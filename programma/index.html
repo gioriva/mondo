@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Programma Personalizzato</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f6f2ea;
+    --cream-deep:#ede6d8;
+    --paper:#fdfaf3;
+    --navy:#142d49;
+    --gold:#b8924a;
+    --gold-soft:#d4b276;
+    --ink:#1a1a1a;
+    --grey:#5b5b5b;
+    --grey-soft:#8a8a8a;
+    --border:#d8cfba;
+    --border-soft:#e8e1cf;
+    --red:#a83232;
+    --display:'Fraunces',Georgia,serif;
+    --body:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);background:var(--cream);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.4;z-index:0;background-image:radial-gradient(circle at 20% 30%, rgba(184,146,74,.04), transparent 50%),radial-gradient(circle at 80% 70%, rgba(20,45,73,.03), transparent 50%)}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+  header{padding:48px 24px 32px;text-align:center;border-bottom:1px solid var(--border);background:var(--cream);position:relative}
+  header::after{content:"";position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:60px;height:3px;background:var(--gold)}
+  .eyebrow{font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  h1.hero{font-family:var(--display);font-weight:500;font-size:clamp(36px,6vw,64px);line-height:1;letter-spacing:-.02em;color:var(--navy);margin:0 0 14px;font-style:italic}
+  h1.hero em{font-style:normal;font-weight:600}
+  .hero-sub{font-family:var(--display);font-size:18px;color:var(--grey);max-width:560px;margin:0 auto;line-height:1.5}
+
+  nav.tabs{position:sticky;top:0;z-index:50;background:rgba(246,242,234,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .tabs-inner{max-width:1100px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+  .tabs-inner::-webkit-scrollbar{display:none}
+  .tab-btn{flex:0 0 auto;padding:18px 22px;font-family:var(--body);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:var(--grey);cursor:pointer;transition:all .25s ease;white-space:nowrap;position:relative}
+  .tab-btn:hover{color:var(--navy)}
+  .tab-btn.active{color:var(--navy);border-bottom-color:var(--gold)}
+
+  main{padding:40px 0 80px}
+  section.tab-content{display:none;animation:fadeIn .35s ease}
+  section.tab-content.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+  h2.section-title{font-family:var(--display);font-weight:500;font-size:clamp(28px,4vw,42px);color:var(--navy);margin:0 0 8px;letter-spacing:-.01em;line-height:1.1}
+  .section-lead{font-family:var(--display);font-size:17px;color:var(--grey);font-style:italic;max-width:680px;margin:0 0 36px;line-height:1.5}
+  h3.sub-title{font-family:var(--display);font-weight:600;font-size:24px;color:var(--navy);margin:48px 0 16px;letter-spacing:-.01em}
+  h4{font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+
+  .day-selector{display:flex;gap:8px;overflow-x:auto;padding:4px 0 16px;margin-bottom:24px;scrollbar-width:none;-ms-overflow-style:none;border-bottom:1px solid var(--border-soft)}
+  .day-selector::-webkit-scrollbar{display:none}
+  .day-btn{flex:0 0 auto;padding:14px 20px;background:var(--paper);border:1px solid var(--border);border-radius:999px;font-family:var(--body);font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--ink);cursor:pointer;transition:all .2s ease;text-transform:uppercase;position:relative}
+  .day-btn:hover{background:var(--cream-deep);transform:translateY(-1px)}
+  .day-btn.active{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+  .day-btn .badge{display:inline-block;margin-left:6px;font-size:9px;color:var(--gold-soft);letter-spacing:.05em}
+  .day-btn.active .badge{color:var(--gold-soft)}
+  .day-btn.today::before{content:"";position:absolute;top:6px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+
+  .day-content{display:none}
+  .day-content.active{display:block;animation:fadeIn .25s ease}
+  .day-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;padding:16px 0 24px;border-bottom:1px solid var(--border-soft);margin-bottom:24px}
+  .day-name{font-family:var(--display);font-weight:500;font-size:32px;color:var(--navy);letter-spacing:-.01em}
+  .day-tag{font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;border-radius:999px;background:var(--cream-deep);color:var(--navy)}
+  .day-tag.sport{background:var(--gold);color:var(--paper)}
+  .day-tag.rest{background:var(--cream-deep);color:var(--grey)}
+
+  .meals{display:grid;gap:14px}
+  .meal{display:grid;grid-template-columns:170px 1fr;gap:24px;padding:18px 22px;background:var(--paper);border:1px solid var(--border-soft);border-radius:8px;transition:all .2s ease}
+  .meal:hover{border-color:var(--gold-soft);transform:translateX(2px)}
+  .meal-label{display:flex;flex-direction:column;gap:2px}
+  .meal-name{font-family:var(--display);font-weight:600;font-size:17px;color:var(--navy)}
+  .meal-time{font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-soft)}
+  .meal-text{font-size:15px;color:var(--ink);line-height:1.55}
+  @media (max-width:640px){
+    .meal{grid-template-columns:1fr;gap:8px;padding:16px 18px}
+    .meal-label{flex-direction:row;align-items:center;gap:10px;flex-wrap:wrap}
+  }
+
+  .card{background:var(--paper);border:1px solid var(--border-soft);border-radius:8px;padding:24px 26px;margin-bottom:18px}
+  .card.callout{background:var(--cream-deep);border-left:3px solid var(--gold);border-radius:4px}
+  .card.warning{background:#fbf0e8;border-left:3px solid var(--red);border-radius:4px}
+  .card p{margin:0 0 8px}
+  .card p:last-child{margin-bottom:0}
+  .card strong{color:var(--navy)}
+
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:24px 0 32px}
+  .stat{background:var(--paper);border:1px solid var(--border-soft);padding:18px 20px;border-radius:6px}
+  .stat-label{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  .stat-value{font-family:var(--display);font-size:22px;font-weight:600;color:var(--navy);line-height:1.2}
+
+  .principles{display:grid;gap:14px;margin:24px 0}
+  .principle{display:grid;grid-template-columns:50px 1fr;gap:18px;padding:18px 22px;background:var(--paper);border:1px solid var(--border-soft);border-radius:6px}
+  .principle-num{font-family:var(--display);font-style:italic;font-size:32px;color:var(--gold);line-height:1;font-weight:500}
+  .principle-body h5{font-family:var(--display);font-size:18px;font-weight:600;color:var(--navy);margin:0 0 4px}
+  .principle-body p{margin:0;color:var(--grey);font-size:14.5px}
+
+  .training-grid{display:grid;gap:10px;margin:24px 0}
+  .training-row{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:18px 22px;background:var(--paper);border:1px solid var(--border-soft);border-radius:6px;align-items:start}
+  .training-row.sport{border-left:3px solid var(--gold)}
+  .training-day{font-family:var(--display);font-weight:600;font-size:16px;color:var(--navy);text-transform:uppercase;letter-spacing:.04em}
+  .training-activity{font-family:var(--display);font-weight:600;font-size:17px;color:var(--navy);margin-bottom:4px}
+  .training-detail{font-size:14.5px;color:var(--grey);line-height:1.55}
+  @media (max-width:640px){.training-row{grid-template-columns:1fr;gap:6px;padding:16px 18px}}
+
+  .phases{display:grid;gap:18px;margin:24px 0}
+  .phase{padding:26px 28px;background:var(--paper);border:1px solid var(--border-soft);border-radius:8px;position:relative;overflow:hidden}
+  .phase::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}
+  .phase-num{font-family:var(--body);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .phase h3{font-family:var(--display);font-weight:600;font-size:22px;color:var(--navy);margin:0 0 4px}
+  .phase-period{font-family:var(--display);font-style:italic;font-size:14px;color:var(--grey);margin-bottom:14px}
+  .phase p{margin:0;font-size:15px;color:var(--ink);line-height:1.6}
+
+  .tactics{display:grid;gap:14px;margin:20px 0}
+  .tactic{padding:18px 22px;background:var(--paper);border:1px solid var(--border-soft);border-radius:6px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+  .tactic-icon{width:40px;height:40px;border-radius:50%;background:var(--cream-deep);color:var(--gold);display:grid;place-items:center;font-family:var(--display);font-weight:600;font-style:italic;font-size:18px}
+  .tactic h5{font-family:var(--display);font-weight:600;font-size:17px;color:var(--navy);margin:0 0 4px}
+  .tactic p{margin:0;color:var(--grey);font-size:14.5px;line-height:1.55}
+
+  .decalogo{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:30px 0}
+  .deca-item{padding:22px 24px;background:var(--paper);border:1px solid var(--border-soft);border-radius:6px;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:center}
+  .deca-num{font-family:var(--display);font-size:34px;font-weight:600;font-style:italic;color:var(--gold);line-height:1}
+  .deca-text{font-size:15px;color:var(--ink);line-height:1.5;font-weight:500}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0}
+  @media (max-width:780px){.two-col{grid-template-columns:1fr}}
+
+  ul.clean{list-style:none;padding:0;margin:12px 0}
+  ul.clean li{padding:10px 0 10px 22px;border-bottom:1px solid var(--border-soft);position:relative;font-size:15px;color:var(--ink)}
+  ul.clean li:last-child{border-bottom:none}
+  ul.clean li::before{content:"";position:absolute;left:4px;top:18px;width:6px;height:6px;background:var(--gold);border-radius:50%}
+
+  /* Shopping list */
+  .shopping-progress{padding:22px 26px;background:var(--paper);border:1px solid var(--border-soft);border-radius:8px;margin-bottom:30px}
+  .shopping-progress-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:12px}
+  .shopping-progress-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+  .shopping-progress-count{font-family:var(--display);font-size:24px;font-weight:600;color:var(--navy)}
+  .shopping-progress-count .total{color:var(--grey-soft);font-weight:400}
+  .reset-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:999px;background:transparent;border:1px solid var(--border);font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--grey-soft);cursor:not-allowed;opacity:.5;transition:all .2s ease}
+  .reset-btn.active{border-color:var(--navy);color:var(--navy);cursor:pointer;opacity:1}
+  .progress-bar{height:6px;border-radius:999px;background:var(--cream-deep);overflow:hidden}
+  .progress-fill{height:100%;background:var(--gold);transition:width .3s ease;width:0%}
+  .shop-list{display:grid;gap:18px}
+  .shop-cat{background:var(--paper);border:1px solid var(--border-soft);border-radius:8px;overflow:hidden;transition:opacity .3s ease}
+  .shop-cat.done{opacity:.6}
+  .shop-cat-head{padding:16px 22px;background:var(--cream-deep);border-bottom:1px solid var(--border-soft);display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+  .shop-cat-title{font-family:var(--display);font-weight:600;font-size:19px;color:var(--navy);margin:0}
+  .shop-cat-note{font-family:var(--display);font-style:italic;font-size:12.5px;color:var(--grey);margin:3px 0 0}
+  .shop-cat-counter{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:5px 11px;border-radius:999px;border:1px solid var(--gold);color:var(--gold);white-space:nowrap}
+  .shop-cat-counter.full{background:var(--gold);color:var(--paper);border-color:var(--gold)}
+  ul.shop-items{list-style:none;margin:0;padding:0}
+  ul.shop-items li{padding:12px 22px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .15s ease;border-bottom:1px solid var(--border-soft);user-select:none}
+  ul.shop-items li:last-child{border-bottom:none}
+  ul.shop-items li:hover{background:var(--cream)}
+  ul.shop-items li.checked:hover{background:transparent}
+  .shop-checkbox{flex-shrink:0;width:20px;height:20px;border-radius:4px;border:1.5px solid var(--border);background:transparent;display:grid;place-items:center;transition:all .2s ease;position:relative}
+  .shop-checkbox::after{content:"";display:block;width:6px;height:11px;border:solid var(--paper);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-2px);opacity:0;transition:opacity .15s ease}
+  li.checked .shop-checkbox{background:var(--gold);border-color:var(--gold)}
+  li.checked .shop-checkbox::after{opacity:1}
+  .shop-item-text{font-size:15px;line-height:1.5;color:var(--ink);transition:color .2s ease}
+  li.checked .shop-item-text{color:var(--grey-soft);text-decoration:line-through;text-decoration-color:var(--gold);text-decoration-thickness:1.5px}
+  @media (max-width:640px){
+    .shop-cat-head{padding:14px 18px}
+    ul.shop-items li{padding:11px 18px}
+    .shop-item-text{font-size:14px}
+  }
+
+  footer{padding:50px 24px 60px;text-align:center;border-top:1px solid var(--border);margin-top:60px;background:var(--cream)}
+  footer p{font-family:var(--display);font-style:italic;font-size:14px;color:var(--grey);max-width:560px;margin:0 auto;line-height:1.6}
+  .footer-mark{font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+
+  @media print{nav.tabs{position:static}section.tab-content{display:block !important;page-break-after:always}.day-content{display:block !important}}
+  button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Programma personalizzato · Modalità intensiva</div>
+  <h1 class="hero">Strada <em>verso</em> l'obiettivo</h1>
+  <p class="hero-sub">Piano alimentare, allenamento e strategie operative per un percorso di rimessa in forma in vista di un evento importante.</p>
+</header>
+
+<nav class="tabs" aria-label="Navigazione principale">
+  <div class="tabs-inner">
+    <button class="tab-btn active" data-tab="alimentazione">Alimentazione</button>
+    <button class="tab-btn" data-tab="spesa">Lista spesa</button>
+    <button class="tab-btn" data-tab="allenamento">Allenamento</button>
+    <button class="tab-btn" data-tab="strategie">Strategie</button>
+    <button class="tab-btn" data-tab="roadmap">Roadmap</button>
+    <button class="tab-btn" data-tab="decalogo">Decalogo</button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ALIMENTAZIONE -->
+<section class="tab-content active" id="alimentazione">
+  <h2 class="section-title">Piano alimentare</h2>
+  <p class="section-lead">Versione intensiva del piano: deficit calorico maggiorato del 15% per accelerare i risultati delle prime settimane.</p>
+
+  <div class="card warning" style="margin-bottom:30px">
+    <p><strong>Modalità intensiva — usare con criterio.</strong> Massimo 6–8 settimane a questo regime, poi tornare al piano standard per evitare plateau metabolico e perdita di muscolo. Se compaiono nausea forte, vertigini, stanchezza persistente o cali di pressione, sospendi e parla col medico curante. Le proteine restano alte: il taglio è su carboidrati e grassi.</p>
+  </div>
+
+  <h4>Riferimenti giornalieri · Modalità intensiva</h4>
+  <div class="stats-grid">
+    <div class="stat"><div class="stat-label">Calorie</div><div class="stat-value">1.450 – 1.530 kcal</div></div>
+    <div class="stat"><div class="stat-label">Proteine</div><div class="stat-value">170 – 180 g</div></div>
+    <div class="stat"><div class="stat-label">Carboidrati</div><div class="stat-value">110 – 140 g</div></div>
+    <div class="stat"><div class="stat-label">Grassi</div><div class="stat-value">45 – 55 g</div></div>
+  </div>
+
+  <h3 class="sub-title">Settimana tipo</h3>
+  <div class="day-selector" role="tablist" aria-label="Giorni della settimana">
+    <button class="day-btn active" data-day="lun">Lunedì</button>
+    <button class="day-btn" data-day="mar">Martedì <span class="badge">tennis</span></button>
+    <button class="day-btn" data-day="mer">Mercoledì</button>
+    <button class="day-btn" data-day="gio">Giovedì <span class="badge">corsa</span></button>
+    <button class="day-btn" data-day="ven">Venerdì</button>
+    <button class="day-btn" data-day="sab">Sabato</button>
+    <button class="day-btn" data-day="dom">Domenica <span class="badge">corsa</span></button>
+  </div>
+
+  <div class="day-content active" id="day-lun">
+    <div class="day-header"><div class="day-name">Lunedì</div><div class="day-tag rest">Giornata leggera</div></div>
+    <div class="meals">
+      <div class="meal"><div class="meal-label"><span class="meal-name">Colazione</span><span class="meal-time">Mattina</span></div><div class="meal-text">Yogurt greco 0% (200 g) + 1 cucchiaino di miele + 30 g di mirtilli + 10 g di mandorle + caffè</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Spuntino</span><span class="meal-time">Metà mattina</span></div><div class="meal-text">1 mela piccola</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Pranzo</span><span class="meal-time">Mezzogiorno</span></div><div class="meal-text">Petto di pollo ai ferri (180 g) + insalata mista abbondante con 1 cucchiaio di olio EVO + 30 g di pane integrale</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Spuntino</span><span class="meal-time">Pomeriggio</span></div><div class="meal-text">1 yogurt greco 0% piccolo (150 g)</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Cena</span><span class="meal-time">Sera</span></div><div class="meal-text">Salmone al forno (180 g) + zucchine in padella (condite a fine cottura con poco olio)</div></div>
+    </div>
+  </div>
+
+  <div class="day-content" id="day-mar">
+    <div class="day-header"><div class="day-name">Martedì</div><div class="day-tag sport">Tennis al mattino</div></div>
+    <div class="meals">
+      <div class="meal"><div class="meal-label"><span class="meal-name">Pre-tennis</span><span class="meal-time">Colazione</span></div><div class="meal-text">40 g pane integrale + 50 g bresaola + caffè + 1 banana piccola</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Post-tennis</span><span class="meal-time">Spuntino</span></div><div class="meal-text">Yogurt greco 0% (200 g) + 1 cucchiaino di miele</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Pranzo</span><span class="meal-time">Mezzogiorno</span></div><div class="meal-text">Tagliata di manzo (180 g) + rucola e scaglie di grana (15 g) + 30 g di pane integrale</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Spuntino</span><span class="meal-time">Pomeriggio</span></div><div class="meal-text">1 frutto piccolo</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Cena</span><span class="meal-time">Sera</span></div><div class="meal-text">Orata o branzino al forno (200 g) + melanzane grigliate condite con 1 cucchiaino di olio EVO</div></div>
+    </div>
+  </div>
+
+  <div class="day-content" id="day-mer">
+    <div class="day-header"><div class="day-name">Mercoledì</div><div class="day-tag">Sacco da boxe + core</div></div>
+    <div class="meals">
+      <div class="meal"><div class="meal-label"><span class="meal-name">Colazione</span><span class="meal-time">Mattina</span></div><div class="meal-text">2 uova strapazzate (poco olio) + 30 g di pane integrale + 1 fetta di prosciutto crudo sgrassato + caffè</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Spuntino</span><span class="meal-time">Metà mattina</span></div><div class="meal-text">1 mela piccola</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Pranzo</span><span class="meal-time">Mezzogiorno</span></div><div class="meal-text">Filetto di vitello (180 g) ai ferri + insalata di valeriana e carote + 40 g di riso basmati (pesato a crudo)</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Spuntino</span><span class="meal-time">Pomeriggio</span></div><div class="meal-text">1 yogurt greco 0% piccolo (150 g)</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Cena</span><span class="meal-time">Sera</span></div><div class="meal-text">Vellutata di zucca o zucchine (Bimby, senza panna, 1 cucchiaino di olio EVO finale) + 150 g di petto di pollo grigliato</div></div>
+    </div>
+  </div>
+
+  <div class="day-content" id="day-gio">
+    <div class="day-header"><div class="day-name">Giovedì</div><div class="day-tag sport">Corsa 6–7 km</div></div>
+    <div class="meals">
+      <div class="meal"><div class="meal-label"><span class="meal-name">Colazione</span><span class="meal-time">Mattina</span></div><div class="meal-text">40 g di fiocchi d'avena cotti in 200 ml di latte parzialmente scremato + 1 cucchiaino di miele + frutti di bosco</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Spuntino</span><span class="meal-time">Metà mattina</span></div><div class="meal-text">1 frutto piccolo</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Pranzo</span><span class="meal-time">Mezzogiorno</span></div><div class="meal-text">Insalatona ricca: 150 g di tonno al naturale + 2 uova sode + insalata mista + 20 g di grana + 1 cucchiaio di olio EVO + 30 g di pane integrale</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Pre-corsa</span><span class="meal-time">1h prima</span></div><div class="meal-text">1 banana piccola + caffè</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Cena</span><span class="meal-time">Post-corsa</span></div><div class="meal-text">Salmone alla griglia (180 g) + 80 g di riso integrale (pesato a crudo) + spinaci saltati in padella</div></div>
+    </div>
+  </div>
+
+  <div class="day-content" id="day-ven">
+    <div class="day-header"><div class="day-name">Venerdì</div><div class="day-tag">Sacco + forza corpo libero</div></div>
+    <div class="meals">
+      <div class="meal"><div class="meal-label"><span class="meal-name">Colazione</span><span class="meal-time">Mattina</span></div><div class="meal-text">Yogurt greco 0% (200 g) + 20 g di granola senza zuccheri aggiunti + 1 frutto piccolo + caffè</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Spuntino</span><span class="meal-time">Metà mattina</span></div><div class="meal-text">10 g di mandorle (circa 8 pezzi)</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Pranzo</span><span class="meal-time">Anche fuori casa</span></div><div class="meal-text">Hamburger di manzo senza pane (200 g) + insalata mista abbondante. Niente patate. Alternativa: tagliata o filetto con contorno di verdure</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Spuntino</span><span class="meal-time">Pomeriggio</span></div><div class="meal-text">1 yogurt greco 0% piccolo (150 g)</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Cena</span><span class="meal-time">Sera</span></div><div class="meal-text">Frittata di zucchine (2 uova + 1 albume) + insalata. Alternativa: parmigiana di melanzane <em>light</em> senza pomodoro (mozzarella light 60 g + 15 g grana) + insalata</div></div>
+    </div>
+  </div>
+
+  <div class="day-content" id="day-sab">
+    <div class="day-header"><div class="day-name">Sabato</div><div class="day-tag">Eventuale cena fuori</div></div>
+    <div class="meals">
+      <div class="meal"><div class="meal-label"><span class="meal-name">Colazione</span><span class="meal-time">Mattina</span></div><div class="meal-text">2 uova + 40 g di bresaola + 30 g di pane integrale + caffè</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Spuntino</span><span class="meal-time">Metà mattina</span></div><div class="meal-text">1 frutto piccolo</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Pranzo</span><span class="meal-time">Mezzogiorno</span></div><div class="meal-text">Pesce alla griglia (200 g — pesce spada, tonno, branzino) + verdure grigliate (zucchine, melanzane) + 30 g di pane integrale</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Spuntino</span><span class="meal-time">Pomeriggio</span></div><div class="meal-text">1 yogurt greco 0% piccolo (150 g)</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Cena</span><span class="meal-time">Al ristorante</span></div><div class="meal-text">Strategia ristorante rinforzata: niente antipasto o solo verdure crude, niente primo, secondo di carne o pesce con verdura, niente pane, massimo 1 calice di vino, niente dolce</div></div>
+    </div>
+  </div>
+
+  <div class="day-content" id="day-dom">
+    <div class="day-header"><div class="day-name">Domenica</div><div class="day-tag sport">Corsa al mattino</div></div>
+    <div class="meals">
+      <div class="meal"><div class="meal-label"><span class="meal-name">Colazione</span><span class="meal-time">Post-corsa</span></div><div class="meal-text">Omelette di 2 uova + 1 albume con 20 g di grana + 30 g di pane integrale + 1 frutto piccolo + caffè</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Pranzo</span><span class="meal-time">Più libero</span></div><div class="meal-text">Primo piccolo (60 g di pasta o risotto, condimento semplice senza pomodoro: olio e grana, pesto leggero, burro e salvia) + secondo di carne o pesce (150 g) + insalata. Niente bis, niente dolce. 1 calice di vino consentito</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Spuntino</span><span class="meal-time">Pomeriggio</span></div><div class="meal-text">1 frutto piccolo</div></div>
+      <div class="meal"><div class="meal-label"><span class="meal-name">Cena</span><span class="meal-time">Sera</span></div><div class="meal-text">Vellutata di verdure Bimby + grigliata mista (pollo + manzo, 150 g totali) + insalata</div></div>
+    </div>
+  </div>
+
+  <h3 class="sub-title">I sette principi guida</h3>
+  <p class="section-lead">Se rispetti queste sette regole, il piano settimanale è poco più di una guida di esecuzione.</p>
+
+  <div class="principles">
+    <div class="principle"><div class="principle-num">01</div><div class="principle-body"><h5>Proteine a ogni pasto principale</h5><p>Minimo 35–45 g per pasto. Saziano, proteggono il muscolo, riducono la fame nervosa pomeridiana.</p></div></div>
+    <div class="principle"><div class="principle-num">02</div><div class="principle-body"><h5>Verdure a pranzo e cena</h5><p>Insalata mista, zucchine, melanzane, vellutate, finocchi, carote, sedano, fagiolini, asparagi, spinaci, valeriana, rucola, indivia, radicchio, zucca.</p></div></div>
+    <div class="principle"><div class="principle-num">03</div><div class="principle-body"><h5>Carboidrati intelligenti</h5><p>Pane e pasta integrali, riso basmati o integrale, patate, legumi, avena. Quantità moderate, concentrate nei giorni di tennis e corsa.</p></div></div>
+    <div class="principle"><div class="principle-num">04</div><div class="principle-body"><h5>Idratazione 2,5–3 litri d'acqua</h5><p>Spesso la fame nervosa è sete travestita. Acqua sempre a portata, anche frizzante con limone per variare.</p></div></div>
+    <div class="principle"><div class="principle-num">05</div><div class="principle-body"><h5>Alcol zero in settimana</h5><p>Nei weekend o cene di lavoro: massimo 1–2 calici di vino, mai superalcolici.</p></div></div>
+    <div class="principle"><div class="principle-num">06</div><div class="principle-body"><h5>Frutta misurata: 2 porzioni al giorno</h5><p>Mela, frutti di bosco, agrumi, kiwi, pere. Mai succhi. Banana solo pre-allenamento.</p></div></div>
+    <div class="principle"><div class="principle-num">07</div><div class="principle-body"><h5>Il piatto di emergenza</h5><p>Cibi liberi sempre pronti in frigo: cetrioli e finocchi tagliati, yogurt greco 0%, bresaola monoporzione, mandorle pesate (10 g).</p></div></div>
+  </div>
+
+  <div class="card callout" style="margin-top:30px">
+    <p><strong>Cosa non c'è nel piano e perché.</strong> Niente pomodoro, niente peperoni, broccoli o cavolfiori (preferenze personali rispettate). Pochissimi formaggi stagionati (grana e parmigiano in piccole dosi vanno bene). Pane sempre integrale per la fibra e l'indice glicemico più basso.</p>
+  </div>
+</section>
+
+<!-- LISTA SPESA -->
+<section class="tab-content" id="spesa">
+  <h2 class="section-title">Lista della spesa</h2>
+  <p class="section-lead">Quantità calibrate sulla settimana intensiva per una persona. Adatta le porzioni se cucini anche per altri. Le voci spuntate restano salvate sul dispositivo fino al reset.</p>
+
+  <div class="shopping-progress">
+    <div class="shopping-progress-head">
+      <div>
+        <div class="shopping-progress-label">Progresso</div>
+        <div class="shopping-progress-count"><span id="shop-checked">0</span> <span class="total">/ <span id="shop-total">0</span></span></div>
+      </div>
+      <button class="reset-btn" id="reset-shop" type="button">↺ Azzera</button>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+
+  <div class="shop-list" id="shop-list"></div>
+
+  <div class="card callout" style="margin-top:30px">
+    <p><strong>Suggerimento operativo.</strong> Una sola spesa grande il sabato mattina copre la settimana, con un piccolo richiamo a metà settimana solo per insalata, frutta fresca e pane. Surgelare carne e pesce in monoporzioni appena tornato dalla spesa risparmia tempo e impulsi sbagliati.</p>
+  </div>
+</section>
+
+<!-- ALLENAMENTO -->
+<section class="tab-content" id="allenamento">
+  <h2 class="section-title">Piano di allenamento</h2>
+  <p class="section-lead">Quattro sessioni a settimana più tennis. Cauto nelle prime quattro settimane per proteggere le articolazioni, poi aumenta il volume.</p>
+
+  <h3 class="sub-title">Settimana tipo</h3>
+  <div class="training-grid">
+    <div class="training-row"><div class="training-day">Lunedì</div><div><div class="training-activity">Riposo o camminata</div><div class="training-detail">30–40 minuti di camminata svelta se ci si sente bene, altrimenti riposo totale.</div></div></div>
+    <div class="training-row sport"><div class="training-day">Martedì</div><div><div class="training-activity">Tennis (1h)</div><div class="training-detail">Allenamento principale del giorno. Niente altro.</div></div></div>
+    <div class="training-row sport"><div class="training-day">Mercoledì</div><div><div class="training-activity">Sacco da boxe + core</div><div class="training-detail">5 min riscaldamento + 6–8 round da 2 min al sacco con 1 min recupero attivo + finitura core: 3 serie di plank 30–45'' + 15 crunch + 15 russian twist. Totale 35–45 min.</div></div></div>
+    <div class="training-row sport"><div class="training-day">Giovedì</div><div><div class="training-activity">Corsa (40 min, 6–7 km)</div><div class="training-detail">Vedi progressione sotto. Ritmo conversazionale.</div></div></div>
+    <div class="training-row sport"><div class="training-day">Venerdì</div><div><div class="training-activity">Sacco + forza a corpo libero</div><div class="training-detail">5 min riscaldamento + 5 round da 2 min al sacco (più tecnici) + circuito × 3 giri: 10 piegamenti + 15 squat + 10 affondi per gamba + 30'' plank. Totale 40–45 min.</div></div></div>
+    <div class="training-row"><div class="training-day">Sabato</div><div><div class="training-activity">Riposo o camminata lunga</div><div class="training-detail">60–90 minuti di camminata. Long slow distance: brucia grassi senza stancare.</div></div></div>
+    <div class="training-row sport"><div class="training-day">Domenica</div><div><div class="training-activity">Corsa (40 min, 6–7 km)</div><div class="training-detail">Stesso ritmo del giovedì.</div></div></div>
+  </div>
+
+  <h3 class="sub-title">Progressione corsa</h3>
+  <p class="section-lead">Importante per chi parte da un peso elevato: andare per gradi protegge ginocchia e tibia.</p>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-num">Fase 1 · Settimane 1–3</div>
+      <h3>Adattamento articolare</h3>
+      <div class="phase-period">Corri 4 min / cammini 1 min, ripeti per 40 min totali</div>
+      <p>Ritmo conversazionale: devi poter parlare mentre corri. Niente eroismi, è la fase più delicata.</p>
+    </div>
+    <div class="phase">
+      <div class="phase-num">Fase 2 · Settimane 4–6</div>
+      <h3>Costruzione base aerobica</h3>
+      <div class="phase-period">Corri 8 min / cammini 1 min, ripeti per 40 min totali</div>
+      <p>Aumenta gradualmente il tempo di corsa continua mantenendo il ritmo controllato.</p>
+    </div>
+    <div class="phase">
+      <div class="phase-num">Fase 3 · Settimana 7 in poi</div>
+      <h3>Stabilizzazione</h3>
+      <div class="phase-period">Corsa continua per 40 min</div>
+      <p>Ritmo conversazionale, 6–7 km a uscita. Una volta al mese (dopo l'ottava settimana), sostituisci una corsa con sessione di intervalli: 10 min riscaldamento + 6 × 400 m veloci con 1 min di recupero camminato + 10 min di defaticamento.</p>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Note pratiche</h3>
+  <div class="two-col">
+    <div class="card"><h4>Scarpe</h4><p>Con un peso elevato, scarpe da running ben ammortizzate sono fondamentali. Riferimenti per runner pesanti: <strong>Asics Gel-Nimbus, Hoka Bondi, Brooks Glycerin</strong>. Sostituiscile dopo 600–700 km.</p></div>
+    <div class="card"><h4>Recupero</h4><p>Stretching 5 min dopo ogni sessione, soprattutto polpacci, quadricipiti, flessori dell'anca. Idratazione abbondante post-allenamento.</p></div>
+  </div>
+
+  <div class="card warning">
+    <p><strong>Segnali di allarme.</strong> Dolore al ginocchio o alla tibia che dura più di 48 ore: fermati e valuta una visita ortopedica o fisioterapica. Niente eroismi — un infortunio adesso costa settimane di stop.</p>
+  </div>
+</section>
+
+<!-- STRATEGIE -->
+<section class="tab-content" id="strategie">
+  <h2 class="section-title">Strategie operative</h2>
+  <p class="section-lead">Le tecniche per gestire i due ostacoli che fanno deragliare i percorsi: la fame emotiva e i pasti fuori casa.</p>
+
+  <h3 class="sub-title">Gestire la fame nervosa</h3>
+  <p>La fame fisiologica si combatte con l'alimentazione. La fame emotiva — quella che arriva dopo la trattativa difficile o nel pomeriggio teso — vive su un altro piano. Cinque tecniche che funzionano.</p>
+
+  <div class="tactics">
+    <div class="tactic"><div class="tactic-icon">10'</div><div><h5>La regola dei 10 minuti</h5><p>All'arrivo dell'impulso, prima un grande bicchiere d'acqua (anche frizzante con limone). Poi timer di 10 minuti facendo altro. Spesso il craving passa.</p></div></div>
+    <div class="tactic"><div class="tactic-icon">①</div><div><h5>Mappa i tuoi trigger</h5><p>Diario sintetico per 14 giorni: ogni episodio di fame nervosa, segna ora, dove sei, cosa è successo prima. Dopo due settimane vedrai i pattern e potrai pre-armarti.</p></div></div>
+    <div class="tactic"><div class="tactic-icon">+</div><div><h5>Cibi liberi sempre disponibili</h5><p>Cetrioli, finocchi, sedano già tagliati in frigo. Yogurt greco 0% in formato piccolo. Bresaola monoporzione. Sono i freni di emergenza.</p></div></div>
+    <div class="tactic"><div class="tactic-icon">↻</div><div><h5>Sostituzione del rituale</h5><p>Se quando sei stressato apri il cassetto degli snack, mettici un sacchetto di tè in foglie e una tazza vicina. Il gesto di prepararsi un tè (5 min) sostituisce il gesto di sgranocchiare.</p></div></div>
+    <div class="tactic"><div class="tactic-icon">→</div><div><h5>Movimento breve</h5><p>5 minuti di camminata fuori, anche solo intorno all'edificio, spezzano il ciclo dello stress alimentare e abbassano il cortisolo.</p></div></div>
+  </div>
+
+  <h3 class="sub-title">Pasti fuori casa</h3>
+  <p>Tre regole d'oro per non sabotare il piano nelle cene di lavoro e con gli amici.</p>
+
+  <div class="tactics">
+    <div class="tactic"><div class="tactic-icon">①</div><div><h5>Ordina per primo</h5><p>Non farti influenzare dagli altri al tavolo. Il primo che ordina dichiara la linea della cena.</p></div></div>
+    <div class="tactic"><div class="tactic-icon">②</div><div><h5>Schema base</h5><p>Salta antipasti e primi (o assaggio piccolissimo). Sempre carne o pesce alla griglia con contorno di verdure. Mai patate fritte. Se proprio devi prendere il primo, mezza porzione e niente secondo.</p></div></div>
+    <div class="tactic"><div class="tactic-icon">③</div><div><h5>Pane sotto controllo</h5><p>Chiedi al cameriere di non lasciare il cestino al tavolo. Se è già lì, una fettina e basta.</p></div></div>
+  </div>
+
+  <div class="card callout">
+    <p><strong>Aperitivi e pranzi veloci.</strong> Per gli aperitivi: 1 calice di vino, salatini massimo 3–4, e prima di andare mangia uno yogurt greco a casa per non arrivare affamato. Per i pranzi rapidi: tagliata + insalata o secondo di pesce + verdure sono ovunque.</p>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="tab-content" id="roadmap">
+  <h2 class="section-title">Roadmap del percorso</h2>
+  <p class="section-lead">Tre fasi distinte, ognuna con un obiettivo specifico. Non lo stesso piano ripetuto, ma un'evoluzione graduale.</p>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-num">Fase 1 · Settimane 1–8</div>
+      <h3>Costruzione</h3>
+      <div class="phase-period">Primi due mesi del percorso · Modalità intensiva</div>
+      <p>Calorie 1.450–1.530 kcal in modalità intensiva. Costruzione progressiva dell'attività fisica seguendo la progressione corsa. Dovrebbe portare al primo grande risultato. <strong>Esami del sangue di controllo a fine fase</strong> e rivalutazione con il medico curante: se tutto bene si può proseguire ancora qualche settimana, altrimenti si torna al piano standard a 1.700–1.800 kcal.</p>
+    </div>
+    <div class="phase">
+      <div class="phase-num">Fase 2 · Settimane 9–17</div>
+      <h3>Accelerazione</h3>
+      <div class="phase-period">Secondo blocco del percorso</div>
+      <p>Si torna a un piano sostenibile (1.700–1.800 kcal) per evitare adattamento metabolico. Se si è in linea con i target, si continua così. Se si è indietro: <strong>carb cycling</strong> — giorni con allenamento a 1.800 kcal con carboidrati, giorni senza attività a 1.500 kcal low-carb.</p>
+    </div>
+    <div class="phase">
+      <div class="phase-num">Fase 3 · Settimane 18–19</div>
+      <h3>Consolidamento</h3>
+      <div class="phase-period">Ultime due settimane</div>
+      <p>Non si tira più. Stringere troppo a ridosso dell'evento porta stanchezza, gonfiore e pelle spenta. <strong>Sodio giù</strong> (poco sale aggiunto, no insaccati salati, no formaggi stagionati), <strong>idratazione massima</strong> (3 l/giorno), <strong>sonno minimo 7–8 ore</strong>. Allenamento ridotto al 60% nell'ultima settimana.</p>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Tappe di controllo</h3>
+  <ul class="clean">
+    <li><strong>Settimana 4 —</strong> Primo controllo: il ritmo è in target?</li>
+    <li><strong>Settimana 8 —</strong> Esami del sangue. Decisione su fase 2.</li>
+    <li><strong>Settimana 12 —</strong> Soglia simbolica superata, fase finale.</li>
+    <li><strong>Settimana 16 —</strong> Prova abito.</li>
+    <li><strong>Settimana 18 —</strong> Si consolida, niente colpi di coda.</li>
+    <li><strong>Settimana 19 —</strong> Obiettivo raggiunto.</li>
+  </ul>
+
+  <div class="card warning" style="margin-top:30px">
+    <p><strong>Misurazione.</strong> Pesata una volta a settimana, sempre stesso giorno e ora — suggerimento: <strong>mercoledì mattina a digiuno</strong>. Misura del girovita ogni due settimane: spesso scende prima del peso e dà motivazione.</p>
+  </div>
+</section>
+
+<!-- DECALOGO -->
+<section class="tab-content" id="decalogo">
+  <h2 class="section-title">Il decalogo</h2>
+  <p class="section-lead">Quando il piano sembra complicato, torna qui. Sono i dieci comandamenti del percorso, da appendere in cucina.</p>
+
+  <div class="decalogo">
+    <div class="deca-item"><div class="deca-num">01</div><div class="deca-text">Proteine a <em>ogni</em> pasto principale, sempre.</div></div>
+    <div class="deca-item"><div class="deca-num">02</div><div class="deca-text">Verdure a pranzo <em>e</em> cena, dalla lista verde.</div></div>
+    <div class="deca-item"><div class="deca-num">03</div><div class="deca-text">Acqua, acqua, acqua. 2,5–3 litri al giorno.</div></div>
+    <div class="deca-item"><div class="deca-num">04</div><div class="deca-text">Alcol zero in settimana. Massimo 1–2 calici nel weekend.</div></div>
+    <div class="deca-item"><div class="deca-num">05</div><div class="deca-text">Pesata ogni mercoledì mattina, a digiuno.</div></div>
+    <div class="deca-item"><div class="deca-num">06</div><div class="deca-text">Fame nervosa: 10 minuti di attesa + 1 bicchiere d'acqua.</div></div>
+    <div class="deca-item"><div class="deca-num">07</div><div class="deca-text">Al ristorante: niente primo, no patate fritte, no bis di pane.</div></div>
+    <div class="deca-item"><div class="deca-num">08</div><div class="deca-text">Allenati anche quando non ne hai voglia. Sempre.</div></div>
+    <div class="deca-item"><div class="deca-num">09</div><div class="deca-text">Dormi 7–8 ore. Il sonno è metà del dimagrimento.</div></div>
+    <div class="deca-item"><div class="deca-num">10</div><div class="deca-text">Confronto regolare con il medico curante.</div></div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="footer-mark">Programma personalizzato</div>
+  <p>Questo documento è uno strumento operativo. Non sostituisce il parere di un medico o di un nutrizionista. Va condiviso con i professionisti che seguono il percorso e adattato alle indicazioni cliniche.</p>
+</footer>
+
+<script>
+  // Tab switching
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(target).classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+
+  // Day switching
+  const dayBtns = document.querySelectorAll('.day-btn');
+  const dayContents = document.querySelectorAll('.day-content');
+  dayBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const day = btn.dataset.day;
+      dayBtns.forEach(b => b.classList.remove('active'));
+      dayContents.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('day-' + day).classList.add('active');
+    });
+  });
+
+  // Auto-select today
+  (function autoSelectToday(){
+    const map = ['dom','lun','mar','mer','gio','ven','sab'];
+    const today = map[new Date().getDay()];
+    const todayBtn = document.querySelector(`.day-btn[data-day="${today}"]`);
+    if(todayBtn){
+      dayBtns.forEach(b => b.classList.remove('active'));
+      dayContents.forEach(c => c.classList.remove('active'));
+      todayBtn.classList.add('active');
+      todayBtn.classList.add('today');
+      document.getElementById('day-' + today).classList.add('active');
+    }
+  })();
+
+  // ---------- SHOPPING LIST ----------
+  const SHOPPING_LIST = [
+    {category:'Carne e pesce',note:'Macelleria e pescheria, fresco di giornata',items:['Petto di pollo — 500 g','Tagliata o filetto di manzo — 350 g','Filetto di vitello — 200 g','Hamburger di manzo — 200 g','Salmone fresco — 400 g','Orata o branzino — 400 g','Pesce spada o tonno fresco — 250 g']},
+    {category:'Salumi e conserve',note:'Banco gastronomia',items:['Bresaola — 150 g','Prosciutto crudo sgrassato — 80 g','Tonno al naturale in scatola — 3 scatolette']},
+    {category:'Latticini e uova',note:'Banco frigo',items:['Yogurt greco 0% formato grande (500 g) — 1 confezione','Yogurt greco 0% piccoli (150 g) — 8–10 vasetti','Latte parzialmente scremato — 1 L','Grana padano o parmigiano — 120 g','Mozzarella light — 80 g','Uova — 18 pezzi']},
+    {category:'Verdure',note:'In abbondanza — sono il volume del piatto. Niente pomodoro, peperoni, broccoli, cavolfiori',items:['Insalata mista (busta o sfusa) — per 6–7 pasti','Zucchine — 1,2 kg','Melanzane — 1 kg','Spinaci freschi o surgelati — 500 g','Rucola e valeriana — per 4–5 pasti','Carote — 500 g','Sedano — 1 cespo','Finocchi — 4 pezzi','Cetrioli — 4 pezzi','Zucca (anche surgelata per Bimby) — 600 g','Limoni — 3 pezzi','Aglio e cipolla — base']},
+    {category:'Frutta',note:'2 porzioni al giorno, preferibilmente piccole. Mai succhi',items:['Mele piccole — 6 pezzi','Mirtilli o frutti di bosco (anche surgelati) — 250 g','Banane piccole — 3 pezzi','Frutta a rotazione (kiwi, pere, agrumi) — 6 pezzi']},
+    {category:'Carboidrati',note:'Sempre integrali, in quantità ridotte rispetto al piano standard',items:['Pane integrale (anche segale) — 1 pagnotta piccola','Pasta integrale — 1 confezione','Riso basmati — 1 confezione','Riso integrale — 1 confezione',"Fiocchi d'avena — 1 confezione",'Granola senza zuccheri aggiunti — 1 confezione']},
+    {category:'Frutta secca e dispensa',note:'Da tenere in casa, scorta mensile. Mandorle pesate, mai a manciate',items:['Mandorle al naturale — 150 g',"Olio extravergine d'oliva — base",'Miele — 1 vasetto','Aceto balsamico — base','Sale, pepe, erbe aromatiche (rosmarino, salvia, basilico)']}
+  ];
+
+  const shopList = document.getElementById('shop-list');
+  const totalEl = document.getElementById('shop-total');
+  const checkedEl = document.getElementById('shop-checked');
+  const fillEl = document.getElementById('progress-fill');
+  const resetBtn = document.getElementById('reset-shop');
+
+  const STORAGE_KEY = 'programma_spesa_v2_intensivo';
+  let state = {};
+  try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { state = {}; }
+
+  let total = 0;
+  SHOPPING_LIST.forEach(c => total += c.items.length);
+  totalEl.textContent = total;
+
+  function persist() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+  }
+
+  function updateProgress() {
+    let checked = 0;
+    Object.keys(state).forEach(k => { if (state[k]) checked++; });
+    checkedEl.textContent = checked;
+    fillEl.style.width = total > 0 ? (checked/total*100) + '%' : '0%';
+    if (checked > 0) resetBtn.classList.add('active');
+    else resetBtn.classList.remove('active');
+
+    document.querySelectorAll('.shop-cat').forEach(cat => {
+      const items = cat.querySelectorAll('li');
+      const c = Array.from(items).filter(li => li.classList.contains('checked')).length;
+      const t = items.length;
+      const counter = cat.querySelector('.shop-cat-counter');
+      counter.textContent = c + ' / ' + t;
+      if (c === t && t > 0) { cat.classList.add('done'); counter.classList.add('full'); }
+      else { cat.classList.remove('done'); counter.classList.remove('full'); }
+    });
+  }
+
+  // Render shopping list
+  SHOPPING_LIST.forEach((cat, catIdx) => {
+    const catEl = document.createElement('div');
+    catEl.className = 'shop-cat';
+    let itemsHTML = '';
+    cat.items.forEach((item, i) => {
+      const key = catIdx + '-' + i;
+      const isChecked = !!state[key];
+      itemsHTML += `<li data-key="${key}" class="${isChecked ? 'checked' : ''}"><span class="shop-checkbox"></span><span class="shop-item-text">${item}</span></li>`;
+    });
+    catEl.innerHTML = `
+      <div class="shop-cat-head">
+        <div>
+          <h3 class="shop-cat-title">${cat.category}</h3>
+          <p class="shop-cat-note">${cat.note}</p>
+        </div>
+        <div class="shop-cat-counter">0 / 0</div>
+      </div>
+      <ul class="shop-items">${itemsHTML}</ul>
+    `;
+    shopList.appendChild(catEl);
+  });
+
+  // Click handler
+  shopList.addEventListener('click', e => {
+    const li = e.target.closest('li[data-key]');
+    if (!li) return;
+    const key = li.dataset.key;
+    state[key] = !state[key];
+    li.classList.toggle('checked', state[key]);
+    persist();
+    updateProgress();
+  });
+
+  // Reset
+  resetBtn.addEventListener('click', () => {
+    if (!resetBtn.classList.contains('active')) return;
+    state = {};
+    persist();
+    document.querySelectorAll('.shop-items li').forEach(li => li.classList.remove('checked'));
+    updateProgress();
+  });
+
+  updateProgress();
+</script>
+
+</body>
+</html>
