@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎌 Giappone 2026 · Giorgio & Lucrezia</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #080808;
+      color: #f0ece4;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+    }
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: #8B0000; border-radius: 2px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .fade-up { animation: fadeUp 0.5s ease both; }
+
+    .btn {
+      padding: 0.45rem 1.1rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.75);
+    }
+    .btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+    .btn.active {
+      background: #FFD700;
+      color: #000;
+      border-color: #FFD700;
+      font-weight: 600;
+    }
+
+    .day-btn {
+      flex-shrink: 0;
+      min-width: 66px;
+      padding: 0.55rem 0.7rem;
+      border-radius: 0.6rem;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      text-align: center;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.55);
+    }
+    .day-btn:hover { background: rgba(255,255,255,0.09); color: #fff; }
+    .day-btn.active { color: #fff; }
+
+    .card {
+      border-radius: 0.85rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: rgba(255,255,255,0.14); }
+
+    .day-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 0.5rem;
+      padding: 1rem 1rem 0.6rem;
+      scrollbar-width: none;
+    }
+    .day-scroll::-webkit-scrollbar { display: none; }
+
+    .gold-text {
+      background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const days = [
+      {
+        day: 1, date: "Sab 4 Luglio", city: "Tokyo", emoji: "✈️",
+        theme: "Arrivo & Prime Impressioni", color: "#C0392B",
+        activities: [
+          { time: "09:45", icon: "🛬", title: "Arrivo a Tokyo Haneda (HND)",
+            detail: "Haneda è a 30 minuti dal centro — un lusso rispetto a Narita. Keikyu Line fino a Shinjuku: ~35min, ¥630. Oppure Tokyo Monorail fino a Hamamatsucho. Check-in hotel, doccia e relax." },
+          { time: "14:00", icon: "⛩️", title: "Asakusa & Senso-ji",
+            detail: "Primo impatto con la Tokyo storica. Passeggiata su Nakamise-dori, il tempio più antico di Tokyo. Prendi un omikuji per portafortuna." },
+          { time: "17:00", icon: "🗼", title: "Tokyo Skytree al tramonto",
+            detail: "A 10 minuti a piedi dal Senso-ji. Vista mozzafiato sulla città all'ora d'oro. Prenotare i biglietti online in anticipo." },
+          { time: "19:30", icon: "🍶", title: "Izakaya a Hoppy Street",
+            detail: "Cena in uno dei localini storici di Asakusa. Yakitori, edamame, birra Sapporo. Il miglior benvenuto nella Tokyo vera." }
+        ],
+        hotel: { name: "Hotel Gracery Shinjuku", stars: 4, note: "Il Godzilla sul tetto lo rende iconico e centralissimo. ~¥20.000/notte." },
+        tip: "Compra subito una Suica card (IC card ricaricabile) all'aeroporto: ti servirà per tutti i trasporti locali per tutta la settimana. Haneda ha sportelli dedicati appena uscito dall'arrivi."
+      },
+      {
+        day: 2, date: "Dom 5 Luglio", city: "Tokyo", emoji: "🏙️",
+        theme: "La Tokyo Autentica", color: "#2C3E50",
+        activities: [
+          { time: "08:00", icon: "🌸", title: "Yanaka — la Tokyo che non ti aspetti",
+            detail: "Il quartiere più autentico della città, risparmiato dai bombardamenti. Vicoletti, negozi artigianali, cimitero pittoresco. Colazione in una panetteria locale." },
+          { time: "11:00", icon: "🏛️", title: "Ueno Park & Tokyo National Museum",
+            detail: "La collezione permanente è straordinaria. In luglio: gelato matcha nel parco." },
+          { time: "14:30", icon: "🎮", title: "Akihabara",
+            detail: "Electric Town. Anche se non siete otaku, l'energia del quartiere è unica. Multistore Yodobashi Camera, crane games, maid cafè almeno in vetrina." },
+          { time: "19:00", icon: "🍣", title: "Cena al kaiten-zushi",
+            detail: "Midori Sushi in zona Ueno: sushi su nastro trasportatore, qualità altissima a prezzi onesti." }
+        ],
+        hotel: { name: "Hotel Gracery Shinjuku", stars: 4, note: "Seconda notte." },
+        tip: "Luglio è caldissimo e umido (30–35°C). Abbigliamento leggero, ventaglio tascabile e acqua sempre con te. Ogni konbini ha bevande fresche a ¥150."
+      },
+      {
+        day: 3, date: "Lun 6 Luglio", city: "Tokyo", emoji: "🌿",
+        theme: "Cultura & Contrasti", color: "#1A6B3A",
+        activities: [
+          { time: "08:30", icon: "🏯", title: "Meiji Jingu — il silenzio nel bosco",
+            detail: "Il santuario shintoista nel cuore di Tokyo. Passeggiata tra i cedri giganti. Assolutamente da non perdere per lei." },
+          { time: "10:30", icon: "👗", title: "Harajuku & Omotesando",
+            detail: "Takeshita-dori: la via della moda giovanile più assurda del mondo. Poi Omotesando, la 'Champs-Élysées' di Tokyo." },
+          { time: "13:00", icon: "🍱", title: "Maisen Tonkatsu — Omotesando",
+            detail: "Uno dei migliori tonkatsu di Tokyo in una vecchia casa da bagno convertita. Esperienza unica." },
+          { time: "15:00", icon: "🎨", title: "Mori Art Museum — Roppongi Hills",
+            detail: "Arte contemporanea con vista su Tokyo dal 53° piano." },
+          { time: "19:30", icon: "🌃", title: "Shibuya Crossing di notte",
+            detail: "L'incrocio più fotografato del mondo. Sali al Shibuya Sky per la vista dall'alto. Dopocena: Golden Gai a Shinjuku." }
+        ],
+        hotel: { name: "Hotel Gracery Shinjuku", stars: 4, note: "Terza notte." },
+        tip: "7 luglio è Tanabata 🎋 — il festival delle stelle. Molti quartieri decorano le strade con bambù e tanzaku colorati. Inizia già la sera del 6."
+      },
+      {
+        day: 4, date: "Mar 7 Luglio", city: "Tokyo", emoji: "✨",
+        theme: "Tanabata & Arte Immersiva", color: "#8E44AD",
+        activities: [
+          { time: "09:00", icon: "🎋", title: "Tanabata a Shinjuku",
+            detail: "Il Festival delle Stelle: leggenda di Orihime e Hikoboshi. Scrivi un desiderio su un tanzaku e appendilo al bambù." },
+          { time: "11:00", icon: "🌊", title: "teamLab Planets — Toyosu",
+            detail: "PRENOTAZIONE OBBLIGATORIA ONLINE. L'installazione immersiva più spettacolare del mondo. Camminare nell'acqua specchiante, fiori digitali infiniti. ~¥3.200/persona." },
+          { time: "14:30", icon: "🍜", title: "Ramen a Fuunji — Shinjuku",
+            detail: "Tsukemen (ramen da intingere) tra i migliori di Tokyo. Fila necessaria, ma ne vale assolutamente la pena." },
+          { time: "16:30", icon: "🌆", title: "Osservatorio Tokyo Metropolitan",
+            detail: "Gratuito al 45° piano di Shinjuku. Vista su tutta Tokyo e, con fortuna, sul Fuji all'orizzonte." },
+          { time: "20:00", icon: "🥃", title: "Golden Gai — ultima notte a Tokyo",
+            detail: "Vicoli stretti con 200 minuscoli bar da 5–8 posti. Ogni locale ha la sua personalità. Magia pura." }
+        ],
+        hotel: { name: "Hotel Gracery Shinjuku", stars: 4, note: "Quarta notte — check-out domani mattina." },
+        tip: "Prenota teamLab Planets settimane prima: in luglio si esaurisce rapidamente. Sito ufficiale: teamlab.art"
+      },
+      {
+        day: 5, date: "Mer 8 Luglio", city: "Kyoto", emoji: "🏯",
+        theme: "Arrivo nell'Antica Capitale", color: "#B7540A",
+        activities: [
+          { time: "08:00", icon: "🚄", title: "Shinkansen Nozomi Tokyo → Kyoto",
+            detail: "2h 15min. Siediti a destra per vedere il Fuji (~30 min dopo la partenza). Con JR Pass incluso." },
+          { time: "10:30", icon: "🎍", title: "Arashiyama — mattino",
+            detail: "Foresta di bambù (vai presto per le foto!), Tenryu-ji con giardino zen, noleggio bici per i canali." },
+          { time: "13:00", icon: "🍵", title: "Pranzo yudofu ad Arashiyama",
+            detail: "Pasta di tofu con vista sul fiume Oi. Tipico di Kyoto, leggero e raffinato." },
+          { time: "15:30", icon: "🏮", title: "Distretto di Gion al tramonto",
+            detail: "Hanamikoji-dori: la via dei machiya. Ore 17–18 è il momento delle geisha. Rispetta la loro privacy." },
+          { time: "19:00", icon: "🥢", title: "Cena a Pontocho",
+            detail: "Il vicolo più bello di Kyoto. Ristoranti con kawayuka (terrazze sul fiume Kamo) in estate." }
+        ],
+        hotel: { name: "The Thousand Kyoto / Ryokan Yoshida-sanso", stars: 5, note: "Una notte in ryokan è imprescindibile per lei: futon, yukata, onsen e colazione kaiseki. ~¥35.000/notte." },
+        tip: "Considera almeno una notte in ryokan: è l'esperienza che ricorda per sempre chi visita il Giappone per la prima volta."
+      },
+      {
+        day: 6, date: "Gio 9 Luglio", city: "Kyoto", emoji: "⛩️",
+        theme: "Il Cuore Spirituale del Giappone", color: "#C0392B",
+        activities: [
+          { time: "05:30", icon: "🌅", title: "Fushimi Inari all'alba — IMPRESCINDIBILE",
+            detail: "I 10.000 torii arancioni sul monte Inari. Arriva entro le 6:00 per le foto senza turisti. Sali fino a Yotsutsuji per la vista su Kyoto." },
+          { time: "09:00", icon: "☕", title: "Colazione a Nishiki Market",
+            detail: "'La cucina di Kyoto': 400 metri di bancarelle. Tamagoyaki, tofu fritto, dashimaki." },
+          { time: "11:00", icon: "✨", title: "Kinkaku-ji & Ryoan-ji",
+            detail: "Il Padiglione d'Oro lascia senza fiato anche la decima volta. Poi Ryoan-ji per il giardino zen con le 15 pietre." },
+          { time: "14:30", icon: "🌸", title: "Philosopher's Path & Nanzen-ji",
+            detail: "2 km lungo il canale. In luglio c'è il loto in fiore. Nanzen-ji ha un acquedotto ottocentesco sorprendente." },
+          { time: "18:00", icon: "🍺", title: "Aperitivo sul Kamo River",
+            detail: "I kyotoiti si siedono sulle sponde al tramonto. Birra dal konbini. Momento autentico e gratuito." }
+        ],
+        hotel: { name: "The Thousand Kyoto", stars: 5, note: "Seconda notte a Kyoto." },
+        tip: "Affitta una bici la mattina (~¥1.000/giorno): Kyoto è pianeggiante e il 70% dei siti si raggiunge pedalando."
+      },
+      {
+        day: 7, date: "Ven 10 Luglio", city: "Nara + Osaka", emoji: "🦌",
+        theme: "Cervi Sacri & Street Food", color: "#16A085",
+        activities: [
+          { time: "08:30", icon: "🚆", title: "Kyoto → Nara (Kintetsu Line)",
+            detail: "45 minuti, ~¥760. Lascia i bagagli in locker alla stazione di Kyoto — li recuperi dopo o li spedisci con Takkyubin a Osaka." },
+          { time: "09:30", icon: "🦌", title: "Nara Park — i cervi sacri",
+            detail: "1.300 cervi liberi nel parco. Shika senbei (cracker per cervi, ¥200). Kasuga Taisha tra i cedri millenari. Todai-ji con il Grande Buddha in bronzo più grande del mondo." },
+          { time: "13:00", icon: "🍡", title: "Kakinoha-zushi — specialità di Nara",
+            detail: "Sushi avvolto in foglie di cachi: rarità locale assolutamente da provare." },
+          { time: "15:00", icon: "🏙️", title: "Nara → Osaka (Kintetsu)",
+            detail: "30 minuti fino a Namba. Check-in hotel, deposito bagagli." },
+          { time: "16:30", icon: "🎡", title: "Dotonbori & Namba",
+            detail: "Il cuore di Osaka. Glico Man, il canale illuminato, Kuromon Ichiba Market: wagyu, takoyaki, tonno fresco." },
+          { time: "19:30", icon: "🐙", title: "Street food tour di Osaka — senza fretta",
+            detail: "Stasera si dorme qui: finalmente potete mangiare tutto senza guardare l'orario del treno. Takoyaki da Aizuya, kushikatsu a Shinsekai, bir­ra a Amerikamura. Osaka è la capitale gastronomica del Giappone." }
+        ],
+        hotel: { name: "Dormy Inn Namba Natural Hot Spring", stars: 3, note: "Ottimo rapporto qualità/prezzo con onsen sul tetto. ~¥12.000/notte. Posizione perfetta per Dotonbori." },
+        tip: "Dormire a Osaka cambia tutto: la sera si allunga, i prezzi scendono e i locali si aprono. È la città più conviviale del Giappone."
+      },
+      {
+        day: 8, date: "Sab 11 Luglio", city: "Osaka → Hakone", emoji: "♨️",
+        theme: "Mattina a Osaka, Notte in Ryokan a Hakone", color: "#1A5276",
+        activities: [
+          { time: "08:00", icon: "🏯", title: "Osaka Castle — mattino presto",
+            detail: "Il castello più iconico di Osaka circondato da un fossato. Vale la vista esterna anche solo passeggiando nel parco. Interno facoltativo (~¥600). Vai presto per evitare la folla." },
+          { time: "10:00", icon: "🍜", title: "Colazione/brunch a Kuromon Ichiba",
+            detail: "Il mercato coperto di Osaka: ostriche, tonno, tamagoyaki, frutta tropicale. Il modo migliore per chiudere Osaka con stile." },
+          { time: "11:30", icon: "🚄", title: "Shinkansen Shin-Osaka → Odawara",
+            detail: "Nozomi: ~2h 20min, incluso nel JR Pass. Odawara è il gateway di Hakone. Da Odawara: Odakyu Line fino a Hakone-Yumoto (~15min, ¥310) oppure taxi direttamente al ryokan." },
+          { time: "14:30", icon: "🚡", title: "Owakudani — uova nere & fumarole",
+            detail: "La funivia sale sul vulcano attivo di Hakone. Fumo di zolfo, paesaggio lunare, vista sul Fuji se il cielo è sereno. Le kuro-tamago (uova nere bollite nello zolfo): leggenda vuole che ognuna aggiunga 7 anni di vita." },
+          { time: "16:00", icon: "🏨", title: "Check-in ryokan — onsen privato",
+            detail: "Seconda notte in ryokan del viaggio. Hakone è la capitale degli onsen termali vicino Tokyo. Consigliato: Hakone Yuryo o Gora Kadan. Yukata, onsen all'aperto, kaiseki dinner inclusa. ~¥30.000–50.000/notte a coppia." },
+          { time: "19:00", icon: "🍱", title: "Kaiseki dinner al ryokan",
+            detail: "La cena kaiseki è inclusa nel ryokan: 8–12 portate preparate con ingredienti locali e stagionali. Wagyu di Hakone, tofu di montagna, sashimi freschissimo. Uno dei pasti più memorabili del viaggio." }
+        ],
+        hotel: { name: "Hakone Yuryo / Gora Kadan", stars: 5, note: "Ryokan con onsen privato e kaiseki dinner inclusa. ~¥30.000–50.000/notte a coppia. Prenota mesi prima." },
+        tip: "Prenota il ryokan di Hakone con molto anticipo: le camere con onsen privato (kashikiri-buro) si esauriscono rapidissimo in estate. Per lei che non è mai stata in Giappone, è un'esperienza che ricorda tutta la vita."
+      },
+      {
+        day: 9, date: "Dom 12 Luglio", city: "Hakone → Tokyo", emoji: "🗻",
+        theme: "Monte Fuji & Ritorno a Tokyo", color: "#2C3E50",
+        activities: [
+          { time: "07:00", icon: "🌅", title: "Alba con vista sul Fuji — dal ryokan",
+            detail: "La mattina presto è la finestra migliore per vedere il Fuji sgombro di nuvole. Molti ryokan hanno terrazze con vista diretta. Alzarsi alle 6:30 e sedersi con un tè verde." },
+          { time: "08:30", icon: "🍵", title: "Colazione kaiseki al ryokan",
+            detail: "La colazione giapponese del ryokan: riso, miso soup, tamagoyaki, salmone alla griglia, tofu, tsukemono. Il contrario esatto di un cappuccino al volo." },
+          { time: "10:30", icon: "⛵", title: "Lago Ashi — la barca sul Fuji",
+            detail: "Il lago sacro con i torii rossi sull'acqua (Hakone Shrine) e il Fuji sullo sfondo. Giro in barca ~30 minuti oppure traghetto fino a Moto-Hakone. Una delle foto più belle del viaggio." },
+          { time: "12:30", icon: "🥾", title: "Passeggiata sul Tokaido — la via dei samurai",
+            detail: "Un tratto lastricato dell'antica via imperiale tra Moto-Hakone e Hakone-machi, tra i cedri secolari. Unico e suggestivo. 30–45 minuti rilassati." },
+          { time: "14:30", icon: "🚞", title: "Rientro: Hakone → Shinjuku",
+            detail: "Romancecar Odakyu: ~85 minuti di treno panoramico. Oppure treno locale + Shinkansen via Odawara. Arrivo a Shinjuku ~16:30." },
+          { time: "17:00", icon: "🌃", title: "Ultima sera a Tokyo — libera",
+            detail: "Nessun programma. Shinjuku Gyoen se volete silenzio, oppure una birra gelata in Golden Gai, o semplicemente guardare Tokyo dall'alto di un bar all'ultimo piano. Meritata." }
+        ],
+        hotel: { name: "Hotel Gracery Shinjuku", stars: 4, note: "Rientro a Tokyo per l'ultima notte. Volo domani mattina da Haneda." },
+        tip: "Con Haneda invece di Narita, puoi alzarti alle 8:00 e essere in aeroporto comodamente entro le 9:30. L'ultima sera è davvero libera — nessuna fretta di andare a letto presto."
+      },
+      {
+        day: 10, date: "Lun 13 Luglio", city: "Haneda", emoji: "✈️",
+        theme: "Arrivederci, Giappone", color: "#7F8C8D",
+        activities: [
+          { time: "08:30", icon: "🚉", title: "Keikyu Line: Shinjuku → Haneda T3",
+            detail: "Da Shinjuku a Haneda: ~40 minuti, ¥630 con Suica. Molto più comodo e veloce di Narita. Sii in aeroporto entro le 09:30." },
+          { time: "11:45", icon: "🛫", title: "LH717 Tokyo Haneda → Francoforte",
+            detail: "Decollo. ~12h di volo. Arrivo FRA lunedì 19:00." },
+          { time: "21:50", icon: "🔄", title: "LH5638 Francoforte → Milano Malpensa",
+            detail: "Coincidenza a FRA. Arrivo Malpensa lunedì 23:10. Bentornati a casa." }
+        ],
+        hotel: null,
+        tip: "Haneda T3 (Internazionale) è bellissimo — arrivi presto e hai tempo per l'ultimo ramen, il duty free e qualche souvenir dell'ultimo minuto. Vale la pena."
+      }
+    ];
+
+    const transportItems = [
+      { icon: "🎫", title: "JR Pass 7 giorni", detail: "~¥50.000/persona (acquista online prima di partire su jrailpass.com). Copre Narita Express A/R, tutti gli Shinkansen, JR locali.", tag: "Consigliato", tagColor: "#27AE60" },
+      { icon: "💳", title: "Suica IC Card", detail: "Carta ricaricabile per metro, autobus, konbini. Compra all'aeroporto appena atterri.", tag: "Essenziale", tagColor: "#C0392B" },
+      { icon: "📱", title: "Pocket Wi-Fi o eSIM", detail: "Noleggia un pocket Wi-Fi in aeroporto (¥600–800/giorno) oppure attiva una eSIM Airalo/Ubigi da casa. Internet velocissimo ovunque.", tag: "Essenziale", tagColor: "#C0392B" },
+      { icon: "🚕", title: "Taxi", detail: "Solo per emergenze o tardi la notte. Le app LINE Taxi e GO funzionano bene.", tag: "Opzionale", tagColor: "#7F8C8D" }
+    ];
+
+    const route = [
+      { from: "MXP", to: "FRA", label: "Lufthansa LH249 · 3 luglio · 11:20", icon: "✈️" },
+      { from: "FRA", to: "HND", label: "Lufthansa LH716 · 3 luglio · 14:05", icon: "✈️" },
+      { from: "Haneda", to: "Tokyo", label: "Keikyu Line · ¥630 · 35min", icon: "🚄" },
+      { from: "Tokyo", to: "Kyoto", label: "Shinkansen Nozomi · ¥13.850 · 2h 15min", icon: "🚄" },
+      { from: "Kyoto", to: "Nara", label: "Kintetsu Line · ¥760 · 45min", icon: "🚆" },
+      { from: "Nara", to: "Osaka", label: "Kintetsu Line · ¥660 · 30min", icon: "🚆" },
+      { from: "Osaka", to: "Odawara", label: "Shinkansen Nozomi · ¥13.620 · 2h 20min", icon: "🚄" },
+      { from: "Odawara", to: "Hakone", label: "Odakyu Line · ¥310 · 15min", icon: "🚞" },
+      { from: "Hakone", to: "Tokyo", label: "Romancecar Odakyu · ¥3.670 · 85min", icon: "🚞" },
+      { from: "Tokyo", to: "Haneda", label: "Keikyu Line · ¥630 · 40min", icon: "🚄" },
+      { from: "HND", to: "FRA", label: "Lufthansa LH717 · 13 luglio · 11:45", icon: "✈️" },
+      { from: "FRA", to: "MXP", label: "Lufthansa LH5638 · 13 luglio · 21:50", icon: "✈️" }
+    ];
+
+    const budget = [
+      ["Hotel (8 notti, media ¥20k/notte)", "~¥160.000"],
+      ["JR Pass 7gg × 2 persone", "~¥100.000"],
+      ["Pasti (3/giorno × 8gg)", "~¥60.000"],
+      ["Attività (teamLab, musei, ecc.)", "~¥30.000"],
+      ["Shopping & varie", "~¥50.000"],
+      ["TOTALE stimato per 2 persone", "~¥400.000 ≈ €2.400"]
+    ];
+
+    const checklist = [
+      ["teamLab Planets Toyosu", "teamlab.art · esaurito settimane prima"],
+      ["JR Pass 7 giorni × 2", "jrailpass.com · acquista da casa"],
+      ["Hakone Free Pass × 2", "odakyu.jp · include Romancecar + funivia + barca"],
+      ["Pocket Wi-Fi o eSIM", "Airalo / aeroporto Haneda"],
+      ["Ryokan a Kyoto (1 notte)", "almeno 1 notte · Yoshida-sanso o simile"],
+      ["Omakase cena finale", "tabelog.com o prenotazione diretta"]
+    ];
+
+    function App() {
+      const [activeDay, setActiveDay] = useState(0);
+      const [tab, setTab] = useState("itinerary");
+      const day = days[activeDay];
+
+      return (
+        <div style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", background: "linear-gradient(160deg,#0a0306 0%,#0d0a04 60%,#040a0d 100%)", minHeight: "100vh", color: "#f0ece4" }}>
+
+          {/* ── HEADER ── */}
+          <div style={{ background: "linear-gradient(135deg,#6b0000,#9b1a1a,#6b0000)", padding: "2rem 1.5rem 1.5rem", textAlign: "center", borderBottom: "2px solid #8B6914", position: "relative", overflow: "hidden" }}>
+            <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 20% 50%, rgba(255,200,0,0.08) 0%, transparent 60%), radial-gradient(circle at 80% 50%, rgba(139,0,0,0.3) 0%, transparent 60%)", pointerEvents: "none" }} />
+            <div style={{ position: "relative", zIndex: 1 }}>
+              <div style={{ fontSize: "0.7rem", letterSpacing: "0.35em", color: "#FFD700", marginBottom: "0.6rem", textTransform: "uppercase" }}>
+                Giorgio & Lucrezia · Estate 2026
+              </div>
+              <h1 style={{ fontSize: "clamp(2rem,6vw,3rem)", fontWeight: 300, margin: 0, letterSpacing: "0.06em", color: "#fff", lineHeight: 1.1 }}>
+                🎌 <span className="gold-text">日本</span> · Giappone
+              </h1>
+              <div style={{ fontSize: "0.9rem", color: "rgba(255,215,0,0.8)", marginTop: "0.5rem", letterSpacing: "0.12em", fontStyle: "italic" }}>
+                4 — 13 Luglio 2026 · 9 giorni · Lufthansa
+              </div>
+              <div style={{ display: "flex", gap: "0.6rem", justifyContent: "center", marginTop: "1.4rem", flexWrap: "wrap" }}>
+                {[["itinerary","🗾 Itinerario"],["transport","🚄 Trasporti"],["budget","💴 Budget"]].map(([key, label]) => (
+                  <button key={key} className={`btn ${tab === key ? "active" : ""}`} onClick={() => setTab(key)}>{label}</button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* ── ITINERARY TAB ── */}
+          {tab === "itinerary" && (
+            <div className="fade-up">
+              <div className="day-scroll">
+                {days.map((d, i) => (
+                  <button key={i} className={`day-btn ${activeDay === i ? "active" : ""}`}
+                    style={activeDay === i ? { borderColor: d.color, background: `${d.color}20` } : {}}
+                    onClick={() => setActiveDay(i)}>
+                    <div style={{ fontSize: "1.2rem" }}>{d.emoji}</div>
+                    <div style={{ fontSize: "0.78rem", fontWeight: activeDay === i ? 600 : 400, marginTop: "0.15rem" }}>G{d.day}</div>
+                    <div style={{ fontSize: "0.62rem", opacity: 0.75, marginTop: "0.1rem" }}>{d.city}</div>
+                  </button>
+                ))}
+              </div>
+
+              {/* Day header */}
+              <div style={{ margin: "0.8rem 1rem 0", padding: "1.1rem 1.2rem", borderRadius: "0.85rem", background: `linear-gradient(135deg,${day.color}28,${day.color}0d)`, border: `1px solid ${day.color}44`, borderLeft: `4px solid ${day.color}` }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "0.5rem" }}>
+                  <div>
+                    <div style={{ fontSize: "0.68rem", color: day.color, letterSpacing: "0.18em", textTransform: "uppercase" }}>{day.date} · Giorno {day.day}</div>
+                    <h2 style={{ margin: "0.35rem 0 0", fontSize: "1.3rem", fontWeight: 400, color: "#fff" }}>{day.emoji} {day.theme}</h2>
+                  </div>
+                  <span style={{ padding: "0.25rem 0.8rem", borderRadius: "2rem", background: `${day.color}33`, fontSize: "0.75rem", color: "#FFD700", border: `1px solid ${day.color}44`, whiteSpace: "nowrap" }}>📍 {day.city}</span>
+                </div>
+              </div>
+
+              {/* Activities */}
+              <div style={{ padding: "0.8rem 1rem 0", display: "flex", flexDirection: "column", gap: "0.7rem" }}>
+                {day.activities.map((act, i) => (
+                  <div key={i} className="card" style={{ display: "flex", gap: "0.9rem", padding: "0.95rem 1rem" }}>
+                    <div style={{ flexShrink: 0, width: "42px", textAlign: "center" }}>
+                      <div style={{ fontSize: "1.4rem" }}>{act.icon}</div>
+                      {act.time && <div style={{ fontSize: "0.6rem", color: day.color, marginTop: "0.2rem", fontWeight: 600, fontFamily: "'DM Mono', monospace" }}>{act.time}</div>}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: "0.95rem", fontWeight: 600, color: "#fff", marginBottom: "0.3rem" }}>{act.title}</div>
+                      <div style={{ fontSize: "0.8rem", color: "rgba(240,236,228,0.7)", lineHeight: 1.55 }}>{act.detail}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Hotel */}
+              {day.hotel && (
+                <div style={{ margin: "0.8rem 1rem 0", padding: "1rem 1.1rem", borderRadius: "0.85rem", background: "rgba(255,215,0,0.07)", border: "1px solid rgba(255,215,0,0.22)" }}>
+                  <div style={{ fontSize: "0.65rem", color: "#FFD700", letterSpacing: "0.18em", marginBottom: "0.45rem", textTransform: "uppercase" }}>🏨 Hotel consigliato</div>
+                  <div style={{ fontSize: "0.95rem", color: "#fff" }}>{"⭐".repeat(day.hotel.stars)} {day.hotel.name}</div>
+                  <div style={{ fontSize: "0.77rem", color: "rgba(240,236,228,0.65)", marginTop: "0.3rem", lineHeight: 1.5 }}>{day.hotel.note}</div>
+                </div>
+              )}
+
+              {/* Tip */}
+              {day.tip && (
+                <div style={{ margin: "0.8rem 1rem 1.5rem", padding: "1rem 1.1rem", borderRadius: "0.85rem", background: "rgba(192,57,43,0.1)", border: "1px solid rgba(192,57,43,0.25)", borderLeft: "3px solid #C0392B" }}>
+                  <div style={{ fontSize: "0.65rem", color: "#C0392B", letterSpacing: "0.18em", marginBottom: "0.35rem", textTransform: "uppercase" }}>💡 Consiglio da insider</div>
+                  <div style={{ fontSize: "0.8rem", color: "rgba(240,236,228,0.8)", lineHeight: 1.55 }}>{day.tip}</div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ── TRANSPORT TAB ── */}
+          {tab === "transport" && (
+            <div className="fade-up" style={{ padding: "1rem", display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+              <div style={{ fontSize: "0.68rem", color: "rgba(240,236,228,0.4)", letterSpacing: "0.18em", textTransform: "uppercase", padding: "0.3rem 0" }}>Come muoversi in Giappone</div>
+              {transportItems.map((t, i) => (
+                <div key={i} className="card" style={{ padding: "1.1rem 1.15rem" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
+                    <span style={{ fontSize: "0.95rem", color: "#fff" }}>{t.icon} {t.title}</span>
+                    <span style={{ padding: "0.2rem 0.65rem", borderRadius: "1rem", fontSize: "0.62rem", background: `${t.tagColor}33`, color: t.tagColor, border: `1px solid ${t.tagColor}55` }}>{t.tag}</span>
+                  </div>
+                  <div style={{ fontSize: "0.8rem", color: "rgba(240,236,228,0.68)", lineHeight: 1.55 }}>{t.detail}</div>
+                </div>
+              ))}
+
+              <div style={{ padding: "1.2rem", borderRadius: "0.85rem", background: "rgba(255,215,0,0.07)", border: "1px solid rgba(255,215,0,0.18)", marginTop: "0.4rem" }}>
+                <div style={{ fontSize: "0.68rem", color: "#FFD700", marginBottom: "0.85rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>🚄 Mappa del viaggio</div>
+                {route.map((r, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.5rem 0", borderBottom: i < route.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none", fontSize: "0.78rem" }}>
+                    <span style={{ color: "#FFD700", fontWeight: 600, minWidth: "52px", fontFamily: "'DM Mono', monospace" }}>{r.from}</span>
+                    <span style={{ opacity: 0.7 }}>{r.icon}</span>
+                    <span style={{ color: "#FFD700", fontWeight: 600, minWidth: "52px", fontFamily: "'DM Mono', monospace" }}>{r.to}</span>
+                    <span style={{ color: "rgba(240,236,228,0.55)", fontSize: "0.72rem" }}>{r.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ── BUDGET TAB ── */}
+          {tab === "budget" && (
+            <div className="fade-up" style={{ padding: "1rem" }}>
+              <div style={{ fontSize: "0.68rem", color: "rgba(240,236,228,0.4)", letterSpacing: "0.18em", textTransform: "uppercase", padding: "0.3rem 0 0.8rem" }}>Stima di spesa per 2 persone · voli esclusi</div>
+              <div style={{ borderRadius: "0.85rem", overflow: "hidden", border: "1px solid rgba(255,255,255,0.07)" }}>
+                {budget.map(([voce, costo], i) => {
+                  const isLast = i === budget.length - 1;
+                  return (
+                    <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.9rem 1.1rem", background: isLast ? "rgba(255,215,0,0.1)" : i % 2 === 0 ? "rgba(255,255,255,0.035)" : "transparent", borderTop: i > 0 ? "1px solid rgba(255,255,255,0.06)" : "none" }}>
+                      <span style={{ fontSize: isLast ? "0.88rem" : "0.82rem", color: isLast ? "#FFD700" : "rgba(240,236,228,0.78)", fontWeight: isLast ? 600 : 400 }}>{voce}</span>
+                      <span style={{ fontSize: isLast ? "0.95rem" : "0.85rem", color: isLast ? "#FFD700" : "#fff", fontWeight: isLast ? 600 : 400, fontFamily: "'DM Mono', monospace" }}>{costo}</span>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div style={{ marginTop: "1.2rem", padding: "1.1rem", borderRadius: "0.85rem", background: "rgba(192,57,43,0.09)", border: "1px solid rgba(192,57,43,0.22)" }}>
+                <div style={{ fontSize: "0.68rem", color: "#C0392B", marginBottom: "0.8rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>📋 Da prenotare prima di partire</div>
+                {checklist.map(([item, note], i) => (
+                  <div key={i} style={{ display: "flex", gap: "0.5rem", padding: "0.42rem 0", borderBottom: i < checklist.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none", fontSize: "0.78rem" }}>
+                    <span style={{ color: "#C0392B", flexShrink: 0 }}>✓</span>
+                    <div>
+                      <span style={{ color: "#fff" }}>{item}</span>
+                      <span style={{ color: "rgba(240,236,228,0.45)", marginLeft: "0.5rem" }}>— {note}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ marginTop: "1rem", padding: "0.9rem 1rem", borderRadius: "0.85rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", fontSize: "0.74rem", color: "rgba(240,236,228,0.48)", lineHeight: 1.6 }}>
+                💴 Cambio indicativo: 1€ ≈ ¥160–165. Il Giappone è tornato a essere una destinazione di medio costo per i turisti europei grazie allo yen debole.
+              </div>
+            </div>
+          )}
+
+          {/* ── FOOTER ── */}
+          <div style={{ padding: "2rem 1.5rem", textAlign: "center", fontSize: "0.72rem", color: "rgba(240,236,228,0.25)", letterSpacing: "0.12em", borderTop: "1px solid rgba(255,255,255,0.05)", marginTop: "0.5rem" }}>
+            良い旅を · Buon viaggio, Giorgio & Lucrezia 🎌
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
