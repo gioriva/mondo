@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Luna di Miele · Giorgio & Lucrezia · 15 settembre — 7 ottobre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #f5f1e8;
+    --bg-soft:   #ebe5d6;
+    --paper:    #fbf8f1;
+    --ink:       #1c1c1c;
+    --ink-soft: #4a4a47;
+    --ink-mute: #7a766c;
+    --rule:      #d9d2bf;
+    --teal:      #1f4a4a;
+    --teal-deep: #0f2e2e;
+    --acid:      #b8d34a;
+    --acid-deep: #6f8a1c;
+    --amber:     #c08a3e;
+    --rose:      #c46b6b;
+    --serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+    --sans:  'Manrope', system-ui, -apple-system, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.55;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ─── Subtle paper texture ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(31,74,74,0.04) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(192,138,62,0.04) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── Layout ─── */
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── Header / Hero ─── */
+  header.hero {
+    padding: 64px 0 56px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .ref-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 36px;
+  }
+  .ref-line .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--acid);
+    border-radius: 50%;
+    margin: 0 10px;
+    vertical-align: middle;
+  }
+  h1.title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(40px, 7vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 18px;
+    font-style: italic;
+  }
+  h1.title em {
+    font-style: normal;
+    font-weight: 500;
+    color: var(--teal);
+  }
+  .subtitle {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin: 0 0 40px;
+    max-width: 620px;
+    line-height: 1.4;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 28px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .stat .num {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--teal);
+    line-height: 1;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .stat .lbl {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  /* ─── Sticky Nav ─── */
+  nav.toc {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+    z-index: 100;
+    padding: 12px 0;
+    margin: 0 -28px;
+  }
+  nav.toc .toc-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  nav.toc .toc-inner::-webkit-scrollbar { display: none; }
+  nav.toc a {
+    color: var(--ink-mute);
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  nav.toc a:hover {
+    color: var(--teal);
+    border-bottom-color: var(--acid);
+  }
+
+  /* ─── Sections ─── */
+  section {
+    padding: 64px 0 24px;
+    position: relative;
+  }
+  section + section { border-top: 1px solid var(--rule); }
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--acid-deep);
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.1;
+    margin: 0 0 32px;
+    letter-spacing: -0.015em;
+  }
+  h2 em {
+    font-style: italic;
+    color: var(--teal);
+    font-weight: 300;
+  }
+  h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.2;
+    margin: 32px 0 12px;
+    letter-spacing: -0.01em;
+  }
+
+  p { margin: 0 0 14px; color: var(--ink-soft); }
+  p.lead { font-size: 17px; line-height: 1.6; color: var(--ink); max-width: 70ch; }
+
+  /* ─── Phase cards (Itinerary) ─── */
+  .phase {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 32px 32px 8px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phase::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--teal);
+  }
+  .phase[data-region="patagonia"]::before { background: linear-gradient(to bottom, #6cb1c9, #2d6e8a); }
+  .phase[data-region="ushuaia"]::before   { background: linear-gradient(to bottom, #4a6fa5, #1f3d6b); }
+  .phase[data-region="ba"]::before        { background: linear-gradient(to bottom, #d4a85c, #9c6a1f); }
+  .phase[data-region="papeete"]::before   { background: linear-gradient(to bottom, #4ab8a8, #1f7a6e); }
+  .phase[data-region="tahaa"]::before     { background: linear-gradient(to bottom, #5cc4d4, #1f8094); }
+  .phase[data-region="bora"]::before      { background: linear-gradient(to bottom, #6bd4c8, #1f9088); }
+
+  .phase-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .phase-head .where {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.1;
+    margin: 0;
+  }
+  .phase-head .where small {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--acid-deep);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .phase-head .when {
+    font-size: 13px;
+    color: var(--ink-mute);
+    font-weight: 500;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .phase-head .when strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .hotel-strip {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--bg-soft);
+    border-radius: 3px;
+    margin: 16px 0 24px;
+    font-size: 14px;
+  }
+  .hotel-strip svg { flex-shrink: 0; color: var(--teal); }
+  .hotel-strip b { font-weight: 700; color: var(--ink); }
+  .hotel-strip .stars { color: var(--amber); letter-spacing: 0.05em; font-size: 12px; }
+  .hotel-strip .room { color: var(--ink-mute); font-size: 13px; }
+
+  /* ─── Day list ─── */
+  .day {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 24px;
+    padding: 18px 0;
+    border-top: 1px dashed var(--rule);
+  }
+  .day:first-of-type { border-top: 1px solid var(--rule); }
+  .day .date {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--teal);
+    font-size: 16px;
+    line-height: 1.3;
+    padding-top: 2px;
+  }
+  .day .date b {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .day .date small {
+    display: block;
+    font-family: var(--sans);
+    font-style: normal;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 6px;
+  }
+  .day .body h4 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 17px;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .day .body p { font-size: 14.5px; line-height: 1.55; margin: 0; }
+  .day .body p + p { margin-top: 8px; }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+    vertical-align: middle;
+  }
+  .tag.guide   { background: #e8efe1; color: var(--acid-deep); }
+  .tag.private { background: #f3e6d4; color: var(--amber); }
+  .tag.free    { background: #ede8de; color: var(--ink-mute); }
+  .tag.flight  { background: #dde7e7; color: var(--teal); }
+
+  /* ─── Flights table ─── */
+  .flights-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+  .flights-table thead {
+    background: var(--teal-deep);
+    color: var(--paper);
+  }
+  .flights-table th {
+    text-align: left;
+    padding: 12px 10px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .flights-table td {
+    padding: 12px 10px;
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .flights-table .flight-num {
+    font-family: var(--serif);
+    font-weight: 600;
+    color: var(--teal);
+    white-space: nowrap;
+  }
+  .flights-table .route {
+    font-weight: 500;
+  }
+  .flights-table .route small {
+    display: block;
+    font-weight: 400;
+    color: var(--ink-mute);
+    font-size: 11.5px;
+    margin-top: 2px;
+  }
+  .flights-table .time {
+    font-family: var(--serif);
+    font-feature-settings: 'tnum';
+    white-space: nowrap;
+  }
+  .flights-table tr.divider td {
+    background: var(--bg-soft);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--acid-deep);
+    padding: 6px 10px;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ─── Info grid ─── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 24px 0;
+  }
+  .info-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 22px 22px 20px;
+    border-radius: 3px;
+  }
+  .info-card h4 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .info-card ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .info-card li {
+    font-size: 14px;
+    color: var(--ink-soft);
+    padding: 6px 0;
+    border-top: 1px dashed var(--rule);
+    line-height: 1.5;
+  }
+  .info-card li:first-child { border-top: none; }
+  .info-card li b { color: var(--ink); font-weight: 600; }
+
+  /* ─── Alerts ─── */
+  .alert {
+    background: #fbf2e0;
+    border-left: 3px solid var(--amber);
+    padding: 16px 20px;
+    margin: 14px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-radius: 0 3px 3px 0;
+  }
+  .alert b { color: var(--ink); }
+  .alert.green {
+    background: #f0f4e3;
+    border-left-color: var(--acid-deep);
+  }
+  .alert.rose {
+    background: #fbeaea;
+    border-left-color: var(--rose);
+  }
+
+  /* ─── Honeymoon perks ─── */
+  .perk {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #fbf8f1 0%, #f5e8d8 100%);
+    padding: 20px 22px;
+    border: 1px solid #e8d8b8;
+    border-radius: 3px;
+    margin-bottom: 14px;
+  }
+  .perk .perk-icon {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    background: var(--amber);
+    color: var(--paper);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .perk h4 {
+    margin: 0 0 4px;
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .perk p { margin: 0; font-size: 13.5px; }
+
+  /* ─── Costs ─── */
+  .cost-box {
+    background: var(--teal-deep);
+    color: var(--paper);
+    padding: 36px 32px;
+    border-radius: 4px;
+    margin: 24px 0;
+  }
+  .cost-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    font-size: 15px;
+  }
+  .cost-row:last-of-type { border-bottom: none; }
+  .cost-row.total {
+    border-bottom: none;
+    margin-top: 16px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    font-size: 17px;
+  }
+  .cost-row .amt {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-feature-settings: 'tnum';
+  }
+  .cost-row.total .amt {
+    font-size: 32px;
+    color: var(--acid);
+    font-weight: 600;
+  }
+  .cost-row.total span:first-child {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* ─── Map / Journey ─── */
+  .journey {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 28px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .journey-line {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+    position: relative;
+  }
+  .journey-line::before {
+    content: '';
+    position: absolute;
+    top: 14px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right,
+      #6cb1c9 0%, #6cb1c9 25%,
+      #4a6fa5 30%, #4a6fa5 45%,
+      #d4a85c 50%, #d4a85c 60%,
+      #4ab8a8 65%, #4ab8a8 75%,
+      #5cc4d4 80%, #5cc4d4 90%,
+      #6bd4c8 95%);
+  }
+  .stop {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .stop .marker {
+    width: 14px; height: 14px;
+    background: var(--paper);
+    border: 2px solid var(--teal);
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    display: block;
+  }
+  .stop[data-r="patagonia"] .marker { border-color: #2d6e8a; }
+  .stop[data-r="ushuaia"]   .marker { border-color: #1f3d6b; }
+  .stop[data-r="ba"]        .marker { border-color: #9c6a1f; }
+  .stop[data-r="papeete"]   .marker { border-color: #1f7a6e; }
+  .stop[data-r="tahaa"]     .marker { border-color: #1f8094; }
+  .stop[data-r="bora"]      .marker { border-color: #1f9088; }
+  .stop .name {
+    font-family: var(--serif);
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .stop .nights {
+    display: block;
+    font-size: 10px;
+    color: var(--ink-mute);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  /* ─── Footer ─── */
+  footer {
+    margin-top: 64px;
+    padding: 48px 0 56px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    color: var(--ink-mute);
+    font-size: 13px;
+  }
+  footer .ornament {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--teal);
+    margin-bottom: 18px;
+  }
+  footer p { margin: 4px 0; color: var(--ink-mute); }
+
+  /* ─── Decorative letter ─── */
+  .ornament-letter {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--acid-deep);
+    opacity: 0.4;
+    font-size: 120px;
+    line-height: 1;
+    position: absolute;
+    right: 28px; top: 32px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 700px) {
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .info-grid { grid-template-columns: 1fr; }
+    .day { grid-template-columns: 1fr; gap: 6px; }
+    .day .date { display: flex; align-items: baseline; gap: 10px; padding-top: 0; }
+    .day .date b { display: inline; font-size: 17px; }
+    .day .date small { display: inline; margin-top: 0; }
+    .phase { padding: 24px 20px 8px; }
+    .ornament-letter { display: none; }
+    .flights-table { font-size: 12px; }
+    .flights-table th, .flights-table td { padding: 8px 6px; }
+    .journey-line { grid-template-columns: repeat(4, 1fr); row-gap: 20px; }
+    .journey-line::before { display: none; }
+    nav.toc .toc-inner { gap: 18px; }
+    h1.title { font-size: 44px; }
+    section { padding: 40px 0 16px; }
+  }
+
+  @media print {
+    nav.toc { display: none; }
+    body { background: white; }
+    .phase, .info-card, .journey { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="ref-line">
+      <span>Rif. 26/POL/C7983 <span class="dot"></span> Viaggi Ronchi · Marcelletti · Idee per Viaggiare</span>
+      <span>22 giorni</span>
+    </div>
+    <h1 class="title">La nostra <em>luna di miele</em><br>tra ghiacciai e lagune.</h1>
+    <p class="subtitle">Da Buenos Aires al fine del mondo, e poi via verso le acque turchesi della Polinesia Francese. Ventidue giorni, otto destinazioni, un solo viaggio.</p>
+
+    <div class="stats">
+      <div class="stat"><span class="num">22</span><span class="lbl">Giorni di viaggio</span></div>
+      <div class="stat"><span class="num">21</span><span class="lbl">Notti in hotel</span></div>
+      <div class="stat"><span class="num">14</span><span class="lbl">Voli</span></div>
+      <div class="stat"><span class="num">7</span><span class="lbl">Hotel diversi</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#journey">Percorso</a>
+    <a href="#itinerary">Itinerario</a>
+    <a href="#flights">Voli</a>
+    <a href="#hotels">Hotel</a>
+    <a href="#perks">Sposi</a>
+    <a href="#docs">Documenti</a>
+    <a href="#alerts">Allerte</a>
+    <a href="#costs">Costi</a>
+  </div>
+</nav>
+
+<!-- JOURNEY MAP -->
+<section id="journey">
+  <div class="container">
+    <div class="section-label">Il percorso</div>
+    <h2>Dalla pampa argentina <em>al cuore del Pacifico.</em></h2>
+    <p class="lead">Il viaggio si apre con la metropoli più europea del Sudamerica, poi precipita verso il sud estremo della Patagonia tra ghiacciai e canali, fa una sosta tecnica nella capitale e attraversa due continenti per raggiungere il paradiso polinesiano.</p>
+
+    <div class="journey">
+      <div class="journey-line">
+        <div class="stop" data-r="ba">
+          <span class="marker"></span>
+          <span class="name">Buenos Aires<small class="nights">3 notti</small></span>
+        </div>
+        <div class="stop" data-r="patagonia">
+          <span class="marker"></span>
+          <span class="name">El Calafate<small class="nights">4 notti</small></span>
+        </div>
+        <div class="stop" data-r="ushuaia">
+          <span class="marker"></span>
+          <span class="name">Ushuaia<small class="nights">2 notti</small></span>
+        </div>
+        <div class="stop" data-r="ba">
+          <span class="marker"></span>
+          <span class="name">Buenos Aires<small class="nights">1 notte</small></span>
+        </div>
+        <div class="stop" data-r="papeete">
+          <span class="marker"></span>
+          <span class="name">Papeete<small class="nights">1 notte</small></span>
+        </div>
+        <div class="stop" data-r="tahaa">
+          <span class="marker"></span>
+          <span class="name">Taha'a<small class="nights">4 notti</small></span>
+        </div>
+        <div class="stop" data-r="bora">
+          <span class="marker"></span>
+          <span class="name">Bora Bora<small class="nights">4 notti</small></span>
+        </div>
+        <div class="stop">
+          <span class="marker" style="border-color: var(--ink-mute);"></span>
+          <span class="name">Rientro<small class="nights">7 ott</small></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section id="itinerary">
+  <div class="container">
+    <div class="section-label">Itinerario</div>
+    <h2>Giorno per giorno, <em>passo dopo passo.</em></h2>
+
+    <!-- PHASE 1: BUENOS AIRES -->
+    <article class="phase" data-region="ba">
+      <div class="phase-head">
+        <h3 class="where"><small>Tappa 01 · Argentina</small>Buenos Aires</h3>
+        <div class="when"><strong>15 → 18 settembre</strong><br>3 notti</div>
+      </div>
+      <div class="hotel-strip">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2M13 9h2M9 13h2M13 13h2M9 17h2M13 17h2"/></svg>
+        <div>
+          <b>725 Continental</b> <span class="stars">★★★★S</span>
+          <div class="room">Camera Standard · Pernottamento e prima colazione</div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>15</b> set <small>Mar · Giorno 1</small></div>
+        <div class="body">
+          <h4>Arrivo a Buenos Aires</h4>
+          <p><span class="tag flight">VOLO</span><span class="tag private">PRIVATO</span>Partenza da Linate alle 06:25 con scalo a Parigi-CDG. Arrivo a Ezeiza alle 18:50. Incontro con la guida in italiano e trasferimento privato in hotel. Pernottamento.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>16</b> set <small>Mer · Giorno 2</small></div>
+        <div class="body">
+          <h4>Visita della città · Mezza giornata</h4>
+          <p><span class="tag guide">GUIDA IT</span><span class="tag private">PRIVATA</span>Centro storico con Plaza de Mayo, Casa Rosada, Cattedrale e Cabildo. Quartiere La Boca con passeggiata sul Caminito e i suoi edifici multicolore. San Telmo (la domenica mercato delle pulci e ballerini di Tango in Plaza Dorrego). Quartiere aristocratico de La Recoleta con il celebre cimitero che ospita le spoglie di Evita Perón. Conclusione a Palermo.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>17</b> set <small>Gio · Giorno 3</small></div>
+        <div class="body">
+          <h4>Giornata libera</h4>
+          <p><span class="tag free">LIBERA</span>Giornata a disposizione per escursioni facoltative o esplorazione personale della città. Pernottamento in hotel.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>18</b> set <small>Ven · Giorno 4</small></div>
+        <div class="body">
+          <h4>Trasferimento aeroporto</h4>
+          <p><span class="tag flight">VOLO</span>Prima colazione, trasferimento privato in aeroporto (con solo autista in spagnolo) e volo AR1840 alle 09:35 da Aeroparque a El Calafate.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- PHASE 2: EL CALAFATE -->
+    <article class="phase" data-region="patagonia">
+      <div class="phase-head">
+        <h3 class="where"><small>Tappa 02 · Patagonia</small>El Calafate</h3>
+        <div class="when"><strong>18 → 22 settembre</strong><br>4 notti</div>
+      </div>
+      <div class="hotel-strip">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2M13 9h2M9 13h2M13 13h2M9 17h2M13 17h2"/></svg>
+        <div>
+          <b>Kosten Aike</b>
+          <div class="room">Camera Doppia · Stile andino, sulle rive del Lago Argentino</div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>18</b> set <small>Ven · Giorno 1</small></div>
+        <div class="body">
+          <h4>Arrivo a El Calafate</h4>
+          <p>Arrivo alle 12:55. Trasferimento in hotel a El Calafate, sulle sponde del Lago Argentino, porta d'ingresso al Parco Nazionale Los Glaciares.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>19</b> set <small>Sab · Giorno 2</small></div>
+        <div class="body">
+          <h4>Ghiacciaio Perito Moreno</h4>
+          <p><span class="tag guide">GUIDA IT</span>Escursione al Parco Nazionale Los Glaciares. Il Perito Moreno: una lingua di ghiaccio di 5 km di fronte e 195 km di estensione. Lo spettacolo del distacco di blocchi di ghiaccio osservato dal belvedere sulla penisola di Magellano. Rientro in hotel nel pomeriggio.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>20</b> set <small>Dom · Giorno 3</small></div>
+        <div class="body">
+          <h4>Navigazione "Todo Glaciares"</h4>
+          <p><span class="tag guide">GUIDA ES/EN</span>Trasferimento al porto di Punta Bandera (47 km). Navigazione sul Brazo Norte del Lago Argentino: Boca del Diablo, Canale Upsala tra gli iceberg, Canale Spegazzini e i ghiacciai Spegazzini, Heim Sur e Peineta. Sentiero panoramico di 300 metri sulla Baia del Ghiacciaio.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>21</b> set <small>Lun · Giorno 4</small></div>
+        <div class="body">
+          <h4>Estancia Cristina Classic · Intera giornata</h4>
+          <p><span class="tag private">PRIVATA</span><span class="tag guide">CON PRANZO</span>Navigazione fino al Canale Upsala, sbarco all'Estancia Cristina e passeggiata di media difficoltà attraverso la valle. Punti panoramici sul Lago Argentino e Lago Pearson, foreste di ñire, cascata del fiume dei cani. Visita al Museo Costumbrista. Pranzo tipico con asado argentino. Rientro in navigazione.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>22</b> set <small>Mar · Giorno 5</small></div>
+        <div class="body">
+          <h4>Trasferimento aeroporto</h4>
+          <p><span class="tag flight">VOLO</span>Prima colazione, trasferimento privato (solo autista in spagnolo) e volo AR1894 alle 14:30 verso Ushuaia.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- PHASE 3: USHUAIA -->
+    <article class="phase" data-region="ushuaia">
+      <div class="phase-head">
+        <h3 class="where"><small>Tappa 03 · Tierra del Fuego</small>Ushuaia</h3>
+        <div class="when"><strong>22 → 24 settembre</strong><br>2 notti</div>
+      </div>
+      <div class="hotel-strip">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2M13 9h2M9 13h2M13 13h2M9 17h2M13 17h2"/></svg>
+        <div>
+          <b>Los Acebos</b>
+          <div class="room">Camera Doppia · Vista sul Canale di Beagle</div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>22</b> set <small>Mar · Giorno 1</small></div>
+        <div class="body">
+          <h4>Arrivo nella città più australe del mondo</h4>
+          <p><span class="tag private">PRIVATO</span><span class="tag guide">GUIDA IT</span>Arrivo alle 15:50. Trasferimento privato con guida in italiano. Ushuaia, sul canale di Beagle: combinazione di litorali, boschi, montagne e ghiacciai. Architettura pittoresca con case in legno e lamina dai colori vivaci.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>23</b> set <small>Mer · Giorno 2</small></div>
+        <div class="body">
+          <h4>Tierra del Fuego + Canale di Beagle</h4>
+          <p><span class="tag guide">GUIDA IT</span>La mattina escursione al Parco Nazionale Tierra del Fuego con guida in italiano.</p>
+          <p><span class="tag guide">GUIDA ES/EN</span>A seguire navigazione in catamarano nel Canale di Beagle: baia di Ushuaia tra i monti Mount Olivia, Cinco Hermanos e Escarpados. Circumnavigazione dell'Isla de los Lobos (colonia di leoni marini), Faro Les Eclaireurs ("della fine del mondo") e avvicinamento all'Isla Martillo.</p>
+          <div class="alert rose">
+            <b>Attenzione:</b> i pinguini di Magellano dell'Isla Martillo si possono avvistare solo da ottobre ad aprile. A settembre non saranno presenti.
+          </div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>24</b> set <small>Gio · Giorno 3</small></div>
+        <div class="body">
+          <h4>Volo di rientro a Buenos Aires</h4>
+          <p><span class="tag flight">VOLO</span>Prima colazione e trasferimento (solo autista in spagnolo). Volo AR1877 alle 13:20 verso Aeroparque.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- PHASE 4: BUENOS AIRES TRANSIT -->
+    <article class="phase" data-region="ba">
+      <div class="phase-head">
+        <h3 class="where"><small>Tappa 04 · Transit</small>Buenos Aires</h3>
+        <div class="when"><strong>24 → 25 settembre</strong><br>1 notte</div>
+      </div>
+      <div class="hotel-strip">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2M13 9h2M9 13h2M13 13h2M9 17h2M13 17h2"/></svg>
+        <div>
+          <b>725 Continental</b> <span class="stars">★★★★S</span>
+          <div class="room">Camera Standard · Una sola notte di transito</div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>24</b> set <small>Gio · Sera</small></div>
+        <div class="body">
+          <h4>Arrivo e pernottamento</h4>
+          <p>Trasferimento privato in auto da aeroporto a hotel (autista in spagnolo/inglese). Pernottamento.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>25</b> set <small>Ven · Sera</small></div>
+        <div class="body">
+          <h4>Inizio della traversata oceanica</h4>
+          <p><span class="tag flight">VOLO</span>Volo LA2381 alle 17:35 da Aeroparque verso Lima. Da lì, scalo notturno e proseguimento per Los Angeles, poi Air Tahiti Nui per Papeete.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- PHASE 5: PAPEETE -->
+    <article class="phase" data-region="papeete">
+      <div class="phase-head">
+        <h3 class="where"><small>Tappa 05 · Polinesia Francese</small>Papeete · Tahiti</h3>
+        <div class="when"><strong>26 → 27 settembre</strong><br>1 notte</div>
+      </div>
+      <div class="hotel-strip">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2M13 9h2M9 13h2M13 13h2M9 17h2M13 17h2"/></svg>
+        <div>
+          <b>Kon Tiki Tahiti</b> <span class="stars">★★★</span>
+          <div class="room">Camera Tahitian · Pernottamento e American breakfast</div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>26</b> set <small>Sab · Giorno 1</small></div>
+        <div class="body">
+          <h4>Atterraggio a Papeete</h4>
+          <p><span class="tag flight">VOLO</span><span class="tag guide">ASSISTENZA</span>Arrivo da Los Angeles con TN0007 alle 21:50. Trasferimento collettivo in bus dall'aeroporto al Kon Tiki Tahiti, con assistenza e Welcome Flower.</p>
+          <p><b>Gift incluso:</b> Monoï e perla nera in regalo.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>27</b> set <small>Dom · Giorno 2</small></div>
+        <div class="body">
+          <h4>Volo verso Raiatea</h4>
+          <p><span class="tag flight">VOLO</span>Volo VT0311 alle 10:35 da Papeete a Raiatea. Trasferimento in barca all'isolotto di Motu Tautau, sede del resort di Taha'a.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- PHASE 6: TAHA'A -->
+    <article class="phase" data-region="tahaa">
+      <div class="phase-head">
+        <h3 class="where"><small>Tappa 06 · Isole della Società</small>Taha'a</h3>
+        <div class="when"><strong>27 sett → 1 ott</strong><br>4 notti</div>
+      </div>
+      <div class="hotel-strip">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2M13 9h2M9 13h2M13 13h2M9 17h2M13 17h2"/></svg>
+        <div>
+          <b>Le Taha'a by Pearl Resorts</b> <span class="stars">★★★★</span>
+          <div class="room">Tahaa Overwater Suite · Relais &amp; Châteaux · Sul Motu Tautau</div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>27</b> set <small>Dom</small></div>
+        <div class="body">
+          <h4>Check-in al resort</h4>
+          <p>Trasferimento collettivo in barca dall'aeroporto di Raiatea (5 minuti dall'isola principale, 30 minuti di barca). Sabbia bianca finissima, struttura ispirata all'architettura polinesiana tradizionale.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>28</b> set — <b>30</b> set</div>
+        <div class="body">
+          <h4>Tre giornate sull'overwater suite</h4>
+          <p><span class="tag free">LIBERE</span>Giornate libere al resort, sulla barriera corallina del Motu Tautau.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>1</b> ott <small>Gio</small></div>
+        <div class="body">
+          <h4>Trasferimento a Bora Bora</h4>
+          <p><span class="tag flight">VOLO</span>Volo VT4804 alle 17:25 da Raiatea a Bora Bora (durata 20 minuti).</p>
+        </div>
+      </div>
+
+      <div class="alert">
+        <b>Note operative:</b> il trasferimento in barca a Le Taha'a è disponibile solo per voli in arrivo dalle 07:30 alle 17:30 e per voli in partenza dalle 09:00 alle 18:30. Compatibile con i voli previsti.
+      </div>
+    </article>
+
+    <!-- PHASE 7: BORA BORA -->
+    <article class="phase" data-region="bora">
+      <div class="phase-head">
+        <h3 class="where"><small>Tappa 07 · Isole della Società</small>Bora Bora</h3>
+        <div class="when"><strong>1 → 5 ottobre</strong><br>4 notti</div>
+      </div>
+      <div class="hotel-strip">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2M13 9h2M9 13h2M13 13h2M9 17h2M13 17h2"/></svg>
+        <div>
+          <b>Le Bora Bora by Pearl Resorts</b> <span class="stars">★★★★</span>
+          <div class="room">Lagoon Overwater Bungalow · Relais &amp; Châteaux · Sul Motu Tevairoa</div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>1</b> ott <small>Gio</small></div>
+        <div class="body">
+          <h4>Arrivo sul Motu Tevairoa</h4>
+          <p>Atterraggio alle 17:45. Trasferimento collettivo in barca veloce (10 minuti dall'aeroporto). Vista privilegiata sul monte Otemanu.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>2</b> ott — <b>4</b> ott</div>
+        <div class="body">
+          <h4>Tre giornate sul bungalow overwater</h4>
+          <p><span class="tag free">LIBERE</span>Giornate libere al resort sulla laguna di Bora Bora.</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>5</b> ott <small>Lun</small></div>
+        <div class="body">
+          <h4>Inizio del rientro</h4>
+          <p><span class="tag flight">VOLO</span>Volo VT0227 alle 15:40 da Bora Bora a Papeete. Cena/transito a Papeete e volo notturno TN0002 alle 22:30 verso Los Angeles.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- PHASE 8: RETURN -->
+    <article class="phase" style="border-color: #d9d2bf;">
+      <div class="phase-head">
+        <h3 class="where"><small>Rientro</small>Verso casa</h3>
+        <div class="when"><strong>6 → 7 ottobre</strong><br>2 voli notturni</div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>6</b> ott <small>Mar</small></div>
+        <div class="body">
+          <h4>Da Los Angeles a Parigi</h4>
+          <p><span class="tag flight">VOLO</span>Arrivo a Los Angeles alle 09:20. Volo Air France AF0023 alle 15:15 verso Parigi-CDG (arrivo 11:10 del giorno successivo).</p>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="date"><b>7</b> ott <small>Mer</small></div>
+        <div class="body">
+          <h4>Atterraggio a Linate</h4>
+          <p><span class="tag flight">VOLO</span>Volo AF1012 alle 12:20 da Parigi-CDG. Arrivo a Milano Linate alle 13:55. <em>Fine del viaggio.</em></p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- FLIGHTS -->
+<section id="flights">
+  <div class="container">
+    <div class="section-label">Operativo voli</div>
+    <h2>Quattordici voli, <em>tre continenti.</em></h2>
+    <p class="lead">Tutti i voli sono in classe Economy con un bagaglio in stiva. PNR univoco: <b>GDJX5S</b>. Gli orari sono sempre locali.</p>
+
+    <table class="flights-table">
+      <thead>
+        <tr>
+          <th>Volo</th>
+          <th>Tratta</th>
+          <th>Data</th>
+          <th>Orario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="divider"><td colspan="4">Andata · Italia → Argentina</td></tr>
+        <tr>
+          <td class="flight-num">AF 1733</td>
+          <td class="route">Milano Linate → Parigi CDG<small>Air France</small></td>
+          <td>15 set 2026</td>
+          <td class="time">06:25 → 08:05</td>
+        </tr>
+        <tr>
+          <td class="flight-num">AF 0556</td>
+          <td class="route">Parigi CDG → Buenos Aires Ezeiza<small>Air France</small></td>
+          <td>15 set 2026</td>
+          <td class="time">10:10 → 18:50</td>
+        </tr>
+
+        <tr class="divider"><td colspan="4">Voli interni Argentina</td></tr>
+        <tr>
+          <td class="flight-num">AR 1840</td>
+          <td class="route">Buenos Aires Aeroparque → El Calafate<small>Aerolíneas Argentinas</small></td>
+          <td>18 set 2026</td>
+          <td class="time">09:35 → 12:55</td>
+        </tr>
+        <tr>
+          <td class="flight-num">AR 1894</td>
+          <td class="route">El Calafate → Ushuaia<small>Aerolíneas Argentinas</small></td>
+          <td>22 set 2026</td>
+          <td class="time">14:30 → 15:50</td>
+        </tr>
+        <tr>
+          <td class="flight-num">AR 1877</td>
+          <td class="route">Ushuaia → Buenos Aires Aeroparque<small>Aerolíneas Argentinas</small></td>
+          <td>24 set 2026</td>
+          <td class="time">13:20 → 16:50</td>
+        </tr>
+
+        <tr class="divider"><td colspan="4">Traversata · Argentina → Polinesia</td></tr>
+        <tr>
+          <td class="flight-num">LA 2381</td>
+          <td class="route">Buenos Aires Aeroparque → Lima<small>LATAM (op. LATAM Perú)</small></td>
+          <td>25 set 2026</td>
+          <td class="time">17:35 → 20:20</td>
+        </tr>
+        <tr>
+          <td class="flight-num">LA 2478</td>
+          <td class="route">Lima → Los Angeles<small>LATAM (op. LATAM Perú)</small></td>
+          <td>26 set 2026</td>
+          <td class="time">00:50 → 07:50</td>
+        </tr>
+        <tr>
+          <td class="flight-num">TN 0007</td>
+          <td class="route">Los Angeles → Papeete<small>Air Tahiti Nui</small></td>
+          <td>26 set 2026</td>
+          <td class="time">16:40 → 21:50</td>
+        </tr>
+
+        <tr class="divider"><td colspan="4">Voli interisole Polinesia · 23 kg bagaglio</td></tr>
+        <tr>
+          <td class="flight-num">VT 0311</td>
+          <td class="route">Papeete → Raiatea<small>Air Tahiti</small></td>
+          <td>27 set 2026</td>
+          <td class="time">10:35 → 11:20</td>
+        </tr>
+        <tr>
+          <td class="flight-num">VT 4804</td>
+          <td class="route">Raiatea → Bora Bora<small>Air Tahiti</small></td>
+          <td>1 ott 2026</td>
+          <td class="time">17:25 → 17:45</td>
+        </tr>
+        <tr>
+          <td class="flight-num">VT 0227</td>
+          <td class="route">Bora Bora → Papeete<small>Air Tahiti</small></td>
+          <td>5 ott 2026</td>
+          <td class="time">15:40 → 16:30</td>
+        </tr>
+
+        <tr class="divider"><td colspan="4">Rientro · Polinesia → Italia</td></tr>
+        <tr>
+          <td class="flight-num">TN 0002</td>
+          <td class="route">Papeete → Los Angeles<small>Air Tahiti Nui</small></td>
+          <td>5 ott 2026</td>
+          <td class="time">22:30 → 09:20<sup>+1</sup></td>
+        </tr>
+        <tr>
+          <td class="flight-num">AF 0023</td>
+          <td class="route">Los Angeles → Parigi CDG<small>Air France</small></td>
+          <td>6 ott 2026</td>
+          <td class="time">15:15 → 11:10<sup>+1</sup></td>
+        </tr>
+        <tr>
+          <td class="flight-num">AF 1012</td>
+          <td class="route">Parigi CDG → Milano Linate<small>Air France</small></td>
+          <td>7 ott 2026</td>
+          <td class="time">12:20 → 13:55</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-grid" style="margin-top: 28px;">
+      <div class="info-card">
+        <h4>Bagagli · Aerolíneas Argentinas</h4>
+        <ul>
+          <li><b>Stiva:</b> 15 kg massimo per persona</li>
+          <li>Eventuali eccedenze vanno saldate <b>direttamente in loco</b> al banco check-in</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>Bagagli · Air Tahiti</h4>
+        <ul>
+          <li><b>Stiva:</b> 23 kg per persona (max 25 kg per pezzo) · dimensioni L+L+A = 157 cm</li>
+          <li><b>A mano:</b> 5 kg · max 55 × 35 × 25 cm</li>
+          <li>Compagnia molto rigida sui pesi: extra molto onerosi pagati sul posto</li>
+          <li>Suggerimento: estendere la franchigia per uno dei due passeggeri o usare il deposito bagagli di Papeete</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOTELS -->
+<section id="hotels">
+  <div class="container">
+    <div class="section-label">Hotel</div>
+    <h2>Sette indirizzi, <em>una sola firma di stile.</em></h2>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>725 Continental ★★★★S · Buenos Aires</h4>
+        <p style="margin-bottom: 8px; font-size: 14px;">Palazzo anni '30 progettato da Alejandro Bustillo, classico stile francese all'esterno e interni completamente modernizzati. A 10 minuti da Casa Rosada e 200 metri da Plaza de Mayo.</p>
+        <ul>
+          <li><b>Soggiorno:</b> 15-18 set (3 notti) + 24-25 set (1 notte)</li>
+          <li><b>Camera:</b> Standard · Pernottamento e prima colazione</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>Kosten Aike · El Calafate</h4>
+        <p style="margin-bottom: 8px; font-size: 14px;">Hotel caldo e accogliente in stile andino, con tetti spioventi verde brillante e legno chiaro. Sulle rive meridionali del Lago Argentino. Il nome significa "luogo del vento" in lingua tehuelche.</p>
+        <ul>
+          <li><b>Soggiorno:</b> 18-22 settembre (4 notti)</li>
+          <li><b>Camera:</b> Doppia · Prima colazione</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>Los Acebos · Ushuaia</h4>
+        <p style="margin-bottom: 8px; font-size: 14px;">Hotel a Ushuaia, la città più australe del mondo, con vista sul Canale di Beagle e sui monti circostanti.</p>
+        <ul>
+          <li><b>Soggiorno:</b> 22-24 settembre (2 notti)</li>
+          <li><b>Camera:</b> Doppia · Prima colazione</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>Kon Tiki Tahiti ★★★ · Papeete</h4>
+        <p style="margin-bottom: 8px; font-size: 14px;">Boutique hotel attento all'ambiente nel cuore di Papeete, vicino al lungomare e al molo dei traghetti. Tappa di passaggio per la prima notte in Polinesia.</p>
+        <ul>
+          <li><b>Soggiorno:</b> 26-27 settembre (1 notte)</li>
+          <li><b>Camera:</b> Tahitian · American breakfast</li>
+          <li><b>Trasferimento:</b> bus collettivo da/per aeroporto</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>Le Taha'a by Pearl Resorts ★★★★ · Taha'a</h4>
+        <p style="margin-bottom: 8px; font-size: 14px;">Resort 5 stelle Relais &amp; Châteaux sul Motu Tautau, isolotto di sabbia bianca finissima a 30 minuti di barca dall'aeroporto di Raiatea. Architettura tradizionale polinesiana.</p>
+        <ul>
+          <li><b>Soggiorno:</b> 27 set - 1 ott (4 notti)</li>
+          <li><b>Camera:</b> Tahaa Overwater Suite · American breakfast</li>
+          <li><b>Trasferimento:</b> barca collettiva da/per Raiatea</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>Le Bora Bora by Pearl Resorts ★★★★ · Bora Bora</h4>
+        <p style="margin-bottom: 8px; font-size: 14px;">Resort della catena Pearl Beach (gruppo Relais &amp; Châteaux) sul Motu Tevairoa, a 10 minuti di barca veloce dall'aeroporto. Vista privilegiata sul monte Otemanu.</p>
+        <ul>
+          <li><b>Soggiorno:</b> 1-5 ottobre (4 notti)</li>
+          <li><b>Camera:</b> Lagoon Overwater Bungalow · American breakfast</li>
+          <li><b>Trasferimento:</b> barca collettiva da/per aeroporto Bora Bora</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HONEYMOON PERKS -->
+<section id="perks">
+  <div class="container">
+    <div class="section-label">Per gli sposi</div>
+    <h2>I regali <em>che vi aspettano.</em></h2>
+    <p class="lead">Tre resort polinesiani vi accoglieranno con omaggi dedicati alla luna di miele. Tutti i benefit sono validi una sola volta durante l'intero soggiorno.</p>
+
+    <div class="alert green">
+      <b>Importante:</b> Per ricevere i benefit "luna di miele" è necessario presentare al check-in il <b>certificato di matrimonio</b> con validità massima di 12 mesi. Vi sposate il 12 settembre 2026 e arrivate al primo resort il 27 settembre 2026 — perfettamente nei termini.
+    </div>
+
+    <div class="perk">
+      <div class="perk-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2h8M9 2v6c0 2-1 3-1 5v9h8v-9c0-2-1-3-1-5V2"/></svg>
+      </div>
+      <div>
+        <h4>Kon Tiki Tahiti · Papeete</h4>
+        <p>Gift di benvenuto: <b>Monoï e perla nera</b> in regalo all'arrivo, oltre a una decorazione floreale (Welcome Flower) e assistenza all'aeroporto.</p>
+      </div>
+    </div>
+
+    <div class="perk">
+      <div class="perk-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2h8M9 2v6c0 2-1 3-1 5v9h8v-9c0-2-1-3-1-5V2"/></svg>
+      </div>
+      <div>
+        <h4>Le Taha'a by Pearl Resorts</h4>
+        <p>Per gli sposi: <b>piccola bottiglia di Champagne</b> e <b>decorazione floreale del letto</b>. In camera: minibar con selezione di soft drinks rifornito giornalmente.</p>
+      </div>
+    </div>
+
+    <div class="perk">
+      <div class="perk-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2h8M9 2v6c0 2-1 3-1 5v9h8v-9c0-2-1-3-1-5V2"/></svg>
+      </div>
+      <div>
+        <h4>Le Bora Bora by Pearl Resorts</h4>
+        <p>Per gli sposi: <b>piccola bottiglia di Champagne</b>. In camera: minibar con selezione di soft drinks rifornito giornalmente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCUMENTS -->
+<section id="docs">
+  <div class="container">
+    <div class="section-label">Documenti</div>
+    <h2>Cosa portare <em>e cosa preparare prima.</em></h2>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Passaporto</h4>
+        <ul>
+          <li><b>Validità residua:</b> minimo 6 mesi (richiesta dalla Polinesia)</li>
+          <li><b>Pagine libere:</b> almeno 4 (visitate 3 nazioni + transiti)</li>
+          <li>Deve essere <b>integro</b>: anche piccoli danni alla copertina possono comportare il rifiuto dell'imbarco</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>Argentina</h4>
+        <ul>
+          <li>Nessun visto richiesto per soggiorni fino a 3 mesi</li>
+          <li>Necessaria <b>assicurazione medica e bagaglio</b> (la documentazione va stampata e presentata all'Immigrazione)</li>
+          <li>Necessari <b>biglietto di uscita</b> e <b>prenotazioni alloggi</b></li>
+          <li>All'arrivo va compilato un <b>formulario di dichiarazione doganale</b> da conservare e restituire all'uscita</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>ESTA · Stati Uniti (transito)</h4>
+        <ul>
+          <li>I voli per Papeete fanno scalo tecnico a <b>Los Angeles</b></li>
+          <li>Anche per il solo transito è obbligatoria la registrazione <b>ESTA</b></li>
+          <li>Da richiedere su <b>esta.cbp.dhs.gov</b> prima della partenza</li>
+          <li>Le valigie dovranno essere <b>ritirate e reimbarcate</b> a Los Angeles</li>
+          <li>Presentarsi in aeroporto con <b>3h30' di anticipo</b> sui voli verso gli USA (pre-screening TSA)</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>Polinesia Francese</h4>
+        <ul>
+          <li>Passaporto con <b>6 mesi di validità residua</b></li>
+          <li>Non esiste ambasciata polinesiana in Italia: riferimento Parigi</li>
+          <li>Consolato italiano: B.P. 77 - 98725 Vairao Tahiti</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>Per le luna di miele</h4>
+        <ul>
+          <li><b>Certificato di matrimonio</b> in copia (max 12 mesi di validità)</li>
+          <li>Da presentare al check-in nei tre resort polinesiani</li>
+          <li>Consigliato portare anche una versione tradotta in inglese</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>Carta di credito</h4>
+        <ul>
+          <li>Richiesta in tutti gli hotel come <b>garanzia al check-in</b></li>
+          <li>Verrà bloccata una somma a titolo cauzionale (slegata dai pagamenti già effettuati)</li>
+          <li>Necessaria per minibar, ristoranti, servizi opzionali</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALERTS -->
+<section id="alerts">
+  <div class="container">
+    <div class="section-label">Da sapere</div>
+    <h2>Avvertenze <em>e dettagli pratici.</em></h2>
+
+    <div class="alert">
+      <b>Tasse di soggiorno · Buenos Aires.</b> Da pagare direttamente in hotel: da USD 0,50 a USD 1,50 per notte a seconda della categoria.
+    </div>
+
+    <div class="alert">
+      <b>Resort fee in Polinesia.</b> Alcuni hotel possono richiedere il pagamento in loco di tasse di soggiorno o resort fee non prepagabili dall'Italia. L'importo varia da struttura a struttura.
+    </div>
+
+    <div class="alert rose">
+      <b>Pinguini all'Isla Martillo.</b> La colonia di pinguini magellanici è visibile solo da <b>ottobre ad aprile</b>. Durante la vostra navigazione di settembre potrete avvistare leoni marini, uccelli e il Faro Les Eclaireurs, ma non i pinguini.
+    </div>
+
+    <div class="alert">
+      <b>Hotel smoke-free negli USA (transito).</b> Anche se non pernotterete negli USA, ricordate che le regole antifumo americane sono molto severe — multe oltre i 250-500 USD per fumo in aree chiuse.
+    </div>
+
+    <div class="alert">
+      <b>Voli domestici Air Tahiti.</b> Gli orari possono subire modifiche fino al giorno della partenza. I biglietti elettronici verranno consegnati all'arrivo a Papeete.
+    </div>
+
+    <div class="alert green">
+      <b>Vegetazione tropicale.</b> Nei resort polinesiani è normale trovare gechi, piccoli insetti non velenosi e occasionali volpi volanti (pipistrelli innocui). Si consiglia repellente per insetti.
+    </div>
+
+    <div class="alert">
+      <b>Tariffe soggette a riconferma.</b> Il preventivo di Idee per Viaggiare contiene tariffe soggette a riconferma: meglio sollecitare la conferma definitiva con largo anticipo. <b>Le tariffe Le Taha'a e Le Bora Bora richiedono prenotazione entro il 30 aprile 2026.</b>
+    </div>
+
+    <div class="alert">
+      <b>Vaccinazione febbre gialla.</b> Non obbligatoria, ma raccomandata per alcune aree dell'Argentina e del Perù che attraverserete in transito (province menzionate dal preventivo: Sucumbios, Orellana, Napo, Pastaza, Morona Santiago, Zamora Chinchipe). Verificare con largo anticipo.
+    </div>
+  </div>
+</section>
+
+<!-- COSTS -->
+<section id="costs">
+  <div class="container">
+    <div class="section-label">Investimento</div>
+    <h2>Il costo <em>complessivo del viaggio.</em></h2>
+
+    <div class="cost-box">
+      <div class="cost-row">
+        <span>Quota totale pratica</span>
+        <span class="amt">€ 27.817,00</span>
+      </div>
+      <div class="cost-row">
+        <span>Polizza All-Risk · annullamento + bagaglio + spese mediche fino a 50.000 €</span>
+        <span class="amt">€ 1.016,00</span>
+      </div>
+      <div class="cost-row total">
+        <span>Totale (incl. tasse aeroportuali e quote apertura pratica)</span>
+        <span class="amt">€ 28.833,00</span>
+      </div>
+    </div>
+
+    <p class="lead" style="margin-top: 24px;">La polizza <b>All-Risk</b> è obbligatoria per Idee per Viaggiare e copre annullamento, bagaglio e spese mediche fino a 50.000 € per persona / 150.000 € totale pratica. Premio: 3,9% dei servizi assicurabili. Pacchetti fino a 45 giorni di durata massima.</p>
+
+    <p class="lead">È disponibile anche una <b>polizza integrativa spese mediche</b> per chi vuole aumentare il massimale rimborso oltre i 50.000 €. Acquistabile da passeggeri residenti in Italia che alla partenza non abbiano compiuto 75 anni. Da richiedere al booking.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="ornament">— Buon viaggio —</div>
+    <p><b>Pratica Rif. 26/POL/C7983</b></p>
+    <p>Viaggi Ronchi (Como) · in collaborazione con Marcelletti</p>
+    <p>Organizzazione tecnica: Idee per Viaggiare S.r.l. — Roma</p>
+    <p>Aderente al Fondo Astoi a tutela dei viaggiatori (art. 50 Codice del Turismo)</p>
+    <p style="margin-top: 18px; font-style: italic; font-family: var(--serif); color: var(--teal);">Giorgio &amp; Lucrezia · 12 settembre 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
