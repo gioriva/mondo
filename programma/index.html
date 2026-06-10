@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Diario di rotta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --notte:#0b0e13;
+    --carta:#11151c;
+    --carta-2:#161b24;
+    --oro:#c9a35c;
+    --oro-chiaro:#e7cf9a;
+    --avorio:#ece5d8;
+    --grigio:#8d94a3;
+    --grigio-scuro:#5a6070;
+    --linea:rgba(201,163,92,.16);
+    --linea-soft:rgba(236,229,216,.07);
+    --rosso:#c4564a;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --mono:'IBM Plex Mono',monospace;
+    --sans:'Montserrat',-apple-system,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  }
+  body{
+    margin:0;
+    background:var(--notte);
+    color:var(--avorio);
+    font-family:var(--sans);
+    font-size:15.5px;
+    font-weight:300;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--oro);color:var(--notte)}
+  a{color:var(--oro-chiaro)}
+  button{font-family:inherit}
+  button:focus-visible,li:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+
+  /* grain */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+    background-image:radial-gradient(circle at 15% 20%, rgba(201,163,92,.05), transparent 45%),
+                     radial-gradient(circle at 85% 80%, rgba(201,163,92,.04), transparent 45%);
+  }
+
+  /* scroll progress hairline */
+  #progress{
+    position:fixed;top:0;left:0;height:2px;width:0%;
+    background:linear-gradient(90deg,var(--oro),var(--oro-chiaro));
+    z-index:100;transition:width .1s linear;
+  }
+
+  /* ======== NAV ======== */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:90;
+    display:flex;justify-content:center;gap:4px;
+    padding:14px 16px;
+    background:linear-gradient(to bottom, rgba(11,14,19,.92), rgba(11,14,19,.75) 70%, transparent);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    overflow-x:auto;scrollbar-width:none;
+  }
+  nav::-webkit-scrollbar{display:none}
+  nav a{
+    flex:0 0 auto;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--grigio);text-decoration:none;
+    padding:8px 13px;border-radius:999px;
+    border:1px solid transparent;
+    transition:color .25s ease,border-color .25s ease;
+    white-space:nowrap;
+  }
+  nav a:hover{color:var(--avorio)}
+  nav a.attiva{color:var(--oro-chiaro);border-color:var(--linea)}
+
+  /* ======== HERO ======== */
+  .hero{
+    min-height:100svh;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;padding:96px 24px 64px;position:relative;
+  }
+  .hero-anello{
+    width:120px;height:120px;margin-bottom:42px;position:relative;
+  }
+  .hero-anello svg{width:100%;height:100%;overflow:visible}
+  .anello-base{fill:none;stroke:var(--linea);stroke-width:1}
+  .anello-arco{
+    fill:none;stroke:var(--oro);stroke-width:1.5;stroke-linecap:round;
+    stroke-dasharray:339.3;stroke-dashoffset:280;
+    transform-origin:center;
+    animation:respiro 6s ease-in-out infinite;
+  }
+  @keyframes respiro{
+    0%,100%{stroke-dashoffset:280;opacity:.7}
+    50%{stroke-dashoffset:180;opacity:1}
+  }
+  .anello-centro{
+    position:absolute;inset:0;display:grid;place-items:center;
+    font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--oro);
+  }
+  .hero .occhiello{
+    font-family:var(--mono);font-size:11px;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--oro);margin-bottom:26px;
+  }
+  .hero h1{
+    font-family:var(--serif);font-weight:500;font-style:italic;
+    font-size:clamp(52px,9vw,118px);line-height:.95;letter-spacing:-.015em;
+    margin:0 0 28px;color:var(--avorio);
+  }
+  .hero h1 b{font-style:normal;font-weight:600;color:var(--oro-chiaro)}
+  .hero .sotto{
+    font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.4vw,21px);
+    color:var(--grigio);max-width:540px;line-height:1.5;margin:0;
+  }
+  .hero .freccia{
+    position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+    font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--grigio-scuro);
+    text-transform:uppercase;text-decoration:none;
+    animation:galleggia 3s ease-in-out infinite;
+  }
+  @keyframes galleggia{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+
+  /* ======== LAYOUT + FILO ======== */
+  .corpo{max-width:1060px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+  #filo{
+    position:absolute;left:38px;top:0;bottom:0;width:2px;pointer-events:none;
+  }
+  #filo .filo-base{position:absolute;inset:0;background:var(--linea-soft);width:1px;left:0}
+  #filo .filo-oro{
+    position:absolute;top:0;width:1px;left:0;height:0;
+    background:linear-gradient(to bottom,var(--oro),var(--oro-chiaro));
+    box-shadow:0 0 8px rgba(201,163,92,.5);
+  }
+  @media (max-width:920px){#filo{display:none}}
+
+  section{
+    padding:110px 0 30px;
+    scroll-margin-top:60px;
+  }
+  .sez-testa{
+    display:flex;align-items:baseline;gap:22px;margin-bottom:14px;
+    padding-left:64px;position:relative;
+  }
+  @media (max-width:920px){.sez-testa{padding-left:0}}
+  .sez-num{
+    position:absolute;left:14px;top:8px;
+    width:48px;height:48px;border-radius:50%;
+    border:1px solid var(--linea);
+    display:grid;place-items:center;
+    font-family:var(--mono);font-size:12px;color:var(--oro);
+    background:var(--notte);
+    transition:border-color .5s ease,box-shadow .5s ease;
+  }
+  @media (max-width:920px){
+    .sez-num{position:static;width:40px;height:40px;flex:0 0 auto}
+  }
+  section.acceso .sez-num{
+    border-color:var(--oro);
+    box-shadow:0 0 16px rgba(201,163,92,.35);
+  }
+  .sez-testa h2{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(34px,5vw,54px);letter-spacing:-.01em;line-height:1;
+    margin:0;color:var(--avorio);
+  }
+  .sez-lead{
+    font-family:var(--serif);font-style:italic;font-size:17.5px;color:var(--grigio);
+    max-width:620px;margin:0 0 44px;padding-left:64px;line-height:1.55;
+  }
+  @media (max-width:920px){.sez-lead{padding-left:0}}
+  .sez-corpo{padding-left:64px}
+  @media (max-width:920px){.sez-corpo{padding-left:0}}
+
+  h3.sotto-titolo{
+    font-family:var(--serif);font-weight:500;font-size:27px;color:var(--avorio);
+    margin:54px 0 18px;letter-spacing:-.01em;
+  }
+  .etichetta{
+    font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--oro);margin:0 0 12px;
+  }
+
+  /* reveal */
+  .vela{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .vela.svelato{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.vela{opacity:1;transform:none}}
+
+  /* ======== OGGI ======== */
+  .oggi-griglia{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+  @media (max-width:780px){.oggi-griglia{grid-template-columns:1fr}}
+  .scheda{
+    background:var(--carta);border:1px solid var(--linea-soft);border-radius:10px;
+    padding:26px 28px;
+  }
+  .scheda-titolo{
+    display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+    margin-bottom:18px;flex-wrap:wrap;
+  }
+  .scheda-titolo .nome{
+    font-family:var(--serif);font-weight:500;font-size:26px;color:var(--avorio);
+  }
+  .pillola{
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+    padding:6px 13px;border-radius:999px;border:1px solid var(--linea);color:var(--oro);
+  }
+  .pillola.sport{background:var(--oro);color:var(--notte);border-color:var(--oro)}
+  .riga-pasto{
+    display:grid;grid-template-columns:118px 1fr;gap:16px;
+    padding:13px 0;border-bottom:1px solid var(--linea-soft);
+    align-items:baseline;
+  }
+  .riga-pasto:last-child{border-bottom:none}
+  .riga-pasto .quando{
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--oro);
+  }
+  .riga-pasto .cosa{font-size:14px;color:var(--avorio);line-height:1.55}
+  @media (max-width:560px){.riga-pasto{grid-template-columns:1fr;gap:4px}}
+
+  .oggi-allenamento .attivita{
+    font-family:var(--serif);font-weight:500;font-size:22px;color:var(--oro-chiaro);
+    margin:2px 0 8px;
+  }
+  .oggi-allenamento .dettaglio{font-size:13.5px;color:var(--grigio);line-height:1.6}
+
+  /* acqua */
+  .acqua{margin-top:18px}
+  .acqua-dots{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0 10px}
+  .goccia{
+    width:30px;height:30px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+    border:1px solid var(--linea);background:transparent;cursor:pointer;
+    transition:all .25s ease;padding:0;
+  }
+  .goccia:hover{border-color:var(--oro)}
+  .goccia.piena{
+    background:linear-gradient(to top,var(--oro),var(--oro-chiaro));
+    border-color:var(--oro);
+    box-shadow:0 0 10px rgba(201,163,92,.35);
+  }
+  .acqua-nota{font-family:var(--mono);font-size:10.5px;color:var(--grigio-scuro);letter-spacing:.08em}
+  .acqua-nota b{color:var(--oro);font-weight:500}
+
+  /* ======== MACROS ======== */
+  .macro-griglia{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 40px}
+  .macro{
+    background:var(--carta);border:1px solid var(--linea-soft);border-radius:8px;
+    padding:18px 20px;
+  }
+  .macro .m-eti{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--oro);margin-bottom:8px}
+  .macro .m-val{font-family:var(--serif);font-weight:500;font-size:24px;color:var(--avorio);line-height:1.1}
+  .macro .m-val small{font-size:14px;color:var(--grigio)}
+
+  /* avviso */
+  .avviso{
+    border:1px solid rgba(196,86,74,.35);border-left:2px solid var(--rosso);
+    background:rgba(196,86,74,.06);border-radius:8px;
+    padding:20px 24px;margin:0 0 36px;font-size:14px;color:var(--avorio);line-height:1.65;
+  }
+  .avviso b{color:var(--oro-chiaro);font-weight:500}
+  .nota-oro{
+    border:1px solid var(--linea);border-left:2px solid var(--oro);
+    background:rgba(201,163,92,.05);border-radius:8px;
+    padding:20px 24px;margin:36px 0 0;font-size:14px;color:var(--avorio);line-height:1.65;
+  }
+  .nota-oro b{color:var(--oro-chiaro);font-weight:500}
+
+  /* ======== GIORNI ======== */
+  .selettore{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 16px;scrollbar-width:none;margin-bottom:8px}
+  .selettore::-webkit-scrollbar{display:none}
+  .g-btn{
+    flex:0 0 auto;padding:11px 18px;border-radius:999px;
+    background:transparent;border:1px solid var(--linea-soft);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--grigio);cursor:pointer;transition:all .25s ease;position:relative;
+  }
+  .g-btn:hover{color:var(--avorio);border-color:var(--linea)}
+  .g-btn.attivo{background:var(--oro);border-color:var(--oro);color:var(--notte);font-weight:500}
+  .g-btn.odierno::after{
+    content:"";position:absolute;top:5px;right:7px;width:5px;height:5px;border-radius:50%;
+    background:var(--oro-chiaro);
+  }
+  .g-btn.attivo.odierno::after{background:var(--notte)}
+  .g-pann{display:none}
+  .g-pann.attivo{display:block;animation:apparire .3s ease}
+  @keyframes apparire{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .g-intesta{
+    display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;
+    padding:18px 0 14px;border-bottom:1px solid var(--linea-soft);margin-bottom:6px;
+  }
+  .g-nome{font-family:var(--serif);font-weight:500;font-size:34px;color:var(--avorio)}
+
+  /* ======== SPESA ======== */
+  .spesa-testa{
+    display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center;
+    background:var(--carta);border:1px solid var(--linea-soft);border-radius:10px;
+    padding:24px 28px;margin-bottom:26px;
+  }
+  @media (max-width:640px){.spesa-testa{grid-template-columns:1fr;text-align:center;justify-items:center}}
+  .cerchio{width:88px;height:88px;position:relative}
+  .cerchio svg{width:100%;height:100%;transform:rotate(-90deg)}
+  .cerchio .c-base{fill:none;stroke:var(--linea-soft);stroke-width:3}
+  .cerchio .c-arco{
+    fill:none;stroke:var(--oro);stroke-width:3;stroke-linecap:round;
+    stroke-dasharray:251.3;stroke-dashoffset:251.3;
+    transition:stroke-dashoffset .45s ease;
+  }
+  .cerchio .c-testo{
+    position:absolute;inset:0;display:grid;place-items:center;
+    font-family:var(--mono);font-size:13px;color:var(--oro-chiaro);
+  }
+  .spesa-info .conta{font-family:var(--serif);font-size:24px;font-weight:500;color:var(--avorio)}
+  .spesa-info .conta small{color:var(--grigio);font-size:16px}
+  .spesa-info p{margin:4px 0 0;font-size:12.5px;color:var(--grigio)}
+  .azzera{
+    padding:10px 20px;border-radius:999px;background:transparent;
+    border:1px solid var(--linea-soft);color:var(--grigio-scuro);
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    cursor:not-allowed;opacity:.5;transition:all .25s ease;
+  }
+  .azzera.attivo{border-color:var(--oro);color:var(--oro);cursor:pointer;opacity:1}
+  .azzera.attivo:hover{background:var(--oro);color:var(--notte)}
+
+  .reparto{
+    background:var(--carta);border:1px solid var(--linea-soft);border-radius:10px;
+    overflow:hidden;margin-bottom:16px;transition:opacity .35s ease;
+  }
+  .reparto.fatto{opacity:.45}
+  .reparto-testa{
+    padding:16px 24px;background:var(--carta-2);
+    display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
+    border-bottom:1px solid var(--linea-soft);
+  }
+  .reparto-titolo{font-family:var(--serif);font-weight:500;font-size:21px;color:var(--avorio);margin:0}
+  .reparto-nota{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--grigio);margin:2px 0 0}
+  .reparto-conta{
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;
+    padding:5px 12px;border-radius:999px;border:1px solid var(--oro);color:var(--oro);white-space:nowrap;
+  }
+  .reparto-conta.pieno{background:var(--oro);color:var(--notte)}
+  ul.articoli{list-style:none;margin:0;padding:0}
+  ul.articoli li{
+    padding:12px 24px;display:flex;align-items:center;gap:14px;cursor:pointer;
+    border-bottom:1px solid var(--linea-soft);transition:background .15s ease;user-select:none;
+  }
+  ul.articoli li:last-child{border-bottom:none}
+  ul.articoli li:hover{background:rgba(201,163,92,.04)}
+  .quadr{
+    flex:0 0 auto;width:18px;height:18px;border-radius:4px;
+    border:1px solid var(--grigio-scuro);position:relative;transition:all .2s ease;
+  }
+  .quadr::after{
+    content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;
+    border:solid var(--notte);border-width:0 2px 2px 0;transform:rotate(45deg);
+    opacity:0;
+  }
+  li.preso .quadr{background:var(--oro);border-color:var(--oro)}
+  li.preso .quadr::after{opacity:1}
+  .articolo-testo{font-size:14px;color:var(--avorio);transition:color .2s ease}
+  li.preso .articolo-testo{color:var(--grigio-scuro);text-decoration:line-through;text-decoration-color:var(--oro)}
+
+  /* ======== ALLENAMENTO ======== */
+  .sett-griglia{display:grid;gap:10px;margin-bottom:14px}
+  .sett-riga{
+    display:grid;grid-template-columns:108px 1fr;gap:20px;
+    background:var(--carta);border:1px solid var(--linea-soft);border-radius:8px;
+    padding:18px 24px;align-items:start;
+  }
+  .sett-riga.sport{border-left:2px solid var(--oro)}
+  .sett-g{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);padding-top:4px}
+  .sett-att{font-family:var(--serif);font-weight:500;font-size:20px;color:var(--avorio);margin-bottom:4px}
+  .sett-det{font-size:13.5px;color:var(--grigio);line-height:1.6}
+  @media (max-width:560px){.sett-riga{grid-template-columns:1fr;gap:6px}}
+
+  .fase{
+    background:var(--carta);border:1px solid var(--linea-soft);border-radius:10px;
+    border-left:2px solid var(--oro);padding:26px 28px;margin-bottom:16px;
+  }
+  .fase .f-eti{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--oro);margin-bottom:10px}
+  .fase h4{font-family:var(--serif);font-weight:500;font-size:23px;color:var(--avorio);margin:0 0 4px}
+  .fase .f-schema{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--grigio);margin-bottom:12px}
+  .fase p{margin:0;font-size:14px;color:var(--avorio);line-height:1.65}
+  .fase p b{color:var(--oro-chiaro);font-weight:500}
+
+  .due-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+  @media (max-width:700px){.due-col{grid-template-columns:1fr}}
+
+  /* ======== STRATEGIE ======== */
+  .tattica{
+    display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:start;
+    background:var(--carta);border:1px solid var(--linea-soft);border-radius:8px;
+    padding:20px 24px;margin-bottom:12px;
+  }
+  .tattica .t-icona{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--linea);
+    display:grid;place-items:center;
+    font-family:var(--serif);font-style:italic;font-weight:600;font-size:17px;color:var(--oro);
+  }
+  .tattica h5{font-family:var(--serif);font-weight:500;font-size:19px;color:var(--avorio);margin:0 0 4px}
+  .tattica p{margin:0;font-size:13.5px;color:var(--grigio);line-height:1.6}
+
+  /* ======== ROADMAP ======== */
+  ul.tappe{list-style:none;margin:14px 0 0;padding:0}
+  ul.tappe li{
+    padding:13px 0 13px 26px;position:relative;font-size:14.5px;color:var(--avorio);
+    border-bottom:1px solid var(--linea-soft);
+  }
+  ul.tappe li:last-child{border-bottom:none}
+  ul.tappe li::before{
+    content:"";position:absolute;left:4px;top:21px;width:6px;height:6px;border-radius:50%;
+    background:var(--oro);
+  }
+  ul.tappe b{color:var(--oro-chiaro);font-weight:500;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+
+  /* ======== DECALOGO ======== */
+  .deca-griglia{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:13px;margin-top:10px}
+  .deca{
+    background:var(--carta);border:1px solid var(--linea-soft);border-radius:8px;
+    padding:20px 22px;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;
+  }
+  .deca .d-num{font-family:var(--serif);font-style:italic;font-weight:600;font-size:32px;color:var(--oro);line-height:1}
+  .deca .d-testo{font-size:13.5px;color:var(--avorio);line-height:1.5}
+  .deca .d-testo em{color:var(--oro-chiaro);font-style:italic}
+
+  /* ======== FOOTER ======== */
+  footer{
+    margin-top:120px;padding:64px 24px 72px;text-align:center;
+    border-top:1px solid var(--linea-soft);
+  }
+  footer .marchio{font-family:var(--mono);font-size:9.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--oro);margin-bottom:18px}
+  footer p{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--grigio);max-width:520px;margin:0 auto;line-height:1.7}
+
+  @media print{
+    body{background:#fff;color:#000}
+    nav,#progress,#filo,.freccia{display:none}
+    .g-pann{display:block !important}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav id="nav">
+  <a href="#oggi">Oggi</a>
+  <a href="#pasti">Pasti</a>
+  <a href="#spesa">Spesa</a>
+  <a href="#allenamento">Allenamento</a>
+  <a href="#strategie">Strategie</a>
+  <a href="#rotta">Rotta</a>
+  <a href="#decalogo">Decalogo</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-anello" aria-hidden="true">
+    <svg viewBox="0 0 120 120">
+      <circle class="anello-base" cx="60" cy="60" r="54"/>
+      <circle class="anello-arco" cx="60" cy="60" r="54"/>
+    </svg>
+    <div class="anello-centro" id="anello-giorno">—</div>
+  </div>
+  <div class="occhiello">Modalità intensiva</div>
+  <h1>Diario <b>di rotta</b></h1>
+  <p class="sotto">Alimentazione, allenamento e disciplina quotidiana — un percorso cucito su misura, una settimana alla volta.</p>
+  <a class="freccia" href="#oggi">Scendi ↓</a>
+</div>
+
+<div class="corpo">
+<div id="filo" aria-hidden="true"><div class="filo-base"></div><div class="filo-oro" id="filo-oro"></div></div>
+
+<!-- ============ I · OGGI ============ -->
+<section id="oggi">
+  <div class="sez-testa vela"><div class="sez-num">I</div><h2>Oggi</h2></div>
+  <p class="sez-lead vela">La pagina si compone da sola: pasti e allenamento del giorno corrente, più il conto dell'acqua.</p>
+  <div class="sez-corpo">
+    <div class="oggi-griglia vela">
+      <div class="scheda">
+        <div class="scheda-titolo">
+          <span class="nome" id="oggi-nome">—</span>
+          <span class="pillola" id="oggi-tag">—</span>
+        </div>
+        <div id="oggi-pasti"></div>
+      </div>
+      <div>
+        <div class="scheda oggi-allenamento" style="margin-bottom:18px">
+          <div class="etichetta">Allenamento del giorno</div>
+          <div class="attivita" id="oggi-att">—</div>
+          <div class="dettaglio" id="oggi-det">—</div>
+        </div>
+        <div class="scheda acqua">
+          <div class="etichetta">Acqua · obiettivo 2,5 litri</div>
+          <div class="acqua-dots" id="acqua-dots"></div>
+          <div class="acqua-nota"><b id="acqua-conta">0</b> / 10 bicchieri da 250 ml — si azzera ogni notte</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ II · PASTI ============ -->
+<section id="pasti">
+  <div class="sez-testa vela"><div class="sez-num">II</div><h2>Pasti</h2></div>
+  <p class="sez-lead vela">Versione intensiva — deficit maggiorato del 15% per accelerare i primi risultati. Massimo 6–8 settimane, poi si torna al piano standard.</p>
+  <div class="sez-corpo">
+
+    <div class="avviso vela"><b>Usare con criterio.</b> Se compaiono nausea forte, vertigini, stanchezza persistente o cali di pressione, sospendi e parla col medico curante. Le proteine restano alte: il taglio è su carboidrati e grassi.</div>
+
+    <div class="macro-griglia vela">
+      <div class="macro"><div class="m-eti">Calorie</div><div class="m-val">1.450–1.530 <small>kcal</small></div></div>
+      <div class="macro"><div class="m-eti">Proteine</div><div class="m-val">170–180 <small>g</small></div></div>
+      <div class="macro"><div class="m-eti">Carboidrati</div><div class="m-val">110–140 <small>g</small></div></div>
+      <div class="macro"><div class="m-eti">Grassi</div><div class="m-val">45–55 <small>g</small></div></div>
+    </div>
+
+    <div class="selettore vela" id="selettore"></div>
+    <div id="giorni-pann"></div>
+
+    <div class="nota-oro vela"><b>Cosa non c'è, e perché.</b> Niente pomodoro, peperoni, broccoli o cavolfiori — preferenze rispettate. Pochissimi formaggi stagionati. Pane sempre integrale, per fibra e indice glicemico più basso.</div>
+  </div>
+</section>
+
+<!-- ============ III · SPESA ============ -->
+<section id="spesa">
+  <div class="sez-testa vela"><div class="sez-num">III</div><h2>Spesa</h2></div>
+  <p class="sez-lead vela">Quantità calibrate sulla settimana intensiva, per una persona. Le voci spuntate restano salvate sul dispositivo.</p>
+  <div class="sez-corpo">
+    <div class="spesa-testa vela">
+      <div class="cerchio">
+        <svg viewBox="0 0 88 88">
+          <circle class="c-base" cx="44" cy="44" r="40"/>
+          <circle class="c-arco" id="c-arco" cx="44" cy="44" r="40"/>
+        </svg>
+        <div class="c-testo" id="c-perc">0%</div>
+      </div>
+      <div class="spesa-info">
+        <div class="conta"><span id="sp-fatti">0</span> <small>/ <span id="sp-totale">0</span> articoli</small></div>
+        <p>Una spesa grande il sabato, un richiamo a metà settimana per fresco e pane.</p>
+      </div>
+      <button class="azzera" id="azzera" type="button">Azzera</button>
+    </div>
+    <div id="reparti"></div>
+    <div class="nota-oro vela"><b>Suggerimento.</b> Surgela carne e pesce in monoporzioni appena rientri: risparmia tempo nei giorni pieni e toglie spazio agli impulsi sbagliati.</div>
+  </div>
+</section>
+
+<!-- ============ IV · ALLENAMENTO ============ -->
+<section id="allenamento">
+  <div class="sez-testa vela"><div class="sez-num">IV</div><h2>Allenamento</h2></div>
+  <p class="sez-lead vela">Quattro sessioni a settimana più tennis. Prudenza nelle prime quattro settimane per proteggere le articolazioni, poi si alza il volume.</p>
+  <div class="sez-corpo">
+    <div class="sett-griglia vela" id="sett-griglia"></div>
+
+    <h3 class="sotto-titolo vela">Progressione corsa</h3>
+    <div class="vela">
+      <div class="fase">
+        <div class="f-eti">Fase 1 · Settimane 1–3</div>
+        <h4>Adattamento articolare</h4>
+        <div class="f-schema">Corri 4 minuti, cammina 1 — ripeti per 40 minuti totali</div>
+        <p>Ritmo conversazionale: devi poter parlare mentre corri. È la fase più delicata, niente eroismi.</p>
+      </div>
+      <div class="fase">
+        <div class="f-eti">Fase 2 · Settimane 4–6</div>
+        <h4>Costruzione aerobica</h4>
+        <div class="f-schema">Corri 8 minuti, cammina 1 — ripeti per 40 minuti totali</div>
+        <p>Si allunga gradualmente il tempo di corsa continua, mantenendo il ritmo sotto controllo.</p>
+      </div>
+      <div class="fase">
+        <div class="f-eti">Fase 3 · Dalla settimana 7</div>
+        <h4>Stabilizzazione</h4>
+        <div class="f-schema">Corsa continua per 40 minuti, 6–7 km a uscita</div>
+        <p>Una volta al mese, dopo l'ottava settimana, una corsa diventa sessione di intervalli: 10' di riscaldamento + 6 × 400 m veloci con 1' di recupero camminato + 10' di defaticamento.</p>
+      </div>
+    </div>
+
+    <div class="due-col vela">
+      <div class="scheda">
+        <div class="etichetta">Scarpe</div>
+        <p style="margin:0;font-size:14px;color:var(--avorio);line-height:1.65">Con un peso elevato l'ammortizzazione è tutto. Riferimenti per runner pesanti: <b style="color:var(--oro-chiaro);font-weight:500">Asics Gel-Nimbus, Hoka Bondi, Brooks Glycerin</b>. Si sostituiscono dopo 600–700 km.</p>
+      </div>
+      <div class="scheda">
+        <div class="etichetta">Recupero</div>
+        <p style="margin:0;font-size:14px;color:var(--avorio);line-height:1.65">Stretching 5 minuti dopo ogni sessione — polpacci, quadricipiti, flessori dell'anca. Idratazione abbondante post-allenamento.</p>
+      </div>
+    </div>
+
+    <div class="avviso vela"><b>Segnali d'allarme.</b> Dolore al ginocchio o alla tibia che dura più di 48 ore: fermarsi e valutare una visita ortopedica o fisioterapica. Un infortunio adesso costa settimane di stop.</div>
+  </div>
+</section>
+
+<!-- ============ V · STRATEGIE ============ -->
+<section id="strategie">
+  <div class="sez-testa vela"><div class="sez-num">V</div><h2>Strategie</h2></div>
+  <p class="sez-lead vela">I due ostacoli che fanno deragliare ogni percorso: la fame emotiva e i pasti fuori casa. Tecniche collaudate per entrambi.</p>
+  <div class="sez-corpo">
+    <h3 class="sotto-titolo vela" style="margin-top:0">Fame nervosa</h3>
+    <div class="vela">
+      <div class="tattica"><div class="t-icona">10'</div><div><h5>La regola dei dieci minuti</h5><p>All'arrivo dell'impulso: un grande bicchiere d'acqua, poi un timer di 10 minuti facendo altro. Spesso il craving passa da solo.</p></div></div>
+      <div class="tattica"><div class="t-icona">①</div><div><h5>Mappa i trigger</h5><p>Diario sintetico per 14 giorni: ora, luogo, cosa è successo prima. Dopo due settimane i pattern emergono — e ci si può pre-armare.</p></div></div>
+      <div class="tattica"><div class="t-icona">+</div><div><h5>Cibi liberi a portata</h5><p>Cetrioli, finocchi e sedano già tagliati in frigo. Yogurt greco in formato piccolo, bresaola monoporzione. Sono i freni di emergenza.</p></div></div>
+      <div class="tattica"><div class="t-icona">↻</div><div><h5>Sostituzione del rituale</h5><p>Al posto del cassetto degli snack: tè in foglie e una tazza. Il gesto di prepararlo — cinque minuti — sostituisce il gesto di sgranocchiare.</p></div></div>
+      <div class="tattica"><div class="t-icona">→</div><div><h5>Movimento breve</h5><p>Cinque minuti di camminata fuori, anche solo intorno all'edificio, spezzano il ciclo dello stress e abbassano il cortisolo.</p></div></div>
+    </div>
+
+    <h3 class="sotto-titolo vela">Pasti fuori casa</h3>
+    <div class="vela">
+      <div class="tattica"><div class="t-icona">①</div><div><h5>Ordina per primo</h5><p>Il primo che ordina dichiara la linea della cena. Non farsi trascinare dal tavolo.</p></div></div>
+      <div class="tattica"><div class="t-icona">②</div><div><h5>Schema fisso</h5><p>Niente antipasti né primi — o assaggio minimo. Carne o pesce alla griglia con verdure, mai patate fritte. Se proprio il primo: mezza porzione, e niente secondo.</p></div></div>
+      <div class="tattica"><div class="t-icona">③</div><div><h5>Pane sotto controllo</h5><p>Chiedere di non lasciare il cestino al tavolo. Se è già lì: una fettina, e basta.</p></div></div>
+    </div>
+
+    <div class="nota-oro vela"><b>Aperitivi e pranzi rapidi.</b> Un calice di vino, salatini massimo 3–4 — e uno yogurt greco a casa prima di uscire, per non arrivare affamato. Per i pranzi veloci: tagliata e insalata, o pesce e verdure, si trovano ovunque.</div>
+  </div>
+</section>
+
+<!-- ============ VI · ROTTA ============ -->
+<section id="rotta">
+  <div class="sez-testa vela"><div class="sez-num">VI</div><h2>Rotta</h2></div>
+  <p class="sez-lead vela">Tre fasi distinte, ognuna con il proprio obiettivo. Non lo stesso piano ripetuto, ma un'evoluzione che accompagna fino al traguardo.</p>
+  <div class="sez-corpo">
+    <div class="vela">
+      <div class="fase">
+        <div class="f-eti">Fase 1 · Settimane 1–8 · Intensiva</div>
+        <h4>Costruzione</h4>
+        <div class="f-schema">1.450–1.530 kcal, attività in crescita progressiva</div>
+        <p>I primi due mesi portano il primo grande risultato. <b>Esami del sangue a fine fase</b> e rivalutazione col medico: se tutto regge si può proseguire qualche settimana, altrimenti si torna al piano standard a 1.700–1.800 kcal.</p>
+      </div>
+      <div class="fase">
+        <div class="f-eti">Fase 2 · Settimane 9–17</div>
+        <h4>Accelerazione</h4>
+        <div class="f-schema">Ritorno a 1.700–1.800 kcal, sostenibile</div>
+        <p>Si evita l'adattamento metabolico. In linea coi target: si prosegue. Indietro: <b>carb cycling</b> — giorni di allenamento a 1.800 kcal con carboidrati, giorni di riposo a 1.500 low-carb.</p>
+      </div>
+      <div class="fase">
+        <div class="f-eti">Fase 3 · Settimane 18–19</div>
+        <h4>Consolidamento</h4>
+        <div class="f-schema">Non si tira più — si arriva freschi</div>
+        <p>Stringere a ridosso dell'evento porta stanchezza, gonfiore e pelle spenta. <b>Sodio giù</b>, <b>idratazione massima</b> — 3 litri al giorno — <b>sonno 7–8 ore</b>. Allenamento ridotto al 60% nell'ultima settimana.</p>
+      </div>
+    </div>
+
+    <h3 class="sotto-titolo vela">Tappe di controllo</h3>
+    <ul class="tappe vela">
+      <li><b>Sett. 04</b> — Primo controllo: il ritmo è in target?</li>
+      <li><b>Sett. 08</b> — Esami del sangue. Decisione sulla fase 2.</li>
+      <li><b>Sett. 12</b> — Soglia simbolica superata, fase finale.</li>
+      <li><b>Sett. 16</b> — Prova abito.</li>
+      <li><b>Sett. 18</b> — Si consolida. Niente colpi di coda.</li>
+      <li><b>Sett. 19</b> — Obiettivo raggiunto.</li>
+    </ul>
+
+    <div class="nota-oro vela"><b>Misurazione.</b> Pesata una volta a settimana — mercoledì mattina a digiuno, sempre. Girovita ogni due settimane: spesso scende prima del peso, e dà morale.</div>
+  </div>
+</section>
+
+<!-- ============ VII · DECALOGO ============ -->
+<section id="decalogo">
+  <div class="sez-testa vela"><div class="sez-num">VII</div><h2>Decalogo</h2></div>
+  <p class="sez-lead vela">Quando il piano sembra complicato, si torna qui. Dieci righe da tenere a mente — o in cucina.</p>
+  <div class="sez-corpo">
+    <div class="deca-griglia vela">
+      <div class="deca"><div class="d-num">01</div><div class="d-testo">Proteine a <em>ogni</em> pasto principale, sempre.</div></div>
+      <div class="deca"><div class="d-num">02</div><div class="d-testo">Verdure a pranzo <em>e</em> cena, dalla lista verde.</div></div>
+      <div class="deca"><div class="d-num">03</div><div class="d-testo">Acqua, acqua, acqua — 2,5–3 litri al giorno.</div></div>
+      <div class="deca"><div class="d-num">04</div><div class="d-testo">Alcol zero in settimana. Massimo 1–2 calici nel weekend.</div></div>
+      <div class="deca"><div class="d-num">05</div><div class="d-testo">Pesata ogni mercoledì mattina, a digiuno.</div></div>
+      <div class="deca"><div class="d-num">06</div><div class="d-testo">Fame nervosa: 10 minuti di attesa e un bicchiere d'acqua.</div></div>
+      <div class="deca"><div class="d-num">07</div><div class="d-testo">Al ristorante: niente primo, no fritti, no bis di pane.</div></div>
+      <div class="deca"><div class="d-num">08</div><div class="d-testo">Allenarsi anche quando non se ne ha voglia. Sempre.</div></div>
+      <div class="deca"><div class="d-num">09</div><div class="d-testo">Dormire 7–8 ore: il sonno è metà del dimagrimento.</div></div>
+      <div class="deca"><div class="d-num">10</div><div class="d-testo">Confronto regolare con il medico curante.</div></div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /corpo -->
+
+<footer>
+  <div class="marchio">Diario di rotta</div>
+  <p>Strumento operativo, non parere medico. Da condividere con i professionisti che seguono il percorso e adattare alle loro indicazioni.</p>
+</footer>
+
+<script>
+/* ================= DATI ================= */
+const GIORNI = [
+  {id:'lun',nome:'Lunedì',tag:'Giornata leggera',sport:false,
+   pasti:[['Colazione','Yogurt greco 0% (200 g) + 1 cucchiaino di miele + 30 g di mirtilli + 10 g di mandorle + caffè'],
+          ['Spuntino','1 mela piccola'],
+          ['Pranzo','Petto di pollo ai ferri (180 g) + insalata mista abbondante con 1 cucchiaio di olio EVO + 30 g di pane integrale'],
+          ['Spuntino','1 yogurt greco 0% piccolo (150 g)'],
+          ['Cena','Salmone al forno (180 g) + zucchine in padella, condite a fine cottura con poco olio']],
+   allenamento:['Riposo o camminata','30–40 minuti di camminata svelta se ci si sente bene, altrimenti riposo totale.']},
+  {id:'mar',nome:'Martedì',tag:'Tennis al mattino',sport:true,
+   pasti:[['Pre-tennis','40 g pane integrale + 50 g bresaola + caffè + 1 banana piccola'],
+          ['Post-tennis','Yogurt greco 0% (200 g) + 1 cucchiaino di miele'],
+          ['Pranzo','Tagliata di manzo (180 g) + rucola e scaglie di grana (15 g) + 30 g di pane integrale'],
+          ['Spuntino','1 frutto piccolo'],
+          ['Cena','Orata o branzino al forno (200 g) + melanzane grigliate con 1 cucchiaino di olio EVO']],
+   allenamento:['Tennis (1h)','Allenamento principale del giorno. Niente altro.']},
+  {id:'mer',nome:'Mercoledì',tag:'Sacco + core',sport:true,
+   pasti:[['Colazione','2 uova strapazzate (poco olio) + 30 g di pane integrale + 1 fetta di prosciutto crudo sgrassato + caffè'],
+          ['Spuntino','1 mela piccola'],
+          ['Pranzo','Filetto di vitello (180 g) ai ferri + insalata di valeriana e carote + 40 g di riso basmati (a crudo)'],
+          ['Spuntino','1 yogurt greco 0% piccolo (150 g)'],
+          ['Cena','Vellutata di zucca o zucchine (Bimby, senza panna, 1 cucchiaino di olio EVO) + 150 g di petto di pollo grigliato']],
+   allenamento:['Sacco da boxe + core','5\u2032 riscaldamento + 6–8 round da 2\u2032 al sacco con 1\u2032 di recupero attivo + 3 plank 30–45\u2033, 15 crunch, 15 russian twist. Totale 35–45\u2032.']},
+  {id:'gio',nome:'Giovedì',tag:'Corsa 6–7 km',sport:true,
+   pasti:[['Colazione','40 g di fiocchi d\u2019avena in 200 ml di latte parz. scremato + 1 cucchiaino di miele + frutti di bosco'],
+          ['Spuntino','1 frutto piccolo'],
+          ['Pranzo','Insalatona: 150 g di tonno al naturale + 2 uova sode + insalata mista + 20 g di grana + 1 cucchiaio di olio EVO + 30 g di pane integrale'],
+          ['Pre-corsa','1 banana piccola + caffè, un\u2019ora prima'],
+          ['Cena','Salmone alla griglia (180 g) + 80 g di riso integrale (a crudo) + spinaci saltati']],
+   allenamento:['Corsa — 40 min, 6–7 km','Ritmo conversazionale. Segui la progressione della sezione Allenamento.']},
+  {id:'ven',nome:'Venerdì',tag:'Sacco + forza',sport:true,
+   pasti:[['Colazione','Yogurt greco 0% (200 g) + 20 g di granola senza zuccheri + 1 frutto piccolo + caffè'],
+          ['Spuntino','10 g di mandorle (circa 8)'],
+          ['Pranzo','Hamburger di manzo senza pane (200 g) + insalata mista abbondante. Niente patate. In alternativa: tagliata con verdure'],
+          ['Spuntino','1 yogurt greco 0% piccolo (150 g)'],
+          ['Cena','Frittata di zucchine (2 uova + 1 albume) + insalata. In alternativa: parmigiana light senza pomodoro (mozzarella light 60 g + 15 g grana)']],
+   allenamento:['Sacco + forza a corpo libero','5\u2032 riscaldamento + 5 round da 2\u2032 al sacco + circuito \u00d7 3: 10 piegamenti, 15 squat, 10 affondi per gamba, 30\u2033 plank. Totale 40–45\u2032.']},
+  {id:'sab',nome:'Sabato',tag:'Eventuale cena fuori',sport:false,
+   pasti:[['Colazione','2 uova + 40 g di bresaola + 30 g di pane integrale + caffè'],
+          ['Spuntino','1 frutto piccolo'],
+          ['Pranzo','Pesce alla griglia (200 g — spada, tonno, branzino) + verdure grigliate + 30 g di pane integrale'],
+          ['Spuntino','1 yogurt greco 0% piccolo (150 g)'],
+          ['Cena','Al ristorante, schema rinforzato: niente antipasto o solo verdure crude, niente primo, secondo con verdura, niente pane, massimo 1 calice di vino, niente dolce']],
+   allenamento:['Riposo o camminata lunga','60–90 minuti di camminata. Long slow distance: brucia grassi senza stancare.']},
+  {id:'dom',nome:'Domenica',tag:'Corsa al mattino',sport:true,
+   pasti:[['Post-corsa','Omelette di 2 uova + 1 albume con 20 g di grana + 30 g di pane integrale + 1 frutto piccolo + caffè'],
+          ['Pranzo','Primo piccolo (60 g pasta o risotto, condimento semplice senza pomodoro) + secondo (150 g) + insalata. Niente bis né dolce, 1 calice di vino consentito'],
+          ['Spuntino','1 frutto piccolo'],
+          ['Cena','Vellutata di verdure Bimby + grigliata mista (pollo e manzo, 150 g totali) + insalata']],
+   allenamento:['Corsa — 40 min, 6–7 km','Stesso ritmo del giovedì.']},
+];
+
+const SPESA = [
+  {cat:'Carne e pesce',nota:'Macelleria e pescheria, fresco di giornata',
+   voci:['Petto di pollo — 500 g','Tagliata o filetto di manzo — 350 g','Filetto di vitello — 200 g','Hamburger di manzo — 200 g','Salmone fresco — 400 g','Orata o branzino — 400 g','Pesce spada o tonno fresco — 250 g']},
+  {cat:'Salumi e conserve',nota:'Banco gastronomia',
+   voci:['Bresaola — 150 g','Prosciutto crudo sgrassato — 80 g','Tonno al naturale — 3 scatolette']},
+  {cat:'Latticini e uova',nota:'Banco frigo',
+   voci:['Yogurt greco 0% grande (500 g) — 1 confezione','Yogurt greco 0% piccoli (150 g) — 8–10 vasetti','Latte parzialmente scremato — 1 L','Grana o parmigiano — 120 g','Mozzarella light — 80 g','Uova — 18 pezzi']},
+  {cat:'Verdure',nota:'In abbondanza: sono il volume del piatto. Niente pomodoro, peperoni, broccoli, cavolfiori',
+   voci:['Insalata mista — per 6–7 pasti','Zucchine — 1,2 kg','Melanzane — 1 kg','Spinaci freschi o surgelati — 500 g','Rucola e valeriana — per 4–5 pasti','Carote — 500 g','Sedano — 1 cespo','Finocchi — 4 pezzi','Cetrioli — 4 pezzi','Zucca (anche surgelata) — 600 g','Limoni — 3 pezzi','Aglio e cipolla — base']},
+  {cat:'Frutta',nota:'Due porzioni al giorno, piccole. Mai succhi',
+   voci:['Mele piccole — 6 pezzi','Mirtilli o frutti di bosco — 250 g','Banane piccole — 3 pezzi','Frutta a rotazione (kiwi, pere, agrumi) — 6 pezzi']},
+  {cat:'Carboidrati',nota:'Sempre integrali, in quantità ridotte',
+   voci:['Pane integrale — 1 pagnotta piccola','Pasta integrale — 1 confezione','Riso basmati — 1 confezione','Riso integrale — 1 confezione','Fiocchi d\u2019avena — 1 confezione','Granola senza zuccheri — 1 confezione']},
+  {cat:'Dispensa',nota:'Scorta mensile. Mandorle pesate, mai a manciate',
+   voci:['Mandorle al naturale — 150 g','Olio extravergine d\u2019oliva','Miele — 1 vasetto','Aceto balsamico','Sale, pepe, erbe aromatiche']},
+];
+
+/* ================= UTIL ================= */
+const $ = s => document.querySelector(s);
+const ridotto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const mappa = ['dom','lun','mar','mer','gio','ven','sab'];
+const oggiId = mappa[new Date().getDay()];
+const giornoOggi = GIORNI.find(g => g.id === oggiId);
+
+/* ================= HERO ANELLO ================= */
+const nomiCorti = ['DOM','LUN','MAR','MER','GIO','VEN','SAB'];
+$('#anello-giorno').textContent = nomiCorti[new Date().getDay()];
+
+/* ================= OGGI ================= */
+$('#oggi-nome').textContent = giornoOggi.nome;
+const tagEl = $('#oggi-tag');
+tagEl.textContent = giornoOggi.tag;
+if (giornoOggi.sport) tagEl.classList.add('sport');
+$('#oggi-pasti').innerHTML = giornoOggi.pasti.map(p =>
+  `<div class="riga-pasto"><span class="quando">${p[0]}</span><span class="cosa">${p[1]}</span></div>`).join('');
+$('#oggi-att').textContent = giornoOggi.allenamento[0];
+$('#oggi-det').textContent = giornoOggi.allenamento[1];
+
+/* acqua — persistente per giorno */
+const ACQUA_KEY = 'rotta_acqua';
+const oggiData = new Date().toISOString().slice(0,10);
+let acqua = {data:oggiData, n:0};
+try{
+  const salvata = JSON.parse(localStorage.getItem(ACQUA_KEY) || 'null');
+  if (salvata && salvata.data === oggiData) acqua = salvata;
+}catch(e){}
+const dotsEl = $('#acqua-dots');
+function renderAcqua(){
+  dotsEl.innerHTML = '';
+  for (let i=0;i<10;i++){
+    const b = document.createElement('button');
+    b.className = 'goccia' + (i < acqua.n ? ' piena' : '');
+    b.setAttribute('aria-label','Bicchiere ' + (i+1));
+    b.addEventListener('click', () => {
+      acqua.n = (i < acqua.n) ? i : i+1;
+      try{ localStorage.setItem(ACQUA_KEY, JSON.stringify(acqua)); }catch(e){}
+      renderAcqua();
+    });
+    dotsEl.appendChild(b);
+  }
+  $('#acqua-conta').textContent = acqua.n;
+}
+renderAcqua();
+
+/* ================= PASTI — selettore giorni ================= */
+const sel = $('#selettore');
+const pann = $('#giorni-pann');
+GIORNI.forEach(g => {
+  const b = document.createElement('button');
+  b.className = 'g-btn' + (g.id === oggiId ? ' attivo odierno' : '');
+  b.dataset.g = g.id;
+  b.textContent = g.nome;
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.g-btn').forEach(x => x.classList.remove('attivo'));
+    document.querySelectorAll('.g-pann').forEach(x => x.classList.remove('attivo'));
+    b.classList.add('attivo');
+    document.getElementById('pann-' + g.id).classList.add('attivo');
+  });
+  sel.appendChild(b);
+
+  const d = document.createElement('div');
+  d.className = 'g-pann' + (g.id === oggiId ? ' attivo' : '');
+  d.id = 'pann-' + g.id;
+  d.innerHTML = `
+    <div class="g-intesta">
+      <span class="g-nome">${g.nome}</span>
+      <span class="pillola${g.sport ? ' sport' : ''}">${g.tag}</span>
+    </div>
+    ${g.pasti.map(p => `<div class="riga-pasto"><span class="quando">${p[0]}</span><span class="cosa">${p[1]}</span></div>`).join('')}
+  `;
+  pann.appendChild(d);
+});
+
+/* ================= ALLENAMENTO settimana ================= */
+$('#sett-griglia').innerHTML = GIORNI.map(g => `
+  <div class="sett-riga${g.sport ? ' sport' : ''}">
+    <div class="sett-g">${g.nome}</div>
+    <div><div class="sett-att">${g.allenamento[0]}</div><div class="sett-det">${g.allenamento[1]}</div></div>
+  </div>`).join('');
+
+/* ================= SPESA ================= */
+const SPESA_KEY = 'rotta_spesa_v1';
+let presi = {};
+try{ presi = JSON.parse(localStorage.getItem(SPESA_KEY) || '{}'); }catch(e){}
+const repartiEl = $('#reparti');
+let totale = 0;
+SPESA.forEach(c => totale += c.voci.length);
+$('#sp-totale').textContent = totale;
+
+SPESA.forEach((c, ci) => {
+  const div = document.createElement('div');
+  div.className = 'reparto vela';
+  div.innerHTML = `
+    <div class="reparto-testa">
+      <div><h4 class="reparto-titolo">${c.cat}</h4><p class="reparto-nota">${c.nota}</p></div>
+      <span class="reparto-conta">0 / ${c.voci.length}</span>
+    </div>
+    <ul class="articoli">
+      ${c.voci.map((v,i) => {
+        const k = ci + '-' + i;
+        return `<li data-k="${k}" class="${presi[k] ? 'preso' : ''}" tabindex="0"><span class="quadr"></span><span class="articolo-testo">${v}</span></li>`;
+      }).join('')}
+    </ul>`;
+  repartiEl.appendChild(div);
+});
+
+function aggiornaSpesa(){
+  let fatti = 0;
+  Object.keys(presi).forEach(k => { if (presi[k]) fatti++; });
+  $('#sp-fatti').textContent = fatti;
+  const perc = totale ? Math.round(fatti/totale*100) : 0;
+  $('#c-perc').textContent = perc + '%';
+  $('#c-arco').style.strokeDashoffset = 251.3 * (1 - fatti/totale);
+  const az = $('#azzera');
+  if (fatti > 0) az.classList.add('attivo'); else az.classList.remove('attivo');
+  document.querySelectorAll('.reparto').forEach(rep => {
+    const lis = rep.querySelectorAll('li');
+    const c = Array.from(lis).filter(li => li.classList.contains('preso')).length;
+    const conta = rep.querySelector('.reparto-conta');
+    conta.textContent = c + ' / ' + lis.length;
+    conta.classList.toggle('pieno', c === lis.length);
+    rep.classList.toggle('fatto', c === lis.length);
+  });
+}
+function toggleArticolo(li){
+  const k = li.dataset.k;
+  presi[k] = !presi[k];
+  li.classList.toggle('preso', presi[k]);
+  try{ localStorage.setItem(SPESA_KEY, JSON.stringify(presi)); }catch(e){}
+  aggiornaSpesa();
+}
+repartiEl.addEventListener('click', e => {
+  const li = e.target.closest('li[data-k]');
+  if (li) toggleArticolo(li);
+});
+repartiEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' '){
+    const li = e.target.closest('li[data-k]');
+    if (li){ e.preventDefault(); toggleArticolo(li); }
+  }
+});
+$('#azzera').addEventListener('click', () => {
+  if (!$('#azzera').classList.contains('attivo')) return;
+  presi = {};
+  try{ localStorage.setItem(SPESA_KEY, '{}'); }catch(e){}
+  document.querySelectorAll('.articoli li').forEach(li => li.classList.remove('preso'));
+  aggiornaSpesa();
+});
+aggiornaSpesa();
+
+/* ================= SCROLL: progress + filo + scrollspy + reveal ================= */
+const filoOro = $('#filo-oro');
+function suScroll(){
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  const r = max > 0 ? h.scrollTop / max : 0;
+  $('#progress').style.width = (r*100) + '%';
+  if (filoOro){
+    const corpo = document.querySelector('.corpo');
+    const rect = corpo.getBoundingClientRect();
+    const visibile = Math.min(Math.max(window.innerHeight*0.6 - rect.top, 0), rect.height);
+    filoOro.style.height = visibile + 'px';
+  }
+}
+window.addEventListener('scroll', suScroll, {passive:true});
+suScroll();
+
+const sezioni = document.querySelectorAll('section[id]');
+const linkNav = document.querySelectorAll('nav a');
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting){
+      linkNav.forEach(a => a.classList.toggle('attiva', a.getAttribute('href') === '#' + en.target.id));
+      en.target.classList.add('acceso');
+    }
+  });
+}, {rootMargin:'-35% 0px -55% 0px'});
+sezioni.forEach(s => spy.observe(s));
+
+const vele = document.querySelectorAll('.vela');
+if (ridotto){
+  vele.forEach(v => v.classList.add('svelato'));
+} else {
+  const oss = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting){ en.target.classList.add('svelato'); oss.unobserve(en.target); }
+    });
+  }, {threshold:.12});
+  vele.forEach(v => oss.observe(v));
+}
+</script>
+
+</body>
+</html>
