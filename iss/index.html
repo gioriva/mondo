@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ISS · LIVE TRACKING</title>
+<meta name="description" content="Tracciamento in tempo reale della Stazione Spaziale Internazionale: posizione su mappa e globo 3D, altitudine, velocità e parametri di volo.">
+<meta name="theme-color" content="#02060f">
+
+<!-- Favicon -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Open Graph (gli URL delle immagini DEVONO essere assoluti) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="ISS · Live Tracking">
+<meta property="og:description" content="Dove si trova adesso la Stazione Spaziale Internazionale: posizione, velocità e altitudine in tempo reale, su mappa e globo 3D.">
+<meta property="og:url" content="https://www.gioriva.it/iss/">
+<meta property="og:image" content="https://www.gioriva.it/iss/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="it_IT">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ISS · Live Tracking">
+<meta name="twitter:description" content="Dove si trova adesso la Stazione Spaziale Internazionale: posizione, velocità e altitudine in tempo reale.">
+<meta name="twitter:image" content="https://www.gioriva.it/iss/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --bg: #02060f;
+    --bg-panel: #06101e;
+    --bg-elev: #0a1628;
+    --rule: #16263f;
+    --rule-bright: #1f3759;
+    --ink: #d6e1f0;
+    --ink-2: #7e92b0;
+    --ink-3: #4a5d7a;
+    --ink-dim: #2d3e58;
+
+    --cyan: #5ae0ff;
+    --cyan-dim: rgba(90, 224, 255, 0.5);
+    --amber: #ffb852;
+    --green: #4ade80;
+    --red: #ff5566;
+
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --font-sans: "IBM Plex Sans Condensed", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.5;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-image:
+      linear-gradient(rgba(90, 224, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90, 224, 255, 0.025) 1px, transparent 1px),
+      radial-gradient(ellipse 60% 50% at 20% 30%, rgba(90, 224, 255, 0.04), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(255, 184, 82, 0.025), transparent 60%);
+    background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0, transparent 2px,
+      rgba(90, 224, 255, 0.012) 2px, rgba(90, 224, 255, 0.012) 3px
+    );
+  }
+
+  /* ===== BOOT OVERLAY ===== */
+  .boot {
+    position: fixed; inset: 0;
+    z-index: 10000;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+  }
+  .boot.done { opacity: 0; pointer-events: none; }
+  .boot-inner { width: min(420px, 86vw); }
+  .boot-title {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.14em;
+    color: var(--cyan);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+  .boot-line {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-2);
+    opacity: 0;
+    margin: 4px 0;
+    white-space: pre;
+  }
+  .boot-line .ok { color: var(--green); }
+  .boot-line.show { animation: bootIn 0.15s steps(2) forwards; }
+  @keyframes bootIn { to { opacity: 1; } }
+  .boot-bar {
+    margin-top: 16px;
+    height: 3px;
+    background: var(--rule);
+    overflow: hidden;
+  }
+  .boot-bar .fill {
+    height: 100%;
+    width: 0%;
+    background: var(--cyan);
+    transition: width 2.2s linear;
+  }
+  .boot-skip {
+    margin-top: 14px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+
+  /* ===== APP ===== */
+  .app {
+    display: grid;
+    grid-template-rows: 56px 1fr 40px;
+    height: 100vh;
+    height: 100dvh;
+    width: 100%;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg-panel);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 20px;
+    gap: 24px;
+    position: relative;
+    z-index: 2;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0.4;
+  }
+  .header-left { display: flex; align-items: center; gap: 20px; }
+  .header-center { display: flex; align-items: center; gap: 16px; }
+  .header-right { display: flex; align-items: center; gap: 20px; justify-content: flex-end; }
+  .brand {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .brand .accent { color: var(--cyan); }
+  .ident {
+    font-size: 11px;
+    color: var(--ink-2);
+    letter-spacing: 0.12em;
+    padding-left: 16px;
+    border-left: 1px solid var(--rule);
+  }
+
+  .status-leds { display: flex; gap: 4px; align-items: center; }
+  .led {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    border: 1px solid var(--rule);
+    color: var(--ink-2);
+    background: var(--bg);
+  }
+  .led::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--ink-dim);
+  }
+  .led.ok { color: var(--green); border-color: rgba(74, 222, 128, 0.3); }
+  .led.ok::before {
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: ledPulse 2.5s infinite;
+  }
+  .led.warn { color: var(--amber); border-color: rgba(255, 184, 82, 0.3); }
+  .led.warn::before { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+  @keyframes ledPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+  /* View toggle */
+  .view-toggle {
+    display: flex;
+    border: 1px solid var(--rule-bright);
+  }
+  .view-btn {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    padding: 7px 14px;
+    background: var(--bg);
+    color: var(--ink-2);
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+  }
+  .view-btn + .view-btn { border-left: 1px solid var(--rule-bright); }
+  .view-btn.active {
+    background: rgba(90, 224, 255, 0.1);
+    color: var(--cyan);
+    text-shadow: 0 0 8px rgba(90, 224, 255, 0.5);
+  }
+  .view-btn:hover:not(.active) { color: var(--ink); }
+
+  .clock-block {
+    display: flex; flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.2;
+  }
+  .clock-block .utc {
+    font-size: 14px;
+    color: var(--cyan);
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+  .clock-block .local {
+    font-size: 10px;
+    color: var(--ink-2);
+    letter-spacing: 0.12em;
+  }
+  .met {
+    display: flex; flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.2;
+    padding-right: 16px;
+    border-right: 1px solid var(--rule);
+  }
+  .met .label { font-size: 9px; color: var(--ink-3); letter-spacing: 0.18em; }
+  .met .value { font-size: 12px; color: var(--ink); letter-spacing: 0.06em; font-weight: 500; }
+
+  /* ===== MAIN ===== */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 440px;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* ===== VIEWPORT ===== */
+  .viewport {
+    position: relative;
+    border-right: 1px solid var(--rule);
+    background: #03070f;
+    overflow: hidden;
+  }
+  #map { width: 100%; height: 100%; position: relative; }
+  .map-svg { display: block; width: 100%; height: 100%; }
+
+  .sphere-bg {
+    fill: rgba(90, 224, 255, 0.02);
+    stroke: rgba(90, 224, 255, 0.3);
+    stroke-width: 1;
+  }
+  .graticule {
+    fill: none;
+    stroke: rgba(90, 224, 255, 0.08);
+    stroke-width: 0.5;
+    stroke-dasharray: 2 4;
+  }
+  .equator {
+    fill: none;
+    stroke: rgba(90, 224, 255, 0.18);
+    stroke-width: 0.6;
+  }
+  .country {
+    fill: rgba(90, 224, 255, 0.045);
+    stroke: rgba(90, 224, 255, 0.32);
+    stroke-width: 0.5;
+  }
+  .terminator {
+    fill: rgba(2, 6, 15, 0.55);
+    stroke: rgba(90, 224, 255, 0.25);
+    stroke-width: 0.6;
+    stroke-dasharray: 1 3;
+  }
+  .footprint {
+    fill: rgba(255, 184, 82, 0.07);
+    stroke: rgba(255, 184, 82, 0.45);
+    stroke-width: 0.8;
+    stroke-dasharray: 2 3;
+  }
+  .trail-past {
+    fill: none;
+    stroke: var(--cyan);
+    stroke-width: 1.4;
+    opacity: 0.45;
+  }
+  .trail-future {
+    fill: none;
+    stroke: var(--amber);
+    stroke-width: 1.2;
+    stroke-dasharray: 3 4;
+    opacity: 0.7;
+  }
+  .subsolar { fill: var(--amber); opacity: 0.9; }
+  .subsolar-ray { stroke: var(--amber); stroke-width: 1; opacity: 0.7; }
+
+  .iss-group { pointer-events: none; }
+  .iss-group .ring-pulse {
+    fill: none;
+    stroke: var(--cyan);
+    stroke-width: 1.2;
+    animation: issRing 2.6s infinite ease-out;
+  }
+  @keyframes issRing {
+    0% { r: 6; opacity: 0.9; }
+    100% { r: 36; opacity: 0; }
+  }
+  .iss-group .crosshair { stroke: var(--cyan); stroke-width: 0.8; opacity: 0.7; }
+  .iss-group .bracket { fill: none; stroke: var(--cyan); stroke-width: 1.5; }
+  .iss-group .dot { fill: var(--cyan); filter: drop-shadow(0 0 6px var(--cyan)); }
+  .iss-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    fill: var(--cyan);
+    letter-spacing: 0.12em;
+    font-weight: 500;
+  }
+
+  .map-overlay {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    line-height: 1.4;
+    color: var(--ink-2);
+    text-transform: uppercase;
+  }
+  .map-overlay .heading { color: var(--cyan); margin-bottom: 4px; font-weight: 500; }
+  .map-overlay .big { color: var(--ink); font-size: 13px; letter-spacing: 0.08em; }
+  .map-overlay.tl { top: 16px; left: 20px; }
+  .map-overlay.tr { top: 16px; right: 20px; text-align: right; }
+  .map-overlay.bl { bottom: 16px; left: 20px; }
+  .map-overlay.br { bottom: 16px; right: 20px; text-align: right; }
+
+  .viewport::before, .viewport::after {
+    content: '';
+    position: absolute;
+    width: 24px; height: 24px;
+    border: 1px solid var(--cyan);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .viewport::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+  .viewport::after { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+
+  .over-readout {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;
+    z-index: 3;
+    background: rgba(6, 16, 30, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--rule-bright);
+    padding: 10px 22px;
+    min-width: 240px;
+  }
+  .over-readout .label {
+    font-size: 9px; color: var(--ink-3);
+    letter-spacing: 0.22em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .over-readout .place {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    color: var(--cyan);
+    text-transform: uppercase;
+  }
+
+  /* ===== PANELS ===== */
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    background-color: var(--rule);
+    gap: 1px;
+  }
+  .panel {
+    background: var(--bg-panel);
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .panel-label {
+    font-size: 10px;
+    color: var(--ink-2);
+    letter-spacing: 0.18em;
+    font-weight: 500;
+  }
+  .panel-label .idx { color: var(--ink-3); margin-right: 6px; }
+  .panel-flag {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--green);
+    padding: 2px 6px;
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    background: rgba(74, 222, 128, 0.06);
+  }
+  .panel-value {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin: 6px 0;
+  }
+  .panel-value .val {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.4s, text-shadow 0.4s;
+  }
+  .panel-value .val.refresh {
+    color: var(--cyan);
+    text-shadow: 0 0 12px rgba(90, 224, 255, 0.6);
+  }
+  .panel-value .unit {
+    font-size: 11px;
+    color: var(--ink-2);
+    letter-spacing: 0.1em;
+  }
+  .panel-bar {
+    height: 3px;
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    margin-top: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-bar .fill {
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    background: linear-gradient(90deg, var(--cyan-dim), var(--cyan));
+    width: 0%;
+    transition: width 0.6s ease;
+  }
+  .panel-bar .ticks {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      90deg, transparent 0, transparent 9px, rgba(0,0,0,0.6) 9px, rgba(0,0,0,0.6) 10px
+    );
+    pointer-events: none;
+  }
+  .spark {
+    width: 100%;
+    height: 22px;
+    margin-top: 6px;
+    display: block;
+  }
+  .spark polyline {
+    fill: none;
+    stroke: var(--cyan);
+    stroke-width: 1.2;
+    opacity: 0.85;
+  }
+  .spark .spark-area {
+    fill: rgba(90, 224, 255, 0.07);
+    stroke: none;
+  }
+  .panel-foot {
+    font-size: 9px;
+    color: var(--ink-3);
+    letter-spacing: 0.12em;
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .panel.wide { grid-column: 1 / -1; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    border-top: 1px solid var(--rule);
+    background: var(--bg-panel);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 20px;
+    gap: 24px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+  .footer-left, .footer-right { display: flex; gap: 18px; align-items: center; }
+  .footer-right { justify-content: flex-end; }
+  .footer span.val { color: var(--ink-2); }
+  .footer a { color: var(--ink-2); text-decoration: none; border-bottom: 1px dotted var(--ink-3); }
+  .footer a:hover { color: var(--cyan); border-bottom-color: var(--cyan); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    html, body {
+      overflow: auto;
+      overflow-x: hidden;
+      height: auto;
+      min-height: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+    .app {
+      height: auto;
+      min-height: 100vh;
+      min-height: 100dvh;
+      grid-template-rows: auto auto auto;
+    }
+    .main {
+      grid-template-columns: 1fr;
+      grid-template-rows: 55vh auto;
+    }
+    .viewport {
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+      min-height: 360px;
+    }
+    .panels { grid-template-rows: repeat(4, minmax(110px, auto)); }
+  }
+
+  @media (max-width: 640px) {
+    .header {
+      grid-template-columns: auto auto;
+      justify-content: space-between;
+      padding: 0 14px;
+      height: auto;
+      min-height: 56px;
+      gap: 12px;
+    }
+    .header-center { order: 3; grid-column: 1 / -1; padding-bottom: 10px; justify-content: center; }
+    .status-leds { display: none; }
+    .ident { display: none; }
+    .met { display: none; }
+    .clock-block .local { display: none; }
+    .panels { grid-template-columns: 1fr; grid-template-rows: repeat(8, auto); }
+    .panel { padding: 14px 16px; }
+    .panel-value .val { font-size: 26px; }
+    .footer {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: 8px 14px;
+      height: auto;
+      min-height: 40px;
+    }
+    .footer-center { display: none; }
+    .footer-right { justify-content: center; }
+    .over-readout { bottom: 30px; min-width: 200px; padding: 8px 16px; }
+    .over-readout .place { font-size: 13px; }
+    .map-overlay { font-size: 9px; }
+    .viewport::before, .viewport::after { width: 16px; height: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ BOOT ============ -->
+<div class="boot" id="boot">
+  <div class="boot-inner">
+    <div class="boot-title">ISS Flight Deck <span style="color:var(--ink-3)">v2.0</span></div>
+    <div class="boot-line" data-step="0">INIT RENDER PIPELINE ......... <span class="ok">OK</span></div>
+    <div class="boot-line" data-step="1">LINK TELEMETRY NORAD 25544 ... <span class="ok">OK</span></div>
+    <div class="boot-line" data-step="2">LOAD GEODATA WGS84 ........... <span class="ok">OK</span></div>
+    <div class="boot-line" data-step="3">SYNC CLOCK UTC ............... <span class="ok">OK</span></div>
+    <div class="boot-line" data-step="4">ALL SYSTEMS NOMINAL</div>
+    <div class="boot-bar"><div class="fill" id="bootFill"></div></div>
+    <div class="boot-skip">tocca per saltare</div>
+  </div>
+</div>
+
+<div class="app">
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="header-left">
+      <div class="brand"><span class="accent">ISS</span> · ZARYA</div>
+      <div class="ident">NORAD 25544 · COSPAR 1998-067A</div>
+    </div>
+    <div class="header-center">
+      <div class="status-leds">
+        <span class="led ok" id="ledAcq">ACQ</span>
+        <span class="led ok" id="ledTlm">TLM</span>
+        <span class="led ok" id="ledTrk">TRK</span>
+      </div>
+      <div class="view-toggle" role="group" aria-label="Modalità di visualizzazione">
+        <button class="view-btn active" id="btnFlat" type="button">MAP</button>
+        <button class="view-btn" id="btnGlobe" type="button">GLOBE</button>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="met">
+        <span class="label">MISSION ELAPSED</span>
+        <span class="value" id="met">––D ––:––:––</span>
+      </div>
+      <div class="clock-block">
+        <span class="utc" id="utcTime">––:––:–– UTC</span>
+        <span class="local" id="localTime">––:––:––</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <section class="viewport">
+      <div id="map"></div>
+
+      <div class="map-overlay tl">
+        <div class="heading">VIEWPORT</div>
+        <div id="ovProjection">EQUIRECTANGULAR · WGS84</div>
+        <div>GRID 30° × 30°</div>
+      </div>
+
+      <div class="map-overlay tr">
+        <div class="heading">TRACKING</div>
+        <div>TRAIL · T−45 MIN</div>
+        <div>PATH · T+90 MIN</div>
+      </div>
+
+      <div class="map-overlay bl">
+        <div>LAT <span class="big" id="overLat">––.––°</span></div>
+        <div>LON <span class="big" id="overLon">––.––°</span></div>
+      </div>
+
+      <div class="map-overlay br">
+        <div class="heading">GROUND SPEED</div>
+        <div class="big" id="overSpeed">––,–––  KM/H</div>
+      </div>
+
+      <div class="over-readout">
+        <div class="label">CURRENT GROUND POSITION</div>
+        <div class="place" id="overOver">ACQUISIZIONE…</div>
+      </div>
+    </section>
+
+    <aside class="panels" aria-label="Telemetria">
+
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-label"><span class="idx">[01]</span>ALTITUDINE</span>
+          <span class="panel-flag">NOMINAL</span>
+        </div>
+        <div class="panel-value">
+          <span class="val" id="pAlt">–––,–</span>
+          <span class="unit">KM</span>
+        </div>
+        <svg class="spark" id="sparkAlt" viewBox="0 0 100 24" preserveAspectRatio="none"></svg>
+        <div class="panel-foot"><span>RANGE 370 / 460</span><span>STD 408</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-label"><span class="idx">[02]</span>VELOCITÀ</span>
+          <span class="panel-flag">NOMINAL</span>
+        </div>
+        <div class="panel-value">
+          <span class="val" id="pVel">––,–––</span>
+          <span class="unit">KM/H</span>
+        </div>
+        <svg class="spark" id="sparkVel" viewBox="0 0 100 24" preserveAspectRatio="none"></svg>
+        <div class="panel-foot"><span id="pVelMs">– KM/S</span><span>ORB. ~27 580</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-label"><span class="idx">[03]</span>LATITUDINE</span>
+          <span class="panel-flag" id="flagLat">N · TRK</span>
+        </div>
+        <div class="panel-value">
+          <span class="val" id="pLat">–––,––</span>
+          <span class="unit">°</span>
+        </div>
+        <div class="panel-bar"><div class="fill" id="barLat"></div><div class="ticks"></div></div>
+        <div class="panel-foot"><span>RANGE ±51.6°</span><span>INCL 51.64°</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-label"><span class="idx">[04]</span>LONGITUDINE</span>
+          <span class="panel-flag" id="flagLon">E · TRK</span>
+        </div>
+        <div class="panel-value">
+          <span class="val" id="pLon">–––,––</span>
+          <span class="unit">°</span>
+        </div>
+        <div class="panel-bar"><div class="fill" id="barLon"></div><div class="ticks"></div></div>
+        <div class="panel-foot"><span>RANGE ±180°</span><span>Δ ~4°/MIN</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-label"><span class="idx">[05]</span>PERIODO ORBITALE</span>
+          <span class="panel-flag">CALC</span>
+        </div>
+        <div class="panel-value">
+          <span class="val" id="pPeriod">92,7</span>
+          <span class="unit">MIN</span>
+        </div>
+        <div class="panel-bar"><div class="fill" style="width:62%"></div><div class="ticks"></div></div>
+        <div class="panel-foot"><span>ORBITE/24H · 15,5</span><span id="pOrbits">ORB OGGI ––</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-label"><span class="idx">[06]</span>FOOTPRINT</span>
+          <span class="panel-flag">CALC</span>
+        </div>
+        <div class="panel-value">
+          <span class="val" id="pFoot">–––,–</span>
+          <span class="unit">KM</span>
+        </div>
+        <div class="panel-bar"><div class="fill" id="barFoot"></div><div class="ticks"></div></div>
+        <div class="panel-foot"><span>RAGGIO DI VISIBILITÀ</span><span>SUP. CIRC.</span></div>
+      </div>
+
+      <div class="panel wide">
+        <div class="panel-head">
+          <span class="panel-label"><span class="idx">[07]</span>STATO ILLUMINAZIONE</span>
+          <span class="panel-flag" id="flagVis">––</span>
+        </div>
+        <div class="panel-value">
+          <span class="val" id="pVis" style="font-size:22px; font-family: var(--font-sans); font-weight:600; letter-spacing:0.08em;">––</span>
+        </div>
+        <div class="panel-foot" style="margin-top:4px;">
+          <span id="pVisDesc">in attesa di telemetria…</span>
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-left">
+      <span>DATA · <a href="https://wheretheiss.at/" target="_blank" rel="noopener">WHERETHEISS.AT</a></span>
+      <span>REFRESH · 3.0 S</span>
+    </div>
+    <div class="footer-center">
+      <span class="val" id="liveStatus">▮ LIVE</span>
+    </div>
+    <div class="footer-right">
+      <span>LAST PING · <span class="val" id="lastPing">––:––:––</span></span>
+      <span>SAMPLES · <span class="val" id="samples">0000</span></span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script>
+'use strict';
+
+// ============================================================
+// COSTANTI
+// ============================================================
+const ISS_API = 'https://api.wheretheiss.at/v1/satellites/25544';
+const POSITIONS_API = 'https://api.wheretheiss.at/v1/satellites/25544/positions';
+const WORLD_TOPO = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+const GEOCODE_API = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
+const LAUNCH_DATE = new Date(Date.UTC(1998, 10, 20, 6, 40, 0));
+
+const SPARK_MAX = 60;       // campioni per le sparkline
+const GLOBE_FPS_MS = 100;   // refresh del globo: 10 fps
+
+// ============================================================
+// STATO
+// ============================================================
+const state = {
+  mode: 'flat',             // 'flat' | 'globe'
+  current: null,            // ultimo fix API
+  prevFix: null,            // fix precedente (per dead reckoning)
+  rate: { lat: 0, lon: 0 }, // gradi/secondo
+  disp: { lat: 0, lon: 0 }, // posizione visualizzata (interpolata)
+  hasFix: false,
+  trailPast: [],            // [lon, lat] passato
+  trailFuture: [],          // [lon, lat] futuro
+  sparkAlt: [],
+  sparkVel: [],
+  samples: 0,
+  geocodeCache: { key: null, value: null },
+  countries: null,
+  lastGlobeRender: 0,
+};
+
+// Scena D3
+const scene = {
+  svg: null,
+  projection: null,
+  path: null,
+  w: 0, h: 0,
+  sel: {},                  // selezioni d3 persistenti
+};
+
+// ============================================================
+// UTILITY
+// ============================================================
+const pad = (n, len = 2) => String(Math.floor(Math.abs(n))).padStart(len, '0');
+
+function fmtIT(n, dec = 0) {
+  return new Intl.NumberFormat('it-IT', {
+    minimumFractionDigits: dec,
+    maximumFractionDigits: dec
+  }).format(n);
+}
+
+function normLon(lon) {
+  let l = lon;
+  while (l > 180) l -= 360;
+  while (l < -180) l += 360;
+  return l;
+}
+
+function lonDelta(a, b) {
+  // differenza più breve b - a, gestendo il wrap
+  let d = b - a;
+  if (d > 180) d -= 360;
+  if (d < -180) d += 360;
+  return d;
+}
+
+function fmtUTC(d) {
+  return `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}`;
+}
+function fmtLocal(d) {
+  return d.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+function fmtMET(now) {
+  const diff = now - LAUNCH_DATE;
+  const days = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  return `${days}D ${pad(h)}:${pad(m)}:${pad(s)}`;
+}
+
+const VIS_MAP = {
+  daylight: { label: 'DAYLIGHT', desc: 'la stazione è in luce solare diretta', flag: 'SUN', color: 'var(--amber)' },
+  eclipsed: { label: 'ECLIPSED', desc: 'la stazione è nel cono d\'ombra della Terra', flag: 'UMBRA', color: 'var(--cyan)' },
+  visible:  { label: 'VISIBLE', desc: 'in luce solare e potenzialmente visibile da terra', flag: 'VIS', color: 'var(--green)' },
+};
+
+function pct(v, min, max) {
+  return Math.max(0, Math.min(100, ((v - min) / (max - min)) * 100));
+}
+
+// ============================================================
+// SCENA / PROIEZIONI
+// ============================================================
+function makeProjection(mode, w, h) {
+  if (mode === 'globe') {
+    return d3.geoOrthographic()
+      .scale(Math.min(w, h) / 2 - 28)
+      .translate([w / 2, h / 2])
+      .clipAngle(90);
+  }
+  const scale = Math.min(w / (2 * Math.PI), h / Math.PI) * 1.18;
+  return d3.geoEquirectangular().scale(scale).translate([w / 2, h / 2]);
+}
+
+function buildScene() {
+  const container = document.getElementById('map');
+  container.innerHTML = '';
+  const w = container.clientWidth;
+  const h = container.clientHeight;
+  scene.w = w;
+  scene.h = h;
+
+  scene.projection = makeProjection(state.mode, w, h);
+  scene.path = d3.geoPath(scene.projection);
+
+  const svg = d3.select(container).append('svg')
+    .attr('class', 'map-svg')
+    .attr('viewBox', `0 0 ${w} ${h}`)
+    .attr('preserveAspectRatio', 'xMidYMid slice');
+  scene.svg = svg;
+
+  // Sfera di sfondo (visibile solo in globe)
+  scene.sel.sphere = svg.append('path')
+    .datum({ type: 'Sphere' })
+    .attr('class', 'sphere-bg')
+    .style('display', state.mode === 'globe' ? null : 'none');
+
+  // Terminatore
+  scene.sel.terminator = svg.append('path').attr('class', 'terminator');
+
+  // Reticolo + equatore
+  scene.sel.graticule = svg.append('path')
+    .datum(d3.geoGraticule().step([30, 30])())
+    .attr('class', 'graticule');
+
+  scene.sel.equator = svg.append('path')
+    .datum({ type: 'LineString', coordinates: [[-179.9, 0], [-90, 0], [0, 0], [90, 0], [179.9, 0]] })
+    .attr('class', 'equator');
+
+  // Paesi
+  scene.sel.countries = svg.append('g');
+  if (state.countries) {
+    scene.sel.countries.selectAll('path')
+      .data(state.countries.features)
+      .enter().append('path')
+      .attr('class', 'country');
+  }
+
+  // Footprint, scie, sole, ISS
+  scene.sel.footprint = svg.append('path').attr('class', 'footprint');
+  scene.sel.trailPast = svg.append('path').attr('class', 'trail-past');
+  scene.sel.trailFuture = svg.append('path').attr('class', 'trail-future');
+  scene.sel.subsolar = svg.append('g');
+
+  const g = svg.append('g').attr('class', 'iss-group');
+  g.append('circle').attr('class', 'ring-pulse').attr('r', 6);
+  g.append('line').attr('class', 'crosshair').attr('x1', -30).attr('x2', -10).attr('y1', 0).attr('y2', 0);
+  g.append('line').attr('class', 'crosshair').attr('x1', 10).attr('x2', 30).attr('y1', 0).attr('y2', 0);
+  g.append('line').attr('class', 'crosshair').attr('x1', 0).attr('x2', 0).attr('y1', -30).attr('y2', -10);
+  g.append('line').attr('class', 'crosshair').attr('x1', 0).attr('x2', 0).attr('y1', 10).attr('y2', 30);
+  g.append('path').attr('class', 'bracket')
+    .attr('d', 'M-12,-8 L-12,-12 L-6,-12 M12,-8 L12,-12 L6,-12 M-12,8 L-12,12 L-6,12 M12,8 L12,12 L6,12');
+  g.append('circle').attr('class', 'dot').attr('r', 4);
+  g.append('text').attr('class', 'iss-label').attr('x', 18).attr('y', -14).text('ISS');
+  scene.sel.iss = g;
+
+  refreshScene();
+}
+
+// Ridisegna tutti i path con la proiezione corrente
+function refreshScene() {
+  const p = scene.path;
+  scene.sel.sphere.attr('d', p);
+  scene.sel.graticule.attr('d', p);
+  scene.sel.equator.attr('d', p);
+  scene.sel.countries.selectAll('path').attr('d', p);
+
+  // Terminatore
+  if (state.current && typeof state.current.solar_lon === 'number') {
+    const sLon = state.current.solar_lon > 180 ? state.current.solar_lon - 360 : state.current.solar_lon;
+    const sLat = state.current.solar_lat;
+    let antiLon = normLon(sLon + 180);
+    const night = d3.geoCircle().center([antiLon, -sLat]).radius(90);
+    scene.sel.terminator.datum(night()).attr('d', p);
+
+    // Punto subsolare
+    scene.sel.subsolar.selectAll('*').remove();
+    const pos = scene.projection([sLon, sLat]);
+    if (pos && !isNaN(pos[0]) && isPointVisible(sLon, sLat)) {
+      const [sx, sy] = pos;
+      scene.sel.subsolar.append('circle')
+        .attr('class', 'subsolar')
+        .attr('cx', sx).attr('cy', sy).attr('r', 4);
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2;
+        scene.sel.subsolar.append('line')
+          .attr('class', 'subsolar-ray')
+          .attr('x1', sx + Math.cos(a) * 7).attr('y1', sy + Math.sin(a) * 7)
+          .attr('x2', sx + Math.cos(a) * 11).attr('y2', sy + Math.sin(a) * 11);
+      }
+    }
+  }
+
+  // Footprint
+  if (state.current) {
+    const radiusDeg = (state.current.footprint / 2) / 111.32;
+    const fp = d3.geoCircle()
+      .center([state.disp.lon, state.disp.lat])
+      .radius(radiusDeg);
+    scene.sel.footprint.datum(fp()).attr('d', p);
+  }
+
+  // Scie come LineString: d3.geoPath gestisce antimeridiano e clipping sferico
+  if (state.trailPast.length > 1) {
+    scene.sel.trailPast
+      .datum({ type: 'LineString', coordinates: state.trailPast })
+      .attr('d', p);
+  }
+  if (state.trailFuture.length > 1) {
+    scene.sel.trailFuture
+      .datum({ type: 'LineString', coordinates: state.trailFuture })
+      .attr('d', p);
+  }
+
+  updateMarker();
+}
+
+// Visibilità di un punto nella proiezione corrente (per il globo)
+function isPointVisible(lon, lat) {
+  if (state.mode !== 'globe') return true;
+  const r = scene.projection.rotate();
+  const center = [-r[0], -r[1]];
+  const dist = d3.geoDistance([lon, lat], center);
+  return dist < Math.PI / 2;
+}
+
+function updateMarker() {
+  if (!state.hasFix) return;
+  const pos = scene.projection([state.disp.lon, state.disp.lat]);
+  if (!pos || isNaN(pos[0])) return;
+  const visible = isPointVisible(state.disp.lon, state.disp.lat);
+  scene.sel.iss
+    .style('display', visible ? null : 'none')
+    .attr('transform', `translate(${pos[0]},${pos[1]})`);
+}
+
+// ============================================================
+// LOOP DI ANIMAZIONE (dead reckoning, 60 fps)
+// ============================================================
+function animFrame(ts) {
+  if (state.hasFix && state.current) {
+    const dt = (Date.now() - state.current._t) / 1000;
+    state.disp.lat = state.current.latitude + state.rate.lat * dt;
+    state.disp.lon = normLon(state.current.longitude + state.rate.lon * dt);
+
+    if (state.mode === 'globe') {
+      if (ts - state.lastGlobeRender > GLOBE_FPS_MS) {
+        state.lastGlobeRender = ts;
+        scene.projection.rotate([-state.disp.lon, -state.disp.lat]);
+        refreshScene();
+      }
+    } else {
+      updateMarker();
+    }
+  }
+  requestAnimationFrame(animFrame);
+}
+
+// ============================================================
+// FETCH
+// ============================================================
+async function fetchCurrent() {
+  const r = await fetch(ISS_API);
+  if (!r.ok) throw new Error('iss api error');
+  return r.json();
+}
+
+async function fetchPositions(stamps) {
+  const url = `${POSITIONS_API}?timestamps=${stamps.join(',')}`;
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('positions api error');
+  return r.json();
+}
+
+async function loadTrails() {
+  try {
+    const now = Math.floor(Date.now() / 1000);
+    // Passato: T-45 min, 10 punti. Futuro: T+90 min, 10 punti.
+    // L'API accetta max 10 timestamp per chiamata: due chiamate.
+    const past = [];
+    for (let i = 9; i >= 0; i--) past.push(now - i * 5 * 60);
+    const future = [];
+    for (let i = 1; i <= 10; i++) future.push(now + i * 9 * 60);
+
+    const [pPast, pFuture] = await Promise.all([
+      fetchPositions(past),
+      fetchPositions(future),
+    ]);
+    state.trailPast = pPast.map(p => [p.longitude, p.latitude]);
+    state.trailFuture = pFuture.map(p => [p.longitude, p.latitude]);
+    refreshScene();
+  } catch (e) {
+    console.warn('trails error', e);
+  }
+}
+
+async function reverseGeocode(lat, lon) {
+  const key = `${Math.round(lat * 2) / 2},${Math.round(lon * 2) / 2}`;
+  if (state.geocodeCache.key === key) return state.geocodeCache.value;
+  try {
+    const r = await fetch(`${GEOCODE_API}?latitude=${lat}&longitude=${lon}&localityLanguage=it`);
+    const data = await r.json();
+    const place = data.countryName || oceanFromCoords(lat, lon);
+    state.geocodeCache = { key, value: place };
+    return place;
+  } catch (e) {
+    return oceanFromCoords(lat, lon);
+  }
+}
+
+function oceanFromCoords(lat, lon) {
+  if (lat > 66) return 'Mar Glaciale Artico';
+  if (lat < -60) return 'Oceano Antartico';
+  if (lon > -70 && lon < 20) return 'Oceano Atlantico';
+  if (lon >= 20 && lon < 150) return 'Oceano Indiano';
+  return 'Oceano Pacifico';
+}
+
+// ============================================================
+// SPARKLINE
+// ============================================================
+function drawSpark(svgId, data) {
+  const svg = document.getElementById(svgId);
+  if (!svg || data.length < 2) return;
+  const min = Math.min(...data);
+  const max = Math.max(...data);
+  const range = (max - min) || 1;
+  const n = data.length;
+  const pts = data.map((v, i) => {
+    const x = (i / (SPARK_MAX - 1)) * 100;
+    const y = 21 - ((v - min) / range) * 18;
+    return `${x.toFixed(2)},${y.toFixed(2)}`;
+  });
+  const lastX = ((n - 1) / (SPARK_MAX - 1)) * 100;
+  svg.innerHTML =
+    `<polygon class="spark-area" points="0,24 ${pts.join(' ')} ${lastX.toFixed(2)},24"/>` +
+    `<polyline points="${pts.join(' ')}"/>`;
+}
+
+// ============================================================
+// UPDATE UI
+// ============================================================
+function flash(el) {
+  if (!el) return;
+  el.classList.remove('refresh');
+  void el.offsetWidth;
+  el.classList.add('refresh');
+  setTimeout(() => el.classList.remove('refresh'), 600);
+}
+
+function setVal(id, value) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (el.textContent !== value) {
+    el.textContent = value;
+    flash(el);
+  }
+}
+
+function setBar(id, percent) {
+  const el = document.getElementById(id);
+  if (el) el.style.width = `${percent}%`;
+}
+
+function onNewFix(data) {
+  data._t = Date.now();
+
+  // Dead reckoning: tasso di variazione dai due ultimi fix
+  if (state.current) {
+    const dt = (data._t - state.current._t) / 1000;
+    if (dt > 0.5) {
+      state.rate.lat = (data.latitude - state.current.latitude) / dt;
+      state.rate.lon = lonDelta(state.current.longitude, data.longitude) / dt;
+    }
+  }
+  state.prevFix = state.current;
+  state.current = data;
+  state.disp.lat = data.latitude;
+  state.disp.lon = data.longitude;
+  state.hasFix = true;
+  state.samples++;
+
+  const now = new Date();
+  const { velocity: vel, altitude: alt, latitude: lat, longitude: lon, visibility: vis, footprint: fp } = data;
+
+  // Sparkline buffers
+  state.sparkAlt.push(alt);
+  state.sparkVel.push(vel);
+  if (state.sparkAlt.length > SPARK_MAX) state.sparkAlt.shift();
+  if (state.sparkVel.length > SPARK_MAX) state.sparkVel.shift();
+  drawSpark('sparkAlt', state.sparkAlt);
+  drawSpark('sparkVel', state.sparkVel);
+
+  // Overlay
+  document.getElementById('overLat').textContent = `${fmtIT(lat, 2)}°`;
+  document.getElementById('overLon').textContent = `${fmtIT(lon, 2)}°`;
+  document.getElementById('overSpeed').textContent = `${fmtIT(vel, 0)} KM/H`;
+
+  // Pannelli
+  setVal('pAlt', fmtIT(alt, 1));
+  setVal('pVel', fmtIT(vel, 0));
+  setVal('pLat', fmtIT(Math.abs(lat), 2));
+  setVal('pLon', fmtIT(Math.abs(lon), 2));
+  setVal('pFoot', fmtIT(fp, 0));
+  setVal('pVelMs', `${fmtIT(vel / 3600, 2)} KM/S`);
+
+  document.getElementById('flagLat').textContent = (lat >= 0 ? 'N' : 'S') + ' · TRK';
+  document.getElementById('flagLon').textContent = (lon >= 0 ? 'E' : 'O') + ' · TRK';
+
+  setBar('barLat', pct(Math.abs(lat), 0, 52));
+  setBar('barLon', pct(Math.abs(lon), 0, 180));
+  setBar('barFoot', pct(fp, 4000, 5000));
+
+  const v = VIS_MAP[vis] || { label: (vis || '––').toUpperCase(), desc: '', flag: '–', color: 'var(--ink-2)' };
+  setVal('pVis', v.label);
+  const visFlag = document.getElementById('flagVis');
+  visFlag.textContent = v.flag;
+  visFlag.style.color = v.color;
+  visFlag.style.borderColor = v.color;
+  document.getElementById('pVisDesc').textContent = v.desc;
+
+  const utcMidnight = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  const orbitsToday = Math.floor(((now - utcMidnight) / 60000) / 92.7);
+  document.getElementById('pOrbits').textContent = `ORB OGGI · ${pad(orbitsToday)}`;
+
+  document.getElementById('lastPing').textContent = fmtUTC(now);
+  document.getElementById('samples').textContent = String(state.samples).padStart(4, '0');
+
+  ['ledAcq', 'ledTlm', 'ledTrk'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.remove('warn'); el.classList.add('ok'); }
+  });
+  const live = document.getElementById('liveStatus');
+  live.style.color = '';
+  live.textContent = '▮ LIVE';
+
+  // Aggiungo il fix alla scia passata (cap a 30 punti extra)
+  state.trailPast.push([lon, lat]);
+  if (state.trailPast.length > 40) state.trailPast.shift();
+
+  if (state.mode === 'flat') refreshScene();
+
+  reverseGeocode(lat, lon).then(place => {
+    const el = document.getElementById('overOver');
+    const up = place.toUpperCase();
+    if (el && el.textContent !== up) el.textContent = up;
+  });
+}
+
+function setLEDsError() {
+  document.getElementById('ledTlm').classList.remove('ok');
+  document.getElementById('ledTlm').classList.add('warn');
+  const live = document.getElementById('liveStatus');
+  live.style.color = 'var(--amber)';
+  live.textContent = '▮ RETRY';
+}
+
+// ============================================================
+// CLOCK
+// ============================================================
+function tickClock() {
+  const now = new Date();
+  document.getElementById('utcTime').textContent = `${fmtUTC(now)} UTC`;
+  document.getElementById('localTime').textContent = `${fmtLocal(now)} CET`;
+  document.getElementById('met').textContent = fmtMET(now);
+}
+
+// ============================================================
+// MAIN LOOP
+// ============================================================
+async function tick() {
+  try {
+    const data = await fetchCurrent();
+    onNewFix(data);
+  } catch (e) {
+    console.warn('tick error', e);
+    setLEDsError();
+  }
+}
+
+// ============================================================
+// VIEW TOGGLE
+// ============================================================
+function setMode(mode) {
+  if (state.mode === mode) return;
+  state.mode = mode;
+  document.getElementById('btnFlat').classList.toggle('active', mode === 'flat');
+  document.getElementById('btnGlobe').classList.toggle('active', mode === 'globe');
+  document.getElementById('ovProjection').textContent =
+    mode === 'globe' ? 'ORTHOGRAPHIC · WGS84' : 'EQUIRECTANGULAR · WGS84';
+  buildScene();
+  if (mode === 'globe' && state.hasFix) {
+    scene.projection.rotate([-state.disp.lon, -state.disp.lat]);
+    refreshScene();
+  }
+}
+
+// ============================================================
+// BOOT
+// ============================================================
+function runBoot() {
+  const boot = document.getElementById('boot');
+  const lines = boot.querySelectorAll('.boot-line');
+  lines.forEach((line, i) => {
+    setTimeout(() => line.classList.add('show'), 250 + i * 320);
+  });
+  requestAnimationFrame(() => {
+    document.getElementById('bootFill').style.width = '100%';
+  });
+  const close = () => {
+    boot.classList.add('done');
+    setTimeout(() => boot.remove(), 600);
+  };
+  const timer = setTimeout(close, 2400);
+  boot.addEventListener('click', () => { clearTimeout(timer); close(); }, { once: true });
+}
+
+// ============================================================
+// AVVIO
+// ============================================================
+async function init() {
+  runBoot();
+  tickClock();
+  setInterval(tickClock, 1000);
+
+  // Carico le geometrie prima di costruire la scena
+  try {
+    const world = await fetch(WORLD_TOPO).then(r => r.json());
+    state.countries = topojson.feature(world, world.objects.countries);
+  } catch (e) {
+    console.warn('countries load error', e);
+  }
+
+  buildScene();
+  await tick();
+  loadTrails();
+
+  setInterval(tick, 3000);
+  setInterval(loadTrails, 5 * 60 * 1000);
+
+  requestAnimationFrame(animFrame);
+
+  document.getElementById('btnFlat').addEventListener('click', () => setMode('flat'));
+  document.getElementById('btnGlobe').addEventListener('click', () => setMode('globe'));
+
+  // Resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const container = document.getElementById('map');
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      if (Math.abs(w - scene.w) < 20 && Math.abs(h - scene.h) < 20) return;
+      buildScene();
+      if (state.mode === 'globe' && state.hasFix) {
+        scene.projection.rotate([-state.disp.lon, -state.disp.lat]);
+        refreshScene();
+      }
+    }, 250);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>
