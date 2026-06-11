@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy &amp; Cookie · I viaggi di Giorgio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+  <meta name="robots" content="noindex, follow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Barlow+Condensed:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --ink:    #0c0b09;
+      --ink-2:  #121110;
+      --cream:  #f2ecdf;
+      --gold:   #c9a86a;
+      --gold-dim: rgba(201,168,106,.35);
+      --muted:  #8a8275;
+      --line:   #211f1a;
+    }
+
+    html { scroll-behavior:smooth; }
+
+    body {
+      background-color: var(--ink);
+      color: var(--cream);
+      font-family: 'Barlow Condensed', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+      background-image:
+        repeating-linear-gradient(90deg,
+          transparent, transparent calc(100vw/12 - 1px),
+          rgba(201,168,106,.04) calc(100vw/12 - 1px),
+          rgba(201,168,106,.04) calc(100vw/12)),
+        radial-gradient(ellipse 70% 40% at 100% 0%, rgba(201,168,106,.05) 0%, transparent 70%);
+      background-attachment: fixed;
+    }
+
+    .grain {
+      position: fixed; inset:0; z-index:1; pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    .wrap {
+      position: relative; z-index: 2;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 5rem 5vw 6rem;
+    }
+
+    .back {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none; font-weight: 400;
+      margin-bottom: 4rem;
+      transition: gap .3s;
+    }
+    .back::before { content: '←'; font-size: .9rem; }
+    .back:hover { gap: 1rem; }
+
+    .rule { width: 50px; height: 1px; background: var(--gold); margin-bottom: 1.8rem; }
+
+    .eyebrow {
+      font-weight: 300; letter-spacing: .35em; font-size: .7rem;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 1.4rem;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 7vw, 4.6rem);
+      line-height: 1; letter-spacing: -.02em;
+      margin-bottom: 1.2rem;
+    }
+    h1 em { font-style: italic; color: var(--gold); }
+
+    .updated {
+      font-size: .82rem; letter-spacing: .1em; text-transform: uppercase;
+      color: #56503f; margin-bottom: 3.5rem;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+      letter-spacing: -.01em;
+      margin: 3rem 0 1rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      display: flex; align-items: baseline; gap: 1rem;
+    }
+    h2 .num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .8rem; letter-spacing: .3em;
+      color: var(--gold); font-weight: 400;
+    }
+
+    p, li {
+      font-weight: 300; font-size: 1.02rem;
+      color: #cfc7b7; letter-spacing: .015em;
+    }
+    p { margin-bottom: 1rem; }
+
+    a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold-dim); transition: border-color .3s; }
+    a:hover { border-color: var(--gold); }
+
+    strong { color: var(--cream); font-weight: 500; }
+
+    ul { list-style: none; margin: 1rem 0 1.4rem; }
+    li { position: relative; padding-left: 1.6rem; margin-bottom: .7rem; }
+    li::before {
+      content: ''; position: absolute; left: 0; top: .65em;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold); opacity: .7;
+    }
+
+    .table {
+      border: 1px solid var(--line);
+      margin: 1.4rem 0 1.6rem;
+    }
+    .table-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+    .table-row:last-child { border-bottom: none; }
+    .table-row > div {
+      padding: .9rem 1.1rem;
+      font-size: .86rem; font-weight: 300;
+      color: #cfc7b7;
+      border-right: 1px solid var(--line);
+    }
+    .table-row > div:last-child { border-right: none; }
+    .table-row.head > div {
+      font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); font-weight: 400;
+      background: rgba(201,168,106,.03);
+    }
+
+    .btn-manage {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 400; font-size: .76rem;
+      letter-spacing: .25em; text-transform: uppercase;
+      padding: .85rem 1.6rem;
+      border: 1px solid var(--gold); background: transparent;
+      color: var(--gold); cursor: pointer;
+      transition: letter-spacing .3s, background .3s, color .3s;
+      margin-top: .6rem;
+    }
+    .btn-manage:hover { letter-spacing: .3em; background: var(--gold); color: var(--ink); }
+
+    .foot {
+      margin-top: 4rem; padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+      color: #403c33;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .foot .mark { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #2e2b24; letter-spacing: .1em; }
+
+    @media (max-width: 560px) {
+      .table-row { grid-template-columns: 1fr; }
+      .table-row > div { border-right: none; border-bottom: 1px solid var(--line); }
+      .table-row > div:last-child { border-bottom: none; }
+      .table-row.head { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration:.01ms !important; }
+      html { scroll-behavior:auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+
+  <div class="wrap">
+    <a href="index.html" class="back">Torna ai viaggi</a>
+
+    <div class="rule"></div>
+    <p class="eyebrow">Informativa</p>
+    <h1>Privacy &amp;<br><em>Cookie Policy</em></h1>
+    <p class="updated">Ultimo aggiornamento · giugno 2026</p>
+
+    <p>Questo è un sito personale dove raccolgo i diari dei miei viaggi. Tengo alla tua privacy tanto quanto ai miei ricordi: qui trovi spiegato, in modo semplice, quali dati vengono raccolti e perché.</p>
+
+    <h2><span class="num">01</span> Chi è il titolare</h2>
+    <p>Il titolare del trattamento dei dati è <strong>Giorgio Riva</strong>, gestore di questo sito personale e non commerciale. Per qualsiasi richiesta relativa ai tuoi dati puoi scrivere tramite i recapiti presenti sul sito principale <a href="https://www.gioriva.it/">gioriva.it</a>.</p>
+
+    <h2><span class="num">02</span> Quali dati raccolgo</h2>
+    <p>Il sito <strong>non richiede registrazione</strong> e non raccoglie dati come nome, email o numero di telefono. Gli unici dati trattati sono quelli statistici e anonimi raccolti, previo tuo consenso, da Google Analytics:</p>
+    <ul>
+      <li>Pagine visitate e tempo di permanenza</li>
+      <li>Tipo di dispositivo, browser e sistema operativo</li>
+      <li>Provenienza geografica approssimativa (a livello di città/regione)</li>
+      <li>Come sei arrivato al sito (link diretto, social, motore di ricerca)</li>
+    </ul>
+    <p>L'indirizzo IP viene <strong>anonimizzato</strong>: non è possibile risalire alla tua identità.</p>
+
+    <h2><span class="num">03</span> Cosa sono i cookie</h2>
+    <p>I cookie sono piccoli file di testo che un sito salva sul tuo dispositivo. Servono a far funzionare le pagine o a raccogliere statistiche. Su questo sito si distinguono in due categorie.</p>
+
+    <div class="table">
+      <div class="table-row head">
+        <div>Categoria</div>
+        <div>Finalità</div>
+        <div>Consenso</div>
+      </div>
+      <div class="table-row">
+        <div><strong>Tecnici</strong></div>
+        <div>Memorizzano la tua scelta sui cookie, così il banner non ricompare a ogni visita.</div>
+        <div>Non richiesto</div>
+      </div>
+      <div class="table-row">
+        <div><strong>Statistici</strong><br>(Google Analytics)</div>
+        <div>Raccolgono dati anonimi e aggregati su come viene usato il sito.</div>
+        <div>Richiesto</div>
+      </div>
+    </div>
+
+    <p>I cookie statistici di Google Analytics restano attivi fino a un massimo di <strong>14 mesi</strong>. Quelli tecnici relativi alla tua scelta vengono conservati sul tuo dispositivo finché non li cancelli.</p>
+
+    <h2><span class="num">04</span> La tua scelta, sempre revocabile</h2>
+    <p>Alla prima visita ti viene chiesto se attivare i cookie statistici. Finché non acconsenti, Google Analytics resta disattivato e non scrive alcun cookie (Consent Mode). Puoi cambiare idea in qualsiasi momento:</p>
+    <button class="btn-manage" id="manageBtn">Gestisci le mie preferenze</button>
+    <p style="margin-top:1.2rem;">In alternativa, puoi sempre cancellare i cookie dalle impostazioni del tuo browser o navigare in modalità anonima.</p>
+
+    <h2><span class="num">05</span> A chi vengono comunicati</h2>
+    <p>I dati statistici sono trattati da <strong>Google Ireland Ltd.</strong> in qualità di responsabile, tramite il servizio Google Analytics 4. Google può trasferire dati anche fuori dall'Unione Europea, nel rispetto delle clausole contrattuali standard approvate dalla Commissione Europea. Per dettagli puoi consultare la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy di Google</a>. Nessun dato viene venduto o ceduto a terzi per finalità commerciali.</p>
+
+    <h2><span class="num">06</span> I tuoi diritti</h2>
+    <p>In base al Regolamento UE 2016/679 (GDPR) hai diritto di accedere, rettificare, cancellare o limitare il trattamento dei tuoi dati, e di opporti allo stesso. Trattandosi di dati anonimi e aggregati, in molti casi non sarà possibile ricondurli a te; puoi comunque revocare il consenso ai cookie statistici in qualsiasi momento. Se ritieni che i tuoi diritti siano stati violati, puoi rivolgerti al <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>.</p>
+
+    <h2><span class="num">07</span> Modifiche</h2>
+    <p>Questa informativa può essere aggiornata nel tempo, ad esempio se cambiano gli strumenti utilizzati. La data in alto indica sempre l'ultima revisione.</p>
+
+    <div class="foot">
+      <span class="mark">G.R.</span>
+      <span><a href="index.html" style="border:none;color:inherit;">I viaggi di Giorgio</a></span>
+      <span>2012 — 2026</span>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      'use strict';
+      var KEY = 'gr_cookie_consent';
+      var btn = document.getElementById('manageBtn');
+      if (!btn) return;
+      btn.addEventListener('click', function(){
+        try { localStorage.removeItem(KEY); } catch(e){}
+        // torna alla home dove ricompare il banner
+        window.location.href = 'index.html';
+      });
+    })();
+  </script>
+</body>
+</html>
