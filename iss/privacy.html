@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy policy · ISS Live Tracking</title>
+<meta name="description" content="Come questo sito tratta i dati: cookie tecnici, statistiche aggregate di Google Analytics, geolocalizzazione del browser.">
+<meta name="theme-color" content="#02060f">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --bg: #02060f;
+    --bg-panel: #06101e;
+    --rule: #16263f;
+    --rule-bright: #1f3759;
+    --ink: #d6e1f0;
+    --ink-2: #7e92b0;
+    --ink-3: #4a5d7a;
+    --cyan: #5ae0ff;
+    --cyan-dim: rgba(90, 224, 255, 0.5);
+    --amber: #ffb852;
+    --green: #4ade80;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --font-sans: "IBM Plex Sans Condensed", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(rgba(90, 224, 255, 0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90, 224, 255, 0.022) 1px, transparent 1px),
+      radial-gradient(ellipse 60% 50% at 20% 0%, rgba(90, 224, 255, 0.05), transparent 70%);
+    background-size: 48px 48px, 48px 48px, 100% 100%;
+  }
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(90, 224, 255, 0.012) 2px, rgba(90, 224, 255, 0.012) 3px);
+  }
+
+  /* Header strip coerente con il cockpit */
+  .topbar {
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg-panel);
+    position: relative;
+  }
+  .topbar::before {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0.4;
+  }
+  .topbar-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .brand {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .brand .accent { color: var(--cyan); }
+  .back-link {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    text-decoration: none;
+    border: 1px solid var(--rule-bright);
+    padding: 7px 14px;
+    transition: all 0.15s;
+  }
+  .back-link:hover { color: var(--cyan); border-color: var(--cyan-dim); }
+
+  /* Documento */
+  .doc {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 28px 100px;
+    position: relative;
+  }
+
+  .doc-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .doc-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--amber); }
+
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: clamp(34px, 6vw, 52px);
+    line-height: 1.04;
+    letter-spacing: 0.01em;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+  }
+  h1 .accent { color: var(--cyan); }
+
+  .doc-meta {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    margin-bottom: 44px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .doc-meta span { color: var(--ink-2); }
+
+  .lead {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin: 0 0 40px;
+  }
+
+  section { margin-bottom: 38px; }
+
+  h2 {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin: 0 0 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  h2 .num {
+    font-size: 11px;
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+
+  p { margin: 0 0 14px; color: var(--ink-2); }
+  p strong { color: var(--ink); font-weight: 500; }
+
+  a { color: var(--cyan); text-decoration: none; border-bottom: 1px dotted var(--cyan-dim); }
+  a:hover { border-bottom-style: solid; }
+
+  ul { margin: 0 0 14px; padding: 0; list-style: none; }
+  li {
+    color: var(--ink-2);
+    padding: 8px 0 8px 22px;
+    position: relative;
+    border-bottom: 1px solid rgba(22, 38, 63, 0.6);
+  }
+  li:last-child { border-bottom: none; }
+  li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--cyan);
+    opacity: 0.7;
+  }
+  li strong { color: var(--ink); font-weight: 500; }
+
+  /* Tabella cookie come pannello tecnico */
+  .cookie-table {
+    border: 1px solid var(--rule-bright);
+    margin: 0 0 14px;
+    background: var(--bg-panel);
+  }
+  .cookie-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 0.9fr;
+    border-bottom: 1px solid var(--rule);
+  }
+  .cookie-row:last-child { border-bottom: none; }
+  .cookie-row.head {
+    background: rgba(90, 224, 255, 0.05);
+  }
+  .cookie-cell {
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    border-right: 1px solid var(--rule);
+  }
+  .cookie-cell:last-child { border-right: none; }
+  .cookie-row.head .cookie-cell {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+  .cookie-cell strong { color: var(--ink); font-weight: 500; }
+
+  .note-box {
+    border: 1px solid var(--rule-bright);
+    border-left: 2px solid var(--amber);
+    background: rgba(255, 184, 82, 0.04);
+    padding: 16px 20px;
+    margin: 0 0 14px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+
+  .reset-btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: rgba(90, 224, 255, 0.1);
+    color: var(--cyan);
+    border: 1px solid var(--cyan-dim);
+    padding: 11px 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 6px;
+  }
+  .reset-btn:hover { background: rgba(90, 224, 255, 0.2); text-shadow: 0 0 8px rgba(90, 224, 255, 0.5); }
+  .reset-msg {
+    font-size: 12px;
+    color: var(--green);
+    margin-left: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .reset-msg.show { opacity: 1; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 28px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer a { color: var(--ink-2); border-bottom: 1px dotted var(--ink-3); }
+  footer a:hover { color: var(--cyan); }
+
+  @media (max-width: 600px) {
+    .cookie-row { grid-template-columns: 1fr; }
+    .cookie-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+    .cookie-row .cookie-cell:last-child { border-bottom: none; }
+    .topbar-inner { padding: 14px 18px; }
+    .doc { padding: 40px 18px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="accent">ISS</span> · LIVE TRACKING</div>
+    <a class="back-link" href="index.html">← Torna al cockpit</a>
+  </div>
+</header>
+
+<main class="doc">
+  <p class="doc-eyebrow">Documento · Trattamento dati</p>
+  <h1>Privacy <span class="accent">policy</span></h1>
+  <div class="doc-meta">Ultimo aggiornamento <span>giugno 2026</span> · Versione <span>1.0</span></div>
+
+  <p class="lead">Questo è un sito divulgativo che mostra la posizione della Stazione Spaziale Internazionale in tempo reale. Raccoglie pochissimi dati e non chiede registrazioni. Qui trovi cosa viene trattato, perché, e come puoi intervenire.</p>
+
+  <section>
+    <h2><span class="num">[01]</span> Titolare del trattamento</h2>
+    <p>Il titolare è Giorgio Riva. Per qualsiasi richiesta sui tuoi dati puoi scrivere all'indirizzo indicato in fondo a questa pagina. Le richieste ricevono risposta entro i tempi previsti dal Regolamento europeo (GDPR, articolo 12: di norma un mese).</p>
+  </section>
+
+  <section>
+    <h2><span class="num">[02]</span> Quali dati vengono trattati</h2>
+    <p>Il sito tratta tre categorie di dati, tutte limitate al minimo:</p>
+    <ul>
+      <li><strong>Dati tecnici di navigazione.</strong> Quando visiti il sito, il server che lo ospita registra informazioni standard come l'indirizzo IP, il tipo di browser e l'orario di accesso. Servono a far funzionare e a proteggere il sito.</li>
+      <li><strong>Statistiche di visita aggregate.</strong> Se acconsenti, Google Analytics raccoglie dati su come viene usato il sito (pagine viste, durata, paese di provenienza approssimativo) in forma aggregata e anonimizzata. Senza il tuo consenso questi dati non vengono raccolti.</li>
+      <li><strong>Geolocalizzazione del browser.</strong> Il sito non chiede la tua posizione. Tutti i calcoli sulla distanza dalla stazione, se presenti, avvengono nel browser e non vengono inviati né salvati da nessuna parte.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">[03]</span> Cookie usati</h2>
+    <p>Un cookie è un piccolo file che il sito salva nel tuo browser. Questo sito ne usa pochi e di due tipi:</p>
+    <div class="cookie-table">
+      <div class="cookie-row head">
+        <div class="cookie-cell">Cookie</div>
+        <div class="cookie-cell">Scopo</div>
+        <div class="cookie-cell">Durata</div>
+      </div>
+      <div class="cookie-row">
+        <div class="cookie-cell"><strong>iss_cookie_consent</strong><br>(tecnico)</div>
+        <div class="cookie-cell">Ricorda la scelta che fai sul banner, così non ti viene riproposto a ogni visita. Salvato nella memoria locale del browser.</div>
+        <div class="cookie-cell">Finché non lo cancelli</div>
+      </div>
+      <div class="cookie-row">
+        <div class="cookie-cell"><strong>_ga, _ga_*</strong><br>(statistica)</div>
+        <div class="cookie-cell">Google Analytics 4. Distinguono le visite in forma anonima per produrre le statistiche. Attivi solo dopo il tuo consenso.</div>
+        <div class="cookie-cell">Fino a 24 mesi</div>
+      </div>
+    </div>
+    <p>I cookie tecnici non richiedono consenso perché senza di loro il sito non funzionerebbe correttamente. I cookie di statistica partono solo se premi "Accetta" sul banner.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">[04]</span> Base giuridica</h2>
+    <p>I dati tecnici di navigazione si basano sul legittimo interesse a mantenere il sito funzionante e sicuro (GDPR, articolo 6, lettera f). Le statistiche di Google Analytics si basano sul tuo consenso (articolo 6, lettera a), che puoi dare o negare dal banner e revocare in qualsiasi momento.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">[05]</span> Google Analytics e trasferimento dati</h2>
+    <p>Le statistiche sono gestite da Google Ireland Limited. Il sito usa la modalità consenso di Google (Consent Mode): finché non accetti, lo script di Analytics non scrive cookie né invia dati. L'indirizzo IP viene anonimizzato. Google può trasferire dati verso server negli Stati Uniti, sulla base del Data Privacy Framework UE-USA. Il funzionamento di Analytics è descritto nella <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy di Google</a>.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">[06]</span> Servizi esterni che il sito interroga</h2>
+    <p>Per mostrare i dati in tempo reale, il tuo browser si collega direttamente ad alcuni servizi pubblici. Questi servizi vedono il tuo indirizzo IP per il solo tempo necessario a rispondere:</p>
+    <ul>
+      <li><strong>wheretheiss.at</strong>, per la posizione e i parametri di volo della stazione.</li>
+      <li><strong>bigdatacloud.net</strong>, per tradurre le coordinate nel nome del paese o dell'oceano sorvolato.</li>
+      <li><strong>jsdelivr.net</strong> e <strong>fonts.google.com</strong>, per caricare le librerie tecniche e i caratteri tipografici.</li>
+    </ul>
+    <p>Questi collegamenti sono necessari al funzionamento del sito e non tracciano la tua navigazione a fini pubblicitari.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">[07]</span> I tuoi diritti</h2>
+    <p>Il GDPR ti riconosce il diritto di accedere ai tuoi dati, chiederne la correzione o la cancellazione, limitarne il trattamento, opporti e revocare il consenso. Per i cookie di statistica la revoca è immediata e la fai da qui:</p>
+    <button class="reset-btn" id="resetConsent" type="button">Revisiona il consenso ai cookie</button>
+    <span class="reset-msg" id="resetMsg">Preferenze azzerate. Ricarica la pagina iniziale per rivedere il banner.</span>
+    <p style="margin-top:16px;">Se ritieni che il trattamento violi il Regolamento, puoi rivolgerti al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">garanteprivacy.it</a>).</p>
+  </section>
+
+  <section>
+    <h2><span class="num">[08]</span> Contatti</h2>
+    <div class="note-box">
+      Per esercitare i tuoi diritti o per domande su questo documento, scrivi a:<br>
+      <strong style="color:var(--cyan)">info@gioriva.it</strong>
+    </div>
+    <p style="font-size:12px; color:var(--ink-3);">Sostituisci questo indirizzo con quello reale prima della pubblicazione.</p>
+  </section>
+
+</main>
+
+<footer>
+  <span>ISS · LIVE TRACKING</span>
+  <span><a href="index.html">Cockpit</a> · <a href="https://www.gioriva.it" target="_blank" rel="noopener">gioriva.it</a></span>
+</footer>
+
+<script>
+  document.getElementById('resetConsent').addEventListener('click', function () {
+    try { localStorage.removeItem('iss_cookie_consent'); } catch (e) {}
+    document.getElementById('resetMsg').classList.add('show');
+  });
+</script>
+
+</body>
+</html>
