@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dott.ssa Claudia Tarpini · Psicologa e psicoterapeuta · Olgiate Comasco</title>
+<meta name="description" content="Psicologa e psicoterapeuta a Olgiate Comasco (Como). Percorsi di supporto psicologico e psicoterapia per individui, coppie e famiglie con approccio sistemico-relazionale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   Palette derivata dal colore storico del brand (#43585f),
+   portata verso i toni d'acqua e di bosco del territorio lariano.
+   ============================================================ */
+:root{
+  --petrolio:#28424b;        /* testo principale, header, footer */
+  --petrolio-scuro:#1d3138;  /* hover, footer profondo */
+  --salvia:#9db29e;          /* accento vegetale */
+  --salvia-scuro:#6f8a74;    /* link, dettagli */
+  --carta:#f7f6f1;           /* fondo pagina */
+  --nebbia:#eceee6;          /* sezioni alternate */
+  --ocra:#b98e4f;            /* accento caldo, usato con parsimonia */
+  --bianco:#ffffff;
+  --linea:rgba(40,66,75,.16);
+
+  --f-display:'Cormorant Garamond', Georgia, serif;
+  --f-body:'Karla', 'Helvetica Neue', sans-serif;
+
+  --maxw:1140px;
+  --r-soft:14px;
+  --shadow:0 18px 50px -22px rgba(29,49,56,.28);
+  --t:.35s cubic-bezier(.4,0,.2,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{
+  font-family:var(--f-body);
+  font-weight:400;
+  color:var(--petrolio);
+  background:var(--carta);
+  line-height:1.65;
+  font-size:clamp(1rem,.95rem + .25vw,1.0625rem);
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--salvia-scuro)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ocra);outline-offset:3px;border-radius:3px}
+
+h1,h2,h3{font-family:var(--f-display);font-weight:500;line-height:1.15;letter-spacing:.01em}
+h1{font-size:clamp(2.4rem,1.6rem + 4vw,4.4rem)}
+h2{font-size:clamp(1.9rem,1.4rem + 2.2vw,3rem)}
+h3{font-size:clamp(1.35rem,1.2rem + .8vw,1.7rem)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+
+/* Occhielli di sezione: punto-nodo + filo, richiamo alla rete di relazioni */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.65rem;
+  font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--salvia-scuro);font-weight:600;margin-bottom:1rem;
+}
+.eyebrow::before{
+  content:"";width:9px;height:9px;border-radius:50%;
+  background:var(--salvia);box-shadow:0 0 0 4px rgba(157,178,158,.25);
+}
+.eyebrow::after{content:"";width:42px;height:1px;background:var(--linea)}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.skip-link{position:absolute;left:-999px;top:0;background:var(--petrolio);color:#fff;padding:.6rem 1rem;z-index:200}
+.skip-link:focus{left:1rem;top:1rem}
+
+header.site{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  background:rgba(247,246,241,.88);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linea);
+  transition:box-shadow var(--t);
+}
+header.site.scrolled{box-shadow:0 6px 24px -14px rgba(29,49,56,.25)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+.brand{display:flex;flex-direction:column;text-decoration:none;color:var(--petrolio);line-height:1.1}
+.brand b{font-family:var(--f-display);font-weight:600;font-size:1.35rem;letter-spacing:.02em}
+.brand span{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--salvia-scuro);margin-top:.2rem}
+.nav-links{display:flex;align-items:center;gap:clamp(1rem,2.4vw,2.1rem);list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--petrolio);font-size:.92rem;font-weight:500;
+  padding:.35rem 0;position:relative;
+}
+.nav-links a:not(.btn)::after{
+  content:"";position:absolute;left:0;bottom:0;height:1.5px;width:0;
+  background:var(--ocra);transition:width var(--t);
+}
+.nav-links a:not(.btn):hover::after{width:100%}
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--petrolio);color:#fff!important;text-decoration:none;
+  padding:.78rem 1.5rem;border-radius:999px;font-weight:600;font-size:.92rem;
+  border:1px solid var(--petrolio);transition:background var(--t),transform var(--t);
+}
+.btn:hover{background:var(--petrolio-scuro);transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--petrolio)!important}
+.btn.ghost:hover{background:var(--petrolio);color:#fff!important}
+.btn.light{background:#fff;color:var(--petrolio)!important;border-color:#fff}
+.btn.light:hover{background:var(--nebbia)}
+
+.burger{
+  display:none;background:none;border:none;cursor:pointer;
+  width:42px;height:42px;flex-direction:column;justify-content:center;align-items:center;gap:6px;
+}
+.burger span{width:24px;height:2px;background:var(--petrolio);transition:transform var(--t),opacity var(--t)}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+@media (max-width:880px){
+  .burger{display:flex}
+  .nav-links{
+    position:fixed;top:74px;right:0;left:0;
+    background:var(--carta);border-bottom:1px solid var(--linea);
+    flex-direction:column;align-items:flex-start;gap:0;
+    padding:.5rem 1.5rem 1.5rem;
+    transform:translateY(-115%);transition:transform var(--t);
+  }
+  .nav-links.open{transform:translateY(0)}
+  .nav-links li{width:100%;border-bottom:1px solid var(--linea)}
+  .nav-links li:last-child{border:none;padding-top:1rem}
+  .nav-links a{display:block;padding:1rem 0;font-size:1.05rem}
+  .nav-links .btn{display:inline-flex;width:auto}
+}
+
+/* ============================================================
+   HERO: la costellazione relazionale
+   ============================================================ */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;align-items:center;
+  padding:130px 0 80px;overflow:hidden;
+  background:linear-gradient(165deg,var(--carta) 0%,var(--nebbia) 100%);
+}
+#rete{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero-quote{
+  font-family:var(--f-display);font-style:italic;font-size:clamp(1.1rem,1rem + .6vw,1.4rem);
+  color:var(--salvia-scuro);margin-bottom:1.4rem;display:block;
+}
+.hero h1{margin-bottom:1.4rem}
+.hero h1 em{font-style:italic;color:var(--salvia-scuro)}
+.hero p.lead{max-width:34rem;margin-bottom:2.2rem;font-size:clamp(1.05rem,1rem + .35vw,1.2rem);font-weight:300}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
+.hero-meta{
+  margin-top:2.6rem;display:flex;flex-wrap:wrap;gap:1.8rem;
+  font-size:.85rem;color:var(--salvia-scuro);letter-spacing:.04em;
+}
+.hero-meta span{display:flex;align-items:center;gap:.5rem}
+.hero-meta svg{flex:none}
+
+.ritratto{position:relative;justify-self:end;width:min(420px,100%)}
+.ritratto .cornice{
+  border-radius:230px 230px var(--r-soft) var(--r-soft);
+  overflow:hidden;box-shadow:var(--shadow);
+  aspect-ratio:4/5;background:var(--salvia);
+}
+.ritratto img{width:100%;height:100%;object-fit:cover}
+.ritratto .badge{
+  position:absolute;left:-18px;bottom:26px;
+  background:#fff;border-radius:var(--r-soft);box-shadow:var(--shadow);
+  padding:.9rem 1.2rem;font-size:.82rem;line-height:1.4;max-width:240px;
+  border-left:3px solid var(--ocra);
+}
+.ritratto .badge b{display:block;font-size:.92rem}
+
+@media (max-width:880px){
+  .hero{min-height:auto;padding:120px 0 60px}
+  .hero .wrap{grid-template-columns:1fr}
+  .ritratto{justify-self:center;width:min(340px,88%);order:-1}
+  .ritratto .badge{left:auto;right:-8px}
+}
+
+/* ============================================================
+   SEZIONI
+   ============================================================ */
+section{padding:clamp(4rem,9vw,7.5rem) 0;position:relative}
+.alt{background:var(--nebbia)}
+.intro{max-width:46rem}
+.intro h2{margin-bottom:1.2rem}
+.intro p{font-weight:300;font-size:1.08em}
+
+/* Chi sono */
+.chi-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2.5rem,5vw,5rem);align-items:start;margin-top:3rem}
+.chi-foto{
+  border-radius:var(--r-soft);overflow:hidden;box-shadow:var(--shadow);
+  position:sticky;top:110px;aspect-ratio:3/4;background:var(--salvia);
+}
+.chi-foto img{width:100%;height:100%;object-fit:cover}
+.percorso{list-style:none;position:relative;padding-left:2rem}
+.percorso::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:1px;background:var(--linea)}
+.percorso li{position:relative;padding-bottom:2.2rem}
+.percorso li:last-child{padding-bottom:0}
+.percorso li::before{
+  content:"";position:absolute;left:-2rem;top:.45rem;width:17px;height:17px;border-radius:50%;
+  background:var(--carta);border:2px solid var(--salvia-scuro);
+}
+.alt .percorso li::before{background:var(--nebbia)}
+.percorso .anno{font-size:.78rem;letter-spacing:.16em;color:var(--ocra);font-weight:600;text-transform:uppercase}
+.percorso h3{margin:.25rem 0 .45rem}
+.percorso p{font-weight:300}
+.albo{
+  margin-top:2.4rem;padding:1.3rem 1.5rem;background:#fff;border-radius:var(--r-soft);
+  border-left:3px solid var(--salvia);font-size:.95rem;box-shadow:var(--shadow);
+}
+@media (max-width:880px){
+  .chi-grid{grid-template-columns:1fr}
+  .chi-foto{position:static;max-width:380px;margin:0 auto}
+}
+
+/* Approccio */
+.approccio-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,5vw,5rem);align-items:center;margin-top:3rem}
+.approccio-testo p+p{margin-top:1rem}
+.approccio-testo p{font-weight:300}
+.approccio-figura{position:relative}
+.approccio-figura svg{width:100%;height:auto}
+.approccio-claim{
+  font-family:var(--f-display);font-style:italic;
+  font-size:clamp(1.25rem,1.1rem + .8vw,1.6rem);color:var(--petrolio);
+  border-left:2px solid var(--ocra);padding-left:1.2rem;margin-top:1.6rem;
+}
+@media (max-width:880px){.approccio-grid{grid-template-columns:1fr}}
+
+/* Percorsi: individui, coppie, famiglie */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.card{
+  background:#fff;border-radius:var(--r-soft);padding:2.2rem 1.9rem;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;
+  border-top:3px solid transparent;transition:transform var(--t),border-color var(--t);
+}
+.card:hover{transform:translateY(-5px);border-top-color:var(--salvia)}
+.card .glifo{width:54px;height:54px;margin-bottom:1.3rem}
+.card h3{margin-bottom:.7rem}
+.card p{font-weight:300;font-size:.97rem;flex:1}
+.card .dettaglio{margin-top:1.1rem;font-size:.9rem;color:var(--salvia-scuro);font-weight:600;letter-spacing:.04em}
+@media (max-width:880px){.cards{grid-template-columns:1fr;max-width:480px;margin-inline:auto}}
+
+/* Come funziona */
+.passi{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;counter-reset:passo}
+.passo{
+  background:#fff;border-radius:var(--r-soft);padding:2rem 1.8rem;box-shadow:var(--shadow);
+  position:relative;counter-increment:passo;
+}
+.passo::before{
+  content:counter(passo,decimal-leading-zero);
+  font-family:var(--f-display);font-size:2.6rem;color:var(--salvia);line-height:1;
+  display:block;margin-bottom:.9rem;
+}
+.passo h3{font-size:1.25rem;margin-bottom:.6rem}
+.passo p{font-weight:300;font-size:.96rem}
+.info-pratiche{
+  margin-top:3rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;
+  background:var(--linea);border:1px solid var(--linea);border-radius:var(--r-soft);overflow:hidden;
+}
+.info-pratiche div{background:var(--carta);padding:1.5rem 1.6rem}
+.alt .info-pratiche div{background:var(--nebbia)}
+.info-pratiche b{display:block;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ocra);margin-bottom:.4rem}
+.info-pratiche p{font-size:.95rem;font-weight:300}
+@media (max-width:880px){.passi{grid-template-columns:1fr;max-width:480px;margin-inline:auto}}
+
+/* Citazione di passaggio */
+.banda-quote{
+  background:var(--petrolio);color:#fff;text-align:center;
+  padding:clamp(3.5rem,7vw,5.5rem) 0;position:relative;overflow:hidden;
+}
+.banda-quote blockquote{
+  font-family:var(--f-display);font-style:italic;
+  font-size:clamp(1.5rem,1.2rem + 1.6vw,2.4rem);max-width:42rem;margin:0 auto;line-height:1.35;
+}
+.banda-quote .firma{margin-top:1.2rem;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--salvia)}
+
+/* Contatti */
+.contatti-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,5vw,5rem);margin-top:3rem;align-items:start}
+.contatti-lista{list-style:none;display:flex;flex-direction:column;gap:1.1rem}
+.contatti-lista li{display:flex;gap:1.1rem;align-items:flex-start}
+.contatti-lista .ico{
+  flex:none;width:48px;height:48px;border-radius:50%;
+  background:#fff;box-shadow:var(--shadow);display:grid;place-items:center;
+}
+.contatti-lista b{display:block;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--salvia-scuro);margin-bottom:.15rem}
+.contatti-lista a{color:var(--petrolio);text-decoration:none;font-weight:500}
+.contatti-lista a:hover{color:var(--salvia-scuro)}
+.contatti-box{
+  background:var(--petrolio);color:#fff;border-radius:var(--r-soft);
+  padding:clamp(1.8rem,4vw,2.8rem);box-shadow:var(--shadow);
+}
+.contatti-box h3{color:#fff;margin-bottom:.8rem}
+.contatti-box p{font-weight:300;font-size:.97rem;color:rgba(255,255,255,.85)}
+.contatti-box .azioni{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:1.6rem}
+.nota-riservatezza{margin-top:1.4rem;font-size:.82rem;color:rgba(255,255,255,.6)}
+@media (max-width:880px){.contatti-grid{grid-template-columns:1fr}}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer.site{background:var(--petrolio-scuro);color:rgba(255,255,255,.78);padding:3.2rem 0 2rem;font-size:.9rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem}
+footer.site b{color:#fff}
+footer.site .brand-foot{font-family:var(--f-display);font-size:1.4rem;color:#fff;margin-bottom:.4rem;display:block}
+footer.site ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+footer.site a{color:rgba(255,255,255,.78);text-decoration:none}
+footer.site a:hover{color:#fff;text-decoration:underline}
+.foot-legal{
+  border-top:1px solid rgba(255,255,255,.14);padding-top:1.4rem;
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem;font-size:.8rem;color:rgba(255,255,255,.55);
+}
+@media (max-width:880px){.foot-grid{grid-template-columns:1fr}}
+
+/* ============================================================
+   COOKIE BANNER
+   ============================================================ */
+.cookie-banner{
+  position:fixed;left:50%;bottom:1.2rem;transform:translate(-50%,140%);
+  width:min(680px,calc(100% - 2rem));z-index:150;
+  background:#fff;border-radius:var(--r-soft);box-shadow:0 24px 60px -18px rgba(29,49,56,.45);
+  padding:1.4rem 1.6rem;border:1px solid var(--linea);
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+}
+.cookie-banner.visibile{transform:translate(-50%,0)}
+.cookie-banner p{font-size:.88rem;font-weight:300;margin-bottom:1rem}
+.cookie-banner .azioni{display:flex;flex-wrap:wrap;gap:.7rem}
+.cookie-banner .btn{padding:.55rem 1.2rem;font-size:.85rem}
+
+/* ============================================================
+   PAGINA PRIVACY (vista alternativa)
+   ============================================================ */
+.vista{display:none}
+.vista.attiva{display:block}
+.privacy{padding:140px 0 80px;max-width:780px;margin:0 auto}
+.privacy h1{font-size:clamp(2rem,1.6rem + 1.8vw,3rem);margin-bottom:.6rem}
+.privacy .agg{font-size:.85rem;color:var(--salvia-scuro);margin-bottom:2.5rem}
+.privacy h2{font-size:1.45rem;margin:2.4rem 0 .8rem}
+.privacy p,.privacy li{font-weight:300;font-size:.98rem}
+.privacy ul{padding-left:1.3rem;margin:.6rem 0}
+.privacy .placeholder{background:#fdf6e8;border-left:3px solid var(--ocra);padding:.9rem 1.1rem;border-radius:6px;font-size:.88rem;margin:1.2rem 0}
+
+/* Animazioni di ingresso */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenuto">Vai al contenuto</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site" id="header">
+  <div class="wrap nav">
+    <a class="brand" href="#home" data-vista="home">
+      <b>Claudia Tarpini</b>
+      <span>Psicologa · Psicoterapeuta</span>
+    </a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Apri il menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="menu">
+      <li><a href="#chi-sono" data-vista="home">Chi sono</a></li>
+      <li><a href="#approccio" data-vista="home">L'approccio</a></li>
+      <li><a href="#percorsi" data-vista="home">Percorsi</a></li>
+      <li><a href="#come-funziona" data-vista="home">Come funziona</a></li>
+      <li><a href="#contatti" data-vista="home">Contatti</a></li>
+      <li><a class="btn" href="https://www.miodottore.it/claudia-tarpini/psicologo-psicoterapeuta/olgiate-comasco" target="_blank" rel="noopener">Prenota un colloquio</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="contenuto">
+<!-- ===================== VISTA HOME ===================== -->
+<div class="vista attiva" id="vista-home">
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <canvas id="rete" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="hero-quote">"Non vediamo le cose per come sono,<br>ma per come siamo."</span>
+      <h1>Uno spazio per te<br>e per le tue <em>relazioni</em></h1>
+      <p class="lead">Sono Claudia Tarpini, psicologa e psicoterapeuta a Olgiate Comasco. Accompagno individui, coppie e famiglie in percorsi di supporto psicologico e psicoterapia con approccio sistemico-relazionale.</p>
+      <div class="hero-cta">
+        <a class="btn" href="https://www.miodottore.it/claudia-tarpini/psicologo-psicoterapeuta/olgiate-comasco" target="_blank" rel="noopener">Prenota un colloquio</a>
+        <a class="btn ghost" href="#approccio">Scopri l'approccio</a>
+      </div>
+      <div class="hero-meta">
+        <span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Olgiate Comasco (CO)
+        </span>
+        <span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          In studio e online
+        </span>
+        <span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a10 10 0 1 0-10-10"/><path d="M12 6v6l4 2"/></svg>
+          Su appuntamento
+        </span>
+      </div>
+    </div>
+    <div class="ritratto reveal">
+      <div class="cornice">
+        <!-- In produzione: sostituire con immagine ospitata sul proprio dominio -->
+        <img src="https://claudiatarpinipsicologa.com/wp-content/uploads/2022/10/sr57643.jpg" alt="La Dott.ssa Claudia Tarpini nel suo studio" loading="eager">
+      </div>
+      <div class="badge">
+        <b>Dott.ssa Claudia Tarpini</b>
+        Iscritta all'Ordine degli Psicologi della Lombardia
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHI SONO -->
+<section id="chi-sono">
+  <div class="wrap">
+    <div class="intro reveal">
+      <span class="eyebrow">Chi sono</span>
+      <h2>Un percorso costruito passo dopo passo</h2>
+      <p>Dalla laurea in psicologia alla specializzazione in psicoterapia: le tappe che hanno formato il mio modo di lavorare e di stare in relazione con chi incontro in studio.</p>
+    </div>
+    <div class="chi-grid">
+      <div class="chi-foto reveal">
+        <img src="https://claudiatarpinipsicologa.com/wp-content/uploads/2022/10/sr57640.jpg" alt="Claudia Tarpini, psicologa e psicoterapeuta" loading="lazy">
+      </div>
+      <div class="reveal">
+        <ul class="percorso">
+          <li>
+            <span class="anno">2016</span>
+            <h3>Laurea magistrale in psicologia</h3>
+            <p>Dopo la maturità scientifica scelgo la Facoltà di Psicologia dell'Università Cattolica di Milano, dove ottengo la laurea magistrale in Psicologia dello sviluppo e della comunicazione.</p>
+          </li>
+          <li>
+            <span class="anno">2018</span>
+            <h3>Abilitazione alla professione</h3>
+            <p>Concluso il tirocinio formativo e superato l'Esame di Stato, mi iscrivo all'Ordine degli Psicologi della Lombardia e inizio a esercitare come psicologa.</p>
+          </li>
+          <li>
+            <span class="anno">2017 – 2022</span>
+            <h3>Specializzazione in psicoterapia</h3>
+            <p>Per proseguire la mia crescita professionale e personale frequento la Scuola di Psicoterapia Mara Selvini Palazzoli di Milano, a indirizzo sistemico-relazionale, dove al termine del quinquennio ottengo il diploma di specializzazione.</p>
+          </li>
+        </ul>
+        <div class="albo">
+          <b>Psicologa e psicoterapeuta</b> iscritta all'Ordine degli Psicologi della Lombardia. Ricevo su appuntamento a Olgiate Comasco, in provincia di Como.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROCCIO -->
+<section class="alt" id="approccio">
+  <div class="wrap">
+    <div class="approccio-grid">
+      <div class="approccio-testo reveal">
+        <span class="eyebrow">L'approccio</span>
+        <h2 style="margin-bottom:1.2rem">Sistemico-relazionale: al centro c'è la relazione</h2>
+        <p>In psicologia si definisce "sistemico" un approccio che pone al centro del lavoro terapeutico la relazione. L'attenzione e l'intervento si concentrano sulle relazioni interpersonali, attuali e passate, nella storia individuale e familiare di ciascuna persona.</p>
+        <p>Le relazioni possono essere motivo di fatica e di difficoltà. L'intervento sistemico, però, le considera anche una risorsa preziosa per il benessere di ognuno: comprenderle aiuta a spiegare ciò che è accaduto e che accade, e apre la strada al cambiamento.</p>
+        <p>Con modalità diverse, questo approccio risponde ai bisogni di individui, coppie e famiglie.</p>
+        <div class="approccio-claim">La stanza di terapia è simbolicamente affollata da molte più persone di quelle che vi partecipano davvero.</div>
+      </div>
+      <div class="approccio-figura reveal" aria-hidden="true">
+        <svg viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#9db29e" stroke-width="1.2" opacity=".7">
+            <line x1="240" y1="200" x2="120" y2="90"/>
+            <line x1="240" y1="200" x2="370" y2="110"/>
+            <line x1="240" y1="200" x2="90" y2="280"/>
+            <line x1="240" y1="200" x2="390" y2="300"/>
+            <line x1="240" y1="200" x2="250" y2="370"/>
+            <line x1="120" y1="90" x2="370" y2="110"/>
+            <line x1="90" y1="280" x2="250" y2="370"/>
+            <line x1="390" y1="300" x2="250" y2="370"/>
+          </g>
+          <g fill="#f7f6f1" stroke="#6f8a74" stroke-width="2">
+            <circle cx="120" cy="90" r="16"/>
+            <circle cx="370" cy="110" r="13"/>
+            <circle cx="90" cy="280" r="13"/>
+            <circle cx="390" cy="300" r="16"/>
+            <circle cx="250" cy="370" r="12"/>
+          </g>
+          <circle cx="240" cy="200" r="26" fill="#28424b"/>
+          <circle cx="240" cy="200" r="36" fill="none" stroke="#b98e4f" stroke-width="1.4" stroke-dasharray="3 5"/>
+          <text x="240" y="56" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="19" fill="#6f8a74">la persona, dentro le sue relazioni</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERCORSI -->
+<section id="percorsi">
+  <div class="wrap">
+    <div class="intro reveal">
+      <span class="eyebrow">Di cosa mi occupo</span>
+      <h2>Percorsi per individui, coppie e famiglie</h2>
+      <p>Mi occupo di supporto psicologico e psicoterapia. Ogni percorso parte da una domanda di aiuto e prende forma insieme, nel rispetto dei tempi e della storia di chi lo intraprende.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <svg class="glifo" viewBox="0 0 54 54" aria-hidden="true">
+          <circle cx="27" cy="27" r="10" fill="none" stroke="#28424b" stroke-width="2"/>
+          <circle cx="27" cy="27" r="20" fill="none" stroke="#9db29e" stroke-width="1.4" stroke-dasharray="3 5"/>
+        </svg>
+        <h3>Individui</h3>
+        <p>La maggior parte dei percorsi che conduco è individuale: persone che sentono il bisogno di uno spazio per sé. Anche quando la richiesta è personale, lavoro tenendo sempre presente il sistema di relazioni, familiari, amicali e non solo, che circonda e influenza ciascuno di noi, nel presente come nel passato.</p>
+        <span class="dettaglio">Il focus: la persona dentro le sue relazioni significative</span>
+      </article>
+      <article class="card reveal">
+        <svg class="glifo" viewBox="0 0 54 54" aria-hidden="true">
+          <circle cx="20" cy="27" r="10" fill="none" stroke="#28424b" stroke-width="2"/>
+          <circle cx="34" cy="27" r="10" fill="none" stroke="#6f8a74" stroke-width="2"/>
+        </svg>
+        <h3>Coppie</h3>
+        <p>Quando la relazione di coppia attraversa un momento di crisi, di distanza o di cambiamento, uno spazio condiviso e protetto permette di rimettere in dialogo i due partner, comprendere le dinamiche che si ripetono e ritrovare un modo di stare insieme.</p>
+        <span class="dettaglio">Il focus: il legame e le sue dinamiche</span>
+      </article>
+      <article class="card reveal">
+        <svg class="glifo" viewBox="0 0 54 54" aria-hidden="true">
+          <circle cx="16" cy="20" r="8" fill="none" stroke="#28424b" stroke-width="2"/>
+          <circle cx="38" cy="20" r="8" fill="none" stroke="#6f8a74" stroke-width="2"/>
+          <circle cx="27" cy="38" r="8" fill="none" stroke="#b98e4f" stroke-width="2"/>
+          <line x1="20" y1="26" x2="24" y2="32" stroke="#9db29e" stroke-width="1.4"/>
+          <line x1="34" y1="26" x2="30" y2="32" stroke="#9db29e" stroke-width="1.4"/>
+        </svg>
+        <h3>Famiglie</h3>
+        <p>La famiglia è il primo sistema di relazioni in cui cresciamo. Nei momenti di difficoltà, di passaggio o di conflitto, il lavoro con l'intero nucleo aiuta a leggere ciò che accade da nuove prospettive e a trasformare le relazioni in una risorsa per tutti i suoi membri.</p>
+        <span class="dettaglio">Il focus: il sistema familiare come risorsa</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="banda-quote">
+  <div class="wrap">
+    <blockquote>"Se talvolta le relazioni possono essere motivo di fatica, sono anche una risorsa per il benessere di ciascuna persona."</blockquote>
+    <div class="firma">L'approccio sistemico-relazionale</div>
+  </div>
+</div>
+
+<!-- COME FUNZIONA -->
+<section class="alt" id="come-funziona">
+  <div class="wrap">
+    <div class="intro reveal">
+      <span class="eyebrow">Come funziona</span>
+      <h2>Iniziare è più semplice di quanto sembri</h2>
+      <p>Chiedere aiuto richiede coraggio. Per questo il primo passo è pensato per essere il più accessibile possibile.</p>
+    </div>
+    <div class="passi">
+      <article class="passo reveal">
+        <h3>Il primo contatto</h3>
+        <p>Puoi scrivermi un messaggio, chiamarmi o prenotare online il primo colloquio. Risponderò per concordare insieme giorno e orario dell'appuntamento.</p>
+      </article>
+      <article class="passo reveal">
+        <h3>Il primo colloquio</h3>
+        <p>È un momento di conoscenza reciproca: uno spazio in cui raccontare ciò che porti e capire insieme di cosa hai bisogno, senza alcun impegno per il seguito.</p>
+      </article>
+      <article class="passo reveal">
+        <h3>Il percorso</h3>
+        <p>Se decidiamo di proseguire, definiamo insieme obiettivi e frequenza degli incontri. Ogni percorso ha tempi e forme proprie, costruiti su misura.</p>
+      </article>
+    </div>
+    <div class="info-pratiche reveal">
+      <div>
+        <b>Dove</b>
+        <p>Ricevo su appuntamento a Olgiate Comasco, in provincia di Como.</p>
+      </div>
+      <div>
+        <b>Online</b>
+        <p>Su richiesta, i colloqui possono svolgersi anche a distanza in videochiamata.</p>
+      </div>
+      <div>
+        <b>Riservatezza</b>
+        <p>Tutto ciò che viene condiviso in seduta è protetto dal segreto professionale.</p>
+      </div>
+      <div>
+        <b>Detraibilità</b>
+        <p>Le prestazioni psicologiche sono spese sanitarie detraibili nella dichiarazione dei redditi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti">
+  <div class="wrap">
+    <div class="intro reveal">
+      <span class="eyebrow">Contatti</span>
+      <h2>Parliamone</h2>
+      <p>Per qualsiasi domanda o per fissare un primo colloquio, puoi contattarmi nel modo che preferisci.</p>
+    </div>
+    <div class="contatti-grid">
+      <ul class="contatti-lista reveal">
+        <li>
+          <span class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#28424b" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <div>
+            <b>Telefono</b>
+            <a href="tel:+393495402329">+39 349 540 2329</a><br>
+            <small>Anche con un messaggio: ti richiamo appena possibile.</small>
+          </div>
+        </li>
+        <li>
+          <span class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#28424b" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          </span>
+          <div>
+            <b>Email</b>
+            <a href="mailto:claudia.tarpini@hotmail.it">claudia.tarpini@hotmail.it</a>
+          </div>
+        </li>
+        <li>
+          <span class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#28424b" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <div>
+            <b>Studio</b>
+            Olgiate Comasco (CO)<br>
+            <small>Ricevo solo su appuntamento.</small>
+          </div>
+        </li>
+      </ul>
+      <div class="contatti-box reveal">
+        <h3>Prenota il primo colloquio</h3>
+        <p>Puoi prenotare direttamente online attraverso MioDottore, scegliendo il giorno e l'orario che preferisci, oppure scrivermi per concordare insieme l'appuntamento.</p>
+        <div class="azioni">
+          <a class="btn light" href="https://www.miodottore.it/claudia-tarpini/psicologo-psicoterapeuta/olgiate-comasco" target="_blank" rel="noopener">Prenota su MioDottore</a>
+          <a class="btn ghost" style="color:#fff!important;border-color:rgba(255,255,255,.5)" href="mailto:claudia.tarpini@hotmail.it">Scrivimi una email</a>
+        </div>
+        <p class="nota-riservatezza">Ogni contatto è trattato con la massima riservatezza, nel rispetto del Codice deontologico degli psicologi e della normativa sulla privacy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- /vista-home -->
+
+<!-- ===================== VISTA PRIVACY ===================== -->
+<div class="vista" id="vista-privacy">
+  <div class="wrap privacy">
+    <span class="eyebrow">Informativa</span>
+    <h1>Privacy e cookie policy</h1>
+    <p class="agg">Informativa ai sensi degli artt. 13 e 14 del Regolamento (UE) 2016/679 (GDPR)</p>
+
+    <div class="placeholder"><b>Nota per la pubblicazione:</b> prima di mettere online il sito, completare i campi tra parentesi quadre (indirizzo dello studio, P. IVA, eventuali strumenti di terze parti effettivamente utilizzati) e far validare il testo da un consulente privacy.</div>
+
+    <h2>1. Titolare del trattamento</h2>
+    <p>Il Titolare del trattamento è la Dott.ssa Claudia Tarpini, psicologa e psicoterapeuta iscritta all'Ordine degli Psicologi della Lombardia, con studio in Olgiate Comasco (CO) [indirizzo completo], P. IVA [inserire]. Contatti: claudia.tarpini@hotmail.it, +39 349 540 2329.</p>
+
+    <h2>2. Dati trattati attraverso il sito</h2>
+    <ul>
+      <li><b>Dati di navigazione:</b> i sistemi informatici che fanno funzionare il sito raccolgono, durante il normale esercizio, alcuni dati la cui trasmissione è implicita nell'uso di internet (indirizzi IP, orari di accesso, pagine visitate). Sono utilizzati solo per ricavare informazioni statistiche anonime e per controllare il corretto funzionamento del sito.</li>
+      <li><b>Dati forniti volontariamente:</b> l'invio di email o messaggi agli indirizzi indicati sul sito comporta l'acquisizione dell'indirizzo del mittente e degli eventuali altri dati personali contenuti nella comunicazione, trattati al solo fine di rispondere alla richiesta.</li>
+    </ul>
+
+    <h2>3. Finalità e base giuridica</h2>
+    <ul>
+      <li>Rispondere alle richieste di contatto e di appuntamento (art. 6, par. 1, lett. b GDPR);</li>
+      <li>garantire il funzionamento tecnico e la sicurezza del sito (art. 6, par. 1, lett. f GDPR);</li>
+      <li>adempiere a obblighi di legge, contabili e fiscali (art. 6, par. 1, lett. c GDPR).</li>
+    </ul>
+    <p>I dati relativi alla salute eventualmente comunicati in fase di richiesta di appuntamento sono trattati ai sensi dell'art. 9, par. 2, lett. h GDPR, nell'ambito del rapporto professionale sanitario e nel rispetto del segreto professionale.</p>
+
+    <h2>4. Conservazione</h2>
+    <p>I dati sono conservati per il tempo necessario a rispondere alle richieste e, in caso di instaurazione del rapporto professionale, per i termini previsti dalla normativa sanitaria, fiscale e deontologica applicabile.</p>
+
+    <h2>5. Destinatari</h2>
+    <p>I dati non sono diffusi. Possono essere trattati da fornitori di servizi tecnici (hosting, posta elettronica) che agiscono come responsabili del trattamento, e comunicati a soggetti terzi solo ove previsto dalla legge.</p>
+
+    <h2>6. Diritti dell'interessato</h2>
+    <p>Ai sensi degli artt. 15-22 GDPR è possibile esercitare in qualsiasi momento i diritti di accesso, rettifica, cancellazione, limitazione, portabilità e opposizione scrivendo a claudia.tarpini@hotmail.it. È inoltre possibile proporre reclamo al Garante per la protezione dei dati personali (www.garanteprivacy.it).</p>
+
+    <h2>7. Cookie</h2>
+    <p>Questo sito utilizza esclusivamente cookie tecnici, necessari al suo funzionamento e alla memorizzazione delle preferenze espresse attraverso il banner (ad esempio la scelta sui cookie stessa). Per i cookie tecnici non è richiesto il consenso.</p>
+    <p>Il sito non utilizza cookie di profilazione propri. [Se in produzione verranno attivati strumenti di terze parti, ad esempio statistiche, mappe incorporate o il widget di prenotazione MioDottore, elencarli qui con relative finalità, durata e link alle rispettive privacy policy: tali cookie verranno installati solo previo consenso.]</p>
+    <p>È possibile gestire o disabilitare i cookie anche dalle impostazioni del proprio browser.</p>
+
+    <h2>8. Prenotazioni online</h2>
+    <p>Il pulsante "Prenota" rimanda alla piattaforma esterna MioDottore (Docplanner Italy S.r.l.), che opera come autonomo titolare del trattamento per i dati inseriti in fase di prenotazione. Si invita a consultare la relativa informativa privacy sul sito della piattaforma.</p>
+
+    <p style="margin-top:2.5rem"><a href="#home" data-vista="home" class="btn ghost">← Torna al sito</a></p>
+  </div>
+</div><!-- /vista-privacy -->
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <span class="brand-foot">Claudia Tarpini</span>
+        <p>Psicologa e psicoterapeuta a indirizzo sistemico-relazionale.<br>Iscritta all'Ordine degli Psicologi della Lombardia.</p>
+        <p style="margin-top:.8rem">P. IVA [inserire] · Olgiate Comasco (CO)</p>
+      </div>
+      <div>
+        <b>Naviga</b>
+        <ul style="margin-top:.8rem">
+          <li><a href="#chi-sono" data-vista="home">Chi sono</a></li>
+          <li><a href="#approccio" data-vista="home">L'approccio</a></li>
+          <li><a href="#percorsi" data-vista="home">Percorsi</a></li>
+          <li><a href="#contatti" data-vista="home">Contatti</a></li>
+        </ul>
+      </div>
+      <div>
+        <b>Contatti</b>
+        <ul style="margin-top:.8rem">
+          <li><a href="tel:+393495402329">+39 349 540 2329</a></li>
+          <li><a href="mailto:claudia.tarpini@hotmail.it">claudia.tarpini@hotmail.it</a></li>
+          <li><a href="https://www.miodottore.it/claudia-tarpini/psicologo-psicoterapeuta/olgiate-comasco" target="_blank" rel="noopener">Prenota su MioDottore</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© <span id="anno"></span> Dott.ssa Claudia Tarpini. Tutti i diritti riservati.</span>
+      <span><a href="#privacy" data-vista="privacy">Privacy e cookie policy</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== COOKIE BANNER ===================== -->
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Informativa sui cookie" aria-live="polite">
+  <p><b>Questo sito utilizza solo cookie tecnici.</b> Servono al funzionamento del sito e a ricordare le tue preferenze. Nessun cookie di profilazione viene installato. Maggiori dettagli nella <a href="#privacy" data-vista="privacy">privacy e cookie policy</a>.</p>
+  <div class="azioni">
+    <button class="btn" id="cookieOk">Ho capito</button>
+    <a class="btn ghost" href="#privacy" data-vista="privacy">Leggi l'informativa</a>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   NAVIGAZIONE E VISTE (home / privacy)
+   ============================================================ */
+const viste = {home: document.getElementById('vista-home'), privacy: document.getElementById('vista-privacy')};
+function mostraVista(nome){
+  Object.values(viste).forEach(v => v.classList.remove('attiva'));
+  (viste[nome] || viste.home).classList.add('attiva');
+  if(nome === 'privacy') window.scrollTo({top:0, behavior:'auto'});
+}
+document.querySelectorAll('[data-vista]').forEach(el => {
+  el.addEventListener('click', e => {
+    const nome = el.dataset.vista;
+    if(nome === 'privacy'){ e.preventDefault(); mostraVista('privacy'); history.replaceState(null,'','#privacy'); }
+    else if(!viste.home.classList.contains('attiva')){ mostraVista('home'); }
+    chiudiMenu();
+  });
+});
+if(location.hash === '#privacy') mostraVista('privacy');
+
+/* Menu mobile */
+const burger = document.getElementById('burger');
+const menu = document.getElementById('menu');
+function chiudiMenu(){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
+burger.addEventListener('click', () => {
+  const aperto = menu.classList.toggle('open');
+  burger.setAttribute('aria-expanded', aperto);
+});
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', chiudiMenu));
+
+/* Ombra header allo scroll */
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 10), {passive:true});
+
+/* Anno corrente nel footer */
+document.getElementById('anno').textContent = new Date().getFullYear();
+
+/* ============================================================
+   COOKIE BANNER
+   In questa anteprima il consenso resta in memoria di pagina.
+   In produzione, sostituire le due funzioni qui sotto con un
+   cookie tecnico, ad esempio:
+     document.cookie = "cookie_consent=ok; max-age=15552000; path=/; SameSite=Lax";
+   ============================================================ */
+let consensoCookie = false; // in produzione: leggere dal cookie
+const banner = document.getElementById('cookieBanner');
+if(!consensoCookie){ setTimeout(() => banner.classList.add('visibile'), 1200); }
+document.getElementById('cookieOk').addEventListener('click', () => {
+  consensoCookie = true; // in produzione: scrivere il cookie tecnico
+  banner.classList.remove('visibile');
+});
+
+/* ============================================================
+   ANIMAZIONI DI INGRESSO
+   ============================================================ */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ============================================================
+   LA COSTELLAZIONE RELAZIONALE (hero)
+   Nodi e fili che si muovono lentamente: la rete di relazioni
+   al centro dell'approccio sistemico. Rispetta la preferenza
+   di ridurre il movimento.
+   ============================================================ */
+(function(){
+  const canvas = document.getElementById('rete');
+  const ctx = canvas.getContext('2d');
+  const riduci = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W, H, nodi = [];
+
+  function setup(){
+    W = canvas.width = canvas.offsetWidth * devicePixelRatio;
+    H = canvas.height = canvas.offsetHeight * devicePixelRatio;
+    const n = Math.min(26, Math.floor(canvas.offsetWidth / 46));
+    nodi = Array.from({length:n}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      vx:(Math.random()-.5)*.16*devicePixelRatio,
+      vy:(Math.random()-.5)*.16*devicePixelRatio,
+      r:(Math.random()*2.2+1.6)*devicePixelRatio
+    }));
+  }
+
+  function disegna(){
+    ctx.clearRect(0,0,W,H);
+    const dMax = 150*devicePixelRatio;
+    for(let i=0;i<nodi.length;i++){
+      for(let j=i+1;j<nodi.length;j++){
+        const a=nodi[i], b=nodi[j];
+        const d=Math.hypot(a.x-b.x, a.y-b.y);
+        if(d<dMax){
+          ctx.strokeStyle=`rgba(111,138,116,${(1-d/dMax)*.5})`;
+          ctx.lineWidth=devicePixelRatio*.7;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+    nodi.forEach(p=>{
+      ctx.fillStyle='rgba(40,66,75,.55)';
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+    });
+  }
+
+  function passo(){
+    nodi.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+    });
+    disegna();
+    requestAnimationFrame(passo);
+  }
+
+  setup();
+  window.addEventListener('resize', () => { setup(); disegna(); });
+  if(riduci){ disegna(); } else { passo(); }
+})();
+</script>
+</body>
+</html>
