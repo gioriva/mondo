@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giorgio Riva</title>
+<meta name="robots" content="noindex, nofollow">
+
+<meta name="description" content="Freedom is a state of mind.">
+<meta property="og:title" content="Giorgio Riva">
+<meta property="og:description" content="Freedom is a state of mind.">
+<meta property="og:image" content="https://www.gioriva.it/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.gioriva.it/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Giorgio Riva">
+<meta name="twitter:description" content="Freedom is a state of mind.">
+<meta name="twitter:image" content="https://www.gioriva.it/og-image.png">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- Google Analytics + Consent Mode -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied'
+  });
+  gtag('config', 'G-1ZCCJ6QBR4', { 'anonymize_ip': true });
+  try {
+    if (localStorage.getItem('gr_cookie_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&family=IBM+Plex+Mono:wght@300&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sky-top: #07080D;
+  --sky-mid: #0B0C12;
+  --sky-low: #14110D;
+  --ridge-1: #0A0A0B;
+  --ridge-2: #060607;
+  --text:  #E8E2D9;
+  --muted: #6B6560;
+  --gold:  #C8A97E;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans:  'Montserrat', sans-serif;
+  --mono:  'IBM Plex Mono', monospace;
+}
+
+body {
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-low) 100%);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  height: 100vh;
+  overflow: hidden;
+  cursor: none;
+}
+a, button { cursor: none; }
+
+/* ── Sky layers ── */
+#sky-far, #sky-near { position: fixed; inset: 0; pointer-events: none; }
+#sky-far  { z-index: 1; }
+#sky-near { z-index: 2; }
+
+/* ── Constellation ── */
+#constellation {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+}
+#constellation svg { width: 100%; height: 100%; display: block; }
+#const-overlay { position: fixed; inset: 0; z-index: 5; pointer-events: none; }
+
+/* ── Moon ── */
+#moon-link {
+  position: fixed;
+  top: 9vh;
+  right: 8vw;
+  z-index: 9;
+  pointer-events: auto;
+}
+#moon {
+  display: block;
+  opacity: 0.9;
+  transition: filter .25s, opacity .25s;
+}
+#moon-link:hover #moon { filter: brightness(1.5); opacity: 1; }
+
+/* ── Mountain ridges ── */
+.ridge {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+}
+.ridge svg { display: block; width: 100%; height: auto; }
+#ridge-far  { z-index: 6; }
+#ridge-near { z-index: 7; }
+
+/* ── Lake reflection hint ── */
+#lake {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: 7vh;
+  z-index: 8;
+  background: linear-gradient(180deg, rgba(200,169,126,0.03), rgba(7,8,13,0.0));
+  pointer-events: none;
+}
+
+/* ── Identity ── */
+.identity {
+  position: fixed;
+  left: 5vw;
+  bottom: 12vh;
+  z-index: 10;
+}
+.identity h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(3.2rem, 7.5vw, 7rem);
+  line-height: 0.95;
+  color: var(--text);
+}
+.identity h1 em { font-style: italic; color: var(--gold); }
+.identity .rule { width: 40px; height: 1px; background: var(--gold); opacity: 0.6; margin: 1.4rem 0; }
+.identity p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: var(--muted);
+}
+
+/* ── Bars ── */
+.bar-top {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 2.5rem;
+}
+.monogram {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-decoration: none;
+  opacity: 0.85;
+}
+.readout {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  display: flex;
+  gap: 2rem;
+}
+.readout b { color: var(--gold); font-weight: 300; }
+
+.bar-bottom {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.3rem 2.5rem;
+}
+.coords {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+.links { display: flex; gap: 2.2rem; list-style: none; }
+.links a {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.links a:hover { color: var(--gold); }
+
+/* ── Hint ── */
+.hint {
+  position: fixed;
+  top: 50%;
+  right: 2.2rem;
+  transform: rotate(90deg) translateX(50%);
+  transform-origin: right center;
+  z-index: 20;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ── Custom cursor ── */
+#cur-dot {
+  position: fixed; top: 0; left: 0;
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10002;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s;
+}
+#cur-ring {
+  position: fixed; top: 0; left: 0;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(200,169,126,0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10001;
+  transform: translate(-50%,-50%);
+  transition: width .25s, height .25s, border-color .25s;
+}
+body.hov #cur-dot  { width: 10px; height: 10px; background: #fff; }
+body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(200,169,126,0.9); }
+
+/* ── Drone ── */
+#drone {
+  position: fixed;
+  z-index: 9;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  pointer-events: auto;
+}
+#drone.visible { opacity: 1; }
+#drone svg { display: block; }
+#drone:hover svg { filter: brightness(1.45); }
+#drone a { display: block; }
+
+/* ── Cookie banner ── */
+#cookie-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(140%);
+  z-index: 10000;
+  width: min(92vw, 640px);
+  background: rgba(14,15,20,0.97);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(200,169,126,0.22);
+  border-radius: 4px;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  transition: transform .6s cubic-bezier(.16,.84,.44,1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+#cookie-banner.show { transform: translateX(-50%) translateY(0); }
+.cookie-text { flex: 1 1 280px; font-size: 0.78rem; line-height: 1.7; color: var(--muted); }
+.cookie-text strong {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+.cookie-text a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(200,169,126,0.3); }
+.cookie-text a:hover { color: var(--text); }
+.cookie-actions { display: flex; gap: 0.75rem; flex: 0 0 auto; }
+.cookie-btn {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.2rem;
+  border-radius: 2px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  transition: background .2s, color .2s;
+  white-space: nowrap;
+}
+.cookie-btn.decline { border-color: rgba(255,255,255,0.15); color: var(--muted); }
+.cookie-btn.accept:hover { background: var(--gold); color: var(--sky-top); }
+.cookie-btn.decline:hover { border-color: var(--muted); color: var(--text); }
+
+/* ── Entry ── */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+#constellation { animation: fadeIn 2.2s ease both .3s; }
+.identity h1   { animation: fadeUp .9s ease both .8s; }
+.identity .rule{ animation: fadeUp .7s ease both 1.1s; }
+.identity p    { animation: fadeUp .9s ease both 1.25s; }
+.bar-top, .bar-bottom, .hint { animation: fadeIn 1.2s ease both 1.5s; }
+#moon-link { animation: fadeIn 2.5s ease both .6s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  body { cursor: auto; height: 100dvh; }
+  a, button { cursor: pointer; }
+  #cur-dot, #cur-ring { display: none; }
+  .bar-top { padding: 1rem 1.25rem; }
+  .readout span:first-child { display: none; }
+  .bar-bottom {
+    padding: 1rem 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .links { gap: 1.4rem; flex-wrap: wrap; }
+  .identity { left: 6vw; bottom: 16dvh; right: 6vw; }
+  .identity h1 { font-size: clamp(2.6rem, 13vw, 4rem); }
+  .hint { display: none; }
+  #moon-link { right: 6vw; top: 8dvh; }
+  #moon { width: 40px; height: 40px; }
+  #ridge-far svg { height: 150px; }
+  #ridge-near svg { height: 100px; }
+  #drone { transform: scale(0.8); }
+  #cookie-banner {
+    flex-direction: column;
+    align-items: stretch;
+    bottom: 12px;
+    padding: 1.1rem 1.2rem;
+    gap: 0.9rem;
+  }
+  .cookie-text { flex: 0 0 auto; font-size: 0.74rem; line-height: 1.55; }
+  .cookie-actions { justify-content: stretch; }
+  .cookie-btn { flex: 1; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="sky-far"></canvas>
+<canvas id="sky-near"></canvas>
+
+<!-- Crescent moon -->
+<a id="moon-link" href="https://www.gioriva.it/iss/" target="_blank" rel="noopener" aria-label="ISS tracker">
+<svg id="moon" width="54" height="54" viewBox="0 0 54 54">
+  <defs>
+    <mask id="crescent">
+      <circle cx="27" cy="27" r="20" fill="white"/>
+      <circle cx="35" cy="22" r="18" fill="black"/>
+    </mask>
+  </defs>
+  <circle cx="27" cy="27" r="20" fill="#C8A97E" opacity="0.55" mask="url(#crescent)"/>
+  <circle cx="27" cy="27" r="20" fill="none" stroke="#C8A97E" stroke-width="0.4" opacity="0.25"/>
+</svg>
+</a>
+
+<!-- Constellation -->
+<div id="constellation">
+  <svg id="const-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+<div id="const-overlay"></div>
+
+<!-- Mountain ridges (Como silhouette) -->
+<div class="ridge" id="ridge-far">
+  <svg viewBox="0 0 1440 220" preserveAspectRatio="none" height="220">
+    <path d="M0,220 L0,150 L90,118 L180,140 L290,92 L390,128 L470,105 L580,135 L690,80 L800,122 L905,98 L1010,130 L1120,88 L1230,118 L1330,100 L1440,135 L1440,220 Z"
+          fill="#0A0A0C"/>
+    <path d="M0,150 L90,118 L180,140 L290,92 L390,128 L470,105 L580,135 L690,80 L800,122 L905,98 L1010,130 L1120,88 L1230,118 L1330,100 L1440,135"
+          fill="none" stroke="rgba(200,169,126,0.10)" stroke-width="1"/>
+  </svg>
+</div>
+<div class="ridge" id="ridge-near">
+  <svg viewBox="0 0 1440 150" preserveAspectRatio="none" height="150">
+    <path d="M0,150 L0,95 L120,60 L240,90 L360,48 L500,85 L620,55 L760,92 L880,40 L1020,80 L1150,52 L1290,86 L1440,58 L1440,150 Z"
+          fill="#060608"/>
+    <path d="M0,95 L120,60 L240,90 L360,48 L500,85 L620,55 L760,92 L880,40 L1020,80 L1150,52 L1290,86 L1440,58"
+          fill="none" stroke="rgba(200,169,126,0.14)" stroke-width="1"/>
+  </svg>
+</div>
+<div id="lake"></div>
+
+<!-- Identity -->
+<div class="identity">
+  <h1>Giorgio <em>Riva</em></h1>
+  <div class="rule"></div>
+  <p>Freedom is a state of mind.</p>
+</div>
+
+<!-- Bars -->
+<header class="bar-top">
+  <span></span>
+  <div class="readout">
+    <span>OSSERVATORIO &middot; COMO</span>
+    <span><b id="ro-time">--:--</b></span>
+  </div>
+</header>
+
+<footer class="bar-bottom">
+  <span class="coords">45.81&deg;N &mdash; 9.09&deg;E</span>
+  <ul class="links">
+    <li><a href="/privacy.html">Privacy</a></li>
+    <li><a href="#" id="cookie-reopen">Cookie</a></li>
+    <li><a href="https://www.instagram.com/gioriva" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="https://www.linkedin.com/in/giorgioriva/" target="_blank" rel="noopener">LinkedIn</a></li>
+  </ul>
+</footer>
+
+<!-- Drone -->
+<div id="drone">
+  <a href="https://www.gioriva.it/drone/" target="_blank" rel="noopener" aria-label="Drone photography">
+  <svg width="52" height="38" viewBox="0 0 52 38" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <line x1="10" y1="10" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
+    <line x1="42" y1="10" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
+    <line x1="10" y1="28" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
+    <line x1="42" y1="28" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
+    <circle cx="10" cy="10" r="4" fill="#15151a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
+    <circle cx="42" cy="10" r="4" fill="#15151a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
+    <circle cx="10" cy="28" r="4" fill="#15151a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
+    <circle cx="42" cy="28" r="4" fill="#15151a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
+    <ellipse id="p1" cx="10" cy="10" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
+    <ellipse id="p2" cx="42" cy="10" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
+    <ellipse id="p3" cx="10" cy="28" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
+    <ellipse id="p4" cx="42" cy="28" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
+    <rect x="21" y="15" width="10" height="8" rx="2" fill="#15151a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.7"/>
+    <circle cx="26" cy="30" r="2" fill="#15151a" stroke="#C8A97E" stroke-width="0.7" stroke-opacity="0.5"/>
+    <line x1="26" y1="23" x2="26" y2="28" stroke="#C8A97E" stroke-width="0.6" stroke-opacity="0.4"/>
+    <circle cx="26" cy="19" r="1.2" fill="#C8A97E" fill-opacity="0.9"/>
+  </svg>
+  </a>
+</div>
+
+<!-- Cookie banner -->
+<div id="cookie-banner" role="dialog" aria-label="Gestione cookie">
+  <div class="cookie-text">
+    <strong>Cookie &amp; privacy</strong>
+    Questo sito usa cookie analitici (Google Analytics) per capire come viene visitato. Sono attivati solo con il tuo consenso. Maggiori dettagli nella <a href="/privacy.html">privacy policy</a>.
+  </div>
+  <div class="cookie-actions">
+    <button class="cookie-btn decline" id="cookie-decline">Rifiuta</button>
+    <button class="cookie-btn accept" id="cookie-accept">Accetta</button>
+  </div>
+</div>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<script>
+'use strict';
+
+/* ════════════════════════════════════
+   SKY — two parallax star layers + meteors
+   ════════════════════════════════════ */
+var skyFar  = document.getElementById('sky-far');
+var skyNear = document.getElementById('sky-near');
+var ctxFar  = skyFar.getContext('2d');
+var ctxNear = skyNear.getContext('2d');
+
+var starsFar = [], starsNear = [], meteors = [];
+
+function resizeSky() {
+  skyFar.width  = skyNear.width  = window.innerWidth;
+  skyFar.height = skyNear.height = window.innerHeight;
+}
+resizeSky();
+window.addEventListener('resize', resizeSky);
+
+(function seedStars() {
+  for (var i = 0; i < 130; i++) {
+    starsFar.push({ x: Math.random(), y: Math.random() * 0.85, r: 0.35 + Math.random() * 0.6,
+                    phase: Math.random() * 6.28, speed: 0.0003 + Math.random() * 0.0006 });
+  }
+  for (var j = 0; j < 55; j++) {
+    starsNear.push({ x: Math.random(), y: Math.random() * 0.8, r: 0.7 + Math.random() * 1.0,
+                     phase: Math.random() * 6.28, speed: 0.0005 + Math.random() * 0.0009 });
+  }
+})();
+
+function spawnMeteor() {
+  var x = Math.random() * skyNear.width * 0.8;
+  var y = Math.random() * skyNear.height * 0.3;
+  var ang = Math.PI * (0.18 + Math.random() * 0.12);
+  meteors.push({ x: x, y: y, vx: Math.cos(ang) * 9, vy: Math.sin(ang) * 9, life: 1 });
+  setTimeout(spawnMeteor, 12000 + Math.random() * 23000);
+}
+setTimeout(spawnMeteor, 6000 + Math.random() * 8000);
+
+function drawLayer(ctx, cv, stars, ts) {
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  for (var i = 0; i < stars.length; i++) {
+    var s = stars[i];
+    var tw = 0.22 + 0.4 * (0.5 + 0.5 * Math.sin(ts * s.speed + s.phase));
+    ctx.beginPath();
+    ctx.arc(s.x * cv.width, s.y * cv.height, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(200,169,126,' + tw.toFixed(3) + ')';
+    ctx.fill();
+  }
+}
+
+function skyTick(ts) {
+  drawLayer(ctxFar,  skyFar,  starsFar,  ts);
+  drawLayer(ctxNear, skyNear, starsNear, ts);
+
+  for (var m = meteors.length - 1; m >= 0; m--) {
+    var mt = meteors[m];
+    mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.012;
+    if (mt.life <= 0) { meteors.splice(m, 1); continue; }
+    var grad = ctxNear.createLinearGradient(mt.x, mt.y, mt.x - mt.vx * 9, mt.y - mt.vy * 9);
+    grad.addColorStop(0, 'rgba(232,226,217,' + (0.85 * mt.life).toFixed(3) + ')');
+    grad.addColorStop(1, 'rgba(200,169,126,0)');
+    ctxNear.strokeStyle = grad;
+    ctxNear.lineWidth = 1.2;
+    ctxNear.beginPath();
+    ctxNear.moveTo(mt.x, mt.y);
+    ctxNear.lineTo(mt.x - mt.vx * 9, mt.y - mt.vy * 9);
+    ctxNear.stroke();
+  }
+  requestAnimationFrame(skyTick);
+}
+requestAnimationFrame(skyTick);
+
+/* ════════════════════════════════════
+   CONSTELLATION — cities at true coordinates
+   ════════════════════════════════════ */
+var HOME = { name: 'Como', lat: 45.81, lon: 9.09, url: 'https://www.gioriva.it/mondo/' };
+var cities = [
+  HOME,
+  { name: 'Los Angeles',  lat:  34.05, lon: -118.24, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Tokyo',        lat:  35.70, lon:  139.70, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Hong Kong',    lat:  22.32, lon:  114.17, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'New York',     lat:  40.71, lon:  -74.01, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Singapore',    lat:   1.35, lon:  103.82, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Cancun',       lat:  21.16, lon:  -86.85, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Bora Bora',    lat: -16.50, lon: -151.74, url: 'https://www.gioriva.it/mondo/' },
+  { name: 'Buenos Aires', lat: -34.61, lon:  -58.38, url: 'https://www.gioriva.it/mondo/' }
+];
+
+var constSvg = document.getElementById('const-svg');
+var constOverlay = document.getElementById('const-overlay');
+var NS = 'http://www.w3.org/2000/svg';
+
+/* Equirectangular mapping into the sky region.
+   Desktop:  lon -> x (8%..92% W), lat 70..-40 -> y (7%..46% H)
+             (lower bound keeps southern stars clear of the name block)
+   Mobile:   rotated portrait projection — lat -> x, lon -> y —
+             so cities spread along the screen height instead of crowding */
+function isMobile() { return window.innerWidth <= 768; }
+
+function skyPos(lat, lon) {
+  var W = window.innerWidth, H = window.innerHeight;
+  if (isMobile()) {
+    var x = (0.16 + (lat + 40) / 110 * 0.68) * W;   // south left -> north right
+    var y = (0.07 + (lon + 180) / 360 * 0.50) * H;  // west top -> east bottom
+    return { x: x, y: y };
+  }
+  return {
+    x: (0.08 + (lon + 180) / 360 * 0.84) * W,
+    y: (0.07 + (70 - lat) / 110 * 0.39) * H
+  };
+}
+
+var edgesG = document.createElementNS(NS, 'g');
+constSvg.appendChild(edgesG);
+var starsG = document.createElementNS(NS, 'g');
+constSvg.appendChild(starsG);
+
+var cityEls = [];   // svg elements per city
+var cityLinks = []; // html links per city
+
+cities.forEach(function (c, i) {
+  /* SVG star: core + glow ring */
+  var glow = document.createElementNS(NS, 'circle');
+  glow.setAttribute('r', i === 0 ? '9' : '7');
+  glow.setAttribute('fill', 'none');
+  glow.setAttribute('stroke', '#C8A97E');
+  glow.setAttribute('stroke-width', '0.6');
+  glow.setAttribute('opacity', '0.25');
+  starsG.appendChild(glow);
+
+  var core = document.createElementNS(NS, 'circle');
+  core.setAttribute('r', i === 0 ? '3.2' : '2.4');
+  core.setAttribute('fill', '#C8A97E');
+  starsG.appendChild(core);
+
+  /* 4-point sparkle cross */
+  var cross = document.createElementNS(NS, 'g');
+  cross.setAttribute('stroke', '#C8A97E');
+  cross.setAttribute('stroke-width', '0.5');
+  cross.setAttribute('opacity', '0.4');
+  ['h','v'].forEach(function (dir) {
+    var l = document.createElementNS(NS, 'line');
+    cross.appendChild(l);
+  });
+  starsG.appendChild(cross);
+
+  cityEls.push({ glow: glow, core: core, cross: cross, phase: Math.random() * 6.28 });
+
+  /* HTML label-link */
+  var a = document.createElement('a');
+  a.href = c.url;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  a.style.cssText = 'position:absolute;pointer-events:auto;text-decoration:none;white-space:nowrap;transform:translate(-50%,0)';
+  var lbl = document.createElement('span');
+  lbl.style.cssText = 'font-family:Montserrat,sans-serif;font-size:8.5px;font-weight:400;letter-spacing:2px;color:#C8A97E;opacity:0.6;text-transform:uppercase;transition:color .2s,opacity .2s';
+  lbl.textContent = c.name.toUpperCase();
+  a.appendChild(lbl);
+  a.addEventListener('mouseenter', function () {
+    document.body.classList.add('hov');
+    lbl.style.opacity = '1'; lbl.style.color = '#fff';
+  });
+  a.addEventListener('mouseleave', function () {
+    document.body.classList.remove('hov');
+    lbl.style.opacity = '0.6'; lbl.style.color = '#C8A97E';
+  });
+  constOverlay.appendChild(a);
+  cityLinks.push(a);
+});
+
+/* Constellation edges: Como -> each destination */
+var edgeEls = [];
+for (var e = 1; e < cities.length; e++) {
+  var line = document.createElementNS(NS, 'line');
+  line.setAttribute('stroke', 'rgba(200,169,126,0.16)');
+  line.setAttribute('stroke-width', '0.6');
+  line.setAttribute('stroke-dasharray', '2 6');
+  edgesG.appendChild(line);
+  edgeEls.push(line);
+}
+
+function layoutConstellation(ts) {
+  for (var i = 0; i < cities.length; i++) {
+    var c = cities[i];
+    var p = skyPos(c.lat, c.lon);
+    var px = p.x, py = p.y;
+    var el = cityEls[i];
+
+    /* breathing glow */
+    var breathe = 0.5 + 0.5 * Math.sin(ts * 0.0009 + el.phase);
+    var glowR = (i === 0 ? 9 : 7) + breathe * 2.5;
+    el.glow.setAttribute('cx', px); el.glow.setAttribute('cy', py);
+    el.glow.setAttribute('r', glowR.toFixed(1));
+    el.glow.setAttribute('opacity', (0.15 + breathe * 0.2).toFixed(2));
+
+    el.core.setAttribute('cx', px); el.core.setAttribute('cy', py);
+
+    var arm = (i === 0 ? 8 : 6) + breathe * 2;
+    var lines = el.cross.children;
+    lines[0].setAttribute('x1', px - arm); lines[0].setAttribute('y1', py);
+    lines[0].setAttribute('x2', px + arm); lines[0].setAttribute('y2', py);
+    lines[1].setAttribute('x1', px); lines[1].setAttribute('y1', py - arm);
+    lines[1].setAttribute('x2', px); lines[1].setAttribute('y2', py + arm);
+
+    /* label: alternate above/below to avoid collisions */
+    var a = cityLinks[i];
+    a.style.left = px + 'px';
+    if (i % 2 === 0) {
+      a.style.top = (py + 12) + 'px';
+      a.style.transform = 'translate(-50%,0)';
+    } else {
+      a.style.top = (py - 12) + 'px';
+      a.style.transform = 'translate(-50%,-100%)';
+    }
+  }
+
+  var hp = skyPos(HOME.lat, HOME.lon);
+  for (var k = 0; k < edgeEls.length; k++) {
+    var dp = skyPos(cities[k + 1].lat, cities[k + 1].lon);
+    edgeEls[k].setAttribute('x1', hp.x); edgeEls[k].setAttribute('y1', hp.y);
+    edgeEls[k].setAttribute('x2', dp.x); edgeEls[k].setAttribute('y2', dp.y);
+  }
+
+  requestAnimationFrame(layoutConstellation);
+}
+requestAnimationFrame(layoutConstellation);
+
+/* ════════════════════════════════════
+   COMO local time
+   ════════════════════════════════════ */
+(function () {
+  var el = document.getElementById('ro-time');
+  var fmt = new Intl.DateTimeFormat('it-IT', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' });
+  function update() { el.textContent = fmt.format(new Date()); }
+  update();
+  setInterval(update, 15000);
+})();
+
+/* ════════════════════════════════════
+   CUSTOM CURSOR
+   ════════════════════════════════════ */
+(function () {
+  var dot = document.getElementById('cur-dot');
+  var ring = document.getElementById('cur-ring');
+  var mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+  (function anim() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(anim);
+  })();
+  document.querySelectorAll('a, button, #drone').forEach(function (el) {
+    el.addEventListener('mouseenter', function () { document.body.classList.add('hov'); });
+    el.addEventListener('mouseleave', function () { document.body.classList.remove('hov'); });
+  });
+})();
+
+/* ════════════════════════════════════
+   COOKIE CONSENT
+   ════════════════════════════════════ */
+(function () {
+  var banner  = document.getElementById('cookie-banner');
+  var accept  = document.getElementById('cookie-accept');
+  var decline = document.getElementById('cookie-decline');
+  var reopen  = document.getElementById('cookie-reopen');
+  var KEY = 'gr_cookie_consent';
+
+  function store(val) { try { localStorage.setItem(KEY, val); } catch (e) {} }
+  function getStored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function show() { banner.classList.add('show'); }
+  function hide() { banner.classList.remove('show'); }
+
+  accept.addEventListener('click', function () {
+    store('granted');
+    if (typeof gtag === 'function') gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    hide();
+  });
+  decline.addEventListener('click', function () {
+    store('denied');
+    if (typeof gtag === 'function') gtag('consent', 'update', { 'analytics_storage': 'denied' });
+    hide();
+  });
+  reopen.addEventListener('click', function (e) { e.preventDefault(); show(); });
+
+  if (!getStored()) setTimeout(show, 1600);
+})();
+
+/* ════════════════════════════════════
+   DRONE flight
+   ════════════════════════════════════ */
+(function () {
+  var drone = document.getElementById('drone');
+  var W = window.innerWidth, H = window.innerHeight;
+  window.addEventListener('resize', function () { W = window.innerWidth; H = window.innerHeight; });
+
+  var waypoints = [
+    [0.15, 0.30], [0.32, 0.20], [0.50, 0.32], [0.68, 0.18],
+    [0.85, 0.28], [0.80, 0.48], [0.62, 0.58], [0.45, 0.50],
+    [0.28, 0.60], [0.12, 0.48]
+  ];
+
+  var idx = 0;
+  var startX = -60, startY = H * 0.3;
+  var targetX = waypoints[0][0] * W, targetY = waypoints[0][1] * H;
+  var startTime = null;
+  var segDuration = 7000;
+  var propAngle = 0;
+
+  setTimeout(function () { drone.classList.add('visible'); }, 1200);
+
+  function easeInOut(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
+
+  function anim(ts) {
+    if (!startTime) startTime = ts;
+    var t = Math.min((ts - startTime) / segDuration, 1);
+    var e = easeInOut(t);
+    var x = startX + (targetX - startX) * e;
+    var y = startY + (targetY - startY) * e;
+    var hover = Math.sin(ts * 0.0015) * 3;
+    var tilt = Math.max(-12, Math.min(12, (targetX - startX) * 0.015));
+
+    drone.style.left = (x - 26) + 'px';
+    drone.style.top  = (y - 19 + hover) + 'px';
+    drone.style.transform = 'rotate(' + tilt + 'deg)';
+
+    propAngle += 18;
+    ['p1','p2','p3','p4'].forEach(function (id, i) {
+      var el = document.getElementById(id);
+      var phase = (propAngle + i * 45) % 180;
+      el.setAttribute('transform', 'rotate(' + phase + ' ' + el.getAttribute('cx') + ' ' + el.getAttribute('cy') + ')');
+    });
+
+    if (t >= 1) {
+      startX = x; startY = y + hover;
+      idx = (idx + 1) % waypoints.length;
+      targetX = waypoints[idx][0] * W;
+      targetY = waypoints[idx][1] * H;
+      startTime = ts;
+      segDuration = 5500 + Math.random() * 4000;
+    }
+    requestAnimationFrame(anim);
+  }
+  requestAnimationFrame(anim);
+})();
+</script>
+</body>
+</html>
