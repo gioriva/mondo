@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Giorgio & Lucrezia · Il viaggio · 15 settembre – 7 ottobre 2026</title>
+
+<!-- Open Graph / anteprima social (WhatsApp, Telegram, Facebook, LinkedIn) -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Giorgio & Lucrezia · Il viaggio" />
+<meta property="og:description" content="Luna di miele tra ghiacciai e lagune. Argentina e Polinesia, 22 giorni, 8 tappe. 15 settembre – 7 ottobre 2026." />
+<meta property="og:image" content="https://www.gioriva.it/mondo/og-viaggio.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://www.gioriva.it/mondo/viaggio.html" />
+<meta property="og:locale" content="it_IT" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Giorgio & Lucrezia · Il viaggio" />
+<meta name="twitter:description" content="Luna di miele tra ghiacciai e lagune. Argentina e Polinesia, 22 giorni, 8 tappe." />
+<meta name="twitter:image" content="https://www.gioriva.it/mondo/og-viaggio.png" />
+
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1ZCCJ6QBR4');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Figtree:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ════════ TOKENS ════════ */
+  :root {
+    --bg: #070d1a;
+    --accent: #e3a04b;
+    --ink: #f2ede3;
+    --ink-dim: rgba(242,237,227,0.62);
+    --ink-faint: rgba(242,237,227,0.34);
+    --line: rgba(242,237,227,0.14);
+    --card: rgba(242,237,227,0.05);
+    --card-line: rgba(242,237,227,0.11);
+    --display: 'Prata', 'Didot', serif;
+    --body: 'Figtree', system-ui, sans-serif;
+    --mono: 'Space Mono', 'Courier New', monospace;
+    --head-h: 58px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.55;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.5s linear;
+    overflow-x: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) { body { transition: none; } }
+
+  ::selection { background: var(--accent); color: #0a0a0a; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  button { font-family: inherit; }
+
+  /* ════════ HEADER FISSO ════════ */
+  header.bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--head-h);
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px 0 22px;
+    background: color-mix(in srgb, var(--bg) 72%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    transition: background 0.5s linear;
+  }
+  .bar .brand {
+    font-family: var(--display);
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .bar .brand .amp { color: var(--accent); transition: color 0.5s linear; font-style: italic; }
+  .bar .cd-pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-dim);
+    border: 1px solid var(--card-line);
+    border-radius: 100px;
+    padding: 6px 14px;
+    white-space: nowrap;
+  }
+  .bar .cd-pill b { color: var(--accent); transition: color 0.5s linear; font-size: 13px; }
+  @media (max-width: 480px) { .bar .cd-pill span.lbl { display: none; } }
+
+  /* hamburger */
+  .burger {
+    width: 44px; height: 44px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 8px;
+  }
+  .burger span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* barra avanzamento sotto l'header */
+  .progress {
+    position: fixed;
+    top: var(--head-h);
+    left: 0; right: 0;
+    height: 2px;
+    z-index: 89;
+    background: transparent;
+    pointer-events: none;
+  }
+  .progress .fill {
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    transition: background 0.5s linear;
+  }
+
+  /* ════════ DRAWER ════════ */
+  .scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(3px);
+    z-index: 95;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .scrim.open { opacity: 1; pointer-events: auto; }
+
+  .drawer {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: min(330px, 86vw);
+    z-index: 96;
+    background: color-mix(in srgb, var(--bg) 88%, #000);
+    border-left: 1px solid var(--line);
+    transform: translateX(102%);
+    transition: transform 0.35s cubic-bezier(.3,.8,.3,1);
+    display: flex;
+    flex-direction: column;
+    padding: 22px 0;
+    overflow-y: auto;
+  }
+  .drawer.open { transform: translateX(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .drawer { transition: none; }
+    .scrim { transition: none; }
+  }
+  .drawer .d-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 22px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .drawer .d-head .t {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .drawer .d-close {
+    background: none; border: none;
+    color: var(--ink);
+    font-size: 22px;
+    cursor: pointer;
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    line-height: 1;
+  }
+  .drawer nav { padding: 10px 0; flex-grow: 1; }
+  .d-link {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-left: 2px solid transparent;
+    color: var(--ink);
+    padding: 13px 22px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .d-link:hover { background: var(--card); }
+  .d-link.active {
+    border-left-color: var(--accent);
+    background: var(--card);
+  }
+  .d-link .n {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    width: 18px;
+    flex-shrink: 0;
+  }
+  .d-link .place {
+    font-family: var(--display);
+    font-size: 17px;
+    flex-grow: 1;
+  }
+  .d-link .date {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--ink-dim);
+    white-space: nowrap;
+  }
+  .d-sep {
+    margin: 10px 22px;
+    border: none;
+    border-top: 1px solid var(--line);
+  }
+  .drawer .d-foot {
+    padding: 16px 22px 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    line-height: 1.9;
+  }
+
+  /* ════════ LAYOUT ════════ */
+  main { position: relative; z-index: 1; padding-top: var(--head-h); }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  section.chapter {
+    padding: 64px 0 56px;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: calc(var(--head-h) + 10px);
+  }
+
+  /* ════════ HERO ════════ */
+  .hero {
+    padding: 56px 0 52px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: var(--head-h);
+  }
+  .hero-aurora {
+    position: absolute; inset: -30%;
+    background:
+      radial-gradient(ellipse 55% 40% at 75% 15%, rgba(80,200,220,0.12), transparent 60%),
+      radial-gradient(ellipse 45% 35% at 18% 85%, rgba(227,160,75,0.10), transparent 60%);
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    transition: color 0.5s linear;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(34px, 6.4vw, 58px);
+    line-height: 1.1;
+    margin: 0 0 8px;
+  }
+  .hero h1 .amp { color: var(--accent); transition: color 0.5s linear; font-style: italic; }
+  .hero .dates {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: var(--ink-dim);
+    margin-bottom: 36px;
+  }
+  .countdown {
+    display: flex;
+    gap: clamp(18px, 5vw, 40px);
+    flex-wrap: wrap;
+    margin-bottom: 34px;
+  }
+  .cd-cell .num {
+    font-family: var(--display);
+    font-size: clamp(34px, 6.5vw, 56px);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    display: block;
+  }
+  .cd-cell .unit {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: block;
+    margin-top: 7px;
+  }
+  .cd-cell:first-child .num { color: var(--accent); transition: color 0.5s linear; }
+  .clocks {
+    display: flex;
+    gap: clamp(18px, 5vw, 46px);
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+  }
+  .clock .place {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .clock .time {
+    font-family: var(--mono);
+    font-size: 17px;
+    font-variant-numeric: tabular-nums;
+    margin-top: 3px;
+  }
+  .clock .time small { font-size: 10px; color: var(--ink-dim); }
+
+  /* ════════ CAPITOLI ════════ */
+  .ch-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    transition: color 0.5s linear;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .chapter h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(30px, 5.4vw, 46px);
+    line-height: 1.08;
+    margin: 0 0 10px;
+  }
+  .ch-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+    margin-bottom: 22px;
+  }
+  .ch-meta b { color: var(--ink); font-weight: 700; }
+  .ch-lede {
+    font-size: clamp(16px, 2.1vw, 19px);
+    line-height: 1.55;
+    max-width: 580px;
+    margin: 0 0 26px;
+  }
+  .ch-lede em {
+    font-style: italic;
+    font-family: var(--display);
+    color: var(--accent);
+    transition: color 0.5s linear;
+  }
+
+  .hotel {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    border: 1px solid var(--card-line);
+    background: var(--card);
+    padding: 11px 18px;
+    border-radius: 10px;
+    margin-bottom: 26px;
+  }
+  .hotel .ico { color: var(--accent); transition: color 0.5s linear; font-size: 12px; }
+  .hotel b { font-weight: 600; font-size: 14px; }
+  .hotel span { font-size: 12.5px; color: var(--ink-dim); }
+
+  .moments { display: grid; gap: 0; }
+  .moment {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 18px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .moment .when {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--ink-dim);
+    padding-top: 3px;
+  }
+  .moment .when b {
+    display: block;
+    font-size: 21px;
+    font-weight: 400;
+    font-family: var(--display);
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .moment h3 {
+    font-weight: 600;
+    font-size: 15px;
+    margin: 0 0 4px;
+  }
+  .moment p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ink-dim);
+    max-width: 540px;
+  }
+  .moment p b { color: var(--ink); font-weight: 500; }
+  .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 8.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid var(--card-line);
+    color: var(--accent);
+    transition: color 0.5s linear;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-right: 6px;
+    margin-bottom: 5px;
+  }
+  .note {
+    border-left: 2px solid var(--accent);
+    transition: border-color 0.5s linear;
+    background: var(--card);
+    padding: 13px 18px;
+    font-size: 13px;
+    color: var(--ink-dim);
+    margin-top: 22px;
+    border-radius: 0 6px 6px 0;
+  }
+  .note b { color: var(--ink); font-weight: 600; }
+
+  /* ════════ TRAVERSATA ════════ */
+  #traversata { position: relative; overflow: hidden; }
+  .stars {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 12% 24%, rgba(255,255,255,0.8) 0, transparent 100%),
+      radial-gradient(1px 1px at 28% 64%, rgba(255,255,255,0.55) 0, transparent 100%),
+      radial-gradient(1.5px 1.5px at 41% 18%, rgba(255,255,255,0.7) 0, transparent 100%),
+      radial-gradient(1px 1px at 55% 76%, rgba(255,255,255,0.5) 0, transparent 100%),
+      radial-gradient(1px 1px at 67% 34%, rgba(255,255,255,0.75) 0, transparent 100%),
+      radial-gradient(1.5px 1.5px at 79% 58%, rgba(255,255,255,0.6) 0, transparent 100%),
+      radial-gradient(1px 1px at 88% 12%, rgba(255,255,255,0.65) 0, transparent 100%),
+      radial-gradient(1px 1px at 6% 52%, rgba(255,255,255,0.55) 0, transparent 100%);
+  }
+  .legs { position: relative; padding-left: 26px; }
+  .legs::before {
+    content: '';
+    position: absolute;
+    left: 5px; top: 14px; bottom: 14px;
+    width: 1px;
+    background: repeating-linear-gradient(to bottom, var(--ink-faint) 0 4px, transparent 4px 10px);
+  }
+  .leg { position: relative; padding: 12px 0; }
+  .leg::before {
+    content: '';
+    position: absolute;
+    left: -25px; top: 19px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1.5px solid var(--accent);
+    transition: border-color 0.5s linear, background 0.5s linear;
+  }
+  .leg .route {
+    font-family: var(--display);
+    font-size: clamp(17px, 3vw, 23px);
+    line-height: 1.25;
+  }
+  .leg .route .arr { color: var(--accent); transition: color 0.5s linear; }
+  .leg .det {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-dim);
+    margin-top: 3px;
+  }
+
+  /* ════════ CARTE D'IMBARCO · scorrimento orizzontale ════════ */
+  .passes-scroll {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 24px;
+    padding: 4px 24px 18px;
+    margin: 22px 0 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--card-line) transparent;
+  }
+  .passes-scroll::-webkit-scrollbar { height: 5px; }
+  .passes-scroll::-webkit-scrollbar-thumb { background: var(--card-line); border-radius: 3px; }
+  .pass {
+    flex: 0 0 290px;
+    scroll-snap-align: start;
+    background: var(--card);
+    border: 1px solid var(--card-line);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  .pass-top {
+    padding: 13px 18px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .pass-top .carrier {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .pass-top .fn {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent);
+    transition: color 0.5s linear;
+  }
+  .pass-mid {
+    padding: 0 18px 13px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 6px;
+  }
+  .pass-mid .apt { font-family: var(--display); font-size: 25px; line-height: 1; }
+  .pass-mid .apt:last-child { text-align: right; }
+  .pass-mid .apt small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 5px;
+  }
+  .pass-mid .plane { color: var(--ink-faint); font-size: 12px; text-align: center; }
+  .pass-cut {
+    position: relative;
+    border-top: 1.5px dashed var(--card-line);
+    margin: 0 12px;
+  }
+  .pass-cut::before, .pass-cut::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--bg);
+    transition: background 0.5s linear;
+  }
+  .pass-cut::before { left: -20px; }
+  .pass-cut::after  { right: -20px; }
+  .pass-bot {
+    padding: 11px 18px 13px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-dim);
+  }
+  .pass-bot b { color: var(--ink); font-weight: 700; }
+
+  .swipe-hint {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 4px;
+  }
+
+  .pnr {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--card-line);
+    background: var(--card);
+    padding: 10px 18px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+  }
+  .pnr b { font-size: 16px; letter-spacing: 0.26em; color: var(--accent); transition: color 0.5s linear; }
+
+  /* ════════ FISARMONICHE ════════ */
+  details.acc { border-top: 1px solid var(--line); }
+  details.acc:last-of-type { border-bottom: 1px solid var(--line); }
+  details.acc summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--display);
+    font-size: clamp(16px, 2.4vw, 20px);
+  }
+  details.acc summary::-webkit-details-marker { display: none; }
+  details.acc summary .plus {
+    font-family: var(--mono);
+    font-size: 17px;
+    color: var(--accent);
+    transition: transform 0.3s, color 0.5s linear;
+  }
+  details.acc[open] summary .plus { transform: rotate(45deg); }
+  details.acc .acc-body {
+    padding: 0 4px 22px;
+    color: var(--ink-dim);
+    font-size: 13.5px;
+    max-width: 600px;
+  }
+  details.acc .acc-body b { color: var(--ink); font-weight: 600; }
+  details.acc .acc-body ul { margin: 0; padding: 0; list-style: none; }
+  details.acc .acc-body li {
+    padding: 7px 0 7px 18px;
+    position: relative;
+    border-top: 1px dashed var(--line);
+  }
+  details.acc .acc-body li:first-child { border-top: none; }
+  details.acc .acc-body li::before {
+    content: '·';
+    position: absolute;
+    left: 2px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ════════ FINALE ════════ */
+  .finale {
+    padding: 70px 0 80px;
+    text-align: center;
+    border-bottom: none;
+  }
+  .finale .big {
+    font-family: var(--display);
+    font-size: clamp(26px, 4.6vw, 42px);
+    line-height: 1.2;
+    margin: 0 0 22px;
+  }
+  .finale .big em { font-style: italic; color: var(--accent); transition: color 0.5s linear; }
+  .finale .mini-cd {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--ink-dim);
+  }
+  .finale .mini-cd b { color: var(--accent); transition: color 0.5s linear; font-size: 16px; }
+  .finale .sig {
+    margin-top: 36px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    line-height: 2.1;
+  }
+
+  @media (max-width: 560px) {
+    .moment { grid-template-columns: 1fr; gap: 5px; }
+    .moment .when { display: flex; align-items: baseline; gap: 8px; }
+    .moment .when b { font-size: 17px; margin: 0; }
+    section.chapter { padding: 48px 0 42px; }
+    .hero { padding: 42px 0 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="bar">
+  <div class="brand">G <span class="amp">&amp;</span> L · Il viaggio</div>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <div class="cd-pill"><b id="cd-pill-d">–</b> <span class="lbl">giorni alla partenza</span><span style="display:none;">g</span></div>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Apri il menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="progress" aria-hidden="true"><div class="fill" id="progfill"></div></div>
+
+<!-- ═══ DRAWER ═══ -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Indice del viaggio">
+  <div class="d-head">
+    <span class="t">Indice del viaggio</span>
+    <button class="d-close" id="dclose" aria-label="Chiudi il menu">×</button>
+  </div>
+  <nav>
+    <button class="d-link" data-target="hero"><span class="n">·</span><span class="place">Partenza</span><span class="date">conto alla rovescia</span></button>
+    <button class="d-link" data-target="ba"><span class="n">I</span><span class="place">Buenos Aires</span><span class="date">15–18 set</span></button>
+    <button class="d-link" data-target="calafate"><span class="n">II</span><span class="place">El Calafate</span><span class="date">18–22 set</span></button>
+    <button class="d-link" data-target="ushuaia"><span class="n">III</span><span class="place">Ushuaia</span><span class="date">22–24 set</span></button>
+    <button class="d-link" data-target="traversata"><span class="n">·</span><span class="place">La traversata</span><span class="date">25–27 set</span></button>
+    <button class="d-link" data-target="tahaa"><span class="n">IV</span><span class="place">Taha'a</span><span class="date">27 set–1 ott</span></button>
+    <button class="d-link" data-target="borabora"><span class="n">V</span><span class="place">Bora Bora</span><span class="date">1–5 ott</span></button>
+    <hr class="d-sep">
+    <button class="d-link" data-target="voli"><span class="n">✈</span><span class="place">I voli</span><span class="date">14 tratte</span></button>
+    <button class="d-link" data-target="info"><span class="n">✓</span><span class="place">Documenti e info</span><span class="date"></span></button>
+  </nav>
+  <div class="d-foot">
+    Pratica 26/POL/C7983<br>
+    Viaggi Ronchi · Como
+  </div>
+</aside>
+
+<main>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero" data-bg="#070d1a" data-accent="#e3a04b">
+  <div class="hero-aurora" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="eyebrow">Luna di miele · 15 set → 7 ott 2026</div>
+    <h1>Giorgio <span class="amp">&amp;</span> Lucrezia</h1>
+    <div class="dates">ARGENTINA + POLINESIA · 22 GIORNI · 8 TAPPE</div>
+
+    <div class="countdown" aria-label="Conto alla rovescia alla partenza">
+      <div class="cd-cell"><span class="num" id="cd-d">–</span><span class="unit">giorni</span></div>
+      <div class="cd-cell"><span class="num" id="cd-h">–</span><span class="unit">ore</span></div>
+      <div class="cd-cell"><span class="num" id="cd-m">–</span><span class="unit">minuti</span></div>
+      <div class="cd-cell"><span class="num" id="cd-s">–</span><span class="unit">secondi</span></div>
+    </div>
+
+    <div class="clocks">
+      <div class="clock"><div class="place">Como</div><div class="time" id="clk-como">–:–</div></div>
+      <div class="clock"><div class="place">Buenos Aires</div><div class="time" id="clk-ba">–:–</div></div>
+      <div class="clock"><div class="place">Papeete</div><div class="time" id="clk-ppt">–:–</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CAP I ═══ -->
+<section class="chapter" id="ba" data-bg="#231507" data-accent="#e3a04b">
+  <div class="wrap">
+    <span class="ch-num">Capitolo I · Argentina</span>
+    <h2>Buenos Aires</h2>
+    <div class="ch-meta"><span><b>15 → 18 set</b> · 3 notti</span><span>poi <b>24 → 25 set</b> · 1 notte di transito</span></div>
+    <p class="ch-lede">La città dove l'Europa si specchia nel Sudamerica. Si parte da qui: <em>tango, avenidas, oro al tramonto.</em></p>
+
+    <div class="hotel"><span class="ico">⌂</span><b>725 Continental ★★★★S</b><span>palazzo anni '30 di Bustillo, a 200 m da Plaza de Mayo</span></div>
+
+    <div class="moments">
+      <div class="moment">
+        <div class="when"><b>15</b>set · mar</div>
+        <div>
+          <h3>Arrivo a Ezeiza</h3>
+          <p><span class="badge">volo</span><span class="badge">privato</span>Linate 06:25, scalo a Parigi, atterraggio alle 18:50. Guida in italiano e trasferimento in hotel.</p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="when"><b>16</b>set · mer</div>
+        <div>
+          <h3>La città in mezza giornata</h3>
+          <p><span class="badge">guida IT</span>Plaza de Mayo e Casa Rosada, il Caminito de La Boca, San Telmo, il cimitero della Recoleta dove riposa Evita, chiusura a Palermo.</p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="when"><b>17</b>set · gio</div>
+        <div>
+          <h3>Giornata vostra</h3>
+          <p><span class="badge">libera</span>Nessun programma. Una milonga la sera, una parrilla, o niente di tutto questo.</p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="when"><b>18</b>set · ven</div>
+        <div>
+          <h3>Verso sud</h3>
+          <p><span class="badge">volo</span>AR1840 alle 09:35 da Aeroparque. Tre ore dopo, la Patagonia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CAP II ═══ -->
+<section class="chapter" id="calafate" data-bg="#0a2531" data-accent="#9fdcef">
+  <div class="wrap">
+    <span class="ch-num">Capitolo II · Patagonia</span>
+    <h2>El Calafate</h2>
+    <div class="ch-meta"><span><b>18 → 22 set</b> · 4 notti</span></div>
+    <p class="ch-lede">Il Lago Argentino, 356 ghiacciai, e il rumore che fa <em>il ghiaccio quando crolla.</em></p>
+
+    <div class="hotel"><span class="ico">⌂</span><b>Kosten Aike</b><span>"luogo del vento": legno chiaro e tetti verdi sulle rive del lago</span></div>
+
+    <div class="moments">
+      <div class="moment">
+        <div class="when"><b>19</b>set · sab</div>
+        <div>
+          <h3>Perito Moreno</h3>
+          <p><span class="badge">guida IT</span>Un fronte di ghiaccio di 5 km che scivola nel lago. Dal belvedere si aspetta il distacco: prima il silenzio, poi il boato.</p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="when"><b>20</b>set · dom</div>
+        <div>
+          <h3>Navigazione Todo Glaciares</h3>
+          <p><span class="badge">guida ES/EN</span>In motonave tra gli iceberg del Canale Upsala, fino ai fronti dei ghiacciai Spegazzini, Heim Sur e Peineta.</p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="when"><b>21</b>set · lun</div>
+        <div>
+          <h3>Estancia Cristina</h3>
+          <p><span class="badge">privata</span><span class="badge">pranzo</span>Giornata intera: navigazione, camminata nella valle tra foreste di ñire, il museo dei pionieri, asado argentino a pranzo.</p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="when"><b>22</b>set · mar</div>
+        <div>
+          <h3>Ancora più a sud</h3>
+          <p><span class="badge">volo</span>AR1894 alle 14:30. Destinazione: la fine del mondo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CAP III ═══ -->
+<section class="chapter" id="ushuaia" data-bg="#0a1428" data-accent="#8fb4e8">
+  <div class="wrap">
+    <span class="ch-num">Capitolo III · Tierra del Fuego</span>
+    <h2>Ushuaia</h2>
+    <div class="ch-meta"><span><b>22 → 24 set</b> · 2 notti</span></div>
+    <p class="ch-lede">La città più australe del pianeta. Oltre il Canale di Beagle <em>c'è solo l'Antartide.</em></p>
+
+    <div class="hotel"><span class="ico">⌂</span><b>Los Acebos</b><span>camera doppia con vista sul Canale di Beagle</span></div>
+
+    <div class="moments">
+      <div class="moment">
+        <div class="when"><b>23</b>set · mer</div>
+        <div>
+          <h3>Tierra del Fuego e il faro della fine del mondo</h3>
+          <p><span class="badge">guida IT</span>Mattina nel Parco Nazionale. Poi in catamarano sul Beagle: i leoni marini dell'Isla de los Lobos e il faro Les Eclaireurs.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note"><b>Da sapere:</b> i pinguini dell'Isla Martillo arrivano da ottobre. A settembre vedrete leoni marini e uccelli marini, niente pinguini.</div>
+  </div>
+</section>
+
+<!-- ═══ TRAVERSATA ═══ -->
+<section class="chapter" id="traversata" data-bg="#04060f" data-accent="#c9b8ff">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="ch-num">Interludio · 25 → 27 settembre</span>
+    <h2>La traversata</h2>
+    <div class="ch-meta"><span><b>4 voli</b> · 3 continenti · 13 fusi orari</span></div>
+    <p class="ch-lede">Trentasei ore sopra l'oceano, inseguendo il sole verso ovest. Si parte venerdì sera da Buenos Aires, <em>si atterra in paradiso sabato notte.</em></p>
+
+    <div class="legs">
+      <div class="leg">
+        <div class="route">Buenos Aires <span class="arr">→</span> Lima</div>
+        <div class="det">LA 2381 · ven 25 set · 17:35 → 20:20</div>
+      </div>
+      <div class="leg">
+        <div class="route">Lima <span class="arr">→</span> Los Angeles</div>
+        <div class="det">LA 2478 · sab 26 set · 00:50 → 07:50 · notturno</div>
+      </div>
+      <div class="leg">
+        <div class="route">Los Angeles <span class="arr">→</span> Papeete</div>
+        <div class="det">TN 0007 · sab 26 set · 16:40 → 21:50</div>
+      </div>
+      <div class="leg">
+        <div class="route">Papeete <span class="arr">→</span> Raiatea</div>
+        <div class="det">VT 0311 · dom 27 set · 10:35 → 11:20 · poi barca al resort</div>
+      </div>
+    </div>
+
+    <div class="note"><b>Scalo a Los Angeles:</b> serve l'ESTA anche per il transito. Le valigie vanno ritirate e reimbarcate. La notte del 26 si dorme al Kon Tiki Tahiti, con monoï e perla nera di benvenuto.</div>
+  </div>
+</section>
+
+<!-- ═══ CAP IV ═══ -->
+<section class="chapter" id="tahaa" data-bg="#05333a" data-accent="#45e0c8">
+  <div class="wrap">
+    <span class="ch-num">Capitolo IV · Isole della Società</span>
+    <h2>Taha'a</h2>
+    <div class="ch-meta"><span><b>27 set → 1 ott</b> · 4 notti</span></div>
+    <p class="ch-lede">Un isolotto di sabbia bianca sulla barriera corallina, una suite sospesa sull'acqua, <em>e nient'altro da fare.</em></p>
+
+    <div class="hotel"><span class="ico">⌂</span><b>Le Taha'a by Pearl Resorts</b><span>Relais &amp; Châteaux · Overwater Suite sul Motu Tautau</span></div>
+
+    <div class="moments">
+      <div class="moment">
+        <div class="when"><b>27</b>set · dom</div>
+        <div>
+          <h3>Check-in in barca</h3>
+          <p>Trenta minuti di laguna da Raiatea al motu. Champagne e letto fiorito per gli sposi: tenete a portata il certificato di matrimonio.</p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="when"><b>28–30</b>set</div>
+        <div>
+          <h3>Tre giorni sospesi</h3>
+          <p><span class="badge">libere</span>La barriera corallina è sotto la suite. Snorkeling, la vaniglia di Taha'a, il resto è silenzio.</p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="when"><b>1</b>ott · gio</div>
+        <div>
+          <h3>Venti minuti di volo</h3>
+          <p><span class="badge">volo</span>VT4804 alle 17:25. Atterraggio a Bora Bora al tramonto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CAP V ═══ -->
+<section class="chapter" id="borabora" data-bg="#03293d" data-accent="#4fd4ff">
+  <div class="wrap">
+    <span class="ch-num">Capitolo V · Isole della Società</span>
+    <h2>Bora Bora</h2>
+    <div class="ch-meta"><span><b>1 → 5 ott</b> · 4 notti</span></div>
+    <p class="ch-lede">Il bungalow sulla laguna guarda dritto il monte Otemanu. <em>L'ultima cartolina prima di casa.</em></p>
+
+    <div class="hotel"><span class="ico">⌂</span><b>Le Bora Bora by Pearl Resorts</b><span>Relais &amp; Châteaux · Lagoon Bungalow sul Motu Tevairoa</span></div>
+
+    <div class="moments">
+      <div class="moment">
+        <div class="when"><b>2–4</b>ott</div>
+        <div>
+          <h3>Gli ultimi giorni di laguna</h3>
+          <p><span class="badge">libere</span>Champagne di benvenuto, minibar rifornito ogni giorno. La laguna più fotografata del mondo, tutta per voi.</p>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="when"><b>5</b>ott · lun</div>
+        <div>
+          <h3>Si torna inseguendo il sole</h3>
+          <p><span class="badge">volo</span>VT0227 alle 15:40 per Papeete, poi il notturno per Los Angeles. Parigi il 7 mattina, Linate alle 13:55.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note"><b>Bagagli Air Tahiti:</b> 23 kg in stiva e 5 kg a mano, controlli rigidi e supplementi cari. Conviene estendere la franchigia per uno dei due o usare il deposito bagagli di Papeete.</div>
+  </div>
+</section>
+
+<!-- ═══ VOLI ═══ -->
+<section class="chapter" id="voli" data-bg="#0a0f18" data-accent="#e3a04b">
+  <div class="wrap">
+    <span class="ch-num">Appendice · operativo</span>
+    <h2>I voli</h2>
+    <div class="ch-meta"><span><b>14 tratte</b> su un unico codice</span></div>
+    <div class="pnr">PNR <b>GDJX5S</b></div>
+  </div>
+
+  <div class="passes-scroll" tabindex="0" aria-label="Carte d'imbarco, scorri orizzontalmente">
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Air France</span><span class="fn">AF 1733</span></div>
+      <div class="pass-mid"><div class="apt">LIN<small>Milano</small></div><div class="plane">✈</div><div class="apt">CDG<small>Parigi</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>15 SET</b></span><span>06:25 → 08:05</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Air France</span><span class="fn">AF 0556</span></div>
+      <div class="pass-mid"><div class="apt">CDG<small>Parigi</small></div><div class="plane">✈</div><div class="apt">EZE<small>Buenos Aires</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>15 SET</b></span><span>10:10 → 18:50</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Aerolíneas Arg.</span><span class="fn">AR 1840</span></div>
+      <div class="pass-mid"><div class="apt">AEP<small>Buenos Aires</small></div><div class="plane">✈</div><div class="apt">FTE<small>El Calafate</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>18 SET</b></span><span>09:35 → 12:55</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Aerolíneas Arg.</span><span class="fn">AR 1894</span></div>
+      <div class="pass-mid"><div class="apt">FTE<small>El Calafate</small></div><div class="plane">✈</div><div class="apt">USH<small>Ushuaia</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>22 SET</b></span><span>14:30 → 15:50</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Aerolíneas Arg.</span><span class="fn">AR 1877</span></div>
+      <div class="pass-mid"><div class="apt">USH<small>Ushuaia</small></div><div class="plane">✈</div><div class="apt">AEP<small>Buenos Aires</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>24 SET</b></span><span>13:20 → 16:50</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">LATAM</span><span class="fn">LA 2381</span></div>
+      <div class="pass-mid"><div class="apt">AEP<small>Buenos Aires</small></div><div class="plane">✈</div><div class="apt">LIM<small>Lima</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>25 SET</b></span><span>17:35 → 20:20</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">LATAM</span><span class="fn">LA 2478</span></div>
+      <div class="pass-mid"><div class="apt">LIM<small>Lima</small></div><div class="plane">✈</div><div class="apt">LAX<small>Los Angeles</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>26 SET</b></span><span>00:50 → 07:50</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Air Tahiti Nui</span><span class="fn">TN 0007</span></div>
+      <div class="pass-mid"><div class="apt">LAX<small>Los Angeles</small></div><div class="plane">✈</div><div class="apt">PPT<small>Papeete</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>26 SET</b></span><span>16:40 → 21:50</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Air Tahiti · 23 kg</span><span class="fn">VT 0311</span></div>
+      <div class="pass-mid"><div class="apt">PPT<small>Papeete</small></div><div class="plane">✈</div><div class="apt">RFP<small>Raiatea</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>27 SET</b></span><span>10:35 → 11:20</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Air Tahiti · 23 kg</span><span class="fn">VT 4804</span></div>
+      <div class="pass-mid"><div class="apt">RFP<small>Raiatea</small></div><div class="plane">✈</div><div class="apt">BOB<small>Bora Bora</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>1 OTT</b></span><span>17:25 → 17:45</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Air Tahiti · 23 kg</span><span class="fn">VT 0227</span></div>
+      <div class="pass-mid"><div class="apt">BOB<small>Bora Bora</small></div><div class="plane">✈</div><div class="apt">PPT<small>Papeete</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>5 OTT</b></span><span>15:40 → 16:30</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Air Tahiti Nui</span><span class="fn">TN 0002</span></div>
+      <div class="pass-mid"><div class="apt">PPT<small>Papeete</small></div><div class="plane">✈</div><div class="apt">LAX<small>Los Angeles</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>5 OTT</b></span><span>22:30 → 09:20+1</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Air France</span><span class="fn">AF 0023</span></div>
+      <div class="pass-mid"><div class="apt">LAX<small>Los Angeles</small></div><div class="plane">✈</div><div class="apt">CDG<small>Parigi</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>6 OTT</b></span><span>15:15 → 11:10+1</span></div>
+    </div>
+    <div class="pass">
+      <div class="pass-top"><span class="carrier">Air France</span><span class="fn">AF 1012</span></div>
+      <div class="pass-mid"><div class="apt">CDG<small>Parigi</small></div><div class="plane">✈</div><div class="apt">LIN<small>Milano</small></div></div>
+      <div class="pass-cut"></div>
+      <div class="pass-bot"><span><b>7 OTT</b></span><span>12:20 → 13:55</span></div>
+    </div>
+  </div>
+  <div class="wrap"><div class="swipe-hint">← scorri le carte →</div></div>
+</section>
+
+<!-- ═══ DOCUMENTI E INFO ═══ -->
+<section class="chapter" id="info" data-bg="#0a0f18" data-accent="#e3a04b">
+  <div class="wrap">
+    <span class="ch-num">Appendice · pratico</span>
+    <h2>Documenti e info</h2>
+
+    <div style="margin-top: 22px;">
+      <details class="acc">
+        <summary>Documenti da preparare <span class="plus">+</span></summary>
+        <div class="acc-body">
+          <ul>
+            <li><b>Passaporto:</b> validità residua di almeno 6 mesi, almeno 4 pagine libere, integro in ogni sua parte</li>
+            <li><b>ESTA</b> per il transito a Los Angeles, da richiedere prima della partenza su esta.cbp.dhs.gov</li>
+            <li><b>Certificato di matrimonio</b> (validità max 12 mesi) per i benefit sposi nei tre resort polinesiani</li>
+            <li><b>Assicurazione medica e bagaglio</b> stampata: in Argentina va mostrata all'Immigrazione insieme a biglietto di uscita e prenotazioni</li>
+            <li><b>Formulario doganale</b> argentino: si compila all'arrivo e si restituisce all'uscita</li>
+            <li><b>Carta di credito</b> per le cauzioni al check-in di ogni hotel</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Bagagli e franchigie <span class="plus">+</span></summary>
+        <div class="acc-body">
+          <ul>
+            <li><b>Aerolíneas Argentinas:</b> solo 15 kg in stiva, eccedenze da pagare al banco</li>
+            <li><b>Air Tahiti:</b> 23 kg in stiva (max 25 kg a collo), 5 kg a mano max 55×35×25 cm, controlli severi</li>
+            <li>A Los Angeles le valigie vanno <b>ritirate e reimbarcate</b></li>
+            <li>Per i voli verso gli USA presentarsi con <b>3h30' di anticipo</b> (pre-screening TSA)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Avvertenze <span class="plus">+</span></summary>
+        <div class="acc-body">
+          <ul>
+            <li><b>Scadenza tariffe:</b> Le Taha'a e Le Bora Bora vanno prenotati entro il 30 aprile 2026; il preventivo è comunque soggetto a riconferma</li>
+            <li><b>Tasse di soggiorno</b> a Buenos Aires (0,50–1,50 USD a notte) e possibili resort fee in Polinesia, da pagare in loco</li>
+            <li><b>Orari Air Tahiti</b> modificabili fino al giorno della partenza; i biglietti elettronici si ritirano all'arrivo a Papeete</li>
+            <li><b>Trasferimento in barca a Le Taha'a</b> operativo solo 07:30–17:30 in arrivo e 09:00–18:30 in partenza (i vostri voli sono compatibili)</li>
+            <li><b>Febbre gialla:</b> vaccinazione raccomandata, non obbligatoria, per chi transita da aree a rischio; verificare per tempo</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>I regali per gli sposi <span class="plus">+</span></summary>
+        <div class="acc-body">
+          <ul>
+            <li><b>Kon Tiki Tahiti:</b> monoï e perla nera di benvenuto, Welcome Flower e assistenza in aeroporto</li>
+            <li><b>Le Taha'a:</b> bottiglia di Champagne e letto decorato di fiori, minibar rifornito ogni giorno</li>
+            <li><b>Le Bora Bora:</b> bottiglia di Champagne, minibar rifornito ogni giorno</li>
+            <li>Tutti i benefit valgono una sola volta per soggiorno, presentando il certificato di matrimonio al check-in</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINALE ═══ -->
+<section class="chapter finale" id="finale" data-bg="#070d1a" data-accent="#e3a04b">
+  <div class="wrap">
+    <p class="big">Ventidue giorni, otto tappe,<br><em>un solo viaggio.</em></p>
+    <p class="mini-cd">Mancano <b id="cd-mini">–</b> giorni alla partenza.</p>
+    <div class="sig">
+      Viaggi Ronchi · Como · con Marcelletti<br>
+      org. tecnica Idee per Viaggiare S.r.l. · Fondo Astoi<br>
+      Giorgio &amp; Lucrezia · 12 settembre 2026
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── COUNTDOWN ── */
+  var DEP = new Date('2026-09-15T06:25:00+02:00').getTime();
+  var elD = document.getElementById('cd-d'),
+      elH = document.getElementById('cd-h'),
+      elM = document.getElementById('cd-m'),
+      elS = document.getElementById('cd-s'),
+      elMini = document.getElementById('cd-mini'),
+      elPill = document.getElementById('cd-pill-d');
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function tick() {
+    var diff = Math.max(0, DEP - Date.now());
+    var d = Math.floor(diff / 86400000),
+        h = Math.floor(diff / 3600000) % 24,
+        m = Math.floor(diff / 60000) % 60,
+        s = Math.floor(diff / 1000) % 60;
+    elD.textContent = d;
+    elH.textContent = pad(h);
+    elM.textContent = pad(m);
+    elS.textContent = pad(s);
+    if (elMini) elMini.textContent = d;
+    if (elPill) elPill.textContent = d;
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ── OROLOGI ── */
+  function fmtClock(tz) {
+    try {
+      return new Intl.DateTimeFormat('it-IT', {
+        timeZone: tz, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      }).format(new Date());
+    } catch (e) { return '–:–'; }
+  }
+  var clkComo = document.getElementById('clk-como'),
+      clkBA = document.getElementById('clk-ba'),
+      clkPPT = document.getElementById('clk-ppt');
+  function clocks() {
+    clkComo.textContent = fmtClock('Europe/Rome');
+    clkBA.innerHTML  = fmtClock('America/Argentina/Buenos_Aires') + ' <small>−5h</small>';
+    clkPPT.innerHTML = fmtClock('Pacific/Tahiti') + ' <small>−12h</small>';
+  }
+  clocks();
+  setInterval(clocks, 1000);
+
+  /* ── DRAWER ── */
+  var burger = document.getElementById('burger'),
+      drawer = document.getElementById('drawer'),
+      scrim = document.getElementById('scrim'),
+      dclose = document.getElementById('dclose');
+
+  function setDrawer(open) {
+    drawer.classList.toggle('open', open);
+    scrim.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function () {
+    setDrawer(!drawer.classList.contains('open'));
+  });
+  dclose.addEventListener('click', function () { setDrawer(false); });
+  scrim.addEventListener('click', function () { setDrawer(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && drawer.classList.contains('open')) setDrawer(false);
+  });
+
+  var dlinks = Array.prototype.slice.call(document.querySelectorAll('.d-link'));
+  dlinks.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.target);
+      setDrawer(false);
+      if (target) {
+        setTimeout(function () {
+          target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+        }, 80);
+      }
+    });
+  });
+
+  /* ── TAVOLOZZA CHE VIAGGIA ── */
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section[data-bg]'));
+  var root = document.documentElement;
+  function hexToRgb(hex) {
+    var m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return m ? [parseInt(m[1],16), parseInt(m[2],16), parseInt(m[3],16)] : [7,13,26];
+  }
+  function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+  function mix(c1, c2, t) {
+    return 'rgb(' + lerp(c1[0],c2[0],t) + ',' + lerp(c1[1],c2[1],t) + ',' + lerp(c1[2],c2[2],t) + ')';
+  }
+  var palette = sections.map(function (s) {
+    return { el: s, bg: hexToRgb(s.dataset.bg), ac: hexToRgb(s.dataset.accent) };
+  });
+
+  var progfill = document.getElementById('progfill');
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      var vh = window.innerHeight;
+      var probe = window.scrollY + vh * 0.45;
+
+      var cur = palette[0], nxt = palette[0], t = 0;
+      for (var i = 0; i < palette.length; i++) {
+        var mid = palette[i].el.offsetTop + palette[i].el.offsetHeight * 0.5;
+        if (probe >= mid) { cur = palette[i]; nxt = palette[Math.min(i + 1, palette.length - 1)]; }
+      }
+      if (cur !== nxt) {
+        var a = cur.el.offsetTop + cur.el.offsetHeight * 0.5;
+        var b = nxt.el.offsetTop + nxt.el.offsetHeight * 0.5;
+        t = Math.min(1, Math.max(0, (probe - a) / (b - a)));
+      }
+      root.style.setProperty('--bg', mix(cur.bg, nxt.bg, t));
+      root.style.setProperty('--accent', mix(cur.ac, nxt.ac, t));
+
+      var total = document.documentElement.scrollHeight - vh;
+      if (progfill) progfill.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ── LINK ATTIVO NEL DRAWER ── */
+  if ('IntersectionObserver' in window) {
+    var ids = ['hero','ba','calafate','ushuaia','traversata','tahaa','borabora','voli','info'];
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          dlinks.forEach(function (b) {
+            b.classList.toggle('active', b.dataset.target === e.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-30% 0px -55% 0px' });
+    ids.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+})();
+</script>
+</body>
+</html>
