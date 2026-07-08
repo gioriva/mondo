@@ -554,6 +554,102 @@
       .day, .plan-card { opacity: 1; transform: none; }
     }
 
+
+    /* ── Menu giorni (dropdown) ── */
+    .day, .plan-card { scroll-margin-top: 86px; }
+
+    .dropdown { position: relative; }
+    .drop-btn {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240,232,216,0.85);
+      padding: 0.5rem 1.15rem;
+      border: 1px solid rgba(240,232,216,0.25);
+      border-radius: 2rem;
+      background: rgba(15,12,13,0.35);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .drop-btn:hover { color: var(--kin); border-color: rgba(217,164,65,0.65); }
+    .drop-btn .arrow { font-size: 0.5rem; transition: transform 0.25s ease; }
+    .dropdown.open .drop-btn { color: var(--kin); border-color: rgba(217,164,65,0.65); }
+    .dropdown.open .drop-btn .arrow { transform: rotate(180deg); }
+
+    .drop-panel {
+      position: absolute;
+      top: calc(100% + 0.65rem);
+      right: 0;
+      width: 320px;
+      max-height: min(62vh, 440px);
+      overflow-y: auto;
+      background: rgba(20,15,17,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--line);
+      border-radius: 0.9rem;
+      padding: 0.5rem;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .dropdown.open .drop-panel { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    .drop-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0.7rem;
+      border-radius: 0.6rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .drop-item:hover { background: rgba(240,232,216,0.07); }
+    .drop-item .di-dot {
+      flex-shrink: 0;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      margin-top: 0.3rem;
+      background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
+      box-shadow: 0 0 7px rgba(217,58,53,0.4);
+    }
+    .drop-item.future .di-dot {
+      background: transparent;
+      border: 2px solid rgba(143,134,124,0.55);
+      box-shadow: none;
+    }
+    .drop-item .di-text { display: flex; flex-direction: column; gap: 0.18rem; min-width: 0; }
+    .drop-item .di-meta {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--kin);
+    }
+    .drop-item .di-title {
+      font-family: var(--display);
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: var(--washi);
+      line-height: 1.28;
+    }
+    .drop-item.future .di-title { color: rgba(240,232,216,0.5); }
+
+    @media (max-width: 560px) {
+      .drop-panel {
+        position: fixed;
+        left: 1rem; right: 1rem;
+        top: 62px;
+        width: auto;
+      }
+    }
+
     @media (max-width: 640px) {
       body { font-size: 1rem; }
       .kanji-side-left { display: none; }
@@ -571,6 +667,10 @@
     <div class="nav-links">
       <a href="#diario" class="active">Diario</a>
       <a href="programma.html">Programma</a>
+      <div class="dropdown" id="daysDropdown">
+        <button class="drop-btn" id="daysBtn" aria-haspopup="menu" aria-expanded="false">Giorni <span class="arrow" aria-hidden="true">▼</span></button>
+        <div class="drop-panel" id="daysPanel" role="menu" aria-label="Vai al giorno"></div>
+      </div>
     </div>
   </nav>
 
@@ -716,6 +816,40 @@
   </footer>
 
   <script>
+
+    // ── Menu giorni: apertura/chiusura ──
+    const daysDropdown = document.getElementById('daysDropdown');
+    const daysBtn = document.getElementById('daysBtn');
+    const daysPanel = document.getElementById('daysPanel');
+    daysBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = daysDropdown.classList.toggle('open');
+      daysBtn.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', (e) => {
+      if (!daysDropdown.contains(e.target)) daysDropdown.classList.remove('open');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') daysDropdown.classList.remove('open');
+    });
+    function addDropItem(href, meta, title, future) {
+      const a = document.createElement('a');
+      a.className = 'drop-item' + (future ? ' future' : '');
+      a.href = href;
+      a.setAttribute('role', 'menuitem');
+      a.innerHTML = '<span class="di-dot" aria-hidden="true"></span><span class="di-text"><span class="di-meta">' + meta + '</span><span class="di-title">' + title + '</span></span>';
+      a.addEventListener('click', () => daysDropdown.classList.remove('open'));
+      daysPanel.appendChild(a);
+    }
+
+    // Voci generate automaticamente dagli articoli del diario
+    document.querySelectorAll('.diary .day').forEach((d, i) => {
+      d.id = 'day-' + (i + 1);
+      const meta = (d.querySelector('.day-meta') || {}).textContent || '';
+      const title = (d.querySelector('h3') || {}).textContent || '';
+      addDropItem('#day-' + (i + 1), meta, title, d.classList.contains('writing'));
+    });
+
     // Nav visibile dopo il hero
     const nav = document.getElementById('nav');
     const hero = document.querySelector('.hero');
