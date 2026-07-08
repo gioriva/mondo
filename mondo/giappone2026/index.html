@@ -218,15 +218,17 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.85rem clamp(1.2rem, 4vw, 3rem);
+      padding: 0.8rem clamp(1.2rem, 4vw, 3rem);
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .nav.scrolled {
       background: rgba(15,12,13,0.82);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line);
-      transform: translateY(-100%);
-      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+      border-bottom-color: var(--line);
     }
-    .nav.visible { transform: translateY(0); }
 
     .nav-brand {
       display: flex;
@@ -246,18 +248,33 @@
       flex-shrink: 0;
     }
 
-    .nav-links { display: flex; gap: clamp(1rem, 3vw, 2.2rem); }
+    .nav-links { display: flex; gap: 0.55rem; }
     .nav-links a {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.24em;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       text-decoration: none;
-      color: var(--hai);
-      transition: color 0.25s;
-      padding: 0.3rem 0;
+      color: rgba(240,232,216,0.85);
+      padding: 0.5rem 1.15rem;
+      border: 1px solid rgba(240,232,216,0.25);
+      border-radius: 2rem;
+      background: rgba(15,12,13,0.35);
+      transition: color 0.25s, border-color 0.25s, background 0.25s;
     }
-    .nav-links a:hover, .nav-links a.active { color: var(--kin); }
+    .nav-links a:hover {
+      color: var(--kin);
+      border-color: rgba(217,164,65,0.65);
+    }
+    .nav-links a.active {
+      color: #fff;
+      border-color: rgba(217,58,53,0.7);
+      background: rgba(217,58,53,0.18);
+    }
+    @media (max-width: 460px) {
+      .brand-text { display: none; }
+      .nav-links a { padding: 0.45rem 0.95rem; }
+    }
 
     /* ═══════════ SHARED ═══════════ */
     .wrap { max-width: 1060px; margin: 0 auto; padding: 0 clamp(1.2rem, 4.5vw, 3rem); }
@@ -549,10 +566,10 @@
   <nav class="nav" id="nav" aria-label="Navigazione principale">
     <a class="nav-brand" href="#top">
       <span class="dot" aria-hidden="true"></span>
-      Japan Summer
+      <span class="brand-text">Japan Summer</span>
     </a>
     <div class="nav-links">
-      <a href="#diario">Diario</a>
+      <a href="#diario" class="active">Diario</a>
       <a href="programma.html">Programma</a>
     </div>
   </nav>
@@ -688,7 +705,7 @@
     const nav = document.getElementById('nav');
     const hero = document.querySelector('.hero');
     const navObserver = new IntersectionObserver(
-      ([entry]) => nav.classList.toggle('visible', !entry.isIntersecting),
+      ([entry]) => nav.classList.toggle('scrolled', !entry.isIntersecting),
       { threshold: 0.08 }
     );
     navObserver.observe(hero);
