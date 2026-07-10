@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>御神籤 · Le benedizioni di Kiyomizu</title>
+
+  <!-- No indicizzazione -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="御神籤 · Le benedizioni di Kiyomizu" />
+  <meta property="og:description" content="Due omikuji pescati al tempio dell'acqua pura. Kyoto, 8 luglio 2026." />
+  <meta property="og:image" content="https://www.gioriva.it/mondo/giappone2026/japan-summer-og.PNG" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%23d93a35'/></svg>" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1ZCCJ6QBR4');
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --sumi: #0c090b;
+      --aka: #d93a35;
+      --aka-seal: #b3271e;
+      --kin: #d9a441;
+      --washi: #f2ecdf;
+      --washi-dim: #e6ddc9;
+      --ink: #1a1512;
+      --ink-soft: #4a423a;
+      --hai: #8f867c;
+      --line: rgba(240,232,216,0.1);
+      --display: 'Shippori Mincho', serif;
+      --body: 'Newsreader', Georgia, serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background:
+        radial-gradient(ellipse 70% 45% at 20% 8%, rgba(217,164,65,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 45% at 80% 92%, rgba(217,58,53,0.08) 0%, transparent 60%),
+        var(--sumi);
+      color: var(--washi);
+      font-family: var(--body);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    ::selection { background: var(--aka); color: #fff; }
+    :focus-visible { outline: 2px solid var(--kin); outline-offset: 3px; }
+    a { color: inherit; }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(1.2rem, 4.5vw, 3rem); }
+
+    /* ── Ritorno al diario ── */
+    .back {
+      position: fixed;
+      top: 1.1rem;
+      left: clamp(1rem, 3vw, 2rem);
+      z-index: 50;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--hai);
+      padding: 0.5rem 1.1rem;
+      border: 1px solid rgba(240,232,216,0.2);
+      border-radius: 2rem;
+      background: rgba(12,9,11,0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .back:hover { color: var(--kin); border-color: rgba(217,164,65,0.6); }
+
+    /* ── Intestazione ── */
+    .hero {
+      text-align: center;
+      padding: clamp(6.5rem, 15vw, 9.5rem) 1.5rem clamp(2.5rem, 6vw, 4rem);
+      position: relative;
+    }
+    .hero .jp-title {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 7vw, 3.6rem);
+      letter-spacing: 0.35em;
+      color: var(--aka);
+      display: block;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 40px rgba(217,58,53,0.35);
+    }
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.7rem, 4.6vw, 2.8rem);
+      color: var(--washi);
+      line-height: 1.15;
+    }
+    .hero .where {
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--kin);
+    }
+    .hero .intro {
+      max-width: 560px;
+      margin: 1.6rem auto 0;
+      color: rgba(240,232,216,0.72);
+      font-weight: 300;
+      font-size: 1.02rem;
+    }
+
+    /* ── Griglia omikuji ── */
+    .omikuji-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(2.5rem, 6vw, 4rem);
+      padding-bottom: clamp(3rem, 7vw, 5rem);
+    }
+    @media (min-width: 920px) {
+      .omikuji-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+    }
+
+    .omikuji { text-align: center; }
+
+    .who {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--hai);
+      margin-bottom: 1.4rem;
+    }
+
+    /* ── La striscia di carta ── */
+    .strip {
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(172deg, var(--washi) 0%, var(--washi-dim) 100%);
+      color: var(--ink);
+      padding: 1.6rem 1.4rem 1.2rem;
+      width: min(100%, 380px);
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.5),
+        0 24px 70px rgba(0,0,0,0.55),
+        0 0 90px rgba(217,164,65,0.1);
+      opacity: 0;
+      transform: translateY(26px) rotate(0.6deg);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .strip.revealed { opacity: 1; transform: translateY(0) rotate(0deg); }
+    .omikuji:nth-child(2) .strip { transition-delay: 0.18s; }
+
+    /* doppio bordo come l'originale */
+    .strip::before {
+      content: '';
+      position: absolute;
+      inset: 0.7rem;
+      border: 1.5px solid var(--ink);
+      outline: 1px solid var(--ink);
+      outline-offset: 3px;
+      pointer-events: none;
+    }
+
+    .strip-inner { position: relative; padding: 0.8rem 0.6rem; }
+
+    .temple-name {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.15rem;
+      letter-spacing: 0.55em;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 0.7rem;
+      margin-bottom: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .rank-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.9rem;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 0.9rem;
+      margin-bottom: 1.3rem;
+    }
+    .rank-number {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.15rem;
+      letter-spacing: 0.18em;
+    }
+    .rank-seal {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 0.12em;
+      color: var(--washi);
+      background: var(--aka-seal);
+      padding: 0.28rem 0.7rem 0.34rem;
+      border-radius: 4px;
+      transform: rotate(-1.5deg);
+      box-shadow: 0 1px 4px rgba(179,39,30,0.4);
+      white-space: nowrap;
+    }
+
+    /* versi verticali: da destra a sinistra come l'originale */
+    .verses {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      margin: 0 auto;
+      height: clamp(240px, 42vw, 300px);
+      display: inline-block;
+      font-family: var(--display);
+      font-weight: 600;
+    }
+    .verse {
+      font-size: clamp(1.35rem, 4vw, 1.7rem);
+      letter-spacing: 0.34em;
+      padding: 0 0.85rem;
+      line-height: 1;
+    }
+    .verse + .verse { border-right: 1px solid rgba(26,21,18,0.18); }
+
+    .serial {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      color: var(--ink-soft);
+      margin-top: 1.2rem;
+      border-top: 1.5px solid var(--ink);
+      padding-top: 0.8rem;
+    }
+
+    /* ── Rango spiegato ── */
+    .rank-caption {
+      margin-top: 1.5rem;
+      font-family: var(--display);
+      font-size: 1.05rem;
+      color: var(--kin);
+      letter-spacing: 0.06em;
+    }
+    .rank-caption small {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--hai);
+      margin-top: 0.35rem;
+    }
+
+    /* ── Traduzione poesia ── */
+    .poem {
+      margin: 2.2rem auto 0;
+      max-width: 420px;
+      text-align: left;
+    }
+    .poem-title {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--aka);
+      text-align: center;
+      margin-bottom: 1.1rem;
+    }
+    .poem-line {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .poem-line:last-child { border-bottom: none; }
+    .poem-line .kanji {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.02rem;
+      letter-spacing: 0.28em;
+      color: var(--kin);
+      display: block;
+    }
+    .poem-line .it {
+      display: block;
+      margin-top: 0.3rem;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.02rem;
+      color: rgba(240,232,216,0.85);
+    }
+
+    /* ── Auspici ── */
+    .omens {
+      margin: 2.2rem auto 0;
+      max-width: 420px;
+      text-align: left;
+      border: 1px solid var(--line);
+      border-radius: 0.9rem;
+      padding: 1.4rem 1.5rem;
+      background: rgba(240,232,216,0.03);
+    }
+    .omens-title {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--aka);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .omens .counsel {
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(240,232,216,0.8);
+      font-size: 0.98rem;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .omens ul { list-style: none; }
+    .omens li {
+      position: relative;
+      padding: 0.32rem 0 0.32rem 1.3rem;
+      font-weight: 300;
+      font-size: 0.94rem;
+      color: rgba(240,232,216,0.75);
+    }
+    .omens li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0.78em;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
+    }
+    .omens li strong { font-weight: 500; color: var(--washi); }
+
+    /* ── Cos'è / nota finale ── */
+    .note {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+      padding: clamp(2rem, 5vw, 3.5rem) 1.5rem clamp(3.5rem, 8vw, 5.5rem);
+    }
+    .note .jp {
+      font-family: var(--display);
+      font-size: 0.95rem;
+      letter-spacing: 0.5em;
+      color: var(--aka);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .note p {
+      color: rgba(240,232,216,0.72);
+      font-weight: 300;
+      font-size: 1.02rem;
+    }
+    .note p + p { margin-top: 1rem; }
+    .note em { color: var(--kin); font-style: italic; }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      margin: 0 auto;
+      background: linear-gradient(to right, transparent, var(--kin), transparent);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 3rem 1.5rem 3.4rem;
+      text-align: center;
+    }
+    a.footer-sun {
+      display: block;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
+      margin: 0 auto 1.2rem;
+      box-shadow: 0 0 18px rgba(217,58,53,0.45);
+      transition: box-shadow 0.3s;
+    }
+    a.footer-sun:hover { box-shadow: 0 0 30px rgba(217,58,53,0.85); }
+    footer .jp {
+      font-family: var(--display);
+      font-size: 0.95rem;
+      letter-spacing: 0.4em;
+      color: var(--washi);
+      opacity: 0.8;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    footer .credit {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--hai);
+    }
+    footer .credit a { color: var(--kin); text-decoration: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.001s !important; animation-duration: 0.001s !important; }
+      .strip { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Torna al diario</a>
+
+  <!-- ═══════════ INTESTAZIONE ═══════════ -->
+  <header class="hero">
+    <span class="jp-title" aria-hidden="true">御神籤</span>
+    <h1>Le benedizioni di Kiyomizu</h1>
+    <p class="where">音羽山清水寺 · Kyoto · 8 luglio 2026</p>
+    <p class="intro">Al tempio dell'acqua pura si estrae a sorte un numero, e il numero corrisponde a un foglio: sopra ci sono una poesia in quattro versi e gli auspici che ne discendono. Quel giorno il destino ci ha risposto così.</p>
+  </header>
+
+  <!-- ═══════════ I DUE OMIKUJI ═══════════ -->
+  <main class="wrap">
+    <div class="omikuji-grid">
+
+      <!-- ── GIORGIO · DAI-KICHI ── -->
+      <section class="omikuji" aria-label="L'omikuji di Giorgio">
+        <p class="who">L'omikuji di Giorgio</p>
+
+        <div class="strip">
+          <div class="strip-inner">
+            <div class="temple-name">音羽山清水寺</div>
+            <div class="rank-row">
+              <span class="rank-number">第九十六</span>
+              <span class="rank-seal">大吉</span>
+            </div>
+            <div class="verses" lang="ja">
+              <div class="verse">鶏逐鳳同飛</div>
+              <div class="verse">高林整羽儀</div>
+              <div class="verse">棹舟須湾岸</div>
+              <div class="verse">宝貨満船帰</div>
+            </div>
+            <div class="serial">96 — № 000848</div>
+          </div>
+        </div>
+
+        <p class="rank-caption">Dai-kichi · Grande fortuna<small>Il rango più alto</small></p>
+
+        <div class="poem">
+          <p class="poem-title">La poesia</p>
+          <div class="poem-line">
+            <span class="kanji" lang="ja">鶏逐鳳同飛</span>
+            <span class="it">Il gallo insegue la fenice, e insieme a lei si leva in volo.</span>
+          </div>
+          <div class="poem-line">
+            <span class="kanji" lang="ja">高林整羽儀</span>
+            <span class="it">Nell'alto della foresta compone le sue piume.</span>
+          </div>
+          <div class="poem-line">
+            <span class="kanji" lang="ja">棹舟須湾岸</span>
+            <span class="it">Spingi la barca sull'acqua: raggiungerai la riva.</span>
+          </div>
+          <div class="poem-line">
+            <span class="kanji" lang="ja">宝貨満船帰</span>
+            <span class="it">E tornerai con la nave colma di tesori.</span>
+          </div>
+        </div>
+
+        <div class="omens">
+          <p class="omens-title">Gli auspici</p>
+          <p class="counsel">Non guardare nessuno dall'alto in basso e sii misurato in ogni cosa: abbi cura anche di chi ha rango più umile. Se ti impegni nel lavoro, la felicità della tua casa sarà immensa.</p>
+          <ul>
+            <li><strong>I desideri</strong> si avverano</li>
+            <li><strong>Chi è malato</strong> guarirà, giorno dopo giorno</li>
+            <li><strong>Le dispute</strong> le vincerai</li>
+            <li><strong>Ciò che hai perso</strong> tornerà, con lentezza</li>
+            <li><strong>Traslochi, costruzioni e viaggi</strong> vanno bene, senza fretta</li>
+            <li><strong>Il matrimonio</strong> è fortunato</li>
+            <li><strong>Gli affari</strong> sono favorevoli, specie in ciò che tocca metallo, terra, legno e carta</li>
+            <li><strong>I figli</strong> saranno saggi e avranno successo: crescili con cura</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ── LUCREZIA · KICHI ── -->
+      <section class="omikuji" aria-label="L'omikuji di Lucrezia">
+        <p class="who">L'omikuji di Lucrezia</p>
+
+        <div class="strip">
+          <div class="strip-inner">
+            <div class="temple-name">音羽山清水寺</div>
+            <div class="rank-row">
+              <span class="rank-number">第二十九</span>
+              <span class="rank-seal">吉</span>
+            </div>
+            <div class="verses" lang="ja">
+              <div class="verse">憂轗漸消融</div>
+              <div class="verse">求名得再通</div>
+              <div class="verse">宝財臨禄位</div>
+              <div class="verse">当遇主人公</div>
+            </div>
+            <div class="serial">29 — № 004610</div>
+          </div>
+        </div>
+
+        <p class="rank-caption">Kichi · Fortuna<small>Buona sorte</small></p>
+
+        <div class="poem">
+          <p class="poem-title">La poesia</p>
+          <div class="poem-line">
+            <span class="kanji" lang="ja">憂轗漸消融</span>
+            <span class="it">Le pene, a poco a poco, si sciolgono come neve.</span>
+          </div>
+          <div class="poem-line">
+            <span class="kanji" lang="ja">求名得再通</span>
+            <span class="it">La strada verso ciò che cerchi torna ad aprirsi.</span>
+          </div>
+          <div class="poem-line">
+            <span class="kanji" lang="ja">宝財臨禄位</span>
+            <span class="it">Ricchezze e onori si avvicinano al tuo cammino.</span>
+          </div>
+          <div class="poem-line">
+            <span class="kanji" lang="ja">当遇主人公</span>
+            <span class="it">E incontrerai chi saprà proteggerti.</span>
+          </div>
+        </div>
+
+        <div class="omens">
+          <p class="omens-title">Gli auspici</p>
+          <p class="counsel">Come chi era malato e si rialza, giorno dopo giorno le sofferenze si scioglieranno e incontrerai la gioia. Ma ricorda: fino alla fine, è affidandoti agli altri che troverai la forza.</p>
+          <ul>
+            <li><strong>Le gioie</strong> arriveranno</li>
+            <li><strong>La persona che aspetti</strong> verrà</li>
+            <li><strong>Chi è malato</strong> guarirà</li>
+            <li><strong>Ciò che hai perso</strong> ricomparirà</li>
+            <li><strong>Le dispute</strong> le vincerai</li>
+            <li><strong>Nuove case, traslochi e fidanzamenti</strong> vanno bene</li>
+            <li><strong>I viaggi</strong> sono favorevoli</li>
+            <li><strong>Bene confidare</strong> in Hachiman e in Kannon</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ═══════════ NOTA ═══════════ -->
+  <section class="note">
+    <div class="divider" aria-hidden="true"></div>
+    <p style="margin-top: 2.5rem;"><span class="jp" aria-hidden="true">結ばず持ち帰る</span></p>
+    <p>Quando l'oracolo è sfavorevole, la tradizione vuole che lo si leghi a un ramo nel tempio, perché il vento se lo porti via. Quando è favorevole, si porta con sé.</p>
+    <p>Il cartiglio di Kiyomizu chiede di non legarlo agli alberi ma di custodirlo. <em>Così abbiamo fatto: ora le nostre benedizioni vivono qui.</em></p>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <a class="footer-sun" href="index.html" aria-label="Torna al diario"></a>
+    <span class="jp">良い旅を</span>
+    <p class="credit">Japan Summer 2026 · un diario di <a href="https://www.gioriva.it/mondo/">GioRiva</a></p>
+  </footer>
+
+  <script>
+    // Le strisce si rivelano come estratte dalla scatola degli omikuji
+    const stripObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          stripObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.strip').forEach(el => stripObserver.observe(el));
+  </script>
+</body>
+</html>

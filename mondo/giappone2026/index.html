@@ -526,12 +526,15 @@
       text-align: center;
     }
     .footer-sun {
+      display: block;
       width: 30px; height: 30px;
       border-radius: 50%;
       background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
       margin: 0 auto 1.2rem;
       box-shadow: 0 0 18px rgba(217,58,53,0.45);
+      transition: box-shadow 0.35s ease;
     }
+    a.footer-sun:hover { box-shadow: 0 0 32px rgba(217,58,53,0.9); }
     footer .jp {
       font-family: var(--display);
       font-size: 0.95rem;
@@ -831,7 +834,7 @@
 
   <!-- ═══════════ FOOTER ═══════════ -->
   <footer>
-    <div class="footer-sun" aria-hidden="true"></div>
+    <a class="footer-sun" href="omikuji.html" aria-label="御神籤"></a>
     <span class="jp">良い旅を</span>
     <p class="credit">Japan Summer 2026 · un diario di <a href="https://www.gioriva.it/mondo/">GioRiva</a></p>
   </footer>
