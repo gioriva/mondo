@@ -95,7 +95,7 @@
     /* ── Intestazione ── */
     .hero {
       text-align: center;
-      padding: clamp(6.5rem, 15vw, 9.5rem) 1.5rem clamp(2.5rem, 6vw, 4rem);
+      padding: clamp(4.5rem, 10vw, 6.5rem) 1.5rem clamp(2.5rem, 6vw, 4rem);
       position: relative;
     }
     .hero .jp-title {
@@ -416,6 +416,113 @@
     }
     footer .credit a { color: var(--kin); text-decoration: none; }
 
+
+    /* ── Il cielo: fenice e gallo che si disegnano ── */
+    .hero { overflow: hidden; }
+    .sky {
+      display: block;
+      width: min(92vw, 640px);
+      height: auto;
+      margin: 0 auto -1.2rem;
+    }
+    .sky .draw {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: drawStroke 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    @keyframes drawStroke { to { stroke-dashoffset: 0; } }
+    .sky .d1 { animation-delay: 0.4s; }
+    .sky .d2 { animation-delay: 1.0s; }
+    .sky .d3 { animation-delay: 1.7s; }
+    .sky .d4 { animation-delay: 2.6s; animation-duration: 1.2s; }
+    .sky .d5 { animation-delay: 3.6s; animation-duration: 1.6s; }
+    .sky .ink {
+      opacity: 0;
+      animation: inkFade 0.6s ease forwards;
+    }
+    .sky .i1 { animation-delay: 1.2s; }
+    .sky .i2 { animation-delay: 3.0s; }
+    @keyframes inkFade { to { opacity: 1; } }
+
+    /* ── Piume che fluttuano ── */
+    .feather {
+      position: absolute;
+      top: -50px;
+      width: 26px;
+      height: auto;
+      opacity: 0;
+      pointer-events: none;
+      animation: featherFall linear infinite;
+    }
+    @keyframes featherFall {
+      0%   { transform: translate(0, 0) rotate(-12deg); opacity: 0; }
+      6%   { opacity: 0.4; }
+      45%  { transform: translate(-34px, 42vh) rotate(130deg); }
+      90%  { opacity: 0.32; }
+      100% { transform: translate(22px, 96vh) rotate(260deg); opacity: 0; }
+    }
+
+    /* ── La nave dei tesori ── */
+    .voyage {
+      text-align: center;
+      padding: clamp(1.5rem, 4vw, 2.5rem) 1.5rem 0;
+    }
+    .voyage svg {
+      width: min(78vw, 340px);
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .voyage .ship {
+      animation: shipBob 5.5s ease-in-out infinite alternate;
+      transform-origin: 50% 80%;
+    }
+    @keyframes shipBob {
+      from { transform: rotate(-1.6deg) translateY(0); }
+      to   { transform: rotate(1.4deg) translateY(-4px); }
+    }
+    .voyage .waves {
+      animation: waveDrift 4.5s ease-in-out infinite alternate;
+    }
+    @keyframes waveDrift {
+      from { transform: translateX(-6px); }
+      to   { transform: translateX(6px); }
+    }
+    .voyage-caption {
+      margin-top: 1.2rem;
+      font-family: var(--display);
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      color: var(--kin);
+    }
+    .voyage-caption .it {
+      display: block;
+      margin-top: 0.3rem;
+      font-family: var(--body);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: rgba(240,232,216,0.62);
+      letter-spacing: 0;
+    }
+
+    /* ── Strisce: respiro al passaggio ── */
+    .strip { transition: opacity 0.9s ease, transform 0.9s ease, box-shadow 0.5s ease; }
+    .strip.revealed:hover {
+      transform: translateY(-5px) rotate(0deg);
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.5),
+        0 30px 80px rgba(0,0,0,0.6),
+        0 0 110px rgba(217,164,65,0.22);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sky .draw { stroke-dashoffset: 0; animation: none; }
+      .sky .ink { opacity: 1; animation: none; }
+      .feather { display: none; }
+      .voyage .ship, .voyage .waves { animation: none; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { transition-duration: 0.001s !important; animation-duration: 0.001s !important; }
       .strip { opacity: 1; transform: none; }
@@ -428,6 +535,63 @@
 
   <!-- ═══════════ INTESTAZIONE ═══════════ -->
   <header class="hero">
+
+    <!-- 鶏逐鳳同飛 · il gallo insegue la fenice -->
+    <svg class="sky" viewBox="0 0 800 500" aria-hidden="true" role="img">
+      <g fill="none" stroke="#d9a441" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- corpo, testa, becco e cresta della fenice -->
+        <path class="draw d1" pathLength="1" d="M 455 235 Q 495 200 545 185"/>
+        <path class="draw d1" pathLength="1" d="M 545 185 Q 560 178 568 182 Q 576 186 572 176 L 585 172"/>
+        <path class="draw d2" pathLength="1" d="M 552 178 Q 548 162 536 158"/>
+        <path class="draw d2" pathLength="1" d="M 560 176 Q 560 158 550 150"/>
+        <circle class="ink i1" cx="562" cy="180" r="1.7" fill="#d9a441" stroke="none"/>
+        <!-- ala superiore: ventaglio di cinque penne -->
+        <path class="draw d2" pathLength="1" d="M 490 210 Q 430 150 350 130"/>
+        <path class="draw d2" pathLength="1" d="M 495 205 Q 445 130 385 100"/>
+        <path class="draw d2" pathLength="1" d="M 500 200 Q 465 120 425 82"/>
+        <path class="draw d2" pathLength="1" d="M 507 197 Q 495 115 472 72"/>
+        <path class="draw d2" pathLength="1" d="M 513 195 Q 520 118 516 70"/>
+        <!-- ala inferiore -->
+        <path class="draw d3" pathLength="1" d="M 480 222 Q 440 245 400 250"/>
+        <path class="draw d3" pathLength="1" d="M 486 228 Q 455 258 425 268"/>
+        <path class="draw d3" pathLength="1" d="M 493 232 Q 472 265 455 280"/>
+        <!-- tre code fluenti -->
+        <path class="draw d3" pathLength="1" d="M 455 235 Q 380 260 320 320 Q 275 365 240 370 Q 220 372 226 358"/>
+        <path class="draw d3" pathLength="1" d="M 455 238 Q 395 285 355 350 Q 325 398 292 408 Q 272 413 279 398"/>
+        <path class="draw d3" pathLength="1" d="M 456 241 Q 420 305 400 380 Q 387 428 358 442 Q 338 450 344 434"/>
+      </g>
+      <g fill="none" stroke="#d93a35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- il gallo, proteso verso di lei -->
+        <path class="draw d4" pathLength="1" d="M 150 428 Q 175 408 205 415 Q 222 420 226 432 Q 228 444 214 450 Q 185 458 162 448 Q 146 440 150 428"/>
+        <path class="draw d4" pathLength="1" d="M 205 415 Q 222 400 238 396"/>
+        <path class="draw d4" pathLength="1" d="M 238 396 L 250 392 L 240 402"/>
+        <path class="draw d4" pathLength="1" d="M 228 398 Q 226 388 218 386 Q 224 382 230 386 Q 232 378 238 380"/>
+        <circle class="ink i2" cx="233" cy="398" r="1.5" fill="#d93a35" stroke="none"/>
+        <path class="draw d4" pathLength="1" d="M 240 402 Q 240 410 234 410"/>
+        <path class="draw d4" pathLength="1" d="M 152 430 Q 128 410 118 386 Q 114 374 124 372"/>
+        <path class="draw d4" pathLength="1" d="M 156 438 Q 122 428 106 406 Q 100 396 110 394"/>
+        <path class="draw d4" pathLength="1" d="M 185 424 Q 172 408 152 402"/>
+        <path class="draw d4" pathLength="1" d="M 190 428 Q 180 412 165 405"/>
+      </g>
+      <!-- la scia del volo che li unisce -->
+      <path class="draw d5" pathLength="1" d="M 258 388 Q 330 330 420 275" fill="none" stroke="#d9a441"
+            stroke-width="1.4" stroke-dasharray="0.004 0.018" stroke-linecap="round" opacity="0.55"/>
+    </svg>
+
+    <!-- piume che fluttuano -->
+    <svg class="feather" style="left: 12%; animation-duration: 16s; animation-delay: 2s;" viewBox="0 0 24 34" aria-hidden="true">
+      <path d="M 12 2 Q 20 14 12 32 Q 4 14 12 2 Z M 12 6 L 12 28" fill="none" stroke="#d9a441" stroke-width="1.2"/>
+    </svg>
+    <svg class="feather" style="left: 78%; animation-duration: 21s; animation-delay: 7s;" viewBox="0 0 24 34" aria-hidden="true">
+      <path d="M 12 2 Q 20 14 12 32 Q 4 14 12 2 Z M 12 6 L 12 28" fill="none" stroke="#d93a35" stroke-width="1.2"/>
+    </svg>
+    <svg class="feather" style="left: 45%; animation-duration: 18s; animation-delay: 11s;" viewBox="0 0 24 34" aria-hidden="true">
+      <path d="M 12 2 Q 20 14 12 32 Q 4 14 12 2 Z M 12 6 L 12 28" fill="none" stroke="#d9a441" stroke-width="1.2"/>
+    </svg>
+    <svg class="feather" style="left: 63%; animation-duration: 24s; animation-delay: 0s;" viewBox="0 0 24 34" aria-hidden="true">
+      <path d="M 12 2 Q 20 14 12 32 Q 4 14 12 2 Z M 12 6 L 12 28" fill="none" stroke="#d9a441" stroke-width="1.2"/>
+    </svg>
+
     <span class="jp-title" aria-hidden="true">御神籤</span>
     <h1>Le benedizioni di Kiyomizu</h1>
     <p class="where">音羽山清水寺 · Kyoto · 8 luglio 2026</p>
@@ -558,6 +722,28 @@
 
     </div>
   </main>
+
+  <!-- ═══════════ LA NAVE DEI TESORI ═══════════ -->
+  <section class="voyage" aria-label="La nave dei tesori">
+    <svg viewBox="0 0 360 200" role="img" aria-hidden="true">
+      <g class="ship" fill="none" stroke="#d9a441" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 110 128 Q 180 152 250 128 Q 236 158 180 160 Q 124 158 110 128 Z"/>
+        <path d="M 110 128 Q 100 118 102 106"/>
+        <path d="M 250 128 Q 260 118 258 106"/>
+        <path d="M 180 128 L 180 62"/>
+        <path d="M 150 62 Q 180 54 210 62 L 206 104 Q 180 112 154 104 Z"/>
+        <circle cx="152" cy="124" r="7"/>
+        <circle cx="180" cy="120" r="8"/>
+        <circle cx="208" cy="124" r="7"/>
+        <text x="180" y="94" font-family="'Shippori Mincho', serif" font-size="26" fill="#d9a441" stroke="none" text-anchor="middle">宝</text>
+      </g>
+      <g class="waves" fill="none" stroke="#d9a441" stroke-width="1.4" opacity="0.55">
+        <path d="M 60 168 Q 85 152 110 168 Q 135 152 160 168 Q 185 152 210 168 Q 235 152 260 168 Q 285 152 310 168"/>
+        <path d="M 80 180 Q 105 166 130 180 Q 155 166 180 180 Q 205 166 230 180 Q 255 166 280 180" opacity="0.6"/>
+      </g>
+    </svg>
+    <p class="voyage-caption" lang="ja">宝貨満船帰<span class="it" lang="it">e la nave torna colma di tesori</span></p>
+  </section>
 
   <!-- ═══════════ NOTA ═══════════ -->
   <section class="note">
