@@ -216,6 +216,40 @@
       50% { transform: scaleY(1); opacity: 1; }
     }
 
+
+    /* ── La fenice del Daikichi sorvola il sole ── */
+    .hero-phoenix {
+      position: absolute;
+      top: clamp(3.5rem, 9vh, 6rem);
+      left: clamp(2%, 6vw, 9%);
+      width: min(36vw, 300px);
+      z-index: 3;
+      display: block;
+      animation: phoenixFloat 7s ease-in-out 5.5s infinite alternate;
+    }
+    .hero-phoenix svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .hero-phoenix .pdraw {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: drawPhoenix 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .hero-phoenix .p1 { animation-delay: 2.4s; }
+    .hero-phoenix .p2 { animation-delay: 3.1s; }
+    .hero-phoenix .p3 { animation-delay: 3.9s; }
+    @keyframes drawPhoenix { to { stroke-dashoffset: 0; } }
+    @keyframes phoenixFloat {
+      from { transform: translateY(0) rotate(0deg); }
+      to   { transform: translateY(-12px) rotate(1.2deg); }
+    }
+    .hero-phoenix:hover svg { filter: drop-shadow(0 0 14px rgba(217,164,65,0.55)); }
+    @media (max-width: 640px) {
+      .hero-phoenix { width: 44vw; top: 3rem; left: 2%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-phoenix { animation: none; }
+      .hero-phoenix .pdraw { stroke-dashoffset: 0; animation: none; }
+    }
+
     /* ═══════════ NAV ═══════════ */
     .nav {
       position: fixed;
@@ -246,6 +280,7 @@
       font-weight: 600;
       color: var(--washi);
     }
+
     .nav-brand .dot {
       width: 15px; height: 15px;
       border-radius: 50%;
@@ -279,7 +314,6 @@
     }
     @media (max-width: 460px) {
       .brand-text { display: none; }
-      .nav-links a { padding: 0.45rem 0.95rem; }
     }
 
     /* ═══════════ SHARED ═══════════ */
@@ -564,100 +598,199 @@
     }
 
 
-    /* ── Menu giorni (dropdown) ── */
     .day, .plan-card { scroll-margin-top: 86px; }
 
-    .dropdown { position: relative; }
-    .drop-btn {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(240,232,216,0.85);
-      padding: 0.5rem 1.15rem;
-      border: 1px solid rgba(240,232,216,0.25);
-      border-radius: 2rem;
-      background: rgba(15,12,13,0.35);
-      cursor: pointer;
+    /* ── Menu 目次: overlay a schermo intero ── */
+    .menu-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.65rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(240,232,216,0.85);
+      background: rgba(15,12,13,0.35);
+      border: 1px solid rgba(240,232,216,0.25);
+      border-radius: 2rem;
+      padding: 0.55rem 1.3rem;
+      cursor: pointer;
       transition: color 0.25s, border-color 0.25s;
     }
-    .drop-btn:hover { color: var(--kin); border-color: rgba(217,164,65,0.65); }
-    .drop-btn .arrow { font-size: 0.5rem; transition: transform 0.25s ease; }
-    .dropdown.open .drop-btn { color: var(--kin); border-color: rgba(217,164,65,0.65); }
-    .dropdown.open .drop-btn .arrow { transform: rotate(180deg); }
+    .menu-btn:hover { color: var(--kin); border-color: rgba(217,164,65,0.65); }
+    .menu-btn .bars { display: inline-flex; flex-direction: column; gap: 4px; }
+    .menu-btn .bars i { display: block; width: 16px; height: 1.5px; background: currentColor; border-radius: 1px; transition: width 0.25s; }
+    .menu-btn .bars i:nth-child(2) { width: 10px; }
+    .menu-btn:hover .bars i { width: 16px; }
 
-    .drop-panel {
-      position: absolute;
-      top: calc(100% + 0.65rem);
-      right: 0;
-      width: 320px;
-      max-height: min(62vh, 440px);
-      overflow-y: auto;
-      background: rgba(20,15,17,0.97);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--line);
-      border-radius: 0.9rem;
-      padding: 0.5rem;
-      box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(12,9,11,0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       opacity: 0;
-      transform: translateY(-8px);
       pointer-events: none;
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      transition: opacity 0.45s ease;
+      overflow-y: auto;
     }
-    .dropdown.open .drop-panel { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .menu-overlay.open { opacity: 1; pointer-events: auto; }
 
-    .drop-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      padding: 0.6rem 0.7rem;
-      border-radius: 0.6rem;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .drop-item:hover { background: rgba(240,232,216,0.07); }
-    .drop-item .di-dot {
-      flex-shrink: 0;
-      width: 12px; height: 12px;
+    .menu-close {
+      position: absolute;
+      top: 1.1rem;
+      right: clamp(1.2rem, 4vw, 3rem);
+      width: 44px; height: 44px;
       border-radius: 50%;
-      margin-top: 0.3rem;
-      background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
-      box-shadow: 0 0 7px rgba(217,58,53,0.4);
-    }
-    .drop-item.future .di-dot {
+      border: 1px solid rgba(240,232,216,0.3);
       background: transparent;
+      color: var(--washi);
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: color 0.25s, border-color 0.25s, transform 0.35s;
+    }
+    .menu-close:hover { color: var(--aka); border-color: var(--aka); transform: rotate(90deg); }
+
+    .menu-kanji {
+      position: fixed;
+      left: clamp(0.8rem, 3vw, 3rem);
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      letter-spacing: 0.5em;
+      color: rgba(217,58,53,0.22);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .menu-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: clamp(5.5rem, 12vh, 8rem) clamp(1.5rem, 6vw, 3rem) 4rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(2.5rem, 6vw, 4.5rem);
+    }
+    @media (min-width: 800px) {
+      .menu-inner { grid-template-columns: 1.1fr 1fr; }
+    }
+
+    .m-item {
+      display: block;
+      text-decoration: none;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--line);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .menu-overlay.open .m-item { opacity: 1; transform: translateY(0); }
+    .menu-overlay.open .m-item:nth-child(1) { transition-delay: 0.1s; }
+    .menu-overlay.open .m-item:nth-child(2) { transition-delay: 0.18s; }
+    .menu-overlay.open .m-item:nth-child(3) { transition-delay: 0.26s; }
+
+    .m-item .m-jp {
+      display: block;
+      font-family: var(--display);
+      font-size: 0.9rem;
+      letter-spacing: 0.45em;
+      color: var(--aka);
+      margin-bottom: 0.3rem;
+    }
+    .m-item .m-label {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.9rem, 4.5vw, 2.7rem);
+      color: var(--washi);
+      line-height: 1.15;
+      transition: color 0.3s, letter-spacing 0.3s;
+    }
+    .m-item:hover .m-label { color: var(--kin); letter-spacing: 0.02em; }
+    .m-item .m-note {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--hai);
+      margin-top: 0.35rem;
+    }
+
+    .menu-days-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--hai);
+      margin-bottom: 1.3rem;
+      opacity: 0;
+      transition: opacity 0.5s ease 0.3s;
+    }
+    .menu-overlay.open .menu-days-label { opacity: 1; }
+
+    .m-timeline {
+      position: relative;
+      padding-left: 1.6rem;
+      max-height: 58vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+    .m-timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px; top: 12px; bottom: 12px;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(217,58,53,0.55), var(--line));
+    }
+    .m-day {
+      display: block;
+      position: relative;
+      padding: 0.55rem 0.5rem 0.55rem 0;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .menu-overlay.open .m-day { opacity: 1; transform: translateX(0); }
+    .m-day::before {
+      content: '';
+      position: absolute;
+      left: -1.6rem; top: 0.95rem;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
+      box-shadow: 0 0 8px rgba(217,58,53,0.45);
+    }
+    .m-day.future::before {
+      background: var(--sumi);
       border: 2px solid rgba(143,134,124,0.55);
       box-shadow: none;
     }
-    .drop-item .di-text { display: flex; flex-direction: column; gap: 0.18rem; min-width: 0; }
-    .drop-item .di-meta {
+    .m-day .d-meta {
+      display: block;
       font-family: var(--mono);
       font-size: 0.6rem;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--kin);
     }
-    .drop-item .di-title {
+    .m-day .d-title {
+      display: block;
       font-family: var(--display);
-      font-size: 0.94rem;
       font-weight: 500;
+      font-size: 0.98rem;
       color: var(--washi);
-      line-height: 1.28;
+      line-height: 1.3;
+      margin-top: 0.12rem;
+      transition: color 0.25s;
     }
-    .drop-item.future .di-title { color: rgba(240,232,216,0.5); }
+    .m-day:hover .d-title { color: var(--kin); }
+    .m-day.future .d-title { color: rgba(240,232,216,0.5); }
 
-    @media (max-width: 560px) {
-      .drop-panel {
-        position: fixed;
-        left: 1rem; right: 1rem;
-        top: 62px;
-        width: auto;
-      }
-    }
+    body.menu-locked { overflow: hidden; }
 
     @media (max-width: 640px) {
       body { font-size: 1rem; }
@@ -674,18 +807,66 @@
       <span class="brand-text">Japan Summer</span>
     </a>
     <div class="nav-links">
-      <a href="#diario" class="active">Diario</a>
-      <a href="programma.html">Programma</a>
-      <div class="dropdown" id="daysDropdown">
-        <button class="drop-btn" id="daysBtn" aria-haspopup="menu" aria-expanded="false">Giorni <span class="arrow" aria-hidden="true">▼</span></button>
-        <div class="drop-panel" id="daysPanel" role="menu" aria-label="Vai al giorno"></div>
-      </div>
+      <button class="menu-btn" id="menuBtn" aria-haspopup="dialog" aria-expanded="false">
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        Menu
+      </button>
     </div>
   </nav>
+
+  <!-- ═══════════ MENU 目次 ═══════════ -->
+  <div class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
+    <button class="menu-close" id="menuClose" aria-label="Chiudi il menu">✕</button>
+    <span class="menu-kanji" aria-hidden="true">目次</span>
+    <div class="menu-inner">
+      <nav class="menu-sections" aria-label="Sezioni del sito">
+        <a class="m-item" href="#diario">
+          <span class="m-jp" aria-hidden="true">日記</span>
+          <span class="m-label">Diario</span>
+          <span class="m-note">Il racconto, giorno per giorno</span>
+        </a>
+        <a class="m-item" href="programma.html">
+          <span class="m-jp" aria-hidden="true">旅程</span>
+          <span class="m-label">Programma</span>
+          <span class="m-note">Voli, treni e tappe del viaggio</span>
+        </a>
+        <a class="m-item" href="omikuji.html">
+          <span class="m-jp" aria-hidden="true">御神籤</span>
+          <span class="m-label">Le benedizioni</span>
+          <span class="m-note">Gli omikuji di Kiyomizu</span>
+        </a>
+      </nav>
+      <div class="menu-days">
+        <p class="menu-days-label">I giorni</p>
+        <div class="m-timeline" id="menuTimeline"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══════════ HERO ═══════════ -->
   <header class="hero" id="top">
     <div class="sun" aria-hidden="true"></div>
+    <a class="hero-phoenix" href="omikuji.html" aria-label="Le benedizioni di Kiyomizu" title="御神籤">
+      <svg viewBox="280 40 320 260" aria-hidden="true">
+        <g fill="none" stroke="#d9a441" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path class="pdraw p1" pathLength="1" d="M 455 235 Q 495 200 545 185"/>
+          <path class="pdraw p1" pathLength="1" d="M 545 185 Q 560 178 568 182 Q 576 186 572 176 L 585 172"/>
+          <path class="pdraw p2" pathLength="1" d="M 552 178 Q 548 162 536 158"/>
+          <path class="pdraw p2" pathLength="1" d="M 560 176 Q 560 158 550 150"/>
+          <circle cx="562" cy="180" r="1.7" fill="#d9a441" stroke="none" opacity="0"><animate attributeName="opacity" to="1" dur="0.5s" begin="3.4s" fill="freeze"/></circle>
+          <path class="pdraw p2" pathLength="1" d="M 490 210 Q 430 150 350 130"/>
+          <path class="pdraw p2" pathLength="1" d="M 495 205 Q 445 130 385 100"/>
+          <path class="pdraw p2" pathLength="1" d="M 500 200 Q 465 120 425 82"/>
+          <path class="pdraw p2" pathLength="1" d="M 507 197 Q 495 115 472 72"/>
+          <path class="pdraw p2" pathLength="1" d="M 513 195 Q 520 118 516 70"/>
+          <path class="pdraw p3" pathLength="1" d="M 480 222 Q 440 245 400 250"/>
+          <path class="pdraw p3" pathLength="1" d="M 486 228 Q 455 258 425 268"/>
+          <path class="pdraw p3" pathLength="1" d="M 493 232 Q 472 265 455 280"/>
+          <path class="pdraw p3" pathLength="1" d="M 455 235 Q 400 255 360 290"/>
+          <path class="pdraw p3" pathLength="1" d="M 455 238 Q 410 275 385 315"/>
+        </g>
+      </svg>
+    </a>
     <div class="kanji-side" aria-hidden="true">日本の夏</div>
     <div class="kanji-side kanji-side-left" aria-hidden="true">旅の日記</div>
     <div class="hero-inner">
@@ -807,15 +988,30 @@
             <div class="day-body">
               <p>La giornata di oggi ci riserva una grande, anzi grandissima sorpresa, perché scopriamo una <strong>Nara</strong> molto più affascinante rispetto alle aspettative. Ma andiamo con ordine. Sveglia alle sette, facciamo comunque colazione in albergo e, con 10 minuti di taxi, arriviamo alla <strong>Kyoto Station</strong>, dove prendiamo un treno locale <em>(<strong>Kintetsu Line</strong>)</em> che, in poco meno di un'ora, ci porta a Nara. In stazione lasciamo i bagagli nei <em>"coin locker"</em>, dei pratici armadietti che fanno proprio al caso nostro; usciamo a piedi e ci incamminiamo con calma verso il <strong>parco di Nara</strong>, incontrando già dopo pochi metri i primi cerbiatti, che sono la principale particolarità di questa zona, dal momento che ne girano migliaia di esemplari ovunque, testimoniando uno strano equilibrio tra uomo e natura. Camminare qui vuol dire letteralmente convivere con questi simpatici animali, che sono completamente abituati alla presenza umana, si lasciano accarezzare e fanno anche una sorta di inchino con la testa, anche se il loro unico vero obiettivo è quello di cercare cibo dai passanti <em>(le strade sono popolate da venditori ambulanti che, per pochi spiccioli, vendono dei cracker particolari che i turisti usano per assicurarsi qualche secondo di attenzione da parte dei cervi ma attenzione, perché arrivano in branco e si incazzano anche)</em>.</p>
               <p>Camminiamo nel parco senza una meta precisa, semplicemente godendoci l'atmosfera un po' fiabesca, ed è proprio qui che arriva la sorpresa, perché ci imbattiamo in tre complessi sacri che sarebbe anche riduttivo definire meravigliosi: il <strong>Santuario Kasuga</strong>, il <strong>Nigatsu-do</strong> e il <strong>Tōdai-ji</strong> <em>(dove riposa il <strong>Grande Buddha</strong>)</em>. Partiamo dal <strong>Santuario Kasuga</strong>, soprannominato <em>"il Mistico"</em>, famoso per le sue migliaia di lanterne di pietra e bronzo che fiancheggiano i sentieri e adornano i corridoi interni. È un santuario shintoista immerso in una foresta vergine protetta, dove i cervi <em>(sacri secondo la tradizione)</em> circolano liberamente, e ci accompagnano in un giro mistico davvero affascinante. Riprendiamo il sentiero nel bosco, per arrivare casualmente al <strong>Nigatsu-do</strong>, soprannominato <em>"il Panoramico"</em>, perché situato su una collina leggermente sopraelevata rispetto alla zona circostante; questo edificio è composto principalmente da una sala in legno con una terrazza sporgente che offre una vista spettacolare sull'intera città di <strong>Nara</strong>. Ultimo ma non per importanza, il <strong>Tōdai-ji</strong> detto <em>"il Gigante"</em> perché il <strong>Daibutsu-den</strong>, ovvero il padiglione principale, è una delle strutture in legno più grandi del mondo e ospita un <strong>Buddha</strong> in bronzo <em>(il Daibutsu per l'appunto)</em> alto ben 15 metri, che ispira serenità, reverenza e spiritualità.</p>
-              <p>Tra cervi, misticismo e divinità giganti il tempo a Nara si esaurisce, per cui in stazione recuperiamo i bagagli dai <em>coin lockers</em> e riprendiamo il <strong>Kintetsu</strong> fino a <strong>Osaka</strong>, che raggiungiamo in circa 40 minuti. L'albergo è molto vicino alla stazione, nel quartiere di <strong>Nakanoshima</strong>, una zona molto elegante, caratterizzata da un'architettura raffinata, uffici moderni, musei e una posizione privilegiata lungo il fiume. Dopo il check-in e la doccia di rito, decidiamo di andare diretti a visitare l'<strong>Umeda Sky Building</strong>, un'icona della moderna architettura di Osaka, una struttura composta da due torri collegate in cima dal <em>"Floating Garden Observatory"</em>, un punto panoramico a 360° su tutta la città, che tra l'altro ci regala delle viste mozzafiato perché in modo quasi casuale arriviamo proprio al momento del tramonto, nel primo giorno di questa vacanza dove il cielo è sgombro dalle nuvole e all'orizzonte si vede un sole rosso come il fuoco tramontare lentamente. Ci godiamo il momento, facendo più volte il giro dell'osservatorio, e quando il buio è ormai calato, dobbiamo rispondere a un bisogno che adesso si fa sentire in modo prepotente: una gran fame!</p>
-              <p>Cambiamo completamente zona, e ci buttiamo nel caos urbano di <strong>Dotonbori</strong>: caotico, eccessivo, sfacciatamente commerciale e incredibilmente vitale. Se Kyoto è la città del silenzio e del tempio, <strong>Dotonbori</strong> è la città del rumore e dell'insegna al neon. Facciamo la gincana tra la folla e dopo qualche valutazione troviamo un <strong>ristorante di ramen</strong> che ci incuriosisce, e devo ammettere che ci facciamo una gran bella cena. La stanchezza adesso si fa sentire, ma non possiamo non fare un giro per questo quartiere che non ha assolutamente nulla di sobrio, eppure rimane comunque fichissimo. Torniamo a piedi verso l'albergo, un paio di chilometri lungo il vialone di eleganti vetrine che caratterizzano <strong>Nakanoshima</strong>. Goodnight!</p>
+              <p>Tra cervi, misticismo e divinità giganti il tempo a Nara si esaurisce, per cui in stazione recuperiamo i bagagli dai <em>coin lockers</em> e riprendiamo il <strong>Kintetsu</strong> fino a <strong>Osaka</strong>, che raggiungiamo in circa 40 minuti. L'albergo è molto vicino alla stazione, nel quartiere di <strong>Shinsaibashi</strong>, una zona molto elegante, caratterizzata da un'architettura raffinata, uffici moderni, musei e una posizione privilegiata lungo il fiume. Dopo il check-in e la doccia di rito, decidiamo di andare diretti a visitare l'<strong>Umeda Sky Building</strong>, un'icona della moderna architettura di Osaka, una struttura composta da due torri collegate in cima dal <em>"Floating Garden Observatory"</em>, un punto panoramico a 360° su tutta la città, che tra l'altro ci regala delle viste mozzafiato perché in modo quasi casuale arriviamo proprio al momento del tramonto, nel primo giorno di questa vacanza dove il cielo è sgombro dalle nuvole e all'orizzonte si vede un sole rosso come il fuoco tramontare lentamente. Ci godiamo il momento, facendo più volte il giro dell'osservatorio, e quando il buio è ormai calato, dobbiamo rispondere a un bisogno che adesso si fa sentire in modo prepotente: una gran fame!</p>
+              <p>Cambiamo completamente zona, e ci buttiamo nel caos urbano di <strong>Dotonbori</strong>: caotico, eccessivo, sfacciatamente commerciale e incredibilmente vitale. Se Kyoto è la città del silenzio e del tempio, <strong>Dotonbori</strong> è la città del rumore e dell'insegna al neon. Facciamo la gincana tra la folla e dopo qualche valutazione troviamo un <strong>ristorante di ramen</strong> che ci incuriosisce, e devo ammettere che ci facciamo una gran bella cena. La stanchezza adesso si fa sentire, ma non possiamo non fare un giro per questo quartiere che non ha assolutamente nulla di sobrio, eppure rimane comunque fichissimo. Torniamo a piedi verso l'albergo, un paio di chilometri lungo il vialone di eleganti vetrine che caratterizzano <strong>Shinsaibashi</strong>. Goodnight!</p>
             </div>
           </article>
 
-          <!-- DAY 8 - in scrittura -->
-          <article class="day writing">
+          <!-- DAY 8 -->
+          <article class="day">
             <p class="day-meta">Day 8 · Venerdì 10 luglio</p>
-            <h3>Osaka, tutto il giorno</h3>
+            <h3>Osaka così come viene</h3>
+            <div class="day-tags">
+              <span>Mido-Suji</span><span>Shinsaibashi</span><span>Uncle Rikuro</span><span>Castello di Osaka</span><span>Dotonbori</span>
+            </div>
+            <div class="day-body">
+              <p>Oggi, per la prima volta in questo viaggio, ci prendiamo il lusso di una partenza mattutina un po' più rilassata. Ci alziamo per le 8:30, fedeli alla tradizione ci godiamo un'abbondante colazione e usciamo verso le 10:00 senza una meta precisa, guidati dalla curiosità di esplorare <strong>Osaka</strong> così come viene. Tra l'altro, ci rendiamo conto di aver fatto bene a rallentare un attimo questa mattina, perché qua tutte le attività aprono i battenti alle 11:00 <em>(che orario strano, sarà perché poi la sera vanno avanti a oltranza)</em>. Scendiamo a piedi per <strong>Mido-Suji</strong>, ovvero l'elegante via che attraversa da nord a sud tutta l'area di <strong>Shinsaibashi</strong>, facendo diverse soste per ammirare le architetture eleganti, moderne e a tratti anche molto originali dei palazzi che ospitano le vetrine dei grandi marchi. Scendendo lungo la via, andiamo a zonzo imboccando a sentimento delle stradine minori perpendicolari, che comunque ci offrono degli scorci e dei punti di vista che scopriamo con immenso piacere. <strong>Osaka</strong> è una città molto frizzante, giovane e dinamica, e questo si respira facilmente girando come stiamo facendo noi.</p>
+              <p>Arriviamo quasi a <strong>Dotonbori</strong>, salvo a un certo punto attraversare la strada e risalire verso la direzione da cui siamo arrivati, ma prendendo una parallela, una strada pedonale coperta che sembra un misto tra un mercato e una via commerciale. Facciamo tappa in un sacco di negozi, alcuni più noti <em>(non possono mancare due tappe da Uniqlo e Muji)</em> altri meno, ma il nostro focus principale è trovare la bottega di <strong>Uncle Rikuro</strong>, ovvero una piccola bakery che si trova nel primo piano interrato di un grosso centro commerciale, che è diventata famosa per la produzione di una particolare tipologia di <strong>cheesecake</strong> <em>(che in verità sembra quasi un morbido muffin)</em>; ne sfornano in continuazione con una certa teatralità, e ovviamente l'abbiamo acquistata ancora calda da forno <em>(ci siamo dovuti trattenere per non finirla tutta)</em>: era veramente clamorosa!</p>
+              <p>Soddisfatti a questo punto del tour di <strong>Shinsaibashi</strong>, ci spostiamo in taxi al <strong>Castello di Osaka</strong> che, per quanto ricostruito di recente e ora sede di un museo <em>(tranne le mura, quelle sono originali del XVI secolo e sono mastodontiche)</em>, trasmette sempre un certo fascino e domina imponente sullo skyline cittadino e sui giardini del castello, cinti da un fossato con tanto di fiume navigabile, che sono veramente molto belli e meritano di essere girati a piedi senza fretta. Completiamo passeggiando la visita dei giardini che formano appunto un anello intorno al castello, prima di tornare in albergo per prepararci per la sera.</p>
+              <p>La destinazione per la cena è uno storico ristorante di sushi che abbiamo individuato ovviamente a <strong>Dotonbori</strong>, e devo dire che delle varie cucine provate fino ad adesso, questo vince di sicuro a mani basse, con un sushi assolutamente delizioso e delle varianti con carne di <strong>Kobe</strong> che ci ricorderemo per un po'. Post cena facciamo due passi ancora in zona, ma poi decidiamo di allontanarci un attimo dal casino brulicante e ci spostiamo in delle viuzze parallele, dove troviamo un piccolo bar, il <strong>Brackwell</strong>, che sembra uscito dagli anni '30: musica, atmosfera e arredamento quasi occidentali, ma zero turisti e solo frequentatori locali, dove facciamo tappa per bere qualcosa prima di rientrare in albergo per sistemare i bagagli, domani si parte, direzione <strong>Castello di Himeji</strong> e poi <strong>Hakone</strong>! Buonanotte!</p>
+            </div>
+          </article>
+
+          <!-- DAY 9 - in scrittura -->
+          <article class="day writing">
+            <p class="day-meta">Day 9 · Sabato 11 luglio</p>
+            <h3>Himeji e Hakone</h3>
             <div class="day-body">
               <p class="writing-note"><span class="blink" aria-hidden="true"></span> Questa pagina del diario è in scrittura. Torna presto.</p>
             </div>
@@ -834,44 +1030,49 @@
 
   <!-- ═══════════ FOOTER ═══════════ -->
   <footer>
-    <a class="footer-sun" href="omikuji.html" aria-label="御神籤"></a>
+    <div class="footer-sun" aria-hidden="true"></div>
     <span class="jp">良い旅を</span>
     <p class="credit">Japan Summer 2026 · un diario di <a href="https://www.gioriva.it/mondo/">GioRiva</a></p>
   </footer>
 
   <script>
 
-    // ── Menu giorni: apertura/chiusura ──
-    const daysDropdown = document.getElementById('daysDropdown');
-    const daysBtn = document.getElementById('daysBtn');
-    const daysPanel = document.getElementById('daysPanel');
-    daysBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const open = daysDropdown.classList.toggle('open');
-      daysBtn.setAttribute('aria-expanded', open);
-    });
-    document.addEventListener('click', (e) => {
-      if (!daysDropdown.contains(e.target)) daysDropdown.classList.remove('open');
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') daysDropdown.classList.remove('open');
-    });
-    function addDropItem(href, meta, title, future) {
+
+    // ── Menu 目次 ──
+    const menuBtn = document.getElementById('menuBtn');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuClose = document.getElementById('menuClose');
+    function openMenu() {
+      menuOverlay.classList.add('open');
+      document.body.classList.add('menu-locked');
+      menuBtn.setAttribute('aria-expanded', 'true');
+    }
+    function closeMenu() {
+      menuOverlay.classList.remove('open');
+      document.body.classList.remove('menu-locked');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+    menuBtn.addEventListener('click', openMenu);
+    menuClose.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+    menuOverlay.addEventListener('click', (e) => { if (e.target === menuOverlay) closeMenu(); });
+    document.querySelectorAll('.m-item, .m-day').forEach(a => a.addEventListener('click', closeMenu));
+    function addMenuDay(container, href, meta, title, future) {
       const a = document.createElement('a');
-      a.className = 'drop-item' + (future ? ' future' : '');
+      a.className = 'm-day' + (future ? ' future' : '');
       a.href = href;
-      a.setAttribute('role', 'menuitem');
-      a.innerHTML = '<span class="di-dot" aria-hidden="true"></span><span class="di-text"><span class="di-meta">' + meta + '</span><span class="di-title">' + title + '</span></span>';
-      a.addEventListener('click', () => daysDropdown.classList.remove('open'));
-      daysPanel.appendChild(a);
+      a.innerHTML = '<span class="d-meta">' + meta + '</span><span class="d-title">' + title + '</span>';
+      a.addEventListener('click', closeMenu);
+      container.appendChild(a);
     }
 
-    // Voci generate automaticamente dagli articoli del diario
+    // Timeline dei giorni nel menu, generata dagli articoli del diario
+    const menuTimeline = document.getElementById('menuTimeline');
     document.querySelectorAll('.diary .day').forEach((d, i) => {
       d.id = 'day-' + (i + 1);
       const meta = (d.querySelector('.day-meta') || {}).textContent || '';
       const title = (d.querySelector('h3') || {}).textContent || '';
-      addDropItem('#day-' + (i + 1), meta, title, d.classList.contains('writing'));
+      addMenuDay(menuTimeline, '#day-' + (i + 1), meta, title, d.classList.contains('writing'));
     });
 
     // Nav visibile dopo il hero
