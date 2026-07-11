@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>写真 · La galleria · Japan Summer</title>
+
+  <!-- No indicizzazione -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="写真 · La galleria · Japan Summer" />
+  <meta property="og:description" content="Le foto del nostro viaggio in Giappone. In allestimento." />
+  <meta property="og:image" content="https://www.gioriva.it/mondo/giappone2026/japan-summer-og.PNG" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%23d93a35'/></svg>" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1ZCCJ6QBR4');
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --sumi: #0c0a0b;
+      --aka: #d93a35;
+      --kin: #d9a441;
+      --washi: #f0e8d8;
+      --hai: #8f867c;
+      --line: rgba(240,232,216,0.1);
+      --display: 'Shippori Mincho', serif;
+      --body: 'Newsreader', Georgia, serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -12%, rgba(217,58,53,0.09) 0%, transparent 60%),
+        var(--sumi);
+      color: var(--washi);
+      font-family: var(--body);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    ::selection { background: var(--aka); color: #fff; }
+    :focus-visible { outline: 2px solid var(--kin); outline-offset: 3px; }
+    a { color: inherit; }
+
+    .back {
+      position: fixed;
+      top: 1.1rem;
+      left: clamp(1rem, 3vw, 2rem);
+      z-index: 50;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--hai);
+      padding: 0.5rem 1.1rem;
+      border: 1px solid rgba(240,232,216,0.2);
+      border-radius: 2rem;
+      background: rgba(12,10,11,0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .back:hover { color: var(--kin); border-color: rgba(217,164,65,0.6); }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: clamp(6.5rem, 15vh, 9rem) 1.5rem clamp(2rem, 5vw, 3.5rem);
+    }
+
+    /* diaframma che ruota */
+    .aperture {
+      width: 74px; height: 74px;
+      margin: 0 auto 1.6rem;
+      display: block;
+      animation: apertureSpin 40s linear infinite;
+    }
+    @keyframes apertureSpin { to { transform: rotate(360deg); } }
+
+    .hero .jp-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 6.5vw, 3.2rem);
+      letter-spacing: 0.4em;
+      color: var(--aka);
+      display: block;
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 40px rgba(217,58,53,0.3);
+    }
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.6rem, 4.4vw, 2.5rem);
+      color: var(--washi);
+      line-height: 1.18;
+    }
+    .hero .intro {
+      max-width: 520px;
+      margin: 1.4rem auto 0;
+      color: rgba(240,232,216,0.72);
+      font-weight: 300;
+      font-size: 1.02rem;
+    }
+    .hero .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.6rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--kin);
+      border: 1px dashed rgba(217,164,65,0.45);
+      border-radius: 2rem;
+      padding: 0.6rem 1.4rem;
+    }
+    .hero .status .blink {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--kin);
+      animation: blinkdot 1.5s ease-in-out infinite;
+    }
+    @keyframes blinkdot { 0%,100% { opacity: 1; } 50% { opacity: 0.15; } }
+
+    /* ── Le cornici in attesa ── */
+    .frames {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(1.5rem, 4vw, 3rem) clamp(1.2rem, 4.5vw, 3rem) clamp(3.5rem, 8vw, 5.5rem);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    @media (min-width: 720px) { .frames { grid-template-columns: repeat(3, 1fr); } }
+
+    .frame {
+      aspect-ratio: 4 / 3;
+      border: 1.5px dashed rgba(217,164,65,0.4);
+      border-radius: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: rgba(240,232,216,0.02);
+      animation: frameBreathe 4.5s ease-in-out infinite;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .frame:nth-child(2) { animation-delay: 0.7s; }
+    .frame:nth-child(3) { animation-delay: 1.4s; }
+    .frame:nth-child(4) { animation-delay: 2.1s; }
+    .frame:nth-child(5) { animation-delay: 2.8s; }
+    .frame:nth-child(6) { animation-delay: 3.5s; }
+    @keyframes frameBreathe {
+      0%, 100% { border-color: rgba(217,164,65,0.28); }
+      50% { border-color: rgba(217,164,65,0.6); }
+    }
+    .frame:hover { background: rgba(240,232,216,0.05); border-color: var(--kin); }
+
+    .frame .f-kanji {
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+      letter-spacing: 0.2em;
+      color: rgba(240,232,216,0.35);
+    }
+    .frame .f-name {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--hai);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 3rem 1.5rem 3.4rem;
+      text-align: center;
+    }
+    .footer-sun {
+      display: block;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
+      margin: 0 auto 1.2rem;
+      box-shadow: 0 0 18px rgba(217,58,53,0.45);
+    }
+    footer .jp {
+      font-family: var(--display);
+      font-size: 0.95rem;
+      letter-spacing: 0.4em;
+      color: var(--washi);
+      opacity: 0.8;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    footer .credit {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--hai);
+    }
+    footer .credit a { color: var(--kin); text-decoration: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="index.html">← Torna al diario</a>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <header class="hero">
+    <svg class="aperture" viewBox="0 0 80 80" aria-hidden="true">
+      <circle cx="40" cy="40" r="36" fill="none" stroke="#d9a441" stroke-width="1.6"/>
+      <g stroke="#d9a441" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85">
+        <path d="M 40 8 L 52 40"/>
+        <path d="M 68 24 L 40 44"/>
+        <path d="M 68 56 L 32 42"/>
+        <path d="M 40 72 L 28 40"/>
+        <path d="M 12 56 L 40 36"/>
+        <path d="M 12 24 L 48 38"/>
+      </g>
+      <circle cx="40" cy="40" r="5" fill="none" stroke="#d93a35" stroke-width="1.6"/>
+    </svg>
+
+    <span class="jp-title" aria-hidden="true">写真</span>
+    <h1>La galleria</h1>
+    <p class="intro">Le cornici sono pronte, appese una accanto all'altra. Le foto del viaggio stanno tornando a casa con noi: appena scelte e sviluppate, abiteranno qui.</p>
+    <p class="status"><span class="blink" aria-hidden="true"></span> In allestimento</p>
+  </header>
+
+  <!-- ═══════════ CORNICI IN ATTESA ═══════════ -->
+  <section class="frames" aria-label="Le città del viaggio, in attesa delle foto">
+    <div class="frame"><span class="f-kanji" aria-hidden="true">東京</span><span class="f-name">Tokyo</span></div>
+    <div class="frame"><span class="f-kanji" aria-hidden="true">京都</span><span class="f-name">Kyoto</span></div>
+    <div class="frame"><span class="f-kanji" aria-hidden="true">奈良</span><span class="f-name">Nara</span></div>
+    <div class="frame"><span class="f-kanji" aria-hidden="true">大阪</span><span class="f-name">Osaka</span></div>
+    <div class="frame"><span class="f-kanji" aria-hidden="true">姫路</span><span class="f-name">Himeji</span></div>
+    <div class="frame"><span class="f-kanji" aria-hidden="true">箱根</span><span class="f-name">Hakone</span></div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <div class="footer-sun" aria-hidden="true"></div>
+    <span class="jp">良い旅を</span>
+    <p class="credit">Japan Summer 2026 · un diario di <a href="https://www.gioriva.it/mondo/">GioRiva</a> · <a href="index.html">torna al diario</a></p>
+  </footer>
+</body>
+</html>

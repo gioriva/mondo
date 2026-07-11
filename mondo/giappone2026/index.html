@@ -454,6 +454,45 @@
     .day-body a:hover { color: #fff; border-color: var(--kin); }
     .day-body a strong { color: inherit; border-bottom: none; padding-bottom: 0; }
 
+
+    /* ── Anteprima giorni: continua a leggere ── */
+    .day-body.clamped {
+      max-height: 21rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .day-body.clamped::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 7rem;
+      background: linear-gradient(to bottom, transparent, var(--sumi));
+      pointer-events: none;
+    }
+    .day-body.expanding {
+      transition: max-height 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.1rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--kin);
+      background: transparent;
+      border: 1px solid rgba(217,164,65,0.4);
+      border-radius: 2rem;
+      padding: 0.6rem 1.4rem;
+      cursor: pointer;
+      transition: color 0.25s, border-color 0.25s, background 0.25s;
+    }
+    .read-more:hover { color: #fff; border-color: var(--kin); background: rgba(217,164,65,0.08); }
+    .read-more .rm-arrow { transition: transform 0.3s; font-size: 0.6rem; }
+    .read-more:hover .rm-arrow { transform: translateY(2px); }
+
     /* giorno in scrittura */
     .day.writing::after {
       background: transparent;
@@ -676,15 +715,9 @@
     }
 
     .menu-inner {
-      max-width: 980px;
+      max-width: 700px;
       margin: 0 auto;
-      padding: clamp(5.5rem, 12vh, 8rem) clamp(1.5rem, 6vw, 3rem) 4rem;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: clamp(2.5rem, 6vw, 4.5rem);
-    }
-    @media (min-width: 800px) {
-      .menu-inner { grid-template-columns: 1.1fr 1fr; }
+      padding: clamp(5.5rem, 12vh, 7.5rem) clamp(1.5rem, 6vw, 3rem) 4rem;
     }
 
     .m-item {
@@ -700,6 +733,7 @@
     .menu-overlay.open .m-item:nth-child(1) { transition-delay: 0.1s; }
     .menu-overlay.open .m-item:nth-child(2) { transition-delay: 0.18s; }
     .menu-overlay.open .m-item:nth-child(3) { transition-delay: 0.26s; }
+    .menu-overlay.open .m-item:nth-child(4) { transition-delay: 0.34s; }
 
     .m-item .m-jp {
       display: block;
@@ -717,7 +751,10 @@
       line-height: 1.15;
       transition: color 0.3s, letter-spacing 0.3s;
     }
-    .m-item:hover .m-label { color: var(--kin); letter-spacing: 0.02em; }
+    .m-head { display: block; text-decoration: none; }
+    @media (hover: hover) {
+      a.m-item:hover .m-label, .m-head:hover .m-label { color: var(--kin); letter-spacing: 0.02em; }
+    }
     .m-item .m-note {
       display: block;
       font-family: var(--mono);
@@ -728,17 +765,54 @@
       margin-top: 0.35rem;
     }
 
-    .menu-days-label {
-      font-family: var(--mono);
-      font-size: 0.68rem;
+
+    .m-group { cursor: default; }
+    .m-subs { margin-top: 1rem; }
+    .m-sub {
+      display: block;
+      text-decoration: none;
+      padding: 0.55rem 0 0.55rem 1.25rem;
+      position: relative;
+    }
+    .m-sub::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 1.08rem;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
+    }
+    .m-sub .ms-jp {
+      font-family: var(--display);
+      font-size: 0.78rem;
       letter-spacing: 0.3em;
+      color: rgba(217,58,53,0.75);
+      margin-right: 0.7rem;
+    }
+    .m-sub .ms-label {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.3rem, 3vw, 1.65rem);
+      color: var(--washi);
+      transition: color 0.3s;
+    }
+    .m-sub .ms-note {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--hai);
-      margin-bottom: 1.3rem;
-      opacity: 0;
-      transition: opacity 0.5s ease 0.3s;
+      margin-top: 0.15rem;
     }
-    .menu-overlay.open .menu-days-label { opacity: 1; }
+    @media (hover: hover) {
+      .m-sub:hover .ms-label { color: var(--kin); }
+    }
+    @media (max-width: 800px) {
+      .menu-kanji { display: none; }
+    }
+
+    .m-group .m-timeline { margin-top: 1.1rem; max-height: 36vh; }
 
     .m-timeline {
       position: relative;
@@ -829,26 +903,39 @@
     <span class="menu-kanji" aria-hidden="true">目次</span>
     <div class="menu-inner">
       <nav class="menu-sections" aria-label="Sezioni del sito">
-        <a class="m-item" href="#diario">
-          <span class="m-jp" aria-hidden="true">日記</span>
-          <span class="m-label">Diario</span>
-          <span class="m-note">Il racconto, giorno per giorno</span>
-        </a>
+        <div class="m-item m-group">
+          <a class="m-head" href="#diario">
+            <span class="m-jp" aria-hidden="true">日記</span>
+            <span class="m-label">Diario</span>
+            <span class="m-note">Il racconto, giorno per giorno</span>
+          </a>
+          <div class="m-timeline" id="menuTimeline"></div>
+        </div>
         <a class="m-item" href="programma.html">
           <span class="m-jp" aria-hidden="true">旅程</span>
           <span class="m-label">Programma</span>
           <span class="m-note">Voli, treni e tappe del viaggio</span>
         </a>
-        <a class="m-item" href="omikuji.html">
-          <span class="m-jp" aria-hidden="true">御神籤</span>
-          <span class="m-label">Le benedizioni</span>
-          <span class="m-note">Gli omikuji di Kiyomizu</span>
+        <a class="m-item" href="galleria.html">
+          <span class="m-jp" aria-hidden="true">写真</span>
+          <span class="m-label">Galleria</span>
+          <span class="m-note">Le foto del viaggio, in arrivo</span>
         </a>
+        <div class="m-item m-group">
+          <span class="m-jp" aria-hidden="true">逸話</span>
+          <span class="m-label">Curiosità</span>
+          <div class="m-subs">
+            <a class="m-sub" href="omikuji.html">
+              <span><span class="ms-jp" aria-hidden="true">御神籤</span><span class="ms-label">Le benedizioni</span></span>
+              <span class="ms-note">Gli omikuji di Kiyomizu</span>
+            </a>
+            <a class="m-sub" href="himeji.html">
+              <span><span class="ms-jp" aria-hidden="true">姫路城</span><span class="ms-label">Il castello di Himeji</span></span>
+              <span class="ms-note">Quattro secoli dell'Airone bianco</span>
+            </a>
+          </div>
+        </div>
       </nav>
-      <div class="menu-days">
-        <p class="menu-days-label">I giorni</p>
-        <div class="m-timeline" id="menuTimeline"></div>
-      </div>
     </div>
   </div>
 
@@ -921,7 +1008,7 @@
             <div class="day-body">
               <p>Dopo 12 ore atterriamo nel paese del sol levante, dove sono circa le nove di sabato mattina <em>(7h di fuso in avanti rispetto all'Italia)</em>. Recuperiamo i bagagli, facciamo l'immigrazione, e usciamo. Il tempo è nuvoloso, caldo sopportabile ma molto umido. Primo impatto con i mezzi di trasporto, sempre puliti ed efficienti, ma non di facile comprensione nell'immediato, tant'è che saliamo sul primo treno convinti di essere a posto con il biglietto, salvo poi scoprire che non è così. Dopo un po' di peripezie riusciamo ad attivare una carta abbonamento e proseguiamo con uno scalo verso la fermata di <strong>Shinjuku</strong>, il quartiere giovane e della movida dove abbiamo prenotato il nostro hotel, nientemeno che il famoso <strong>Gracery Hotel Shinjuku</strong>, quello con il Godzilla gigante sul terrazzo.</p>
               <p>Rimaniamo subito colpiti dall'ordine, dalla pulizia, e dall'organizzazione delle persone, anche solo per prendere il treno, tutti in fila ordinatamente e senza problemi. Altra nota positiva sono i tipici gabinetti giapponesi, dotati di tutti i comfort e i servizi. Completiamo il check-in, e ci prendiamo un attimo di riposo in quella che sarà la nostra camera per i prossimi tre giorni, decisamente piccola ma comunque accogliente e confortevole. Doccia al volo e si esce, pronti per pranzo, dove battezziamo subito la cucina giapponese con il primo sushi, veramente una delizia.</p>
-              <p>Con le pance piene a questo punto, prendiamo un Uber e ci dirigiamo un po' più a nord, nella zona di <strong>Asakusa</strong>, per visitare il <strong>Senso-ji</strong>, il tempio buddista più antico e grande del Giappone che, nonostante la folla, ci proietta subito nell'atmosfera locale. Tra incensi e fontane sacre riusciamo a fare un bel giro godendoci senza fretta tutto quel che la zona ha da offrire <em>(compreso uno spettacolo con bambini guerrieri con katane di legno)</em> e, terminata la prima tappa, ci avviamo a piedi verso la <strong>Tokyo Skytree</strong>, che raggiungiamo senza però salirci in cima, visto che il tempo nuvoloso non avrebbe agevolato la vista panoramica.</p>
+              <p>Con le pance piene a questo punto, prendiamo la metro <em>(dove ci addormentiamo in 0,2 secondi, rischiando di perdere la fermata, siamo scesi al volo mentre si chiudevano le porte)</em> e ci dirigiamo un po' più a nord, nella zona di <strong>Asakusa</strong>, per visitare il <strong>Senso-ji</strong>, il tempio buddista più antico e grande del Giappone che, nonostante la folla, ci proietta subito nell'atmosfera locale. Tra incensi e fontane sacre riusciamo a fare un bel giro godendoci senza fretta tutto quel che la zona ha da offrire <em>(compreso uno spettacolo con bambini guerrieri con katane di legno)</em> e, terminata la prima tappa, ci avviamo a piedi verso la <strong>Tokyo Skytree</strong>, che raggiungiamo senza però salirci in cima, visto che il tempo nuvoloso non avrebbe agevolato la vista panoramica.</p>
               <p>Proseguiamo a piedi per qualche chilometro lungo il fiume fino alla zona di <strong>Akihabara</strong>, famosa per i videogiochi, il mondo degli anime e dei manga e tutto quello che c'è di nerd. Io mi perdo in ogni negozio, mentre probabilmente Lucrezia ogni tanto vorrebbe strozzarmi <em>(riesco comunque a comprare qualche minchiata da portarmi a casa come ricordo)</em> ma, spinta da un moto di curiosità, si lascia convincere a comprare un Tamagotchi, piccolo oggetto che ha fatto la storia ludica dei primi anni duemila.</p>
               <p>A un certo punto la stanchezza inizia a farsi sentire, anche perché di chilometri a piedi ne abbiamo già macinati parecchi, quindi chiamiamo un altro Uber e torniamo in hotel per una doccia al volo prima di cena. È calato il sole, e ci buttiamo di testa nel vibrante quartiere di <strong>Shinjuku</strong>, che la sera cambia completamente aspetto grazie a illuminazioni, musica, e una quantità di persone vestite nei modi più assurdi. Per cena andiamo in un ristorante locale, dove ero stato nel 2018, che riesco a ritrovare, e ci godiamo una cena tipica <em>(facendo un po' fatica a intenderci con i camerieri, perché qua l'inglese proprio non lo masticano, e le mie lezioni con Duolingo non son ancora sufficienti per essere autonomo)</em> a base di pesce grigliato e un mix di sushi davvero delizioso. Finita la cena sembriamo due zombie, ci trasciniamo in camera e ci addormentiamo ancora prima di aver toccato il cuscino.</p>
             </div>
@@ -996,9 +1083,9 @@
               <span>Nara</span><span>Kasuga</span><span>Tōdai-ji</span><span>Umeda Sky</span><span>Dotonbori</span>
             </div>
             <div class="day-body">
-              <p>La giornata di oggi ci riserva una grande, anzi grandissima sorpresa, perché scopriamo una <strong>Nara</strong> molto più affascinante rispetto alle aspettative. Ma andiamo con ordine. Sveglia alle sette, facciamo comunque colazione in albergo e, con 10 minuti di taxi, arriviamo alla <strong>Kyoto Station</strong>, dove prendiamo un treno locale <em>(<strong>Kintetsu Line</strong>)</em> che, in poco meno di un'ora, ci porta a Nara. In stazione lasciamo i bagagli nei <em>"coin locker"</em>, dei pratici armadietti che fanno proprio al caso nostro; usciamo a piedi e ci incamminiamo con calma verso il <strong>parco di Nara</strong>, incontrando già dopo pochi metri i primi cerbiatti, che sono la principale particolarità di questa zona, dal momento che ne girano migliaia di esemplari ovunque, testimoniando uno strano equilibrio tra uomo e natura. Camminare qui vuol dire letteralmente convivere con questi simpatici animali, che sono completamente abituati alla presenza umana, si lasciano accarezzare e fanno anche una sorta di inchino con la testa, anche se il loro unico vero obiettivo è quello di cercare cibo dai passanti <em>(le strade sono popolate da venditori ambulanti che, per pochi spiccioli, vendono dei cracker particolari che i turisti usano per assicurarsi qualche secondo di attenzione da parte dei cervi ma attenzione, perché arrivano in branco e si incazzano anche)</em>.</p>
+              <p>La giornata di oggi ci riserva una grande, anzi grandissima sorpresa, perché scopriamo una <strong>Nara</strong> molto più affascinante rispetto alle aspettative. Ma andiamo con ordine. Sveglia alle sette, facciamo comunque colazione in albergo e, con 10 minuti di taxi, arriviamo alla <strong>Kyoto Station</strong>, dove prendiamo un treno locale <em>(<strong>Kintetsu Line</strong>)</em> che, in poco meno di un'ora, ci porta a Nara. In stazione lasciamo i bagagli nei <em>"coin locker"</em>, dei pratici armadietti che fanno proprio al caso nostro; usciamo a piedi e ci incamminiamo con calma verso il <strong>parco di Nara</strong>, incontrando già dopo pochi metri i primi cerbiatti <em>(Lucrezia affascinata li intercettava in estasi convinta fossero tutti "Bambi" della Disney)</em>, che sono la principale particolarità di questa zona, dal momento che ne girano migliaia di esemplari ovunque, testimoniando uno strano equilibrio tra uomo e natura. Camminare qui vuol dire letteralmente convivere con questi simpatici animali, che sono completamente abituati alla presenza umana, si lasciano accarezzare e fanno anche una sorta di inchino con la testa, anche se il loro unico vero obiettivo è quello di cercare cibo dai passanti <em>(le strade sono popolate da venditori ambulanti che, per pochi spiccioli, vendono dei cracker particolari che i turisti usano per assicurarsi qualche secondo di attenzione da parte dei cervi ma attenzione, perché arrivano in branco e si incazzano anche)</em>.</p>
               <p>Camminiamo nel parco senza una meta precisa, semplicemente godendoci l'atmosfera un po' fiabesca, ed è proprio qui che arriva la sorpresa, perché ci imbattiamo in tre complessi sacri che sarebbe anche riduttivo definire meravigliosi: il <strong>Santuario Kasuga</strong>, il <strong>Nigatsu-do</strong> e il <strong>Tōdai-ji</strong> <em>(dove riposa il <strong>Grande Buddha</strong>)</em>. Partiamo dal <strong>Santuario Kasuga</strong>, soprannominato <em>"il Mistico"</em>, famoso per le sue migliaia di lanterne di pietra e bronzo che fiancheggiano i sentieri e adornano i corridoi interni. È un santuario shintoista immerso in una foresta vergine protetta, dove i cervi <em>(sacri secondo la tradizione)</em> circolano liberamente, e ci accompagnano in un giro mistico davvero affascinante. Riprendiamo il sentiero nel bosco, per arrivare casualmente al <strong>Nigatsu-do</strong>, soprannominato <em>"il Panoramico"</em>, perché situato su una collina leggermente sopraelevata rispetto alla zona circostante; questo edificio è composto principalmente da una sala in legno con una terrazza sporgente che offre una vista spettacolare sull'intera città di <strong>Nara</strong>. Ultimo ma non per importanza, il <strong>Tōdai-ji</strong> detto <em>"il Gigante"</em> perché il <strong>Daibutsu-den</strong>, ovvero il padiglione principale, è una delle strutture in legno più grandi del mondo e ospita un <strong>Buddha</strong> in bronzo <em>(il Daibutsu per l'appunto)</em> alto ben 15 metri, che ispira serenità, reverenza e spiritualità.</p>
-              <p>Tra cervi, misticismo e divinità giganti il tempo a Nara si esaurisce, per cui in stazione recuperiamo i bagagli dai <em>coin lockers</em> e riprendiamo il <strong>Kintetsu</strong> fino a <strong>Osaka</strong>, che raggiungiamo in circa 40 minuti. L'albergo è molto vicino alla stazione, nel quartiere di <strong>Shinsaibashi</strong>, una zona molto elegante, caratterizzata da un'architettura raffinata, uffici moderni, musei e una posizione privilegiata lungo il fiume. Dopo il check-in e la doccia di rito, decidiamo di andare diretti a visitare l'<strong>Umeda Sky Building</strong>, un'icona della moderna architettura di Osaka, una struttura composta da due torri collegate in cima dal <em>"Floating Garden Observatory"</em>, un punto panoramico a 360° su tutta la città, che tra l'altro ci regala delle viste mozzafiato perché in modo quasi casuale arriviamo proprio al momento del tramonto, nel primo giorno di questa vacanza dove il cielo è sgombro dalle nuvole e all'orizzonte si vede un sole rosso come il fuoco tramontare lentamente. Ci godiamo il momento, facendo più volte il giro dell'osservatorio, e quando il buio è ormai calato, dobbiamo rispondere a un bisogno che adesso si fa sentire in modo prepotente: una gran fame!</p>
+              <p>Tra cervi, misticismo e divinità giganti il tempo a Nara si esaurisce, per cui in stazione recuperiamo i bagagli dai <em>coin lockers</em> e riprendiamo il <strong>Kintetsu</strong> fino a <strong>Osaka</strong>, che raggiungiamo in circa 40 minuti. L'albergo è molto vicino alla stazione, nel quartiere di <strong>Shinsaibashi</strong>, una zona molto elegante, caratterizzata da un'architettura raffinata, uffici moderni, musei e una posizione privilegiata lungo il fiume <em>(che ci ricorda molto Ginza a Tokyo)</em>, dove c'è una vera ibridazione tra architetture ultra moderne e qualche elemento più classico in stile occidentale, il tutto davvero molto suggestivo. Dopo il check-in e la doccia di rito, decidiamo di andare diretti a visitare l'<strong>Umeda Sky Building</strong>, un'icona della moderna architettura di Osaka realizzata dall'architetto <strong>Hiroshi Hara</strong> <em>(figura di grande rilievo nel panorama giapponese, noto anche per la progettazione della stazione di Kyoto)</em>, una struttura composta da due torri collegate in cima dal <em>"Floating Garden Observatory"</em>, un punto panoramico a 360° su tutta la città, che tra l'altro ci regala delle viste mozzafiato perché in modo quasi casuale arriviamo proprio al momento del tramonto, nel primo giorno di questa vacanza dove il cielo è sgombro dalle nuvole e all'orizzonte si vede un sole rosso come il fuoco tramontare lentamente. Ci godiamo il momento, facendo più volte il giro dell'osservatorio, e quando il buio è ormai calato, dobbiamo rispondere a un bisogno che adesso si fa sentire in modo prepotente: una gran fame!</p>
               <p>Cambiamo completamente zona, e ci buttiamo nel caos urbano di <strong>Dotonbori</strong>: caotico, eccessivo, sfacciatamente commerciale e incredibilmente vitale. Se Kyoto è la città del silenzio e del tempio, <strong>Dotonbori</strong> è la città del rumore e dell'insegna al neon. Facciamo la gincana tra la folla e dopo qualche valutazione troviamo un <strong>ristorante di ramen</strong> che ci incuriosisce, e devo ammettere che ci facciamo una gran bella cena. La stanchezza adesso si fa sentire, ma non possiamo non fare un giro per questo quartiere che non ha assolutamente nulla di sobrio, eppure rimane comunque fichissimo. Torniamo a piedi verso l'albergo, un paio di chilometri lungo il vialone di eleganti vetrine che caratterizzano <strong>Shinsaibashi</strong>. Goodnight!</p>
             </div>
           </article>
@@ -1066,7 +1153,7 @@
     menuClose.addEventListener('click', closeMenu);
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
     menuOverlay.addEventListener('click', (e) => { if (e.target === menuOverlay) closeMenu(); });
-    document.querySelectorAll('.m-item, .m-day').forEach(a => a.addEventListener('click', closeMenu));
+    document.querySelectorAll('a.m-item, .m-head, .m-sub, .m-day').forEach(a => a.addEventListener('click', closeMenu));
     function addMenuDay(container, href, meta, title, future) {
       const a = document.createElement('a');
       a.className = 'm-day' + (future ? ' future' : '');
@@ -1083,6 +1170,37 @@
       const meta = (d.querySelector('.day-meta') || {}).textContent || '';
       const title = (d.querySelector('h3') || {}).textContent || '';
       addMenuDay(menuTimeline, '#day-' + (i + 1), meta, title, d.classList.contains('writing'));
+    });
+
+
+    // ── Anteprima giorni: continua a leggere ──
+    function expandDay(body) {
+      if (!body || !body.classList.contains('clamped')) return;
+      const btn = body.parentElement.querySelector('.read-more');
+      body.classList.add('expanding');
+      body.style.maxHeight = body.scrollHeight + 'px';
+      setTimeout(() => {
+        body.classList.remove('clamped', 'expanding');
+        body.style.maxHeight = '';
+      }, 950);
+      if (btn) btn.remove();
+    }
+    document.querySelectorAll('.diary .day:not(.writing) .day-body').forEach(body => {
+      if (body.scrollHeight > 430) {
+        body.classList.add('clamped');
+        const btn = document.createElement('button');
+        btn.className = 'read-more';
+        btn.innerHTML = 'Continua a leggere <span class="rm-arrow" aria-hidden="true">▼</span>';
+        btn.addEventListener('click', () => expandDay(body));
+        body.insertAdjacentElement('afterend', btn);
+      }
+    });
+    // Navigando dal menu a un giorno, il giorno si apre da solo
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="#day-"]');
+      if (!link) return;
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) expandDay(target.querySelector('.day-body'));
     });
 
     // Nav visibile dopo il hero
