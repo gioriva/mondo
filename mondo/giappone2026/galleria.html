@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>写真 · La galleria · Japan Summer</title>
+  <title>Japan Summer 🇯🇵 Diario di viaggio</title>
 
   <!-- No indicizzazione -->
   <meta name="robots" content="noindex, nofollow" />
@@ -301,7 +301,9 @@
       pointer-events: none;
       user-select: none;
     }
-    @media (max-width: 800px) { .menu-kanji { display: none; } }
+    @media (max-width: 800px), (max-height: 540px) {
+      .menu-kanji { display: none; }
+    }
     .menu-inner {
       max-width: 700px;
       margin: 0 auto;
@@ -389,6 +391,67 @@
       a.m-item:hover .m-label { color: var(--kin); letter-spacing: 0.02em; }
       .m-sub:hover .ms-label { color: var(--kin); }
     }
+    .m-head { display: block; text-decoration: none; }
+    .m-group .m-timeline { margin-top: 1.1rem; max-height: 36vh; }
+
+    .m-timeline {
+      position: relative;
+      padding-left: 1.6rem;
+      max-height: 58vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+    .m-timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px; top: 12px; bottom: 12px;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(217,58,53,0.55), var(--line));
+    }
+    .m-day {
+      display: block;
+      position: relative;
+      padding: 0.55rem 0.5rem 0.55rem 0;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .menu-overlay.open .m-day { opacity: 1; transform: translateX(0); }
+    .m-day::before {
+      content: '';
+      position: absolute;
+      left: -1.6rem; top: 0.95rem;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
+      box-shadow: 0 0 8px rgba(217,58,53,0.45);
+    }
+    .m-day.future::before {
+      background: var(--sumi);
+      border: 2px solid rgba(143,134,124,0.55);
+      box-shadow: none;
+    }
+    .m-day .d-meta {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--kin);
+    }
+    .m-day .d-title {
+      display: block;
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 0.98rem;
+      color: var(--washi);
+      line-height: 1.3;
+      margin-top: 0.12rem;
+      transition: color 0.25s;
+    }
+    .m-day:hover .d-title { color: var(--kin); }
+    .m-day.future .d-title { color: rgba(240,232,216,0.5); }
     body.menu-locked { overflow: hidden; }
   </style>
 </head>
@@ -414,11 +477,14 @@
     <span class="menu-kanji" aria-hidden="true">目次</span>
     <div class="menu-inner">
       <nav class="menu-sections" aria-label="Sezioni del sito">
-        <a class="m-item" href="index.html">
-          <span class="m-jp" aria-hidden="true">日記</span>
-          <span class="m-label">Diario</span>
-          <span class="m-note">Il racconto, giorno per giorno</span>
-        </a>
+        <div class="m-item m-group">
+          <a class="m-head" href="index.html">
+            <span class="m-jp" aria-hidden="true">日記</span>
+            <span class="m-label">Diario</span>
+            <span class="m-note">Il racconto, giorno per giorno</span>
+          </a>
+          <div class="m-timeline" id="menuTimeline"></div>
+        </div>
         <a class="m-item" href="programma.html">
           <span class="m-jp" aria-hidden="true">旅程</span>
           <span class="m-label">Programma</span>
@@ -513,6 +579,28 @@
     menuClose.addEventListener('click', closeMenu);
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
     menuOverlay.addEventListener('click', (e) => { if (e.target === menuOverlay) closeMenu(); });
+
+    // ── Timeline dei giorni: caricata dal diario ──
+    const menuTimeline = document.getElementById('menuTimeline');
+    function addMenuDay(container, href, meta, title, future) {
+      const a = document.createElement('a');
+      a.className = 'm-day' + (future ? ' future' : '');
+      a.href = href;
+      a.innerHTML = '<span class="d-meta">' + meta + '</span><span class="d-title">' + title + '</span>';
+      container.appendChild(a);
+    }
+    fetch('index.html')
+      .then(r => r.text())
+      .then(html => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        doc.querySelectorAll('.diary .day').forEach((d, i) => {
+          const meta = (d.querySelector('.day-meta') || {}).textContent || '';
+          const title = (d.querySelector('h3') || {}).textContent || '';
+          addMenuDay(menuTimeline, 'index.html#day-' + (i + 1), meta, title, d.classList.contains('writing'));
+        });
+      })
+      .catch(() => {});
+
     document.querySelectorAll('a.m-item, .m-sub').forEach(a => a.addEventListener('click', closeMenu));
 </script>
 </body>

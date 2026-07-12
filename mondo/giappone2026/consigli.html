@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>心得 · Consigli di viaggio · Japan Summer</title>
+  <title>Japan Summer 🇯🇵 Diario di viaggio</title>
   <meta name="robots" content="noindex, nofollow" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="心得 · Consigli di viaggio · Japan Summer" />
-  <meta property="og:description" content="Contanti, eSIM, konbini e treni: sette cose che avremmo voluto sapere prima di partire per il Giappone." />
+  <meta property="og:description" content="Contanti, Suica, eSIM, konbini e treni: nove cose che avremmo voluto sapere prima di partire per il Giappone." />
   <meta property="og:image" content="https://www.gioriva.it/mondo/giappone2026/japan-summer-og.PNG" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%23d93a35'/></svg>" />
@@ -120,6 +120,8 @@
     .tip p { font-size: 0.97rem; font-weight: 300; color: rgba(240,232,216,0.8); }
     .tip p + p { margin-top: 0.55rem; }
     .tip em { color: var(--kin); font-style: italic; }
+    .tip a { color: var(--kin); text-decoration: none; border-bottom: 1px solid rgba(217,164,65,0.6); padding-bottom: 1px; transition: color 0.25s, border-color 0.25s; }
+    .tip a:hover { color: #fff; border-color: var(--kin); }
     .tip .t-tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--kin); display: block; margin-bottom: 0.3rem; }
 
     .note { max-width: 620px; margin: 0 auto; text-align: center; padding: 0 1.5rem clamp(3rem, 7vw, 5rem); }
@@ -220,7 +222,9 @@
       pointer-events: none;
       user-select: none;
     }
-    @media (max-width: 800px) { .menu-kanji { display: none; } }
+    @media (max-width: 800px), (max-height: 540px) {
+      .menu-kanji { display: none; }
+    }
     .menu-inner {
       max-width: 700px;
       margin: 0 auto;
@@ -309,6 +313,67 @@
       a.m-item:hover .m-label { color: var(--kin); letter-spacing: 0.02em; }
       .m-sub:hover .ms-label { color: var(--kin); }
     }
+    .m-head { display: block; text-decoration: none; }
+    .m-group .m-timeline { margin-top: 1.1rem; max-height: 36vh; }
+
+    .m-timeline {
+      position: relative;
+      padding-left: 1.6rem;
+      max-height: 58vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+    .m-timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px; top: 12px; bottom: 12px;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(217,58,53,0.55), var(--line));
+    }
+    .m-day {
+      display: block;
+      position: relative;
+      padding: 0.55rem 0.5rem 0.55rem 0;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .menu-overlay.open .m-day { opacity: 1; transform: translateX(0); }
+    .m-day::before {
+      content: '';
+      position: absolute;
+      left: -1.6rem; top: 0.95rem;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
+      box-shadow: 0 0 8px rgba(217,58,53,0.45);
+    }
+    .m-day.future::before {
+      background: var(--sumi);
+      border: 2px solid rgba(143,134,124,0.55);
+      box-shadow: none;
+    }
+    .m-day .d-meta {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--kin);
+    }
+    .m-day .d-title {
+      display: block;
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 0.98rem;
+      color: var(--washi);
+      line-height: 1.3;
+      margin-top: 0.12rem;
+      transition: color 0.25s;
+    }
+    .m-day:hover .d-title { color: var(--kin); }
+    .m-day.future .d-title { color: rgba(240,232,216,0.5); }
     body.menu-locked { overflow: hidden; }
 
     @media (prefers-reduced-motion: reduce) {
@@ -339,11 +404,14 @@
     <span class="menu-kanji" aria-hidden="true">目次</span>
     <div class="menu-inner">
       <nav class="menu-sections" aria-label="Sezioni del sito">
-        <a class="m-item" href="index.html">
-          <span class="m-jp" aria-hidden="true">日記</span>
-          <span class="m-label">Diario</span>
-          <span class="m-note">Il racconto, giorno per giorno</span>
-        </a>
+        <div class="m-item m-group">
+          <a class="m-head" href="index.html">
+            <span class="m-jp" aria-hidden="true">日記</span>
+            <span class="m-label">Diario</span>
+            <span class="m-note">Il racconto, giorno per giorno</span>
+          </a>
+          <div class="m-timeline" id="menuTimeline"></div>
+        </div>
         <a class="m-item" href="programma.html">
           <span class="m-jp" aria-hidden="true">旅程</span>
           <span class="m-label">Programma</span>
@@ -417,7 +485,7 @@
 
     <span class="jp-title" aria-hidden="true">心得</span>
     <h1>Consigli di viaggio</h1>
-    <p class="intro">Sette cose che avremmo voluto sapere prima di partire, imparate sul campo tra Tokyo e Hakone. Il gatto le custodisce, noi ve le regaliamo.</p>
+    <p class="intro">Nove cose che avremmo voluto sapere prima di partire, imparate sul campo tra Tokyo e Hakone. Il gatto le custodisce, noi ve le regaliamo.</p>
   </header>
 
   <!-- ═══════════ I SETTE CONSIGLI ═══════════ -->
@@ -427,6 +495,15 @@
       <div class="tip reveal">
         <span class="t-num" aria-hidden="true">一</span>
         <div>
+          <span class="t-tag">Prima di partire</span>
+          <h3>Le pratiche d'ingresso, da casa</h3>
+          <p>Conviene sbrigare in anticipo le formalità d'ingresso in Giappone, immigrazione e dogana: si fa tutto online su <a href="https://services.digital.go.jp/en/visit-japan-web/" target="_blank" rel="noopener">Visit Japan Web</a>, il portale ufficiale che genera un apposito QR code personale e velocizza di molto le operazioni una volta atterrati. La procedura è molto semplice e si completa in pochi minuti.</p>
+        </div>
+      </div>
+
+      <div class="tip reveal">
+        <span class="t-num" aria-hidden="true">二</span>
+        <div>
           <span class="t-tag">Contanti</span>
           <h3>Il contante è ancora il re</h3>
           <p>Il Giappone è un paese super sviluppato, eppure l'uso dei contanti è ancora davvero comune: parecchi posti, soprattutto fuori dalle grandi città, non accettano carte di credito. Assicuratevi di avere sempre a portata di mano almeno 15 o 20.000 yen, che corrispondono a circa 100 euro.</p>
@@ -434,7 +511,7 @@
       </div>
 
       <div class="tip reveal">
-        <span class="t-num" aria-hidden="true">二</span>
+        <span class="t-num" aria-hidden="true">三</span>
         <div>
           <span class="t-tag">Cambio valuta</span>
           <h3>Niente cambio in aeroporto</h3>
@@ -443,7 +520,17 @@
       </div>
 
       <div class="tip reveal">
-        <span class="t-num" aria-hidden="true">三</span>
+        <span class="t-num" aria-hidden="true">四</span>
+        <div>
+          <span class="t-tag">Pagamenti e trasporti</span>
+          <h3>La Suica Card, direttamente nel telefono</h3>
+          <p>Importantissima, facilissima da attivare e funziona ovunque: un vero must have. La Suica è una tessera digitale che si attiva direttamente dal Wallet dell'iPhone, toccando il tasto "+" e cercando "Suica", e si usa per pagare i mezzi di trasporto, bus, treni e metropolitane, oltre a un sacco di altre cose, come la spesa nei konbini o i prodotti nei distributori automatici.</p>
+          <p>Ci vogliono davvero pochi secondi per attivarla, e poi si carica credito di volta in volta direttamente con Apple Pay <em>(il processo è analogo per chi ha Android)</em>. Uno strumento imprescindibile per chi vuole girare il Giappone.</p>
+        </div>
+      </div>
+
+      <div class="tip reveal">
+        <span class="t-num" aria-hidden="true">五</span>
         <div>
           <span class="t-tag">Lingua</span>
           <h3>L'inglese non è scontato</h3>
@@ -452,7 +539,7 @@
       </div>
 
       <div class="tip reveal">
-        <span class="t-num" aria-hidden="true">四</span>
+        <span class="t-num" aria-hidden="true">六</span>
         <div>
           <span class="t-tag">Connessione</span>
           <h3>Internet in tasca, con una eSIM</h3>
@@ -461,7 +548,7 @@
       </div>
 
       <div class="tip reveal">
-        <span class="t-num" aria-hidden="true">五</span>
+        <span class="t-num" aria-hidden="true">七</span>
         <div>
           <span class="t-tag">Treni</span>
           <h3>Il Japan Rail Pass non è sempre un affare</h3>
@@ -471,7 +558,7 @@
       </div>
 
       <div class="tip reveal">
-        <span class="t-num" aria-hidden="true">六</span>
+        <span class="t-num" aria-hidden="true">八</span>
         <div>
           <span class="t-tag">Spazzatura</span>
           <h3>Lo zaino con il sacchetto</h3>
@@ -480,7 +567,7 @@
       </div>
 
       <div class="tip reveal">
-        <span class="t-num" aria-hidden="true">七</span>
+        <span class="t-num" aria-hidden="true">九</span>
         <div>
           <span class="t-tag">Konbini</span>
           <h3>I konbini sono i migliori amici del viaggiatore</h3>
@@ -520,6 +607,28 @@
     menuClose.addEventListener('click', closeMenu);
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
     menuOverlay.addEventListener('click', (e) => { if (e.target === menuOverlay) closeMenu(); });
+
+    // ── Timeline dei giorni: caricata dal diario ──
+    const menuTimeline = document.getElementById('menuTimeline');
+    function addMenuDay(container, href, meta, title, future) {
+      const a = document.createElement('a');
+      a.className = 'm-day' + (future ? ' future' : '');
+      a.href = href;
+      a.innerHTML = '<span class="d-meta">' + meta + '</span><span class="d-title">' + title + '</span>';
+      container.appendChild(a);
+    }
+    fetch('index.html')
+      .then(r => r.text())
+      .then(html => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        doc.querySelectorAll('.diary .day').forEach((d, i) => {
+          const meta = (d.querySelector('.day-meta') || {}).textContent || '';
+          const title = (d.querySelector('h3') || {}).textContent || '';
+          addMenuDay(menuTimeline, 'index.html#day-' + (i + 1), meta, title, d.classList.contains('writing'));
+        });
+      })
+      .catch(() => {});
+
 
     // Scroll reveal
     const revealObserver = new IntersectionObserver((entries) => {
