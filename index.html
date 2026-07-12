@@ -262,8 +262,16 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
   body { cursor: auto; height: 100dvh; }
   a, button { cursor: pointer; }
   #cur-dot, #cur-ring { display: none; }
-  .identity { left: 6vw; bottom: 17dvh; right: 6vw; }
-  .identity h1 { font-size: clamp(2.5rem, 12vw, 3.8rem); }
+  .identity { left: 6vw; bottom: 12dvh; right: 6vw; }
+  .identity h1 {
+    font-size: clamp(2.3rem, 11vw, 3.4rem);
+    text-shadow: 0 0 26px rgba(12,12,13,0.95), 0 0 10px rgba(12,12,13,0.9);
+  }
+  .identity .rule { margin: 0.9rem 0; }
+  .identity p {
+    font-size: 1rem;
+    text-shadow: 0 0 18px rgba(12,12,13,0.95);
+  }
   .bar-bottom {
     padding: 1rem 1.25rem;
     flex-direction: column;
