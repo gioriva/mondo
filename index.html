@@ -45,28 +45,25 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&family=IBM+Plex+Mono:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --sky-top: #07080D;
-  --sky-mid: #0B0C12;
-  --sky-low: #14110D;
-  --ridge-1: #0A0A0B;
-  --ridge-2: #060607;
-  --text:  #E8E2D9;
-  --muted: #6B6560;
-  --gold:  #C8A97E;
+  --sumi:  #0C0C0D;
+  --washi: #E9E4D8;
+  --muted: #6E675D;
+  --shu:   #B5433C;
+  --kin:   #C8A97E;
+  --line:  rgba(233,228,216,0.08);
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans:  'Montserrat', sans-serif;
-  --mono:  'IBM Plex Mono', monospace;
 }
 
 body {
-  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-low) 100%);
-  color: var(--text);
+  background: linear-gradient(180deg, #0A0A0C 0%, #0C0C0D 45%, #0E0D0C 100%);
+  color: var(--washi);
   font-family: var(--sans);
   font-weight: 300;
   height: 100vh;
@@ -75,106 +72,63 @@ body {
 }
 a, button { cursor: none; }
 
-/* ── Sky layers ── */
-#sky-far, #sky-near { position: fixed; inset: 0; pointer-events: none; }
-#sky-far  { z-index: 1; }
-#sky-near { z-index: 2; }
-
-/* ── Constellation ── */
-#constellation {
+/* Paper grain */
+body::before {
+  content: '';
   position: fixed;
   inset: 0;
-  z-index: 4;
-}
-#constellation svg { width: 100%; height: 100%; display: block; }
-#const-overlay { position: fixed; inset: 0; z-index: 5; pointer-events: none; }
-
-/* ── Moon ── */
-#moon-link {
-  position: fixed;
-  top: 9vh;
-  right: 8vw;
-  z-index: 9;
-  pointer-events: auto;
-}
-#moon {
-  display: block;
-  opacity: 0.9;
-  transition: filter .25s, opacity .25s;
-}
-#moon-link:hover #moon { filter: brightness(1.5); opacity: 1; }
-
-/* ── Mountain ridges ── */
-.ridge {
-  position: fixed;
-  left: 0; right: 0; bottom: 0;
+  z-index: 3;
   pointer-events: none;
+  opacity: 0.3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.06 0 0 0 0 0.055 0 0 0 0 0.05 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.ridge svg { display: block; width: 100%; height: auto; }
-#ridge-far  { z-index: 6; }
-#ridge-near { z-index: 7; }
 
-/* ── Lake reflection hint ── */
-#lake {
+#stars  { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+#petals { position: fixed; inset: 0; z-index: 6; pointer-events: none; }
+
+/* ── Scene ── */
+#scene {
   position: fixed;
-  left: 0; right: 0; bottom: 0;
-  height: 7vh;
-  z-index: 8;
-  background: linear-gradient(180deg, rgba(200,169,126,0.03), rgba(7,8,13,0.0));
-  pointer-events: none;
+  inset: 0;
+  z-index: 2;
 }
+#scene svg { width: 100%; height: 100%; display: block; }
+
+/* Hotspot hover labels inside SVG */
+#scene a { cursor: none; }
+#torii-link:hover #torii-group { filter: brightness(1.25); }
+#moon-link:hover  #moon-group  { filter: brightness(1.3); }
+#torii-group, #moon-group { transition: filter .3s; }
 
 /* ── Identity ── */
 .identity {
   position: fixed;
   left: 5vw;
-  bottom: 12vh;
+  bottom: 13vh;
   z-index: 10;
 }
 .identity h1 {
   font-family: var(--serif);
   font-weight: 300;
-  font-size: clamp(3.2rem, 7.5vw, 7rem);
+  font-size: clamp(3rem, 6.5vw, 6rem);
   line-height: 0.95;
-  color: var(--text);
+  color: var(--washi);
 }
-.identity h1 em { font-style: italic; color: var(--gold); }
-.identity .rule { width: 40px; height: 1px; background: var(--gold); opacity: 0.6; margin: 1.4rem 0; }
+.identity h1 em { font-style: italic; color: var(--kin); }
+.identity .rule {
+  width: 40px; height: 1px;
+  background: linear-gradient(90deg, var(--kin), transparent);
+  opacity: 0.7;
+  margin: 1.3rem 0;
+}
 .identity p {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
   color: var(--muted);
 }
 
-/* ── Bars ── */
-.bar-top {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 20;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.4rem 2.5rem;
-}
-.monogram {
-  font-family: var(--serif);
-  font-size: 0.95rem;
-  letter-spacing: 0.4em;
-  color: var(--gold);
-  text-decoration: none;
-  opacity: 0.85;
-}
-.readout {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-  color: var(--muted);
-  display: flex;
-  gap: 2rem;
-}
-.readout b { color: var(--gold); font-weight: 300; }
-
+/* ── Footer ── */
 .bar-bottom {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -182,47 +136,31 @@ a, button { cursor: none; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.3rem 2.5rem;
+  padding: 1.2rem 2.2rem;
 }
 .coords {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--muted);
+  opacity: 0.7;
 }
-.links { display: flex; gap: 2.2rem; list-style: none; }
+.links { display: flex; gap: 2rem; list-style: none; }
 .links a {
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
   text-decoration: none;
   transition: color .2s;
 }
-.links a:hover { color: var(--gold); }
-
-/* ── Hint ── */
-.hint {
-  position: fixed;
-  top: 50%;
-  right: 2.2rem;
-  transform: rotate(90deg) translateX(50%);
-  transform-origin: right center;
-  z-index: 20;
-  font-family: var(--mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--muted);
-  opacity: 0.55;
-  pointer-events: none;
-}
+.links a:hover { color: var(--shu); }
 
 /* ── Custom cursor ── */
 #cur-dot {
   position: fixed; top: 0; left: 0;
   width: 6px; height: 6px;
-  background: var(--gold);
+  background: var(--shu);
   border-radius: 50%;
   pointer-events: none;
   z-index: 10002;
@@ -232,28 +170,28 @@ a, button { cursor: none; }
 #cur-ring {
   position: fixed; top: 0; left: 0;
   width: 32px; height: 32px;
-  border: 1px solid rgba(200,169,126,0.55);
+  border: 1px solid rgba(181,67,60,0.5);
   border-radius: 50%;
   pointer-events: none;
   z-index: 10001;
   transform: translate(-50%,-50%);
   transition: width .25s, height .25s, border-color .25s;
 }
-body.hov #cur-dot  { width: 10px; height: 10px; background: #fff; }
-body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(200,169,126,0.9); }
+body.hov #cur-dot  { width: 10px; height: 10px; background: var(--washi); }
+body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9); }
 
-/* ── Drone ── */
-#drone {
+/* ── Crane (tancho) ── */
+#crane {
   position: fixed;
-  z-index: 9;
+  z-index: 8;
   opacity: 0;
   transition: opacity 1.5s ease;
   pointer-events: auto;
 }
-#drone.visible { opacity: 1; }
-#drone svg { display: block; }
-#drone:hover svg { filter: brightness(1.45); }
-#drone a { display: block; }
+#crane.visible { opacity: 1; }
+#crane svg { display: block; overflow: visible; }
+#crane:hover svg { filter: brightness(1.35); }
+#crane a { display: block; }
 
 /* ── Cookie banner ── */
 #cookie-banner {
@@ -263,9 +201,9 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(200,169,126,0
   transform: translateX(-50%) translateY(140%);
   z-index: 10000;
   width: min(92vw, 640px);
-  background: rgba(14,15,20,0.97);
+  background: rgba(15,14,13,0.97);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(200,169,126,0.22);
+  border: 1px solid rgba(233,228,216,0.14);
   border-radius: 4px;
   padding: 1.5rem 1.75rem;
   display: flex;
@@ -283,11 +221,11 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(200,169,126,0
   font-style: italic;
   font-size: 1.05rem;
   font-weight: 400;
-  color: var(--text);
+  color: var(--washi);
   margin-bottom: 0.35rem;
 }
-.cookie-text a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(200,169,126,0.3); }
-.cookie-text a:hover { color: var(--text); }
+.cookie-text a { color: var(--shu); text-decoration: none; border-bottom: 1px solid rgba(181,67,60,0.35); }
+.cookie-text a:hover { color: var(--washi); }
 .cookie-actions { display: flex; gap: 0.75rem; flex: 0 0 auto; }
 .cookie-btn {
   font-family: var(--sans);
@@ -296,25 +234,24 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(200,169,126,0
   text-transform: uppercase;
   padding: 0.7rem 1.2rem;
   border-radius: 2px;
-  border: 1px solid var(--gold);
+  border: 1px solid var(--shu);
   background: transparent;
-  color: var(--gold);
+  color: var(--shu);
   transition: background .2s, color .2s;
   white-space: nowrap;
 }
-.cookie-btn.decline { border-color: rgba(255,255,255,0.15); color: var(--muted); }
-.cookie-btn.accept:hover { background: var(--gold); color: var(--sky-top); }
-.cookie-btn.decline:hover { border-color: var(--muted); color: var(--text); }
+.cookie-btn.decline { border-color: rgba(233,228,216,0.15); color: var(--muted); }
+.cookie-btn.accept:hover { background: var(--shu); color: var(--washi); }
+.cookie-btn.decline:hover { border-color: var(--muted); color: var(--washi); }
 
 /* ── Entry ── */
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-#constellation { animation: fadeIn 2.2s ease both .3s; }
-.identity h1   { animation: fadeUp .9s ease both .8s; }
-.identity .rule{ animation: fadeUp .7s ease both 1.1s; }
-.identity p    { animation: fadeUp .9s ease both 1.25s; }
-.bar-top, .bar-bottom, .hint { animation: fadeIn 1.2s ease both 1.5s; }
-#moon-link { animation: fadeIn 2.5s ease both .6s; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+#scene         { animation: fadeIn 2.2s ease both .2s; }
+.identity h1   { animation: fadeUp .9s ease both 1.2s; }
+.identity .rule{ animation: fadeIn 1.1s ease both 1.55s; }
+.identity p    { animation: fadeUp .9s ease both 1.65s; }
+.bar-bottom    { animation: fadeIn 1.2s ease both 2.1s; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -325,23 +262,17 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(200,169,126,0
   body { cursor: auto; height: 100dvh; }
   a, button { cursor: pointer; }
   #cur-dot, #cur-ring { display: none; }
-  .bar-top { padding: 1rem 1.25rem; }
-  .readout span:first-child { display: none; }
+  .identity { left: 6vw; bottom: 17dvh; right: 6vw; }
+  .identity h1 { font-size: clamp(2.5rem, 12vw, 3.8rem); }
   .bar-bottom {
     padding: 1rem 1.25rem;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.6rem;
+    background: linear-gradient(0deg, var(--sumi) 55%, transparent);
   }
   .links { gap: 1.4rem; flex-wrap: wrap; }
-  .identity { left: 6vw; bottom: 16dvh; right: 6vw; }
-  .identity h1 { font-size: clamp(2.6rem, 13vw, 4rem); }
-  .hint { display: none; }
-  #moon-link { right: 6vw; top: 8dvh; }
-  #moon { width: 40px; height: 40px; }
-  #ridge-far svg { height: 150px; }
-  #ridge-near svg { height: 100px; }
-  #drone { transform: scale(0.8); }
+  #crane { transform: scale(0.75); }
   #cookie-banner {
     flex-direction: column;
     align-items: stretch;
@@ -357,47 +288,120 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(200,169,126,0
 </head>
 <body>
 
-<canvas id="sky-far"></canvas>
-<canvas id="sky-near"></canvas>
+<canvas id="stars"></canvas>
 
-<!-- Crescent moon -->
-<a id="moon-link" href="https://www.gioriva.it/iss/" target="_blank" rel="noopener" aria-label="ISS tracker">
-<svg id="moon" width="54" height="54" viewBox="0 0 54 54">
+<!-- ── The scene ── -->
+<div id="scene">
+<svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <mask id="crescent">
-      <circle cx="27" cy="27" r="20" fill="white"/>
-      <circle cx="35" cy="22" r="18" fill="black"/>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#16130F"/>
+      <stop offset="100%" stop-color="#070707"/>
+    </linearGradient>
+    <radialGradient id="moonglow" cx="50%" cy="0%" r="100%">
+      <stop offset="0%"  stop-color="rgba(200,169,126,0.09)"/>
+      <stop offset="55%" stop-color="rgba(200,169,126,0.04)"/>
+      <stop offset="100%" stop-color="rgba(200,169,126,0)"/>
+    </radialGradient>
+    <linearGradient id="refl-fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="white" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="refl-mask">
+      <rect x="0" y="660" width="1440" height="240" fill="url(#refl-fade)"/>
     </mask>
   </defs>
-  <circle cx="27" cy="27" r="20" fill="#C8A97E" opacity="0.55" mask="url(#crescent)"/>
-  <circle cx="27" cy="27" r="20" fill="none" stroke="#C8A97E" stroke-width="0.4" opacity="0.25"/>
+
+  <!-- ══ MOON → ISS ══ -->
+  <a id="moon-link" href="https://www.gioriva.it/iss/" target="_blank" rel="noopener" aria-label="Tracker ISS">
+    <g id="moon-group">
+      <circle cx="1130" cy="170" r="64" fill="#E9E4D8" opacity="0.88"/>
+      <circle cx="1108" cy="152" r="9"  fill="#0C0C0D" opacity="0.07"/>
+      <circle cx="1148" cy="188" r="13" fill="#0C0C0D" opacity="0.06"/>
+      <circle cx="1122" cy="196" r="6"  fill="#0C0C0D" opacity="0.05"/>
+    </g>
+  </a>
+
+  <!-- ══ MOUNT FUJI (scenery) ══ -->
+  <g id="fuji">
+    <path d="M 60 660 C 260 610, 340 460, 396 318 L 484 318 C 540 460, 620 610, 820 660 Z"
+          fill="#131317"/>
+    <path d="M 60 660 C 260 610, 340 460, 396 318 L 484 318 C 540 460, 620 610, 820 660"
+          fill="none" stroke="rgba(233,228,216,0.13)" stroke-width="1"/>
+    <!-- snow cap -->
+    <path d="M 396 318 L 484 318 C 478 336 470 342 462 352 L 452 338 L 440 360 L 428 340 L 416 356 L 406 336 C 402 330 398 324 396 318 Z"
+          fill="#E9E4D8" opacity="0.42"/>
+  </g>
+
+  <!-- ══ HIMEJI CASTLE (scenery, distant hill right) ══ -->
+  <g id="himeji" stroke="rgba(233,228,216,0.16)" stroke-width="1" fill="#0A0A0B">
+    <!-- hill -->
+    <path d="M 980 660 Q 1180 590 1440 630 L 1440 660 Z" stroke="none" fill="#111115"/>
+    <path d="M 980 660 Q 1180 590 1440 630" stroke="rgba(233,228,216,0.10)" stroke-width="1" fill="none"/>
+    <!-- base walls -->
+    <path d="M 1150 620 L 1160 585 L 1290 585 L 1300 620 Z"/>
+    <!-- tier 1 -->
+    <path d="M 1168 585 L 1168 560 L 1282 560 L 1282 585 Z"/>
+    <path d="M 1152 560 Q 1225 546 1298 560 L 1282 542 L 1168 542 Z"/>
+    <!-- tier 2 -->
+    <path d="M 1180 542 L 1180 518 L 1270 518 L 1270 542 Z"/>
+    <path d="M 1166 518 Q 1225 505 1284 518 L 1268 501 L 1182 501 Z"/>
+    <!-- tier 3 -->
+    <path d="M 1192 501 L 1192 480 L 1258 480 L 1258 501 Z"/>
+    <path d="M 1180 480 Q 1225 468 1270 480 L 1254 464 L 1196 464 Z"/>
+    <!-- top tier + shachihoko finials -->
+    <path d="M 1204 464 L 1204 446 L 1246 446 L 1246 464 Z"/>
+    <path d="M 1194 446 Q 1225 435 1256 446 L 1242 431 L 1208 431 Z"/>
+    <line x1="1212" y1="431" x2="1210" y2="422"/>
+    <line x1="1238" y1="431" x2="1240" y2="422"/>
+  </g>
+
+  <!-- ══ WATER ══ -->
+  <rect x="0" y="660" width="1440" height="240" fill="url(#water)"/>
+  <line x1="0" y1="660" x2="1440" y2="660" stroke="rgba(233,228,216,0.14)" stroke-width="1"/>
+  <!-- moon glow column on water -->
+  <ellipse id="moonglow-col" cx="1130" cy="662" rx="70" ry="175" fill="url(#moonglow)"/>
+  <!-- ripples -->
+  <g stroke="rgba(233,228,216,0.06)" stroke-width="1">
+    <line class="ripple" x1="180"  y1="700" x2="430"  y2="700"/>
+    <line class="ripple" x1="540"  y1="742" x2="860"  y2="742"/>
+    <line class="ripple" x1="950"  y1="710" x2="1240" y2="710"/>
+    <line class="ripple" x1="300"  y1="800" x2="620"  y2="800"/>
+    <line class="ripple" x1="820"  y1="828" x2="1140" y2="828"/>
+  </g>
+
+  <!-- ══ FLOATING TORII → MONDO ══ -->
+  <a id="torii-link" href="https://www.gioriva.it/mondo/" aria-label="Diari di viaggio">
+    <!-- reflection -->
+    <g mask="url(#refl-mask)" opacity="0.8">
+      <g transform="translate(0,1320) scale(1,-1)" fill="#7E2E29">
+        <path d="M 500 392 Q 640 366 780 392 L 780 374 Q 640 344 500 374 Z"/>
+        <rect x="524" y="398" width="232" height="15"/>
+        <polygon points="586,413 602,413 590,660 574,660"/>
+        <polygon points="678,413 694,413 706,660 690,660"/>
+        <rect x="548" y="478" width="184" height="15"/>
+        <rect x="633" y="413" width="14" height="65"/>
+      </g>
+    </g>
+    <!-- torii -->
+    <g id="torii-group" fill="#B5433C">
+      <!-- kasagi (curved top beam) -->
+      <path d="M 500 392 Q 640 366 780 392 L 780 374 Q 640 344 500 374 Z"/>
+      <!-- shimaki -->
+      <rect x="524" y="398" width="232" height="15"/>
+      <!-- pillars (slight inward lean) -->
+      <polygon points="586,413 602,413 590,660 574,660"/>
+      <polygon points="678,413 694,413 706,660 690,660"/>
+      <!-- nuki -->
+      <rect x="548" y="478" width="184" height="15"/>
+      <!-- gakuzuka -->
+      <rect x="633" y="413" width="14" height="65"/>
+    </g>
+  </a>
 </svg>
-</a>
+</div>
 
-<!-- Constellation -->
-<div id="constellation">
-  <svg id="const-svg" xmlns="http://www.w3.org/2000/svg"></svg>
-</div>
-<div id="const-overlay"></div>
-
-<!-- Mountain ridges (Como silhouette) -->
-<div class="ridge" id="ridge-far">
-  <svg viewBox="0 0 1440 220" preserveAspectRatio="none" height="220">
-    <path d="M0,220 L0,150 L90,118 L180,140 L290,92 L390,128 L470,105 L580,135 L690,80 L800,122 L905,98 L1010,130 L1120,88 L1230,118 L1330,100 L1440,135 L1440,220 Z"
-          fill="#0A0A0C"/>
-    <path d="M0,150 L90,118 L180,140 L290,92 L390,128 L470,105 L580,135 L690,80 L800,122 L905,98 L1010,130 L1120,88 L1230,118 L1330,100 L1440,135"
-          fill="none" stroke="rgba(200,169,126,0.10)" stroke-width="1"/>
-  </svg>
-</div>
-<div class="ridge" id="ridge-near">
-  <svg viewBox="0 0 1440 150" preserveAspectRatio="none" height="150">
-    <path d="M0,150 L0,95 L120,60 L240,90 L360,48 L500,85 L620,55 L760,92 L880,40 L1020,80 L1150,52 L1290,86 L1440,58 L1440,150 Z"
-          fill="#060608"/>
-    <path d="M0,95 L120,60 L240,90 L360,48 L500,85 L620,55 L760,92 L880,40 L1020,80 L1150,52 L1290,86 L1440,58"
-          fill="none" stroke="rgba(200,169,126,0.14)" stroke-width="1"/>
-  </svg>
-</div>
-<div id="lake"></div>
+<canvas id="petals"></canvas>
 
 <!-- Identity -->
 <div class="identity">
@@ -406,17 +410,8 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(200,169,126,0
   <p>Freedom is a state of mind.</p>
 </div>
 
-<!-- Bars -->
-<header class="bar-top">
-  <span></span>
-  <div class="readout">
-    <span>OSSERVATORIO &middot; COMO</span>
-    <span><b id="ro-time">--:--</b></span>
-  </div>
-</header>
-
 <footer class="bar-bottom">
-  <span class="coords">45.81&deg;N &mdash; 9.09&deg;E</span>
+  <span class="coords">Como, Italia &middot; 45.81&deg;N</span>
   <ul class="links">
     <li><a href="/privacy.html">Privacy</a></li>
     <li><a href="#" id="cookie-reopen">Cookie</a></li>
@@ -425,26 +420,38 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(200,169,126,0
   </ul>
 </footer>
 
-<!-- Drone -->
-<div id="drone">
-  <a href="https://www.gioriva.it/drone/" target="_blank" rel="noopener" aria-label="Drone photography">
-  <svg width="52" height="38" viewBox="0 0 52 38" xmlns="http://www.w3.org/2000/svg" fill="none">
-    <line x1="10" y1="10" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
-    <line x1="42" y1="10" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
-    <line x1="10" y1="28" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
-    <line x1="42" y1="28" x2="26" y2="19" stroke="#C8A97E" stroke-width="1.2" stroke-opacity="0.7"/>
-    <circle cx="10" cy="10" r="4" fill="#15151a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
-    <circle cx="42" cy="10" r="4" fill="#15151a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
-    <circle cx="10" cy="28" r="4" fill="#15151a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
-    <circle cx="42" cy="28" r="4" fill="#15151a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.6"/>
-    <ellipse id="p1" cx="10" cy="10" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
-    <ellipse id="p2" cx="42" cy="10" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
-    <ellipse id="p3" cx="10" cy="28" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
-    <ellipse id="p4" cx="42" cy="28" rx="8" ry="1.5" fill="#C8A97E" fill-opacity="0.25" stroke="#C8A97E" stroke-width="0.5" stroke-opacity="0.5"/>
-    <rect x="21" y="15" width="10" height="8" rx="2" fill="#15151a" stroke="#C8A97E" stroke-width="0.8" stroke-opacity="0.7"/>
-    <circle cx="26" cy="30" r="2" fill="#15151a" stroke="#C8A97E" stroke-width="0.7" stroke-opacity="0.5"/>
-    <line x1="26" y1="23" x2="26" y2="28" stroke="#C8A97E" stroke-width="0.6" stroke-opacity="0.4"/>
-    <circle cx="26" cy="19" r="1.2" fill="#C8A97E" fill-opacity="0.9"/>
+<!-- Crane (tancho) -> /drone/ -->
+<div id="crane">
+  <a href="https://www.gioriva.it/drone/" target="_blank" rel="noopener" aria-label="Fotografia aerea">
+  <svg width="80" height="46" viewBox="0 0 80 46" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <!-- far wing (behind body) -->
+    <g id="wing-far">
+      <path d="M 40 23 C 31 12, 20 6, 9 8 C 21 13, 29 18, 40 23 Z"
+            fill="#E9E4D8" opacity="0.5"/>
+      <path d="M 14 7 C 11 7.2, 9.5 7.6, 9 8 C 12 9.2, 15 10.4, 18 11.5 C 16.4 9.9, 15.1 8.4, 14 7 Z"
+            fill="#1A1918" opacity="0.6"/>
+    </g>
+    <!-- tail -->
+    <path d="M 26 24 L 15 26.5 L 26 29 Z" fill="#E9E4D8" opacity="0.85"/>
+    <path d="M 18 25.3 L 15 26.5 L 18 27.8 Z" fill="#1A1918" opacity="0.9"/>
+    <!-- legs trailing -->
+    <path d="M 28 28 L 13 32.5" stroke="#E9E4D8" stroke-width="1" stroke-opacity="0.55" stroke-linecap="round"/>
+    <path d="M 29 29 L 14 35.5" stroke="#E9E4D8" stroke-width="1" stroke-opacity="0.55" stroke-linecap="round"/>
+    <!-- body -->
+    <ellipse cx="38" cy="26" rx="14" ry="5.4" fill="#E9E4D8" opacity="0.92" transform="rotate(-7 38 26)"/>
+    <!-- neck + head -->
+    <path d="M 49 23.5 C 56 21.5, 60 18, 64.5 14.5" stroke="#E9E4D8" stroke-width="2.6" stroke-linecap="round" stroke-opacity="0.92"/>
+    <circle cx="65.5" cy="13.8" r="2.3" fill="#E9E4D8" opacity="0.95"/>
+    <path d="M 67.5 13.2 L 75 11.4" stroke="#E9E4D8" stroke-width="1.2" stroke-linecap="round" stroke-opacity="0.85"/>
+    <!-- red crown -->
+    <circle cx="65" cy="12" r="1.4" fill="#B5433C"/>
+    <!-- near wing (in front) -->
+    <g id="wing-near">
+      <path d="M 42 24 C 34 9, 23 1, 10 3 C 24 9, 32 17, 42 24 Z"
+            fill="#E9E4D8" opacity="0.95"/>
+      <path d="M 16 2.2 C 13 2.4, 11 2.7, 10 3 C 13.5 4.5, 17 6, 20.5 7.6 C 18.8 5.7, 17.3 3.9, 16 2.2 Z"
+            fill="#1A1918" opacity="0.75"/>
+    </g>
   </svg>
   </a>
 </div>
@@ -468,240 +475,166 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(200,169,126,0
 'use strict';
 
 /* ════════════════════════════════════
-   SKY — two parallax star layers + meteors
-   ════════════════════════════════════ */
-var skyFar  = document.getElementById('sky-far');
-var skyNear = document.getElementById('sky-near');
-var ctxFar  = skyFar.getContext('2d');
-var ctxNear = skyNear.getContext('2d');
-
-var starsFar = [], starsNear = [], meteors = [];
-
-function resizeSky() {
-  skyFar.width  = skyNear.width  = window.innerWidth;
-  skyFar.height = skyNear.height = window.innerHeight;
-}
-resizeSky();
-window.addEventListener('resize', resizeSky);
-
-(function seedStars() {
-  for (var i = 0; i < 130; i++) {
-    starsFar.push({ x: Math.random(), y: Math.random() * 0.85, r: 0.35 + Math.random() * 0.6,
-                    phase: Math.random() * 6.28, speed: 0.0003 + Math.random() * 0.0006 });
-  }
-  for (var j = 0; j < 55; j++) {
-    starsNear.push({ x: Math.random(), y: Math.random() * 0.8, r: 0.7 + Math.random() * 1.0,
-                     phase: Math.random() * 6.28, speed: 0.0005 + Math.random() * 0.0009 });
-  }
-})();
-
-function spawnMeteor() {
-  var x = Math.random() * skyNear.width * 0.8;
-  var y = Math.random() * skyNear.height * 0.3;
-  var ang = Math.PI * (0.18 + Math.random() * 0.12);
-  meteors.push({ x: x, y: y, vx: Math.cos(ang) * 9, vy: Math.sin(ang) * 9, life: 1 });
-  setTimeout(spawnMeteor, 12000 + Math.random() * 23000);
-}
-setTimeout(spawnMeteor, 6000 + Math.random() * 8000);
-
-function drawLayer(ctx, cv, stars, ts) {
-  ctx.clearRect(0, 0, cv.width, cv.height);
-  for (var i = 0; i < stars.length; i++) {
-    var s = stars[i];
-    var tw = 0.22 + 0.4 * (0.5 + 0.5 * Math.sin(ts * s.speed + s.phase));
-    ctx.beginPath();
-    ctx.arc(s.x * cv.width, s.y * cv.height, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(200,169,126,' + tw.toFixed(3) + ')';
-    ctx.fill();
-  }
-}
-
-function skyTick(ts) {
-  drawLayer(ctxFar,  skyFar,  starsFar,  ts);
-  drawLayer(ctxNear, skyNear, starsNear, ts);
-
-  for (var m = meteors.length - 1; m >= 0; m--) {
-    var mt = meteors[m];
-    mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.012;
-    if (mt.life <= 0) { meteors.splice(m, 1); continue; }
-    var grad = ctxNear.createLinearGradient(mt.x, mt.y, mt.x - mt.vx * 9, mt.y - mt.vy * 9);
-    grad.addColorStop(0, 'rgba(232,226,217,' + (0.85 * mt.life).toFixed(3) + ')');
-    grad.addColorStop(1, 'rgba(200,169,126,0)');
-    ctxNear.strokeStyle = grad;
-    ctxNear.lineWidth = 1.2;
-    ctxNear.beginPath();
-    ctxNear.moveTo(mt.x, mt.y);
-    ctxNear.lineTo(mt.x - mt.vx * 9, mt.y - mt.vy * 9);
-    ctxNear.stroke();
-  }
-  requestAnimationFrame(skyTick);
-}
-requestAnimationFrame(skyTick);
-
-/* ════════════════════════════════════
-   CONSTELLATION — cities at true coordinates
-   ════════════════════════════════════ */
-var HOME = { name: 'Como', lat: 45.81, lon: 9.09, url: 'https://www.gioriva.it/mondo/' };
-var cities = [
-  HOME,
-  { name: 'Los Angeles',  lat:  34.05, lon: -118.24, url: 'https://www.gioriva.it/mondo/' },
-  { name: 'Tokyo',        lat:  35.70, lon:  139.70, url: 'https://www.gioriva.it/mondo/' },
-  { name: 'Hong Kong',    lat:  22.32, lon:  114.17, url: 'https://www.gioriva.it/mondo/' },
-  { name: 'New York',     lat:  40.71, lon:  -74.01, url: 'https://www.gioriva.it/mondo/' },
-  { name: 'Singapore',    lat:   1.35, lon:  103.82, url: 'https://www.gioriva.it/mondo/' },
-  { name: 'Cancun',       lat:  21.16, lon:  -86.85, url: 'https://www.gioriva.it/mondo/' },
-  { name: 'Bora Bora',    lat: -16.50, lon: -151.74, url: 'https://www.gioriva.it/mondo/' },
-  { name: 'Buenos Aires', lat: -34.61, lon:  -58.38, url: 'https://www.gioriva.it/mondo/' }
-];
-
-var constSvg = document.getElementById('const-svg');
-var constOverlay = document.getElementById('const-overlay');
-var NS = 'http://www.w3.org/2000/svg';
-
-/* Equirectangular mapping into the sky region.
-   Desktop:  lon -> x (8%..92% W), lat 70..-40 -> y (7%..46% H)
-             (lower bound keeps southern stars clear of the name block)
-   Mobile:   rotated portrait projection — lat -> x, lon -> y —
-             so cities spread along the screen height instead of crowding */
-function isMobile() { return window.innerWidth <= 768; }
-
-function skyPos(lat, lon) {
-  var W = window.innerWidth, H = window.innerHeight;
-  if (isMobile()) {
-    var x = (0.16 + (lat + 40) / 110 * 0.68) * W;   // south left -> north right
-    var y = (0.07 + (lon + 180) / 360 * 0.50) * H;  // west top -> east bottom
-    return { x: x, y: y };
-  }
-  return {
-    x: (0.08 + (lon + 180) / 360 * 0.84) * W,
-    y: (0.07 + (70 - lat) / 110 * 0.39) * H
-  };
-}
-
-var edgesG = document.createElementNS(NS, 'g');
-constSvg.appendChild(edgesG);
-var starsG = document.createElementNS(NS, 'g');
-constSvg.appendChild(starsG);
-
-var cityEls = [];   // svg elements per city
-var cityLinks = []; // html links per city
-
-cities.forEach(function (c, i) {
-  /* SVG star: core + glow ring */
-  var glow = document.createElementNS(NS, 'circle');
-  glow.setAttribute('r', i === 0 ? '9' : '7');
-  glow.setAttribute('fill', 'none');
-  glow.setAttribute('stroke', '#C8A97E');
-  glow.setAttribute('stroke-width', '0.6');
-  glow.setAttribute('opacity', '0.25');
-  starsG.appendChild(glow);
-
-  var core = document.createElementNS(NS, 'circle');
-  core.setAttribute('r', i === 0 ? '3.2' : '2.4');
-  core.setAttribute('fill', '#C8A97E');
-  starsG.appendChild(core);
-
-  /* 4-point sparkle cross */
-  var cross = document.createElementNS(NS, 'g');
-  cross.setAttribute('stroke', '#C8A97E');
-  cross.setAttribute('stroke-width', '0.5');
-  cross.setAttribute('opacity', '0.4');
-  ['h','v'].forEach(function (dir) {
-    var l = document.createElementNS(NS, 'line');
-    cross.appendChild(l);
-  });
-  starsG.appendChild(cross);
-
-  cityEls.push({ glow: glow, core: core, cross: cross, phase: Math.random() * 6.28 });
-
-  /* HTML label-link */
-  var a = document.createElement('a');
-  a.href = c.url;
-  a.target = '_blank';
-  a.rel = 'noopener';
-  a.style.cssText = 'position:absolute;pointer-events:auto;text-decoration:none;white-space:nowrap;transform:translate(-50%,0)';
-  var lbl = document.createElement('span');
-  lbl.style.cssText = 'font-family:Montserrat,sans-serif;font-size:8.5px;font-weight:400;letter-spacing:2px;color:#C8A97E;opacity:0.6;text-transform:uppercase;transition:color .2s,opacity .2s';
-  lbl.textContent = c.name.toUpperCase();
-  a.appendChild(lbl);
-  a.addEventListener('mouseenter', function () {
-    document.body.classList.add('hov');
-    lbl.style.opacity = '1'; lbl.style.color = '#fff';
-  });
-  a.addEventListener('mouseleave', function () {
-    document.body.classList.remove('hov');
-    lbl.style.opacity = '0.6'; lbl.style.color = '#C8A97E';
-  });
-  constOverlay.appendChild(a);
-  cityLinks.push(a);
-});
-
-/* Constellation edges: Como -> each destination */
-var edgeEls = [];
-for (var e = 1; e < cities.length; e++) {
-  var line = document.createElementNS(NS, 'line');
-  line.setAttribute('stroke', 'rgba(200,169,126,0.16)');
-  line.setAttribute('stroke-width', '0.6');
-  line.setAttribute('stroke-dasharray', '2 6');
-  edgesG.appendChild(line);
-  edgeEls.push(line);
-}
-
-function layoutConstellation(ts) {
-  for (var i = 0; i < cities.length; i++) {
-    var c = cities[i];
-    var p = skyPos(c.lat, c.lon);
-    var px = p.x, py = p.y;
-    var el = cityEls[i];
-
-    /* breathing glow */
-    var breathe = 0.5 + 0.5 * Math.sin(ts * 0.0009 + el.phase);
-    var glowR = (i === 0 ? 9 : 7) + breathe * 2.5;
-    el.glow.setAttribute('cx', px); el.glow.setAttribute('cy', py);
-    el.glow.setAttribute('r', glowR.toFixed(1));
-    el.glow.setAttribute('opacity', (0.15 + breathe * 0.2).toFixed(2));
-
-    el.core.setAttribute('cx', px); el.core.setAttribute('cy', py);
-
-    var arm = (i === 0 ? 8 : 6) + breathe * 2;
-    var lines = el.cross.children;
-    lines[0].setAttribute('x1', px - arm); lines[0].setAttribute('y1', py);
-    lines[0].setAttribute('x2', px + arm); lines[0].setAttribute('y2', py);
-    lines[1].setAttribute('x1', px); lines[1].setAttribute('y1', py - arm);
-    lines[1].setAttribute('x2', px); lines[1].setAttribute('y2', py + arm);
-
-    /* label: alternate above/below to avoid collisions */
-    var a = cityLinks[i];
-    a.style.left = px + 'px';
-    if (i % 2 === 0) {
-      a.style.top = (py + 12) + 'px';
-      a.style.transform = 'translate(-50%,0)';
-    } else {
-      a.style.top = (py - 12) + 'px';
-      a.style.transform = 'translate(-50%,-100%)';
-    }
-  }
-
-  var hp = skyPos(HOME.lat, HOME.lon);
-  for (var k = 0; k < edgeEls.length; k++) {
-    var dp = skyPos(cities[k + 1].lat, cities[k + 1].lon);
-    edgeEls[k].setAttribute('x1', hp.x); edgeEls[k].setAttribute('y1', hp.y);
-    edgeEls[k].setAttribute('x2', dp.x); edgeEls[k].setAttribute('y2', dp.y);
-  }
-
-  requestAnimationFrame(layoutConstellation);
-}
-requestAnimationFrame(layoutConstellation);
-
-/* ════════════════════════════════════
-   COMO local time
+   SCENE recomposition for portrait crop
+   (slice keeps ~512..928 of viewBox visible on phones)
    ════════════════════════════════════ */
 (function () {
-  var el = document.getElementById('ro-time');
-  var fmt = new Intl.DateTimeFormat('it-IT', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' });
-  function update() { el.textContent = fmt.format(new Date()); }
-  update();
-  setInterval(update, 15000);
+  var moon  = document.getElementById('moon-link');
+  var torii = document.getElementById('torii-link');
+  var fuji  = document.getElementById('fuji');
+
+  var himeji = document.getElementById('himeji');
+  var glow   = document.getElementById('moonglow-col');
+
+  function recompose() {
+    if (window.innerWidth <= 768) {
+      moon.setAttribute('transform', 'translate(-310,-10)');    // moon -> x 820
+      glow.setAttribute('transform', 'translate(-310,0)');      // glow follows moon
+      torii.removeAttribute('transform');                       // torii ~500-780, in view
+      fuji.setAttribute('transform', 'translate(200,0)');       // peak -> x ~640
+      himeji.setAttribute('transform', 'translate(-390,-15)');  // castle -> x ~760-910
+    } else {
+      moon.removeAttribute('transform');
+      glow.removeAttribute('transform');
+      torii.removeAttribute('transform');
+      fuji.removeAttribute('transform');
+      himeji.removeAttribute('transform');
+    }
+  }
+  recompose();
+  window.addEventListener('resize', recompose);
+})();
+
+/* ════════════════════════════════════
+   STARS + occasional meteor
+   ════════════════════════════════════ */
+(function () {
+  var cv = document.getElementById('stars');
+  var ctx = cv.getContext('2d');
+  var stars = [], meteors = [];
+
+  function resize() { cv.width = window.innerWidth; cv.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (var i = 0; i < 90; i++) {
+    stars.push({
+      x: Math.random(), y: Math.random() * 0.6,
+      r: 0.35 + Math.random() * 0.75,
+      phase: Math.random() * 6.28,
+      speed: 0.0003 + Math.random() * 0.0007
+    });
+  }
+
+  function spawnMeteor() {
+    meteors.push({
+      x: Math.random() * cv.width * 0.7,
+      y: Math.random() * cv.height * 0.25,
+      vx: 8, vy: 3.4, life: 1
+    });
+    setTimeout(spawnMeteor, 15000 + Math.random() * 25000);
+  }
+  setTimeout(spawnMeteor, 8000);
+
+  function tick(ts) {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      var tw = 0.18 + 0.35 * (0.5 + 0.5 * Math.sin(ts * s.speed + s.phase));
+      ctx.beginPath();
+      ctx.arc(s.x * cv.width, s.y * cv.height, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(233,228,216,' + tw.toFixed(3) + ')';
+      ctx.fill();
+    }
+    for (var m = meteors.length - 1; m >= 0; m--) {
+      var mt = meteors[m];
+      mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.012;
+      if (mt.life <= 0) { meteors.splice(m, 1); continue; }
+      var grad = ctx.createLinearGradient(mt.x, mt.y, mt.x - mt.vx * 8, mt.y - mt.vy * 8);
+      grad.addColorStop(0, 'rgba(233,228,216,' + (0.8 * mt.life).toFixed(3) + ')');
+      grad.addColorStop(1, 'rgba(233,228,216,0)');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      ctx.moveTo(mt.x, mt.y);
+      ctx.lineTo(mt.x - mt.vx * 8, mt.y - mt.vy * 8);
+      ctx.stroke();
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ════════════════════════════════════
+   RIPPLES — slow breathing
+   ════════════════════════════════════ */
+(function () {
+  var ripples = document.querySelectorAll('.ripple');
+  function tick(ts) {
+    ripples.forEach(function (r, i) {
+      var o = 0.03 + 0.05 * (0.5 + 0.5 * Math.sin(ts * 0.0004 + i * 1.4));
+      r.setAttribute('stroke-opacity', o.toFixed(3));
+    });
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ════════════════════════════════════
+   PETALS — rare drifting sakura
+   ════════════════════════════════════ */
+(function () {
+  var cv = document.getElementById('petals');
+  var ctx = cv.getContext('2d');
+  var petals = [];
+
+  function resize() { cv.width = window.innerWidth; cv.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function spawn() {
+    if (petals.length < 4) {
+      petals.push({
+        x: Math.random() * cv.width * 0.6,
+        y: -20,
+        vx: 0.25 + Math.random() * 0.4,
+        vy: 0.4 + Math.random() * 0.5,
+        rot: Math.random() * 6.28,
+        vr: (Math.random() - 0.5) * 0.02,
+        size: 5 + Math.random() * 4,
+        sway: Math.random() * 6.28
+      });
+    }
+    setTimeout(spawn, 8000 + Math.random() * 14000);
+  }
+  setTimeout(spawn, 5000);
+
+  function drawPetal(p) {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.beginPath();
+    ctx.moveTo(0, -p.size);
+    ctx.bezierCurveTo(p.size * 0.8, -p.size * 0.4, p.size * 0.6, p.size * 0.6, 0, p.size);
+    ctx.bezierCurveTo(-p.size * 0.6, p.size * 0.6, -p.size * 0.8, -p.size * 0.4, 0, -p.size);
+    ctx.fillStyle = 'rgba(214,160,158,0.30)';
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function tick(ts) {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    for (var i = petals.length - 1; i >= 0; i--) {
+      var p = petals[i];
+      p.x += p.vx + Math.sin(ts * 0.001 + p.sway) * 0.3;
+      p.y += p.vy;
+      p.rot += p.vr;
+      if (p.y > cv.height + 30 || p.x > cv.width + 30) { petals.splice(i, 1); continue; }
+      drawPetal(p);
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 })();
 
 /* ════════════════════════════════════
@@ -720,7 +653,7 @@ requestAnimationFrame(layoutConstellation);
     ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
     requestAnimationFrame(anim);
   })();
-  document.querySelectorAll('a, button, #drone').forEach(function (el) {
+  document.querySelectorAll('a, button, #crane').forEach(function (el) {
     el.addEventListener('mouseenter', function () { document.body.classList.add('hov'); });
     el.addEventListener('mouseleave', function () { document.body.classList.remove('hov'); });
   });
@@ -753,31 +686,34 @@ requestAnimationFrame(layoutConstellation);
   });
   reopen.addEventListener('click', function (e) { e.preventDefault(); show(); });
 
-  if (!getStored()) setTimeout(show, 1600);
+  if (!getStored()) setTimeout(show, 1800);
 })();
 
 /* ════════════════════════════════════
-   DRONE flight
+   CRANE flight — gliding with wing beats
    ════════════════════════════════════ */
 (function () {
-  var drone = document.getElementById('drone');
+  var crane = document.getElementById('crane');
+  var svg = crane.querySelector('svg');
+  var wingNear = document.getElementById('wing-near');
+  var wingFar  = document.getElementById('wing-far');
   var W = window.innerWidth, H = window.innerHeight;
   window.addEventListener('resize', function () { W = window.innerWidth; H = window.innerHeight; });
 
   var waypoints = [
-    [0.15, 0.30], [0.32, 0.20], [0.50, 0.32], [0.68, 0.18],
-    [0.85, 0.28], [0.80, 0.48], [0.62, 0.58], [0.45, 0.50],
-    [0.28, 0.60], [0.12, 0.48]
+    [0.14, 0.14], [0.34, 0.08], [0.55, 0.16], [0.74, 0.07],
+    [0.88, 0.13], [0.84, 0.30], [0.64, 0.36], [0.44, 0.28],
+    [0.24, 0.38], [0.10, 0.28]
   ];
 
   var idx = 0;
-  var startX = -60, startY = H * 0.3;
+  var startX = -80, startY = H * 0.18;
   var targetX = waypoints[0][0] * W, targetY = waypoints[0][1] * H;
   var startTime = null;
-  var segDuration = 7000;
-  var propAngle = 0;
+  var segDuration = 9000;
+  var facing = 1; // 1 = right, -1 = left
 
-  setTimeout(function () { drone.classList.add('visible'); }, 1200);
+  setTimeout(function () { crane.classList.add('visible'); }, 1400);
 
   function easeInOut(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
 
@@ -787,27 +723,33 @@ requestAnimationFrame(layoutConstellation);
     var e = easeInOut(t);
     var x = startX + (targetX - startX) * e;
     var y = startY + (targetY - startY) * e;
-    var hover = Math.sin(ts * 0.0015) * 3;
-    var tilt = Math.max(-12, Math.min(12, (targetX - startX) * 0.015));
+    var bob = Math.sin(ts * 0.0011) * 2.5;
 
-    drone.style.left = (x - 26) + 'px';
-    drone.style.top  = (y - 19 + hover) + 'px';
-    drone.style.transform = 'rotate(' + tilt + 'deg)';
+    crane.style.left = (x - 40) + 'px';
+    crane.style.top  = (y - 23 + bob) + 'px';
 
-    propAngle += 18;
-    ['p1','p2','p3','p4'].forEach(function (id, i) {
-      var el = document.getElementById(id);
-      var phase = (propAngle + i * 45) % 180;
-      el.setAttribute('transform', 'rotate(' + phase + ' ' + el.getAttribute('cx') + ' ' + el.getAttribute('cy') + ')');
-    });
+    /* face direction of travel */
+    var dir = (targetX - startX) >= 0 ? 1 : -1;
+    facing += (dir - facing) * 0.08;
+    var tilt = Math.max(-8, Math.min(8, (targetY - startY) * -0.008 * dir));
+    svg.style.transform = 'scaleX(' + facing.toFixed(3) + ') rotate(' + tilt.toFixed(1) + 'deg)';
+
+    /* wing beat: slow flap with glide pauses */
+    var beat = Math.sin(ts * 0.004);
+    var glide = 0.5 + 0.5 * Math.sin(ts * 0.0006);        /* 0..1, slow cycle */
+    var amp = 6 + 16 * glide;                              /* flap harder, then glide */
+    var nearA = beat * amp;
+    var farA  = Math.sin(ts * 0.004 + 0.7) * amp * 0.8;
+    wingNear.setAttribute('transform', 'rotate(' + nearA.toFixed(1) + ' 42 24)');
+    wingFar.setAttribute('transform',  'rotate(' + farA.toFixed(1)  + ' 40 23)');
 
     if (t >= 1) {
-      startX = x; startY = y + hover;
+      startX = x; startY = y + bob;
       idx = (idx + 1) % waypoints.length;
       targetX = waypoints[idx][0] * W;
       targetY = waypoints[idx][1] * H;
       startTime = ts;
-      segDuration = 5500 + Math.random() * 4000;
+      segDuration = 7500 + Math.random() * 5000;
     }
     requestAnimationFrame(anim);
   }
