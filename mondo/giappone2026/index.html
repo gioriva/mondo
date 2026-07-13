@@ -438,6 +438,33 @@
       background: rgba(217,164,65,0.06);
     }
 
+    .trip-total {
+      margin-top: clamp(3rem, 7vw, 4.5rem);
+      padding-top: clamp(2rem, 4.5vw, 3rem);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+    .trip-total .tt-jp {
+      display: block;
+      font-family: var(--display);
+      font-size: 0.85rem;
+      letter-spacing: 0.5em;
+      color: var(--aka);
+      margin-bottom: 0.8rem;
+    }
+    .trip-total .tt-nums {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      color: var(--hai);
+    }
+    .trip-total strong { color: var(--kin); font-weight: 400; }
+    .trip-total .tt-sep { color: rgba(217,58,53,0.7); }
+
     .day-stats {
       display: inline-flex;
       align-items: center;
@@ -1173,23 +1200,39 @@
             </div>
             <p class="day-stats"><span class="st-jp" aria-hidden="true">歩</span><span><strong>9,7 km</strong> percorsi · <strong>14.324</strong> passi</span></p>
             <div class="day-body">
-              <p>Oggi è il nostro ultimo giorno pieno in questo paese che una volta che ti entra dentro, non ti abbandona più. La sveglia suona sempre discretamente presto, e dato che abbiamo un <em>onsen</em> privato in camera, ne approfittiamo per cominciar bene la giornata. Facciamo colazione in kimono seduti per terra con le gambe sotto un piccolo tavolino in pieno stile giapponese, bevendo caffè in lattina e mangiando qualche biscotto comprato ieri sera al <em>konbini</em> del paese. Finalmente usciamo, incamminandoci a piedi verso la stazione di <strong>Hakone-Yumoto</strong>, dove acquistiamo l'<strong>Hakone Pass</strong> <em>(una specie di abbonamento per tutte le attrazioni della zona)</em> e saliamo sul <strong>Tozan Railway</strong>, un trenino che in mezz'oretta ci porta a <strong>Gora</strong>, una piccola località di montagna dove facciamo scalo su un altro trenino per arrivare quindi ai piedi del <strong>vulcano Owakudani</strong>.</p>
-              <p>A questo punto, abbandoniamo il treno per una funivia che ci porta in cima al vulcano, percorrendo l'ultimo tratto letteralmente sopra una parte di cratere da cui possiamo osservare fumate bianche e colate di zolfo giallo di cui riconosciamo subito il tipico odore. Arrivati in cima il paesaggio è veramente incredibile, i vapori del vulcano riempiono il cielo, rendendo il contesto davvero unico. Ci sono diversi punti panoramici, dai quali si possono vedere le valli che circondano il vulcano, le miniere di zolfo e tutta la conformazione morfologica molto particolare che caratterizza questa zona. L'altra particolarità che ci aspetta in cima all'<strong>Owakudani</strong> sono le tipiche <a href="kurotamago.html"><strong>uova nere</strong></a>, ovvero delle uova che vengono lasciate a lessare per diverso tempo nelle pozze di acqua termale che sgorgano naturalmente in questa zona, la cui composizione altera il guscio dell'uovo rendendolo nero come la cenere. La leggenda vuole che <em>consumare queste uova allunga la vita di sette anni</em>: noi nel dubbio ne abbiamo mangiate quattro.</p>
-              <p>Ci prendiamo ancora qualche minuto per girovagare un po' in cima al cratere e, una volta deciso che avevamo visto tutto, torniamo allo scalo della funivia, non per tornare a <strong>Gora</strong> ma per scendere sul versante opposto, con un collegamento diretto che ci porta al <strong>porto di Togendai</strong> sul <strong>Lake Ashinoko</strong>. In tutto questo ci siamo scordati un piccolo particolare: sia dalla cima del vulcano che dalle sponde del lago in teoria si dovrebbe ammirare il simbolo per eccellenza del <strong>Giappone</strong>, ovvero il <strong>monte Fuji</strong>, peccato che il cielo sia nuvoloso, l'aria un po' nebbiosa e nel complesso del <strong>monte Fuji</strong> neanche l'ombra. Abbandonate le speranze di vedere il maestoso vulcano, facciamo un'integrazione del pass acquistato in precedenza e ci imbarchiamo su un moderno galeone che attraversa il <strong>Lago Ashi</strong>, facendo tappa prima a <strong>Hakone Sekisho</strong> e successivamente a quella che sarà la nostra destinazione, ovvero <strong>Motohakone</strong>; entrambi piccoli insediamenti sulle sponde del lago, molto piccolini ma accoglienti e tipici.</p>
-              <p>La navigazione sul <strong>lago Ashi</strong> prosegue serena, noi ci posizioniamo sul ponte più alto del galeone, per goderci un paesaggio montano quasi mistico, con la nebbia che permea le foreste e dei <strong>torii galleggianti</strong> che spuntano dalle acque. Ed è proprio a questo punto che arriva la sorpresa più bella: per qualche minuto, poco prima di sbarcare, le nuvole si aprono e, quasi come a volerci salutare, appare maestoso ed elegante proprio lui, il <strong>monte Fuji</strong>, in tutta la sua bellezza che, devo dire, ci lascia senza parole. Dopo questo momento quasi spirituale, sbarchiamo a <strong>Motohakone</strong> animati da un misto di felicità e nostalgia, perché il saluto del <strong>Monte Fuji</strong> ci ha comunque ricordato che tra non molto rientreremo in Italia. Abbandoniamo comunque questo senso di nostalgia e facciamo una passeggiata in zona, prendendo un sentiero nel bosco che ci conduce a un'apertura tra gli alberi dove si può ammirare un maestoso <strong>torii rosso</strong> spuntare dalle acque del lago.</p>
+              <p>Oggi è il nostro ultimo giorno pieno in questo paese che una volta che ti entra dentro, non ti abbandona più. La sveglia suona sempre discretamente presto, e dato che abbiamo un <em>onsen</em> privato in camera, ne approfittiamo per cominciar bene la giornata. Facciamo colazione in kimono, seduti per terra con le gambe sotto un piccolo tavolino in pieno stile giapponese, bevendo caffè in lattina e mangiando qualche biscotto comprato ieri sera al <em>konbini</em> del paese. Finalmente usciamo, incamminandoci a piedi verso la stazione di <strong>Hakone-Yumoto</strong>, dove acquistiamo l'<strong>Hakone Pass</strong> <em>(una specie di abbonamento per tutte le attrazioni della zona)</em> e saliamo sul <strong>Tozan Railway</strong>, un trenino panoramico davvero affascinante, che risale a zig zag la montagna, facendoci scoprire panorami e viste davvero suggestive e che, in poco più di mezz'ora, ci porta a <strong>Gora</strong>, una piccola località di montagna dove facciamo scalo su un altro trenino per arrivare quindi ai piedi del <strong>vulcano Owakudani</strong>.</p>
+              <p>A questo punto, abbandoniamo il treno per una funivia che ci porta in cima al vulcano, percorrendo l'ultimo tratto letteralmente sopra una parte di cratere da cui possiamo osservare fumate bianche e colate di zolfo giallo, di cui riconosciamo subito il tipico odore. Arrivati in cima il paesaggio è veramente incredibile, i vapori del vulcano riempiono il cielo, rendendo il contesto davvero unico. Ci sono diversi punti panoramici, dai quali si possono vedere le valli che circondano il vulcano, le miniere di zolfo e tutta la conformazione morfologica molto particolare che caratterizza questa zona. L'altra particolarità che ci aspetta in cima all'<strong>Owakudani</strong> sono le tipiche <a href="kurotamago.html"><strong>uova nere</strong></a>, ovvero delle uova che vengono lasciate a lessare per diverso tempo nelle pozze di acqua termale che sgorgano naturalmente in questa zona, la cui composizione altera il guscio dell'uovo rendendolo nero come la cenere. La leggenda vuole che <em>consumare queste uova allunga la vita di sette anni</em>: noi nel dubbio ne abbiamo mangiate quattro.</p>
+              <p>Ci prendiamo ancora qualche minuto per girovagare un po' in cima al cratere e, una volta deciso che avevamo visto tutto, torniamo allo scalo della funivia, non per tornare a <strong>Gora</strong> ma per scendere sul versante opposto, con un collegamento diretto che ci porta al <strong>porto di Togendai</strong> sul <strong>Lake Ashinoko</strong>. In tutto questo ci siamo scordati un piccolo particolare: sia dalla cima del vulcano che dalle sponde del lago in teoria si dovrebbe ammirare il simbolo per eccellenza del <strong>Giappone</strong>, ovvero il <strong>monte Fuji</strong>, peccato che il cielo sia nuvoloso, l'aria un po' nebbiosa e nel complesso del <strong>monte Fuji</strong> neanche l'ombra. Abbandonate le speranze di vedere il maestoso vulcano, facciamo un'integrazione del pass acquistato in precedenza e ci imbarchiamo su un moderno galeone che attraversa il <strong>Lago Ashi</strong>, facendo tappa prima a <strong>Hakone Sekisho</strong> e, successivamente, a quella che sarà la nostra destinazione, ovvero <strong>Motohakone</strong>; entrambi piccoli insediamenti sulle sponde del lago, molto piccolini ma accoglienti e tipici.</p>
+              <p>La navigazione sul <strong>lago Ashi</strong> prosegue serena, noi ci posizioniamo sul ponte più alto del galeone, per goderci un paesaggio montano quasi mistico, con la nebbia che permea le foreste e dei <strong>torii galleggianti</strong> che spuntano dalle acque. Ed è proprio a questo punto che arriva la sorpresa più bella: per qualche minuto, poco prima di sbarcare, le nuvole si aprono e, quasi come a volerci salutare, appare maestoso ed elegante proprio lui, il <strong>monte Fuji</strong>, in tutta la sua bellezza che, devo dire, ci lascia senza parole. Dopo questo momento quasi spirituale, sbarchiamo a <strong>Motohakone</strong> animati da un misto di felicità e nostalgia, perché il saluto del <strong>Monte Fuji</strong> ci ha comunque ricordato che tra non molto rientreremo in Italia. Ci godiamo senza fretta una passeggiata in zona, prendendo un sentiero nel bosco che ci conduce a un'apertura tra gli alberi, dove si può ammirare un maestoso <strong>torii rosso</strong> spuntare dalle acque del lago.</p>
               <p>Adesso possiamo dirci soddisfatti, per cui torniamo a <strong>Motohakone</strong> e prendiamo il <strong>Tozan Bus</strong> che, in circa 40 minuti, ci riporta alla stazione di <strong>Hakone-Yumoto</strong>, da cui siamo partiti questa mattina. Ci incamminiamo a piedi verso il nostro <strong>ryokan</strong>, pronti a goderci un bagno caldo e prepararci per la sera. Usciamo sul presto, anche perché qua le cucine abbiamo capito che chiudono altrettanto presto; torniamo in centro al paese, vicino alla stazione dove abbiamo preso il trenino oggi, e completamente a sentimento ci affidiamo alle cure di un piccolo ristorante tradizionale, gestito da due signore anziane la cui specialità è <strong>carne giapponese alla griglia</strong>, che possiamo cuocere direttamente al centro del tavolo. L'intuito non delude, perché la cena è squisita, e a fine pasto brindiamo con un sake locale prima di incamminarci di nuovo verso il nostro <em>ryokan</em>, anche perché ora ci aspetta il compito più arduo: quello di rifare completamente i bagagli per la grande partenza di domani.</p>
               <p>Lasciare il Giappone sarà davvero dura: quando dico che è un paese che ti entra nel cuore non è una frase fatta: tradizione, storia, tecnologia, spiritualità, educazione e rispetto <em>(per non parlare dei treni, puntuali, frequenti e puliti)</em>, insomma sembra che ogni tassello qua si incastri alla perfezione in quello che è un quadro disegnato per far stare bene tutti quanti. C'è solo un aspetto negativo quando visiti il Giappone, ovvero che non vedi l'ora di tornarci, non ne puoi più fare a meno. Bando alle ciance, è ora di dormire, domani sveglia all'alba per transfer in aeroporto. Notte!</p>
             </div>
           </article>
 
-          <!-- DAY 11 - in scrittura -->
-          <article class="day writing">
+          <!-- DAY 11 -->
+          <article class="day">
             <p class="day-meta">Day 11 · Lunedì 13 luglio</p>
-            <h3>Si torna a casa</h3>
+            <h3>Sayonara, Giappone</h3>
+            <div class="day-tags">
+              <span>Onsen</span><span>Odawara</span><span>Shinkansen</span><span>Tokyo</span><span>Haneda</span>
+            </div>
+            <p class="day-stats"><span class="st-jp" aria-hidden="true">歩</span><span><strong>3,5 km</strong> percorsi · <strong>5.273</strong> passi</span></p>
             <div class="day-body">
-              <p class="writing-note"><span class="blink" aria-hidden="true"></span> Questa pagina del diario è in scrittura. Torna presto.</p>
+              <p>Ultimi momenti nella terra del <strong>Sol Levante</strong>, per cui la giornata inizia subito con un bagno nel nostro <em>onsen</em> privato, ricontrolliamo al volo i bagagli e alle 7:00 puntuali siamo fuori dal <strong>ryokan</strong>, dove ci attende un Uber che abbiamo prenotato la sera prima <em>(tra l'altro, è stata una scoperta, perché non sapevamo che si potessero prenotare gli Uber con partenza posticipata)</em>. Prima tappa stazione di <strong>Odawara</strong>, dove con uno <em>Shinkansen</em> arriviamo allo scalo di <strong>Shinagawa</strong> a <strong>Tokyo</strong> <em>(tra l'altro, vivere il lunedì mattina a Tokyo è un'esperienza incredibile, perché c'è letteralmente un fiume di gente che si muove per andare al lavoro, con una compostezza, un ordine e una educazione che, ancora una volta, ci lasciano di stucco)</em> per prendere un treno della linea <strong>Keikyu</strong> che entra diretto al Terminal 3 dell'aeroporto di <strong>Haneda</strong>. Le procedure aeroportuali filano rapide e lisce, siamo pronti al decollo! <strong>Arigatō gozaimasu Giappone</strong> e... <strong>Sayonara</strong> (さようなら) ❤️</p>
             </div>
           </article>
+
+          <!-- IL VIAGGIO IN NUMERI -->
+          <div class="trip-total" aria-label="Il viaggio in numeri">
+            <span class="tt-jp" aria-hidden="true">旅の記録</span>
+            <div class="tt-nums">
+              <span><strong>11</strong> giorni</span>
+              <span class="tt-sep" aria-hidden="true">·</span>
+              <span><strong>113,7 km</strong> a piedi</span>
+              <span class="tt-sep" aria-hidden="true">·</span>
+              <span><strong>170.967</strong> passi</span>
+            </div>
+          </div>
 
         </div>
 
