@@ -98,7 +98,8 @@ body::before {
 #scene a { cursor: none; }
 #torii-link:hover #torii-group { filter: brightness(1.25); }
 #moon-link:hover  #moon-group  { filter: brightness(1.3); }
-#torii-group, #moon-group { transition: filter .3s; }
+#himeji-link:hover #himeji { filter: brightness(2.2); }
+#torii-group, #moon-group, #himeji { transition: filter .3s; }
 
 /* ── Identity ── */
 .identity {
@@ -341,11 +342,15 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
           fill="#E9E4D8" opacity="0.42"/>
   </g>
 
-  <!-- ══ HIMEJI CASTLE (scenery, distant hill right) ══ -->
-  <g id="himeji" stroke="rgba(233,228,216,0.16)" stroke-width="1" fill="#0A0A0B">
-    <!-- hill -->
-    <path d="M 980 660 Q 1180 590 1440 630 L 1440 660 Z" stroke="none" fill="#111115"/>
+  <!-- ══ HIMEJI hill (scenery) ══ -->
+  <g id="himeji-hill">
+    <path d="M 980 660 Q 1180 590 1440 630 L 1440 660 Z" fill="#111115"/>
     <path d="M 980 660 Q 1180 590 1440 630" stroke="rgba(233,228,216,0.10)" stroke-width="1" fill="none"/>
+  </g>
+
+  <!-- ══ HIMEJI CASTLE → MONDO ══ -->
+  <a id="himeji-link" href="https://www.gioriva.it/mondo/" aria-label="Diari di viaggio">
+  <g id="himeji" stroke="rgba(233,228,216,0.16)" stroke-width="1" fill="#0A0A0B">
     <!-- base walls -->
     <path d="M 1150 620 L 1160 585 L 1290 585 L 1300 620 Z"/>
     <!-- tier 1 -->
@@ -363,6 +368,7 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
     <line x1="1212" y1="431" x2="1210" y2="422"/>
     <line x1="1238" y1="431" x2="1240" y2="422"/>
   </g>
+  </a>
 
   <!-- ══ WATER ══ -->
   <rect x="0" y="660" width="1440" height="240" fill="url(#water)"/>
@@ -379,7 +385,7 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
   </g>
 
   <!-- ══ FLOATING TORII → MONDO ══ -->
-  <a id="torii-link" href="https://www.gioriva.it/mondo/" aria-label="Diari di viaggio">
+  <a id="torii-link" href="https://www.gioriva.it/mondo/giappone2026/" aria-label="Giappone 2026">
     <!-- reflection -->
     <g mask="url(#refl-mask)" opacity="0.8">
       <g transform="translate(0,1320) scale(1,-1)" fill="#7E2E29">
@@ -499,6 +505,7 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
   var fuji  = document.getElementById('fuji');
 
   var himeji = document.getElementById('himeji');
+  var hill   = document.getElementById('himeji-hill');
   var glow   = document.getElementById('moonglow-col');
 
   function recompose() {
@@ -508,12 +515,14 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
       torii.removeAttribute('transform');                       // torii ~500-780, in view
       fuji.setAttribute('transform', 'translate(200,0)');       // peak -> x ~640
       himeji.setAttribute('transform', 'translate(-390,-15)');  // castle -> x ~760-910
+      hill.setAttribute('transform', 'translate(-390,-15)');
     } else {
       moon.removeAttribute('transform');
       glow.removeAttribute('transform');
       torii.removeAttribute('transform');
       fuji.removeAttribute('transform');
       himeji.removeAttribute('transform');
+      hill.removeAttribute('transform');
     }
   }
   recompose();
