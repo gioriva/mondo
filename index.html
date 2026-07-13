@@ -134,27 +134,28 @@ body::before {
   bottom: 0; left: 0; right: 0;
   z-index: 20;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 1.2rem 2.2rem;
 }
-.coords {
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--muted);
-  opacity: 0.7;
-}
-.links { display: flex; gap: 2rem; list-style: none; }
+.links { display: flex; gap: 1.9rem; list-style: none; }
 .links a {
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  display: block;
   color: var(--muted);
-  text-decoration: none;
-  transition: color .2s;
+  opacity: 0.85;
+  transition: color .2s, opacity .2s;
 }
-.links a:hover { color: var(--shu); }
+.links a:hover { color: var(--shu); opacity: 1; }
+.links svg {
+  width: 17px; height: 17px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.links svg .dot { fill: currentColor; stroke: none; }
 
 /* ── Custom cursor ── */
 #cur-dot {
@@ -273,13 +274,12 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
     text-shadow: 0 0 18px rgba(12,12,13,0.95);
   }
   .bar-bottom {
-    padding: 1rem 1.25rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
+    padding: 1.1rem 1.25rem;
+    justify-content: center;
     background: linear-gradient(0deg, var(--sumi) 55%, transparent);
   }
-  .links { gap: 1.4rem; flex-wrap: wrap; }
+  .links { gap: 2.4rem; }
+  .links svg { width: 19px; height: 19px; }
   #crane { transform: scale(0.75); }
   #cookie-banner {
     flex-direction: column;
@@ -419,12 +419,19 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 </div>
 
 <footer class="bar-bottom">
-  <span class="coords">Como, Italia &middot; 45.81&deg;N</span>
   <ul class="links">
-    <li><a href="/privacy.html">Privacy</a></li>
-    <li><a href="#" id="cookie-reopen">Cookie</a></li>
-    <li><a href="https://www.instagram.com/gioriva" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="https://www.linkedin.com/in/giorgioriva/" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="/privacy.html" aria-label="Privacy" title="Privacy">
+      <svg viewBox="0 0 24 24"><path d="M12 3 L20 6 V11 C20 16.5 16.7 20 12 21.5 C7.3 20 4 16.5 4 11 V6 Z"/></svg>
+    </a></li>
+    <li><a href="#" id="cookie-reopen" aria-label="Cookie" title="Cookie">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle class="dot" cx="9.2" cy="10" r="1"/><circle class="dot" cx="14.2" cy="9" r="1"/><circle class="dot" cx="11" cy="14.2" r="1"/><circle class="dot" cx="15.2" cy="13.6" r="1"/></svg>
+    </a></li>
+    <li><a href="https://www.instagram.com/gioriva" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+      <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.8"/><circle class="dot" cx="16.4" cy="7.6" r="1"/></svg>
+    </a></li>
+    <li><a href="https://www.linkedin.com/in/giorgioriva/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+      <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><line x1="8.4" y1="11.1" x2="8.4" y2="16.4"/><circle class="dot" cx="8.4" cy="8.4" r="1"/><path d="M11.8 16.4 V11.1 M11.8 13 C11.8 11.8 12.8 11.1 13.9 11.1 C15.3 11.1 15.9 12.1 15.9 13.5 V16.4"/></svg>
+    </a></li>
   </ul>
 </footer>
 
