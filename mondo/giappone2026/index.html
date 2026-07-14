@@ -69,6 +69,7 @@
     }
 
     ::selection { background: var(--aka); color: #fff; }
+    html { scrollbar-width: thin; scrollbar-color: rgba(217,58,53,0.6) var(--sumi); }
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--sumi); }
     ::-webkit-scrollbar-thumb { background: var(--aka-deep); border-radius: 3px; }
@@ -770,6 +771,10 @@
       margin: 0 auto;
       padding: clamp(5.5rem, 12vh, 7.5rem) clamp(1.5rem, 6vw, 3rem) 4rem;
     }
+    @media (min-width: 900px) {
+      .menu-inner { margin: 0 clamp(2.5rem, 9vw, 8rem) 0 auto; }
+    }
+
 
     .m-item {
       display: block;
@@ -873,6 +878,14 @@
       overflow-y: auto;
       scrollbar-width: thin;
     }
+    .m-timeline { scrollbar-color: rgba(217,164,65,0.6) transparent; }
+    .m-timeline::-webkit-scrollbar { width: 5px; }
+    .m-timeline::-webkit-scrollbar-track { background: transparent; }
+    .m-timeline::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, rgba(217,58,53,0.75), rgba(217,164,65,0.75));
+      border-radius: 3px;
+    }
+    .m-timeline::-webkit-scrollbar-thumb:hover { background: var(--kin); }
     .m-timeline::before {
       content: '';
       position: absolute;
