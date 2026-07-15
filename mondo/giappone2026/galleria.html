@@ -11,7 +11,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="写真 · La galleria · Japan Summer" />
-  <meta property="og:description" content="527 scatti in undici giorni, da Tokyo a Hakone: la galleria completa del viaggio." />
+  <meta property="og:description" content="519 scatti in undici giorni, da Tokyo a Hakone: la galleria completa del viaggio." />
   <meta property="og:image" content="https://www.gioriva.it/mondo/giappone2026/japan-summer-og.PNG" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -631,8 +631,8 @@
 
     <span class="jp-title" aria-hidden="true">写真</span>
     <h1>La galleria</h1>
-    <p class="intro">Cinquecentoventisette scatti in undici giorni, da Malpensa al saluto del monte Fuji. Tocca una foto per aprirla, e naviga con le frecce o con un dito.</p>
-    <p class="status">527 fotografie · 11 giorni</p>
+    <p class="intro">Cinquecentodiciannove scatti in undici giorni, da Malpensa al saluto del monte Fuji. Tocca una foto per aprirla, e naviga con le frecce o con un dito.</p>
+    <p class="status">519 fotografie · 11 giorni</p>
   </header>
 
   <!-- ═══════════ LA GALLERIA ═══════════ -->
@@ -700,13 +700,13 @@
     const PHOTO_BASE = 'https://gioriva.github.io/album/giappone2026';
     const DAYS = [
       { n: 1,  count: 3,  date: 'Ven 3 luglio',  title: 'Si parte' },
-      { n: 2,  count: 40, date: 'Sab 4 luglio',  title: 'Benvenuti nel paese del sol levante' },
+      { n: 2,  count: 40, skip: [5, 6, 7, 8], date: 'Sab 4 luglio',  title: 'Benvenuti nel paese del sol levante' },
       { n: 3,  count: 57, date: 'Dom 5 luglio',  title: 'Dal santuario di Meiji alle atmosfere del TeamLab' },
       { n: 4,  count: 46, date: 'Lun 6 luglio',  title: 'La Tokyo che non ti aspetti (e il sumo)' },
       { n: 5,  count: 72, date: 'Mar 7 luglio',  title: 'Arashiyama e le lanterne di Pontocho' },
       { n: 6,  count: 54, date: 'Mer 8 luglio',  title: "I torii di Fushimi Inari e l'antica Kyoto" },
-      { n: 7,  count: 99, date: 'Gio 9 luglio',  title: 'I cervi di Nara e i neon di Dotonbori' },
-      { n: 8,  count: 27, date: 'Ven 10 luglio', title: 'Osaka così come viene' },
+      { n: 7,  count: 99, skip: [33, 34, 35], date: 'Gio 9 luglio',  title: 'I cervi di Nara e i neon di Dotonbori' },
+      { n: 8,  count: 27, skip: [25], date: 'Ven 10 luglio', title: 'Osaka così come viene' },
       { n: 9,  count: 75, date: 'Sab 11 luglio', title: "Sua Maestà l'Airone bianco, poi Hakone" },
       { n: 10, count: 51, date: 'Dom 12 luglio', title: 'Hakone e il monte Fuji' },
       { n: 11, count: 3,  date: 'Lun 13 luglio', title: 'Sayonara, Giappone' }
@@ -717,16 +717,20 @@
 
     const root = document.getElementById('galleryRoot');
     DAYS.forEach(day => {
+      day.ids = [];
+      for (let i = 1; i <= day.count; i++) {
+        if (!(day.skip || []).includes(i)) day.ids.push(i);
+      }
       const sec = document.createElement('section');
       sec.className = 'gday';
       sec.id = 'day-' + day.n;
       sec.innerHTML = '<div class="gday-head"><div class="gd-left">' +
         '<span class="gd-meta">Day ' + day.n + ' · ' + day.date + '</span>' +
         '<span class="gd-title">' + day.title + '</span></div>' +
-        '<span class="gd-count">' + day.count + ' foto</span></div>';
+        '<span class="gd-count">' + day.ids.length + ' foto</span></div>';
       const grid = document.createElement('div');
       grid.className = 'ggrid';
-      for (let i = 1; i <= day.count; i++) {
+      for (const i of day.ids) {
         const btn = document.createElement('button');
         btn.className = 'gph';
         btn.setAttribute('aria-label', 'Apri la foto ' + i + ' del Day ' + day.n);
@@ -753,9 +757,11 @@
     function show() {
       lbImg.src = fullUrl(curDay.n, curIdx);
       lbImg.alt = 'Day ' + curDay.n + ', foto ' + curIdx;
-      lbCap.textContent = 'Day ' + curDay.n + ' · ' + curIdx + ' / ' + curDay.count;
-      [curIdx - 1, curIdx + 1].forEach(i => {
-        if (i >= 1 && i <= curDay.count) { const p = new Image(); p.src = fullUrl(curDay.n, i); }
+      const pos = curDay.ids.indexOf(curIdx);
+      lbCap.textContent = 'Day ' + curDay.n + ' · ' + (pos + 1) + ' / ' + curDay.ids.length;
+      [pos - 1, pos + 1].forEach(p2 => {
+        const j = curDay.ids[p2];
+        if (j) { const p = new Image(); p.src = fullUrl(curDay.n, j); }
       });
     }
     function openLightbox(day, i) {
@@ -771,9 +777,10 @@
     }
     function step(d) {
       if (!curDay) return;
-      curIdx += d;
-      if (curIdx < 1) curIdx = curDay.count;
-      if (curIdx > curDay.count) curIdx = 1;
+      const len = curDay.ids.length;
+      let pos = curDay.ids.indexOf(curIdx);
+      pos = (pos + d + len) % len;
+      curIdx = curDay.ids[pos];
       show();
     }
     document.getElementById('lbClose').addEventListener('click', closeLightbox);
