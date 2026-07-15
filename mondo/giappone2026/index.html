@@ -439,6 +439,65 @@
       background: rgba(217,164,65,0.06);
     }
 
+    /* ── Anteprima foto del giorno ── */
+    .day-gallery { margin-top: 1.5rem; }
+    .dg-label {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--hai);
+      margin-bottom: 0.65rem;
+    }
+    .dg-label .jp { font-family: var(--display); font-size: 0.8rem; color: var(--aka); letter-spacing: 0.2em; }
+    .dg-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+    .dg-ph {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: block;
+      background: rgba(240,232,216,0.04);
+    }
+    .dg-ph img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.6s ease, transform 0.35s ease;
+    }
+    .dg-ph img.ld { opacity: 1; }
+    @media (hover: hover) {
+      .dg-ph:hover img { transform: scale(1.07); }
+    }
+    .dg-more {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: clamp(0.58rem, 1.8vw, 0.7rem);
+      letter-spacing: 0.14em;
+      color: var(--kin);
+      border: 1px dashed rgba(217,164,65,0.45);
+      background: rgba(217,164,65,0.05);
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+      text-align: center;
+      padding: 0.3rem;
+    }
+    .dg-more strong { font-family: var(--display); font-size: clamp(1rem, 3vw, 1.4rem); font-weight: 600; color: var(--kin); }
+    .dg-more:hover { background: rgba(217,164,65,0.12); border-color: var(--kin); color: #fff; }
+
     .trip-total {
       margin-top: clamp(3rem, 7vw, 4.5rem);
       padding-top: clamp(2rem, 4.5vw, 3rem);
@@ -984,7 +1043,7 @@
         <a class="m-item" href="galleria.html">
           <span class="m-jp" aria-hidden="true">写真</span>
           <span class="m-label">Galleria</span>
-          <span class="m-note">Le foto del viaggio, in arrivo</span>
+          <span class="m-note">Le foto del viaggio, giorno per giorno</span>
         </a>
         <a class="m-item" href="consigli.html">
           <span class="m-jp" aria-hidden="true">心得</span>
@@ -1340,6 +1399,45 @@
       if (!link) return;
       const target = document.querySelector(link.getAttribute('href'));
       if (target) expandDay(target.querySelector('.day-body'));
+    });
+
+
+    // ── Anteprima foto in ogni giorno ──
+    const PHOTO_BASE = 'https://gioriva.github.io/album/giappone2026';
+    const PHOTO_COUNT = { 1: 3, 2: 40, 3: 57, 4: 46, 5: 72, 6: 54, 7: 99, 8: 27, 9: 75, 10: 51, 11: 3 };
+    document.querySelectorAll('.diary .day').forEach((d, idx) => {
+      const n = idx + 1;
+      const count = PHOTO_COUNT[n];
+      if (!count) return;
+      const shown = Math.min(4, count);
+      const wrap = document.createElement('div');
+      wrap.className = 'day-gallery';
+      wrap.innerHTML = '<p class="dg-label"><span class="jp" aria-hidden="true">写真</span> Le foto del giorno</p>';
+      const row = document.createElement('div');
+      row.className = 'dg-row';
+      for (let i = 1; i <= shown; i++) {
+        const a = document.createElement('a');
+        a.className = 'dg-ph';
+        a.href = 'galleria.html#day-' + n;
+        a.setAttribute('aria-label', 'Apri la galleria del Day ' + n);
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.alt = 'Day ' + n + ', anteprima foto ' + i;
+        img.src = PHOTO_BASE + '/day' + n + '/t-' + String(i).padStart(2, '0') + '.jpg';
+        img.addEventListener('load', () => img.classList.add('ld'));
+        a.appendChild(img);
+        row.appendChild(a);
+      }
+      const more = document.createElement('a');
+      more.className = 'dg-more';
+      more.href = 'galleria.html#day-' + n;
+      more.innerHTML = count > shown
+        ? '<strong>+' + (count - shown) + '</strong><span>foto</span>'
+        : '<strong>→</strong><span>galleria</span>';
+      row.appendChild(more);
+      wrap.appendChild(row);
+      d.appendChild(wrap);
     });
 
     // Nav visibile dopo il hero

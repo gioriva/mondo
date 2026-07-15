@@ -11,7 +11,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="写真 · La galleria · Japan Summer" />
-  <meta property="og:description" content="Le foto del nostro viaggio in Giappone. In allestimento." />
+  <meta property="og:description" content="527 scatti in undici giorni, da Tokyo a Hakone: la galleria completa del viaggio." />
   <meta property="og:image" content="https://www.gioriva.it/mondo/giappone2026/japan-summer-og.PNG" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -127,53 +127,128 @@
     }
     @keyframes blinkdot { 0%,100% { opacity: 1; } 50% { opacity: 0.15; } }
 
-    /* ── Le cornici in attesa ── */
-    .frames {
-      max-width: 900px;
+    /* ── La galleria per giorni ── */
+    .gallery-wrap {
+      max-width: 1100px;
       margin: 0 auto;
-      padding: clamp(1.5rem, 4vw, 3rem) clamp(1.2rem, 4.5vw, 3rem) clamp(3.5rem, 8vw, 5.5rem);
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3.5vw, 2.5rem) clamp(3.5rem, 8vw, 5.5rem);
     }
-    @media (min-width: 720px) { .frames { grid-template-columns: repeat(3, 1fr); } }
-
-    .frame {
-      aspect-ratio: 4 / 3;
-      border: 1.5px dashed rgba(217,164,65,0.4);
-      border-radius: 0.8rem;
+    .gday { padding-top: clamp(2.2rem, 5vw, 3.5rem); scroll-margin-top: 80px; }
+    .gday-head {
       display: flex;
-      flex-direction: column;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.7rem;
+      margin-bottom: 1rem;
+    }
+    .gd-left { min-width: 0; }
+    .gd-meta {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--kin);
+      margin-bottom: 0.2rem;
+    }
+    .gd-title {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.15rem, 3vw, 1.5rem);
+      color: var(--washi);
+      line-height: 1.25;
+    }
+    .gd-count {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.18em;
+      color: var(--hai);
+      white-space: nowrap;
+    }
+    .ggrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+      gap: 6px;
+    }
+    @media (min-width: 720px) {
+      .ggrid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+    }
+    .gph {
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 6px;
+      background: rgba(240,232,216,0.04);
+      cursor: zoom-in;
+      border: none;
+      padding: 0;
+      display: block;
+      width: 100%;
+    }
+    .gph img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.6s ease, transform 0.35s ease;
+    }
+    .gph img.ld { opacity: 1; }
+    @media (hover: hover) {
+      .gph:hover img { transform: scale(1.06); }
+    }
+
+    /* ── Lightbox ── */
+    .lb {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(8,6,7,0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: none;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      background: rgba(240,232,216,0.02);
-      animation: frameBreathe 4.5s ease-in-out infinite;
-      transition: border-color 0.3s, background 0.3s;
     }
-    .frame:nth-child(2) { animation-delay: 0.7s; }
-    .frame:nth-child(3) { animation-delay: 1.4s; }
-    .frame:nth-child(4) { animation-delay: 2.1s; }
-    .frame:nth-child(5) { animation-delay: 2.8s; }
-    .frame:nth-child(6) { animation-delay: 3.5s; }
-    @keyframes frameBreathe {
-      0%, 100% { border-color: rgba(217,164,65,0.28); }
-      50% { border-color: rgba(217,164,65,0.6); }
+    .lb.open { display: flex; }
+    .lb img {
+      max-width: 92vw;
+      max-height: 82vh;
+      border-radius: 4px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
     }
-    .frame:hover { background: rgba(240,232,216,0.05); border-color: var(--kin); }
-
-    .frame .f-kanji {
-      font-family: var(--display);
-      font-size: clamp(1.5rem, 4.5vw, 2.1rem);
-      letter-spacing: 0.2em;
-      color: rgba(240,232,216,0.35);
+    .lb-btn {
+      position: absolute;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(240,232,216,0.3);
+      background: rgba(12,10,11,0.5);
+      color: var(--washi);
+      font-size: 1.15rem;
+      cursor: pointer;
+      transition: color 0.25s, border-color 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .frame .f-name {
+    .lb-btn:hover { color: var(--kin); border-color: var(--kin); }
+    .lb-close { top: 1rem; right: 1rem; }
+    .lb-prev { left: clamp(0.5rem, 2vw, 1.5rem); top: 50%; transform: translateY(-50%); }
+    .lb-next { right: clamp(0.5rem, 2vw, 1.5rem); top: 50%; transform: translateY(-50%); }
+    .lb-cap {
+      position: absolute;
+      bottom: 1.1rem;
+      left: 50%;
+      transform: translateX(-50%);
       font-family: var(--mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.24em;
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--hai);
+      background: rgba(12,10,11,0.6);
+      padding: 0.45rem 1rem;
+      border-radius: 2rem;
+      white-space: nowrap;
     }
 
     /* ── Footer ── */
@@ -509,7 +584,7 @@
         <a class="m-item" href="#top">
           <span class="m-jp" aria-hidden="true">写真</span>
           <span class="m-label">Galleria</span>
-          <span class="m-note">Le foto del viaggio, in arrivo</span>
+          <span class="m-note">Le foto del viaggio, giorno per giorno</span>
         </a>
         <a class="m-item" href="consigli.html">
           <span class="m-jp" aria-hidden="true">心得</span>
@@ -556,19 +631,21 @@
 
     <span class="jp-title" aria-hidden="true">写真</span>
     <h1>La galleria</h1>
-    <p class="intro">Le cornici sono pronte, appese una accanto all'altra. Le foto del viaggio stanno tornando a casa con noi: appena scelte e sviluppate, abiteranno qui.</p>
-    <p class="status"><span class="blink" aria-hidden="true"></span> In allestimento</p>
+    <p class="intro">Cinquecentoventisette scatti in undici giorni, da Malpensa al saluto del monte Fuji. Tocca una foto per aprirla, e naviga con le frecce o con un dito.</p>
+    <p class="status">527 fotografie · 11 giorni</p>
   </header>
 
-  <!-- ═══════════ CORNICI IN ATTESA ═══════════ -->
-  <section class="frames" aria-label="Le città del viaggio, in attesa delle foto">
-    <div class="frame"><span class="f-kanji" aria-hidden="true">東京</span><span class="f-name">Tokyo</span></div>
-    <div class="frame"><span class="f-kanji" aria-hidden="true">京都</span><span class="f-name">Kyoto</span></div>
-    <div class="frame"><span class="f-kanji" aria-hidden="true">奈良</span><span class="f-name">Nara</span></div>
-    <div class="frame"><span class="f-kanji" aria-hidden="true">大阪</span><span class="f-name">Osaka</span></div>
-    <div class="frame"><span class="f-kanji" aria-hidden="true">姫路</span><span class="f-name">Himeji</span></div>
-    <div class="frame"><span class="f-kanji" aria-hidden="true">箱根</span><span class="f-name">Hakone</span></div>
-  </section>
+  <!-- ═══════════ LA GALLERIA ═══════════ -->
+  <main class="gallery-wrap" id="galleryRoot" aria-label="Le foto del viaggio, giorno per giorno"></main>
+
+  <!-- ═══════════ LIGHTBOX ═══════════ -->
+  <div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Fotografia a schermo intero">
+    <img id="lbImg" src="" alt="" />
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Chiudi">✕</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Foto precedente">‹</button>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Foto successiva">›</button>
+    <p class="lb-cap" id="lbCap"></p>
+  </div>
 
   <!-- ═══════════ FOOTER ═══════════ -->
   <footer>
@@ -618,6 +695,106 @@
       .catch(() => {});
 
     document.querySelectorAll('a.m-item, .m-sub').forEach(a => a.addEventListener('click', closeMenu));
+
+    // ── La galleria ──
+    const PHOTO_BASE = 'https://gioriva.github.io/album/giappone2026';
+    const DAYS = [
+      { n: 1,  count: 3,  date: 'Ven 3 luglio',  title: 'Si parte' },
+      { n: 2,  count: 40, date: 'Sab 4 luglio',  title: 'Benvenuti nel paese del sol levante' },
+      { n: 3,  count: 57, date: 'Dom 5 luglio',  title: 'Dal santuario di Meiji alle atmosfere del TeamLab' },
+      { n: 4,  count: 46, date: 'Lun 6 luglio',  title: 'La Tokyo che non ti aspetti (e il sumo)' },
+      { n: 5,  count: 72, date: 'Mar 7 luglio',  title: 'Arashiyama e le lanterne di Pontocho' },
+      { n: 6,  count: 54, date: 'Mer 8 luglio',  title: "I torii di Fushimi Inari e l'antica Kyoto" },
+      { n: 7,  count: 99, date: 'Gio 9 luglio',  title: 'I cervi di Nara e i neon di Dotonbori' },
+      { n: 8,  count: 27, date: 'Ven 10 luglio', title: 'Osaka così come viene' },
+      { n: 9,  count: 75, date: 'Sab 11 luglio', title: "Sua Maestà l'Airone bianco, poi Hakone" },
+      { n: 10, count: 51, date: 'Dom 12 luglio', title: 'Hakone e il monte Fuji' },
+      { n: 11, count: 3,  date: 'Lun 13 luglio', title: 'Sayonara, Giappone' }
+    ];
+    const pad = (i) => String(i).padStart(2, '0');
+    const thumbUrl = (n, i) => PHOTO_BASE + '/day' + n + '/t-' + pad(i) + '.jpg';
+    const fullUrl = (n, i) => PHOTO_BASE + '/day' + n + '/f-' + pad(i) + '.jpg';
+
+    const root = document.getElementById('galleryRoot');
+    DAYS.forEach(day => {
+      const sec = document.createElement('section');
+      sec.className = 'gday';
+      sec.id = 'day-' + day.n;
+      sec.innerHTML = '<div class="gday-head"><div class="gd-left">' +
+        '<span class="gd-meta">Day ' + day.n + ' · ' + day.date + '</span>' +
+        '<span class="gd-title">' + day.title + '</span></div>' +
+        '<span class="gd-count">' + day.count + ' foto</span></div>';
+      const grid = document.createElement('div');
+      grid.className = 'ggrid';
+      for (let i = 1; i <= day.count; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'gph';
+        btn.setAttribute('aria-label', 'Apri la foto ' + i + ' del Day ' + day.n);
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.alt = 'Day ' + day.n + ', foto ' + i;
+        img.src = thumbUrl(day.n, i);
+        img.addEventListener('load', () => img.classList.add('ld'));
+        btn.appendChild(img);
+        btn.addEventListener('click', () => openLightbox(day, i));
+        grid.appendChild(btn);
+      }
+      sec.appendChild(grid);
+      root.appendChild(sec);
+    });
+
+    // ── Lightbox ──
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    let curDay = null, curIdx = 1;
+
+    function show() {
+      lbImg.src = fullUrl(curDay.n, curIdx);
+      lbImg.alt = 'Day ' + curDay.n + ', foto ' + curIdx;
+      lbCap.textContent = 'Day ' + curDay.n + ' · ' + curIdx + ' / ' + curDay.count;
+      [curIdx - 1, curIdx + 1].forEach(i => {
+        if (i >= 1 && i <= curDay.count) { const p = new Image(); p.src = fullUrl(curDay.n, i); }
+      });
+    }
+    function openLightbox(day, i) {
+      curDay = day; curIdx = i;
+      show();
+      lb.classList.add('open');
+      document.body.classList.add('menu-locked');
+    }
+    function closeLightbox() {
+      lb.classList.remove('open');
+      document.body.classList.remove('menu-locked');
+      lbImg.src = '';
+    }
+    function step(d) {
+      if (!curDay) return;
+      curIdx += d;
+      if (curIdx < 1) curIdx = curDay.count;
+      if (curIdx > curDay.count) curIdx = 1;
+      show();
+    }
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lbPrev').addEventListener('click', () => step(-1));
+    document.getElementById('lbNext').addEventListener('click', () => step(1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
+    });
+    let touchX = null;
+    lb.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 45) step(dx < 0 ? 1 : -1);
+      touchX = null;
+    }, { passive: true });
+
 </script>
 </body>
 </html>
