@@ -1,4 +1,4 @@
-const BASE = 'https://gioriva.github.io/album';
+const BASE = 'https://gioriva.github.io/album/drone';
 
 const ALBUMS = [
   {
