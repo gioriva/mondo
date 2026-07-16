@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <!-- Google tag (gtag.js) con Consent Mode v2 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-1ZCCJ6QBR4');
+    if (localStorage.getItem('ag_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Above Ground — Fotografia Aerea</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:title" content="Above Ground — Fotografia Aerea">
+  <meta property="og:description" content="Il mondo appare diverso a centinaia di metri di altezza. Paesaggi, coste, città, rivisti dall'alto.">
+  <meta property="og:image" content="https://www.gioriva.it/drone/og.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.gioriva.it/drone/og.png">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMDgwQjEwIi8+PGNpcmNsZSBjeD0iNyIgY3k9IjciIHI9IjQuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN0RGRkI0IiBzdHJva2Utd2lkdGg9IjEuMiIvPjxjaXJjbGUgY3g9IjI1IiBjeT0iNyIgcj0iNC41IiBmaWxsPSJub25lIiBzdHJva2U9IiM3REZGQjQiIHN0cm9rZS13aWR0aD0iMS4yIi8+PGNpcmNsZSBjeD0iNyIgY3k9IjI1IiByPSI0LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdERkZCNCIgc3Ryb2tlLXdpZHRoPSIxLjIiLz48Y2lyY2xlIGN4PSIyNSIgY3k9IjI1IiByPSI0LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdERkZCNCIgc3Ryb2tlLXdpZHRoPSIxLjIiLz48bGluZSB4MT0iMTAiIHkxPSIxMCIgeDI9IjE0IiB5Mj0iMTQiIHN0cm9rZT0iIzdERkZCNCIgc3Ryb2tlLXdpZHRoPSIxLjIiLz48bGluZSB4MT0iMjIiIHkxPSIxMCIgeDI9IjE4IiB5Mj0iMTQiIHN0cm9rZT0iIzdERkZCNCIgc3Ryb2tlLXdpZHRoPSIxLjIiLz48bGluZSB4MT0iMTAiIHkxPSIyMiIgeDI9IjE0IiB5Mj0iMTgiIHN0cm9rZT0iIzdERkZCNCIgc3Ryb2tlLXdpZHRoPSIxLjIiLz48bGluZSB4MT0iMjIiIHkxPSIyMiIgeDI9IjE4IiB5Mj0iMTgiIHN0cm9rZT0iIzdERkZCNCIgc3Ryb2tlLXdpZHRoPSIxLjIiLz48cmVjdCB4PSIxMyIgeT0iMTMiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHJ4PSIxIiBmaWxsPSIjN0RGRkI0Ii8+PC9zdmc+">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:    #080B10;
+      --white: #EAF0F4;
+      --grey:  #66707E;
+      --mint:  #7DFFB4;
+      --line:  rgba(234,240,244,0.08);
+      --line2: rgba(125,255,180,0.28);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--mint); color: var(--bg); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      height: 72px;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 6vw;
+      background: linear-gradient(to bottom, rgba(8,11,16,0.9), rgba(8,11,16,0));
+      transition: background 0.35s, backdrop-filter 0.35s, border-color 0.35s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.solid { background: rgba(8,11,16,0.88); backdrop-filter: blur(14px); border-bottom-color: var(--line); }
+    .logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--white);
+      font-weight: 600; font-size: 14px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      position: relative; z-index: 320;
+    }
+    .logo-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 10px var(--mint); animation: blink 2.6s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+    .nav-links { display: flex; gap: 40px; }
+    .nav-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--grey); text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.on { color: var(--mint); }
+
+    .burger{display:none;background:none;border:none;cursor:pointer;width:44px;height:44px;align-items:center;justify-content:center;position:relative;z-index:320;padding:0;}
+    .burger span{position:absolute;left:10px;right:10px;height:1px;background:var(--white);transition:transform 0.3s ease;}
+    .burger span:nth-child(1){transform:translateY(-4px);}
+    .burger span:nth-child(2){transform:translateY(4px);}
+    .burger.open span:nth-child(1){transform:rotate(45deg);}
+    .burger.open span:nth-child(2){transform:rotate(-45deg);}
+    .mmenu{position:fixed;inset:0;z-index:310;background:var(--bg);display:flex;flex-direction:column;justify-content:center;padding:0 8vw;gap:12px;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
+    .mmenu.open{opacity:1;pointer-events:all;}
+    .mmenu a{font-weight:600;font-size:clamp(36px,10vw,58px);line-height:1.05;text-transform:uppercase;color:var(--white);text-decoration:none;opacity:0.45;transition:opacity 0.25s,color 0.25s;letter-spacing:-0.01em;}
+    .mmenu a.on,.mmenu a:hover{opacity:1;color:var(--mint);}
+    .mmenu .mm-foot{margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--grey);}
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 90px 6vw 120px;
+      overflow: hidden;
+    }
+
+    /* Flight path — signature */
+    .flight {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    /* Altitude ruler — signature */
+    .ruler {
+      position: absolute; top: 16dvh; bottom: 16dvh; right: 6vw;
+      width: 1px;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(234,240,244,0.2) 0, rgba(234,240,244,0.2) 1px,
+        transparent 1px, transparent 14px
+      );
+    }
+    .ruler span {
+      position: absolute; right: 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.18em;
+      color: var(--grey);
+      white-space: nowrap;
+    }
+    .ruler span:nth-child(1) { top: -4px; }
+    .ruler span:nth-child(2) { top: calc(50% - 5px); color: var(--mint); }
+    .ruler span:nth-child(3) { bottom: -4px; }
+
+    .hero-kicker {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 40px;
+      display: flex; align-items: center; gap: 18px;
+      opacity: 0; animation: up 1.1s 0.2s forwards cubic-bezier(0.19,1,0.22,1);
+    }
+    .hero-kicker::before { content: ''; width: 44px; height: 1px; background: var(--mint); }
+
+    .hero-title {
+      font-weight: 500;
+      font-size: clamp(64px, 13.5vw, 210px);
+      line-height: 0.88;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+      position: relative; z-index: 2;
+      opacity: 0; animation: up 1.2s 0.4s forwards cubic-bezier(0.19,1,0.22,1);
+    }
+    .hero-title .thin {
+      font-weight: 300;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(234,240,244,0.75);
+    }
+
+    .hero-foot {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-top: 9dvh; gap: 40px; flex-wrap: wrap;
+      opacity: 0; animation: up 1.1s 0.65s forwards cubic-bezier(0.19,1,0.22,1);
+    }
+    .hero-sub {
+      max-width: 380px;
+      font-size: 15.5px; font-weight: 300; line-height: 1.8;
+      color: var(--grey);
+    }
+    .hero-sub b { color: var(--white); font-weight: 400; }
+    .cta {
+      display: inline-flex; align-items: center; gap: 16px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--mint); text-decoration: none;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line2);
+      transition: gap 0.35s, border-color 0.35s;
+    }
+    .cta:hover { gap: 28px; border-color: var(--mint); }
+
+    @keyframes up { from { opacity:0; transform: translateY(40px); } to { opacity:1; transform: translateY(0); } }
+
+    /* Crosshair marks — signature */
+    .x-mark {
+      position: absolute;
+      width: 14px; height: 14px;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+    .x-mark::before, .x-mark::after { content: ''; position: absolute; background: var(--grey); }
+    .x-mark::before { left: 0; right: 0; top: 50%; height: 1px; }
+    .x-mark::after  { top: 0; bottom: 0; left: 50%; width: 1px; }
+
+    /* ── STATS LINE ── */
+    .stats {
+      display: flex;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin: 0 6vw;
+    }
+    .stats div {
+      flex: 1;
+      padding: 26px 0;
+      display: flex; align-items: baseline; gap: 12px;
+      justify-content: center;
+    }
+    .stats .v { font-weight: 500; font-size: clamp(22px, 2.6vw, 32px); letter-spacing: -0.02em; }
+    .stats .v em { font-style: normal; color: var(--mint); font-size: 0.55em; margin-left: 2px; }
+    .stats .k {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    /* ── ALBUMS ── */
+    .albums-sec { position: relative; padding: 15dvh 6vw 14dvh; }
+    .shead {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 8dvh; gap: 24px; flex-wrap: wrap;
+    }
+    .shead h2 {
+      font-weight: 500;
+      font-size: clamp(32px, 4.8vw, 64px);
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+    .shead h2::before {
+      content: '01';
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.3em; font-weight: 300;
+      color: var(--mint);
+      vertical-align: super;
+      margin-right: 16px;
+      letter-spacing: 0.1em;
+    }
+    .shead .r {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 44px 24px;
+    }
+    .card { text-decoration: none; color: var(--white); display: block; position: relative; }
+    .card.s3 { grid-column: span 3; }
+    .card.s2 { grid-column: span 2; }
+    .card.s6 { grid-column: span 6; }
+
+    .card-img {
+      position: relative;
+      overflow: hidden;
+      background: #0D1219;
+      aspect-ratio: 4/3;
+    }
+    .card.s3 .card-img { aspect-ratio: 16/10; }
+    .card.s6 .card-img { aspect-ratio: 21/8; }
+    .card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.88) brightness(0.85);
+      transform: scale(1.003);
+      transition: transform 0.8s cubic-bezier(0.19,1,0.22,1), filter 0.45s;
+    }
+    .card:hover .card-img img { transform: scale(1.05); filter: saturate(1.02) brightness(1); }
+
+    .vf { position: absolute; width: 18px; height: 18px; z-index: 2; opacity: 0; transition: opacity 0.4s; }
+    .vf::before, .vf::after { content: ''; position: absolute; background: var(--mint); top: 0; left: 0; }
+    .vf::before { width: 100%; height: 1px; }
+    .vf::after  { width: 1px; height: 100%; }
+    .vf.tl { top: 14px; left: 14px; }
+    .vf.tr { top: 14px; right: 14px; transform: scaleX(-1); }
+    .vf.bl { bottom: 14px; left: 14px; transform: scaleY(-1); }
+    .vf.br { bottom: 14px; right: 14px; transform: scale(-1); }
+    .card:hover .vf { opacity: 1; }
+
+    .rec {
+      position: absolute; top: 16px; right: 16px; z-index: 3;
+      display: flex; align-items: center; gap: 7px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9.5px; letter-spacing: 0.22em;
+      color: var(--white);
+    }
+    .rec i { width: 6px; height: 6px; border-radius: 50%; background: #FF5E5E; animation: blink 1.4s infinite; }
+
+    .card-meta {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      margin-top: 16px;
+      gap: 14px;
+      transition: border-color 0.35s;
+    }
+    .card:hover .card-meta { border-color: var(--line2); }
+    .card-name {
+      font-weight: 500; font-size: 17px; letter-spacing: -0.01em;
+      display: flex; align-items: baseline; gap: 12px;
+    }
+    .card-name .n {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 300; color: var(--mint);
+      letter-spacing: 0.12em;
+    }
+    .card-info {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--grey);
+      text-align: right;
+    }
+
+    /* ── DRONE ── */
+    .drone-sec { padding: 0 6vw 16dvh; }
+    .drone-inner {
+      border-top: 1px solid var(--line);
+      padding-top: 8dvh;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 8vw;
+    }
+    .drone-l h2 {
+      font-weight: 500;
+      font-size: clamp(32px, 4.8vw, 64px);
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 28px;
+    }
+    .drone-l h2::before {
+      content: '02';
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.3em; font-weight: 300;
+      color: var(--mint);
+      vertical-align: super;
+      margin-right: 16px;
+      letter-spacing: 0.1em;
+    }
+    .drone-l p {
+      font-size: 15px; font-weight: 300; line-height: 1.85;
+      color: var(--grey);
+      max-width: 380px;
+    }
+    .drone-l p b { color: var(--white); font-weight: 400; }
+
+    .spec-list { display: flex; flex-direction: column; }
+    .spec-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+      gap: 20px;
+      transition: border-color 0.3s, padding-left 0.3s;
+    }
+    .spec-row:first-child { border-top: 1px solid var(--line); }
+    .spec-row:hover { border-bottom-color: var(--line2); padding-left: 10px; }
+    .spec-row .k {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--grey);
+    }
+    .spec-row .v { font-weight: 500; font-size: 19px; letter-spacing: -0.01em; }
+    .spec-row .v em { font-style: normal; color: var(--mint); font-size: 12px; margin-left: 3px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 38px 6vw;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .f-brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase; }
+    .f-brand .logo-dot { width: 6px; height: 6px; }
+    .f-mid { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); }
+    .f-icons { display: flex; gap: 20px; }
+    .f-icons a { color: var(--grey); transition: color 0.25s; display: flex; }
+    .f-icons a:hover { color: var(--mint); }
+    .f-icons svg { width: 17px; height: 17px; }
+
+    .rv { opacity: 0; transform: translateY(34px); transition: opacity 1s cubic-bezier(0.19,1,0.22,1), transform 1s cubic-bezier(0.19,1,0.22,1); }
+    .rv.in { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1000px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .card.s3, .card.s2, .card.s6 { grid-column: span 1; }
+      .card.s6 .card-img, .card.s3 .card-img { aspect-ratio: 4/3; }
+      .drone-inner { grid-template-columns: 1fr; gap: 6dvh; }
+      .stats { flex-wrap: wrap; }
+      .stats div { flex: 1 1 40%; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .burger { display: flex; }
+      .grid { grid-template-columns: 1fr; gap: 34px; }
+      .ruler { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="logo" href="index.html"><span class="logo-dot"></span>Above Ground</a>
+  <div class="nav-links">
+    <a href="index.html" class="on">Base</a>
+    <a href="works.html">Album</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+</nav>
+
+<div class="mmenu" id="mmenu">
+  <a href="index.html" class="on">Base</a>
+  <a href="works.html">Album</a>
+  <div class="mm-foot">Above Ground · Fotografia aerea · DJI Mini Pro 5</div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <svg class="flight" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <path id="fp" d="M -60 640 C 240 560, 380 420, 620 460 S 1020 620, 1220 420 S 1420 220, 1560 260"
+          fill="none" stroke="rgba(125,255,180,0.16)" stroke-width="1" stroke-dasharray="5 7"/>
+    <circle r="3.5" fill="#7DFFB4">
+      <animateMotion dur="26s" repeatCount="indefinite" rotate="auto">
+        <mpath href="#fp"/>
+      </animateMotion>
+    </circle>
+    <circle r="9" fill="none" stroke="rgba(125,255,180,0.35)" stroke-width="1">
+      <animateMotion dur="26s" repeatCount="indefinite">
+        <mpath href="#fp"/>
+      </animateMotion>
+    </circle>
+  </svg>
+
+  <div class="ruler">
+    <span>ALT 150M</span>
+    <span>— 120M</span>
+    <span>ALT 0M · GND</span>
+  </div>
+
+  <div class="hero-kicker">Fotografia aerea · DJI Mini Pro 5</div>
+  <h1 class="hero-title">Above<br><span class="thin">Ground</span></h1>
+  <div class="hero-foot">
+    <p class="hero-sub">Il mondo appare diverso a <b>centinaia di metri di altezza</b>. Paesaggi, coste, città, rivisti dall'alto.</p>
+    <a class="cta" href="works.html">
+      Sfoglia gli album
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats rv">
+  <div><span class="v" id="tAlbums">9</span><span class="k">Album</span></div>
+  <div><span class="v" id="tPhotos">157</span><span class="k">Fotografie</span></div>
+  <div><span class="v">120<em>M</em></span><span class="k">Quota max</span></div>
+  <div><span class="v">48<em>MP</em></span><span class="k">Hasselblad</span></div>
+</div>
+
+<!-- ALBUMS -->
+<section class="albums-sec">
+  <span class="x-mark" style="top:40px;left:calc(6vw - 7px);"></span>
+  <span class="x-mark" style="top:40px;right:calc(6vw - 7px);"></span>
+  <div class="shead rv">
+    <h2>Gli Album</h2>
+    <span class="r" id="sheadR">9 voli completati</span>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- DRONE -->
+<section class="drone-sec">
+  <div class="drone-inner rv">
+    <div class="drone-l">
+      <h2>Il Drone</h2>
+      <p>Sotto i 300 grammi, sopra ogni aspettativa. Il <b>DJI Mini Pro 5</b> porta una fotocamera Hasselblad in formato tascabile ovunque ci sia un cielo da attraversare — <b>ogni scatto di questo archivio</b> nasce dai suoi voli.</p>
+    </div>
+    <div class="spec-list">
+      <div class="spec-row"><span class="k">Fotocamera</span><span class="v">Hasselblad CMOS 1" · 48<em>MP</em></span></div>
+      <div class="spec-row"><span class="k">Video</span><span class="v">4K/60 · D-Log 10<em>bit</em></span></div>
+      <div class="spec-row"><span class="k">Autonomia</span><span class="v">34<em>MIN</em></span></div>
+      <div class="spec-row"><span class="k">Trasmissione</span><span class="v">O4 Pro · 20<em>KM</em></span></div>
+      <div class="spec-row"><span class="k">Anticollisione</span><span class="v">APAS 5.0 · 6<em>DIR</em></span></div>
+      <div class="spec-row"><span class="k">Peso al decollo</span><span class="v">299<em>G</em></span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-brand"><span class="logo-dot"></span>Above Ground</div>
+  <div class="f-mid">© 2026 · Fotografia aerea · DJI Mini Pro 5</div>
+  <div class="f-icons">
+    <a href="privacy.html" title="Privacy" aria-label="Privacy">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V6l-8-3-8 3v6c0 6 8 10 8 10z"/></svg>
+    </a>
+    <a href="privacy.html#cookie" title="Cookie" aria-label="Cookie">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="14.5" cy="11" r="1" fill="currentColor"/><circle cx="10" cy="14.5" r="1" fill="currentColor"/><circle cx="15" cy="15.5" r="1" fill="currentColor"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script src="photos_data.js"></script>
+<script>
+// NAV solid on scroll
+const navEl = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  navEl.classList.toggle('solid', window.scrollY > 40);
+}, { passive: true });
+
+// BURGER
+const burger = document.getElementById('burger');
+const mmenu  = document.getElementById('mmenu');
+burger.addEventListener('click', () => {
+  const open = mmenu.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mmenu.classList.remove('open'); burger.classList.remove('open'); document.body.style.overflow = '';
+}));
+
+// STATS
+const totPhotos = ALBUMS.reduce((s, a) => s + a.photos.length, 0);
+document.getElementById('tAlbums').textContent = ALBUMS.length;
+document.getElementById('tPhotos').textContent = totPhotos;
+document.getElementById('sheadR').textContent = ALBUMS.length + ' voli completati';
+
+// GRID — spans: 2 featured, 6 standard, 1 panoramic full-width
+const spans = ['s3','s3','s2','s2','s2','s2','s2','s2','s6'];
+const grid = document.getElementById('grid');
+ALBUMS.forEach((a, i) => {
+  const cover = photoUrl(a, a.photos[0]);
+  const card = document.createElement('a');
+  card.className = 'card rv ' + (spans[i] || 's2');
+  card.href = 'works.html#' + a.slug;
+  card.style.transitionDelay = (i % 3) * 0.07 + 's';
+  card.innerHTML =
+    '<div class="card-img">' +
+      '<img src="' + cover + '" alt="' + a.name + '" loading="lazy">' +
+      '<span class="vf tl"></span><span class="vf tr"></span><span class="vf bl"></span><span class="vf br"></span>' +
+      (a.video ? '<span class="rec"><i></i>REC</span>' : '') +
+    '</div>' +
+    '<div class="card-meta">' +
+      '<span class="card-name"><span class="n">' + String(i+1).padStart(2,'0') + '</span>' + a.name + '</span>' +
+      '<span class="card-info">' + a.photos.length + (a.video ? '+1' : '') + ' · ' + a.coord + '</span>' +
+    '</div>';
+  grid.appendChild(card);
+});
+
+// REVEAL
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) e.target.classList.add('in');
+}), { threshold: 0.07 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+
+<!-- COOKIE CONSENT BANNER -->
+<style>
+  #ccb{position:fixed;left:20px;right:20px;bottom:20px;z-index:9500;max-width:500px;background:#0D1219;border:1px solid var(--line2);padding:24px 26px;transform:translateY(140%);transition:transform 0.5s cubic-bezier(0.19,1,0.22,1);box-shadow:0 24px 60px rgba(0,0,0,0.6);}
+  #ccb.show{transform:translateY(0);}
+  #ccb h3{font-weight:500;font-size:14px;color:var(--white);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em;}
+  #ccb p{font-size:13px;font-weight:300;line-height:1.7;color:var(--grey);margin-bottom:18px;}
+  #ccb p a{color:var(--mint);text-decoration:underline;text-underline-offset:3px;}
+  #ccb-row{display:flex;gap:10px;flex-wrap:wrap;}
+  #ccb button{flex:1 1 0;min-width:120px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;padding:12px 16px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--white);transition:border-color 0.25s,background 0.25s,color 0.25s;}
+  #ccb button:hover{border-color:var(--white);}
+  #ccb button.accept{background:var(--mint);color:var(--bg);border-color:var(--mint);}
+  #ccb button.accept:hover{background:#9FFFCB;}
+  @media (max-width:600px){#ccb{left:12px;right:12px;bottom:12px;}#ccb button{flex-basis:100%;}}
+</style>
+<div id="ccb" role="dialog" aria-label="Consenso cookie">
+  <h3>Cookie &amp; Privacy</h3>
+  <p>Questo sito usa Google Analytics per capire come viene visitato. Nessun cookie di tracciamento viene attivato senza il tuo consenso. <a href="privacy.html">Maggiori informazioni</a>.</p>
+  <div id="ccb-row">
+    <button id="ccbReject">Rifiuta</button>
+    <button class="accept" id="ccbAccept">Accetta</button>
+  </div>
+</div>
+<script>
+  (function () {
+    var ccb = document.getElementById('ccb');
+    if (!localStorage.getItem('ag_consent')) {
+      setTimeout(function () { ccb.classList.add('show'); }, 900);
+    }
+    function choose(v) {
+      localStorage.setItem('ag_consent', v);
+      if (v === 'granted' && typeof gtag === 'function') {
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+      }
+      ccb.classList.remove('show');
+    }
+    document.getElementById('ccbAccept').addEventListener('click', function () { choose('granted'); });
+    document.getElementById('ccbReject').addEventListener('click', function () { choose('denied'); });
+  })();
+</script>
+</body>
+</html>
