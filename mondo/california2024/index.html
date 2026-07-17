@@ -30,7 +30,7 @@
 <meta name="twitter:title" content="A Cali Story 2024 ☀️">
 <meta name="twitter:description" content="Un road trip epico lungo la costa californiana, attraverso la Silicon Valley, i parchi nazionali, il deserto della Death Valley e la follia di Las Vegas.">
 <meta name="twitter:image" content="https://www.gioriva.it/mondo/california2024/logo_gr_california.png">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐻</text></svg>">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%231a3d52%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2229%22%20r%3D%2217%22%20fill%3D%22%23ffd95e%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2229%22%20r%3D%2217%22%20fill%3D%22none%22%20stroke%3D%22%23e8824a%22%20stroke-width%3D%222%22/%3E%3Crect%20x%3D%2213%22%20y%3D%2230%22%20width%3D%2238%22%20height%3D%223%22%20fill%3D%22%231a3d52%22/%3E%3Crect%20x%3D%2213%22%20y%3D%2236%22%20width%3D%2238%22%20height%3D%224%22%20fill%3D%22%231a3d52%22/%3E%3Crect%20x%3D%2213%22%20y%3D%2243%22%20width%3D%2238%22%20height%3D%225%22%20fill%3D%22%231a3d52%22/%3E%3Crect%20x%3D%228%22%20y%3D%2248%22%20width%3D%2248%22%20height%3D%228%22%20rx%3D%222%22%20fill%3D%22%232a6b8a%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -281,26 +281,8 @@
     background: rgba(212,168,67,0.15);
   }
 
-  /* ── ROUTE MAP ── */
-  #route-section {
-    background: var(--deep-ocean);
-    padding: 5rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-  #route-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(42,107,138,0.4), transparent),
-                radial-gradient(ellipse 60% 80% at 80% 50%, rgba(196,97,58,0.2), transparent);
-  }
-  .route-inner {
-    position: relative;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-  }
+
+  /* ── SHARED ── */
   .section-label {
     font-family: 'DM Mono', monospace;
     font-size: 0.65rem;
@@ -308,56 +290,6 @@
     text-transform: uppercase;
     color: var(--clay);
     margin-bottom: 1rem;
-  }
-  .route-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    color: var(--white);
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-  .route-desc {
-    color: rgba(255,255,255,0.6);
-    font-size: 1.05rem;
-    font-weight: 300;
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.7;
-  }
-
-  /* SVG road map */
-  .route-map-svg {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    display: block;
-  }
-
-  .route-stops {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    justify-content: center;
-    margin-top: 2.5rem;
-  }
-  .route-stop {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 0.4rem 0.9rem;
-    border-radius: 100px;
-    transition: all 0.2s;
-    cursor: default;
-  }
-  .route-stop:hover {
-    color: var(--gold);
-    border-color: var(--gold);
-    background: rgba(212,168,67,0.1);
   }
 
   /* ── TIMELINE / DAYS ── */
@@ -847,97 +779,30 @@
     </div>
   </div>
 
-  <div class="scroll-hint" onclick="document.getElementById('route-section').scrollIntoView({behavior:'smooth'})">
+  <div class="scroll-hint" onclick="document.getElementById('days').scrollIntoView({behavior:'smooth'})">
     <span>Scorri</span>
     <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- ROUTE -->
-<section id="route-section">
-  <div class="route-inner">
-    <p class="section-label reveal">Il percorso</p>
-    <h2 class="route-title reveal">Da Los Angeles all'infinito</h2>
-    <p class="route-desc reveal">Un road trip epico lungo la costa californiana, attraverso la Silicon Valley, i parchi nazionali, il deserto della Death Valley e la follia di Las Vegas.</p>
-
-    <!-- SVG route map -->
-    <svg class="route-map-svg reveal" viewBox="0 0 760 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- California coast rough shape -->
-      <path d="M120,280 C115,240 100,200 90,160 C80,120 75,100 80,75 C85,50 100,35 120,25 C140,15 170,18 190,22 C210,26 220,35 225,50" stroke="rgba(255,255,255,0.06)" stroke-width="60" fill="none" stroke-linecap="round"/>
-      <!-- Route line -->
-      <path id="route-path" d="M190,265 C185,255 175,240 165,228 C155,216 140,208 130,195 C120,182 115,168 118,155 C121,142 130,135 138,125 C146,115 152,105 148,92 C144,79 132,72 128,60 C124,48 130,36 142,30" stroke="rgba(212,168,67,0.3)" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
-      <path id="route-path-anim" d="M190,265 C185,255 175,240 165,228 C155,216 140,208 130,195 C120,182 115,168 118,155 C121,142 130,135 138,125 C146,115 152,105 148,92 C144,79 132,72 128,60 C124,48 130,36 142,30" stroke="rgba(212,168,67,0.8)" stroke-width="2" fill="none" stroke-dasharray="5,5" stroke-dashoffset="1000">
-        <animate attributeName="stroke-dashoffset" from="1000" to="0" dur="3s" begin="0.5s" fill="freeze"/>
-      </path>
-      <!-- Las Vegas detour -->
-      <path d="M148,92 C170,88 200,80 230,75 C260,70 280,72 295,78" stroke="rgba(212,168,67,0.3)" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
-      <!-- San Diego -->
-      <path d="M190,265 C200,280 215,295 230,305" stroke="rgba(212,168,67,0.3)" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
-
-      <!-- City dots + labels -->
-      <!-- Los Angeles -->
-      <circle cx="190" cy="265" r="5" fill="#d4a843"/>
-      <text x="205" y="269" fill="rgba(255,255,255,0.85)" font-size="10" font-family="DM Mono,monospace" letter-spacing="0.08em">LOS ANGELES</text>
-
-      <!-- Malibu/Santa Barbara -->
-      <circle cx="165" cy="228" r="3.5" fill="#87c4d8"/>
-      <text x="100" y="232" fill="rgba(255,255,255,0.6)" font-size="9" font-family="DM Mono,monospace" text-anchor="end">MALIBU</text>
-
-      <!-- Big Sur -->
-      <circle cx="130" cy="195" r="3.5" fill="#7a9e7a"/>
-      <text x="115" y="199" fill="rgba(255,255,255,0.6)" font-size="9" font-family="DM Mono,monospace" text-anchor="end">BIG SUR</text>
-
-      <!-- Monterey -->
-      <circle cx="118" cy="168" r="3.5" fill="#87c4d8"/>
-      <text x="103" y="172" fill="rgba(255,255,255,0.6)" font-size="9" font-family="DM Mono,monospace" text-anchor="end">MONTEREY</text>
-
-      <!-- Silicon Valley -->
-      <circle cx="128" cy="148" r="3.5" fill="#c4613a"/>
-      <text x="113" y="152" fill="rgba(255,255,255,0.6)" font-size="9" font-family="DM Mono,monospace" text-anchor="end">SILICON VALLEY</text>
-
-      <!-- San Francisco -->
-      <circle cx="120" cy="128" r="5" fill="#d4a843"/>
-      <text x="105" y="132" fill="rgba(255,255,255,0.85)" font-size="10" font-family="DM Mono,monospace" text-anchor="end">SAN FRANCISCO</text>
-
-      <!-- Yosemite -->
-      <circle cx="138" cy="108" r="4" fill="#7a9e7a"/>
-      <text x="153" y="112" fill="rgba(255,255,255,0.7)" font-size="9" font-family="DM Mono,monospace">YOSEMITE</text>
-
-      <!-- Death Valley -->
-      <circle cx="148" cy="92" r="3.5" fill="#e8824a"/>
-      <text x="163" y="96" fill="rgba(255,255,255,0.6)" font-size="9" font-family="DM Mono,monospace">DEATH VALLEY</text>
-
-      <!-- Las Vegas -->
-      <circle cx="295" cy="78" r="5" fill="#d4a843"/>
-      <text x="310" y="82" fill="rgba(255,255,255,0.85)" font-size="10" font-family="DM Mono,monospace">LAS VEGAS</text>
-
-      <!-- San Diego -->
-      <circle cx="230" cy="305" r="5" fill="#d4a843"/>
-      <text x="245" y="309" fill="rgba(255,255,255,0.85)" font-size="10" font-family="DM Mono,monospace">SAN DIEGO</text>
-
-      <!-- North label -->
-      <text x="365" y="20" fill="rgba(255,255,255,0.2)" font-size="11" font-family="DM Mono,monospace" text-anchor="end" letter-spacing="0.2em">PACIFIC OCEAN</text>
-    </svg>
-
-    <div class="route-stops reveal">
-      <span class="route-stop">Venice Beach</span>
-      <span class="route-stop">Malibu</span>
-      <span class="route-stop">Santa Barbara</span>
-      <span class="route-stop">Morro Bay</span>
-      <span class="route-stop">Big Sur</span>
-      <span class="route-stop">Monterey</span>
-      <span class="route-stop">Carmel</span>
-      <span class="route-stop">Silicon Valley</span>
-      <span class="route-stop">San Francisco</span>
-      <span class="route-stop">Alcatraz</span>
-      <span class="route-stop">Yosemite</span>
-      <span class="route-stop">Death Valley</span>
-      <span class="route-stop">Las Vegas</span>
-      <span class="route-stop">Grand Canyon</span>
-      <span class="route-stop">San Diego</span>
-      <span class="route-stop">Universal Studios</span>
-    </div>
+<!-- DAYS SECTION -->
+<section id="days">
+  <div class="days-header">
+    <p class="section-label">Giorno per giorno</p>
+    <h2>Il diario di viaggio</h2>
+    <p>Ogni giorno una nuova avventura, ogni miglio un nuovo paesaggio</p>
   </div>
+
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" data-filter="all">Tutti i giorni</button>
+    <button class="filter-btn" data-filter="coast">🌊 Costa</button>
+    <button class="filter-btn" data-filter="city">🏙️ Città</button>
+    <button class="filter-btn" data-filter="nature">🌲 Natura</button>
+    <button class="filter-btn" data-filter="desert">🏜️ Deserto</button>
+    <button class="filter-btn" data-filter="fun">🎢 Divertimento</button>
+  </div>
+
+  <div class="days-grid" id="days-grid"></div>
 </section>
 
 <!-- HIGHLIGHTS -->
@@ -978,26 +843,6 @@
       </div>
     </div>
   </div>
-</section>
-
-<!-- DAYS SECTION -->
-<section id="days">
-  <div class="days-header">
-    <p class="section-label">Giorno per giorno</p>
-    <h2>Il diario di viaggio</h2>
-    <p>Ogni giorno una nuova avventura, ogni miglio un nuovo paesaggio</p>
-  </div>
-
-  <div class="filter-bar" id="filter-bar">
-    <button class="filter-btn active" data-filter="all">Tutti i giorni</button>
-    <button class="filter-btn" data-filter="coast">🌊 Costa</button>
-    <button class="filter-btn" data-filter="city">🏙️ Città</button>
-    <button class="filter-btn" data-filter="nature">🌲 Natura</button>
-    <button class="filter-btn" data-filter="desert">🏜️ Deserto</button>
-    <button class="filter-btn" data-filter="fun">🎢 Divertimento</button>
-  </div>
-
-  <div class="days-grid" id="days-grid"></div>
 </section>
 
 <!-- STATS -->
