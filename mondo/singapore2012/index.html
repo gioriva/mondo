@@ -585,6 +585,53 @@
   .lightbox-close:hover { opacity: 1; }
 
 
+
+  /* ─── READ MORE ─── */
+  .post-content { position: relative; }
+
+  .post-content.collapsed {
+    max-height: 360px;
+    overflow: hidden;
+  }
+
+  .post-content.collapsed::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 140px;
+    background: linear-gradient(to bottom, rgba(250,247,242,0), var(--cream) 88%);
+    pointer-events: none;
+  }
+
+  .read-more {
+    display: none;
+    margin-top: 18px;
+    align-items: center;
+    gap: 9px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: none;
+    border: 1px solid rgba(200,149,42,.45);
+    border-radius: 999px;
+    padding: 11px 22px;
+    cursor: pointer;
+    transition: all .25s ease;
+  }
+
+  .read-more.visible { display: inline-flex; }
+
+  .read-more:hover {
+    background: var(--gold);
+    color: var(--cream);
+    border-color: var(--gold);
+  }
+
+  .read-more svg { transition: transform .3s ease; }
+  .read-more.open svg { transform: rotate(180deg); }
+
   /* ─── HAMBURGER MENU ─── */
   .menu-toggle {
     position: fixed;
@@ -743,9 +790,11 @@
         <span class="post-location">📍 Como → Singapore</span>
       </div>
       <h3 class="post-title">Mi presento</h3>
+      <div class="post-content">
       <div class="post-body">
         <p>Brevemente: mi chiamo <strong>Roberta</strong>, ho 23 anni, una splendida famiglia e una vita di cui non posso lamentarmi. Amo lo sport, l'aria aperta, il sole, il mare, le fotografie, e come capirete da questo blog, amo viaggiare.</p>
       </div>
+    </div>
     </article>
 
     <!-- POST 2: La mia avventura -->
@@ -755,6 +804,7 @@
         <span class="post-location">📍 Singapore</span>
       </div>
       <h3 class="post-title">La mia avventura a Singapore, <em>the Lion City</em></h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Già l'appellativo indica una certa affinità tra me e la città. Il mio segno zodiacale e una "certa" somiglianza con Lyon, città dove ho vissuto 4 mesi, città che ho adorato. Questa città nasconde qualcosa di magico, che ho sentito dentro di me ancora prima di partire.</p>
         <p>Mattina della partenza: dormo circa due ore. Parto sapendo di avere 5 coinquilini, ma non una casa, un ostello prenotato il pomeriggio prima, e zero dollari locali.</p>
@@ -793,6 +843,8 @@
       <div class="pull-quote">
         Riassumendo, quali sensazioni ho provato a Singapore? Non so se è davvero la città, ma io sono felice. E lo sono veramente dopo (tanto) tempo.
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
 
     <!-- POST 3: Chinese Garden -->
@@ -802,6 +854,7 @@
         <span class="post-location">📍 Chinese & Japanese Garden</span>
       </div>
       <h3 class="post-title">Chinese and Japanese Garden</h3>
+      <div class="post-content">
       <div class="post-body">
         <p>Il nostro week end fuori porta è saltato; non siamo riusciti a partire perché non c'erano più posti né sui bus né sui treni per arrivare a Kuala Lumpur.</p>
         <p>Oggi abbiamo optato per una giornata all'insegna della natura. Direzione: Chinese Garden and Japanese Garden!</p>
@@ -813,6 +866,7 @@
       <div class="post-body">
         <p>Abbiamo passeggiato in lungo e in largo, goduto un po' di pace in angoli tranquilli e siamo andati a vedere il museo delle tartarughe, che in realtà ci hanno fatto molta pena. Inoltre, molte di loro erano proprio brutte!</p>
       </div>
+    </div>
     </article>
 
     <!-- POST 4: Pulau Ubin -->
@@ -822,6 +876,7 @@
         <span class="post-location">📍 Pulau Ubin · Sentosa</span>
       </div>
       <h3 class="post-title">Pulau Ubin, Sentosa e hamburger</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Due giorni all'insegna del mare! Domenica: sveglia presto (le 8.30!), colazione abbondante, MRT, bus, boat e arriviamo a Pulau Ubin.</p>
       </div>
@@ -843,6 +898,8 @@
         <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/14_schermata-08-2456160-alle-20-24-18.png" alt="Sentosa" loading="lazy">
         <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/15_schermata-08-2456160-alle-20-24-35.png" alt="Flat dinner" loading="lazy">
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
 
     <!-- POST 5: Cani coltelli tovaglioli -->
@@ -852,6 +909,7 @@
         <span class="post-location">📍 Singapore</span>
       </div>
       <h3 class="post-title">A Singapore è difficile vedere cani, coltelli e tovaglioli</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>In questa grande metropoli c'è tutto, o quasi. In qualsiasi posto si vada a mangiare è pressoché impossibile trovare coltelli e tovaglioli. Non ci sono cani: credo che mi basti una mano per contare quelli che ho visto. E le metro sono pulitissime perché è vietato sia bere che mangiare una volta varcata la soglia della stazione. Pena? Multa di <strong>500 SGD</strong>!</p>
         <p>Le persone dormono ovunque: in classe, sulle panchine, in metro. In metro è particolarmente divertente, perché ondeggiano da una parte all'altra, e a volte si addormentano sulla spalla del vicino!</p>
@@ -874,6 +932,8 @@
       <div class="post-images single">
         <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/21_schermata-08-2456166-alle-11-45-531.png" alt="Sentosa party" loading="lazy">
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
 
     <!-- POST 6: Coraggiosa -->
@@ -883,6 +943,7 @@
         <span class="post-location">📍 Singapore</span>
       </div>
       <h3 class="post-title">Alla fine posso definirmi coraggiosa!</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Sapete qual è l'esperienza che mi permette di autodefinirmi coraggiosa? L'essere entrata in una bettola, ovvero un parrucchiere low cost della stazione di Boon Lay, per tagliare i capelli e uscirne soddisfatta! Mi è costato <strong>3,90 SGD</strong>, ovvero due euro e ottanta centesimi. Sarà il mio nuovo appuntamento mensile!</p>
       </div>
@@ -899,6 +960,8 @@
       <div class="post-body">
         <p>Per concludere in bellezza, finalmente ho visto <em>Orchard Road</em>, la via più "negoziosa" e mondana di Singapore! Ora passo e chiudo perché parto per il mio primo week end fuori porta!</p>
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
 
   </div><!-- /timeline-section -->
@@ -915,6 +978,7 @@
         <span class="post-location">📍 Bintan, Indonesia</span>
       </div>
       <h3 class="post-title">Bintan — mare, cibo, relax e divertimento</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>2 giorni di: mare, cibo, relax e divertimento. Ciliegina sulla torta il massaggio fronte mare, peccato solo che mi è venuto il mal di schiena che prima non avevo!</p>
         <p>Il week end è stato organizzato benissimo: 208 studenti, 2 resort prenotati, pullman a disposizione e spiagge bellissime.</p>
@@ -933,6 +997,8 @@
       <div class="post-body">
         <p>Domenica bis di mega colazione, spiaggia, relax e foto! La sera siamo arrivate a casa all'una e abbiamo trovato la cena pronta: pancakes con nutella, zucchero e marmellata!</p>
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
 
     <!-- POST: Durian -->
@@ -942,6 +1008,7 @@
         <span class="post-location">📍 Singapore</span>
       </div>
       <h3 class="post-title">Sapete cos'è un Durian?</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Venerdì sera optiamo per uscire a cena a Holland Park, pieno di ristorantini carini e molto "occidentale". La verità è che avevo una gran voglia di pizza. Passeggiando ci fermiamo davanti al ristorante "da Paolo", e scopriamo che un amico lavora proprio là. Ci fanno accomodare offrendoci <strong>Champagne dalle 9 alle 11 di sera!</strong> Qui a Singapore il peggiore dei vini costa più di 10 dollari a bicchiere. Per concludere in grande, 3 super porzioni di tiramisù arrivano al nostro tavolo!</p>
       </div>
@@ -962,6 +1029,8 @@
       <div class="post-images single">
         <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/07_schermata-09-2456180-alle-08-43-52.png" alt="Bagni baby" loading="lazy">
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
   </div>
 
@@ -977,6 +1046,7 @@
         <span class="post-location">📍 Kuala Lumpur, Malesia</span>
       </div>
       <h3 class="post-title">Week end quasi al femminile</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Week end quasi al femminile: Io, Violaine, Rosario, Doriana e Mattia, beato tra le donne! Il nostro viaggio inizia venerdì sera alle 6, con questa successione di eventi: metro, bus, secondo bus, confine di uscita da Singapore, terzo bus, confine per entrare in Malesia, quarto bus, arrivo alla stazione dei bus a Larkin, McDonald, quinto bus. <strong>Arrivo a Kuala Lumpur: ore 4.20 am!</strong></p>
         <p>La prima cosa che vediamo è un gran bel ratto che ci attraversa la strada. Questa città è ricchissima nel centro, ed estremamente povera a 200 metri di distanza. In poco tempo troviamo un ostello per la grande cifra di circa 5 euro a notte. La carta igienica non fa parte dell'essenziale: non sono andata in bagno per due giorni!</p>
@@ -1006,6 +1076,8 @@
       <div class="post-images single">
         <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/07_schermata-09-2456188-alle-18-25-53.png" alt="Mercato di KL" loading="lazy">
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
   </div>
 
@@ -1021,6 +1093,7 @@
         <span class="post-location">📍 Hong Kong · Macao</span>
       </div>
       <h3 class="post-title">Hong Kong, migliaia di persone per le strade</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Incomincio dicendo che questo viaggio a Hong Kong è stato bellissimo! Partiamo io e Tia giovedì pomeriggio. L'impressione è quella di arrivare in una città simile a Times Square di NY — c'è addirittura un quartiere che si chiama proprio così!</p>
         <p>La giornata di venerdì inizia presto e finisce molto tardi: computer center a Sham Shui Po, poi il <strong>Victoria Peak</strong> per ammirare il panorama... ovviamente con una nebbia pazzesca.</p>
@@ -1060,6 +1133,8 @@
         <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/08_schermata-09-2456196-alle-18-30-44.png" alt="Stanley Market" loading="lazy">
         <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/09_schermata-09-2456196-alle-18-30-23.png" alt="Stanley sul mare" loading="lazy">
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
   </div>
 
@@ -1074,6 +1149,7 @@
         <span class="post-location">📍 Bali · Lombok · Gili Islands</span>
       </div>
       <h3 class="post-title">Albe e tramonti meravigliosi, traffico selvaggio e paesaggi atipici</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Come descriverei brevemente Bali: albe e tramonti meravigliosi, traffico selvaggio e paesaggi atipici. Per traffico selvaggio intendo l'inesistenza di regole: i semafori sono dei consigli, la gente supera sia a destra che a sinistra. È pieno zeppo di motorini. Vedere un motorino con una sola persona è l'eccezione: minimo tre è la regola.</p>
         <p>La cosa più bella e inaspettata della vacanza è stata l'ospitalità ricevuta: siamo stati ospitati a casa di Ruben, un ragazzo che faceva scout con me e mio fratello. Komang, la signora che tiene la casa, mi ha insegnato a cucinare i <em>mi koreng</em>, un piatto tipico indonesiano gustosissimo!</p>
@@ -1111,6 +1187,8 @@
         <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/09_schermata-10-2456214-alle-09-59-28.png" alt="Gili - cena al tramonto" loading="lazy">
         <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/10_schermata-10-2456214-alle-10-02-061.png" alt="Alba sul vulcano" loading="lazy">
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
   </div>
 
@@ -1126,6 +1204,7 @@
         <span class="post-location">📍 Singapore — NTU</span>
       </div>
       <h3 class="post-title">Tutto procede bene a Singapore!</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Tornata da Bali, ho studiato per il primo parziale che dovrebbe essere andato bene. Finalmente ho speso un week end a Singapore, dopo circa un mese di assenza! L'università va bene, ormai la metà del semestre è stata abbondantemente superata, mancano 4 settimane di lezioni e poi gli esami.</p>
         <p>Ci siamo buttati alla scoperta di tutte le 16 mense all'interno del campus. Le preferite: la canteen 2 e la food connection. Ho scoperto anche che nella canteen 1 fanno il gelato!</p>
@@ -1140,6 +1219,8 @@
       <div class="post-images single">
         <img src="https://gioriva.github.io/album/singapore2012/06_VitaASingapore_NTU/01_schermata-10-2456229-alle-06-56-56.png" alt="Infinity Pool Marina Bay Sands" loading="lazy">
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
   </div>
 
@@ -1155,6 +1236,7 @@
         <span class="post-location">📍 Malacca, Malesia</span>
       </div>
       <h3 class="post-title">Allez, let's go: Malacca!</h3>
+      <div class="post-content">
       <div class="post-body">
         <p>Decisione dell'ultimo minuto: giovedì sera si parte per Malacca, piccola città della Malesia, a metà strada tra Singapore e Kuala Lumpur. Coscienti che alle 8 di sera non partono più bus, decidiamo di tentare lo stesso. Chiudiamo la trattativa per partire con un taxi che del taxi ha ben poco: una macchina rossa sportiva e un autista un po' bizzarro. 240 km di strada, tre ore sul bolide rosso. Da non dimenticare il sottofondo di rutti consecutivi fatti da Schumacher versione asiatica!</p>
         <p>Arriviamo sani, salvi ed esausti a Malacca alle 3.30 del mattino: deserto totale. Con un po' di fortuna troviamo posto in una guest house, e dormiamo fino alle 11.</p>
@@ -1163,6 +1245,7 @@
       <div class="pull-quote">
         Il venerdì sera: escursione in bicicletta organizzata dall'ostello. Slalom nel traffico più selvaggio per arrivare a una moschea sul mare all'ora del tramonto. Meraviglioso!
       </div>
+    </div>
     </article>
   </div>
 
@@ -1178,12 +1261,14 @@
         <span class="post-location">📍 Phuket, Tailandia</span>
       </div>
       <h3 class="post-title">Quattro meravigliosi giorni — <em>con la Mari</em></h3>
+      <div class="post-content">
       <div class="post-body">
         <p>Grazie David e Mario per l'ospitalità e la calda accoglienza, e grazie David per averci fatto da guida dell'isola! Patong è un centro estremamente caotico, pieno di negozi e ristorantini. La cosa che salta all'occhio: la rete di distribuzione dell'energia elettrica è sospesa, con matasse di fili che si stendono sui pali, nelle vie, per poi attaccarsi alle case.</p>
         <p>La giornata di sabato è stata interamente dedicata alla gita in barca all'arcipelago di <strong>Phi Phi Islands</strong>. Ko Phi Phi Leh, nota per essere stata il set del film <em>The Beach</em> con Leonardo DiCaprio, ospita una colonia di uccelli i cui nidi, ritenuti afrodisiaci, sono consumati come ingredienti di zuppe.</p>
         <p>Domenica: visita al grande Buddha di Phuket, da cui si può godere un fantastico panorama sull'isola. Il Big Buddha deve ancora essere ultimato, e ai suoi piedi c'è un piccolo tempio dove i monaci raccolgono le offerte. Ci sono alberelli su cui sono appese delle banconote, altri su cui sono appese campanelle. Pare che i Tailandesi siano estremamente superstiziosi.</p>
         <p>Il pranzo è stato memorabile: abbiamo acquistato il pesce al mercato dei pescatori e ce lo siamo fatto cucinare da alcuni ristoranti proprio di fronte al porticciolo — barracuda, granchio al curry, insalata di papaya, gamberi fritti. <em>Alcuni dei colori più belli che abbia mai visto.</em></p>
       </div>
+    </div>
     </article>
 
     <!-- POST: La Mari -->
@@ -1193,6 +1278,7 @@
         <span class="post-location">📍 Singapore — dal diario di Marianna</span>
       </div>
       <h3 class="post-title">La Mari a Singapore</h3>
+      <div class="post-content">
       <div class="post-body">
         <p><em>Un racconto speciale: la settimana di Singapore vista dagli occhi della mia amica Marianna, venuta a trovarmi dall'Italia.</em></p>
         <p>«Ieri ho lasciato Singapore. Tre valeriane e tredici ore di dormiveglia dopo sono arrivata a Malpensa, accompagnata da una certa quantità di merce umidiccia stipata in valigia, un diario scritto a metà e tenuto senza costanza, un mazzo di cartoline scritte ma non spedite, una chiavetta piena di fotografie scattate da altri e un quintale di souvenir per comprarmi l'affetto di chi ho lasciato a casa. Niente di nuovo sotto il sole, per chi mi conosce un pochino.</p>
@@ -1202,6 +1288,7 @@
       <div class="post-images single">
         <img src="https://gioriva.github.io/album/singapore2012/08_Phuket_LaMari/00_schermata-11-2456253-alle-14-55-31.png" alt="ArtScience Museum - mostra fotografica" loading="lazy">
       </div>
+    </div>
     </article>
   </div>
 
@@ -1217,6 +1304,7 @@
         <span class="post-location">📍 Singapore — NTU</span>
       </div>
       <h3 class="post-title">E così i corsi sono finiti</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Ebbene sì, oggi è sabato 17 novembre e il semestre è finito: 10 giorni per studiare e poi 4 esami! Martedì compleanno di Marghe e Giacomo: super pizzata in centro a Singapore e birra a Chinatown!</p>
         <p>Giovedì, invece, siamo stati invitati a festeggiare il <em>Deepavali</em> (festa delle luci, indiana) con un pranzo in università. Evento della settimana: "End of uni party". La polizia è arrivata due volte, e alla seconda ha cacciato tutti a casa!</p>
@@ -1232,6 +1320,8 @@
       <div class="post-body">
         <p>Per un po' basta feste e basta viaggi: il 7 dicembre finisco gli esami, e il 9 parto per il "grande viaggio": Vietnam – Cambogia – Tailandia e forse Laos! Strano da dire, ma la fine si avvicina. Ma vivo ogni giorno al massimo. <em>Che meraviglia!</em></p>
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
 
     <article class="post">
@@ -1240,6 +1330,7 @@
         <span class="post-location">📍 Singapore</span>
       </div>
       <h3 class="post-title">Che ogni fine sia un nuovo inizio</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Mi trovo quasi a tirare le somme di questi quattro lunghi ed intensi mesi. Mi sembra ieri quando ho salutato il Ponzio a Malpensa e mi sono imbarcata sull'aereo direzione Singapore.</p>
         <p>Cosa mi mancherà? Tutto. Mi mancheranno le mie coinquiline, le chiacchierate di sera con Violaine, il tragitto scuola–casa sullo shuttle bus con la Marghe, il cibo locale. Forse mi mancherà anche un pochino il clima.</p>
@@ -1255,6 +1346,8 @@
       <div class="post-images single">
         <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/06_foto2.png" alt="Singapore ultima notte" loading="lazy">
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
 
     <article class="post">
@@ -1263,6 +1356,7 @@
         <span class="post-location">📍 Singapore — ore 12</span>
       </div>
       <h3 class="post-title">12 ore alla partenza</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Questa ultima settimana è volata! Il professore ci ha detto di stare tranquilli e io l'ho preso in parola: la mattina prima dell'ultimo esame ci siamo rilassate in piscina!</p>
         <p>L'ultimo giorno di università siamo andate a prendere un caffè con Chris (il professore di data mining). Per ringraziarlo gli abbiamo fatto un piccolo regalo di Natale: la foto della serata del teatro. La cosa che ci ha lasciate senza parole: <em>anche lui aveva pensato a un regalo di Natale per noi!</em></p>
@@ -1275,6 +1369,8 @@
       <div class="post-body">
         <p><strong>Tra 12 ore sarò imbarcata sul volo per Hanoi (Vietnam). Chissà!</strong></p>
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
   </div>
 
@@ -1290,6 +1386,7 @@
         <span class="post-location">📍 Hanoi, Vietnam</span>
       </div>
       <h3 class="post-title">La strada va attraversata lentamente</h3>
+      <div class="post-content">
       <div class="post-body">
         <p>Prima tappa del giro: <strong>Hanoi</strong>. Arriviamo in aeroporto e la prima cosa che si sente è la differenza di temperatura. La cosa più importante da imparare è attraversare la strada senza essere stirati dalle miriadi di motorini: si attraversa molto piano, facendo attenzione ai motorini che ti considerano un paletto da aggirare. <em>Nessuno si ferma!</em></p>
         <p>Abbiamo visto il museo di Ho Chi Minh, il tempio della letteratura, diverse pagode, il lago, le trentasei strade. E abbiamo mangiato sempre in posti locali. Il piatto tipico si chiama <em>bun cha</em>: noodle di riso e brodo con pezzi di carne molto gustosi. Squisita! Costa pochissimo: poco più di un euro.</p>
@@ -1298,6 +1395,7 @@
       <div class="post-images single">
         <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/00_20121211-232802.jpg" alt="Hanoi di notte" loading="lazy">
       </div>
+    </div>
     </article>
 
     <article class="post">
@@ -1306,6 +1404,7 @@
         <span class="post-location">📍 Halong Bay · Hué</span>
       </div>
       <h3 class="post-title">Halong Bay e Hué</h3>
+      <div class="post-content">
       <div class="post-body">
         <p>Halong Bay in vietnamita significa "baia del dragone" proprio perché le miriadi di isolotti ricordano la schiena del drago metà sommerso dall'acqua. Ci siamo fermati a vedere due caverne, abbiamo navigato nella baia, e praticato kayaking. La notte in barca non è stata priva di sorprese: dei simpatici topi avevano mangiucchiato i dentifrici e un pezzettino di borsa di Violaine. Ma siccome abbiamo visto un posto meraviglioso, i dettagli meno piacevoli possiamo tralasciarli.</p>
         <p>Poi 12 ore di treno nelle cuccette notturne e arriviamo a <strong>Hué</strong>, città imperiale nel centro del Vietnam. 3 dollari a notte a testa e la camera da 5 è nostra!</p>
@@ -1315,6 +1414,7 @@
         <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/01_20121215-221754.jpg" alt="Halong Bay" loading="lazy">
         <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/02_20121215-221846.jpg" alt="Hué - città imperiale" loading="lazy">
       </div>
+    </div>
     </article>
 
     <article class="post">
@@ -1323,11 +1423,13 @@
         <span class="post-location">📍 Hoi An · My Son</span>
       </div>
       <h3 class="post-title">Hoi An e My Son</h3>
+      <div class="post-content">
       <div class="post-body">
         <p>Arrivo a Hoi An: entriamo nel primo ostello e troviamo un uomo nudo nel dormitorio. Proseguiamo. Nel secondo, scarafaggi nel bagno. La signora che sistema le stanze ha preso i piccoli animaletti per le cornine e li ha portati fuori!</p>
         <p>Una volta sistemati siamo andati a girare il paesino: un lungofiume affascinante, acqua come olio e colori splendenti. Hoi An è famosa per i vestiti <em>"tailor made"</em>: abbiamo scelto tutto — modello, colore, forma, materiale, design. Dopo ore di trattative, i nostri acquisti sarebbero stati pronti per il giorno successivo.</p>
         <p>Poi <strong>My Son</strong>, che in vietnamita significa "the beauty of the mountain": un sito archeologico simile ad Angkor Wat, patrimonio UNESCO dal '99. Pesantemente bombardato durante la guerra, non restano che le rovine. Apparentemente era stato costruito con una tecnica avanzata: nessun materiale collante tra un mattone e l'altro, e ancora non hanno capito come.</p>
       </div>
+    </div>
     </article>
 
     <article class="post">
@@ -1336,10 +1438,12 @@
         <span class="post-location">📍 Mekong Delta</span>
       </div>
       <h3 class="post-title">Benvenuti al Sud</h3>
+      <div class="post-content">
       <div class="post-body">
         <p>Giornata di vero relax: spiaggia e sole, hamburger take away con consegna in spiaggia. Arrivati in aeroporto mi è preso un colpo: leggo che il volo per Ho Chi Minh è stato cancellato. Pensavo: la sfiga con i voli mi perseguita. Per una volta c'è un colpo di fortuna: è il volo di 10 minuti prima del nostro! Scampata!</p>
         <p>Sveglia alle 5.30, direzione <em>Mekong Delta</em>: 4 ore di bus per fare probabilmente meno di 70 km. Arriviamo al fiume, prendiamo la moto taxi, poi la barca. Cielo blu, sole caldissimo e gente sorridente! Tutta la giornata in bicicletta sull'isola An Binh.</p>
       </div>
+    </div>
     </article>
 
     <article class="post">
@@ -1348,6 +1452,7 @@
         <span class="post-location">📍 Ho Chi Minh / Saigon</span>
       </div>
       <h3 class="post-title">Goodbye Vietnam</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>Ultima sera in Vietnam e più precisamente a <strong>Saigon</strong> — che ormai non si chiama più Saigon ma Ho Chi Minh, e voi tutti sapete il perché! Abbiamo visto il mercato galleggiante, le produzioni di riso soffiato, gallette di riso, caramelle al cocco, miele, pappa reale. La cosa più divertente: l'incontro col pitone e il viaggio in moto taxi.</p>
         <p>La cosa più impressionante di Ho Chi Minh è il traffico. Avete presente via Vittorio Emanuele a Como sotto Natale? Immaginate strade larghe settanta metri, illuminate con decorazioni natalizie, e trafficate da fiumi di motorini. L'aria è irrespirabile.</p>
@@ -1363,6 +1468,8 @@
       <div class="post-body">
         <p>Oggi il museo della guerra. Impressionante: tre piani di fotografie documentanti la guerra, i suoi orrori e suoi postumi. Domani la sveglia suona alle 5.45 — ore 6.30 bus direzione Phnom Penh, capitale della Cambogia. <strong>Goodbye Vietnam!</strong></p>
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
   </div>
 
@@ -1378,6 +1485,7 @@
         <span class="post-location">📍 Phnom Penh · Siem Reap</span>
       </div>
       <h3 class="post-title">Natale in Cambogia</h3>
+      <div class="post-content" data-collapsible="1">
       <div class="post-body">
         <p>5 giorni in un paese meraviglioso. Ottima meta per passare un natale che difficilmente dimenticherò, anche se il sapore del natale quest'anno è stato proprio diverso. La prima tappa è Phnom Penh: catapecchie circondate da grattacieli, un lussuosissimo palazzo reale nella cui piazza si riversano moltissime persone.</p>
         <p>Abbiamo visitato il palazzo reale, il museo delle belle arti e la prigione <strong>S21</strong>, cioè una vecchia scuola trasformata in luogo di torture da parte dei khmer rossi dal 1976 al 1979. Pensando a quanto è piccolo il mondo, è proprio in questo orribile posto che incontro un barista del 101 di Noli! Incredibile!</p>
@@ -1402,6 +1510,8 @@
       <div class="pull-quote">
         Bye bye, paese dai tramonti meravigliosi.
       </div>
+    </div>
+      <button class="read-more" onclick="togglePost(this)"><span>Continua a leggere</span><svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4l4 4 4-4"/></svg></button>
     </article>
   </div>
 
@@ -1488,6 +1598,23 @@
   }, { threshold: 0.05 });
 
   document.querySelectorAll('.post').forEach(el => observer.observe(el));
+
+
+  // Read more
+  document.querySelectorAll('.post-content[data-collapsible]').forEach(pc => {
+    pc.classList.add('collapsed');
+    const btn = pc.parentElement.querySelector('.read-more');
+    if (btn) btn.classList.add('visible');
+  });
+
+  function togglePost(btn) {
+    const post = btn.closest('.post');
+    const pc = post.querySelector('.post-content');
+    const collapsed = pc.classList.toggle('collapsed');
+    btn.querySelector('span').textContent = collapsed ? 'Continua a leggere' : 'Riduci';
+    btn.classList.toggle('open', !collapsed);
+    if (collapsed) post.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   // Hamburger menu
   function toggleMenu() {
