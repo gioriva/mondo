@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Singapore 2012</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1ZCCJ6QBR4');
+</script>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦁</text></svg>">
+<meta name="description" content="Diario di un'avventura in Asia">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1409;
+    --parchment: #f5f0e8;
+    --cream: #faf7f2;
+    --gold: #c8952a;
+    --gold-light: #e8c87a;
+    --rust: #b05a2a;
+    --teal: #2a6b6b;
+    --warm-grey: #8a7f72;
+    --line: #d8cfc0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  .page-header {
+    background: var(--ink);
+    padding: 120px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 90%, rgba(200,149,42,.15) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 85% 10%, rgba(42,107,107,.12) 0%, transparent 60%);
+  }
+
+  .page-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 24px;
+    opacity: .8;
+    position: relative;
+  }
+
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 76px);
+    font-weight: 700;
+    color: var(--parchment);
+    line-height: 1.05;
+    position: relative;
+    letter-spacing: -.02em;
+  }
+
+  .page-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px, 2vw, 20px);
+    font-style: italic;
+    color: var(--warm-grey);
+    margin-top: 20px;
+    position: relative;
+  }
+
+  .gallery-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 24px 120px;
+  }
+
+  .gallery-section { margin-bottom: 80px; }
+
+  .gallery-header {
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .gallery-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+
+  .gallery-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 2px;
+    cursor: zoom-in;
+    transition: transform .35s ease, box-shadow .35s ease;
+    background: var(--line);
+  }
+
+  .gallery-grid img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 14px 40px rgba(26,20,9,.2);
+  }
+
+  footer {
+    background: var(--ink);
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  .footer-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--parchment);
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+
+  .footer-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    color: var(--warm-grey);
+    text-transform: uppercase;
+  }
+
+  .footer-legal {
+    margin-top: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .footer-legal a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--warm-grey);
+    text-decoration: none;
+    padding: 6px 2px;
+    transition: color .25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .footer-legal a svg {
+    width: 15px;
+    height: 15px;
+    opacity: .75;
+    transition: opacity .25s;
+  }
+
+  .footer-legal a:hover svg { opacity: 1; }
+
+  .footer-legal a:hover { color: var(--gold-light); }
+
+  .legal-sep {
+    color: var(--gold);
+    opacity: .5;
+    font-size: 12px;
+  }
+
+
+  /* ─── LIGHTBOX ─── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.93);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    cursor: zoom-out;
+  }
+
+  .lightbox.active { display: flex; }
+
+  .lightbox img {
+    max-width: 92vw;
+    max-height: 92vh;
+    object-fit: contain;
+    border-radius: 2px;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 88px;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+    opacity: .6;
+    font-family: sans-serif;
+    line-height: 1;
+    z-index: 1001;
+  }
+
+  .lightbox-close:hover { opacity: 1; }
+
+  /* ─── HAMBURGER MENU ─── */
+  .menu-toggle {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1100;
+    width: 48px;
+    height: 48px;
+    background: rgba(26,20,9,.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(200,149,42,.35);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: border-color .25s;
+  }
+
+  .menu-toggle:hover { border-color: var(--gold-light); }
+
+  .menu-toggle span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--gold-light);
+    transition: transform .3s ease, opacity .3s ease;
+  }
+
+  .menu-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(18,14,6,.97);
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s ease, visibility .35s;
+  }
+
+  .menu-overlay.open { opacity: 1; visibility: visible; }
+
+  .menu-overlay a {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 400;
+    color: var(--parchment);
+    text-decoration: none;
+    padding: 14px 30px;
+    letter-spacing: .02em;
+    transition: color .25s;
+  }
+
+  .menu-overlay a:hover { color: var(--gold-light); font-style: italic; }
+
+  .menu-overlay .menu-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: .7;
+  }
+</style>
+</head>
+<body>
+
+<!-- HAMBURGER MENU -->
+<div class="menu-toggle" id="menuToggle" onclick="toggleMenu()" aria-label="Menu">
+  <span></span><span></span><span></span>
+</div>
+<div class="menu-overlay" id="menuOverlay">
+  <p class="menu-label">Menu</p>
+  <a href="https://www.gioriva.it/mondo/">Home page</a>
+  <a href="https://www.gioriva.it/mondo/singapore2012">Diario</a>
+  <a href="programma.html">Programma</a>
+  <a href="galleria.html">Galleria</a>
+</div>
+
+<!-- HEADER -->
+<header class="page-header">
+  <p class="page-eyebrow">Agosto 2012 — Dicembre 2012</p>
+  <h1 class="page-title">Galleria</h1>
+  <p class="page-subtitle">Tutte le fotografie del viaggio, capitolo per capitolo</p>
+</header>
+
+<!-- GALLERY -->
+<main class="gallery-wrap">
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <p class="gallery-eyebrow">🇸🇬 The Lion City</p>
+      <h2 class="gallery-title">Singapore</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/00_img_0093.jpg" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/01_img_4712.jpg" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/02_schermata-08-2456158-alle-13-52-49.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/03_schermata-08-2456158-alle-13-58-01.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/04_schermata-08-2456158-alle-13-55-46.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/05_schermata-08-2456158-alle-13-59-15.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/06_schermata-08-2456158-alle-13-59-52.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/07_schermata-08-2456158-alle-14-01-11.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/08_schermata-08-2456158-alle-14-56-22.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/09_schermata-08-2456158-alle-14-58-17.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/10_schermata-08-2456160-alle-20-09-17.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/11_schermata-08-2456160-alle-20-18-36.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/12_schermata-08-2456160-alle-20-15-23.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/13_schermata-08-2456160-alle-20-16-41.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/14_schermata-08-2456160-alle-20-24-18.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/15_schermata-08-2456160-alle-20-24-35.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/16_schermata-08-2456166-alle-11-42-19.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/17_schermata-08-2456166-alle-11-42-48.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/18_schermata-08-2456166-alle-11-43-45.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/19_schermata-08-2456166-alle-11-45-10.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/20_schermata-08-2456166-alle-11-45-20.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/21_schermata-08-2456166-alle-11-45-531.png" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/22_img_0249.jpg" alt="Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/23_img_02341.jpg" alt="Singapore" loading="lazy">
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <p class="gallery-eyebrow">🇮🇩 Indonesia</p>
+      <h2 class="gallery-title">Bintan</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/00_schermata-09-2456174-alle-18-09-08.png" alt="Bintan" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/01_539095_457970214226255_1947372569_n.jpeg" alt="Bintan" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/02_schermata-09-2456174-alle-18-08-43.png" alt="Bintan" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/03_schermata-09-2456174-alle-18-08-01.png" alt="Bintan" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/04_schermata-09-2456180-alle-08-19-05.png" alt="Bintan" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/05_421656_4501803302558_134187742_n3.jpeg" alt="Bintan" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/06_schermata-09-2456180-alle-08-43-42.png" alt="Bintan" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/07_schermata-09-2456180-alle-08-43-52.png" alt="Bintan" loading="lazy">
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <p class="gallery-eyebrow">🇲🇾 Malesia</p>
+      <h2 class="gallery-title">Kuala Lumpur</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/00_schermata-09-2456188-alle-18-22-29.png" alt="Kuala Lumpur" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/01_schermata-09-2456188-alle-18-23-27.png" alt="Kuala Lumpur" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/02_schermata-09-2456188-alle-18-23-41.png" alt="Kuala Lumpur" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/03_schermata-09-2456188-alle-18-24-04.png" alt="Kuala Lumpur" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/04_schermata-09-2456188-alle-18-24-25.png" alt="Kuala Lumpur" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/05_schermata-09-2456188-alle-18-24-44.png" alt="Kuala Lumpur" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/06_schermata-09-2456188-alle-18-24-55.png" alt="Kuala Lumpur" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/07_schermata-09-2456188-alle-18-25-53.png" alt="Kuala Lumpur" loading="lazy">
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <p class="gallery-eyebrow">🇭🇰 & Macao</p>
+      <h2 class="gallery-title">Hong Kong</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/00_schermata-09-2456196-alle-18-12-48.png" alt="Hong Kong" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/01_schermata-09-2456196-alle-18-14-13.png" alt="Hong Kong" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/02_schermata-09-2456196-alle-18-15-00.png" alt="Hong Kong" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/03_schermata-09-2456196-alle-18-22-02.png" alt="Hong Kong" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/04_schermata-09-2456196-alle-18-24-44.png" alt="Hong Kong" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/05_schermata-09-2456196-alle-18-24-22-1.png" alt="Hong Kong" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/06_schermata-09-2456196-alle-18-28-42.png" alt="Hong Kong" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/07_schermata-09-2456196-alle-18-15-41.png" alt="Hong Kong" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/08_schermata-09-2456196-alle-18-30-44.png" alt="Hong Kong" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/09_schermata-09-2456196-alle-18-30-23.png" alt="Hong Kong" loading="lazy">
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <p class="gallery-eyebrow">🇮🇩 & Gili Islands</p>
+      <h2 class="gallery-title">Bali, Lombok</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/00_schermata-10-2456214-alle-09-40-59.png" alt="Bali, Lombok" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/01_schermata-10-2456214-alle-10-12-561.png" alt="Bali, Lombok" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/02_schermata-10-2456214-alle-09-46-24.png" alt="Bali, Lombok" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/03_schermata-10-2456214-alle-09-46-51.png" alt="Bali, Lombok" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/04_schermata-10-2456214-alle-09-47-18.png" alt="Bali, Lombok" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/05_schermata-10-2456214-alle-09-47-40.png" alt="Bali, Lombok" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/06_schermata-10-2456214-alle-09-59-12.png" alt="Bali, Lombok" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/07_schermata-10-2456214-alle-09-58-22.png" alt="Bali, Lombok" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/08_schermata-10-2456214-alle-09-58-49.png" alt="Bali, Lombok" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/09_schermata-10-2456214-alle-09-59-28.png" alt="Bali, Lombok" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/10_schermata-10-2456214-alle-10-02-061.png" alt="Bali, Lombok" loading="lazy">
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <p class="gallery-eyebrow">🇸🇬 NTU</p>
+      <h2 class="gallery-title">La vita a Singapore</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://gioriva.github.io/album/singapore2012/06_VitaASingapore_NTU/00_schermata-10-2456229-alle-07-02-29.png" alt="La vita a Singapore" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/06_VitaASingapore_NTU/01_schermata-10-2456229-alle-06-56-56.png" alt="La vita a Singapore" loading="lazy">
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <p class="gallery-eyebrow">🇹🇭 Tailandia</p>
+      <h2 class="gallery-title">Phuket</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://gioriva.github.io/album/singapore2012/08_Phuket_LaMari/00_schermata-11-2456253-alle-14-55-31.png" alt="Phuket" loading="lazy">
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <p class="gallery-eyebrow">🇸🇬 Saluti e partenze</p>
+      <h2 class="gallery-title">La fine di un'era</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/00_schermata-11-2456249-alle-16-25-46.png" alt="La fine di un'era" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/01_schermata-11-2456249-alle-16-26-05.png" alt="La fine di un'era" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/02_schermata-11-2456249-alle-16-26-34.png" alt="La fine di un'era" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/03_schermata-11-2456249-alle-16-26-19.png" alt="La fine di un'era" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/04_foto3.jpg" alt="La fine di un'era" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/05_foto1.jpg" alt="La fine di un'era" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/06_foto2.png" alt="La fine di un'era" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/07_schermata-2012-12-08-alle-17-48-49.png" alt="La fine di un'era" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/08_schermata-2012-12-08-alle-17-50-08.png" alt="La fine di un'era" loading="lazy">
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <p class="gallery-eyebrow">🇻🇳 Da Nord a Sud</p>
+      <h2 class="gallery-title">Vietnam</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/00_20121211-232802.jpg" alt="Vietnam" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/01_20121215-221754.jpg" alt="Vietnam" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/02_20121215-221846.jpg" alt="Vietnam" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/03_20121221-191536.jpg" alt="Vietnam" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/04_20121221-191607.jpg" alt="Vietnam" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/05_20121221-193509.jpg" alt="Vietnam" loading="lazy">
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <p class="gallery-eyebrow">🇰🇭 Natale</p>
+      <h2 class="gallery-title">Cambogia</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://gioriva.github.io/album/singapore2012/11_Cambogia_Natale/00_20121227-005702.jpg" alt="Cambogia" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/11_Cambogia_Natale/01_20121227-005909.jpg" alt="Cambogia" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/11_Cambogia_Natale/02_20121227-010029.jpg" alt="Cambogia" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/11_Cambogia_Natale/03_20121227-010531.jpg" alt="Cambogia" loading="lazy">
+      <img src="https://gioriva.github.io/album/singapore2012/11_Cambogia_Natale/04_20121227-010453.jpg" alt="Cambogia" loading="lazy">
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-title">Roberta Riva</p>
+  <p class="footer-sub">Diario di un'avventura in Asia · 2012</p>
+  <div class="footer-legal">
+    <a href="https://www.gioriva.it/" title="gioriva.it">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <circle cx="12" cy="12" r="9"/>
+        <ellipse cx="12" cy="12" rx="4" ry="9"/>
+        <line x1="3.5" y1="9" x2="20.5" y2="9"/>
+        <line x1="3.5" y1="15" x2="20.5" y2="15"/>
+      </svg>
+      Gio Riva
+    </a>
+    <span class="legal-sep">·</span>
+    <a href="https://www.gioriva.it/mondo/privacy.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3L4.5 6v5c0 4.5 3 8.2 7.5 10 4.5-1.8 7.5-5.5 7.5-10V6L12 3z"/>
+        <path d="M9 11.5l2 2 4-4.5"/>
+      </svg>
+      Privacy
+    </a>
+    <span class="legal-sep">·</span>
+    <a href="https://www.gioriva.it/mondo/privacy.html#cookie">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M12 3a9 9 0 1 0 9 9 3.5 3.5 0 0 1-4-3.5A3.5 3.5 0 0 1 13.5 5 3.4 3.4 0 0 1 12 3z"/>
+        <circle cx="9" cy="10" r=".6" fill="currentColor"/>
+        <circle cx="13" cy="14.5" r=".6" fill="currentColor"/>
+        <circle cx="8.5" cy="15.5" r=".6" fill="currentColor"/>
+      </svg>
+      Cookie
+    </a>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  // Lightbox
+  document.querySelectorAll('.gallery-grid img').forEach(img => {
+    img.addEventListener('click', () => {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Hamburger menu
+  function toggleMenu() {
+    document.getElementById('menuToggle').classList.toggle('open');
+    document.getElementById('menuOverlay').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('menuOverlay').classList.contains('open') ? 'hidden' : '';
+  }
+  document.getElementById('menuOverlay').addEventListener('click', function(e) {
+    if (e.target.tagName === 'A') toggleMenu();
+  });
+</script>
+</body>
+</html>

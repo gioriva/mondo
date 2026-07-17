@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Roby a Singapore 2012</title>
+<title>Singapore 2012</title>
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
@@ -19,7 +19,7 @@
 
 <!-- SEO / Social -->
 <meta name="description" content="Diario di un'avventura in Asia">
-<meta property="og:title" content="Roby a Singapore 2012">
+<meta property="og:title" content="Singapore 2012">
 <meta property="og:description" content="Diario di un'avventura in Asia">
 <meta property="og:image" content="https://www.gioriva.it/mondo/singapore2012/og-singapore.jpg">
 <meta property="og:image:width" content="1200">
@@ -30,7 +30,7 @@
 <meta property="og:locale" content="it_IT">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Roby a Singapore 2012">
+<meta name="twitter:title" content="Singapore 2012">
 <meta name="twitter:description" content="Diario di un'avventura in Asia">
 <meta name="twitter:image" content="https://www.gioriva.it/mondo/singapore2012/og-singapore.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -508,6 +508,46 @@
     margin: 32px auto;
   }
 
+  .footer-legal {
+    margin-top: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .footer-legal a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--warm-grey);
+    text-decoration: none;
+    padding: 6px 2px;
+    transition: color .25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .footer-legal a svg {
+    width: 15px;
+    height: 15px;
+    opacity: .75;
+    transition: opacity .25s;
+  }
+
+  .footer-legal a:hover svg { opacity: 1; }
+
+  .footer-legal a:hover { color: var(--gold-light); }
+
+  .legal-sep {
+    color: var(--gold);
+    opacity: .5;
+    font-size: 12px;
+  }
+
+
   /* ─── LIGHTBOX ─── */
   .lightbox {
     display: none;
@@ -544,6 +584,83 @@
 
   .lightbox-close:hover { opacity: 1; }
 
+
+  /* ─── HAMBURGER MENU ─── */
+  .menu-toggle {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 300;
+    width: 48px;
+    height: 48px;
+    background: rgba(26,20,9,.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(200,149,42,.35);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: border-color .25s, background .25s;
+  }
+
+  .menu-toggle:hover { border-color: var(--gold-light); }
+
+  .menu-toggle span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--gold-light);
+    transition: transform .3s ease, opacity .3s ease;
+  }
+
+  .menu-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(18,14,6,.97);
+    z-index: 250;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s ease, visibility .35s;
+  }
+
+  .menu-overlay.open { opacity: 1; visibility: visible; }
+
+  .menu-overlay a {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 400;
+    color: var(--parchment);
+    text-decoration: none;
+    padding: 14px 30px;
+    letter-spacing: .02em;
+    transition: color .25s;
+    position: relative;
+  }
+
+  .menu-overlay a:hover { color: var(--gold-light); font-style: italic; }
+
+  .menu-overlay .menu-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: .7;
+  }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 640px) {
     .post { padding: 60px 0 60px 28px; }
@@ -554,6 +671,18 @@
 </style>
 </head>
 <body>
+
+<!-- HAMBURGER MENU -->
+<div class="menu-toggle" id="menuToggle" onclick="toggleMenu()" aria-label="Menu">
+  <span></span><span></span><span></span>
+</div>
+<div class="menu-overlay" id="menuOverlay">
+  <p class="menu-label">Menu</p>
+  <a href="https://www.gioriva.it/mondo/">Home page</a>
+  <a href="https://www.gioriva.it/mondo/singapore2012">Diario</a>
+  <a href="programma.html">Programma</a>
+  <a href="galleria.html">Galleria</a>
+</div>
 
 <!-- HERO -->
 <header class="hero">
@@ -631,35 +760,35 @@
         <p>Mattina della partenza: dormo circa due ore. Parto sapendo di avere 5 coinquilini, ma non una casa, un ostello prenotato il pomeriggio prima, e zero dollari locali.</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/img_0093.jpg" alt="In partenza" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/00_img_0093.jpg" alt="In partenza" loading="lazy">
       </div>
       <div class="post-body">
         <p>Arrivo a Singapore: dopo aver congelato in aereo, la calura afosa della città si sente con piacere per i primi 5 minuti. Arrivo in ostello, tempo di fare il check in… <strong>Doriana!</strong> Doriana è la mia coinquilina mezza italiana e mezza francese che mi riconosce e mi dice di sbrigarmi che abbiamo un appuntamento per vedere due case. Arrivata giusto in tempo. Non faccio nemmeno in tempo a fare pipì.</p>
         <p>Uno dopo l'altro siamo arrivati tutti: Laurynas (lituano), Violaine (francese di Lione, mia compagna di stanza), Rosario (originaria dell'Argentina, vive in Svezia) e Vashi (afgano, studia ingegneria in Svezia). Dopo due ore passate tutti assieme, sembrava ci conoscessimo da molto più tempo.</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/img_4712.jpg" alt="Marina Bay di notte" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/01_img_4712.jpg" alt="Marina Bay di notte" loading="lazy">
       </div>
       <div class="post-body">
         <p>Abbiamo girato la zona di Marina Bay e siamo saliti sulle torri: sembra di essere nel futuro! Abbiamo visitato spesso China Town, dove si mangia con pochissimo. La cucina qui è ottima; alcuni piatti molto spicy, altri fritti, altri sanissimi come il chicken rice, tipico per tutti i pranzi.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-13-52-49.png" alt="China Town" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-13-58-01.png" alt="Panorama da Mt. Faber" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/02_schermata-08-2456158-alle-13-52-49.png" alt="China Town" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/03_schermata-08-2456158-alle-13-58-01.png" alt="Panorama da Mt. Faber" loading="lazy">
       </div>
       <div class="post-body">
         <p>Siamo poi andati per la prima volta in università per la riunione di benvenuto. La <em>Nanyang Technological University</em> è enorme: ci sono taxi, free shuttle, bus per spostarsi. Talmente grande che mi sono persa una decina di volte e sono entrata 20 minuti dopo alle prime due lezioni perché non trovavo la classe!</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-13-55-46.png" alt="Università NTU" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-13-59-15.png" alt="Quartieri di Singapore" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/04_schermata-08-2456158-alle-13-55-46.png" alt="Università NTU" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/05_schermata-08-2456158-alle-13-59-15.png" alt="Quartieri di Singapore" loading="lazy">
       </div>
       <div class="post-body">
         <p>Abbiamo visto 3 bellissimi quartieri: Chinatown, Little India (dove abbiamo chiesto alla polizia indicazioni per il mercato delle cose rubate!) e Arab Street, un piccolo paradiso colorato di negozi carinissimi.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-13-59-52.png" alt="Little India" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-14-01-11.png" alt="Vecchia a China Town" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/06_schermata-08-2456158-alle-13-59-52.png" alt="Little India" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/07_schermata-08-2456158-alle-14-01-11.png" alt="Vecchia a China Town" loading="lazy">
       </div>
       <div class="pull-quote">
         Riassumendo, quali sensazioni ho provato a Singapore? Non so se è davvero la città, ma io sono felice. E lo sono veramente dopo (tanto) tempo.
@@ -678,8 +807,8 @@
         <p>Oggi abbiamo optato per una giornata all'insegna della natura. Direzione: Chinese Garden and Japanese Garden!</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-14-56-22.png" alt="Meditazione al Japanese Garden" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456158-alle-14-58-17.png" alt="Trova l'intruso!" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/08_schermata-08-2456158-alle-14-56-22.png" alt="Meditazione al Japanese Garden" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/09_schermata-08-2456158-alle-14-58-17.png" alt="Trova l'intruso!" loading="lazy">
       </div>
       <div class="post-body">
         <p>Abbiamo passeggiato in lungo e in largo, goduto un po' di pace in angoli tranquilli e siamo andati a vedere il museo delle tartarughe, che in realtà ci hanno fatto molta pena. Inoltre, molte di loro erano proprio brutte!</p>
@@ -697,22 +826,22 @@
         <p>Due giorni all'insegna del mare! Domenica: sveglia presto (le 8.30!), colazione abbondante, MRT, bus, boat e arriviamo a Pulau Ubin.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-09-17.png" alt="Pulau Ubin" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-18-36.png" alt="Sull'isola" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/10_schermata-08-2456160-alle-20-09-17.png" alt="Pulau Ubin" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/11_schermata-08-2456160-alle-20-18-36.png" alt="Sull'isola" loading="lazy">
       </div>
       <div class="post-body">
         <p>Abbiamo noleggiato le biciclette, una più sgangherata dell'altra, e pedalato tutto il giorno per l'isola, per poi rilassarci verso sera in spiaggia. Al ritorno in metro è stato infinitamente lungo, ma divertente: c'era un ragazzo che indossava due paia di jeans... rubati! Lo sappiamo per certo perché si è dimenticato di togliere l'etichetta!</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-15-23.png" alt="In bicicletta" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-16-41.png" alt="Spiaggia" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/12_schermata-08-2456160-alle-20-15-23.png" alt="In bicicletta" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/13_schermata-08-2456160-alle-20-16-41.png" alt="Spiaggia" loading="lazy">
       </div>
       <div class="post-body">
         <p>Oggi pomeriggio siamo andati a Sentosa, l'isola con la spiaggia più popolare a Singapore. Non c'è nulla di naturale. La spiaggia è molto bella, quasi caraibica, ma completamente artificiale! Stasera invece è stata la nostra flat dinner… <strong>cheeseburger and chips!!</strong></p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-24-18.png" alt="Sentosa" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456160-alle-20-24-35.png" alt="Flat dinner" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/14_schermata-08-2456160-alle-20-24-18.png" alt="Sentosa" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/15_schermata-08-2456160-alle-20-24-35.png" alt="Flat dinner" loading="lazy">
       </div>
     </article>
 
@@ -729,21 +858,21 @@
         <p>Venerdì abbiamo festeggiato il nostro <em>"flat warming party"</em>, ovvero l'inaugurazione del nostro appartamento. A una certa ora è arrivata la polizia a fermare la festa. Molte persone sono state contentissime della nuova esperienza!</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-42-19.png" alt="La nostra family" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/16_schermata-08-2456166-alle-11-42-19.png" alt="La nostra family" loading="lazy">
       </div>
       <div class="post-body">
         <p>Ecco la mia stupenda "family": Laurynas, Violaine, Rosario, Io, Doriana, Vashi.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-42-48.png" alt="Festa in casa" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-43-45.png" alt="La casa si popola" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/17_schermata-08-2456166-alle-11-42-48.png" alt="Festa in casa" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/18_schermata-08-2456166-alle-11-43-45.png" alt="La casa si popola" loading="lazy">
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-45-10.png" alt="Festa a Sentosa" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-45-20.png" alt="Pool party universitario" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/19_schermata-08-2456166-alle-11-45-10.png" alt="Festa a Sentosa" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/20_schermata-08-2456166-alle-11-45-20.png" alt="Pool party universitario" loading="lazy">
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/schermata-08-2456166-alle-11-45-531.png" alt="Sentosa party" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/21_schermata-08-2456166-alle-11-45-531.png" alt="Sentosa party" loading="lazy">
       </div>
     </article>
 
@@ -758,14 +887,14 @@
         <p>Sapete qual è l'esperienza che mi permette di autodefinirmi coraggiosa? L'essere entrata in una bettola, ovvero un parrucchiere low cost della stazione di Boon Lay, per tagliare i capelli e uscirne soddisfatta! Mi è costato <strong>3,90 SGD</strong>, ovvero due euro e ottanta centesimi. Sarà il mio nuovo appuntamento mensile!</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/img_0249.jpg" alt="Orchard Road" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/22_img_0249.jpg" alt="Orchard Road" loading="lazy">
       </div>
       <div class="post-body">
         <p>Continuo raccontando che la settimana universitaria è andata bene, così come la prima presentazione alla classe mia e di Marghe. Ora anche a Singapore conoscono la Rivauto, contento papi?</p>
         <p>Questo simpatico cicciottello è Erik (ovviamente non è il suo vero nome). Lui trova le lezioni poco interessanti, credo:</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/08/img_02341.jpg" alt="Erik dorme in classe" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/01_Singapore_TheLionCity/23_img_02341.jpg" alt="Erik dorme in classe" loading="lazy">
       </div>
       <div class="post-body">
         <p>Per concludere in bellezza, finalmente ho visto <em>Orchard Road</em>, la via più "negoziosa" e mondana di Singapore! Ora passo e chiudo perché parto per il mio primo week end fuori porta!</p>
@@ -791,15 +920,15 @@
         <p>Il week end è stato organizzato benissimo: 208 studenti, 2 resort prenotati, pullman a disposizione e spiagge bellissime.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456174-alle-18-09-08.png" alt="Bintan - resort" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/539095_457970214226255_1947372569_n.jpeg" alt="Bintan - spiaggia" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/00_schermata-09-2456174-alle-18-09-08.png" alt="Bintan - resort" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/01_539095_457970214226255_1947372569_n.jpeg" alt="Bintan - spiaggia" loading="lazy">
       </div>
       <div class="post-body">
         <p>Venerdì sera cena su una terrazza sul mare e festa in piscina. Sabato mega colazione, isoletta (a cui siamo arrivati in barca – quasi all'avventura, ancora un po' e voliamo in mare!), pranzo/cena alle 5, festa in spiaggia!</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456174-alle-18-08-43.png" alt="Isola" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456174-alle-18-08-01.png" alt="Relax" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/02_schermata-09-2456174-alle-18-08-43.png" alt="Isola" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/03_schermata-09-2456174-alle-18-08-01.png" alt="Relax" loading="lazy">
       </div>
       <div class="post-body">
         <p>Domenica bis di mega colazione, spiaggia, relax e foto! La sera siamo arrivate a casa all'una e abbiamo trovato la cena pronta: pancakes con nutella, zucchero e marmellata!</p>
@@ -817,21 +946,21 @@
         <p>Venerdì sera optiamo per uscire a cena a Holland Park, pieno di ristorantini carini e molto "occidentale". La verità è che avevo una gran voglia di pizza. Passeggiando ci fermiamo davanti al ristorante "da Paolo", e scopriamo che un amico lavora proprio là. Ci fanno accomodare offrendoci <strong>Champagne dalle 9 alle 11 di sera!</strong> Qui a Singapore il peggiore dei vini costa più di 10 dollari a bicchiere. Per concludere in grande, 3 super porzioni di tiramisù arrivano al nostro tavolo!</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456180-alle-08-19-05.png" alt="Serata da Paolo" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/04_schermata-09-2456180-alle-08-19-05.png" alt="Serata da Paolo" loading="lazy">
       </div>
       <div class="post-body">
         <p>Sabato, giornata di relax. Siamo io e Violaine. Ci buttiamo sui pancake, e solo un forte senso di educazione ci ha fatto ingoiare quello che abbiamo mangiato: <strong>Pancake ripieni alla crema di Durian</strong>. Sapete cos'è un Durian? È il frutto più orribile che si possa mangiare! L'odore è rimasto nelle nostre bocche per circa 5 ore, finché non ci siamo buttate da McDonald a mangiare patatine fritte!</p>
         <p>Solo per averne un'idea… è vietato portarlo all'interno delle MRT:</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/421656_4501803302558_134187742_n3.jpeg" alt="Durian vietato in metro" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456180-alle-08-43-42.png" alt="Night safari" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/05_421656_4501803302558_134187742_n3.jpeg" alt="Durian vietato in metro" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/06_schermata-09-2456180-alle-08-43-42.png" alt="Night safari" loading="lazy">
       </div>
       <div class="post-body">
         <p>Nel frattempo siamo andate allo zoo, che ovviamente aveva chiuso da 10 minuti, così abbiamo optato per il night safari. Nuova scoperta a Singapore: bagni versione baby!</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456180-alle-08-43-52.png" alt="Bagni baby" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/02_Bintan_Indonesia/07_schermata-09-2456180-alle-08-43-52.png" alt="Bagni baby" loading="lazy">
       </div>
     </article>
   </div>
@@ -854,28 +983,28 @@
         <p>Prima tappa: <strong>Batu Caves</strong>, un santuario buddista costruito all'interno di un'enorme grotta.</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-22-29.png" alt="Kuala Lumpur" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/00_schermata-09-2456188-alle-18-22-29.png" alt="Kuala Lumpur" loading="lazy">
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-23-27.png" alt="Batu Caves" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-23-41.png" alt="Grotta" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/01_schermata-09-2456188-alle-18-23-27.png" alt="Batu Caves" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/02_schermata-09-2456188-alle-18-23-41.png" alt="Grotta" loading="lazy">
       </div>
       <div class="post-body">
         <p>In lontananza si vedono anche le <em>Petronas Twin Towers</em> — due torri gemelle alte 452 metri, costruite dall'architetto argentino Cesar Pelli tra il 1995 e il 1998, diventate il simbolo del progresso economico della Malesia. Possiedono 32.000 finestre.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-24-04.png" alt="Petronas Twin Towers" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-24-25.png" alt="KL di notte" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/03_schermata-09-2456188-alle-18-24-04.png" alt="Petronas Twin Towers" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/04_schermata-09-2456188-alle-18-24-25.png" alt="KL di notte" loading="lazy">
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-24-44.png" alt="Vista dalla torre" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-24-55.png" alt="Serata a KL" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/05_schermata-09-2456188-alle-18-24-44.png" alt="Vista dalla torre" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/06_schermata-09-2456188-alle-18-24-55.png" alt="Serata a KL" loading="lazy">
       </div>
       <div class="post-body">
         <p>Domenica abbiamo scoperto il grande mercato del cibo di China Town: un odore irrespirabile, ma è il posto più bello che abbia visto in città. Il vecchio che vendeva la carne di pollo sul bancone, sotto il banco aveva le galline vive.</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456188-alle-18-25-53.png" alt="Mercato di KL" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/03_KualaLumpur_Malesia/07_schermata-09-2456188-alle-18-25-53.png" alt="Mercato di KL" loading="lazy">
       </div>
     </article>
   </div>
@@ -897,39 +1026,39 @@
         <p>La giornata di venerdì inizia presto e finisce molto tardi: computer center a Sham Shui Po, poi il <strong>Victoria Peak</strong> per ammirare il panorama... ovviamente con una nebbia pazzesca.</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-12-48.png" alt="Victoria Peak nella nebbia" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/00_schermata-09-2456196-alle-18-12-48.png" alt="Victoria Peak nella nebbia" loading="lazy">
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-14-13.png" alt="Mercatini di Central" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-15-00.png" alt="Tempio Man Mo" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/01_schermata-09-2456196-alle-18-14-13.png" alt="Mercatini di Central" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/02_schermata-09-2456196-alle-18-15-00.png" alt="Tempio Man Mo" loading="lazy">
       </div>
       <div class="post-body">
         <p>Alle 20 assistiamo al <em>Light Show</em>, lo spettacolo di luci sui grattacieli. 5 minuti prima dell'inizio inizia a piovere fastidiosamente, ma la pioggia non rovina lo spettacolo!</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-22-02.png" alt="Light Show Hong Kong" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/03_schermata-09-2456196-alle-18-22-02.png" alt="Light Show Hong Kong" loading="lazy">
       </div>
       <div class="post-body">
         <p>Finito il tutto, corriamo ai taxi perché abbiamo la nave per <strong>Macao</strong> mezz'ora dopo. Macao è una sorta di Las Vegas: casino e prostitute, a eccezione del centro storico che è molto europeo, siccome l'isola era portoghese. All'una e 30 abbiamo la nave di ritorno, controlli, taxi e finalmente alle 3.30 siamo a letto.</p>
         <p>Sabato mattina visitiamo il <em>Chi Lin Nunnery</em>, un monastero buddista totalmente in legno, con dei bonsai fantastici.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-24-44.png" alt="Chi Lin Nunnery" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-24-22-1.png" alt="Giardino del monastero" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/04_schermata-09-2456196-alle-18-24-44.png" alt="Chi Lin Nunnery" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/05_schermata-09-2456196-alle-18-24-22-1.png" alt="Giardino del monastero" loading="lazy">
       </div>
       <div class="post-body">
         <p>Giro in solitaria: Avenue of Stars con le statue, tra cui quella di Bruce Lee, e le stelle sul pavimento con gli autografi delle star. Non ne conoscevo mezzo. Verso le 6 faccio una pausa da Starbucks e bevo il primo cappuccino da quando sono in Asia. <em>Che bontà! Un dolce ricordo.</em></p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-28-42.png" alt="Avenue of Stars" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-15-41.png" alt="Cibo di strada" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/06_schermata-09-2456196-alle-18-28-42.png" alt="Avenue of Stars" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/07_schermata-09-2456196-alle-18-15-41.png" alt="Cibo di strada" loading="lazy">
       </div>
       <div class="post-body">
         <p>Domenica mattina: Stanley Market, un mercatino molto tipico sul mare. Non sembra nemmeno di essere a Hong Kong.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-30-44.png" alt="Stanley Market" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/09/schermata-09-2456196-alle-18-30-23.png" alt="Stanley sul mare" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/08_schermata-09-2456196-alle-18-30-44.png" alt="Stanley Market" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/04_HongKong_Macao/09_schermata-09-2456196-alle-18-30-23.png" alt="Stanley sul mare" loading="lazy">
       </div>
     </article>
   </div>
@@ -951,36 +1080,36 @@
         <p>Bali è il paradiso dei surfisti. Spiagge lunghissime e onde alte. Il primo giorno a Kuta abbiamo incontrato per caso un gruppo di francesi con cui abbiamo passato la serata: barbeque all you can eat e shisha al rooftop garden.</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-40-59.png" alt="Kuta beach" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/00_schermata-10-2456214-alle-09-40-59.png" alt="Kuta beach" loading="lazy">
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-10-12-561.png" alt="Bali - tempio" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-46-24.png" alt="Rice terrace" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/01_schermata-10-2456214-alle-10-12-561.png" alt="Bali - tempio" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/02_schermata-10-2456214-alle-09-46-24.png" alt="Rice terrace" loading="lazy">
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-46-51.png" alt="Bali - paesaggio" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-47-18.png" alt="Bali - natura" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/03_schermata-10-2456214-alle-09-46-51.png" alt="Bali - paesaggio" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/04_schermata-10-2456214-alle-09-47-18.png" alt="Bali - natura" loading="lazy">
       </div>
       <div class="post-body">
         <p>A Lombok abbiamo viaggiato in nave di notte. Appena saliti, ci siamo dovuti sistemare fuori, alzandoci alle 5 del mattino come dei cubetti di viaggio, ma con l'alba a darci il buongiorno. Lombok: molta più natura e molto meno turisti.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-47-40.png" alt="Bali - tramonto" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-59-12.png" alt="Lombok" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/05_schermata-10-2456214-alle-09-47-40.png" alt="Bali - tramonto" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/06_schermata-10-2456214-alle-09-59-12.png" alt="Lombok" loading="lazy">
       </div>
       <div class="post-body">
         <p>Le <strong>Gili Islands</strong>: tre piccole isolette a meno di un'ora di barca da Lombok. Ostello a meno di 5 euro a notte, ma compensato con un'ottima cena di pesce in un bellissimo ristorante in riva al mare. Il giorno dopo abbiamo prenotato il giro con la barca col fondo di vetro e fatto snorkeling. <em>Abbiamo visto le tartarughe: magnifico!</em></p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-58-22.png" alt="Gili Islands" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-58-49.png" alt="Snorkeling" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/07_schermata-10-2456214-alle-09-58-22.png" alt="Gili Islands" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/08_schermata-10-2456214-alle-09-58-49.png" alt="Snorkeling" loading="lazy">
       </div>
       <div class="post-body">
         <p>Il penultimo giorno avevamo prenotato per vedere l'alba al vulcano: sveglia alle 2. Arriviamo al punto di partenza, prendiamo la guida e iniziamo a camminare che non sono nemmeno le tre del mattino. La scalata è stata ripida e anche un po' faticosa, ma lo spettacolo dell'alba vista dalla cima di un vulcano è stata <strong>indimenticabile</strong>.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-09-59-28.png" alt="Gili - cena al tramonto" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456214-alle-10-02-061.png" alt="Alba sul vulcano" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/09_schermata-10-2456214-alle-09-59-28.png" alt="Gili - cena al tramonto" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/05_Bali_Lombok_Gili/10_schermata-10-2456214-alle-10-02-061.png" alt="Alba sul vulcano" loading="lazy">
       </div>
     </article>
   </div>
@@ -1003,13 +1132,13 @@
         <p>Il 17 ottobre è stato il compleanno di Violaine: abbiamo organizzato una festa a casa e poi siamo andati in centro!</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456229-alle-07-02-29.png" alt="Compleanno di Violaine" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/06_VitaASingapore_NTU/00_schermata-10-2456229-alle-07-02-29.png" alt="Compleanno di Violaine" loading="lazy">
       </div>
       <div class="post-body">
         <p>Il week end successivo siamo andati all'<strong>Infinity Pool</strong>, la piscina al piano 55 del Marina Bay Sands. Godendoci piscina e idro-massaggio con vista della città a 360°!</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/10/schermata-10-2456229-alle-06-56-56.png" alt="Infinity Pool Marina Bay Sands" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/06_VitaASingapore_NTU/01_schermata-10-2456229-alle-06-56-56.png" alt="Infinity Pool Marina Bay Sands" loading="lazy">
       </div>
     </article>
   </div>
@@ -1071,7 +1200,7 @@
         <p>— <strong>Marianna</strong></p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/11/schermata-11-2456253-alle-14-55-31.png" alt="ArtScience Museum - mostra fotografica" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/08_Phuket_LaMari/00_schermata-11-2456253-alle-14-55-31.png" alt="ArtScience Museum - mostra fotografica" loading="lazy">
       </div>
     </article>
   </div>
@@ -1093,12 +1222,12 @@
         <p>Giovedì, invece, siamo stati invitati a festeggiare il <em>Deepavali</em> (festa delle luci, indiana) con un pranzo in università. Evento della settimana: "End of uni party". La polizia è arrivata due volte, e alla seconda ha cacciato tutti a casa!</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/11/schermata-11-2456249-alle-16-25-46.png" alt="Roberta" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/11/schermata-11-2456249-alle-16-26-05.png" alt="Compleanno" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/00_schermata-11-2456249-alle-16-25-46.png" alt="Roberta" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/01_schermata-11-2456249-alle-16-26-05.png" alt="Compleanno" loading="lazy">
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/11/schermata-11-2456249-alle-16-26-34.png" alt="Ladies night" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/11/schermata-11-2456249-alle-16-26-19.png" alt="Università" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/02_schermata-11-2456249-alle-16-26-34.png" alt="Ladies night" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/03_schermata-11-2456249-alle-16-26-19.png" alt="Università" loading="lazy">
       </div>
       <div class="post-body">
         <p>Per un po' basta feste e basta viaggi: il 7 dicembre finisco gli esami, e il 9 parto per il "grande viaggio": Vietnam – Cambogia – Tailandia e forse Laos! Strano da dire, ma la fine si avvicina. Ma vivo ogni giorno al massimo. <em>Che meraviglia!</em></p>
@@ -1117,14 +1246,14 @@
         <p>Ho voglia di fare colazione col Ponzio e la Stefi la mattina presto, di fare la spesa della frutta il sabato mattina con la Cinziona. Ho voglia di dormire nel mio letto a castello. Ho voglia di andare a sciare e di giocare a tennis. La pizza mi manca da morire — penso che la prima settimana a casa me la mangerò anche a colazione!</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/foto3.jpg" alt="Prima dell'esame" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/foto1.jpg" alt="Pronta per l'esame" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/04_foto3.jpg" alt="Prima dell'esame" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/05_foto1.jpg" alt="Pronta per l'esame" loading="lazy">
       </div>
       <div class="pull-quote">
         Che ogni fine sia un nuovo inizio.
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/foto2.png" alt="Singapore ultima notte" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/06_foto2.png" alt="Singapore ultima notte" loading="lazy">
       </div>
     </article>
 
@@ -1140,8 +1269,8 @@
         <p>Ieri sera, abbiamo cenato a casa, fatto le ultime foto e siamo andati al ponte. Tanti saluti, niente pianti, e la speranza che i nostri destini si ri-incrocino in qualche città.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/schermata-2012-12-08-alle-17-48-49.png" alt="Piscina pre-esame" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/schermata-2012-12-08-alle-17-50-08.png" alt="Ultima sera a Singapore" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/07_schermata-2012-12-08-alle-17-48-49.png" alt="Piscina pre-esame" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/09_FineDiUnEra/08_schermata-2012-12-08-alle-17-50-08.png" alt="Ultima sera a Singapore" loading="lazy">
       </div>
       <div class="post-body">
         <p><strong>Tra 12 ore sarò imbarcata sul volo per Hanoi (Vietnam). Chissà!</strong></p>
@@ -1167,7 +1296,7 @@
         <p>Domani ci sveglieremo presto e andremo ad <strong>Halong Bay</strong> per due giorni e una notte: un'area con circa 3000 piccole isole, patrimonio UNESCO.</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121211-232802.jpg" alt="Hanoi di notte" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/00_20121211-232802.jpg" alt="Hanoi di notte" loading="lazy">
       </div>
     </article>
 
@@ -1183,8 +1312,8 @@
         <p>Abbiamo visitato la città imperiale tra le mura: un posto indescrivibilmente bello. Un cielo azzurro che faceva risaltare tutte le decorazioni orientali. In bici, su e giù per le colline vietnamite, abbiamo visitato tre siti storici — residenze imperiali con templi, teatri e giardini risalenti al 1800. Stanchi morti siamo tornati in ostello dopo 10 ore di visite. Abbiamo finito "all'italiana": pizza margherita al ristorante "little italy" di Hué.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121215-221754.jpg" alt="Halong Bay" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121215-221846.jpg" alt="Hué - città imperiale" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/01_20121215-221754.jpg" alt="Halong Bay" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/02_20121215-221846.jpg" alt="Hué - città imperiale" loading="lazy">
       </div>
     </article>
 
@@ -1225,11 +1354,11 @@
         <p>Sto leggendo <em>"Niente e così sia"</em> di Oriana Fallaci: in questo viaggio in cui ho attraversato il Vietnam ho riconosciuto e dato un "volto" a tutti i posti citati nel suo capolavoro. Uno di questi è l'<em>Hotel Continental</em>, lussuoso albergo nel centro di Saigon, dove la Fallaci e altri giornalisti si trovavano per scambiare informazioni o più semplicemente per godere di momenti di "pace".</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121221-191536.jpg" alt="Mekong Delta" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/03_20121221-191536.jpg" alt="Mekong Delta" loading="lazy">
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121221-191607.jpg" alt="Mercato galleggiante" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121221-193509.jpg" alt="Hotel Continental Saigon" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/04_20121221-191607.jpg" alt="Mercato galleggiante" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/10_Vietnam/05_20121221-193509.jpg" alt="Hotel Continental Saigon" loading="lazy">
       </div>
       <div class="post-body">
         <p>Oggi il museo della guerra. Impressionante: tre piani di fotografie documentanti la guerra, i suoi orrori e suoi postumi. Domani la sveglia suona alle 5.45 — ore 6.30 bus direzione Phnom Penh, capitale della Cambogia. <strong>Goodbye Vietnam!</strong></p>
@@ -1254,21 +1383,21 @@
         <p>Abbiamo visitato il palazzo reale, il museo delle belle arti e la prigione <strong>S21</strong>, cioè una vecchia scuola trasformata in luogo di torture da parte dei khmer rossi dal 1976 al 1979. Pensando a quanto è piccolo il mondo, è proprio in questo orribile posto che incontro un barista del 101 di Noli! Incredibile!</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121227-005702.jpg" alt="Phnom Penh - palazzo reale" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121227-005909.jpg" alt="Angkor Wat" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/11_Cambogia_Natale/00_20121227-005702.jpg" alt="Phnom Penh - palazzo reale" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/11_Cambogia_Natale/01_20121227-005909.jpg" alt="Angkor Wat" loading="lazy">
       </div>
       <div class="post-body">
         <p>Decidiamo di passare il natale in un posto più tranquillo: <em>Siem Reap</em> e i templi di <strong>Angkor Wat</strong>, che visitiamo in bicicletta proprio il 25 di dicembre! Ma siccome è natale ci concediamo anche qualche vizio: 4 ore di spa alla vigilia, e una super cena con tanto di vino bianco la sera di natale.</p>
       </div>
       <div class="post-images double">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121227-010029.jpg" alt="Natale a Siem Reap" loading="lazy">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121227-010531.jpg" alt="Lago in Cambogia" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/11_Cambogia_Natale/02_20121227-010029.jpg" alt="Natale a Siem Reap" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/11_Cambogia_Natale/03_20121227-010531.jpg" alt="Lago in Cambogia" loading="lazy">
       </div>
       <div class="post-body">
         <p>S. Stefano: i ragazzi locali ci hanno portate al lago. Relax sulle amache, pollo alla griglia, pesce, bagno nel lago con ciambellone! Ora aspetto il bus per Bangkok per incontrare finalmente il Gio! Ma non lasciamo la Cambogia senza aver fatto prima un bel massaggio, con tanto di pesciolini mangia pellicine.</p>
       </div>
       <div class="post-images single">
-        <img src="https://robertariva.wordpress.com/wp-content/uploads/2012/12/20121227-010453.jpg" alt="Massaggio con pesciolini" loading="lazy">
+        <img src="https://gioriva.github.io/album/singapore2012/11_Cambogia_Natale/04_20121227-010453.jpg" alt="Massaggio con pesciolini" loading="lazy">
       </div>
       <div class="pull-quote">
         Bye bye, paese dai tramonti meravigliosi.
@@ -1283,10 +1412,38 @@
 <footer>
   <p class="footer-title">Roberta Riva</p>
   <div class="footer-line"></div>
-  <p class="footer-sub">Agosto — Dicembre 2012 &nbsp;·&nbsp; Singapore &amp; Sud-Est Asiatico</p>
   <div style="margin-top:40px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#8a7f72; font-size:16px; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.7;">
     «Curiosità non è se non vanità. Quasi sempre, si vuol sapere solo per discorrerne.»
     <br><span style="font-style:normal; font-size:12px; font-family:'DM Mono',monospace; letter-spacing:.15em;">— Blaise Pascal</span>
+  </div>
+  <div class="footer-legal">
+    <a href="https://www.gioriva.it/" title="gioriva.it">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <circle cx="12" cy="12" r="9"/>
+        <ellipse cx="12" cy="12" rx="4" ry="9"/>
+        <line x1="3.5" y1="9" x2="20.5" y2="9"/>
+        <line x1="3.5" y1="15" x2="20.5" y2="15"/>
+      </svg>
+      Gio Riva
+    </a>
+    <span class="legal-sep">·</span>
+    <a href="https://www.gioriva.it/mondo/privacy.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3L4.5 6v5c0 4.5 3 8.2 7.5 10 4.5-1.8 7.5-5.5 7.5-10V6L12 3z"/>
+        <path d="M9 11.5l2 2 4-4.5"/>
+      </svg>
+      Privacy
+    </a>
+    <span class="legal-sep">·</span>
+    <a href="https://www.gioriva.it/mondo/privacy.html#cookie">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M12 3a9 9 0 1 0 9 9 3.5 3.5 0 0 1-4-3.5A3.5 3.5 0 0 1 13.5 5 3.4 3.4 0 0 1 12 3z"/>
+        <circle cx="9" cy="10" r=".6" fill="currentColor"/>
+        <circle cx="13" cy="14.5" r=".6" fill="currentColor"/>
+        <circle cx="8.5" cy="15.5" r=".6" fill="currentColor"/>
+      </svg>
+      Cookie
+    </a>
   </div>
 </footer>
 
@@ -1331,6 +1488,16 @@
   }, { threshold: 0.05 });
 
   document.querySelectorAll('.post').forEach(el => observer.observe(el));
+
+  // Hamburger menu
+  function toggleMenu() {
+    document.getElementById('menuToggle').classList.toggle('open');
+    document.getElementById('menuOverlay').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('menuOverlay').classList.contains('open') ? 'hidden' : '';
+  }
+  document.getElementById('menuOverlay').addEventListener('click', function(e) {
+    if (e.target.tagName === 'A') toggleMenu();
+  });
 </script>
 </body>
 </html>
