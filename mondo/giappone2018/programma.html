@@ -16,12 +16,20 @@
 <meta name="description" content="Ogni viaggio lo vivi tre volte: quando lo sogni, quando lo vivi e quando lo ricordi">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
 <script>
+  // Google Analytics — caricato solo dopo consenso cookie
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-1ZCCJ6QBR4');
+  function loadGA(){
+    if (document.getElementById('ga-script')) return;
+    var s = document.createElement('script');
+    s.id = 'ga-script'; s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', 'G-1ZCCJ6QBR4');
+  }
+  try { if (localStorage.getItem('cookie-consent') === 'all') loadGA(); } catch(e) {}
 </script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='white'/><circle cx='16' cy='16' r='9' fill='%23BC002D'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1075,6 +1083,94 @@
     .prog-row::after { left: 82px; }
   }
 
+
+  /* ─── FOOTER BADGES ─── */
+  .footer-badges {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.8rem;
+  }
+  .f-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.45);
+    text-decoration: none;
+    padding: 0.35rem 0.9rem;
+    border: 1px solid rgba(245,240,232,0.15);
+    border-radius: 3px;
+    background: none;
+    cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .f-badge:hover {
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.5);
+  }
+  .f-badge svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+
+  /* ─── COOKIE BANNER ─── */
+  .cookie-banner {
+    display: none;
+    position: fixed;
+    left: 50%;
+    bottom: 1.5rem;
+    transform: translateX(-50%);
+    width: min(560px, calc(100vw - 2rem));
+    background: rgba(18,28,50,0.98);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--torii);
+    border-radius: 8px;
+    padding: 1.4rem 1.6rem;
+    z-index: 600;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+  }
+  .cookie-banner.show { display: block; }
+  .cookie-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 0.5rem;
+  }
+  .cookie-text {
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: rgba(245,240,232,0.65);
+    margin-bottom: 1rem;
+  }
+  .cookie-text a { color: var(--gold); text-decoration: none; }
+  .cookie-text a:hover { text-decoration: underline; }
+  .cookie-actions { display: flex; gap: 0.6rem; }
+  .cookie-btn {
+    flex: 1;
+    padding: 0.55rem 1rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    transition: all 0.2s;
+  }
+  .cookie-btn.accept {
+    background: var(--torii);
+    color: var(--paper);
+    border: 1px solid var(--torii);
+  }
+  .cookie-btn.accept:hover { background: #b83608; }
+  .cookie-btn.necessary {
+    background: none;
+    color: rgba(245,240,232,0.6);
+    border: 1px solid rgba(245,240,232,0.25);
+  }
+  .cookie-btn.necessary:hover { color: var(--paper); border-color: rgba(245,240,232,0.5); }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 700px) {
     .timeline::before { left: 26px; }
@@ -1162,6 +1258,17 @@
 </style>
 </head>
 <body>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-title">Un attimo, prima di partire</div>
+  <div class="cookie-text">Questo sito usa cookie statistici (Google Analytics) per capire come viene esplorato e migliorarlo nel tempo. Sono attivati solo con il tuo consenso. Trovi tutti i dettagli nella <a href="https://www.gioriva.it/mondo/privacy.html">Privacy &amp; cookie policy</a>.</div>
+  <div class="cookie-actions">
+    <button class="cookie-btn accept" onclick="cookieAccept()">Accetto</button>
+    <button class="cookie-btn necessary" onclick="cookieNecessary()">Solo necessari</button>
+  </div>
+</div>
+
 
 <!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLightbox()">
@@ -1340,9 +1447,12 @@
 
 <footer>
   <span class="jp">さようなら</span>
-  <strong style="color:var(--paper); font-family:'Shippori Mincho', serif; font-size:1.1rem;">Spring in Japan</strong><br>
-  <span style="display:block; margin-top:0.5rem;">Aprile 2018 · by Giorgio</span>
-  <span style="display:block; margin-top:0.5rem; font-size:0.7rem; opacity:0.5;">"Ogni viaggio lo vivi tre volte: quando lo sogni, quando lo vivi e quando lo ricordi"</span>
+  <strong style="color:var(--paper); font-family:'Shippori Mincho', serif; font-size:1.1rem;">Spring in Japan</strong>
+  <div class="footer-badges">
+    <a class="f-badge" href="https://www.gioriva.it/" title="gioriva.it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.2 3.6 3.2 14.4 0 18M12 3c-3.2 3.6-3.2 14.4 0 18"/></svg> Gio Riva</a>
+    <a class="f-badge" href="https://www.gioriva.it/mondo/privacy.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 8.2-7 10-4-1.8-7-5.4-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg> Privacy</a>
+    <button class="f-badge" onclick="showCookieBanner()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="9.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="8.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="1.1" fill="currentColor" stroke="none"/><circle cx="9.5" cy="14.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="12" cy="11.8" r="1.1" fill="currentColor" stroke="none"/></svg> Cookie</button>
+  </div>
 </footer>
 
 
@@ -1367,6 +1477,9 @@
     </a>
     <a class="ham-link" style="background:rgba(212,65,10,0.25); color:var(--paper);" href="programma.html">
       <span class="ham-icon">📅</span> Programma
+    </a>
+    <a class="ham-link" href="percorso.html">
+      <span class="ham-icon">🗺</span> Il percorso
     </a>
     <a class="ham-link" href="galleria.html">
       <span class="ham-icon">🖼</span> Galleria
@@ -1409,6 +1522,29 @@ function closeHamburger() {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeLightbox(); closeHamburger(); }
 });
+
+
+// ─── COOKIE CONSENT ───
+function showCookieBanner() {
+  document.getElementById('cookie-banner').classList.add('show');
+}
+function hideCookieBanner() {
+  document.getElementById('cookie-banner').classList.remove('show');
+}
+function cookieAccept() {
+  try { localStorage.setItem('cookie-consent', 'all'); } catch(e) {}
+  loadGA();
+  hideCookieBanner();
+}
+function cookieNecessary() {
+  try { localStorage.setItem('cookie-consent', 'necessary'); } catch(e) {}
+  hideCookieBanner();
+}
+(function() {
+  try {
+    if (!localStorage.getItem('cookie-consent')) showCookieBanner();
+  } catch(e) { showCookieBanner(); }
+})();
 
 </script>
 </body>

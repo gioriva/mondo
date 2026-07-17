@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Shippori+Mincho:wght@400;600;800&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
-<title>Link utili — Spring in Japan 2018</title>
+<title>Il percorso — Spring in Japan 2018</title>
 <style>
   :root {
     --ink: #1a1208;
@@ -471,7 +471,7 @@
   /* ─── MAP SECTION ─── */
   #map-section {
     background: var(--navy);
-    padding: 5rem 2rem;
+    padding: 3rem 2rem 5rem;
     text-align: center;
   }
   .map-title {
@@ -1287,51 +1287,88 @@
 </nav>
 
 <div class="subpage-hero">
-  <div class="subpage-hero-jp">お役立ち</div>
-  <h1 class="subpage-hero-title">Link <span>utili</span></h1>
-  <div class="subpage-hero-sub">Risorse per organizzare il tuo viaggio in Giappone</div>
+  <div class="subpage-hero-jp">旅のルート</div>
+  <h1 class="subpage-hero-title">Il per<span>corso</span></h1>
+  <div class="subpage-hero-sub">Da est a ovest e ritorno · 7 città</div>
 </div>
 
-<div class="subpage-content">
-  <p class="links-intro">Ecco alcuni <strong>link utili</strong> che ho utilizzato per organizzare il viaggio:</p>
-<div class="links-hero-img">
-      <img src="https://gioriva.github.io/album/giappone2018/Extra/copertina_partenza.jpg" alt="Partenza per il Giappone" loading="lazy">
+<!-- MAP / ROUTE SECTION -->
+<div id="map-section">
+  <div class="container">
+    <div style="max-width:700px; margin:0 auto 3rem; border-radius:6px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.4);">
+      <img src="https://gioriva.github.io/album/giappone2018/Extra/mappa_percorso.png" alt="Mappa del percorso Spring in Japan 2018" loading="lazy" style="width:100%; display:block; cursor:zoom-in;" onclick="openLightbox(this)">
     </div>
-
-    <p class="links-intro">Ecco alcuni <strong>link utili</strong> che ho utilizzato per organizzare il viaggio:</p>
-
-    <div class="link-cards">
-
-      <a class="link-card" href="https://www.japan-rail-pass.it/" target="_blank" rel="noopener">
-        <span class="link-card-icon">🚄</span>
-        <div class="link-card-title">Japan Rail Pass</div>
-        <div class="link-card-url">japan-rail-pass.it</div>
-        <div class="link-card-desc">Fondamentale per acquistare il tuo <strong>Japan Rail Pass</strong> e viaggiare comodamente in treno in tutto il Giappone!</div>
-      </a>
-
-      <a class="link-card" href="https://www.sognandoilgiappone.com" target="_blank" rel="noopener">
-        <span class="link-card-icon">🌸</span>
-        <div class="link-card-title">Sognando il Giappone</div>
-        <div class="link-card-url">sognandoilgiappone.com</div>
-        <div class="link-card-desc">Uno dei migliori <strong>siti-guida</strong> con tutto quello che può interessarti per il tuo viaggio nel paese del Sol Levante!</div>
-      </a>
-
-      <a class="link-card" href="https://www.japan-guide.com" target="_blank" rel="noopener">
-        <span class="link-card-icon">🗾</span>
-        <div class="link-card-title">Japan Guide</div>
-        <div class="link-card-url">japan-guide.com</div>
-        <div class="link-card-desc">L'omonimo del sito precedente, soltanto in <strong>inglese</strong> 🙂 — guida completa e sempre aggiornata sul Giappone.</div>
-      </a>
-
-      <a class="link-card" href="http://japan-wireless.com" target="_blank" rel="noopener">
-        <span class="link-card-icon">📶</span>
-        <div class="link-card-title">Japan Wireless</div>
-        <div class="link-card-url">japan-wireless.com</div>
-        <div class="link-card-desc">Per i Wi-Fi addicted, questo sito è fondamentale: con una spesa contenuta potete noleggiare un <strong>pocket Wi-Fi</strong> per restar sempre connessi durante tutto il viaggio!</div>
-      </a>
-
+    <div class="route-map">
+      <div class="route-stops">
+        <div class="route-stop">
+          <div class="stop-dot">1-2</div>
+          <div class="stop-info">
+            <div class="stop-city">Tokyo 東京</div>
+            <div class="stop-days-label">Days 1–2 · 2–3 Aprile</div>
+            <div class="stop-highlights">Capsule Hotel Ginza · Tsukiji · Shibuya · Rappongi</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">3-4</div>
+          <div class="stop-info">
+            <div class="stop-city">Osaka 大阪</div>
+            <div class="stop-days-label">Days 3–4 · 4–5 Aprile</div>
+            <div class="stop-highlights">Shinkansen · Castello · Kaiyūkan Acquario · Dotonbori</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">4</div>
+          <div class="stop-info">
+            <div class="stop-city">Nara 奈良</div>
+            <div class="stop-days-label">Day 4 · 5 Aprile (gita)</div>
+            <div class="stop-highlights">Tōdai-ji · Daibutsu · 1.200 cervi liberi</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">5-8</div>
+          <div class="stop-info">
+            <div class="stop-city">Kyoto 京都</div>
+            <div class="stop-days-label">Days 5–8 · 6–9 Aprile</div>
+            <div class="stop-highlights">Bamboo Forest · Fushimi-Inari · Kinkaku-ji · Hiroshima (gita)</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">8</div>
+          <div class="stop-info">
+            <div class="stop-city">Hiroshima 広島 + Miyajima</div>
+            <div class="stop-days-label">Day 8 · 9 Aprile (gita)</div>
+            <div class="stop-highlights">Parco della Pace · Isola di Miyajima · Grande Torii</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">9</div>
+          <div class="stop-info">
+            <div class="stop-city">Kanazawa 金沢</div>
+            <div class="stop-days-label">Day 9 · 10 Aprile</div>
+            <div class="stop-highlights">Kenrokuen · Higashi Chaya · Castello · Ippei Sushi</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">10</div>
+          <div class="stop-info">
+            <div class="stop-city">Yamanouchi / Nagano 長野</div>
+            <div class="stop-days-label">Day 10 · 11 Aprile</div>
+            <div class="stop-highlights">Ryokan Koishiya · Snow Monkeys · Onsen Sansuikaku</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">11-13</div>
+          <div class="stop-info">
+            <div class="stop-city">Tokyo 東京</div>
+            <div class="stop-days-label">Days 11–13 · 12–14 Aprile</div>
+            <div class="stop-highlights">Odaiba · Gundam · Monte Fuji · Akihabara · Hachiko</div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
+
 
 <footer>
   <span class="jp">さようなら</span>
@@ -1366,13 +1403,13 @@
     <a class="ham-link" href="programma.html">
       <span class="ham-icon">📅</span> Programma
     </a>
-    <a class="ham-link" href="percorso.html">
+    <a class="ham-link" style="background:rgba(212,65,10,0.25); color:var(--paper);" href="percorso.html">
       <span class="ham-icon">🗺</span> Il percorso
     </a>
     <a class="ham-link" href="galleria.html">
       <span class="ham-icon">🖼</span> Galleria
     </a>
-    <a class="ham-link" style="background:rgba(212,65,10,0.25); color:var(--paper);" href="link-utili.html">
+    <a class="ham-link" href="link-utili.html">
       <span class="ham-icon">🔗</span> Link utili
     </a>
   </nav>
