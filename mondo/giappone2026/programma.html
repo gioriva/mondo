@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Japan Summer 2026 🇯🇵</title>
+  <title>Japan Summer 2026</title>
 
   <!-- No indicizzazione -->
   <meta name="robots" content="noindex, nofollow" />
@@ -819,6 +819,10 @@
     .m-day:hover .d-title { color: var(--kin); }
     .m-day.future .d-title { color: rgba(240,232,216,0.5); }
 
+    .m-item.m-home { padding: 0.75rem 0 0.95rem; }
+    .m-home .m-jp { display: inline; font-size: 0.78rem; margin: 0 0.7rem 0 0; }
+    .m-home .m-label { font-size: 1.15rem; }
+    .m-home .m-note { margin-top: 0.2rem; }
     body.menu-locked { overflow: hidden; }
 
     /* ── Stili specifici pagina programma ── */
@@ -1018,9 +1022,13 @@
     <span class="menu-kanji" aria-hidden="true">目次</span>
     <div class="menu-inner">
       <nav class="menu-sections" aria-label="Sezioni del sito">
+        <a class="m-item m-home" href="https://www.gioriva.it/mondo/">
+          <span><span class="m-jp" aria-hidden="true">世界</span><span class="m-label">Home Page</span></span>
+          <span class="m-note">Tutti i viaggi, su gioriva.it</span>
+        </a>
         <a class="m-item" href="index.html">
           <span class="m-jp" aria-hidden="true">日記</span>
-          <span class="m-label">Diario</span>
+          <span class="m-label">Diario di viaggio</span>
           <span class="m-note">Il racconto, giorno per giorno</span>
         </a>
         <div class="m-item m-group">
@@ -1059,11 +1067,6 @@
             </a>
           </div>
         </div>
-        <a class="m-item" href="https://www.gioriva.it/mondo/">
-          <span class="m-jp" aria-hidden="true">世界</span>
-          <span class="m-label">Home Page</span>
-          <span class="m-note">Tutti i viaggi, su gioriva.it</span>
-        </a>
       </nav>
     </div>
   </div>
