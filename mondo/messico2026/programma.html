@@ -109,10 +109,22 @@
     .route-card { padding: 2rem 1.2rem; }
     .timeline-section { padding: 3rem 1.2rem 2rem; }
   }
+  .brand-link { position: fixed; top: 1.2rem; left: 1.2rem; z-index: 300; display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.55rem 1.1rem; border-radius: 100px; background: rgba(26,18,37,0.85); backdrop-filter: blur(8px); border: 1.5px solid rgba(245,166,35,0.5); text-decoration: none; transition: all 0.3s; }
+  .brand-link:hover { border-color: var(--sun); transform: scale(1.03); }
+  .brand-link .brand-sun { font-size: 0.9rem; }
+  .brand-link .brand-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: #fff; white-space: nowrap; }
+  .brand-link .brand-name em { color: var(--terracotta); font-style: italic; }
+  .brand-link:hover .brand-name { color: var(--sun); }
+  .brand-link:hover .brand-name em { color: var(--sun); }
+  @media (max-width: 560px) { .brand-link .brand-name { font-size: 0.85rem; } .brand-link { padding: 0.5rem 0.9rem; } }
 </style>
 </head>
 <body>
 
+<a href="index.html" class="brand-link" aria-label="Torna al diario Messico Magico">
+  <span class="brand-sun">☀️</span>
+  <span class="brand-name">Messico <em>mágico</em></span>
+</a>
 <button class="menu-toggle" id="menuToggle" aria-label="Apri menu" aria-expanded="false">
   <span></span><span></span><span></span>
 </button>
