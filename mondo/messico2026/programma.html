@@ -22,7 +22,7 @@
 <meta name="twitter:title" content="Programma · Messico Magico 2026">
 <meta name="twitter:description" content="Il programma del viaggio: 10 giorni da Playa del Carmen a Isla Contoy">
 <meta name="twitter:image" content="https://www.gioriva.it/mondo/messico2026/logo_gr_messico.png">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231A1225'/><circle cx='32' cy='32' r='11' fill='%23F5A623'/><g stroke='%23F5A623' stroke-width='4' stroke-linecap='round'><line x1='49' y1='32' x2='56' y2='32'/><line x1='44' y1='20' x2='49' y2='15'/><line x1='32' y1='15' x2='32' y2='8'/><line x1='20' y1='20' x2='15' y2='15'/><line x1='15' y1='32' x2='8' y2='32'/><line x1='20' y1='44' x2='15' y2='49'/><line x1='32' y1='49' x2='32' y2='56'/><line x1='44' y1='44' x2='49' y2='49'/></g></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Fraunces:ital,wght@0,300;0,400;1,300&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -93,6 +93,11 @@
   .menu-links a { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; color: rgba(255,255,255,0.85); text-decoration: none; transition: all 0.25s; display: flex; align-items: baseline; gap: 0.7rem; }
   .menu-links a .menu-num { font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; color: var(--terracotta); font-weight: 500; }
   .menu-links a:hover { color: var(--sun); transform: translateX(6px); }
+  .menu-links a.menu-home { font-size: 1.15rem; align-items: flex-start; }
+  .menu-links a.menu-home .menu-home-txt { display: flex; flex-direction: column; gap: 0.15rem; }
+  .menu-links a.menu-home small { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 0.72rem; color: rgba(255,255,255,0.4); letter-spacing: 0; text-transform: none; }
+  .menu-links a.menu-home:hover small { color: rgba(245,166,35,0.7); }
+  .menu-sep { height: 1px; background: linear-gradient(90deg, rgba(245,166,35,0.5), transparent); margin: 0.2rem 0 0.2rem; }
   .menu-links a.menu-current { color: var(--terracotta); pointer-events: none; }
 
   /* ===== Footer ===== */
@@ -132,7 +137,8 @@
 <nav class="menu-panel" id="menuPanel" aria-label="Menu di navigazione">
   <p class="menu-label">Messico Magico 2026</p>
   <div class="menu-links">
-    <a href="https://www.gioriva.it/mondo/"><span class="menu-num">01</span>Home Page</a>
+    <a href="https://www.gioriva.it/mondo/" class="menu-home"><span class="menu-num">01</span><span class="menu-home-txt">Home Page<small>Tutti i viaggi, su gioriva.it</small></span></a>
+    <div class="menu-sep"></div>
     <a href="index.html"><span class="menu-num">02</span>Diario di viaggio</a>
     <a href="programma.html" class="menu-current"><span class="menu-num">03</span>Programma</a>
     <a href="galleria.html"><span class="menu-num">04</span>Galleria</a>
