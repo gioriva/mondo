@@ -239,7 +239,7 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 1rem 2rem;
+    padding: 1rem 5rem 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -248,7 +248,7 @@
   nav.scrolled {
     background: rgba(26,61,82,0.95);
     backdrop-filter: blur(20px);
-    padding: 0.7rem 2rem;
+    padding: 0.7rem 5rem 0.7rem 2rem;
     box-shadow: 0 2px 30px rgba(0,0,0,0.3);
   }
   .nav-logo {
@@ -279,28 +279,6 @@
   .nav-day:hover, .nav-day.active {
     color: var(--gold);
     background: rgba(212,168,67,0.15);
-  }
-  .nav-home-btn {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
-    border: 1px solid rgba(255,255,255,0.18);
-    padding: 0.35rem 0.85rem;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: all 0.2s;
-    white-space: nowrap;
-    margin-left: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .nav-home-btn:hover {
-    color: var(--gold);
-    border-color: var(--gold);
-    background: rgba(212,168,67,0.1);
   }
 
   /* ── ROUTE MAP ── */
@@ -763,11 +741,52 @@
     transition: width 0.1s;
   }
 
+
+  /* ── HAMBURGER MENU ── */
+  .menu-btn {
+    position: fixed; top: 0.75rem; right: 1.2rem; z-index: 300;
+    width: 46px; height: 46px; background: rgba(26,61,82,0.85); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 2px; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    transition: background 0.2s;
+  }
+  .menu-btn:hover { background: rgba(42,107,138,0.9); }
+  .menu-btn span { display: block; width: 20px; height: 2px; background: var(--sand); transition: 0.3s; }
+  .menu-btn.open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .menu-btn.open span:nth-child(2){ opacity: 0; }
+  .menu-btn.open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+  .menu-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 240; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  .menu-backdrop.open { opacity: 1; pointer-events: auto; }
+  .menu-overlay {
+    position: fixed; top: 0; right: -360px; width: 320px; max-width: 85vw; height: 100%;
+    background: rgba(13,34,51,0.98); backdrop-filter: blur(20px); z-index: 250;
+    transition: right 0.35s ease; display: flex; flex-direction: column; justify-content: center;
+    padding: 2.5rem; box-shadow: -10px 0 40px rgba(0,0,0,0.4);
+  }
+  .menu-overlay.open { right: 0; }
+  .menu-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); margin-bottom: 1.5rem; }
+  .menu-overlay a {
+    font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--sand);
+    text-decoration: none; padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); transition: 0.2s;
+  }
+  .menu-overlay a:hover, .menu-overlay a.current { color: var(--gold); padding-left: 0.5rem; }
+  .menu-overlay a .m-ico { font-size: 1rem; margin-right: 0.6rem; opacity: 0.7; }
+
+  /* ── FOOTER LINKS ── */
+  .foot-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+  .foot-links a {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s;
+    display: flex; align-items: center; gap: 0.45rem;
+  }
+  .foot-links a:hover { color: var(--gold); }
+  .foot-links svg { width: 14px; height: 14px; opacity: 0.8; }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 700px) {
     .day-card { grid-template-columns: 1fr; }
     .card-visual { min-height: 220px; }
-    nav { padding: 0.8rem 1rem; }
+    nav { padding: 0.8rem 4.5rem 0.8rem 1rem; }
     .nav-links { display: none; }
     .filter-bar { justify-content: flex-start; }
   }
@@ -795,10 +814,17 @@
 <nav id="main-nav">
   <a href="#hero" class="nav-logo">A Cali Story</a>
   <div class="nav-links" id="nav-links"></div>
-  <a href="http://www.gioriva.it/mondo/" class="nav-home-btn" title="Torna alla Home">
-    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:5px;vertical-align:middle;opacity:0.7"><path d="M6 1L1 5.5V11h3.5V8h3v3H11V5.5L6 1Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="none"/></svg>Home
-  </a>
 </nav>
+
+<button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+<div class="menu-backdrop" id="menuBackdrop"></div>
+<div class="menu-overlay" id="menuOverlay">
+  <p class="menu-label">Esplora il viaggio</p>
+  <a href="https://www.gioriva.it/mondo/"><span class="m-ico">🌍</span>Home Page</a>
+  <a href="index.html" class="current"><span class="m-ico">📖</span>Diario di viaggio</a>
+  <a href="programma.html"><span class="m-ico">🗺️</span>Programma</a>
+  <a href="galleria.html"><span class="m-ico">📷</span>Galleria</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -1009,8 +1035,20 @@
 <!-- FOOTER -->
 <footer>
   <div class="foot-logo">A Cali Story ☀️</div>
-  <p>15 giorni di magia, felicità e amore <span class="heart">♥</span><br>Agosto 2024 · California & Nevada</p>
-  <a href="http://www.gioriva.it/mondo/" style="display:inline-block;margin-top:1.8rem;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.12);padding:0.45rem 1.1rem;border-radius:2px;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.color='#d4a843';this.style.borderColor='#d4a843'" onmouseout="this.style.color='rgba(255,255,255,0.3)';this.style.borderColor='rgba(255,255,255,0.12)'">← Home</a>
+  <div class="foot-links">
+    <a href="https://www.gioriva.it/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.9 5.7 3.9 9s-1.4 6.4-3.9 9c-2.5-2.6-3.9-5.7-3.9-9s1.4-6.4 3.9-9Z"/></svg>
+      Gio Riva
+    </a>
+    <a href="https://www.gioriva.it/privacy/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      Privacy
+    </a>
+    <a href="https://www.gioriva.it/cookie/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="0.8" fill="currentColor"/><circle cx="14" cy="14" r="0.8" fill="currentColor"/><circle cx="12" cy="8" r="0.8" fill="currentColor"/><circle cx="9.5" cy="15" r="0.8" fill="currentColor"/><circle cx="15" cy="9.5" r="0.8" fill="currentColor"/></svg>
+      Cookie
+    </a>
+  </div>
 </footer>
 
 <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
@@ -1200,6 +1238,129 @@ const days = [
   }
 ];
 
+
+// ─── SCENE ILLUSTRATE PER OGNI GIORNO ────────────────────────────────────
+const S = 'position:absolute;inset:0;width:100%;height:100%';
+const DK = '#0d1a24';   // silhouette scura
+const DK2 = 'rgba(13,26,36,0.55)';
+const scenes = {
+  1: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <circle cx="95" cy="70" r="34" fill="#ffd95e" opacity="0.85"/>
+    <rect x="0" y="185" width="400" height="75" fill="${DK2}"/>
+    <rect x="150" y="168" width="250" height="8" fill="${DK}"/>
+    <g fill="${DK}"><rect x="170" y="176" width="5" height="60"/><rect x="215" y="176" width="5" height="66"/><rect x="260" y="176" width="5" height="72"/><rect x="305" y="176" width="5" height="78"/><rect x="350" y="176" width="5" height="84"/></g>
+    <circle cx="330" cy="118" r="46" fill="none" stroke="${DK}" stroke-width="5"/>
+    <g stroke="${DK}" stroke-width="3"><line x1="330" y1="72" x2="330" y2="164"/><line x1="284" y1="118" x2="376" y2="118"/><line x1="297" y1="85" x2="363" y2="151"/><line x1="363" y1="85" x2="297" y2="151"/></g>
+    <rect x="322" y="160" width="16" height="14" fill="${DK}"/>
+    <g stroke="${DK}" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M55 130 q8 -7 16 0 q8 -7 16 0"/><path d="M95 148 q6 -5 12 0 q6 -5 12 0"/></g></svg>`,
+  2: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <circle cx="200" cy="150" r="55" fill="#ffd95e" opacity="0.8"/>
+    <rect x="0" y="190" width="400" height="70" fill="${DK2}"/>
+    <path d="M120 195 C130 130 165 105 200 100 C235 105 268 132 278 195 Z" fill="${DK}"/>
+    <path d="M0 220 q50 -12 100 0 t100 0 t100 0 t100 0 v40 h-400 Z" fill="${DK}" opacity="0.5"/>
+    <g stroke="${DK}" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M70 80 q8 -7 16 0 q8 -7 16 0"/><path d="M310 65 q7 -6 14 0 q7 -6 14 0"/></g></svg>`,
+  3: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <path d="M0 260 V150 C30 140 55 128 70 105 L70 260 Z" fill="${DK}"/>
+    <path d="M400 260 V140 C370 133 345 122 330 100 L330 260 Z" fill="${DK}"/>
+    <rect x="60" y="130" width="280" height="12" fill="${DK}"/>
+    <path d="M95 142 A105 105 0 0 0 305 142 L285 142 A85 85 0 0 1 115 142 Z" fill="${DK}"/>
+    <g fill="${DK}"><rect x="88" y="118" width="8" height="24"/><rect x="304" y="118" width="8" height="24"/><rect x="140" y="142" width="6" height="50"/><rect x="196" y="142" width="6" height="72"/><rect x="254" y="142" width="6" height="50"/></g>
+    <path d="M0 245 q40 -10 80 0 t80 0 t80 0 t80 0 t80 0 v15 h-400 Z" fill="${DK2}"/>
+    <circle cx="330" cy="55" r="26" fill="#ffd95e" opacity="0.7"/></svg>`,
+  4: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <rect x="0" y="200" width="400" height="60" fill="${DK2}"/>
+    <path d="M60 205 L110 205 L100 180 L75 180 Z" fill="${DK}"/>
+    <path d="M84 182 C80 150 78 120 84 95 C86 88 90 88 92 95 C97 120 96 150 93 182 Z" fill="${DK}"/>
+    <g fill="${DK}"><path d="M88 96 C68 82 48 78 30 84 C50 74 74 76 88 90 Z"/><path d="M88 96 C82 74 84 52 96 36 C88 56 88 76 91 94 Z"/><path d="M88 96 C104 80 122 74 140 78 C120 78 102 86 90 98 Z"/></g>
+    <g fill="${DK}"><rect x="250" y="120" width="22" height="86"/><rect x="280" y="95" width="26" height="111"/><rect x="314" y="135" width="18" height="71"/><rect x="340" y="110" width="24" height="96"/></g>
+    <g fill="#ffd95e" opacity="0.55"><rect x="285" y="105" width="4" height="4"/><rect x="294" y="105" width="4" height="4"/><rect x="285" y="118" width="4" height="4"/><rect x="345" y="120" width="4" height="4"/><rect x="354" y="132" width="4" height="4"/><rect x="255" y="130" width="4" height="4"/></g></svg>`,
+  5: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <rect x="0" y="210" width="400" height="50" fill="${DK2}"/>
+    <g fill="#a83226"><rect x="110" y="60" width="12" height="150"/><rect x="278" y="60" width="12" height="150"/><rect x="103" y="78" width="26" height="8"/><rect x="271" y="78" width="26" height="8"/><rect x="103" y="108" width="26" height="8"/><rect x="271" y="108" width="26" height="8"/><rect x="0" y="152" width="400" height="9"/></g>
+    <path d="M0 120 C40 90 80 68 116 62 M122 62 C175 78 225 78 278 62 M284 62 C320 68 360 90 400 120" stroke="#a83226" stroke-width="4" fill="none"/>
+    <g stroke="#a83226" stroke-width="2"><line x1="145" y1="90" x2="145" y2="152"/><line x1="175" y1="102" x2="175" y2="152"/><line x1="200" y1="106" x2="200" y2="152"/><line x1="225" y1="102" x2="225" y2="152"/><line x1="255" y1="90" x2="255" y2="152"/></g>
+    <path d="M0 200 q60 -18 130 -8 q80 10 150 -4 q60 -10 120 4 v70 h-400 Z" fill="rgba(245,239,230,0.14)"/></svg>`,
+  6: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <rect x="0" y="190" width="400" height="70" fill="${DK2}"/>
+    <path d="M80 195 L110 160 L290 160 L330 195 Z" fill="${DK}"/>
+    <rect x="140" y="120" width="110" height="42" fill="${DK}"/>
+    <g fill="#ffd95e" opacity="0.5"><rect x="150" y="130" width="7" height="9"/><rect x="165" y="130" width="7" height="9"/><rect x="180" y="130" width="7" height="9"/><rect x="195" y="130" width="7" height="9"/><rect x="210" y="130" width="7" height="9"/><rect x="225" y="130" width="7" height="9"/></g>
+    <rect x="262" y="95" width="14" height="67" fill="${DK}"/>
+    <polygon points="255,95 283,95 269,78" fill="${DK}"/>
+    <circle cx="269" cy="100" r="5" fill="#ffd95e" opacity="0.9"/>
+    <g stroke="${DK}" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M60 70 q8 -7 16 0 q8 -7 16 0"/><path d="M320 55 q7 -6 14 0 q7 -6 14 0"/><path d="M100 95 q6 -5 12 0 q6 -5 12 0"/></g></svg>`,
+  7: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <path d="M180 260 V90 C180 60 200 40 235 38 C260 37 285 50 298 75 C310 100 312 150 310 260 Z" fill="${DK}"/>
+    <path d="M180 260 V90 C177 130 176 190 176 260 Z" fill="${DK}"/>
+    <path d="M0 260 L45 170 L90 260 Z" fill="${DK2}"/>
+    <g fill="${DK}"><path d="M60 260 L80 195 L100 260 Z"/><path d="M100 260 L125 180 L150 260 Z"/><path d="M30 260 L48 210 L66 260 Z"/></g></svg>`,
+  8: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <g fill="${DK2}"><path d="M290 260 L315 175 L340 260 Z"/><path d="M330 260 L360 160 L390 260 Z"/><path d="M255 260 L275 200 L295 260 Z"/></g>
+    <rect x="0" y="228" width="400" height="32" fill="${DK}" opacity="0.35"/>
+    <g fill="${DK}">
+      <ellipse cx="150" cy="190" rx="58" ry="34"/>
+      <circle cx="205" cy="168" r="20"/>
+      <circle cx="214" cy="153" r="7"/><circle cx="196" cy="150" r="7"/>
+      <path d="M218 172 Q228 174 230 180 Q224 180 216 178 Z"/>
+      <rect x="105" y="212" width="13" height="34" rx="5"/>
+      <rect x="132" y="216" width="13" height="30" rx="5"/>
+      <rect x="163" y="216" width="13" height="30" rx="5"/>
+      <rect x="185" y="212" width="13" height="34" rx="5"/>
+    </g></svg>`,
+  9: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <circle cx="200" cy="90" r="42" fill="#ffe680" opacity="0.9"/>
+    <g stroke="#ffe680" stroke-width="3" opacity="0.5" stroke-linecap="round"><line x1="200" y1="20" x2="200" y2="38"/><line x1="146" y1="42" x2="158" y2="54"/><line x1="254" y1="42" x2="242" y2="54"/><line x1="130" y1="90" x2="148" y2="90"/><line x1="270" y1="90" x2="252" y2="90"/></g>
+    <path d="M0 260 V190 Q90 160 180 195 Q290 230 400 185 V260 Z" fill="${DK2}"/>
+    <path d="M0 260 V225 Q110 195 220 225 Q320 250 400 222 V260 Z" fill="${DK}"/>
+    <path d="M40 190 C42 170 50 158 60 152 L60 190 Z" fill="${DK}" opacity="0.7"/>
+    <path d="M58 152 L58 190 M58 160 C50 158 46 152 46 144 M58 168 C66 166 70 160 70 152" stroke="${DK}" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/></svg>`,
+  10: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <g fill="#ffe680" opacity="0.8"><circle cx="50" cy="40" r="1.5"/><circle cx="120" cy="25" r="1.5"/><circle cx="200" cy="45" r="1.5"/><circle cx="280" cy="22" r="1.5"/><circle cx="350" cy="48" r="1.5"/><circle cx="90" cy="60" r="1.5"/><circle cx="320" cy="70" r="1.5"/></g>
+    <polygon points="150,240 175,60 200,240" fill="rgba(255,230,128,0.10)"/>
+    <polygon points="250,240 268,80 286,240" fill="rgba(255,230,128,0.10)"/>
+    <g fill="${DK}"><rect x="40" y="150" width="30" height="110"/><rect x="80" y="120" width="26" height="140"/><rect x="118" y="165" width="34" height="95"/><rect x="165" y="100" width="24" height="160"/><rect x="200" y="140" width="30" height="120"/><rect x="240" y="115" width="26" height="145"/><rect x="278" y="155" width="32" height="105"/><rect x="320" y="128" width="26" height="132"/><rect x="356" y="168" width="30" height="92"/></g>
+    <rect x="170" y="80" width="14" height="20" fill="${DK}"/>
+    <g fill="#ffd95e" opacity="0.75"><rect x="86" y="130" width="4" height="5"/><rect x="95" y="130" width="4" height="5"/><rect x="86" y="142" width="4" height="5"/><rect x="246" y="125" width="4" height="5"/><rect x="255" y="138" width="4" height="5"/><rect x="170" y="110" width="4" height="5"/><rect x="178" y="122" width="4" height="5"/><rect x="326" y="140" width="4" height="5"/><rect x="46" y="160" width="4" height="5"/><rect x="207" y="150" width="4" height="5"/><rect x="284" y="165" width="4" height="5"/></g></svg>`,
+  11: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <path d="M0 260 V130 L55 130 L70 155 L120 155 L135 120 L190 120 V260 Z" fill="${DK2}"/>
+    <path d="M180 260 V150 L230 150 L245 175 L300 175 L315 140 L400 140 V260 Z" fill="${DK2}"/>
+    <path d="M0 260 V190 L80 190 L95 210 L160 210 L175 185 L250 185 L268 215 L330 215 L345 195 L400 195 V260 Z" fill="${DK}"/>
+    <path d="M60 260 C100 245 150 250 190 238 C240 224 290 240 340 232" stroke="#87c4d8" stroke-width="5" fill="none" opacity="0.6" stroke-linecap="round"/>
+    <circle cx="330" cy="55" r="28" fill="#ffe680" opacity="0.75"/></svg>`,
+  12: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <rect x="0" y="195" width="400" height="65" fill="${DK2}"/>
+    <path d="M90 220 Q140 175 210 195 Q270 210 330 200 L330 260 L90 260 Z" fill="${DK}"/>
+    <g fill="${DK}">
+      <path d="M160 178 Q185 158 225 168 Q255 176 268 190 Q245 200 205 196 Q172 192 160 178 Z"/>
+      <circle cx="152" cy="176" r="13"/>
+      <path d="M266 188 Q280 182 288 172 Q286 190 274 196 Z"/>
+    </g>
+    <path d="M0 238 q40 -8 80 0 t80 0 t80 0 t80 0 t80 0 v22 h-400 Z" fill="rgba(245,239,230,0.12)"/>
+    <g stroke="${DK}" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M300 70 q8 -7 16 0 q8 -7 16 0"/><path d="M70 55 q7 -6 14 0 q7 -6 14 0"/></g>
+    <circle cx="75" cy="115" r="26" fill="#ffd95e" opacity="0.7"/></svg>`,
+  13: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <rect x="0" y="200" width="400" height="60" fill="${DK2}"/>
+    <path d="M120 208 L135 235 L295 235 L310 208 Q215 218 120 208 Z" fill="${DK}"/>
+    <g stroke="${DK}" stroke-width="5"><line x1="165" y1="210" x2="165" y2="105"/><line x1="215" y1="212" x2="215" y2="85"/><line x1="265" y1="210" x2="265" y2="110"/></g>
+    <g fill="${DK}" opacity="0.85"><path d="M165 110 Q190 128 165 150 Z"/><path d="M215 92 Q245 115 215 142 Z"/><path d="M265 115 Q288 132 265 152 Z"/><path d="M165 152 Q145 165 165 180 Z"/><path d="M215 145 Q192 160 215 178 Z"/></g>
+    <line x1="120" y1="208" x2="90" y2="190" stroke="${DK}" stroke-width="4"/>
+    <circle cx="330" cy="70" r="30" fill="#ffd95e" opacity="0.75"/>
+    <path d="M0 245 q45 -9 90 0 t90 0 t90 0 t90 0 v15 h-400 Z" fill="rgba(245,239,230,0.1)"/></svg>`,
+  14: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <rect x="0" y="205" width="400" height="55" fill="rgba(245,239,230,0.18)"/>
+    <rect x="0" y="188" width="400" height="18" fill="${DK2}"/>
+    <g fill="${DK}"><rect x="240" y="130" width="120" height="60"/><polygon points="255,130 285,130 270,105"/><polygon points="315,130 345,130 330,105"/><rect x="296" y="90" width="16" height="40"/><polygon points="288,92 320,92 304,68"/></g>
+    <g fill="#ffd95e" opacity="0.6"><rect x="250" y="142" width="6" height="8"/><rect x="264" y="142" width="6" height="8"/><rect x="278" y="142" width="6" height="8"/><rect x="330" y="142" width="6" height="8"/><rect x="344" y="142" width="6" height="8"/></g>
+    <g><line x1="95" y1="152" x2="95" y2="215" stroke="${DK}" stroke-width="4"/><path d="M55 160 Q95 118 135 160 Q95 148 55 160 Z" fill="#c4613a"/><path d="M55 160 Q95 118 135 160" fill="none" stroke="${DK}" stroke-width="3"/></g>
+    <circle cx="55" cy="60" r="26" fill="#ffd95e" opacity="0.8"/></svg>`,
+  15: `<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" style="${S}">
+    <g fill="#ffe680" opacity="0.7"><circle cx="60" cy="35" r="1.5"/><circle cx="140" cy="22" r="1.5"/><circle cx="230" cy="40" r="1.5"/><circle cx="320" cy="25" r="1.5"/><circle cx="370" cy="55" r="1.5"/></g>
+    <path d="M0 220 C40 218 60 150 105 148 C150 146 160 90 205 88 C250 86 258 150 300 152 C345 154 360 205 400 208" stroke="${DK}" stroke-width="6" fill="none"/>
+    <g stroke="${DK}" stroke-width="3"><line x1="105" y1="150" x2="105" y2="260"/><line x1="205" y1="90" x2="205" y2="260"/><line x1="300" y1="154" x2="300" y2="260"/><line x1="55" y1="185" x2="55" y2="260"/><line x1="355" y1="180" x2="355" y2="260"/></g>
+    <g fill="#c4613a"><rect x="188" y="76" width="14" height="11" rx="2"/><rect x="204" y="79" width="14" height="11" rx="2"/></g>
+    <g stroke="#ffd95e" stroke-width="2" opacity="0.8" stroke-linecap="round"><path d="M330 80 l6 -10 M336 82 l10 -6 M338 90 l11 0 M336 96 l10 6 M330 98 l6 10"/></g></svg>`
+};
+
 // ─── RENDER DAYS ─────────────────────────────────────────────────────────
 const grid = document.getElementById('days-grid');
 const navLinks = document.getElementById('nav-links');
@@ -1225,7 +1386,7 @@ days.forEach((d, i) => {
 
   card.innerHTML = `
     <div class="card-visual" style="direction:ltr">
-      <div class="card-bg" style="background:${d.gradient}"></div>
+      <div class="card-bg" style="background:${d.gradient}">${scenes[d.n] || ''}</div>
       <div class="card-overlay"></div>
       <span class="card-date-badge">Giorno ${d.n} · ${d.date}</span>
       <div class="card-location">
@@ -1306,6 +1467,18 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ─── HAMBURGER MENU ──────────────────────────────────────────────────────
+const menuBtn = document.getElementById('menuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const menuBackdrop = document.getElementById('menuBackdrop');
+function toggleMenu() {
+  menuBtn.classList.toggle('open');
+  menuOverlay.classList.toggle('open');
+  menuBackdrop.classList.toggle('open');
+}
+menuBtn.addEventListener('click', toggleMenu);
+menuBackdrop.addEventListener('click', toggleMenu);
 </script>
 </body>
 </html>
