@@ -233,7 +233,7 @@
   .nav-inner {
     max-width: 1200px; margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between;
-    height: 60px;
+    height: 60px; padding-right: 56px;
   }
 
   .nav-logo {
@@ -677,9 +677,232 @@
     color: var(--text-mid); line-height: 1.7;
     margin-bottom: 2.5rem;
   }
+
+  /* ── PHOTO STRIP IN DAY CARDS ── */
+  .day-photos {
+    display: block; margin-top: 1.1rem;
+    text-decoration: none; color: inherit;
+  }
+  .dp-thumbs {
+    display: grid; gap: 4px;
+    grid-template-columns: repeat(3, 1fr);
+    border-radius: 0.55rem; overflow: hidden;
+  }
+  .dp-thumbs.dp-2 { grid-template-columns: repeat(2, 1fr); }
+  .dp-thumbs img {
+    width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block;
+    background: rgba(139,115,85,0.12);
+    opacity: 0; transition: opacity .5s ease, transform .4s ease, filter .3s ease;
+  }
+  .dp-thumbs img.loaded { opacity: 1; }
+  .day-card:hover .dp-thumbs img { filter: brightness(1.07) saturate(1.05); }
+  .day-card:hover .dp-thumbs img:hover { transform: scale(1.06); }
+  .dp-more {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    margin-top: 0.6rem;
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-light);
+    transition: color .22s ease, gap .22s ease;
+  }
+  .day-card:hover .dp-more { color: var(--terracotta); gap: 0.6rem; }
+  .dp-more svg { transition: transform .22s ease; }
+  .day-card:hover .dp-more svg { transform: translateX(2px); }
+
+  /* ── GALLERY CTA IN NAV ── */
+  .nav-gal {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--deep-teal); text-decoration: none;
+    padding: 0.4rem 0.85rem;
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 2rem;
+    flex-shrink: 0; margin-left: 0.8rem;
+    transition: background .2s, transform .2s;
+    white-space: nowrap;
+  }
+  .nav-gal:hover { background: #E4BC5E; transform: translateY(-1px); }
+
+  /* ── GALLERY BANNER ── */
+  .gal-banner {
+    max-width: 1200px; margin: 0 auto 1rem;
+    padding: 0 2rem;
+  }
+  .gal-banner-inner {
+    position: relative; overflow: hidden;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #0d2a2a 0%, #1A4A4A 55%, #2A7070 100%);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  .gal-banner-inner::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 55% 70% at 15% 20%, rgba(196,98,45,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 60% at 85% 80%, rgba(212,168,67,0.18) 0%, transparent 55%);
+  }
+  .gal-banner-content { position: relative; z-index: 1; }
+  .gal-banner-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.7rem; font-weight: 500;
+  }
+  .gal-banner-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700;
+    color: var(--sand); margin-bottom: 0.4rem;
+  }
+  .gal-banner-title em { font-style: italic; color: var(--light-teal); }
+  .gal-banner-sub {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.05rem; color: rgba(245,236,215,0.6); margin-bottom: 1.4rem;
+  }
+  .gal-banner-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--gold); color: var(--text-dark);
+    text-decoration: none; font-weight: 500;
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.7rem 1.6rem; border-radius: 2rem;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .gal-banner-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(212,168,67,0.3); }
+  .gal-banner-btn svg { transition: transform .2s; }
+  .gal-banner-btn:hover svg { transform: translateX(3px); }
+
+  /* ── HAMBURGER MENU ── */
+  .burger {
+    position: fixed; top: 9px; right: 2rem; z-index: 1200;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(26,74,74,0.85);
+    border: 1px solid rgba(212,168,67,0.35);
+    cursor: pointer; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .25s, border-color .25s, transform .25s;
+  }
+  .burger:hover { background: rgba(212,168,67,0.16); border-color: var(--gold); }
+  .burger-lines { position: relative; width: 18px; height: 12px; }
+  .burger-lines span {
+    position: absolute; left: 0; display: block;
+    height: 1.5px; width: 100%; background: var(--gold);
+    border-radius: 2px;
+    transition: transform .32s cubic-bezier(.65,.05,.36,1), opacity .2s;
+  }
+  .burger-lines span:nth-child(1) { top: 0; }
+  .burger-lines span:nth-child(2) { top: 5.25px; }
+  .burger-lines span:nth-child(3) { top: 10.5px; }
+  .burger.open .burger-lines span:nth-child(1) { transform: translateY(5.25px) rotate(45deg); }
+  .burger.open .burger-lines span:nth-child(2) { opacity: 0; transform: scaleX(.2); }
+  .burger.open .burger-lines span:nth-child(3) { transform: translateY(-5.25px) rotate(-45deg); }
+  @media (max-width: 768px) { .burger { right: 1rem; } }
+
+  .menu-ov {
+    position: fixed; inset: 0; z-index: 1100;
+    background: linear-gradient(160deg, #0b2323 0%, #1A4A4A 48%, #0a1c1c 100%);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden;
+    transition: opacity .4s ease, visibility .4s;
+  }
+  .menu-ov::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 55% 45% at 78% 18%, rgba(196,98,45,0.26) 0%, transparent 62%),
+      radial-gradient(ellipse 50% 45% at 15% 85%, rgba(61,155,155,0.22) 0%, transparent 58%);
+    pointer-events: none;
+  }
+  .menu-ov.open { opacity: 1; visibility: visible; }
+
+  .menu-inner {
+    position: relative; z-index: 1;
+    text-align: center; padding: 2rem;
+    width: 100%; max-width: 640px;
+  }
+  .menu-eyebrow {
+    font-size: 0.63rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2.2rem; font-weight: 500;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity .5s ease .15s, transform .5s ease .15s;
+  }
+  .menu-ov.open .menu-eyebrow { opacity: 1; transform: none; }
+
+  .menu-list { list-style: none; }
+  .menu-list li {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity .55s cubic-bezier(.2,.7,.3,1), transform .55s cubic-bezier(.2,.7,.3,1);
+  }
+  .menu-ov.open .menu-list li:nth-child(1) { transition-delay: .18s; }
+  .menu-ov.open .menu-list li:nth-child(2) { transition-delay: .26s; }
+  .menu-ov.open .menu-list li:nth-child(3) { transition-delay: .34s; }
+  .menu-ov.open .menu-list li { opacity: 1; transform: none; }
+
+  .menu-item {
+    display: inline-flex; align-items: baseline; gap: 0.9rem;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6.5vw, 3.2rem);
+    font-weight: 700; font-style: italic;
+    color: var(--sand); text-decoration: none;
+    padding: 0.5rem 0.4rem;
+    position: relative;
+    transition: color .28s ease;
+  }
+  .menu-item .mi-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem; font-weight: 500; font-style: normal;
+    letter-spacing: 0.2em; color: var(--gold);
+    opacity: 0.55; transition: opacity .28s;
+  }
+  .menu-item .mi-txt { position: relative; }
+  .menu-item .mi-txt::after {
+    content: ''; position: absolute; left: 0; bottom: 0.08em;
+    width: 100%; height: 1.5px; background: var(--gold);
+    transform: scaleX(0); transform-origin: right;
+    transition: transform .35s cubic-bezier(.65,.05,.36,1);
+  }
+  .menu-item:hover { color: var(--gold); }
+  .menu-item:hover .mi-num { opacity: 1; }
+  .menu-item:hover .mi-txt::after { transform: scaleX(1); transform-origin: left; }
+
+  .menu-item.current { color: var(--light-teal); }
+  .menu-item.current .mi-txt::after {
+    transform: scaleX(1); background: var(--light-teal); opacity: 0.45;
+  }
+
+  .menu-foot {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    margin-top: 2.6rem;
+    font-size: 0.66rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(245,236,215,0.4); text-decoration: none;
+    padding: 0.5rem 1.1rem; border-radius: 2rem;
+    border: 1px solid rgba(245,236,215,0.15);
+    opacity: 0; transform: translateY(12px);
+    transition: opacity .5s ease .42s, transform .5s ease .42s, color .25s, border-color .25s;
+  }
+  .menu-ov.open .menu-foot { opacity: 1; transform: none; }
+  .menu-foot:hover { color: var(--gold); border-color: rgba(212,168,67,0.5); }
+  .menu-foot svg { transition: transform .25s; }
+  .menu-foot:hover svg { transform: translateX(-3px); }
 </style>
 </head>
 <body>
+
+<button class="burger" id="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menuOv">
+  <span class="burger-lines"><span></span><span></span><span></span></span>
+</button>
+
+<div class="menu-ov" id="menuOv" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
+  <div class="menu-inner">
+    <p class="menu-eyebrow">Hong Kong &amp; Bali · Agosto 2025</p>
+    <ul class="menu-list">
+      <li><a class="menu-item current" href="index.html" aria-current="page"><span class="mi-num">01</span><span class="mi-txt">Home page</span></a></li>
+      <li><a class="menu-item" href="programma.html"><span class="mi-num">02</span><span class="mi-txt">Programma</span></a></li>
+      <li><a class="menu-item" href="galleria.html"><span class="mi-num">03</span><span class="mi-txt">Galleria</span></a></li>
+    </ul>
+    <a class="menu-foot" href="http://www.gioriva.it/mondo/">
+      <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M8 10L4 6l4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Tutti i viaggi
+    </a>
+  </div>
+</div>
+
 
 <!-- ══════ HERO ══════ -->
 <section class="hero" id="top">
@@ -738,12 +961,6 @@
       <li><a href="#gili">Gili Islands</a></li>
       <li><a href="#highlights">Momenti</a></li>
     </ul>
-    <a class="nav-home" href="http://www.gioriva.it/mondo/" title="Tutti i viaggi">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 10L4 6l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Home
-    </a>
   </div>
 </nav>
 
@@ -827,6 +1044,28 @@
     </p>
 
     <div class="days-grid">
+      <div class="day-card reveal">
+        <div class="day-card-stripe chapter-hk"></div>
+        <div class="day-card-body">
+          <span class="day-emoji">🛫</span>
+          <p class="day-date">Giorno 1 · 6 Agosto</p>
+          <h3 class="day-label">Si Parte da Malpensa</h3>
+          <ul class="day-activities">
+            <li>Ritrovo a Malpensa con le valigie pronte e quel misto di stanchezza e adrenalina che precede i viaggi lunghi</li>
+            <li>Decollo verso oriente: davanti a noi diciotto giorni tra metropoli, giungla e oceano</li>
+            <li>Il viaggio comincia esattamente qui, nella sala d'imbarco</li>
+          </ul>
+          <span class="day-highlight">✈️ Destinazione Asia</span>
+          <a class="day-photos" href="galleria.html#day01">
+            <span class="dp-thumbs dp-2">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day01/IMG_1346.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day01/IMG_1351.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">2 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </div>
+      </div>
+
       <div class="day-card reveal reveal-delay-1">
         <div class="day-card-stripe chapter-hk"></div>
         <div class="day-card-body">
@@ -840,6 +1079,15 @@
             <li>L'energia caotica e vibrante di HK ti travolge fin da subito</li>
           </ul>
           <span class="day-highlight">🏨 Cordis Hotel</span>
+          <a class="day-photos" href="galleria.html#day02">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day02/IMG_1353.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day02/IMG_1358.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day02/IMG_1362.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">11 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
 
@@ -856,6 +1104,15 @@
             <li>La sera, crociera nella baia sul <strong>Duckling</strong>: lo skyline illuminato di notte dal mare è indimenticabile</li>
           </ul>
           <span class="day-highlight">🌃 Luci della baia di notte</span>
+          <a class="day-photos" href="galleria.html#day03">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day03/IMG_1397.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day03/IMG_1433.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day03/IMG_1467.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">37 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
     </div>
@@ -888,6 +1145,15 @@
             <li>Rientro serale a HK: ultime ore a esplorare i vivaci mercatini del quartiere</li>
           </ul>
           <span class="day-highlight" style="background: rgba(212,168,67,0.12); color: var(--rust);">🏛️ Centro Storico UNESCO</span>
+          <a class="day-photos" href="galleria.html#day04">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day04/IMG_1493.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day04/IMG_1503.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day04/IMG_1512.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">24 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
     </div>
@@ -930,6 +1196,15 @@
             <li>Breve giro serale nei dintorni con massaggio rilassante ai piedi: il viaggio comincia davvero</li>
           </ul>
           <span class="day-highlight" style="background: rgba(45,74,45,0.1); color: var(--jungle);">🌴 Benvenuti a Bali</span>
+          <a class="day-photos" href="galleria.html#day05">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day05/IMG_1528.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day05/IMG_1535.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day05/IMG_1545.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">5 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
 
@@ -946,6 +1221,15 @@
             <li>Fine giornata alla <strong>Monkey Forest</strong>: le scimmie sacre di Ubud sono padroni assoluti e non hanno nessuna intenzione di farsi da parte</li>
           </ul>
           <span class="day-highlight" style="background: rgba(45,74,45,0.1); color: var(--jungle);">🐒 Amici scimmietti</span>
+          <a class="day-photos" href="galleria.html#day06">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day06/IMG_1563.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day06/IMG_1677.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day06/IMG_1783.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">71 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
 
@@ -961,6 +1245,15 @@
             <li>Serata speciale allo <strong>Swept Away Restaurant</strong>: cena romantica immersi nella natura, il posto perfetto per celebrare l'avventura del giorno</li>
           </ul>
           <span class="day-highlight" style="background: rgba(45,74,45,0.1); color: var(--jungle);">🍽️ Swept Away</span>
+          <a class="day-photos" href="galleria.html#day07">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day07/IMG_1810.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day07/IMG_1879.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day07/IMG_1974.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">20 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
 
@@ -977,6 +1270,15 @@
             <li>Nel pomeriggio transfer verso il mare: si arriva a Sanur, cena al <strong>Lidah Lokal</strong> con il primo assaggio del menu locale che diventerà un rito</li>
           </ul>
           <span class="day-highlight" style="background: rgba(45,74,45,0.1); color: var(--jungle);">⛩️ Spiritualità balinese</span>
+          <a class="day-photos" href="galleria.html#day08">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day08/IMG_2011.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day08/IMG_2033.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day08/IMG_2059.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">25 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
     </div>
@@ -1012,6 +1314,15 @@
             <li>Nel tardo pomeriggio, passeggiata sulla spiaggia con il tramonto che colora il cielo di rosa e arancio</li>
             <li>Cena al <strong>Tapha Restaurant</strong> direttamente in spiaggia: i piedi nella sabbia, l'oceano davanti</li>
           </ul>
+          <a class="day-photos" href="galleria.html#day09">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day09/IMG_2075.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day09/IMG_2092.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day09/IMG_2095.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">8 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
 
@@ -1028,6 +1339,15 @@
             <li>A seguire, spettacolo della <strong>Kecak Dance</strong>: decine di uomini in cerchio intonano il ritmo ipnotico del kecak, con le fiamme che danzano nel buio del tempio</li>
           </ul>
           <span class="day-highlight" style="background: rgba(61,155,155,0.1); color: var(--teal);">🔥 Kecak al tramonto</span>
+          <a class="day-photos" href="galleria.html#day10">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day10/IMG_2122.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day10/IMG_2152.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day10/IMG_2182.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">31 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
 
@@ -1042,6 +1362,15 @@
             <li>Sera nei negozi locali: vestiti in cotone balinese, souvenir artigianali, batik coloratissimi</li>
             <li>Terza cena al <strong>Lidah Lokal</strong> — ormai è diventato il posto di casa, e il menu non stanca mai</li>
           </ul>
+          <a class="day-photos" href="galleria.html#day11">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day11/IMG_2196.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day11/IMG_2201.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day11/IMG_2205.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">9 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
 
@@ -1059,6 +1388,38 @@
             <li>Rientro a Sanur per un pomeriggio in centro commerciale — il contrasto col vulcano è straniante e divertente</li>
           </ul>
           <span class="day-highlight" style="background: rgba(61,155,155,0.1); color: var(--teal);">🌄 L'alba più bella del viaggio</span>
+          <a class="day-photos" href="galleria.html#day17">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day17/IMG_2361.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day17/IMG_2402.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day17/IMG_2432.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">43 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="day-card reveal reveal-delay-2">
+        <div class="day-card-stripe chapter-sanur"></div>
+        <div class="day-card-body">
+          <span class="day-emoji">❤️</span>
+          <p class="day-date">Giorno 18 · 23 Agosto</p>
+          <h3 class="day-label">Saluti al Mare</h3>
+          <ul class="day-activities">
+            <li>È arrivato il momento della partenza, ma prima ci si concede un ultimo massaggio ai piedi in spiaggia</li>
+            <li>Passeggiata di saluti al mare: ci si guarda intorno cercando di imprimere tutto nella memoria ❤️</li>
+            <li>A mezzogiorno si parte per l'aeroporto, alle 16:30 si decolla</li>
+            <li>Il giorno dopo, alle 08:00, si atterra a Malpensa: la testa è ancora tra le onde delle Gili</li>
+          </ul>
+          <span class="day-highlight" style="background: rgba(61,155,155,0.1); color: var(--teal);">🌊 Arrivederci Bali</span>
+          <a class="day-photos" href="galleria.html#day18">
+            <span class="dp-thumbs dp-2">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day18/IMG_2470.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day18/IMG_2474.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">2 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
         </div>
       </div>
     </div>
@@ -1098,6 +1459,15 @@
             <li>Bagno al tramonto sul lato ovest dell'isola — il cielo si accende — e cena al <strong>Papaya Restaurant</strong></li>
           </ul>
           <span class="day-highlight" style="background: rgba(42,112,112,0.1); color: var(--teal);">🌅 Primo tramonto sull'isola</span>
+          <a class="day-photos" href="galleria.html#day12">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day12/IMG_2218.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day12/IMG_2241.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day12/IMG_2249.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">16 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
 
@@ -1114,6 +1484,15 @@
             <li>Rientro a riva con gli occhi ancora spalancati, relax in piscina e cena di nuovo al <strong>Papaya Restaurant</strong></li>
           </ul>
           <span class="day-highlight" style="background: rgba(42,112,112,0.1); color: var(--teal);">🐢 È una meraviglia!</span>
+          <a class="day-photos" href="galleria.html#day13">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day13/GP010682.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day13/GP010731.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day13/IMG_2256.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">26 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
 
@@ -1129,6 +1508,15 @@
             <li>Il tipo di giornata per cui si viene fin qui: semplice, perfetta, irripetibile</li>
             <li>Serata al <strong>Living Asia Restaurant</strong> con una grigliata di pesce fresco degna di nota</li>
           </ul>
+          <a class="day-photos" href="galleria.html#day14">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day14/IMG_2269.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day14/IMG_2297.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day14/IMG_2300.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">7 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
 
@@ -1143,6 +1531,15 @@
             <li>Altra giornata di letture, nuoto, silenzio e acqua cristallina: Gili Air ha un modo di fermare il tempo</li>
             <li>Cena al <strong>Bahia Restaurant</strong> per chiudere l'ultimo giorno sull'isola nel migliore dei modi</li>
           </ul>
+          <a class="day-photos" href="galleria.html#day15">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day15/IMG_2305.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day15/IMG_2311.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day15/IMG_2312.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">4 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
       <div class="day-card reveal reveal-delay-1" style="background: #EAF7F7;">
@@ -1157,6 +1554,15 @@
             <li>Serata al fedele <strong>Lidah Lokal</strong> per la cena: siamo davvero affezionati, è quasi un rito</li>
             <li>Camminata lungomare sulla spiaggia di Sanur di notte per rientrare: il mare sussurra, le stelle sono tante</li>
           </ul>
+          <a class="day-photos" href="galleria.html#day16">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day16/IMG_2318.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day16/IMG_2323.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day16/IMG_2330.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">12 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
         </div>
       </div>
     </div>
@@ -1221,6 +1627,22 @@
   </p>
 </div>
 
+
+<!-- ══════ GALLERIA BANNER ══════ -->
+<section class="gal-banner">
+  <div class="gal-banner-inner">
+    <div class="gal-banner-content">
+      <p class="gal-banner-eyebrow">353 fotografie · 18 giorni</p>
+      <h2 class="gal-banner-title">La galleria <em>completa</em></h2>
+      <p class="gal-banner-sub">Tutti gli scatti del viaggio, giorno per giorno</p>
+      <a class="gal-banner-btn" href="galleria.html">
+        Sfoglia la galleria
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ══════ FOOTER ══════ -->
 <footer>
   <h3 class="footer-title">Hong Kong & Bali 2025</h3>
@@ -1263,6 +1685,31 @@
     });
   }, { threshold: 0.3 });
   sections.forEach(s => navObs.observe(s));
+
+  // Fade in card thumbnails once loaded
+  document.querySelectorAll('.dp-thumbs img').forEach(img => {
+    if (img.complete && img.naturalWidth) img.classList.add('loaded');
+    else img.addEventListener('load', () => img.classList.add('loaded'), {once:true});
+  });
+</script>
+
+<script>
+(function(){
+  const b = document.getElementById('burger');
+  const ov = document.getElementById('menuOv');
+  let open = false;
+  function set(v){
+    open = v;
+    b.classList.toggle('open', v);
+    ov.classList.toggle('open', v);
+    b.setAttribute('aria-expanded', v);
+    b.setAttribute('aria-label', v ? 'Chiudi il menu' : 'Apri il menu');
+    document.body.style.overflow = v ? 'hidden' : '';
+  }
+  b.addEventListener('click', () => set(!open));
+  ov.addEventListener('click', e => { if (e.target === ov) set(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) set(false); });
+})();
 </script>
 </body>
 </html>
