@@ -496,6 +496,27 @@
   .fl svg { opacity: 0.65; transition: opacity .22s ease, transform .22s ease; flex-shrink: 0; }
   .fl:hover svg { opacity: 1; transform: translateY(-1px); }
   @media (max-width: 480px) { .footer-links { gap: 1.1rem; } .fl { font-size: 0.62rem; letter-spacing: 0.1em; } }
+
+  /* Home page: voce ridotta con sottotitolo e separatore */
+  .menu-item.hub { font-size: clamp(1.3rem, 4.2vw, 2rem); }
+  .mi-sub {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-weight: 400;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    color: rgba(245,236,215,0.5);
+    margin-top: 0.15rem;
+    letter-spacing: 0.02em;
+    transition: color .28s ease;
+  }
+  .menu-item.hub:hover .mi-sub { color: rgba(212,168,67,0.85); }
+  .menu-sep {
+    width: min(220px, 55%);
+    height: 1px; border: 0;
+    margin: 1.1rem auto 1.2rem;
+    background: linear-gradient(90deg, transparent, rgba(212,168,67,0.45), transparent);
+  }
+  .menu-item.hub .mi-txt::after { display: none; }
 </style>
 </head>
 <body>
@@ -508,8 +529,11 @@
   <div class="menu-inner">
     <p class="menu-eyebrow">Hong Kong &amp; Bali · Agosto 2025</p>
     <ul class="menu-list">
-      <li><a class="menu-item" href="https://www.gioriva.it/mondo/"><span class="mi-num">01</span><span class="mi-txt">Home page</span></a></li>
-      <li><a class="menu-item" href="https://www.gioriva.it/mondo/indonesia2025/index.html"><span class="mi-num">02</span><span class="mi-txt">Diario</span></a></li>
+      <li>
+        <a class="menu-item hub" href="https://www.gioriva.it/mondo/"><span class="mi-num">01</span><span class="mi-txt">Home page<span class="mi-sub">Tutti i viaggi, su gioriva.it</span></span></a>
+        <hr class="menu-sep">
+      </li>
+      <li><a class="menu-item" href="https://www.gioriva.it/mondo/indonesia2025/index.html"><span class="mi-num">02</span><span class="mi-txt">Diario di viaggio</span></a></li>
       <li><a class="menu-item" href="programma.html"><span class="mi-num">03</span><span class="mi-txt">Programma</span></a></li>
       <li><a class="menu-item current" href="galleria.html" aria-current="page"><span class="mi-num">04</span><span class="mi-txt">Galleria</span></a></li>
     </ul>
