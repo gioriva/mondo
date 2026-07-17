@@ -259,11 +259,6 @@
     text-decoration: none;
     letter-spacing: 0.02em;
   }
-  .nav-links {
-    display: flex;
-    gap: 0.3rem;
-    flex-wrap: wrap;
-  }
   .nav-day {
     font-family: 'DM Mono', monospace;
     font-size: 0.6rem;
@@ -281,6 +276,30 @@
     background: rgba(212,168,67,0.15);
   }
 
+
+
+  /* ── TIMELINE STRIP ── */
+  #timeline-strip {
+    background: var(--deep-ocean);
+    padding: 2.2rem 2rem 2.4rem;
+    text-align: center;
+  }
+  .ts-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 1.2rem;
+  }
+  .ts-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
   /* ── SHARED ── */
   .section-label {
@@ -703,6 +722,21 @@
   }
   .menu-overlay a:hover, .menu-overlay a.current { color: var(--gold); padding-left: 0.5rem; }
   .menu-overlay a .m-ico { font-size: 1rem; margin-right: 0.6rem; opacity: 0.7; }
+  .menu-overlay a.menu-home {
+    font-size: 1.05rem;
+    padding-bottom: 1.2rem;
+    margin-bottom: 0.6rem;
+    border-bottom: 2px solid rgba(212,168,67,0.4);
+  }
+  .menu-sub {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.04em;
+    margin-top: 0.3rem;
+  }
 
   /* ── FOOTER LINKS ── */
   .foot-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
@@ -719,7 +753,6 @@
     .day-card { grid-template-columns: 1fr; }
     .card-visual { min-height: 220px; }
     nav { padding: 0.8rem 4.5rem 0.8rem 1rem; }
-    .nav-links { display: none; }
     .filter-bar { justify-content: flex-start; }
   }
 
@@ -752,7 +785,7 @@
 <div class="menu-backdrop" id="menuBackdrop"></div>
 <div class="menu-overlay" id="menuOverlay">
   <p class="menu-label">Esplora il viaggio</p>
-  <a href="https://www.gioriva.it/mondo/"><span class="m-ico">🌍</span>Home Page</a>
+  <a href="https://www.gioriva.it/mondo/" class="menu-home"><span class="m-ico">🌍</span>Home Page<span class="menu-sub">Tutti i viaggi, su gioriva.it</span></a>
   <a href="index.html" class="current"><span class="m-ico">📖</span>Diario di viaggio</a>
   <a href="programma.html"><span class="m-ico">🗺️</span>Programma</a>
   <a href="galleria.html"><span class="m-ico">📷</span>Galleria</a>
@@ -784,6 +817,13 @@
     <div class="scroll-line"></div>
   </div>
 </section>
+
+
+<!-- TIMELINE STRIP -->
+<div id="timeline-strip">
+  <p class="ts-label">La timeline del viaggio</p>
+  <div class="ts-links" id="timeline-links"></div>
+</div>
 
 <!-- DAYS SECTION -->
 <section id="days">
@@ -1208,7 +1248,7 @@ const scenes = {
 
 // ─── RENDER DAYS ─────────────────────────────────────────────────────────
 const grid = document.getElementById('days-grid');
-const navLinks = document.getElementById('nav-links');
+const navLinks = document.getElementById('timeline-links');
 
 days.forEach((d, i) => {
   // nav link
