@@ -1172,6 +1172,54 @@
   .back-top.show { opacity: 1; pointer-events: auto; }
   .back-top:hover { transform: translateY(-3px); background: #b83608; }
 
+
+  /* ─── READ MORE / COLLAPSE ─── */
+  .day-card.collapsed .day-text {
+    max-height: 520px;
+    overflow: hidden;
+    position: relative;
+  }
+  .day-card.collapsed .day-text::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 130px;
+    background: linear-gradient(to bottom, rgba(245,240,232,0) 0%, var(--paper) 92%);
+    pointer-events: none;
+  }
+  .day-card.collapsed .day-text img {
+    max-height: 300px;
+    object-fit: cover;
+  }
+  .read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+    padding: 0.55rem 1.4rem;
+    background: none;
+    border: 1px solid var(--torii);
+    border-radius: 3px;
+    color: var(--torii);
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .read-more-btn:hover {
+    background: var(--torii);
+    color: var(--paper);
+  }
+  .read-more-btn .rm-arrow {
+    transition: transform 0.3s;
+    font-size: 0.9rem;
+  }
+  .day-card:not(.collapsed) .read-more-btn .rm-arrow {
+    transform: rotate(180deg);
+  }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 700px) {
     .day-bubble { width: 44px; height: 44px; }
@@ -1938,6 +1986,7 @@ dayCards.forEach(c => navObserver.observe(c));
 function scrollToDay(n) {
   const el = document.getElementById('day-' + n);
   if (el) {
+    expandDay(el);
     const offset = 70;
     const top = el.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: 'smooth' });
@@ -2005,6 +2054,40 @@ function cookieNecessary() {
 window.addEventListener('scroll', () => {
   document.getElementById('back-top').classList.toggle('show', window.scrollY > 900);
 }, { passive: true });
+
+// ─── READ MORE SYSTEM ───
+function initReadMore() {
+  document.querySelectorAll('.day-card').forEach(card => {
+    const text = card.querySelector('.day-text');
+    if (!text) return;
+    card.classList.add('collapsed');
+    const btn = document.createElement('button');
+    btn.className = 'read-more-btn';
+    btn.innerHTML = 'Continua a leggere <span class="rm-arrow">↓</span>';
+    btn.onclick = () => toggleDay(card, btn);
+    text.after(btn);
+  });
+}
+function toggleDay(card, btn) {
+  const wasCollapsed = card.classList.contains('collapsed');
+  card.classList.toggle('collapsed');
+  btn.innerHTML = wasCollapsed
+    ? 'Riduci <span class="rm-arrow">↓</span>'
+    : 'Continua a leggere <span class="rm-arrow">↓</span>';
+  if (!wasCollapsed) {
+    // collapsing back: keep the day header in view
+    const top = card.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}
+function expandDay(card) {
+  if (card.classList.contains('collapsed')) {
+    card.classList.remove('collapsed');
+    const btn = card.querySelector('.read-more-btn');
+    if (btn) btn.innerHTML = 'Riduci <span class="rm-arrow">↓</span>';
+  }
+}
+initReadMore();
 </script>
 
 <!-- HAMBURGER OVERLAY -->
