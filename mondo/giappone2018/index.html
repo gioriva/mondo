@@ -210,6 +210,7 @@
     align-items: center;
     justify-content: space-between;
     height: 56px;
+    padding-right: 56px;
   }
 
   .nav-logo {
@@ -882,6 +883,191 @@
     .page-overlay-inner { padding: 4rem 1.2rem 3rem; }
   }
 
+
+  /* ─── HAMBURGER MENU ─── */
+  .hamburger-btn {
+    position: fixed;
+    top: 14px;
+    right: 1.5rem;
+    z-index: 500;
+    background: none;
+    border: 1px solid rgba(245,240,232,0.25);
+    border-radius: 4px;
+    width: 40px; height: 40px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    padding: 0;
+  }
+  .hamburger-btn:hover { background: rgba(212,65,10,0.3); border-color: var(--torii); }
+  .hamburger-btn span {
+    display: block; width: 20px; height: 2px;
+    background: var(--paper);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+  .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .hamburger-panel {
+    position: fixed;
+    top: 0; right: -280px;
+    width: 260px; height: 100vh;
+    background: rgba(18,28,50,0.98);
+    backdrop-filter: blur(16px);
+    z-index: 490;
+    border-left: 1px solid var(--torii);
+    transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+    display: flex; flex-direction: column;
+    padding: 5rem 2rem 2rem;
+  }
+  .hamburger-panel.open { right: 0; }
+  .hamburger-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5); z-index: 489;
+  }
+  .hamburger-overlay.open { display: block; }
+
+  .ham-logo {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: rgba(245,240,232,0.3);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+  }
+  .ham-nav { display: flex; flex-direction: column; gap: 0.3rem; }
+  .ham-link {
+    display: flex; align-items: center; gap: 0.8rem;
+    padding: 0.85rem 1rem;
+    color: rgba(245,240,232,0.75);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-family: 'Shippori Mincho', serif;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer; background: none; border: none;
+    width: 100%; text-align: left;
+  }
+  .ham-link:hover { background: rgba(212,65,10,0.2); color: var(--paper); }
+  .ham-link .ham-icon { font-size: 1.1rem; width: 1.5rem; text-align: center; }
+  .ham-sep {
+    height: 1px; background: rgba(245,240,232,0.08);
+    margin: 0.5rem 0;
+  }
+  .ham-footer {
+    margin-top: auto;
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.2);
+    letter-spacing: 0.15em;
+    text-align: center;
+  }
+
+  /* ─── GALLERIA PAGE ─── */
+  .gal-tabs {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-bottom: 2rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .gal-tab {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.75rem;
+    color: var(--mist);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .gal-tab:hover, .gal-tab.active {
+    background: var(--torii); color: var(--paper); border-color: var(--torii);
+  }
+  .gal-section { display: none; }
+  .gal-section.active { display: block; }
+  .gal-day-label {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--ink); margin: 2rem 0 0.8rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .gal-day-date {
+    font-size: 0.7rem; font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300; color: var(--torii); letter-spacing: 0.15em;
+  }
+  .gal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+  .gal-item {
+    aspect-ratio: 4/3; overflow: hidden;
+    background: #d0c8bc;
+  }
+  .gal-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s; cursor: zoom-in;
+  }
+  .gal-item:hover img { transform: scale(1.06); }
+  @media (max-width: 700px) {
+    .gal-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ─── PROGRAMMA PAGE ─── */
+  .prog-intro {
+    font-size: 0.95rem; color: #4a4030; line-height: 1.8;
+    margin-bottom: 2.5rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .prog-row {
+    display: grid;
+    grid-template-columns: 80px 40px 1fr;
+    gap: 0 1rem;
+    position: relative;
+    padding-bottom: 2rem;
+  }
+  .prog-row::after {
+    content: ''; position: absolute;
+    left: 98px; top: 28px; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .prog-row:last-child::after { display: none; }
+  .prog-left { text-align: right; padding-top: 4px; }
+  .prog-badge {
+    display: inline-block;
+    background: var(--torii); color: var(--paper);
+    font-size: 0.65rem; font-weight: 700;
+    padding: 0.2rem 0.45rem; border-radius: 3px;
+    letter-spacing: 0.05em; white-space: nowrap;
+  }
+  .prog-date {
+    font-size: 0.65rem; color: var(--mist);
+    letter-spacing: 0.1em; margin-top: 0.3rem;
+    white-space: nowrap;
+  }
+  .prog-dot {
+    font-size: 1.3rem; text-align: center;
+    padding-top: 2px; z-index: 1;
+  }
+  .prog-right { padding-top: 2px; }
+  .prog-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.4rem;
+  }
+  .prog-desc {
+    font-size: 0.85rem; color: #5a4e3e; line-height: 1.7;
+  }
+  @media (max-width: 600px) {
+    .prog-row { grid-template-columns: 65px 36px 1fr; }
+    .prog-row::after { left: 82px; }
+  }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 700px) {
     .timeline::before { left: 26px; }
@@ -915,6 +1101,7 @@
 </script>
 </head>
 <body>
+
 
 <!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLightbox()">
@@ -961,9 +1148,6 @@
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">Spring in <span>Japan</span></a>
     <div class="nav-days">
-      <button class="nav-day nav-page-btn" onclick="openPage('diario')">📋 Diario</button>
-      <button class="nav-day nav-page-btn" onclick="openPage('links')">🔗 Link utili</button>
-      <span style="color:rgba(245,240,232,0.2); font-size:0.8rem; padding: 0 0.3rem;">|</span>
       <button class="nav-day" onclick="scrollToDay(1)">Day 1</button>
       <button class="nav-day" onclick="scrollToDay(2)">Day 2</button>
       <button class="nav-day" onclick="scrollToDay(3)">Day 3</button>
@@ -978,7 +1162,6 @@
       <button class="nav-day" onclick="scrollToDay(12)">Day 12</button>
       <button class="nav-day" onclick="scrollToDay(13)">Day 13</button>
     </div>
-    <a href="http://www.gioriva.it/mondo/" class="nav-home-link">← Home</a>
   </div>
 </nav>
 
@@ -1024,25 +1207,25 @@
         <span class="day-date-tag">2 Aprile 2018</span>
       </div>
       <div class="day-text">
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_0985.jpg" alt="In volo verso Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day01_Milano-Tokyo/00_img_0985.jpg" alt="In volo verso Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Avevo fatto male i conti: Milano – Abu Dhabi 6h circa, Abu Dhabi – Tokyo altre 6h. Peccato che non sia stagione di sconti, perché <strong>Abu Dhabi – Tokyo sono 9h suonate</strong>, in compagnia di due bambini che hanno reputato il sistema di intrattenimento offerto da Etihad poco interessante, e hanno tenuto compagnia a circa 300 passeggeri piangendo e rognando per quasi tutta la tratta… per fortuna sono riuscito a dormire un po'.</p>
         <p>Atterriamo a Tokyo, <strong>Narita Airport</strong>, grande ma non uno dei più grandi che ho visto, ma di sicuro (e qua subentra il cambio di continente e, soprattutto, di idioma) incasinato. Passiamo l'immigrazione in pochi minuti, il <strong>personale</strong> dell'aeroporto è presente ovunque e <strong>gentile</strong> in maniera pro attiva (se ti vedono perplessi o spaesati, vengono in tuo aiuto prima che tu capisca cosa stia succedendo). Recuperiamo il leggendario <strong>Japan Rail Pass</strong> all'ufficio JR e prendiamo la "blue line railway" con destinazione <strong>Shimbashi Station</strong>, praticamente nel cuore del quartiere <strong>Ginza</strong>.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_0989.jpg" alt="Vista dal treno per Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day01_Milano-Tokyo/01_img_0989.jpg" alt="Vista dal treno per Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
         <p>La vista dal treno per certi versi sembrerebbe banale (campagne, campi coltivati, piccoli centri abitati), non fosse che tutto quanto ha un <strong>aspetto molto pittoresco</strong> e geometricamente originale: in qualche modo affascina subito! Passa un'altra, infinita, ora e mezza di treno e finalmente veniamo catapultati nel <strong>cuore di Tokyo</strong>, a due passi dal mare (che ancora non abbiamo visto): palazzi moderni e altissimi, luci anche in pieno pomeriggio, attraversamenti pedonali larghi parecchi metri, fiumi di persone che allo scattare del verde attraversano insieme come durante una marcia.</p>
         <p>Pochi minuti a piedi (grazie Google Maps) e arriviamo al nostro <strong>Capsule Hotel: Tokyo Ginza Bay Hotel</strong>. Ma che è un Capsule Hotel? Ed ecco la risposta 👇🏻</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_0992.jpg" alt="Capsule Hotel corridoio" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day01_Milano-Tokyo/02_img_0992.jpg" alt="Capsule Hotel corridoio" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Le prossime due notti dormiremo in <strong>capsule di 3 metri per 1.5 circa</strong>, fornite di tutto ciò che può servire: pigiama, ciabatte, asciugamani, coperte, armadietti personali per i propri bagagli ecc… L'organizzazione è davvero impeccabile, tutti i locali sono <strong>pulitissimi</strong>, si cammina ovunque rigorosamente in <strong>ciabatte</strong> (le scarpe vengono lasciate in un locker all'ingresso). La struttura fornisce qualsiasi cosa possa servire: spazzolino da denti, dentifricio, rasoio, schiuma da barba, sapone, shampoo, balsamo… insomma: <strong>tutto</strong>!</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_0994.jpg" alt="L'interno della capsula" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day01_Milano-Tokyo/03_img_0994.jpg" alt="L'interno della capsula" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Lo ammetto, è un concetto di "accommodation" talmente <strong>diverso</strong> da tutto quello che abbiamo sperimentato finora che c'è voluto qualche momento per ambientarsi! Detto questo, sistemiamo le borse, doccia al volo e si esce!</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_0996-1.jpg" alt="Pronto a uscire" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day01_Milano-Tokyo/04_img_0996-1.jpg" alt="Pronto a uscire" loading="lazy" onclick="openLightbox(this)"></div>
         <p>La cosa che mi colpisce è che è già buio (sono le 18.30), quindi prendiamo un <strong>taxi</strong> che, con circa 3.050 JPY (una ventina di euro) ci porta nel quartiere chiamato <strong>Shinjuku</strong>. Nel giro di pochi minuti ci rendiamo conto che la fame sta prendendo il sopravvento, quindi inizia la ricerca serrata di un <strong>locale tipico</strong>. Troviamo ciò che fa al caso nostro abbastanza in fretta: un tradizionale locale giapponese, popolato da giapponesi, che parlano solo giapponese, e mangiano solo giapponese, ordinando da un menù scritto solo in giapponese (per fortuna le figure ci hanno salvato)!</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1001.jpg" alt="Prima cena giapponese a Shinjuku" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day01_Milano-Tokyo/05_img_1001.jpg" alt="Prima cena giapponese a Shinjuku" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Dopo un attimo di perplessità, quando arrivano i <strong>primi piatti sono uno più buono dell'altro</strong>: riso saltato con granchio, un tortino di salmone, spada, polipo e salse varie, due cubetti di prosciutto locale fritto, un piatto di sushi misto e uno di sashimi di tonno, spaghetti di soia con semi di vario tipo e una leggera tempura di pesciolini di mare… e che <strong>sapori</strong>! Ci godiamo la cena con calma, e dopo un paio di birre usciamo senza meta alla scoperta del quartiere. Tra l'altro, tutta la zona della movida è controllata dalla <strong>Yakuza</strong> (la mafia giapponese) — la foto a seguire è la "porta di ingresso" nel loro territorio.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1010-1.jpg" alt="Ingresso territorio Yakuza, Shinjuku" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day01_Milano-Tokyo/06_img_1010-1.jpg" alt="Ingresso territorio Yakuza, Shinjuku" loading="lazy" onclick="openLightbox(this)"></div>
         <p>La cosa però non deve spaventare: è più un'attrazione turistica che un quartiere di gangster, e si gira tranquillamente senza <strong>nessun problema</strong>. Spinti dalla curiosità finiamo in un "<strong>VR Building</strong>", dove ci facciamo una partita a "Mario Kart" in Virtual Reality: detto in francese, una figata spaziale, peccato che averlo fatto subito dopo cena non sia stata la migliore delle idee — la VR può provocare un po' di nausea 🤢</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1005.jpg" alt="VR Building Shinjuku - Mario Kart" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day01_Milano-Tokyo/07_img_1005.jpg" alt="VR Building Shinjuku - Mario Kart" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Finiamo il giro e, tra spostamenti vari e jet lag, decidiamo di tornare alle nostre <strong>capsule</strong> per dormire e ripartire all'indomani belli carichi!</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1012.jpg" alt="Notte a Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day01_Milano-Tokyo/08_img_1012.jpg" alt="Notte a Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
       </div>
       <div class="tags">
         <span class="tag">Tokyo</span><span class="tag">Capsule Hotel</span><span class="tag">Shinjuku</span><span class="tag">Ginza</span>
@@ -1061,37 +1244,37 @@
       </div>
       <div class="day-text">
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1040.jpg" alt="Tokyo mattina" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1038.jpg" alt="Fuori dall'hotel" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/00_img_1040.jpg" alt="Tokyo mattina" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/01_img_1038.jpg" alt="Fuori dall'hotel" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Battesimo della capsula: tutto a posto, siamo sopravvissuti e, personalmente, ho dormito profondamente bene. <strong>Unico difetto</strong>: ho sofferto un po' il caldo, purtroppo non c'è modo di regolare la temperatura!</p>
         <p>Prima meta designata: <strong>Tsukiji Fish Market</strong>, ovvero il mercato del pesce di Tokyo, nonché il più grande mercato del pesce al <strong>mondo</strong>, che raggiungiamo in una decina di minuti a piedi dal nostro hotel a Ginza. Camminando per le strade notiamo già i primi <strong>sakura</strong> in fiore, ovvero la pianta di ciliegio dai fiori rosa che ha reso famosa nel mondo la <strong>primavera</strong> giapponese. Man mano che ci avviciniamo alla meta, l'odore di mare e di pesce nell'aria si fa più calcato.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1042.jpg" alt="Ingresso Tsukiji Fish Market" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/02_img_1042.jpg" alt="Ingresso Tsukiji Fish Market" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Il mercato è un <strong>groviglio di bancarelle</strong>, turisti, lavoratori, clienti, urla, colori, odori e… pesce ovunque, forme e colori che non avevo visto neanche nei film! Alcune precisazioni importanti: i lavoratori <strong>non amano</strong> particolarmente i turisti; non amano nemmeno che si facciano <strong>fotografie</strong> (mi sono preso un bel dito medio mentre provavo a filmare due ragazzi che tagliavano un tonno a metà con una sega circolare); si muovono nel labirinto del mercato con delle specie di <strong>moto-carrelli a velocità folle</strong>, e sei tu che devi stare attento a loro.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1048.jpg" alt="Pesci al Tsukiji" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/03_img_1048.jpg" alt="Pesci al Tsukiji" loading="lazy" onclick="openLightbox(this)"></div>
         <p>I "ferri del mestiere", che assomigliano più a delle armi medievali che a raffinati coltelli, sono delle <strong>spade</strong> a lama dritta o seghettata con cui filettano questi pesci enormi. Il giro prosegue, ci mettiamo circa un'ora per esplorare tutto il mercato.</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1054.jpg" alt="Tsukiji lavorazione" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1057.jpg" alt="Pesci tonno" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1060.jpg" alt="Bancarelle Tsukiji" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/04_img_1054.jpg" alt="Tsukiji lavorazione" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/05_img_1057.jpg" alt="Pesci tonno" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/06_img_1060.jpg" alt="Bancarelle Tsukiji" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Alcune scene non sono proprio simpatiche da vedere — il pesce viene sempre lavorato <strong>ancora vivo</strong>. Nonostante questo, ci è venuta fame e troviamo un minuscolo locale chiamato "<strong>Iso Sushi</strong>", con pochissimi posti a sedere. Fuori c'è una piccola coda e uno dei cuochi raccoglie gli ordini in anticipo dai clienti in attesa.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1069.jpg" alt="Coda fuori Iso Sushi" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/07_img_1069.jpg" alt="Coda fuori Iso Sushi" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Una volta entrati, una decina di posti al massimo, tutti a bordo banco di fronte a <strong>due cuochi</strong> impegnati a preparare il <strong>sushi</strong> al momento. Una simpatica vecchina giapponese serve <strong>tè verde</strong> bollente e <strong>zuppa di miso</strong>.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1070.jpg" alt="Bancone Iso Sushi" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/08_img_1070.jpg" alt="Bancone Iso Sushi" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Il pesce viene <strong>filettato e servito fresco</strong>, si scioglie letteralmente in bocca. Il sapore è <strong>squisito</strong>, con un retrogusto piccante di <strong>wasabi</strong> messo di default in piccole dosi in ogni singolo pezzo. Il conto: 9.700 JPY, circa 73€ per tre piatti di sushi. Ne è valsa la pena.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1077.jpg" alt="Sushi fresco Iso Sushi" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/09_img_1077.jpg" alt="Sushi fresco Iso Sushi" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Ripartiamo a piedi verso nord, direzione <strong>Ginza Street</strong>. Al secondo piano di uno show-room Nissan nel <strong>Ginza Place</strong>, si trova un bar che prepara dei <strong>cappuccini speciali</strong>… con la nostra faccia stampata sul latte! Mai vista prima d'ora una "stampante a cacao".</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1089.jpg" alt="Cappuccino con il ritratto - Ginza" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/10_img_1089.jpg" alt="Cappuccino con il ritratto - Ginza" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Il vagabondare ci porta dritti a <strong>Chiyoda</strong>, un enorme parco al cui interno si trova anche il <strong>Palazzo Imperiale</strong>. Dal viale che conduce al parco si può godere di una splendida fioritura di ciliegi.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1101.jpg" alt="Ciliegi Chiyoda" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1105.jpg" alt="Palazzo Imperiale Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/11_img_1101.jpg" alt="Ciliegi Chiyoda" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/12_img_1105.jpg" alt="Palazzo Imperiale Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Nel pomeriggio prendiamo la metro verso <strong>Shibuya</strong>, il quartiere più giovane e alternativo di Tokyo. Insegne luminose, palazzi moderni, un traffico intenso ma ben organizzato, negozi di ogni marca e tantissime persone, molte delle quali camminano a testa bassa, incollate ai propri smartphone. Shibuya è consigliata soprattutto per la vita notturna — ci torneremo più avanti.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1114-1.jpg" alt="Shibuya quartiere giovane" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/13_img_1114-1.jpg" alt="Shibuya quartiere giovane" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Usciamo dalla Shimbashi Station dal lato opposto, che si affaccia su un groviglio di viuzze strette ed affollate tappezzate da <strong>tantissimi localini</strong>. Ci infiliamo in un altro <strong>ristorante tipico</strong>, popolato solo da locali, dove servono esclusivamente <strong>spiedini di carne</strong> di ogni genere — incluse frattaglie. Optiamo per classici spiedini di pollo, polpette di carne e chicken wings, con una salsa simil senape mooolto piccante. Sono le 23.00 e visitiamo <strong>Rappongi</strong> — peccato che il martedì praticamente tutto chiuda a mezzanotte. Nel giro del quartiere a piedi scopriamo la <strong>Tokyo Tower</strong>, 333 metri, molto simile alla Tour Eiffel.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1117.jpg" alt="Tokyo Tower di notte" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day02_Tokyo-Tsukiji-Shibuya/14_img_1117.jpg" alt="Tokyo Tower di notte" loading="lazy" onclick="openLightbox(this)"></div>
       </div>
       <div class="tags">
         <span class="tag">Tsukiji</span><span class="tag">Sushi</span><span class="tag">Shibuya</span><span class="tag">Tokyo Tower</span><span class="tag">Sakura</span>
@@ -1110,45 +1293,45 @@
       </div>
       <div class="day-text">
         <p>La <strong>sveglia</strong> stamattina è stata una tragedia (infatti non l'ho sentita). Ieri notte ho finito davvero tardi di aggiornare il diario e questa mattina mi sentivo un po' uno zombie. Ma passiamo alle cose importanti: doccia, colazione, check-out dalle nostre "amate" capsule e via in taxi verso la <strong>Tokyo Station</strong>, dove prendiamo il primo <strong>Shinkansen</strong> direzione <strong>Osaka</strong>.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1119.jpg" alt="Shinkansen Tokyo Station" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/00_img_1119.jpg" alt="Shinkansen Tokyo Station" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Lo <strong>Shinkansen</strong>, tradotto "bullet train", introdotto in Giappone a metà degli anni '60 è considerato oggi il treno più veloce e sicuro del mondo (oltre <strong>400 km/h e zero incidenti</strong> accidentali, solo due deragliamenti dovuti rispettivamente a uno tsunami e a una tempesta di neve). In circa <strong>due ore</strong> arriviamo a <strong>Osaka</strong>. Il paesaggio sfreccia letteralmente fuori dal finestrino.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1120.jpg" alt="Interno Shinkansen" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/01_img_1120.jpg" alt="Interno Shinkansen" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Arriviamo alla stazione <strong>Shin Osaka</strong>. Il nuovo Capsule Hotel è decisamente <strong>superiore</strong> rispetto al precedente: molto più curato e meno affollato, le capsule sono delle vere e proprie <strong>stanze</strong>, piccole ma pur sempre stanze. Facciamo il check-in al volo e usciamo a pranzo. Siamo nel <strong>cuore di Osaka</strong>, a pochi metri dalla <strong>Namba Station</strong> e dal vivace quartiere di <strong>Dotonbori</strong>. Troviamo un bel locale tipico e mangiamo un piatto visivamente poco invitante ma, credetemi, <strong>delizioso</strong>!</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1123.jpg" alt="Dotonbori Osaka" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1124.jpg" alt="Pranzo tipico Osaka" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/02_img_1123.jpg" alt="Dotonbori Osaka" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/03_img_1124.jpg" alt="Pranzo tipico Osaka" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Sazi e felici comincia il vagabondaggio verso il quartiere di <strong>Chūō-ku</strong> e poi a piedi verso il <strong>Castello di Osaka</strong>, uno dei simboli dell'unificazione del Giappone. Si trova immerso in un <strong>parco</strong> davvero spettacolare, soprattutto durante la stagione dei cherry blossom. Non visitiamo il castello internamente ma ci godiamo il parco e il paesaggio.</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1131.jpg" alt="Verso il castello" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1136.jpg" alt="Castello di Osaka" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1141-2.jpg" alt="Parco Osaka ciliegi" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/04_img_1131.jpg" alt="Verso il castello" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/05_img_1136.jpg" alt="Castello di Osaka" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/06_img_1141-2.jpg" alt="Parco Osaka ciliegi" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1138.jpg" alt="Sakura castello" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1142.jpg" alt="Parco Osaka" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1151.jpg" alt="Giardino Osaka" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/07_img_1138.jpg" alt="Sakura castello" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/08_img_1142.jpg" alt="Parco Osaka" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/09_img_1151.jpg" alt="Giardino Osaka" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Il parco è davvero grande, ci mettiamo qualche ora a girarlo tutto e poi riprendiamo la metro verso il <strong>Kaiyūkan</strong>, ovvero l'Acquario di Osaka, nonché il <strong>più grande acquario del mondo</strong>. A ridosso si trova la <strong>Red Horse Osaka Wheel</strong>, una ruota panoramica con cabine totalmente trasparenti <strong>alta ben 123 metri</strong>, la più grande del Giappone.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1154.jpg" alt="Ruota panoramica Osaka" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1155.jpg" alt="Kaiyukan acquario" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/10_img_1154.jpg" alt="Ruota panoramica Osaka" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/11_img_1155.jpg" alt="Kaiyukan acquario" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Sono già le 18.00, l'acquario chiude alle 20.00, quindi facciamo i biglietti (circa 18€/biglietto) ed entriamo. Una lunga scala mobile ci porta all'8° piano, dove inizia un percorso in discesa a spirale attorno a una <strong>enorme vasca centrale</strong>, al cui interno nuotano pacifici due splendidi esemplari di <strong>squalo balena</strong>, le mascotte della struttura 🦈</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1163.jpg" alt="Squalo balena Kaiyukan" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1160.jpg" alt="Vasca centrale Kaiyukan" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/12_img_1163.jpg" alt="Squalo balena Kaiyukan" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/13_img_1160.jpg" alt="Vasca centrale Kaiyukan" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Usciamo dal Kaiyūkan che ha iniziato a piovere e si è alzato un vento freddo poco simpatico. Fortunatamente troviamo un locale che ci ispira subito fiducia, chiamato <strong>Moriya</strong>. Anche qua i posti a sedere sono su un bancone fronte cucina, composta da <strong>enormi piastre</strong> su cui i due cuochi preparano tutto davanti a noi. Ordiniamo: Beef fried noodles, Octopus fried noodles, Mixed grilled seafood e Kobe steak. Una cena da 10 e lode 😋</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1175.jpg" alt="Ristorante Moriya" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1169.jpg" alt="Cuoco piastra Moriya" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1174.jpg" alt="Cena Moriya" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/14_img_1175.jpg" alt="Ristorante Moriya" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/15_img_1169.jpg" alt="Cuoco piastra Moriya" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/16_img_1174.jpg" alt="Cena Moriya" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Cambio di outfit al volo e si torna all'aperto, alla ricerca di un <strong>bar</strong> dove concludere la giornata a <strong>Dotonbori</strong>. Dopo un po' di girovagare atterriamo in questo micro locale, <strong>Yell Bar</strong>. Ordiniamo un whiskey giapponese e due birre e intavoliamo una curiosa discussione col barista (che si chiama <strong>Nagatomo</strong> — gli esperti di calcio ricorderanno chi era all'Inter), forse la prima persona che capisce e parla un inglese decente. In Giappone, sembra impossibile, ma <strong>quasi nessuno parla inglese</strong>.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1179.jpg" alt="Yell Bar Dotonbori" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1181.jpg" alt="Whiskey giapponese" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/17_img_1179.jpg" alt="Yell Bar Dotonbori" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day03_Osaka/18_img_1181.jpg" alt="Whiskey giapponese" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
       </div>
       <div class="tags">
@@ -1167,39 +1350,39 @@
         <span class="day-date-tag">5 Aprile 2018</span>
       </div>
       <div class="day-text">
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1194.jpg" alt="Nara cervi nel parco" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/00_img_1194.jpg" alt="Nara cervi nel parco" loading="lazy" onclick="openLightbox(this)"></div>
         <p><strong>千里の道も一歩から</strong>. La meta di oggi è <strong>Nara</strong>, una delle <strong>ex capitali</strong> del Giappone nell'VIII secolo. Il <strong>Parco di Nara</strong> ha una dimensione di <strong>502 ettari</strong> (5 milioni di mq!!!) e al suo interno girano liberi circa <strong>1.200 cervi</strong>, considerati animali sacri (l'uccisione di un cervo era punita con la morte) ed ora tesoro nazionale. Sono assolutamente <strong>abituati alla presenza umana</strong>, si lasciano avvicinare ed accarezzare e chiunque in città non si stupirebbe a trovarli anche in mezzo alla strada.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1183.jpg" alt="Nara arrivo" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1243.jpg" alt="Cervo da vicino" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/01_img_1183.jpg" alt="Nara arrivo" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/02_img_1243.jpg" alt="Cervo da vicino" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Per girarlo abbiamo seguito il percorso consigliato dalla <strong>Lonely Planet</strong> (~6km) partendo dal <strong>Tōdai-ji</strong>, patrimonio dell'<strong>Unesco</strong>. L'enorme portale ligneo affascina subito per la presenza di due enormi statue di legno che rappresentano i <strong>Guardiani Nio</strong>, rispettivamente <strong>Ungyo</strong> e <strong>Agyo</strong>, l'inizio e la fine.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1188.jpg" alt="Guardiano Nio Ungyo" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1187.jpg" alt="Guardiano Nio Agyo" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/03_img_1188.jpg" alt="Guardiano Nio Ungyo" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/04_img_1187.jpg" alt="Guardiano Nio Agyo" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Una volta dentro si apre il giardino con l'enorme edificio centrale del <strong>Tōdai-ji</strong>, nonché la <strong>struttura in legno più grande del mondo</strong>!</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1195-1.jpg" alt="Tōdai-ji struttura" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/05_img_1195-1.jpg" alt="Tōdai-ji struttura" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Appena entrati nel tempio, il <strong>Daibutsu</strong> cattura subito l'attenzione: alto 15 metri in bronzo e oro, è il "padre di tutti i Buddha". Mi affascina sempre molto visitare luoghi simili, trasudano <strong>storia</strong>, <strong>misticismo</strong> e <strong>rispetto</strong> da ogni dettaglio.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1205-1.jpg" alt="Daibutsu grande Buddha" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1207-2.jpg" alt="Daibutsu dettaglio" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/06_img_1205-1.jpg" alt="Daibutsu grande Buddha" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/07_img_1207-2.jpg" alt="Daibutsu dettaglio" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Prosegue il percorso lungo la collina verso gli altri templi e siti storici.</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1219.jpg" alt="Percorso Nara" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1223.jpg" alt="Lanterne Nara" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1236.jpg" alt="Veduta parco Nara" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/08_img_1219.jpg" alt="Percorso Nara" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/09_img_1223.jpg" alt="Lanterne Nara" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/10_img_1236.jpg" alt="Veduta parco Nara" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Termina la visita alle quattro di pomeriggio, non abbiamo pranzato. Per caso finiamo in un <strong>sushi bar</strong> dove il sushi scorre su un <strong>nastro trasportatore</strong>, inventato proprio a Osaka! Fate voi la conta dei piatti — noi avevamo fame ed era tutto delizioso 😜</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1301.jpg" alt="Sushi nastro trasportatore" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1302.jpg" alt="Piatti sushi" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/11_img_1301.jpg" alt="Sushi nastro trasportatore" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/12_img_1302.jpg" alt="Piatti sushi" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Tornando a Osaka perdiamo la fermata e giriamo quartieri nuovi. All'alba delle 22.00 notiamo un ristorante i cui cuochi, in perfetta divisa, si inchinavano all'uscita dei clienti. Incuriositi decidiamo di fermarci: carni alla griglia stratosferiche, si scioglievano in bocca. Uno dei cuochi parlava addirittura un po' di italiano e ci ha lasciato il biglietto da visita con due mani e un inchino — importantissimo per loro!</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1265.jpg" alt="Carni alla griglia Osaka" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1272.jpg" alt="Cena carni Osaka" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/13_img_1265.jpg" alt="Carni alla griglia Osaka" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day04_Nara/14_img_1272.jpg" alt="Cena carni Osaka" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
       </div>
       <div class="tags">
@@ -1219,16 +1402,16 @@
       </div>
       <div class="day-text">
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1314-1.jpg" alt="Osaka vista dall'alto" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1317-1.jpg" alt="Umeda Sky Building" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day05_Kyoto/00_img_1314-1.jpg" alt="Osaka vista dall'alto" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day05_Kyoto/01_img_1317-1.jpg" alt="Umeda Sky Building" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Sorpresa: <strong>oggi diluvia</strong>. Ci svegliamo con la pioggia, il cielo nero, e questo sfortunato maltempo oggi non ci dà neanche un minuto di tregua. Prima di partire, tappa all'<strong>Umeda Sky Building</strong>: due torri gemelle di <strong>40 piani</strong>, collegate in cima da un <strong>balcone panoramico</strong> circolare chiamato <strong>Floating Garden Observatory</strong>. Vista a 360° su Osaka… peccato che il maltempo abbia azzerato il fascino! Un po' delusi, recuperiamo le borse e prendiamo lo <strong>Shinkansen</strong> per <strong>Kyoto</strong> (20 minuti). Se fino ad ora avevamo incrociato pochi occidentali, a <strong>Kyoto</strong> la situazione cambia drasticamente: sembra di essere in Europa, <strong>turisti ovunque</strong>. Masse di gente che si spostano a fiume. Pazzesco.</p>
         <p>Troviamo in fretta il nuovo <strong>Capsule Hotel</strong> (l'ultimo del viaggio, poi hotel normali e <strong>Ryokan</strong>). Dopo un pranzo a base di ravioli alla piastra e riso di vario genere, visitiamo il <strong>Nishiki Market</strong>, un <strong>mercato coperto</strong> che si estende per ben <strong>cinque isolati</strong>, in cui si trovano ancora <strong>negozi storici</strong> di ogni genere e si respira, in certi punti, un'<strong>aria d'altri tempi</strong>.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1321.jpg" alt="Nishiki Market Kyoto" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day05_Kyoto/02_img_1321.jpg" alt="Nishiki Market Kyoto" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Passiamo diverso tempo tra i corridoi di questo enorme mercato. Troviamo anche una <strong>sala da gioco un po' inquietante</strong>, dove decine di macchinette simili a slot-machines sono occupate da giocatori anziani in trance. Giriamo i tacchi abbastanza in fretta e ci ributtiamo sotto al maltempo. Percorriamo qualche isolato senza meta, finché una vetrina attira la nostra attenzione: un <strong>Barber Shop</strong> molto <strong>old school</strong> ✂️</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1327.jpg" alt="Old school barber shop Kyoto" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day05_Kyoto/03_img_1327.jpg" alt="Old school barber shop Kyoto" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Entrati diretti: io mi sono fatto dare una bella sbarbata (esperienza eccezionale) e Andrea una rivisitata al taglio. L'approccio col cliente e la cortesia del barbiere erano davvero superlativi, risultato <strong>ottimo</strong>! Scopriamo per caso che a Kyoto si trovano anche alcuni <strong>amici</strong>: tutti a <strong>cena insieme</strong> in un ristorante giapponese!</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/image.jpg" alt="Cena con amici a Kyoto" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day05_Kyoto/04_image.jpg" alt="Cena con amici a Kyoto" loading="lazy" onclick="openLightbox(this)"></div>
       </div>
       <div class="tags">
         <span class="tag">Kyoto</span><span class="tag">Nishiki Market</span><span class="tag">Umeda Sky</span>
@@ -1246,40 +1429,40 @@
         <span class="day-date-tag">7 Aprile 2018</span>
       </div>
       <div class="day-text">
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1370-1.jpg" alt="Bamboo Forest Arashiyama" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/00_img_1370-1.jpg" alt="Bamboo Forest Arashiyama" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Oggi, finalmente, ci tuffiamo di testa nel cuore del <strong>Giappone</strong> che vediamo sui libri di storia e sulle cartoline. Alle 8.30 siamo già alla <strong>Kyoto Station</strong>, sul <strong>JR Sagano</strong> in direzione <strong>Arashiyama</strong>.</p>
         <p>Arriviamo e ci troviamo all'ingresso della famosissima <strong>Bamboo Forest</strong>: un sentiero che si addentra in un'atmosfera quasi surreale, completamente circondati da splendide piante di <strong>bamboo</strong>, con piccoli <strong>templi</strong> e <strong>sakura</strong> in fiore. Il sentiero principale è un fiume di turisti… ma basta deviare per trovare sentieri secondari davvero <strong>magnifici</strong> e deserti!</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1365.jpg" alt="Bamboo Forest sentiero" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1334.jpg" alt="Bamboo silenzio" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1337.jpg" alt="Tempio nel bamboo" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/01_img_1365.jpg" alt="Bamboo Forest sentiero" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/02_img_1334.jpg" alt="Bamboo silenzio" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/03_img_1337.jpg" alt="Tempio nel bamboo" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>La zona è altresì famosa per il <strong>Togetsukyo Bridge</strong>, un ponte sul fiume da cui si può ammirare la fioritura dei ciliegi. Sono anche riuscito a fare un selfie con una coppia di sposini giapponesi 🎎</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1350.jpg" alt="Togetsukyo Bridge" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1351.jpg" alt="Fiume Arashiyama" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/04_img_1350.jpg" alt="Togetsukyo Bridge" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/05_img_1351.jpg" alt="Fiume Arashiyama" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Pausa pranzo a base di <strong>Udon Noodles</strong>, spaghettoni di soia in brodo con gamberi e alghe — la cucina giapponese ci piace sempre di più!</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1372.jpg" alt="Udon Noodles pranzo" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/06_img_1372.jpg" alt="Udon Noodles pranzo" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Arriviamo al <strong>Fushimi-Inari Shrine</strong>, uno dei templi <strong>shintoisti</strong> più famosi del Giappone, dedicato ad <strong>Inari</strong>, divinità del riso. I celebri <strong>Senbon Torii</strong>: sentieri costellati di portali arancioni per ~6km su e giù dalla montagna. Ogni Torii è stato donato (costo: dai 3.000 agli 8.000€ ciascuno).</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1385.jpg" alt="Fushimi Inari ingresso" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/07_img_1385.jpg" alt="Fushimi Inari ingresso" loading="lazy" onclick="openLightbox(this)"></div>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1427-1.jpg" alt="Torii tunnel arancioni" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1412.jpg" alt="Torii salita" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1438.jpg" alt="Torii volpe" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/08_img_1427-1.jpg" alt="Torii tunnel arancioni" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/09_img_1412.jpg" alt="Torii salita" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/10_img_1438.jpg" alt="Torii volpe" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <div class="pullquote">"Era una vita che sognavo di visitare questo luogo, e oggi son stato davvero felice di esserci riuscito: le foto non rendono giustizia alla magia dei Senbon Torii."</div>
         <p>Finiamo il percorso mentre ricomincia a <strong>piovere</strong>. Scappiamo verso il <strong>Kinkaku-ji</strong>, il <strong>Golden Pavilion</strong>: il tempio zen più famoso del mondo, con i primi due piani interamente ricoperti di <strong>foglie d'oro</strong>. Si specchia perfettamente sullo stagno. Fortuna vuole che durante la nostra visita smette di piovere e spunta anche il sole!</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1441.jpg" alt="Kinkaku-ji Golden Pavilion" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/11_img_1441.jpg" alt="Kinkaku-ji Golden Pavilion" loading="lazy" onclick="openLightbox(this)"></div>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1456.jpg" alt="Giardino zen Kinkaku-ji" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1458.jpg" alt="Percorso esterno" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1463.jpg" alt="Stagno riflesso" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/12_img_1456.jpg" alt="Giardino zen Kinkaku-ji" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/13_img_1458.jpg" alt="Percorso esterno" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/14_img_1463.jpg" alt="Stagno riflesso" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Concludiamo la serata con un giro nel quartiere di <strong>Pontocho</strong>, storicamente famoso per essere la zona delle <strong>geishe</strong> (il film "Memorie di una Geisha" è stato girato proprio qua). Oggi ci sono solo ristoranti e turisti, ma il quartiere è molto caratteristico per una passeggiata.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1468.jpg" alt="Pontocho viuzze" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1469.jpg" alt="Pontocho notte" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/15_img_1468.jpg" alt="Pontocho viuzze" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day06_Arashiyama-Fushimi-Kinkakuji/16_img_1469.jpg" alt="Pontocho notte" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
       </div>
       <div class="tags">
@@ -1298,37 +1481,37 @@
         <span class="day-date-tag">8 Aprile 2018</span>
       </div>
       <div class="day-text">
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1525-1.jpg" alt="Higashiyama-Ku mattina" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/00_img_1525-1.jpg" alt="Higashiyama-Ku mattina" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Se ieri abbiamo visitato le principali bellezze che incorniciano <strong>Kyoto</strong> in un quadro stupendo, oggi ci dedichiamo al <strong>cuore</strong> di questa città, che per più di <strong>mille anni</strong> fu <strong>capitale</strong> del <strong>Giappone</strong>. Di prima mattina, prendiamo la metro verso il quartiere di <strong>Higashiyama-Ku</strong>.</p>
         <p>Il primo luogo che visitiamo è il tempio di <strong>Kiyomizu</strong>, in posizione collinare dominante. Il padiglione principale gode di una <strong>vista</strong> sulla città davvero suggestiva, con <strong>fontane a forma di drago</strong> e ciliegi in fiore. Ad immortalare la bellezza di questo tempio ci stava pensando, a modo suo, un <strong>anziano artista</strong> 🎨</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1475.jpg" alt="Kiyomizu tempio" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1489.jpg" alt="Kiyomizu portale" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1503-1.jpg" alt="Kiyomizu vista città" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/01_img_1475.jpg" alt="Kiyomizu tempio" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/02_img_1489.jpg" alt="Kiyomizu portale" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/03_img_1503-1.jpg" alt="Kiyomizu vista città" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1506.jpg" alt="Fontana drago" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1511.jpg" alt="Ciliegi Kiyomizu" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1509-1.jpg" alt="Anziano artista pittore" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/04_img_1506.jpg" alt="Fontana drago" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/05_img_1511.jpg" alt="Ciliegi Kiyomizu" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/06_img_1509-1.jpg" alt="Anziano artista pittore" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Ci buttiamo nella <strong>zona commerciale di Higashiyama-Ku</strong>, la <strong>città vecchia di Kyoto</strong>: costruzioni basse rigorosamente in <strong>legno</strong>, oggi perlopiù negozi e ristoranti. Zona affascinante, si gira senza alcun problema nonostante i turisti.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1524-1.jpg" alt="Higashiyama via commerciale" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1536.jpg" alt="Higashiyama negozi storici" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/07_img_1524-1.jpg" alt="Higashiyama via commerciale" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/08_img_1536.jpg" alt="Higashiyama negozi storici" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Per caso su <strong>Google Maps</strong> compare lo <strong>Shōgunzuka</strong>: montagna a est di Kyoto. La <strong>leggenda</strong> vuole che all'interno sia <strong>sepolta</strong> una statua in armatura da guerra, <strong>talismano protettivo</strong> della città. Oggi è famoso per il suo <strong>Observation Deck</strong>: vista a 360° su tutta Kyoto e, nei giorni limpidi, anche Osaka.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1550.jpg" alt="Shogunzuka panorama Kyoto" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1552.jpg" alt="Vista Kyoto da Shogunzuka" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/09_img_1550.jpg" alt="Shogunzuka panorama Kyoto" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/10_img_1552.jpg" alt="Vista Kyoto da Shogunzuka" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Nello stesso complesso si trova un <strong>giardino zen</strong> davvero magnifico, forse il più bello tra quelli visti fino ad ora.</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1543.jpg" alt="Giardino zen Shogunzuka" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1558.jpg" alt="Laghetto giardino zen" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1554.jpg" alt="Pietra muschio giardino" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/11_img_1543.jpg" alt="Giardino zen Shogunzuka" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/12_img_1558.jpg" alt="Laghetto giardino zen" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/13_img_1554.jpg" alt="Pietra muschio giardino" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Il pomeriggio: il <strong>Palazzo Imperiale di Kyoto</strong> è misteriosamente chiuso, quindi giriamo il parco immenso. Poi pausa relax in albergo — eravamo cotti! La sera, cena all'<strong>Ippudo Nishikikoji</strong>, specializzato in <strong>ramen</strong>: noodles, brodo di carne, miso, soia, uovo, alghe. Non l'avevo mai provato — una rivelazione! Domattina sveglia presto, direzione… <strong>Hiroshima</strong>!!! 🚂</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1625.jpg" alt="Ramen Ippudo Nishikikoji" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day07_Kyoto-Higashiyama/14_img_1625.jpg" alt="Ramen Ippudo Nishikikoji" loading="lazy" onclick="openLightbox(this)"></div>
       </div>
 
       <div class="tags">
@@ -1347,29 +1530,29 @@
         <span class="day-date-tag">9 Aprile 2018</span>
       </div>
       <div class="day-text">
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1630-1.jpg" alt="Hiroshima - Parco della Pace" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/00_img_1630-1.jpg" alt="Hiroshima - Parco della Pace" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Oggi cambiamo completamente zona e ci spostiamo <strong>300km a sud</strong> di Kyoto con il <strong>Nozomi Shinkansen</strong>. Arriviamo a <strong>Hiroshima</strong> e prendiamo il tram verso il <strong>Parco del Memoriale della Pace</strong>. Il <strong>6 Agosto 1945</strong>, la bomba atomica ha vaporizzato <strong>150.000 persone</strong> all'istante. Quattro punti principali, tutti con la pelle d'oca.</p>
         <p>Il primo è <strong>l'A-Bomb Dome</strong> (cupola Genbaku), l'edificio che si trovava esattamente sotto l'epicentro dell'esplosione — la bomba è esplosa a <strong>600 metri d'altezza</strong> per massimizzare l'onda d'urto. La struttura è semi distrutta ma è rimasta in piedi. Oggi è un monumento alla <strong>memoria</strong>.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1641.jpg" alt="A-Bomb Dome cupola Genbaku" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/01_img_1641.jpg" alt="A-Bomb Dome cupola Genbaku" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Il secondo, più emozionante, è dedicato a <strong>Sadako Sasaki</strong>, una bambina sopravvissuta alla bomba ma morta dopo per le radiazioni. Aveva iniziato a costruire <strong>origami-gru</strong>, perché una leggenda giapponese vuole che dopo <strong>mille origami</strong> puoi esprimere un <strong>desiderio</strong>. Il suo era guarire e vivere. Purtroppo non ce l'ha fatta. Ogni anno <strong>migliaia di bambini</strong> depositano qui i propri origami come simboli di pace.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1649.jpg" alt="Memoriale Sadako Sasaki gru origami" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/02_img_1649.jpg" alt="Memoriale Sadako Sasaki gru origami" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Il terzo è la <strong>fiamma della pace</strong>, che arde perennemente dal <strong>1964</strong> e non verrà spenta finché l'<strong>ultimo ordigno nucleare</strong> al mondo non verrà <strong>smantellato</strong>.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1654.jpg" alt="Fiamma della Pace Hiroshima" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/03_img_1654.jpg" alt="Fiamma della Pace Hiroshima" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Il quarto è il <strong>Cenotafio del Memoriale</strong>, con i nomi di tutte le vittime. A ridosso del parco, il <strong>Museo</strong> su tre piani con fotografie (alcune molto forti) e reperti. Uno tra tutti mi ha colpito davvero: un <strong>triciclo</strong>.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1660.jpg" alt="Cenotafio Memoriale" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1665.jpg" alt="Museo bomba Hiroshima" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/04_img_1660.jpg" alt="Cenotafio Memoriale" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/05_img_1665.jpg" alt="Museo bomba Hiroshima" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <div class="pullquote">"That morning, Shinichi Tetsutani (3 years old) was riding his tricycle in front of his house. Following a sudden flash, the heat rays burned Shinichi and his tricycle leading him to death."</div>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1671.jpg" alt="Il triciclo di Shinichi - museo Hiroshima" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/06_img_1671.jpg" alt="Il triciclo di Shinichi - museo Hiroshima" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Terminata la visita, ci dirigiamo al <strong>terminal dei traghetti</strong>: la prossima meta è l'<strong>isola di Miyajima</strong>. La principale attrazione è il <strong>Torii</strong> alto 17 metri che sembra <strong>galleggiare</strong> in mezzo al mare — uno dei panorami più famosi del Giappone.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1675-1.jpg" alt="Traghetto per Miyajima" loading="lazy" onclick="openLightbox(this)"></div>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1686-1.jpg" alt="Grande Torii di Miyajima" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/07_img_1675-1.jpg" alt="Traghetto per Miyajima" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/08_img_1686-1.jpg" alt="Grande Torii di Miyajima" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Il Torii fa parte del <strong>tempio di Itsukushima</strong>, costruito su palafitte che all'alta marea sembrano galleggiare sull'acqua. L'isola è invasa da <strong>daini</strong>, anche loro completamente abituati all'uomo. È tardo pomeriggio e non abbiamo ancora pranzato: degli <strong>ottimi spiedini di pesce fresco</strong> da un ambulante locale!</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1679-2.jpg" alt="Tempio Itsukushima" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1681.jpg" alt="Daino Miyajima" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1700.jpg" alt="Spiedini pesce ambulante" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/09_img_1679-2.jpg" alt="Tempio Itsukushima" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/10_img_1681.jpg" alt="Daino Miyajima" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day08_Hiroshima-Miyajima/11_img_1700.jpg" alt="Spiedini pesce ambulante" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
       </div>
       <div class="tags">
@@ -1388,34 +1571,34 @@
         <span class="day-date-tag">10 Aprile 2018</span>
       </div>
       <div class="day-text">
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1714.jpg" alt="Kanazawa stazione" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/00_img_1714.jpg" alt="Kanazawa stazione" loading="lazy" onclick="openLightbox(this)"></div>
         <p><em>Oggi non è andata esattamente come sarebbe dovuta andare…</em> Nessuno sente la sveglia, ci alziamo alle 9 passate. <strong>Thunderbird</strong> verso <strong>Kanazawa</strong>, 300km a nord di Kyoto. L'albergo, questa volta un vero albergo (basta capsule!) con vere stanze, è a meno di un km dalla stazione.</p>
         <p>Doccia fredda: i bus per <strong>Shirakawa-go</strong> sono tutti <strong>over booked</strong>, niente fino a domani pomeriggio. Provo in ogni modo a trovare una soluzione, improvviso anche quelle tre parole di giapponese che ricordo — niente da fare. Shirakawa-go salta.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1720.jpg" alt="Terminal bus Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/01_img_1720.jpg" alt="Terminal bus Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Col morale a terra, ci avviamo a piedi verso l'<strong>Higashi Chaya District</strong>, famoso per le sale da tè ("chaya") dove le <strong>geishe</strong> facevano i loro spettacoli. Non tutti i mali vengono per nuocere però: Kanazawa si rivela una città <strong>eccezionale</strong>, forse la più <strong>bella e tipica</strong> visitata fino ad ora. Il centro storico mi ricorda subito il <strong>Giappone dei manga e degli anime</strong>, con vie ordinate e file di basse costruzioni in legno.</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1729.jpg" alt="Higashi Chaya District" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1730.jpg" alt="Via tradizionale Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1731-2.jpg" alt="Costruzioni legno Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/02_img_1729.jpg" alt="Higashi Chaya District" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/03_img_1730.jpg" alt="Via tradizionale Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/04_img_1731-2.jpg" alt="Costruzioni legno Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Nel primo pomeriggio un <strong>gelato al tè verde</strong> da una bottega del centro. Poi ci spostiamo verso il <strong>Parco del Castello di Kanazawa</strong>, dove si trova il <strong>Kenrokuen</strong>, uno dei tre <strong>giardini zen</strong> più belli del <strong>Giappone</strong> (costruito nel 1632). In certi punti ti lascia letteralmente a bocca aperta, rasenta la <strong>perfezione</strong>: ciliegi, bonsai, cascate, laghi, carpe e statue.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1736.jpg" alt="Gelato tè verde Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1765-1.jpg" alt="Kenrokuen giardino zen" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/05_img_1736.jpg" alt="Gelato tè verde Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/06_img_1765-1.jpg" alt="Kenrokuen giardino zen" loading="lazy" onclick="openLightbox(this)"></div>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1757-1.jpg" alt="Kenrokuen laghetto" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1769-1.jpg" alt="Kenrokuen ciliegi" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1774.jpg" alt="Kenrokuen bonsai" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/07_img_1757-1.jpg" alt="Kenrokuen laghetto" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/08_img_1769-1.jpg" alt="Kenrokuen ciliegi" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/09_img_1774.jpg" alt="Kenrokuen bonsai" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>All'interno del parco sorge il <strong>Castello di Kanazawa</strong>, circondato da giardini immensi, con l'<strong>Ishikawa-mon Gate</strong> come portale principale.</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1781.jpg" alt="Ishikawa-mon Gate" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1782-1.jpg" alt="Castello Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1785.jpg" alt="Giardini castello" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/10_img_1781.jpg" alt="Ishikawa-mon Gate" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/11_img_1782-1.jpg" alt="Castello Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/12_img_1785.jpg" alt="Giardini castello" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Cena all'<strong>Ippei Sushi</strong>, minuscolo locale con dieci coperti fronte banco. Il sushi migliore del viaggio. I proprietari ci spiegano che il <strong>nigiri si mangia con le mani</strong>, non con le bacchette — le bacchette servono solo per il sashimi.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1801-1.jpg" alt="Ippei Sushi Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1802-1.jpg" alt="Sushi Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/13_img_1801-1.jpg" alt="Ippei Sushi Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day09_Kanazawa/14_img_1802-1.jpg" alt="Sushi Kanazawa" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
       </div>
       <div class="tags">
@@ -1434,31 +1617,31 @@
         <span class="day-date-tag">11 Aprile 2018</span>
       </div>
       <div class="day-text">
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1808.jpg" alt="Stazione di Kanazawa mattina" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/00_img_1808.jpg" alt="Stazione di Kanazawa mattina" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Questa mattina ci dà il buongiorno un leggero mal di testa, dovuto alla combo <strong>birra &amp; sakè</strong> di ieri sera. Nonostante tutto, ci alziamo di buon'ora. <strong>Shinkansen</strong> verso <strong>Nagano</strong>, poi treno locale per <strong>Yamanouchi</strong>, piccolo villaggio di montagna. <strong>Piove tutto il giorno</strong>. Prendiamo un taxi e raggiungiamo il nostro primo <strong>ryokan</strong>, chiamato <strong>Koishiya</strong>.</p>
         <p>I <strong>ryokan</strong> sono i <strong>tradizionali alberghi</strong> giapponesi, rimasti invariati per <strong>centinaia di anni</strong>: pavimento in tatami, letto futon e bagno condiviso. Alla reception troviamo <strong>Sachico</strong>, che parla un ottimo inglese. Ci spiega le due attrazioni principali: gli <strong>onsen</strong> (acqua bollente dalle rocce) e il <strong>Jigokudani Monkey Park</strong>.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1814-2.jpg" alt="Ryokan Koishiya tatami" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1815.jpg" alt="Ryokan Koishiya" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/01_img_1814-2.jpg" alt="Ryokan Koishiya tatami" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/02_img_1815.jpg" alt="Ryokan Koishiya" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Nel pomeriggio, nonostante il diluvio, visita al <strong>Jigokudani Monkey Park</strong>: un sentiero sale lungo la montagna e non tardano ad apparire le prime <strong>scimmie</strong>, abituate alla presenza umana. Dopo venti minuti, compare la famosa <strong>piscina naturale di acqua calda</strong> dove i <strong>macachi</strong> si fanno tranquillamente il <strong>bagno</strong>. Uno spettacolo unico — <em>pare sia l'unico posto al mondo dove le scimmie fanno il bagno</em>.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1819.jpg" alt="Jigokudani Monkey Park vallata" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/03_img_1819.jpg" alt="Jigokudani Monkey Park vallata" loading="lazy" onclick="openLightbox(this)"></div>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1832.jpg" alt="Macachi in acqua calda" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1835.jpg" alt="Snow monkey nel bagno" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1839.jpg" alt="Macachi termale" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/04_img_1832.jpg" alt="Macachi in acqua calda" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/05_img_1835.jpg" alt="Snow monkey nel bagno" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/06_img_1839.jpg" alt="Macachi termale" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1849.jpg" alt="Macaco primo piano" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1852.jpg" alt="Snow monkey ritratto" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1864.jpg" alt="Macachi famiglia" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/07_img_1849.jpg" alt="Macaco primo piano" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/08_img_1852.jpg" alt="Snow monkey ritratto" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/09_img_1864.jpg" alt="Macachi famiglia" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Il diluvio non accenna a smettere, siamo fradici. Rientro al ryokan per cambiarci e riposare. Beviamo il classico tè verde al bar con <strong>Sachico</strong> (29 anni, da Tokyo, ha abbandonato la metropoli per vivere in mezzo alla natura). Riposarsi in un ryokan ha un aspetto quasi <strong>mistico</strong>, sembra davvero un salto <strong>indietro nel tempo</strong>.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1894-1.jpg" alt="Ryokan futon relax" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/10_img_1894-1.jpg" alt="Ryokan futon relax" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Alle 20.00 l'autista <strong>Daitsuke</strong> ci porta al <strong>Sansuikaku</strong>, un onsen privato. L'acqua è a <strong>43°</strong>. Il contrasto con il freddo e la pioggia è eccezionale… <strong>si sta da dio</strong>! Un'ora a mollo, poi cena al ryokan con riso, salmone e funghi locali fritti nella birra. Speriamo fossero tutti commestibili! Il <strong>futon</strong> ci aspetta.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1882.jpg" alt="Onsen Sansuikaku" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1883.jpg" alt="Acqua termale onsen" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/11_img_1882.jpg" alt="Onsen Sansuikaku" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day10_Yamanouchi-Nagano/12_img_1883.jpg" alt="Acqua termale onsen" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
       </div>
       <div class="tags">
@@ -1477,29 +1660,29 @@
         <span class="day-date-tag">12 Aprile 2018</span>
       </div>
       <div class="day-text">
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1898.jpg" alt="Mattina soleggiata al ryokan" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/00_img_1898.jpg" alt="Mattina soleggiata al ryokan" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Stamattina ci dà il buongiorno un <strong>sole incredibile</strong> (finalmente!) che illumina piacevolmente tutta la stanza del <strong>ryokan</strong>, filtrando tra le sottili finestre di legno e carta. Per la prima volta in due settimane facciamo una <strong>colazione normale</strong>, comodamente seduti ad un tavolo, con brioches e cappuccino. L'autista del ryokan ci riporta alla stazione di <strong>Yamanouchi</strong> (purtroppo non riusciamo a salutare Sachico prima di partire).</p>
         <p>In un <strong>paio d'ore</strong> di Shinkansen raggiungiamo <strong>Tokyo</strong> e, appena arrivati alla Tokyo Station, acquistiamo subito i biglietti per la gita di domani al <strong>Lago Kawaguchiko</strong> ai piedi del <strong>Monte Fuji</strong> (diverse linee erano già piene — rischiavamo come con Shirakawa-go!). Check-in al <strong>B Tokyo Shimbashi</strong>, finalmente un vero letto.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1901.jpg" alt="Tokyo Station ritorno" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/01_img_1901.jpg" alt="Tokyo Station ritorno" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Via in direzione <strong>Odaiba</strong> con la linea sopraelevata <strong>Yurikamome</strong>, attraversando il <strong>Rainbow Bridge</strong>. La stessa tratta sopraelevata offre panorami davvero belli.</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1905.jpg" alt="Yurikamome sopraelevata" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1911.jpg" alt="Rainbow Bridge vista" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/02_img_1905.jpg" alt="Yurikamome sopraelevata" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/03_img_1911.jpg" alt="Rainbow Bridge vista" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Raggiungiamo <strong>Odaiba</strong>, un'isola artificiale ingrandita negli ultimi 30 anni rubando spazio al mare. Zona commerciale, mega mall, vista pazzesca sullo skyline… e il <strong>Gundam gigante</strong> in dimensioni reali che ci dà il benvenuto!</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1928.jpg" alt="Gundam gigante Odaiba" loading="lazy" onclick="openLightbox(this)"></div>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1933-2.jpg" alt="Gundam dettaglio testa" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/04_img_1928.jpg" alt="Gundam gigante Odaiba" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/05_img_1933-2.jpg" alt="Gundam dettaglio testa" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Passiamo il pomeriggio dentro e fuori i <strong>mall</strong> e in giro per l'isola. Molto bello anche il <strong>palazzo della Fuji TV</strong>, la principale emittente nazionale. Ma è al <strong>tramonto</strong> che si gode lo spettacolo più bello: vista mozzafiato sullo <strong>skyline di Tokyo</strong> e sul <strong>Rainbow Bridge</strong>. Le foto non rendono giustizia alla vera bellezza del panorama. C'è anche una "sorella minore" della <strong>Statua della Libertà</strong> 🗽</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1941.jpg" alt="Skyline Tokyo tramonto da Odaiba" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/06_img_1941.jpg" alt="Skyline Tokyo tramonto da Odaiba" loading="lazy" onclick="openLightbox(this)"></div>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1944.jpg" alt="Tokyo Bay tramonto" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1946.jpg" alt="Statua Libertà Odaiba" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1948.jpg" alt="Rainbow Bridge notturno" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/07_img_1944.jpg" alt="Tokyo Bay tramonto" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/08_img_1946.jpg" alt="Statua Libertà Odaiba" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/09_img_1948.jpg" alt="Rainbow Bridge notturno" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Giro per negozi a <strong>Ginza</strong>, poi taxi fino a <strong>Shinjuku</strong>, lo stesso quartiere della prima sera. Ritroviamo lo <strong>stesso ristorante tipico</strong> — siamo ben felici di tornarci. Domani si va a vedere il <strong>Monte Fuji!</strong></p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1952-11.jpg" alt="Shinjuku notte" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1958.jpg" alt="Cena Shinjuku" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/10_img_1952-11.jpg" alt="Shinjuku notte" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day11_Tokyo-Odaiba/11_img_1958.jpg" alt="Cena Shinjuku" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
       </div>
       <div class="tags">
@@ -1518,34 +1701,34 @@
         <span class="day-date-tag">13 Aprile 2018</span>
       </div>
       <div class="day-text">
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1965.jpg" alt="Partenza per il Monte Fuji" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/00_img_1965.jpg" alt="Partenza per il Monte Fuji" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Oggi, ahimè, è l'<strong>ultimo giorno pieno</strong> di questo viaggio. Quale modo migliore di concludere in bellezza, se non visitando quello che è per eccellenza il <strong>simbolo</strong> di questo paese? Pullman <strong>JR</strong> verso il <strong>Lake Kawaguchiko</strong>, circa due ore a sud di Tokyo, a 1.000 metri sul mare.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1967.jpg" alt="Bus JR per il Fuji" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/01_img_1967.jpg" alt="Bus JR per il Fuji" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Arriviamo alla <strong>Kawaguchiko Station</strong> e prendiamo la <strong>Red Line</strong>, bus locali che girano tutto il giorno intorno al lago. Qualche chilometro più avanti, eccolo che <strong>finalmente compare</strong>: vetta innevata, aureola di nuvole, cielo azzurro perfetto.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1974.jpg" alt="Primo avvistamento Monte Fuji" loading="lazy" onclick="openLightbox(this)"></div>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1984.jpg" alt="Monte Fuji - vista completa" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/02_img_1974.jpg" alt="Primo avvistamento Monte Fuji" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/03_img_1984.jpg" alt="Monte Fuji - vista completa" loading="lazy" onclick="openLightbox(this)"></div>
         <div class="pullquote">"Il Monte Fuji è l'ultima vera tappa di questa vacanza. Ammirarlo dal vivo mi ha reso felice, è stato come vederlo davvero per la prima volta: la ciliegina sulla torta di un viaggio per me perfetto."</div>
         <p>Lungo il lago: piccoli centri abitati, ciliegi in fiore, pescatori al lavoro, giardini di bonsai. Un percorso davvero suggestivo, goduto senza fretta.</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1976.jpg" alt="Lago Kawaguchiko Fuji" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1981.jpg" alt="Ciliegi lago Fuji" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1986.jpg" alt="Fuji vetta innevata" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/04_img_1976.jpg" alt="Lago Kawaguchiko Fuji" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/05_img_1981.jpg" alt="Ciliegi lago Fuji" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/06_img_1986.jpg" alt="Fuji vetta innevata" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1993.jpg" alt="Giardino bonsai lago" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_1996.jpg" alt="Pescatore Kawaguchiko" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_2007.jpg" alt="Vista panoramica lago Fuji" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/07_img_1993.jpg" alt="Giardino bonsai lago" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/08_img_1996.jpg" alt="Pescatore Kawaguchiko" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/09_img_2007.jpg" alt="Vista panoramica lago Fuji" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Alle <strong>16.30</strong> il pullman prenotato riparte puntualissimo per <strong>Tokyo</strong>. Ho dormito due ore e mi son svegliato praticamente in città. Sera ad <strong>Akihabara</strong>, il quartiere più folle, affascinante, malato e luminoso della capitale.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_2013.jpg" alt="Akihabara insegne luminose" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/10_img_2013.jpg" alt="Akihabara insegne luminose" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Mega store di elettronica dove si può trovare tutto, interi palazzi di <strong>sale giochi stratosferiche</strong>, negozi di videogiochi retrò, vestiario a tema, gadget di ogni tipo, monomarca dedicati ai manga. C'è davvero di <strong>tutto</strong>, ma proprio tutto quello che potete immaginare, e anche quello che io personalmente non avrei mai immaginato di trovare!!!  Meriterebbe una giornata intera.</p>
         <div class="inline-photo-strip cols-3">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_2017.jpg" alt="Akihabara neon" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_2018.jpg" alt="Akihabara negozi" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_2022-1.jpg" alt="Akihabara folle" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/11_img_2017.jpg" alt="Akihabara neon" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/12_img_2018.jpg" alt="Akihabara negozi" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/13_img_2022-1.jpg" alt="Akihabara folle" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Cena in un locale affollatissimo vicino a <strong>Ginza</strong>. È venerdì sera, in giro ci sono parecchi giapponesi in perfetto look da lavoro totalmente <strong>ubriachi</strong> — metodo alternativo per "staccare la spina". Ora che ho realizzato che questo <strong>viaggio volge al termine</strong>, vado a letto già con un po' di <strong>nostalgia</strong> 😞</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_2026.jpg" alt="Cena venerdì sera Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day12_Fuji-Kawaguchiko-Akihabara/14_img_2026.jpg" alt="Cena venerdì sera Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
       </div>
       <div class="tags">
         <span class="tag">Monte Fuji</span><span class="tag">Kawaguchiko</span><span class="tag">Akihabara</span><span class="tag">Tokyo</span>
@@ -1563,16 +1746,16 @@
         <span class="day-date-tag">14 Aprile 2018</span>
       </div>
       <div class="day-text">
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_2032.jpg" alt="Shibuya - ultimo mattino" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day13_Shibuya-Hachiko-Narita/00_img_2032.jpg" alt="Shibuya - ultimo mattino" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Ebbene sì, il giorno della <strong>partenza</strong> è arrivato. Abbiamo ancora un paio d'ore a disposizione quindi, dopo aver fatto le borse, prendiamo un taxi verso <strong>Shibuya</strong>. Ad attenderci qui, nascosto da un mare di folla, c'è la statua grandezza naturale di <strong>Hachiko</strong>, il cane di razza <strong>Akita</strong> che, tra il <strong>1923</strong> e il <strong>1935</strong>, aspettò per tutta la vita il ritorno del suo padrone (purtroppo defunto) alla stazione dove lui tutti i giorni rientrava dal lavoro.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_2034.jpg" alt="Statua di Hachiko Shibuya" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day13_Shibuya-Hachiko-Narita/01_img_2034.jpg" alt="Statua di Hachiko Shibuya" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Sembra di vedere la statua di Giulietta a Verona: tutti in posa per una foto ricordo. Proseguiamo con un ultimo giro per il quartiere di <strong>Shibuya</strong>, zona più giovane e alternativa di questa capitale davvero gigantesca. Ultima <strong>pazzia</strong> di questo paese: ci si può travestire da personaggi di <strong>Super Mario</strong>, noleggiare un <strong>go kart</strong> e girare tranquillamente per le strade del centro!</p>
         <div class="inline-photo-pair">
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_2036.jpg" alt="Mario Kart per le strade di Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
-          <div class="photo-item"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_2037.jpg" alt="Go kart Mario Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day13_Shibuya-Hachiko-Narita/02_img_2036.jpg" alt="Mario Kart per le strade di Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
+          <div class="photo-item"><img src="https://gioriva.github.io/album/giappone2018/Day13_Shibuya-Hachiko-Narita/03_img_2037.jpg" alt="Go kart Mario Tokyo" loading="lazy" onclick="openLightbox(this)"></div>
         </div>
         <p>Il tempo corre, quindi rientriamo veloci in albergo, facciamo il check-out e ci incamminiamo verso la <strong>Shimbashi Station</strong>, poi express fino al <strong>Terminal 1 del Narita Airport</strong>.</p>
-        <div class="inline-photo"><img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/img_2041.jpg" alt="Narita Airport - partenza" loading="lazy" onclick="openLightbox(this)"></div>
+        <div class="inline-photo"><img src="https://gioriva.github.io/album/giappone2018/Day13_Shibuya-Hachiko-Narita/04_img_2041.jpg" alt="Narita Airport - partenza" loading="lazy" onclick="openLightbox(this)"></div>
         <p>Tra pochi minuti imbarcano… mentre scrivo l'ultima vera pagina di questo diario mi rendo conto di <strong>quante cose</strong> siamo riusciti a fare in un lasso di tempo nemmeno eccessivo, e soprattutto di quante cose avrei voluto fare ma non ho potuto. Motivo per cui sono sicuro che questo è solo un…</p>
         <div class="pullquote" style="font-size:1.15rem; text-align:center; border:none; background:transparent; font-weight:700; letter-spacing:0.05em;">ARRIVEDERCI GIAPPONE!<br><br>さようなら</div>
       </div>
@@ -1590,6 +1773,9 @@
   <div class="container">
     <div class="map-title">Il percorso</div>
     <div class="map-sub">旅のルート · Da est a ovest e ritorno</div>
+    <div style="max-width:700px; margin:0 auto 3rem; border-radius:6px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.4);">
+      <img src="https://gioriva.github.io/album/giappone2018/Extra/mappa_percorso.png" alt="Mappa del percorso Spring in Japan 2018" loading="lazy" style="width:100%; display:block; cursor:zoom-in;" onclick="openLightbox(this)">
+    </div>
     <div class="route-map">
       <div class="route-stops">
         <div class="route-stop">
@@ -1669,137 +1855,6 @@
   <span style="display:block; margin-top:0.5rem; font-size:0.7rem; opacity:0.5;">"Ogni viaggio lo vivi tre volte: quando lo sogni, quando lo vivi e quando lo ricordi"</span>
 </footer>
 
-<!-- ═══════════════════════════════════════════
-     PAGE OVERLAY: DIARIO DI VIAGGIO
-════════════════════════════════════════════ -->
-<div class="page-overlay" id="page-diario">
-  <button class="page-close" onclick="closePage('diario')" title="Chiudi">×</button>
-  <div class="page-overlay-inner">
-
-    <h1 class="page-title">Diario di <span>Viaggio</span></h1>
-    <div class="page-meta">Aprile 2018 · by Giorgio · Spring in Japan</div>
-
-    <!-- Mappa del percorso originale dal blog -->
-    <div class="diario-map">
-      <img src="https://gioriva.wordpress.com/wp-content/uploads/2018/04/schermata-2018-04-15-alle-19-06-18.png" alt="Mappa del percorso — Spring in Japan 2018" loading="lazy">
-    </div>
-
-    <p class="diario-intro">Per comodità di lettura, ho raccolto in un elenco facilmente consultabile tutte e tredici le giornate di questo viaggio eccezionale… buona lettura 🙂</p>
-
-    <ul class="diario-list">
-      <li onclick="goToDay(1)">
-        <span class="diario-day-badge">Day 1</span>
-        <span class="diario-day-title">Volare… a Tokyo!</span>
-      </li>
-      <li onclick="goToDay(2)">
-        <span class="diario-day-badge">Day 2</span>
-        <span class="diario-day-title">Tsukiji, Ginza, Shibuya, Rappongi</span>
-      </li>
-      <li onclick="goToDay(3)">
-        <span class="diario-day-badge">Day 3</span>
-        <span class="diario-day-title">A tutta velocità verso Osaka!</span>
-      </li>
-      <li onclick="goToDay(4)">
-        <span class="diario-day-badge">Day 4</span>
-        <span class="diario-day-title">Nara, la città dei cervi e del grande Buddha</span>
-      </li>
-      <li onclick="goToDay(5)">
-        <span class="diario-day-badge">Day 5</span>
-        <span class="diario-day-title">Trasloco a Kyoto</span>
-      </li>
-      <li onclick="goToDay(6)">
-        <span class="diario-day-badge">Day 6</span>
-        <span class="diario-day-title">Arashiyama, Fushimi-Inari e Kinkaku-ji</span>
-      </li>
-      <li onclick="goToDay(7)">
-        <span class="diario-day-badge">Day 7</span>
-        <span class="diario-day-title">Higashiyama-Ku, il cuore storico di Kyoto</span>
-      </li>
-      <li onclick="goToDay(8)">
-        <span class="diario-day-badge">Day 8</span>
-        <span class="diario-day-title">Hiroshima, la bomba e il grande Torii di Miyajima</span>
-      </li>
-      <li onclick="goToDay(9)">
-        <span class="diario-day-badge">Day 9</span>
-        <span class="diario-day-title">Kanazawa e… Kanazawa</span>
-      </li>
-      <li onclick="goToDay(10)">
-        <span class="diario-day-badge">Day 10</span>
-        <span class="diario-day-title">Il ryokan, gli onsen di Nagano e le snow monkeys</span>
-      </li>
-      <li onclick="goToDay(11)">
-        <span class="diario-day-badge">Day 11</span>
-        <span class="diario-day-title">Il Gundam gigante e il tramonto magico di Tokyo</span>
-      </li>
-      <li onclick="goToDay(12)">
-        <span class="diario-day-badge">Day 12</span>
-        <span class="diario-day-title">Dalle pendici del Fuji alla follia di Akihabara</span>
-      </li>
-      <li onclick="goToDay(13)">
-        <span class="diario-day-badge">Day 13</span>
-        <span class="diario-day-title">Sayōnara Giappone!</span>
-      </li>
-    </ul>
-
-    <br>
-    <a class="diario-pdf-link" href="https://gioriva.wordpress.com/wp-content/uploads/2018/04/programma-definitivo.pdf" target="_blank">
-      📄 &nbsp;Scarica il programma dettagliato in PDF
-    </a>
-
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     PAGE OVERLAY: LINK UTILI
-════════════════════════════════════════════ -->
-<div class="page-overlay" id="page-links">
-  <button class="page-close" onclick="closePage('links')" title="Chiudi">×</button>
-  <div class="page-overlay-inner">
-
-    <h1 class="page-title">Link <span>Utili</span></h1>
-    <div class="page-meta">Risorse per organizzare il tuo viaggio in Giappone · by Giorgio</div>
-
-    <div class="links-hero-img">
-      <img src="https://gioriva.wordpress.com/wp-content/uploads/2018/03/photo_2018-03-27_18-44-20-e1522169195127.jpg" alt="Partenza per il Giappone" loading="lazy">
-    </div>
-
-    <p class="links-intro">Ecco alcuni <strong>link utili</strong> che ho utilizzato per organizzare il viaggio:</p>
-
-    <div class="link-cards">
-
-      <a class="link-card" href="https://www.japan-rail-pass.it/" target="_blank" rel="noopener">
-        <span class="link-card-icon">🚄</span>
-        <div class="link-card-title">Japan Rail Pass</div>
-        <div class="link-card-url">japan-rail-pass.it</div>
-        <div class="link-card-desc">Fondamentale per acquistare il tuo <strong>Japan Rail Pass</strong> e viaggiare comodamente in treno in tutto il Giappone!</div>
-      </a>
-
-      <a class="link-card" href="https://www.sognandoilgiappone.com" target="_blank" rel="noopener">
-        <span class="link-card-icon">🌸</span>
-        <div class="link-card-title">Sognando il Giappone</div>
-        <div class="link-card-url">sognandoilgiappone.com</div>
-        <div class="link-card-desc">Uno dei migliori <strong>siti-guida</strong> con tutto quello che può interessarti per il tuo viaggio nel paese del Sol Levante!</div>
-      </a>
-
-      <a class="link-card" href="https://www.japan-guide.com" target="_blank" rel="noopener">
-        <span class="link-card-icon">🗾</span>
-        <div class="link-card-title">Japan Guide</div>
-        <div class="link-card-url">japan-guide.com</div>
-        <div class="link-card-desc">L'omonimo del sito precedente, soltanto in <strong>inglese</strong> 🙂 — guida completa e sempre aggiornata sul Giappone.</div>
-      </a>
-
-      <a class="link-card" href="http://japan-wireless.com" target="_blank" rel="noopener">
-        <span class="link-card-icon">📶</span>
-        <div class="link-card-title">Japan Wireless</div>
-        <div class="link-card-url">japan-wireless.com</div>
-        <div class="link-card-desc">Per i Wi-Fi addicted, questo sito è fondamentale: con una spesa contenuta potete noleggiare un <strong>pocket Wi-Fi</strong> per restar sempre connessi durante tutto il viaggio!</div>
-      </a>
-
-    </div>
-
-  </div>
-</div>
-
 <script>
 // ─── SAKURA PETALS ───
 function createPetals() {
@@ -1855,23 +1910,6 @@ function scrollToDay(n) {
   }
 }
 
-// ─── PAGE OVERLAYS ───
-function openPage(id) {
-  document.getElementById('page-' + id).classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closePage(id) {
-  document.getElementById('page-' + id).classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// Click on a day in the diario list → close overlay and scroll to that day
-function goToDay(n) {
-  closePage('diario');
-  setTimeout(() => scrollToDay(n), 300);
-}
-
 // ─── LIGHTBOX ───
 function openLightbox(img) {
   const lb = document.getElementById('lightbox');
@@ -1889,10 +1927,55 @@ function closeLightbox() {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     closeLightbox();
-    closePage('diario');
-    closePage('links');
+    closeHamburger();
   }
 });
+
+// ─── HAMBURGER ───
+function toggleHamburger() {
+  document.getElementById('ham-btn').classList.toggle('open');
+  document.getElementById('ham-panel').classList.toggle('open');
+  document.getElementById('ham-overlay').classList.toggle('open');
+}
+function closeHamburger() {
+  document.getElementById('ham-btn').classList.remove('open');
+  document.getElementById('ham-panel').classList.remove('open');
+  document.getElementById('ham-overlay').classList.remove('open');
+}
+
 </script>
+
+<!-- HAMBURGER OVERLAY -->
+<div class="hamburger-overlay" id="ham-overlay" onclick="closeHamburger()"></div>
+
+<!-- HAMBURGER BUTTON -->
+<button class="hamburger-btn" id="ham-btn" onclick="toggleHamburger()" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- HAMBURGER PANEL -->
+<div class="hamburger-panel" id="ham-panel">
+  <div class="ham-logo">Spring in Japan 2018</div>
+  <nav class="ham-nav">
+    <a class="ham-link" href="http://www.gioriva.it/mondo/">
+      <span class="ham-icon">⛩</span> Home page
+    </a>
+    <div class="ham-sep"></div>
+    <a class="ham-link" style="background:rgba(212,65,10,0.25); color:var(--paper);" href="index.html">
+      <span class="ham-icon">📖</span> Diario di viaggio
+    </a>
+    <a class="ham-link" href="programma.html">
+      <span class="ham-icon">📅</span> Programma
+    </a>
+    <a class="ham-link" href="galleria.html">
+      <span class="ham-icon">🖼</span> Galleria
+    </a>
+    <a class="ham-link" href="link-utili.html">
+      <span class="ham-icon">🔗</span> Link utili
+    </a>
+  </nav>
+  <div class="ham-footer">gioriva.it · Aprile 2018</div>
+</div>
+
 </body>
 </html>
