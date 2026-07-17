@@ -278,7 +278,7 @@
 
   /* ─── MAIN LAYOUT ─── */
   .container {
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
@@ -291,11 +291,10 @@
   .timeline::before {
     content: '';
     position: absolute;
-    left: 50%;
+    left: 26px;
     top: 0; bottom: 0;
     width: 1px;
     background: linear-gradient(to bottom, transparent, var(--border) 10%, var(--border) 90%, transparent);
-    transform: translateX(-50%);
   }
 
   /* ─── DAY CARD ─── */
@@ -314,9 +313,8 @@
   /* Day number bubble on timeline */
   .day-bubble {
     position: absolute;
-    left: 50%;
+    left: 0;
     top: 0;
-    transform: translate(-50%, 0);
     width: 52px; height: 52px;
     background: var(--torii);
     border-radius: 50%;
@@ -334,17 +332,10 @@
   }
   .day-bubble .day-num { font-size: 1.1rem; }
 
-  /* Alternating layout */
-  .day-card:nth-child(odd) .day-content {
-    margin-left: calc(50% + 2.5rem);
-    margin-right: 0;
+  /* Single-column layout: full width next to left rail */
+  .day-content {
+    margin-left: 92px;
   }
-  .day-card:nth-child(even) .day-content {
-    margin-right: calc(50% + 2.5rem);
-    margin-left: 0;
-  }
-  .day-card:nth-child(odd) .day-content { padding-left: 2rem; }
-  .day-card:nth-child(even) .day-content { padding-right: 2rem; text-align: right; }
 
   .day-header {
     margin-bottom: 1.2rem;
@@ -375,10 +366,16 @@
   }
 
   .day-text {
-    font-size: 0.92rem;
-    line-height: 1.9;
+    font-size: 0.97rem;
+    line-height: 1.85;
     color: #3a3020;
     margin-top: 0.8rem;
+    max-width: 72ch;
+  }
+  .day-text .inline-photo,
+  .day-text .inline-photo-pair,
+  .day-text .inline-photo-strip {
+    max-width: 100%;
   }
 
   .day-text p { margin-bottom: 0.9rem; }
@@ -655,10 +652,7 @@
     color: var(--ink);
     background: var(--sakura-light);
   }
-  .day-card:nth-child(even) .pullquote {
-    border-left: none;
-    border-right: 3px solid var(--torii);
-  }
+
 
   /* ─── TAGS ─── */
   .tags {
@@ -667,7 +661,7 @@
     gap: 0.4rem;
     margin-top: 1rem;
   }
-  .day-card:nth-child(even) .tags { justify-content: flex-end; }
+
   .tag {
     font-size: 0.65rem;
     padding: 0.2rem 0.6rem;
@@ -1156,24 +1150,33 @@
   }
   .cookie-btn.necessary:hover { color: var(--paper); border-color: rgba(245,240,232,0.5); }
 
+
+  /* ─── BACK TO TOP ─── */
+  .back-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px; height: 44px;
+    background: var(--torii);
+    color: var(--paper);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 400;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  }
+  .back-top.show { opacity: 1; pointer-events: auto; }
+  .back-top:hover { transform: translateY(-3px); background: #b83608; }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 700px) {
-    .timeline::before { left: 26px; }
-    .day-bubble { left: 26px; transform: none; }
-    .day-card:nth-child(odd) .day-content,
-    .day-card:nth-child(even) .day-content {
-      margin-left: 60px;
-      margin-right: 0;
-      padding-left: 0;
-      padding-right: 0;
-      text-align: left;
-    }
-    .day-card:nth-child(even) .day-content { text-align: left; }
-    .day-card:nth-child(even) .tags { justify-content: flex-start; }
-    .day-card:nth-child(even) .pullquote {
-      border-left: 3px solid var(--torii);
-      border-right: none;
-    }
+    .day-bubble { width: 44px; height: 44px; }
+    .day-bubble .day-num { font-size: 1rem; }
+    .day-content { margin-left: 58px; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
     .nav-days { display: none; }
     .photo-grid.grid-many { grid-template-columns: 1fr 1fr; }
@@ -1997,6 +2000,11 @@ function cookieNecessary() {
   } catch(e) { showCookieBanner(); }
 })();
 
+
+// ─── BACK TO TOP ───
+window.addEventListener('scroll', () => {
+  document.getElementById('back-top').classList.toggle('show', window.scrollY > 900);
+}, { passive: true });
 </script>
 
 <!-- HAMBURGER OVERLAY -->
@@ -2034,5 +2042,6 @@ function cookieNecessary() {
   <div class="ham-footer">gioriva.it · Aprile 2018</div>
 </div>
 
+<button class="back-top" id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Torna su">↑</button>
 </body>
 </html>
