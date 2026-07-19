@@ -245,6 +245,30 @@
     margin: 0 0 34px;
   }
 
+  /* la carta illustrata */
+  .carta-scena {
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    background: var(--paper);
+    box-shadow: 4px 4px 0 var(--paper-deep);
+    margin: 0 0 26px;
+    overflow: hidden;
+  }
+  .carta-scena svg { display: block; width: 100%; height: auto; }
+  .rotta {
+    stroke-dasharray: 3 9;
+    animation: march 26s linear infinite;
+  }
+  @keyframes march { to { stroke-dashoffset: -240; } }
+  .spout { animation: sbuffo 4s ease-in-out infinite; }
+  @keyframes sbuffo {
+    0%, 100% { opacity: 0.25; }
+    45%, 60% { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rotta, .spout { animation: none; }
+  }
+
   /* riga di log del countdown */
   .logline {
     display: flex;
@@ -533,6 +557,98 @@
     <div class="coords-line">45°27′N 9°17′E<span class="sep">→</span>54°48′S 68°18′W<span class="sep">→</span>16°30′S 151°44′W</div>
     <h1>Patagonia <span class="amp">&amp;</span><br>Polinesia</h1>
     <p class="sub">Quaderno di bordo del nostro viaggio di nozze · settembre – ottobre 2026</p>
+
+    <div class="carta-scena" aria-hidden="true">
+      <svg viewBox="0 0 1160 380" xmlns="http://www.w3.org/2000/svg">
+        <!-- graticola: meridiani reali della rotta -->
+        <g stroke="#22303a" opacity="0.09">
+          <line x1="130" y1="0" x2="130" y2="380"/>
+          <line x1="420" y1="0" x2="420" y2="380"/>
+          <line x1="710" y1="0" x2="710" y2="380"/>
+          <line x1="1000" y1="0" x2="1000" y2="380"/>
+        </g>
+        <g fill="#93a0a8" font-family="'IBM Plex Mono', monospace" font-size="11" text-anchor="middle">
+          <text x="130" y="22">60°W</text>
+          <text x="420" y="22">90°W</text>
+          <text x="710" y="22">120°W</text>
+          <text x="1000" y="22">150°W</text>
+        </g>
+        <g stroke="#93a0a8" opacity="0.6">
+          <line x1="130" y1="28" x2="130" y2="38"/>
+          <line x1="420" y1="28" x2="420" y2="38"/>
+          <line x1="710" y1="28" x2="710" y2="38"/>
+          <line x1="1000" y1="28" x2="1000" y2="38"/>
+        </g>
+
+        <!-- linea del mare -->
+        <line x1="36" y1="300" x2="1124" y2="300" stroke="#5a6a74" stroke-width="1.5"/>
+
+        <!-- PATAGONIA: catena e ghiacciaio -->
+        <path d="M50 300 L128 186 L182 258 L244 148 L306 300 Z" fill="rgba(31,109,132,0.07)" stroke="#1f6d84" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M96 232 L128 186 L162 232" fill="none" stroke="#1f6d84" stroke-width="1.4" opacity="0.65"/>
+        <!-- fronte del ghiacciaio, tratteggio -->
+        <g stroke="#1f6d84" stroke-width="1.4" opacity="0.65">
+          <line x1="222" y1="188" x2="240" y2="170"/>
+          <line x1="230" y1="204" x2="252" y2="182"/>
+          <line x1="238" y1="220" x2="264" y2="194"/>
+          <line x1="246" y1="236" x2="276" y2="206"/>
+        </g>
+        <text x="178" y="338" fill="#1f6d84" font-family="'IBM Plex Mono', monospace" font-size="12" letter-spacing="2" text-anchor="middle">PATAGONIA · 54°S</text>
+
+        <!-- onde del Pacifico -->
+        <g stroke="#93a0a8" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.8">
+          <path d="M400 286 q11 -9 22 0"/>
+          <path d="M462 292 q11 -9 22 0"/>
+          <path d="M640 288 q11 -9 22 0"/>
+          <path d="M760 284 q11 -9 22 0"/>
+          <path d="M820 292 q11 -9 22 0"/>
+        </g>
+
+        <!-- la balena di carta -->
+        <g stroke="#22303a" fill="none" stroke-linecap="round">
+          <path d="M516 296 q32 -28 64 0" stroke-width="3"/>
+          <path d="M578 292 q15 -17 27 -6" stroke-width="2.4"/>
+          <circle cx="532" cy="284" r="1.6" fill="#22303a" stroke="none"/>
+          <g class="spout" stroke-width="2">
+            <line x1="536" y1="272" x2="536" y2="260"/>
+            <line x1="531" y1="273" x2="525" y2="264"/>
+            <line x1="541" y1="273" x2="547" y2="264"/>
+          </g>
+        </g>
+        <text x="548" y="330" fill="#93a0a8" font-family="'Instrument Serif', serif" font-style="italic" font-size="14" text-anchor="middle">hic sunt balaenae</text>
+
+        <!-- POLINESIA: atollo e palme -->
+        <ellipse cx="990" cy="300" rx="118" ry="15" fill="rgba(23,137,124,0.08)" stroke="#17897c" stroke-width="1.5"/>
+        <ellipse cx="990" cy="300" rx="76" ry="9" fill="none" stroke="#17897c" stroke-width="1.2" stroke-dasharray="4 5" opacity="0.7"/>
+        <path d="M938 300 q52 -34 104 0" fill="rgba(23,137,124,0.14)" stroke="#17897c" stroke-width="2"/>
+        <!-- palma grande -->
+        <g stroke="#17897c" fill="none" stroke-width="2.2" stroke-linecap="round">
+          <path d="M976 300 q3 -24 12 -37"/>
+          <path d="M988 263 q-16 -8 -28 -2"/>
+          <path d="M988 263 q-6 -14 -18 -16"/>
+          <path d="M988 263 q4 -14 16 -16"/>
+          <path d="M988 263 q16 -6 26 2"/>
+          <path d="M988 263 q12 6 14 16"/>
+        </g>
+        <!-- palma piccola -->
+        <g stroke="#17897c" fill="none" stroke-width="1.9" stroke-linecap="round">
+          <path d="M1022 300 q-2 -18 -8 -27"/>
+          <path d="M1014 273 q-12 -5 -20 0"/>
+          <path d="M1014 273 q-2 -11 -11 -13"/>
+          <path d="M1014 273 q9 -9 17 -8"/>
+          <path d="M1014 273 q11 0 16 7"/>
+        </g>
+        <text x="990" y="338" fill="#17897c" font-family="'IBM Plex Mono', monospace" font-size="12" letter-spacing="2" text-anchor="middle">POLINESIA · 16°S</text>
+
+        <!-- la rotta -->
+        <path class="rotta" d="M292 250 C 470 92 760 92 972 242" fill="none" stroke="#22303a" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <circle cx="292" cy="250" r="5" fill="#1f6d84"/>
+        <circle cx="972" cy="242" r="5" fill="#17897c"/>
+        <g transform="translate(614 102) rotate(4)">
+          <path d="M0 0 l20 6 l-20 6 l6 -6 z" fill="#bc4327"/>
+        </g>
+      </svg>
+    </div>
 
     <div class="logline" aria-label="Conto alla rovescia alla partenza">
       <span class="k">Alla partenza</span>
