@@ -8,7 +8,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="連絡 · Contatti · Japan Summer" />
   <meta property="og:description" content="Scrivici: domande sul viaggio, consigli o solo un saluto dal paese del Sol Levante." />
-  <meta property="og:image" content="https://www.gioriva.it/mondo/giappone2026/japan-summer-og-foto.PNG" />
+  <meta property="og:image" content="https://www.gioriva.it/mondo/giappone2026/japan-summer-og-sole.PNG" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%23d93a35'/></svg>" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
@@ -409,6 +409,30 @@
     .m-home .m-label { font-size: 1.15rem; }
     .m-home .m-note { margin-top: 0.2rem; }
     body.menu-locked { overflow: hidden; }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+      margin-top: 1.4rem;
+    }
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--hai);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .footer-links a:hover { color: var(--kin); }
+    .footer-links svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
