@@ -6,8 +6,8 @@
   <title>Japan Summer 2026</title>
   <meta name="robots" content="noindex, nofollow" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="黒たまご · Le uova nere di Ōwakudani · Japan Summer" />
-  <meta property="og:description" content="Bollite nelle vasche vulcaniche di Hakone, nere fuori e normali dentro: la tradizione dei kuro-tamago che allungano la vita di sette anni." />
+  <meta property="og:title" content="連絡 · Contatti · Japan Summer" />
+  <meta property="og:description" content="Scrivici: domande sul viaggio, consigli o solo un saluto dal paese del Sol Levante." />
   <meta property="og:image" content="https://www.gioriva.it/mondo/giappone2026/japan-summer-og-foto.PNG" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%23d93a35'/></svg>" />
@@ -62,111 +62,89 @@
     .footer-sun { display: block; width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka)); margin: 0 auto 1.2rem; box-shadow: 0 0 18px rgba(217,58,53,0.45); }
     footer .jp { font-family: var(--display); font-size: 0.95rem; letter-spacing: 0.4em; color: var(--washi); opacity: 0.8; display: block; margin-bottom: 0.5rem; }
 
-    /* ── L'uovo nero interattivo ── */
+
+
+    /* ── Hero con la gru origami ── */
     .hero {
       text-align: center;
-      padding: clamp(6rem, 13vh, 8.5rem) 1.5rem clamp(2rem, 5vw, 3rem);
-      position: relative;
-      overflow: hidden;
+      padding: clamp(6rem, 13vh, 8.5rem) 1.5rem clamp(1.5rem, 4vw, 2.5rem);
       background:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(217,164,65,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(217,58,53,0.08) 0%, transparent 60%),
         var(--sumi);
     }
-    .egg-stage { display: inline-block; cursor: pointer; -webkit-tap-highlight-color: transparent; border: none; background: none; padding: 0; }
-    .egg-stage svg { width: min(62vw, 250px); height: auto; display: block; overflow: visible; }
-    .egg-stage .shell-top, .egg-stage .shell-bottom { transition: transform 0.7s cubic-bezier(0.34, 1.3, 0.5, 1); }
-    .egg-stage .shell-top { transform-origin: 150px 170px; }
-    .egg-stage.cracked .shell-top { transform: translate(-16px, -62px) rotate(-14deg); }
-    .egg-stage .lucky {
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.5s ease 0.35s, transform 0.5s ease 0.35s;
+    .tsuru { width: min(56vw, 230px); height: auto; display: block; margin: 0 auto 1.2rem; overflow: visible; animation: tsuruFloat 6s ease-in-out 3s infinite alternate; }
+    @keyframes tsuruFloat { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-9px) rotate(1deg); } }
+    .tsuru .tdraw {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: tsuruDraw 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
-    .egg-stage.cracked .lucky { opacity: 1; transform: translateY(0); }
-    .egg-hint {
-      margin-top: 1rem;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--kin);
-      animation: hintPulse 2.4s ease-in-out infinite;
-    }
-    @keyframes hintPulse { 0%,100% { opacity: 0.9; } 50% { opacity: 0.35; } }
-    .hero .jp-title {
-      font-family: var(--display);
-      font-size: clamp(2rem, 6.5vw, 3.2rem);
-      letter-spacing: 0.4em;
-      color: var(--washi);
-      display: block;
-      margin: 1.6rem 0 0.8rem;
-      text-shadow: 0 0 40px rgba(240,232,216,0.2);
-    }
+    .tsuru .t2 { animation-delay: 0.8s; }
+    .tsuru .t3 { animation-delay: 1.6s; }
+    @keyframes tsuruDraw { to { stroke-dashoffset: 0; } }
+    .hero .jp-title { font-family: var(--display); font-size: clamp(2rem, 6.5vw, 3.2rem); letter-spacing: 0.4em; color: var(--aka); display: block; margin-bottom: 0.8rem; text-shadow: 0 0 40px rgba(217,58,53,0.3); }
     .hero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(1.5rem, 4.2vw, 2.3rem); color: var(--washi); line-height: 1.2; }
-    .hero .where { margin-top: 1rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--kin); }
-    .hero .intro { max-width: 580px; margin: 1.5rem auto 0; color: rgba(240,232,216,0.75); font-weight: 300; font-size: 1.02rem; }
+    .hero .intro { max-width: 520px; margin: 1.3rem auto 0; color: rgba(240,232,216,0.75); font-weight: 300; font-size: 1.02rem; }
 
-    /* ── Il processo in quattro passi ── */
-    .steps { display: grid; grid-template-columns: 1fr; gap: 1rem; padding-bottom: clamp(2rem, 5vw, 3rem); }
-    @media (min-width: 720px) { .steps { grid-template-columns: 1fr 1fr; } }
-    .step {
+    /* ── Il form ── */
+    .contact-wrap { max-width: 660px; margin: 0 auto; padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.2rem, 4.5vw, 2rem) clamp(3.5rem, 8vw, 5.5rem); }
+    .form-card {
       border: 1px solid var(--line);
       border-radius: 1rem;
       background: var(--sumi-2);
-      padding: 1.6rem 1.6rem 1.4rem;
-      transition: border-color 0.3s;
+      padding: clamp(1.5rem, 4vw, 2.2rem);
     }
-    .step:hover { border-color: rgba(217,164,65,0.4); }
-    .step .s-eggs { display: flex; gap: 0.35rem; margin-bottom: 0.9rem; }
-    .step .s-eggs i {
+    .f-row { display: grid; grid-template-columns: 1fr; gap: 0 1rem; }
+    @media (min-width: 560px) { .f-row { grid-template-columns: 1fr 1fr; } }
+    .f-field { margin-bottom: 1.25rem; }
+    .f-field label {
       display: block;
-      width: 15px; height: 19px;
-      background: var(--washi);
-      border-radius: 50% 50% 50% 50% / 60% 60% 42% 42%;
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--kin);
+      margin-bottom: 0.45rem;
     }
-    .step h3 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; color: var(--washi); margin-bottom: 0.5rem; }
-    .step p { font-size: 0.95rem; font-weight: 300; color: rgba(240,232,216,0.78); }
-    .step .s-num { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--kin); text-transform: uppercase; display: block; margin-bottom: 0.4rem; }
-
-    /* ── La leggenda ── */
-    .legend-7 {
-      border-left: 2px solid rgba(217,58,53,0.5);
-      padding: 0.4rem 0 0.4rem 1.5rem;
-      max-width: 68ch;
-      margin: 0 auto clamp(2rem, 5vw, 3rem);
-    }
-    .legend-7 h3 { font-family: var(--display); font-weight: 600; font-size: 1.3rem; color: var(--washi); margin-bottom: 0.6rem; }
-    .legend-7 p { font-weight: 300; color: rgba(240,232,216,0.8); margin-bottom: 0.6rem; }
-    .legend-7 p:last-child { margin-bottom: 0; }
-    .legend-7 em { color: var(--kin); }
-
-    /* ── Il video ── */
-    .video-frame {
-      position: relative;
+    .f-field input, .f-field textarea {
       width: 100%;
-      aspect-ratio: 16 / 9;
-      border: 1px solid rgba(217,164,65,0.4);
-      border-radius: 1rem;
-      overflow: hidden;
-      background: #000;
-      box-shadow: 0 18px 60px rgba(0,0,0,0.5), 0 0 60px rgba(217,164,65,0.08);
+      background: rgba(240,232,216,0.04);
+      border: 1px solid rgba(240,232,216,0.14);
+      border-radius: 0.55rem;
+      padding: 0.85rem 1rem;
+      color: var(--washi);
+      font-family: var(--body);
+      font-size: 1rem;
+      transition: border-color 0.25s, background 0.25s;
     }
-    .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .video-caption { margin-top: 0.9rem; text-align: center; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--hai); }
-    .video-block { padding-bottom: clamp(2.5rem, 6vw, 4rem); }
-
-    /* ── Numeri ── */
-    .numbers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 1rem; overflow: hidden; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
-    @media (min-width: 720px) { .numbers { grid-template-columns: repeat(3, 1fr); } }
-    .num { background: var(--sumi); padding: 1.5rem 1.1rem; text-align: center; }
-    .num .n { font-family: var(--display); font-weight: 600; font-size: clamp(1.4rem, 3.8vw, 2rem); color: var(--washi); display: block; line-height: 1.1; }
-    .num .l { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--hai); display: block; margin-top: 0.5rem; line-height: 1.6; }
-
-    .note { max-width: 620px; margin: 0 auto; text-align: center; padding: 0 1.5rem clamp(3rem, 7vw, 5rem); }
-    .note .divider { width: 60px; height: 1px; margin: 0 auto 2rem; background: linear-gradient(to right, transparent, var(--kin), transparent); }
-    .note p { color: rgba(240,232,216,0.72); font-weight: 300; }
-    .note p + p { margin-top: 1rem; }
-    .note em { color: var(--kin); }
+    .f-field input:focus, .f-field textarea:focus {
+      outline: none;
+      border-color: rgba(217,164,65,0.65);
+      background: rgba(240,232,216,0.06);
+    }
+    .f-field textarea { min-height: 170px; resize: vertical; }
+    .f-actions { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+    .f-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--kin);
+      background: rgba(217,164,65,0.07);
+      border: 1px solid rgba(217,164,65,0.5);
+      border-radius: 2rem;
+      padding: 0.8rem 1.8rem;
+      cursor: pointer;
+      transition: color 0.25s, border-color 0.25s, background 0.25s;
+    }
+    .f-submit:hover { color: #fff; border-color: var(--kin); background: rgba(217,164,65,0.14); }
+    .f-submit:disabled { opacity: 0.5; cursor: wait; }
+    .f-status { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em; display: none; }
+    .f-status.ok { display: block; color: var(--kin); }
+    .f-status.err { display: block; color: var(--aka); }
 
     .nav {
       position: fixed;
@@ -432,32 +410,10 @@
     .m-home .m-note { margin-top: 0.2rem; }
     body.menu-locked { overflow: hidden; }
 
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.6rem;
-      margin-top: 1.4rem;
-    }
-    .footer-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-family: var(--mono);
-      font-size: 0.66rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--hai);
-      text-decoration: none;
-      transition: color 0.25s;
-    }
-    .footer-links a:hover { color: var(--kin); }
-    .footer-links svg { width: 15px; height: 15px; flex-shrink: 0; }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
       .reveal { opacity: 1; transform: none; }
+      .tsuru .tdraw { stroke-dashoffset: 0; }
     }
   </style>
 </head>
@@ -531,111 +487,55 @@
     </div>
   </div>
 
-  <!-- ═══════════ HERO: l'uovo che si apre ═══════════ -->
+  <!-- ═══════════ HERO ═══════════ -->
   <header class="hero">
-    <button class="egg-stage" id="eggStage" aria-label="Tocca l'uovo nero per aprirlo" aria-pressed="false">
-      <svg viewBox="0 0 300 340" role="img">
-        <!-- interno: albume e tuorlo, nascosti dal guscio -->
-        <g class="inside">
-          <path d="M 75 170 C 78 250 105 298 150 298 C 195 298 222 250 225 170 C 222 120 195 82 150 82 C 105 82 78 120 75 170 Z" fill="#f0e8d8"/>
-          <circle cx="150" cy="150" r="36" fill="#d9a441"/>
-          <path d="M 132 140 Q 140 128 156 128" fill="none" stroke="#f0e8d8" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
-        </g>
-        <!-- guscio: metà inferiore -->
-        <path class="shell-bottom" d="M 55 170 L 78 158 L 100 172 L 122 156 L 148 172 L 172 156 L 196 172 L 220 158 L 245 170 C 242 248 208 306 150 306 C 92 306 58 248 55 170 Z" fill="#141114" stroke="#2a2326" stroke-width="1.5"/>
-        <!-- guscio: metà superiore con la scritta -->
-        <g class="shell-top">
-          <path d="M 55 170 C 58 96 98 52 150 52 C 202 52 242 96 245 170 L 220 158 L 196 172 L 172 156 L 148 172 L 122 156 L 100 172 L 78 158 Z" fill="#141114" stroke="#2a2326" stroke-width="1.5"/>
-          <path d="M 95 100 Q 115 74 145 66" fill="none" stroke="#f0e8d8" stroke-width="4" stroke-linecap="round" opacity="0.14"/>
-          <text x="150" y="128" font-family="'Shippori Mincho', serif" font-size="30" font-weight="600" fill="#f0e8d8" text-anchor="middle" letter-spacing="4">大涌谷</text>
-        </g>
-        <!-- il premio -->
-        <g class="lucky">
-          <text x="150" y="30" font-family="'Shippori Mincho', serif" font-size="19" font-weight="600" fill="#d9a441" text-anchor="middle">+7 anni di vita</text>
-        </g>
-      </svg>
-    </button>
-    <p class="egg-hint" id="eggHint">Tocca l'uovo</p>
+    <svg class="tsuru" viewBox="0 0 240 170" aria-hidden="true" role="img">
+      <g fill="none" stroke="#d9a441" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- corpo -->
+        <path class="tdraw" pathLength="1" d="M 82 112 L 122 84 L 160 112 L 120 138 Z"/>
+        <!-- ala alzata -->
+        <path class="tdraw t2" pathLength="1" d="M 122 84 L 104 28 L 152 66 Z"/>
+        <path class="tdraw t2" pathLength="1" d="M 122 84 L 118 118"/>
+        <!-- collo e testa -->
+        <path class="tdraw t3" pathLength="1" d="M 82 112 L 56 62 L 50 46"/>
+        <path class="tdraw t3" pathLength="1" d="M 50 46 L 38 52"/>
+        <!-- coda -->
+        <path class="tdraw t3" pathLength="1" d="M 160 112 L 202 88"/>
+      </g>
+    </svg>
 
-    <span class="jp-title" aria-hidden="true">黒たまご</span>
-    <h1>Le uova nere di Ōwakudani</h1>
-    <p class="where">大涌谷 · Hakone · 12 luglio 2026</p>
-    <p class="intro">A mille metri di quota, nella Grande Valle Bollente nata da un'eruzione del monte Hakone circa 3.000 anni fa, le uova entrano bianche nelle vasche fumanti e ne escono nere come l'ossidiana. Questa pagina racconta come, e perché conviene mangiarle.</p>
+    <span class="jp-title" aria-hidden="true">連絡</span>
+    <h1>Contatti</h1>
+    <p class="intro">Domande sul viaggio, un consiglio da chiedere o solo un saluto: la gru consegna tutto. Rispondiamo appena rientrati dal fuso orario.</p>
   </header>
 
-  <main class="wrap">
-
-    <!-- ═══════════ IL PROCESSO ═══════════ -->
-    <section aria-label="Come nasce un uovo nero">
-      <div class="section-head">
-        <span class="jp" aria-hidden="true">製法</span>
-        <h2>Come nasce un uovo nero</h2>
-        <p>Il procedimento, in quattro passi, così come lo raccontano i pannelli del Kurotamago-kan.</p>
-      </div>
-
-      <div class="steps">
-        <div class="step reveal">
-          <span class="s-num">Passo uno</span>
-          <div class="s-eggs" aria-hidden="true"><i></i></div>
-          <h3>Un'ora nelle vasche termali</h3>
-          <p>Le uova fresche vengono calate nelle vasche naturali della valle e bollite lentamente per circa 60 minuti a circa 80 gradi, la temperatura dell'acqua che sgorga dal vulcano.</p>
+  <!-- ═══════════ IL FORM ═══════════ -->
+  <main class="contact-wrap">
+    <form class="form-card" id="contactForm" action="https://formspree.io/f/xdaqwjve" method="POST">
+      <div class="f-row">
+        <div class="f-field">
+          <label for="f-nome">Nome</label>
+          <input id="f-nome" type="text" name="nome" required autocomplete="given-name" />
         </div>
-        <div class="step reveal">
-          <span class="s-num">Passo due</span>
-          <div class="s-eggs" aria-hidden="true"><i></i><i></i></div>
-          <h3>Il guscio assorbe la sorgente</h3>
-          <p>Il guscio dell'uovo è pieno di pori microscopici: durante la bollitura i minerali dell'acqua termale, ricca di ferro, vi aderiscono e vi penetrano.</p>
-        </div>
-        <div class="step reveal">
-          <span class="s-num">Passo tre</span>
-          <div class="s-eggs" aria-hidden="true"><i></i><i></i><i></i></div>
-          <h3>La chimica fa il resto</h3>
-          <p>Il ferro depositato reagisce con l'idrogeno solforato dei vapori vulcanici e forma solfuro di ferro: è lui a vestire il guscio di nero. Solo il guscio, però.</p>
-        </div>
-        <div class="step reveal">
-          <span class="s-num">Passo quattro</span>
-          <div class="s-eggs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-          <h3>Il tocco finale al vapore</h3>
-          <p>Le uova ormai annerite passano in una vaporiera e cuociono nel vapore a circa 100 gradi per un quarto d'ora. Pronte: si vendono ancora calde, in sacchetti da quattro.</p>
+        <div class="f-field">
+          <label for="f-cognome">Cognome</label>
+          <input id="f-cognome" type="text" name="cognome" required autocomplete="family-name" />
         </div>
       </div>
-
-      <div class="legend-7 reveal">
-        <h3>La leggenda dei sette anni</h3>
-        <p>La tradizione di Hakone dice che ogni kuro-tamago mangiato allunga la vita di sette anni. La leggenda nasce dal santuario di Enmei Jizō, il protettore della longevità venerato nella valle, e i giapponesi scherzano sul fatto che conviene fermarsi a due: l'immortalità porterebbe troppa confusione.</p>
-        <p>Dentro, per la cronaca, è un normalissimo e ottimo uovo sodo: <em>il nero è solo il vestito</em>. Si mangia con un pizzico di sale, guardando le fumarole.</p>
+      <div class="f-field">
+        <label for="f-email">Email</label>
+        <input id="f-email" type="email" name="email" required autocomplete="email" />
       </div>
-    </section>
-
-    <!-- ═══════════ IL VIDEO ═══════════ -->
-    <section class="video-block" aria-label="La preparazione delle uova nere">
-      <div class="section-head">
-        <span class="jp" aria-hidden="true">映像</span>
-        <h2>La preparazione, dal vivo</h2>
-        <p>Le vasche fumanti, le ceste che salgono e scendono, le uova che cambiano colore: il mestiere di chi le prepara ogni giorno.</p>
+      <div class="f-field">
+        <label for="f-messaggio">Messaggio</label>
+        <textarea id="f-messaggio" name="messaggio" required></textarea>
       </div>
-      <div class="video-frame reveal">
-        <iframe src="https://www.youtube-nocookie.com/embed/-tXVpzwHtSQ" title="La preparazione dei kuro-tamago di Ōwakudani" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+      <div class="f-actions">
+        <button class="f-submit" type="submit" id="fSubmit">Invia il messaggio <span aria-hidden="true">→</span></button>
+        <p class="f-status" id="fStatus" role="status"></p>
       </div>
-      <p class="video-caption">Ōwakudani, le uova nere all'opera</p>
-    </section>
-
-    <!-- ═══════════ NUMERI ═══════════ -->
-    <div class="numbers reveal" aria-label="Le uova nere in numeri">
-      <div class="num"><span class="n">80 °C</span><span class="l">l'acqua delle vasche</span></div>
-      <div class="num"><span class="n">60 min</span><span class="l">di bollitura termale</span></div>
-      <div class="num"><span class="n">15 min</span><span class="l">di vapore a 100 °C</span></div>
-      <div class="num"><span class="n">+7 anni</span><span class="l">di vita per ogni uovo</span></div>
-      <div class="num"><span class="n">¥500</span><span class="l">il sacchetto da quattro</span></div>
-      <div class="num"><span class="n">3.000</span><span class="l">anni fa nasceva la valle</span></div>
-    </div>
-
-    <!-- ═══════════ NOTA ═══════════ -->
-    <div class="note">
-      <div class="divider" aria-hidden="true"></div>
-      <p>Le informazioni vengono dai pannelli del Kurotamago-kan di Ōwakudani, letti il 12 luglio 2026 tra una fumarola e l'altra, integrate dove serviva.</p>
-      <p><em>Quattordici anni guadagnati a testa.</em> Il Daikichi sta già facendo il suo lavoro.</p>
-    </div>
+    </form>
   </main>
   <footer>
     <div class="footer-sun" aria-hidden="true"></div>
@@ -661,6 +561,7 @@
   </footer>
 
   <script>
+
     // ── Menu 目次 ──
     const menuBtn = document.getElementById('menuBtn');
     const menuOverlay = document.getElementById('menuOverlay');
@@ -710,14 +611,33 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // ── L'uovo che si apre ──
-    const eggStage = document.getElementById('eggStage');
-    const eggHint = document.getElementById('eggHint');
-    eggStage.addEventListener('click', () => {
-      const cracked = eggStage.classList.toggle('cracked');
-      eggStage.setAttribute('aria-pressed', cracked);
-      eggHint.textContent = cracked ? 'Buon appetito (e lunga vita)' : "Tocca l'uovo";
-      eggHint.style.animation = cracked ? 'none' : '';
+  
+    // ── Invio del form ──
+    const form = document.getElementById('contactForm');
+    const fSubmit = document.getElementById('fSubmit');
+    const fStatus = document.getElementById('fStatus');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      fSubmit.disabled = true;
+      fStatus.className = 'f-status';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.reset();
+          fStatus.textContent = 'Messaggio inviato, grazie! ありがとう';
+          fStatus.classList.add('ok');
+        } else {
+          throw new Error();
+        }
+      } catch (err) {
+        fStatus.textContent = 'Ops, qualcosa non ha funzionato. Riprova tra poco.';
+        fStatus.classList.add('err');
+      }
+      fSubmit.disabled = false;
     });
   </script>
 </body>
