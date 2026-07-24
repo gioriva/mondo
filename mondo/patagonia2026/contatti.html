@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Galleria · Patagonia & Polinesia 2026</title>
+<title>Contatti · Patagonia & Polinesia 2026</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f1efe4'/%3E%3Ccircle cx='32' cy='32' r='24' fill='none' stroke='%23bc4327' stroke-width='2.5' stroke-dasharray='4 3'/%3E%3Cpath d='M20 38 L28 24 L33 32 L37 27 L44 38 Z' fill='%231f6d84'/%3E%3Cpath d='M20 44 Q 25 41 30 44 T 40 44 T 50 44' fill='none' stroke='%2317897c' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E" />
 
 <!-- Google Analytics (GA4) -->
@@ -18,16 +18,16 @@
 
 <!-- Open Graph / anteprima social -->
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Galleria · Patagonia & Polinesia 2026" />
-<meta property="og:description" content="Le foto del nostro viaggio di nozze. Argentina e Polinesia, 22 giorni, dal 45°N al 54°S." />
+<meta property="og:title" content="Contatti · Patagonia & Polinesia 2026" />
+<meta property="og:description" content="Scrivici una cartolina. Il diario di bordo del nostro viaggio di nozze." />
 <meta property="og:image" content="https://www.gioriva.it/mondo/patagonia2026/og-viaggio.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://www.gioriva.it/mondo/patagonia2026/galleria.html" />
+<meta property="og:url" content="https://www.gioriva.it/mondo/patagonia2026/contatti.html" />
 <meta property="og:locale" content="it_IT" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Galleria · Patagonia & Polinesia 2026" />
-<meta name="twitter:description" content="Le foto del nostro viaggio di nozze. Argentina e Polinesia, 22 giorni, 8 tappe." />
+<meta name="twitter:title" content="Contatti · Patagonia & Polinesia 2026" />
+<meta name="twitter:description" content="Scrivici una cartolina. Il diario di bordo del nostro viaggio di nozze." />
 <meta name="twitter:image" content="https://www.gioriva.it/mondo/patagonia2026/og-viaggio.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,7 +70,7 @@
   ::selection { background: var(--stamp); color: var(--paper); }
   a { color: inherit; text-decoration: none; }
   :focus-visible { outline: 2px solid var(--stamp); outline-offset: 3px; border-radius: 2px; }
-  button { font-family: inherit; }
+  button, input, textarea { font-family: inherit; }
 
   /* ═══ HEADER ═══ */
   header.bar {
@@ -222,124 +222,189 @@
     line-height: 1.0;
     margin: 0 0 12px;
   }
-  .page-head h1 em { font-style: italic; color: var(--lagoon); }
+  .page-head h1 em { font-style: italic; color: var(--stamp); }
   .page-head .lede {
     font-size: clamp(15px, 2vw, 17px);
     color: var(--ink-soft);
     max-width: 600px;
     margin: 0;
   }
-  .page-head .lede b { color: var(--ink); font-weight: 600; }
 
-  /* ═══ ALBUM VUOTO ═══ */
-  section { padding: 50px 0 64px; }
-  .album-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 22px;
-  }
-  @media (max-width: 700px) { .album-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
-
-  /* cornice con angolini fotografici */
-  .slot {
-    aspect-ratio: 4 / 3;
-    background: var(--paper-deep);
-    border: 1px solid var(--rule);
+  /* ═══ LA CARTOLINA ═══ */
+  section { padding: 52px 0 70px; }
+  .cartolina {
+    border: 1.5px solid var(--ink);
+    border-radius: 4px;
+    background: var(--paper);
+    box-shadow: 5px 5px 0 var(--paper-deep);
+    padding: 28px;
     position: relative;
+  }
+  /* francobollo */
+  .francobollo {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 74px; height: 88px;
+    border: 1.5px dashed var(--stamp);
+    border-radius: 3px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    transform: rotate(var(--tilt, 0deg));
+    gap: 4px;
+    color: var(--stamp);
+    transform: rotate(2.5deg);
   }
-  .slot:nth-child(odd) { --tilt: -1.2deg; }
-  .slot:nth-child(even) { --tilt: 1deg; }
-  .slot:nth-child(3n) { --tilt: 0.5deg; }
-  .corner {
-    position: absolute;
-    width: 0; height: 0;
-    border-style: solid;
-  }
-  .corner.tl { top: -1px; left: -1px; border-width: 16px 16px 0 0; border-color: var(--ink) transparent transparent transparent; }
-  .corner.tr { top: -1px; right: -1px; border-width: 0 16px 16px 0; border-color: transparent var(--ink) transparent transparent; }
-  .corner.bl { bottom: -1px; left: -1px; border-width: 16px 0 0 16px; border-color: transparent transparent transparent var(--ink); }
-  .corner.br { bottom: -1px; right: -1px; border-width: 0 0 16px 16px; border-color: transparent transparent var(--ink) transparent; }
-  .slot .lbl {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    text-align: center;
-    padding: 0 10px;
-  }
-  .slot .coord {
+  .francobollo svg { width: 34px; height: 34px; }
+  .francobollo .v {
     font-family: var(--mono);
     font-size: 8px;
+    letter-spacing: 0.14em;
+  }
+  @media (max-width: 620px) {
+    .francobollo { width: 58px; height: 70px; }
+    .francobollo svg { width: 26px; height: 26px; }
+  }
+
+  .cart-head {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
     color: var(--ink-faint);
-    opacity: 0.7;
+    margin-bottom: 26px;
+    padding-right: 100px;
   }
+  .cart-head b { color: var(--ink); }
 
-  .album-note {
-    margin-top: 34px;
-    border-left: 3px solid var(--stamp);
-    background: var(--paper-deep);
-    padding: 13px 17px;
-    font-size: 13px;
-    color: var(--ink-soft);
-    border-radius: 0 4px 4px 0;
-    max-width: 580px;
-  }
-  .album-note b { color: var(--ink); font-weight: 600; }
-
-  /* ═══ GRIGLIA FOTO REALE ═══ */
-  .photo-grid {
+  .cart-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 22px;
   }
-  @media (max-width: 700px) { .photo-grid { grid-template-columns: repeat(2, 1fr); } }
-  .photo-grid a {
+  @media (max-width: 620px) { .cart-grid { grid-template-columns: 1fr; } }
+  .campo { margin-bottom: 22px; }
+  .campo.pieno { grid-column: 1 / -1; }
+  .campo label {
     display: block;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-    border: 1px solid var(--ink);
-    background: var(--paper-deep);
-    padding: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
   }
-  .photo-grid img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s;
+  .campo input,
+  .campo textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--rule);
+    background: transparent;
+    padding: 8px 2px;
+    font-size: 16px;
+    font-family: var(--display);
+    color: var(--ink);
+    border-radius: 0;
+    transition: border-color 0.2s;
   }
-  .photo-grid a:hover img { transform: scale(1.03); }
+  .campo textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 30px;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 29px, var(--rule) 29px 30px);
+  }
+  .campo input:focus,
+  .campo textarea:focus {
+    outline: none;
+    border-bottom-color: var(--stamp);
+  }
+  .campo input::placeholder,
+  .campo textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 
-  /* lightbox */
-  .lightbox {
-    position: fixed; inset: 0;
-    background: rgba(34,48,58,0.94);
-    z-index: 120;
-    display: none;
+  .cart-foot {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 28px;
-    cursor: zoom-out;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--rule);
   }
-  .lightbox.open { display: flex; }
-  .lightbox img {
-    max-width: 100%; max-height: 100%;
-    border: 6px solid var(--paper);
+  .destinatari {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    line-height: 1.8;
   }
-  .lightbox .lb-close {
-    position: absolute;
-    top: 14px; right: 14px;
-    background: none; border: none;
-    color: var(--paper); font-size: 32px;
+  .destinatari b { color: var(--ink-soft); }
+  .spedisci {
+    border: 1.5px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 12px 22px;
+    border-radius: 3px;
     cursor: pointer;
-    width: 44px; height: 44px;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
   }
+  .spedisci:hover { background: var(--stamp); border-color: var(--stamp); }
+  .spedisci:active { transform: translateY(1px); }
+  .spedisci[disabled] { opacity: 0.5; cursor: wait; }
+
+  /* esito */
+  .esito {
+    margin-top: 20px;
+    padding: 14px 18px;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+    display: none;
+  }
+  .esito.ok {
+    display: block;
+    border-left: 3px solid var(--lagoon);
+    background: rgba(23,137,124,0.07);
+    color: var(--ink);
+  }
+  .esito.errore {
+    display: block;
+    border-left: 3px solid var(--stamp);
+    background: rgba(188,67,39,0.07);
+    color: var(--ink);
+  }
+  .esito b { font-weight: 600; }
+
+  /* timbro di spedizione dopo il successo */
+  .timbro-spedito {
+    display: none;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.6;
+    border: 2px solid var(--lagoon);
+    color: var(--lagoon);
+    border-radius: 8px;
+    padding: 10px 16px;
+    transform: rotate(-3deg);
+    position: relative;
+    margin: 22px auto 0;
+    width: max-content;
+  }
+  .timbro-spedito::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    opacity: 0.5;
+  }
+  .timbro-spedito.mostra { display: block; }
 
   /* ═══ FOOTER ═══ */
   footer {
@@ -395,7 +460,7 @@
     <a class="d-link" href="programma.html">
       <span class="place">Programma</span>
     </a>
-    <a class="d-link active" href="galleria.html">
+    <a class="d-link" href="galleria.html">
       <span class="place">Galleria</span>
     </a>
   </nav>
@@ -408,55 +473,58 @@
 <main>
 
 <div class="wrap page-head">
-  <span class="kicker">Carta 2 · L'album</span>
-  <h1>Le foto <em>arriveranno.</em></h1>
-  <p class="lede">Qui finiranno il Perito Moreno, il faro della fine del mondo e la laguna di Bora Bora. Le prime foto <b>dal 15 settembre</b>, caricate direttamente dal viaggio. Gli angolini sono già incollati.</p>
+  <span class="kicker">Posta di bordo</span>
+  <h1>Scrivici <em>una cartolina.</em></h1>
+  <p class="lede">Un saluto, un consiglio per la rotta, un indirizzo da non perdere a Buenos Aires o un motu segreto. Leggiamo tutto, anche dall'altra parte del mondo.</p>
 </div>
 
 <section>
   <div class="wrap">
-    <!-- album vuoto: cornici con angolini, una per tappa -->
-    <div class="album-grid" id="empty">
-      <div class="slot">
-        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <span class="lbl">Buenos Aires</span><span class="coord">34°36′S</span>
+    <form class="cartolina" id="modulo" action="https://formspree.io/f/xdaqwjqe" method="POST" novalidate>
+      <div class="francobollo" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="4 3"/>
+          <path d="M20 38 L28 24 L33 32 L37 27 L44 38 Z" fill="currentColor" opacity="0.85"/>
+          <path d="M20 44 Q 25 41 30 44 T 40 44 T 50 44" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="v">P&amp;P 2026</span>
       </div>
-      <div class="slot">
-        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <span class="lbl">El Calafate</span><span class="coord">50°20′S</span>
-      </div>
-      <div class="slot">
-        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <span class="lbl">Ushuaia</span><span class="coord">54°48′S</span>
-      </div>
-      <div class="slot">
-        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <span class="lbl">La traversata</span><span class="coord">✈</span>
-      </div>
-      <div class="slot">
-        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <span class="lbl">Papeete</span><span class="coord">17°32′S</span>
-      </div>
-      <div class="slot">
-        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <span class="lbl">Taha'a</span><span class="coord">16°37′S</span>
-      </div>
-      <div class="slot">
-        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <span class="lbl">Bora Bora</span><span class="coord">16°30′S</span>
-      </div>
-      <div class="slot">
-        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <span class="lbl">Il ritorno</span><span class="coord">45°27′N</span>
-      </div>
-    </div>
 
-    <div class="album-note" id="empty-note">
-      <b>Come si riempirà:</b> le foto verranno caricate nell'album del viaggio e compariranno qui automaticamente, senza toccare questa pagina.
-    </div>
+      <div class="cart-head">Cartolina per <b>Giorgio &amp; Lucrezia</b> · via aerea</div>
 
-    <!-- griglia reale: si popola da sola quando l'album è online -->
-    <div class="photo-grid" id="grid" hidden></div>
+      <div class="cart-grid">
+        <div class="campo">
+          <label for="f-nome">Nome</label>
+          <input type="text" id="f-nome" name="nome" placeholder="Il tuo nome" autocomplete="given-name" required>
+        </div>
+        <div class="campo">
+          <label for="f-cognome">Cognome</label>
+          <input type="text" id="f-cognome" name="cognome" placeholder="Il tuo cognome" autocomplete="family-name" required>
+        </div>
+        <div class="campo pieno">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" name="email" placeholder="dove.rispondere@esempio.it" autocomplete="email" required>
+        </div>
+        <div class="campo pieno">
+          <label for="f-msg">Messaggio</label>
+          <textarea id="f-msg" name="messaggio" placeholder="Scrivi qui la tua cartolina..." required></textarea>
+        </div>
+      </div>
+
+      <!-- honeypot antispam -->
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="cart-foot">
+        <div class="destinatari">
+          <b>Destinatari:</b> Giorgio &amp; Lucrezia<br>
+          in viaggio tra 54°48′S e 16°30′S
+        </div>
+        <button type="submit" class="spedisci" id="invia">Spedisci la cartolina →</button>
+      </div>
+
+      <div class="esito" id="esito" role="status"></div>
+      <div class="timbro-spedito" id="timbro">Spedita<br>via aerea ✓</div>
+    </form>
   </div>
 </section>
 
@@ -480,12 +548,6 @@
     Contatti
   </a>
 </footer>
-
-<!-- lightbox -->
-<div class="lightbox" id="lightbox" role="dialog" aria-label="Foto ingrandita">
-  <button class="lb-close" id="lbclose" aria-label="Chiudi">×</button>
-  <img id="lbimg" src="" alt="" />
-</div>
 
 <script>
 (function () {
@@ -513,79 +575,54 @@
   burger.addEventListener('click', function () { setDrawer(!drawer.classList.contains('open')); });
   dclose.addEventListener('click', function () { setDrawer(false); });
   scrim.addEventListener('click', function () { setDrawer(false); });
-
-  /* ══ ALBUM ══
-     Le foto vanno caricate nella repo:
-       https://gioriva.github.io/album/patagonia2026/
-     insieme a un file manifest.json in una di queste due forme:
-       ["01.jpg", "02.jpg", ...]
-     oppure
-       { "photos": [ { "file": "01.jpg", "caption": "Perito Moreno" }, ... ] }
-     Appena il manifest è online, la griglia si popola da sola. */
-  var ALBUM_BASE = 'https://gioriva.github.io/album/patagonia2026/';
-
-  var grid = document.getElementById('grid'),
-      empty = document.getElementById('empty'),
-      emptyNote = document.getElementById('empty-note'),
-      lb = document.getElementById('lightbox'),
-      lbimg = document.getElementById('lbimg'),
-      lbclose = document.getElementById('lbclose');
-
-  function openLb(src, alt) {
-    lbimg.src = src;
-    lbimg.alt = alt || 'Foto del viaggio';
-    lb.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLb() {
-    lb.classList.remove('open');
-    lbimg.src = '';
-    document.body.style.overflow = '';
-  }
-  lb.addEventListener('click', closeLb);
-  lbclose.addEventListener('click', closeLb);
-  lbimg.addEventListener('click', function (e) { e.stopPropagation(); });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      if (drawer.classList.contains('open')) setDrawer(false);
-      if (lb.classList.contains('open')) closeLb();
-    }
+    if (e.key === 'Escape' && drawer.classList.contains('open')) setDrawer(false);
   });
 
-  function renderPhotos(list) {
-    if (!list || !list.length) return;
-    grid.innerHTML = '';
-    list.forEach(function (item) {
-      var file = typeof item === 'string' ? item : item.file;
-      var caption = typeof item === 'string' ? '' : (item.caption || '');
-      if (!file) return;
-      var src = ALBUM_BASE + file;
-      var a = document.createElement('a');
-      a.href = src;
-      var img = document.createElement('img');
-      img.src = src;
-      img.alt = caption || 'Foto del viaggio';
-      img.loading = 'lazy';
-      a.appendChild(img);
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        openLb(src, caption);
-      });
-      grid.appendChild(a);
-    });
-    if (grid.children.length) {
-      empty.hidden = true;
-      emptyNote.hidden = true;
-      grid.hidden = false;
-    }
-  }
+  /* invio cartolina via Formspree */
+  var form = document.getElementById('modulo'),
+      invia = document.getElementById('invia'),
+      esito = document.getElementById('esito'),
+      timbro = document.getElementById('timbro');
 
-  fetch(ALBUM_BASE + 'manifest.json', { cache: 'no-store' })
-    .then(function (r) { if (!r.ok) throw new Error('no manifest'); return r.json(); })
-    .then(function (data) {
-      renderPhotos(Array.isArray(data) ? data : data.photos);
-    })
-    .catch(function () { /* album non ancora online: resta l'album vuoto */ });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    /* validazione nativa */
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    invia.disabled = true;
+    invia.textContent = 'Spedizione in corso...';
+    esito.className = 'esito';
+    esito.textContent = '';
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function (r) {
+      if (r.ok) {
+        form.reset();
+        esito.className = 'esito ok';
+        esito.innerHTML = '<b>Cartolina spedita.</b> Grazie, la leggeremo con calma e risponderemo appena possibile.';
+        timbro.classList.add('mostra');
+        invia.textContent = 'Spedisci un\u2019altra →';
+      } else {
+        esito.className = 'esito errore';
+        esito.innerHTML = '<b>La cartolina non è partita.</b> Riprova tra poco, oppure controlla i campi.';
+        invia.textContent = 'Spedisci la cartolina →';
+      }
+      invia.disabled = false;
+    }).catch(function () {
+      esito.className = 'esito errore';
+      esito.innerHTML = '<b>Problema di collegamento.</b> La cartolina non è partita, riprova tra poco.';
+      invia.textContent = 'Spedisci la cartolina →';
+      invia.disabled = false;
+    });
+  });
 })();
 </script>
 </body>
