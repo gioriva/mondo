@@ -327,10 +327,10 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
   <!-- ══ MOON → ISS ══ -->
   <a id="moon-link" href="https://www.gioriva.it/iss/" target="_blank" rel="noopener" aria-label="Tracker ISS">
     <g id="moon-group">
-      <circle cx="1130" cy="170" r="64" fill="#E9E4D8" opacity="0.88"/>
-      <circle cx="1108" cy="152" r="9"  fill="#0C0C0D" opacity="0.07"/>
-      <circle cx="1148" cy="188" r="13" fill="#0C0C0D" opacity="0.06"/>
-      <circle cx="1122" cy="196" r="6"  fill="#0C0C0D" opacity="0.05"/>
+      <circle cx="1130" cy="230" r="64" fill="#E9E4D8" opacity="0.88"/>
+      <circle cx="1108" cy="212" r="9"  fill="#0C0C0D" opacity="0.07"/>
+      <circle cx="1148" cy="248" r="13" fill="#0C0C0D" opacity="0.06"/>
+      <circle cx="1122" cy="256" r="6"  fill="#0C0C0D" opacity="0.05"/>
     </g>
   </a>
 
@@ -435,6 +435,12 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
     <li><a href="#" id="cookie-reopen" aria-label="Cookie" title="Cookie">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle class="dot" cx="9.2" cy="10" r="1"/><circle class="dot" cx="14.2" cy="9" r="1"/><circle class="dot" cx="11" cy="14.2" r="1"/><circle class="dot" cx="15.2" cy="13.6" r="1"/></svg>
     </a></li>
+    <li><a href="/contatti.html" aria-label="Contattami" title="Contattami">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/>
+        <path d="M4.5 7 L12 13 L19.5 7"/>
+      </svg>
+    </a></li>
     <li><a href="https://www.instagram.com/gioriva" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
       <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.8"/><circle class="dot" cx="16.4" cy="7.6" r="1"/></svg>
     </a></li>
@@ -497,6 +503,64 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 
 <script>
 'use strict';
+
+/* ════════════════════════════════════
+   IDENTITY — desktop: whole block inside the
+   water band (like mobile). The waterline position
+   depends on the slice crop, so it's computed; if
+   the band is too short, the block scales to fit.
+   ════════════════════════════════════ */
+(function () {
+  var el = document.querySelector('.identity');
+
+  var h1   = el.querySelector('h1');
+  var rule = el.querySelector('.rule');
+  var pay  = el.querySelector('p');
+
+  function positionIdentity() {
+    if (window.innerWidth <= 768) {
+      el.style.top = ''; el.style.bottom = '';
+      h1.style.fontSize = ''; rule.style.margin = ''; pay.style.fontSize = '';
+      return;
+    }
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var scale = Math.max(vw / 1440, vh / 900);
+    var offY = (900 * scale - vh) / 2;
+    var waterPx = 660 * scale - offY;      // waterline on screen
+
+    var gapTop = 14, gapBottom = 22;
+    var top = waterPx + gapTop;
+    var available = vh - top - gapBottom;
+
+    el.style.top = top + 'px';
+    el.style.bottom = 'auto';
+
+    // Payoff and rule stay at fixed, readable sizes
+    pay.style.fontSize = '1.1rem';
+    rule.style.margin = '0.8rem 0';
+
+    // Only the name resizes to fill the remaining band height
+    h1.style.fontSize = '';                       // reset to CSS clamp
+    var otherH = el.offsetHeight - h1.offsetHeight;
+    var targetH1 = available - otherH;
+    var curFs = parseFloat(getComputedStyle(h1).fontSize);
+    var curH  = h1.offsetHeight;
+    if (targetH1 < curH) {
+      var fs = Math.max(36, curFs * targetH1 / curH * 1.05);
+      h1.style.fontSize = fs.toFixed(1) + 'px';
+      // if even the minimum overflows, let the block rise above the waterline
+      var overflow = el.offsetHeight - available;
+      if (overflow > 0) el.style.top = (top - overflow) + 'px';
+    }
+  }
+
+  positionIdentity();
+  window.addEventListener('resize', positionIdentity);
+  window.addEventListener('load', positionIdentity);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(positionIdentity);
+  }
+})();
 
 /* ════════════════════════════════════
    SCENE recomposition for portrait crop
