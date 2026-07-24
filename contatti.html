@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0C">
+<title>Contattami — Giorgio Riva</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sumi:  #0C0C0D;
+  --washi: #E9E4D8;
+  --muted: #6E675D;
+  --shu:   #B5433C;
+  --kin:   #C8A97E;
+  --line:  rgba(233,228,216,0.10);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans:  'Montserrat', sans-serif;
+}
+
+html { background: #0A0A0C; }
+
+body {
+  background: linear-gradient(180deg, #0A0A0C 0%, #0C0C0D 60%, #0E0D0C 100%);
+  color: var(--washi);
+  font-family: var(--sans);
+  font-weight: 300;
+  min-height: 100vh;
+}
+
+/* Paper grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.06 0 0 0 0 0.055 0 0 0 0 0.05 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 5rem 1.75rem 4rem;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 3rem;
+  transition: gap .25s, color .2s;
+}
+.back:hover { gap: 1rem; color: var(--shu); }
+
+h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  line-height: 1.05;
+}
+h1 em { font-style: italic; color: var(--kin); }
+
+.kintsugi {
+  width: 70px; height: 1px;
+  margin: 1.4rem 0 1.2rem;
+  background: linear-gradient(90deg, var(--kin), transparent);
+}
+
+.intro {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  max-width: 460px;
+}
+
+/* ── Form ── */
+form { display: flex; flex-direction: column; gap: 2rem; }
+
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+.field { display: flex; flex-direction: column; gap: 0.55rem; }
+
+label {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+input, textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  color: var(--washi);
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 300;
+  padding: 0.5rem 2px 0.65rem;
+  outline: none;
+  border-radius: 0;
+  transition: border-color .3s;
+}
+textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+input:focus, textarea:focus { border-bottom-color: var(--shu); }
+input::placeholder, textarea::placeholder { color: rgba(110,103,93,0.5); font-style: italic; }
+
+button[type="submit"] {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.4rem;
+  border-radius: 2px;
+  border: 1px solid var(--shu);
+  background: transparent;
+  color: var(--shu);
+  cursor: pointer;
+  transition: background .25s, color .25s;
+}
+button[type="submit"]:hover { background: var(--shu); color: var(--washi); }
+
+/* status messages */
+#form-status {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  min-height: 1.4em;
+}
+#form-status.ok  { color: var(--kin); }
+#form-status.err { color: var(--shu); }
+
+/* torii mark at the bottom */
+.mark {
+  display: block;
+  margin: 4rem auto 0;
+  width: 34px;
+  opacity: 0.5;
+}
+
+footer {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--line);
+  padding: 1.6rem;
+  text-align: center;
+}
+footer a {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+footer a:hover { color: var(--shu); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.wrap > * { animation: fadeUp .7s ease both; }
+.wrap > *:nth-child(1) { animation-delay: .05s; }
+.wrap > *:nth-child(2) { animation-delay: .15s; }
+.wrap > *:nth-child(3) { animation-delay: .25s; }
+.wrap > *:nth-child(4) { animation-delay: .3s; }
+.wrap > *:nth-child(5) { animation-delay: .4s; }
+
+@media (max-width: 560px) {
+  .wrap { padding: 3.5rem 1.4rem 3rem; }
+  .row { grid-template-columns: 1fr; gap: 2rem; }
+  button[type="submit"] { align-self: stretch; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a class="back" href="/">&larr; Torna alla home</a>
+
+  <h1>Contatta<em>mi</em></h1>
+  <div class="kintsugi"></div>
+  <p class="intro">Scrivimi pure: che sia per un progetto, una domanda o solo per scambiare due parole, questo è il posto giusto.</p>
+
+  <form id="contact-form" action="https://formspree.io/f/mdaqwjwz" method="POST">
+    <div class="row">
+      <div class="field">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" autocomplete="given-name" required>
+      </div>
+      <div class="field">
+        <label for="cognome">Cognome</label>
+        <input type="text" id="cognome" name="cognome" autocomplete="family-name" required>
+      </div>
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label for="messaggio">Messaggio</label>
+      <textarea id="messaggio" name="messaggio" required></textarea>
+    </div>
+    <input type="hidden" name="_subject" value="Nuovo messaggio da gioriva.it">
+    <p id="form-status" aria-live="polite"></p>
+    <button type="submit">Invia il messaggio</button>
+  </form>
+
+  <!-- torii mark -->
+  <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#B5433C">
+      <path d="M 8 20 Q 32 13 56 20 L 56 15 Q 32 7 8 15 Z"/>
+      <rect x="13" y="22" width="38" height="5"/>
+      <polygon points="20,27 26,27 24,54 18,54"/>
+      <polygon points="38,27 44,27 46,54 40,54"/>
+      <rect x="15" y="35" width="34" height="5"/>
+      <rect x="29.5" y="27" width="5" height="8"/>
+    </g>
+  </svg>
+</div>
+
+<footer>
+  <a href="/">gioriva.it</a>
+</footer>
+
+<script>
+'use strict';
+/* Submit via fetch so the visitor stays on the page, with themed feedback */
+(function () {
+  var form = document.getElementById('contact-form');
+  var status = document.getElementById('form-status');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    status.textContent = 'Invio in corso\u2026';
+    status.className = '';
+    var data = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function (resp) {
+      if (resp.ok) {
+        form.reset();
+        status.textContent = 'Messaggio inviato. Grazie, ti risponder\u00f2 presto.';
+        status.className = 'ok';
+      } else {
+        return resp.json().then(function (d) { throw d; });
+      }
+    }).catch(function () {
+      status.textContent = 'Qualcosa \u00e8 andato storto. Riprova tra poco.';
+      status.className = 'err';
+    });
+  });
+})();
+</script>
+</body>
+</html>
