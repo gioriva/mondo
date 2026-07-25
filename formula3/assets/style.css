@@ -399,6 +399,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .scatto:hover .numero, .scatto:focus-visible .numero{ opacity:1; }
 
+/* su mobile: griglia compatta a 3 colonne, stile provini a contatto */
+@media (max-width:720px){
+  .galleria{ padding:2.5rem 0 3rem; }
+  .griglia{
+    grid-template-columns:repeat(3, 1fr);
+    gap:5px;
+    padding:0 5px;
+  }
+  .scatto{ aspect-ratio:1/1; }
+  .scatto .numero{ display:none; }
+  .scatto::after{ height:5px; }
+}
+
 /* ---------- visore (lightbox) ---------- */
 
 .visore{
