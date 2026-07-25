@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti &middot; Tarcisio Riva | Formula 3</title>
+  <meta name="description" content="Scrivi a Gio Riva: circuiti, date, persone e ricordi legati alle foto di Tarcisio in Formula 3.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Racing+Sans+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+  <header class="testata">
+    <div class="testata-inner">
+      <a class="marchio" href="index.html">
+        <span class="roundel">743</span>
+        <span>Tarcisio Riva</span>
+      </a>
+      <nav aria-label="Navigazione principale">
+        <a href="index.html#galleria">Galleria</a>
+        <a href="contatti.html" aria-current="page">Contatti</a>
+      </nav>
+    </div>
+  </header>
+  <div class="stripes" aria-hidden="true"></div>
+
+  <main class="pagina">
+    <h1>Contatti</h1>
+    <p class="sotto">Il muretto box di questo sito</p>
+
+    <p>Se in una delle foto riconosci un circuito, una data, una vettura o una persona, scrivimelo: mi aiuti a completare le didascalie di questo archivio. E se hai corso con Tarcisio, o eri lì con lui, mi farebbe piacere leggerti.</p>
+
+    <form class="modulo" action="https://formspree.io/f/mojgkgqg" method="POST">
+      <input type="hidden" name="_subject" value="Messaggio dal sito Tarcisio Riva | Formula 3">
+      <div class="campi-doppi">
+        <div class="campo">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" autocomplete="given-name" required>
+        </div>
+        <div class="campo">
+          <label for="cognome">Cognome</label>
+          <input type="text" id="cognome" name="cognome" autocomplete="family-name" required>
+        </div>
+      </div>
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </div>
+      <div class="campo">
+        <label for="messaggio">Messaggio</label>
+        <textarea id="messaggio" name="messaggio" required></textarea>
+      </div>
+      <button class="bottone" type="submit">Invia il messaggio</button>
+    </form>
+
+    <p style="margin-top:1.2rem; font-size:.85rem; color:#7a5a44;">I dati del modulo vengono usati solo per risponderti. Dettagli nella <a href="privacy.html">pagina privacy</a>.</p>
+  </main>
+
+  <div class="checker" aria-hidden="true"></div>
+  <footer>
+    <div class="pie-inner">
+      <a class="pie-voce" href="https://gioriva.github.io" target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 18a11 11 0 0 1 22 0v4a2 2 0 0 1-2 2H9l-4-4z"/>
+          <path d="M5 18h14a3 3 0 0 1 3 3v3" stroke="#e8641b"/>
+        </svg>
+        Gio Riva
+      </a>
+      <a class="pie-voce" href="privacy.html">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M16 4l10 4v8c0 6-4 10-10 12C10 26 6 22 6 16V8z"/>
+          <path d="M12 16l3 3 5-6" stroke="#e8641b"/>
+        </svg>
+        Privacy
+      </a>
+      <button class="pie-voce" type="button" id="apri-cookie">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="16" cy="16" r="12"/>
+          <circle cx="16" cy="16" r="5" stroke="#e8641b"/>
+          <path d="M16 4v4M16 24v4M4 16h4M24 16h4M7.5 7.5l2.8 2.8M21.7 21.7l2.8 2.8M24.5 7.5l-2.8 2.8M10.3 21.7l-2.8 2.8"/>
+        </svg>
+        Cookie
+      </button>
+      <a class="pie-voce" href="contatti.html">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="4" y="8" width="24" height="16" rx="1"/>
+          <path d="M4 10l12 8 12-8" stroke="#e8641b"/>
+        </svg>
+        Contatti
+      </a>
+    </div>
+    <p class="pie-nota">Un ricordo di famiglia, dedicato a Tarcisio.</p>
+  </footer>
+
+  <aside class="cookie-avviso" id="cookie-avviso" role="region" aria-label="Informativa cookie">
+    <h3>Ai box: cookie</h3>
+    <p>Questo sito usa Google Analytics solo per contare le visite. Parte soltanto se accetti. Nessun altro tracciamento. <a href="privacy.html#cookie">Come funziona</a>.</p>
+    <div class="cookie-azioni">
+      <button class="bottone" type="button" id="cookie-accetta">Accetta</button>
+      <button class="bottone secondario" type="button" id="cookie-rifiuta">Rifiuta</button>
+    </div>
+  </aside>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>
