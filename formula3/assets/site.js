@@ -77,9 +77,6 @@
     var griglia = document.getElementById("griglia");
     if (!griglia) return;
 
-    var contatore = document.getElementById("contascatti");
-    if (contatore) contatore.textContent = FOTO.length + " scatti";
-
     FOTO.forEach(function (nome, idx) {
       var card = document.createElement("button");
       card.className = "scatto";
@@ -167,6 +164,6 @@
     inizializzaVisore();
 
     var eroeFoto = document.getElementById("eroe-foto");
-    if (eroeFoto) eroeFoto.src = urlIntera("tarcisio5.jpg");
+    if (eroeFoto) eroeFoto.src = urlIntera("tarcisio40.jpg");
   });
 })();
