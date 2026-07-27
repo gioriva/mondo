@@ -164,6 +164,6 @@
     inizializzaVisore();
 
     var eroeFoto = document.getElementById("eroe-foto");
-    if (eroeFoto) eroeFoto.src = urlIntera("tarcisio40.jpg");
+    if (eroeFoto) eroeFoto.src = urlIntera("tarcisio13.jpg");
   });
 })();
