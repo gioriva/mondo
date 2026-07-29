@@ -69,35 +69,78 @@
   /* ---------- galleria e visore ---------- */
 
   var indiceCorrente = 0;
+  var PER_PAGINA = 25;
+  var paginaCorrente = 0;
 
   function urlThumb(nome) { return FOTO_BASE + "/thumbs/" + nome; }
   function urlIntera(nome) { return FOTO_BASE + "/" + nome; }
 
-  function costruisciGalleria() {
+  function numeroPagine() { return Math.ceil(FOTO.length / PER_PAGINA); }
+
+  function mostraPagina(p, scorri) {
     var griglia = document.getElementById("griglia");
     if (!griglia) return;
+    paginaCorrente = p;
+    griglia.innerHTML = "";
 
-    FOTO.forEach(function (nome, idx) {
-      var card = document.createElement("button");
-      card.className = "scatto";
-      card.type = "button";
-      card.setAttribute("aria-label", "Apri la foto " + (idx + 1) + " di " + FOTO.length);
+    var inizio = p * PER_PAGINA;
+    var fine = Math.min(inizio + PER_PAGINA, FOTO.length);
 
-      var img = document.createElement("img");
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.src = urlThumb(nome);
-      img.alt = "Tarcisio Riva, Formula 3, foto " + (idx + 1);
+    for (var idx = inizio; idx < fine; idx++) {
+      (function (i) {
+        var nome = FOTO[i];
+        var card = document.createElement("button");
+        card.className = "scatto";
+        card.type = "button";
+        card.setAttribute("aria-label", "Apri la foto " + (i + 1) + " di " + FOTO.length);
 
-      var num = document.createElement("span");
-      num.className = "numero";
-      num.textContent = idx + 1;
+        var img = document.createElement("img");
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.src = urlThumb(nome);
+        img.alt = "Tarcisio Riva, Formula 3, foto " + (i + 1);
 
-      card.appendChild(img);
-      card.appendChild(num);
-      card.addEventListener("click", function () { apriVisore(idx); });
-      griglia.appendChild(card);
-    });
+        var num = document.createElement("span");
+        num.className = "numero";
+        num.textContent = i + 1;
+
+        card.appendChild(img);
+        card.appendChild(num);
+        card.addEventListener("click", function () { apriVisore(i); });
+        griglia.appendChild(card);
+      })(idx);
+    }
+
+    aggiornaPaginazione();
+    if (scorri) {
+      var sezione = document.getElementById("galleria");
+      if (sezione) sezione.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  function aggiornaPaginazione() {
+    var nav = document.getElementById("paginazione");
+    if (!nav) return;
+    nav.innerHTML = "";
+    for (var p = 0; p < numeroPagine(); p++) {
+      (function (pp) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "pagina-btn" + (pp === paginaCorrente ? " attiva" : "");
+        b.textContent = pp + 1;
+        b.setAttribute("aria-label", "Pagina " + (pp + 1) + " di " + numeroPagine());
+        if (pp === paginaCorrente) b.setAttribute("aria-current", "page");
+        b.addEventListener("click", function () {
+          if (pp !== paginaCorrente) mostraPagina(pp, true);
+        });
+        nav.appendChild(b);
+      })(p);
+    }
+  }
+
+  function costruisciGalleria() {
+    if (!document.getElementById("griglia")) return;
+    mostraPagina(0, false);
   }
 
   function apriVisore(idx) {

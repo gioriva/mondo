@@ -420,6 +420,33 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .scatto::after{ height:5px; }
 }
 
+/* paginazione della galleria: roundel numerati */
+.paginazione{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:1rem;
+  margin-top:2.4rem;
+}
+.pagina-btn{
+  width:52px; height:52px;
+  border-radius:50%;
+  background:var(--panna);
+  color:var(--asfalto);
+  border:4px solid var(--asfalto);
+  box-shadow:0 0 0 3px var(--panna);
+  font-family:var(--font-display);
+  font-size:1.15rem;
+  cursor:pointer;
+  transition:transform .15s ease, background .15s ease;
+}
+.pagina-btn:hover{ transform:translateY(-3px); }
+.pagina-btn.attiva{
+  background:var(--giallo);
+  cursor:default;
+}
+.pagina-btn.attiva:hover{ transform:none; }
+
 /* ---------- visore (lightbox) ---------- */
 
 .visore{
