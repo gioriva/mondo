@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Esclusione dai motori di ricerca -->
-<meta name="robots" content="noindex, nofollow">
-
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
 <script>
@@ -21,7 +18,7 @@
 
 <meta name="description" content="Da Victoria Peak alle acque cristalline delle Gili Islands, un viaggio dentro un sogno">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Galleria — Hong Kong & Bali 2025">
+<meta property="og:title" content="Galleria | Hong Kong & Bali 2025">
 <meta property="og:description" content="Da Victoria Peak alle acque cristalline delle Gili Islands, un viaggio dentro un sogno">
 <meta property="og:url" content="https://www.gioriva.it/mondo/indonesia2025/galleria.html">
 <meta property="og:image" content="https://www.gioriva.it/mondo/indonesia2025/logo_gr_indonesia.png">
@@ -29,7 +26,7 @@
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="GioRiva · Diari di Viaggio">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Galleria — Hong Kong & Bali 2025">
+<meta name="twitter:title" content="Galleria | Hong Kong & Bali 2025">
 <meta name="twitter:description" content="Da Victoria Peak alle acque cristalline delle Gili Islands, un viaggio dentro un sogno">
 <meta name="twitter:image" content="https://www.gioriva.it/mondo/indonesia2025/logo_gr_indonesia.png">
 
@@ -743,7 +740,7 @@ function render() {
       img.loading = 'lazy';
       img.decoding = 'async';
       img.width = p.w; img.height = p.h;
-      img.alt = `${d.title} — ${d.date}`;
+      img.alt = `${d.title}, ${d.date}`;
       img.src = `${BASE}/thumb/${d.slug}/${p.src}`;
       img.onload = () => { img.classList.add('loaded'); a.style.aspectRatio = ''; };
       img.onerror = () => { a.style.background = 'rgba(196,98,45,.12)'; };
