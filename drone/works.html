@@ -20,12 +20,11 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjRjdGNUYwIi8+PGxpbmUgeDE9IjUiIHkxPSIyMyIgeDI9IjI3IiB5Mj0iMjMiIHN0cm9rZT0iIzFBMUExNiIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxnIHN0cm9rZT0iIzJFNUNFNiIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PGxpbmUgeDE9IjExLjUiIHkxPSI4LjUiIHgyPSIxNSIgeTI9IjEyIi8+PGxpbmUgeDE9IjIwLjUiIHkxPSI4LjUiIHgyPSIxNyIgeTI9IjEyIi8+PGxpbmUgeDE9IjExLjUiIHkxPSIxNS41IiB4Mj0iMTUiIHkyPSIxMi41Ii8+PGxpbmUgeDE9IjIwLjUiIHkxPSIxNS41IiB4Mj0iMTciIHkyPSIxMi41Ii8+PC9nPjxjaXJjbGUgY3g9IjExIiBjeT0iOCIgcj0iMi42IiBmaWxsPSJub25lIiBzdHJva2U9IiMyRTVDRTYiIHN0cm9rZS13aWR0aD0iMS40Ii8+PGNpcmNsZSBjeD0iMjEiIGN5PSI4IiByPSIyLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFNUNFNiIgc3Ryb2tlLXdpZHRoPSIxLjQiLz48Y2lyY2xlIGN4PSIxMSIgY3k9IjE2IiByPSIyLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFNUNFNiIgc3Ryb2tlLXdpZHRoPSIxLjQiLz48Y2lyY2xlIGN4PSIyMSIgY3k9IjE2IiByPSIyLjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJFNUNFNiIgc3Ryb2tlLXdpZHRoPSIxLjQiLz48cmVjdCB4PSIxMy42IiB5PSI5LjYiIHdpZHRoPSI0LjgiIGhlaWdodD0iNC44IiByeD0iMS4yIiBmaWxsPSIjMkU1Q0U2Ii8+PC9zdmc+Cg==">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet">
   <title>Above Ground</title>
-  <meta property="og:title" content="Album — Above Ground · Fotografia Aerea">
+  <meta property="og:title" content="Album | Above Ground · Fotografia Aerea">
   <meta property="og:description" content="Il mondo appare diverso a centinaia di metri di altezza. Paesaggi, coste, città, rivisti dall'alto.">
   <meta property="og:image" content="https://www.gioriva.it/drone/og.png">
   <meta property="og:type" content="website">
@@ -214,7 +213,7 @@
       text-align: center;
     }
 
-    /* PHOTO MASONRY — plates */
+    /* PHOTO MASONRY - plates */
     .pgrid { columns: 3; column-gap: 18px; }
     .ph {
       break-inside: avoid;
@@ -242,7 +241,7 @@
       color: var(--soft);
     }
 
-    /* LIGHTBOX — light museum viewer */
+    /* LIGHTBOX - light museum viewer */
     .lb {
       position: fixed; inset: 0; z-index: 500;
       background: rgba(247,245,240,0.97);
@@ -398,12 +397,12 @@ ALBUMS.forEach((a, ai) => {
     '<div class="alb-head">' +
       '<span class="n">Album ' + roman[ai] + '</span>' +
       '<h2 class="alb-title">' + a.name + '</h2>' +
-      '<div class="alb-sub">' + a.loc + ' — ' + media + '</div>' +
+      '<div class="alb-sub">' + a.loc + ' · ' + media + '</div>' +
     '</div>' +
     (a.video ?
       '<div class="vid">' +
-        '<div class="vid-frame"><iframe src="https://www.youtube-nocookie.com/embed/' + a.video + '" title="' + a.name + ' — video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>' +
-        '<div class="vid-cap">Ripresa in volo — ' + a.name + '</div>' +
+        '<div class="vid-frame"><iframe src="https://www.youtube-nocookie.com/embed/' + a.video + '" title="' + a.name + ' · video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>' +
+        '<div class="vid-cap">Ripresa in volo · ' + a.name + '</div>' +
       '</div>'
     : '') +
     '<div class="pgrid" id="g-' + a.slug + '"></div>';
