@@ -1,4 +1,4 @@
-/* Tarcisio Riva | Formula 3 — script condiviso */
+/* Tarcisio Riva | Formula 3 | script condiviso */
 (function () {
   "use strict";
 
