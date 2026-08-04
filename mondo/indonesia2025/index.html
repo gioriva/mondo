@@ -343,7 +343,7 @@
   }
 
   .day-card {
-    flex: 1 1 340px;
+    flex: 1 1 282px;
     max-width: 556px;
     min-width: 0;
     display: flex;
@@ -465,9 +465,11 @@
 
   .moments-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
   }
+  @media (max-width: 1000px) { .moments-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px)  { .moments-grid { grid-template-columns: 1fr; } }
 
   .moment-card {
     background: rgba(245,236,215,0.08);
@@ -904,30 +906,27 @@
   }
   .menu-item.hub .mi-txt::after { display: none; }
 
-  /* ── CARD SINGOLA: layout orizzontale, niente spazio vuoto ── */
+  /* ── CARD SINGOLA: a tutta larghezza, elenco su due colonne ── */
   .day-card.solo {
     flex: 1 1 100%;
-    max-width: 1000px;
+    max-width: 100%;
+    cursor: default;
   }
-  .day-card.solo .day-card-body {
+  .day-card.solo .day-card-body { padding: 1.8rem 2rem 1.7rem; }
+  .day-card.solo .day-activities {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 320px;
+    grid-template-columns: 1fr 1fr;
     column-gap: 2.4rem;
+    row-gap: 0.45rem;
     align-content: start;
   }
-  .day-card.solo .day-card-body > *:not(.day-photos) { grid-column: 1; }
-  .day-card.solo .day-photos {
-    grid-column: 2; grid-row: 1 / -1;
-    align-self: start;
-    margin-top: 0; padding-top: 0.3rem;
-  }
-  .day-card.solo .day-activities li { font-size: 0.9rem; }
-  @media (max-width: 780px) {
-    .day-card.solo .day-card-body { grid-template-columns: 1fr; }
-    .day-card.solo .day-photos {
-      grid-column: 1; grid-row: auto;
-      margin-top: 1.2rem; padding-top: 0;
-    }
+  .day-card.solo .day-activities li { font-size: 0.88rem; }
+  /* foto panoramiche, tre a tutta larghezza */
+  .day-card.solo .dp-thumbs img { aspect-ratio: 4 / 3; }
+  .day-card.solo .dp-more { max-width: 340px; margin-left: auto; margin-right: auto; }
+  @media (max-width: 720px) {
+    .day-card.solo .day-activities { grid-template-columns: 1fr; }
+    .day-card.solo .day-card-body { padding: 1.6rem 1.7rem 1.5rem; }
   }
 </style>
 </head>
@@ -1081,7 +1080,7 @@
     <div class="chapter-header reveal">
       <div class="chapter-number chapter-hk" style="-webkit-text-stroke-color: var(--terracotta);">01</div>
       <div class="chapter-meta">
-        <p class="chapter-flag chapter-hk">🇭🇰 Hong Kong · 6–9 Agosto</p>
+        <p class="chapter-flag chapter-hk">🇭🇰 Hong Kong · 6–8 Agosto</p>
         <h2 class="chapter-title">La Città che non Dorme</h2>
         <p class="chapter-subtitle">Grattacieli, tram e la baia che brilla di notte</p>
       </div>
@@ -1345,7 +1344,7 @@
     <div class="chapter-header reveal">
       <div class="chapter-number" style="-webkit-text-stroke-color: var(--ocean); color: var(--ocean);">04</div>
       <div class="chapter-meta">
-        <p class="chapter-flag" style="color: var(--ocean);">🌊 Sanur, Bali · 13–16 Agosto</p>
+        <p class="chapter-flag" style="color: var(--ocean);">🌊 Sanur, Bali · 14–16 Agosto</p>
         <h2 class="chapter-title">Il Mare Calmo di Sanur</h2>
         <p class="chapter-subtitle">Piscina, oceano e il tramonto di Uluwatu</p>
       </div>
@@ -1719,7 +1718,7 @@
 <!-- ══════ FOOTER ══════ -->
 <footer>
   <h3 class="footer-title">Hong Kong & Bali 2025</h3>
-  <p class="footer-sub">Ogni viaggio lo vivi tre volte: quando lo sogni, quando lo vivi e quando lo ricordi.</p>
+  <p class="footer-sub">Da Victoria Peak alle acque cristalline delle Gili Islands</p>
   <div class="footer-links">
     <a class="fl" href="https://www.gioriva.it/" title="gioriva.it">
       <svg width="15" height="15" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
