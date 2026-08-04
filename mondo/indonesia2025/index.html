@@ -336,12 +336,18 @@
 
   /* ── DAYS GRID ── */
   .days-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.6rem;
   }
 
   .day-card {
+    flex: 1 1 340px;
+    max-width: 556px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
     background: var(--sand);
     border-radius: 1rem;
     overflow: hidden;
@@ -361,7 +367,10 @@
     background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
   }
 
-  .day-card-body { padding: 1.4rem 1.5rem 1.5rem; }
+  .day-card-body {
+    padding: 1.6rem 1.7rem 1.5rem;
+    display: flex; flex-direction: column; flex: 1;
+  }
 
   .day-date {
     font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
@@ -370,7 +379,7 @@
 
   .day-label {
     font-family: 'Playfair Display', serif;
-    font-size: 1.25rem; font-weight: 700; font-style: italic;
+    font-size: 1.4rem; font-weight: 700; font-style: italic;
     color: var(--text-dark); margin-bottom: 0.8rem;
     line-height: 1.2;
   }
@@ -380,7 +389,7 @@
   }
 
   .day-activities li {
-    font-size: 0.82rem; color: var(--text-mid); line-height: 1.4;
+    font-size: 0.87rem; color: var(--text-mid); line-height: 1.4;
     padding-left: 1rem; position: relative;
   }
 
@@ -391,7 +400,7 @@
   }
 
   .day-highlight {
-    display: inline-block; margin-top: 0.8rem;
+    display: inline-block; align-self: flex-start; margin-top: 0.9rem;
     background: rgba(196,98,45,0.08);
     color: var(--terracotta);
     font-size: 0.72rem; font-weight: 500;
@@ -619,7 +628,7 @@
     .chapter-header { grid-template-columns: 1fr; gap: 0.5rem; }
     .chapter-number { font-size: 5rem; opacity: 0.08; }
     .nav-chapters a { padding: 0.5rem 0.6rem; font-size: 0.65rem; }
-    .days-grid { grid-template-columns: 1fr; }
+    .days-grid { gap: 1.1rem; }
   }
 
   /* ── SCROLL REVEAL ── */
@@ -659,8 +668,9 @@
 
   /* ── PHOTO STRIP IN DAY CARDS ── */
   .day-photos {
-    display: block; margin-top: 1.1rem;
+    display: block; margin-top: 1.2rem;
     text-decoration: none; color: inherit;
+    margin-top: auto; padding-top: 1.2rem;
   }
   .dp-thumbs {
     display: grid; gap: 4px;
@@ -677,13 +687,20 @@
   .day-card:hover .dp-thumbs img { filter: brightness(1.07) saturate(1.05); }
   .day-card:hover .dp-thumbs img:hover { transform: scale(1.06); }
   .dp-more {
-    display: inline-flex; align-items: center; gap: 0.35rem;
-    margin-top: 0.6rem;
-    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--text-light);
-    transition: color .22s ease, gap .22s ease;
+    display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+    margin-top: 0.8rem;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-mid);
+    background: rgba(196,98,45,0.07);
+    border: 1px solid rgba(196,98,45,0.22);
+    border-radius: 2rem;
+    padding: 0.6rem 1rem;
+    transition: background .22s ease, border-color .22s ease, color .22s ease, gap .22s ease;
   }
-  .day-card:hover .dp-more { color: var(--terracotta); gap: 0.6rem; }
+  .day-card:hover .dp-more {
+    background: var(--terracotta); border-color: var(--terracotta);
+    color: var(--sand); gap: 0.7rem;
+  }
   .dp-more svg { transition: transform .22s ease; }
   .day-card:hover .dp-more svg { transform: translateX(2px); }
 
@@ -886,6 +903,32 @@
     background: linear-gradient(90deg, transparent, rgba(212,168,67,0.45), transparent);
   }
   .menu-item.hub .mi-txt::after { display: none; }
+
+  /* ── CARD SINGOLA: layout orizzontale, niente spazio vuoto ── */
+  .day-card.solo {
+    flex: 1 1 100%;
+    max-width: 1000px;
+  }
+  .day-card.solo .day-card-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    column-gap: 2.4rem;
+    align-content: start;
+  }
+  .day-card.solo .day-card-body > *:not(.day-photos) { grid-column: 1; }
+  .day-card.solo .day-photos {
+    grid-column: 2; grid-row: 1 / -1;
+    align-self: start;
+    margin-top: 0; padding-top: 0.3rem;
+  }
+  .day-card.solo .day-activities li { font-size: 0.9rem; }
+  @media (max-width: 780px) {
+    .day-card.solo .day-card-body { grid-template-columns: 1fr; }
+    .day-card.solo .day-photos {
+      grid-column: 1; grid-row: auto;
+      margin-top: 1.2rem; padding-top: 0;
+    }
+  }
 </style>
 </head>
 <body>
@@ -965,6 +1008,7 @@
       <li><a href="#ubud">Ubud</a></li>
       <li><a href="#sanur">Sanur</a></li>
       <li><a href="#gili">Gili Islands</a></li>
+      <li><a href="#ritorno">Ritorno</a></li>
       <li><a href="#highlights">Momenti</a></li>
     </ul>
   </div>
@@ -1067,7 +1111,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day01/IMG_1346.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day01/IMG_1351.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">2 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 2 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
         </div>
       </div>
@@ -1091,7 +1135,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day02/IMG_1358.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day02/IMG_1362.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">11 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 11 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1116,7 +1160,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day03/IMG_1433.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day03/IMG_1467.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">37 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 37 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1138,7 +1182,7 @@
     </div>
 
     <div class="days-grid">
-      <div class="day-card reveal chapter-macao" style="background: #FFF8E8;">
+      <div class="day-card solo reveal chapter-macao" style="background: #FFF8E8;">
         <div class="day-card-stripe chapter-macao"></div>
         <div class="day-card-body">
           <span class="day-emoji">⛴️</span>
@@ -1157,7 +1201,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day04/IMG_1503.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day04/IMG_1512.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">24 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 24 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1208,7 +1252,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day05/IMG_1535.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day05/IMG_1545.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">5 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 5 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1233,7 +1277,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day06/IMG_1677.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day06/IMG_1783.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">71 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 71 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1257,13 +1301,13 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day07/IMG_1879.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day07/IMG_1974.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">20 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 20 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
       </div>
 
-      <div class="day-card reveal reveal-delay-4" style="background: #EFF5EF;">
+      <div class="day-card solo reveal reveal-delay-4" style="background: #EFF5EF;">
         <div class="day-card-stripe chapter-ubud"></div>
         <div class="day-card-body">
           <span class="day-emoji">🛕</span>
@@ -1282,7 +1326,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day08/IMG_2033.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day08/IMG_2059.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">25 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 25 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1301,9 +1345,9 @@
     <div class="chapter-header reveal">
       <div class="chapter-number" style="-webkit-text-stroke-color: var(--ocean); color: var(--ocean);">04</div>
       <div class="chapter-meta">
-        <p class="chapter-flag" style="color: var(--ocean);">🌊 Sanur, Bali · 13–16 & 21–23 Agosto</p>
+        <p class="chapter-flag" style="color: var(--ocean);">🌊 Sanur, Bali · 13–16 Agosto</p>
         <h2 class="chapter-title">Il Mare Calmo di Sanur</h2>
-        <p class="chapter-subtitle">Tramonti a Uluwatu, kecak dance e il vulcano Batur</p>
+        <p class="chapter-subtitle">Piscina, oceano e il tramonto di Uluwatu</p>
       </div>
     </div>
 
@@ -1326,7 +1370,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day09/IMG_2092.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day09/IMG_2095.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">8 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 8 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1351,7 +1395,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day10/IMG_2152.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day10/IMG_2182.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">31 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 31 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1374,60 +1418,12 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day11/IMG_2201.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day11/IMG_2205.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">9 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 9 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
       </div>
 
-      <div class="day-card reveal reveal-delay-1" style="margin-top: 1.5rem; grid-column: 1 / -1; max-width: 660px;">
-        <div class="day-card-stripe chapter-sanur"></div>
-        <div class="day-card-body">
-          <span class="day-emoji">🌋</span>
-          <p class="day-date">Giorno 17 · 22 Agosto · Il gran finale</p>
-          <h3 class="day-label">Trekking sul Vulcano Batur</h3>
-          <ul class="day-activities">
-            <li>Sveglia all'<strong>01:30</strong> di notte: tre ore di sonno scarso, ma nessuno si lamenta, sappiamo già che ne varrà la pena</li>
-            <li>Alle 03:00 si parte per il campo base del <strong>Mt. Batur</strong>; colazione al buio tra altri scalatori silenziosi e motivati</li>
-            <li>Trekking notturno a torcia: si arriva in vetta intorno alle <strong>05:30</strong>, giusto in tempo per guardare l'alba tingere di rosso il cielo sopra Bali, uno spettacolo che lascia senza parole</li>
-            <li>Discesa al campo base entro le 08:30 e transfer al tempio <strong>Tirta Empul</strong>: ci si immerge nelle vasche sacre indossando il sarong tradizionale, in un rituale di purificazione autentico e toccante</li>
-            <li>Rientro a Sanur per un pomeriggio in centro commerciale: il contrasto col vulcano è straniante e divertente</li>
-          </ul>
-          <span class="day-highlight" style="background: rgba(61,155,155,0.1); color: var(--teal);">🌄 L'alba più bella del viaggio</span>
-          <a class="day-photos" href="galleria.html#day17">
-            <span class="dp-thumbs">
-              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day17/IMG_2361.jpg" loading="lazy" decoding="async" alt="">
-              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day17/IMG_2402.jpg" loading="lazy" decoding="async" alt="">
-              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day17/IMG_2432.jpg" loading="lazy" decoding="async" alt="">
-            </span>
-            <span class="dp-more">43 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </a>
-
-        </div>
-      </div>
-
-      <div class="day-card reveal reveal-delay-2">
-        <div class="day-card-stripe chapter-sanur"></div>
-        <div class="day-card-body">
-          <span class="day-emoji">❤️</span>
-          <p class="day-date">Giorno 18 · 23 Agosto</p>
-          <h3 class="day-label">Saluti al Mare</h3>
-          <ul class="day-activities">
-            <li>È arrivato il momento della partenza, ma prima ci si concede un ultimo massaggio ai piedi in spiaggia</li>
-            <li>Passeggiata di saluti al mare: ci si guarda intorno cercando di imprimere tutto nella memoria ❤️</li>
-            <li>A mezzogiorno si parte per l'aeroporto, alle 16:30 si decolla</li>
-            <li>Il giorno dopo, alle 08:00, si atterra a Malpensa: la testa è ancora tra le onde delle Gili</li>
-          </ul>
-          <span class="day-highlight" style="background: rgba(61,155,155,0.1); color: var(--teal);">🌊 Arrivederci Bali</span>
-          <a class="day-photos" href="galleria.html#day18">
-            <span class="dp-thumbs dp-2">
-              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day18/IMG_2470.jpg" loading="lazy" decoding="async" alt="">
-              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day18/IMG_2474.jpg" loading="lazy" decoding="async" alt="">
-            </span>
-            <span class="dp-more">2 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1471,7 +1467,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day12/IMG_2241.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day12/IMG_2249.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">16 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 16 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1496,7 +1492,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day13/GP010731.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day13/IMG_2256.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">26 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 26 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1520,7 +1516,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day14/IMG_2297.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day14/IMG_2300.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">7 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 7 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1543,7 +1539,7 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day15/IMG_2311.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day15/IMG_2312.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">4 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 4 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
         </div>
@@ -1566,9 +1562,80 @@
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day16/IMG_2323.jpg" loading="lazy" decoding="async" alt="">
               <img src="https://gioriva.github.io/album/indonesia2025/thumb/day16/IMG_2330.jpg" loading="lazy" decoding="async" alt="">
             </span>
-            <span class="dp-more">12 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="dp-more">Vedi le 12 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CHAPTER 6: RITORNO A SANUR ══════ -->
+<section class="bg-ocean" id="ritorno">
+  <div class="chapter chapter-sanur">
+    <div class="chapter-header reveal">
+      <div class="chapter-number" style="-webkit-text-stroke-color: var(--ocean); color: var(--ocean);">06</div>
+      <div class="chapter-meta">
+        <p class="chapter-flag" style="color: var(--ocean);">🌋 Ritorno a Sanur · 22–23 Agosto</p>
+        <h2 class="chapter-title">L'Ultima Alba</h2>
+        <p class="chapter-subtitle">Il vulcano prima dell'alba, poi i saluti al mare</p>
+      </div>
+    </div>
+
+    <p class="chapter-intro reveal" style="color: var(--deep-teal);">
+      Gli ultimi due giorni concentrano tutto quello che Bali sa dare: una notte insonne per salire su un
+      vulcano e guardare il sole nascere sopra l'isola, il rituale dell'acqua sacra a Tirta Empul, e poi
+      il momento in cui si capisce che è davvero finita.
+    </p>
+
+    <div class="days-grid">
+      <div class="day-card reveal">
+        <div class="day-card-stripe chapter-sanur"></div>
+        <div class="day-card-body">
+          <span class="day-emoji">🌋</span>
+          <p class="day-date">Giorno 17 · 22 Agosto · Il gran finale</p>
+          <h3 class="day-label">Trekking sul Vulcano Batur</h3>
+          <ul class="day-activities">
+            <li>Sveglia all'<strong>01:30</strong> di notte: tre ore di sonno scarso, ma nessuno si lamenta, sappiamo già che ne varrà la pena</li>
+            <li>Alle 03:00 si parte per il campo base del <strong>Mt. Batur</strong>; colazione al buio tra altri scalatori silenziosi e motivati</li>
+            <li>Trekking notturno a torcia: si arriva in vetta intorno alle <strong>05:30</strong>, giusto in tempo per guardare l'alba tingere di rosso il cielo sopra Bali, uno spettacolo che lascia senza parole</li>
+            <li>Discesa al campo base entro le 08:30 e transfer al tempio <strong>Tirta Empul</strong>: ci si immerge nelle vasche sacre indossando il sarong tradizionale, in un rituale di purificazione autentico e toccante</li>
+            <li>Rientro a Sanur per un pomeriggio in centro commerciale: il contrasto col vulcano è straniante e divertente</li>
+          </ul>
+          <span class="day-highlight" style="background: rgba(61,155,155,0.1); color: var(--teal);">🌄 L'alba più bella del viaggio</span>
+          <a class="day-photos" href="galleria.html#day17">
+            <span class="dp-thumbs">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day17/IMG_2361.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day17/IMG_2402.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day17/IMG_2432.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">Vedi le 43 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="day-card reveal reveal-delay-2">
+        <div class="day-card-stripe chapter-sanur"></div>
+        <div class="day-card-body">
+          <span class="day-emoji">❤️</span>
+          <p class="day-date">Giorno 18 · 23 Agosto</p>
+          <h3 class="day-label">Saluti al Mare</h3>
+          <ul class="day-activities">
+            <li>È arrivato il momento della partenza, ma prima ci si concede un ultimo massaggio ai piedi in spiaggia</li>
+            <li>Passeggiata di saluti al mare: ci si guarda intorno cercando di imprimere tutto nella memoria ❤️</li>
+            <li>A mezzogiorno si parte per l'aeroporto, alle 16:30 si decolla</li>
+            <li>Il giorno dopo, alle 08:00, si atterra a Malpensa: la testa è ancora tra le onde delle Gili</li>
+          </ul>
+          <span class="day-highlight" style="background: rgba(61,155,155,0.1); color: var(--teal);">🌊 Arrivederci Bali</span>
+          <a class="day-photos" href="galleria.html#day18">
+            <span class="dp-thumbs dp-2">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day18/IMG_2470.jpg" loading="lazy" decoding="async" alt="">
+              <img src="https://gioriva.github.io/album/indonesia2025/thumb/day18/IMG_2474.jpg" loading="lazy" decoding="async" alt="">
+            </span>
+            <span class="dp-more">Vedi le 2 foto <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
         </div>
       </div>
     </div>
