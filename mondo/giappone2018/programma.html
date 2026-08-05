@@ -1181,6 +1181,94 @@
   }
   .ham-link:hover .ham-sub { color: rgba(245,240,232,0.55); }
 
+
+  /* ─── ROUTE MAP (merged from percorso) ─── */
+  .route-block {
+    margin: 0 0 3rem;
+  }
+  .route-map-img {
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+  .route-map-img img { width: 100%; display: block; cursor: zoom-in; }
+  .route-heading {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .route-heading-sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--torii);
+    margin-bottom: 1.8rem;
+  }
+  .route-stops { display: flex; flex-direction: column; }
+  .route-stop {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    position: relative;
+  }
+  .route-stop::before {
+    content: '';
+    position: absolute;
+    left: 15px; top: 32px; bottom: -8px;
+    width: 1px;
+    background: var(--torii);
+    opacity: 0.3;
+  }
+  .route-stop:last-child::before { display: none; }
+  .stop-dot {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--torii);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.62rem; font-weight: 700;
+    color: var(--paper);
+    margin-top: 0.15rem;
+  }
+  .stop-info { padding-bottom: 1.6rem; }
+  .stop-city {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .stop-days-label {
+    font-size: 0.72rem;
+    color: var(--torii);
+    letter-spacing: 0.08em;
+  }
+  .stop-highlights {
+    font-size: 0.8rem;
+    color: #5a4e3e;
+    margin-top: 0.2rem;
+    line-height: 1.6;
+  }
+  .prog-section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 3.5rem 0 0.3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .prog-section-sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--torii);
+    margin-bottom: 2rem;
+  }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 700px) {
     .timeline::before { left: 26px; }
@@ -1299,11 +1387,88 @@
 <div class="subpage-hero">
   <div class="subpage-hero-jp">旅程</div>
   <h1 class="subpage-hero-title">Pro<span>gramma</span></h1>
-  <div class="subpage-hero-sub">13 giorni · 7 città · Aprile 2018</div>
+  <div class="subpage-hero-sub">Il percorso e le 13 giornate · Aprile 2018</div>
 </div>
 
 <div class="subpage-content">
-<p class="prog-intro">Il programma giorno per giorno del viaggio: 13 giorni in Giappone tra Tokyo, Osaka, Nara, Kyoto, Hiroshima, Kanazawa, Nagano e ritorno a Tokyo.</p>
+<div class="route-block">
+  <div class="route-map-img">
+    <img src="https://gioriva.github.io/album/giappone2018/Extra/mappa_percorso.png" alt="Mappa del percorso Spring in Japan 2018" loading="lazy" onclick="openLightbox(this)">
+  </div>
+  <div class="route-heading">Le tappe</div>
+  <div class="route-heading-sub">旅のルート · Da est a ovest e ritorno</div>
+<div class="route-stops">
+        <div class="route-stop">
+          <div class="stop-dot">1-2</div>
+          <div class="stop-info">
+            <div class="stop-city">Tokyo 東京</div>
+            <div class="stop-days-label">Days 1–2 · 2–3 Aprile</div>
+            <div class="stop-highlights">Capsule Hotel Ginza · Tsukiji · Shibuya · Rappongi</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">3-4</div>
+          <div class="stop-info">
+            <div class="stop-city">Osaka 大阪</div>
+            <div class="stop-days-label">Days 3–4 · 4–5 Aprile</div>
+            <div class="stop-highlights">Shinkansen · Castello · Kaiyūkan Acquario · Dotonbori</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">4</div>
+          <div class="stop-info">
+            <div class="stop-city">Nara 奈良</div>
+            <div class="stop-days-label">Day 4 · 5 Aprile (gita)</div>
+            <div class="stop-highlights">Tōdai-ji · Daibutsu · 1.200 cervi liberi</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">5-8</div>
+          <div class="stop-info">
+            <div class="stop-city">Kyoto 京都</div>
+            <div class="stop-days-label">Days 5–8 · 6–9 Aprile</div>
+            <div class="stop-highlights">Bamboo Forest · Fushimi-Inari · Kinkaku-ji · Hiroshima (gita)</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">8</div>
+          <div class="stop-info">
+            <div class="stop-city">Hiroshima 広島 + Miyajima</div>
+            <div class="stop-days-label">Day 8 · 9 Aprile (gita)</div>
+            <div class="stop-highlights">Parco della Pace · Isola di Miyajima · Grande Torii</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">9</div>
+          <div class="stop-info">
+            <div class="stop-city">Kanazawa 金沢</div>
+            <div class="stop-days-label">Day 9 · 10 Aprile</div>
+            <div class="stop-highlights">Kenrokuen · Higashi Chaya · Castello · Ippei Sushi</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">10</div>
+          <div class="stop-info">
+            <div class="stop-city">Yamanouchi / Nagano 長野</div>
+            <div class="stop-days-label">Day 10 · 11 Aprile</div>
+            <div class="stop-highlights">Ryokan Koishiya · Snow Monkeys · Onsen Sansuikaku</div>
+          </div>
+        </div>
+        <div class="route-stop">
+          <div class="stop-dot">11-13</div>
+          <div class="stop-info">
+            <div class="stop-city">Tokyo 東京</div>
+            <div class="stop-days-label">Days 11–13 · 12–14 Aprile</div>
+            <div class="stop-highlights">Odaiba · Gundam · Monte Fuji · Akihabara · Hachiko</div>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div class="prog-section-title">Giorno per giorno</div>
+<div class="prog-section-sub">旅程 · Il dettaglio delle 13 giornate</div>
+
+<p class="prog-intro">Il percorso completo del viaggio e il dettaglio giorno per giorno: 13 giorni in Giappone tra Tokyo, Osaka, Nara, Kyoto, Hiroshima, Kanazawa, Nagano e ritorno a Tokyo.</p>
     <div class="prog-list">
 <div class="prog-row">
   <div class="prog-left">
@@ -1489,14 +1654,8 @@
     <a class="ham-link" style="background:rgba(212,65,10,0.25); color:var(--paper);" href="programma.html">
       <span class="ham-icon">📅</span> Programma
     </a>
-    <a class="ham-link" href="percorso.html">
-      <span class="ham-icon">🗺</span> Il percorso
-    </a>
     <a class="ham-link" href="galleria.html">
       <span class="ham-icon">🖼</span> Galleria
-    </a>
-    <a class="ham-link" href="link-utili.html">
-      <span class="ham-icon">🔗</span> Link utili
     </a>
   </nav>
   <div class="ham-footer">gioriva.it · Aprile 2018</div>
