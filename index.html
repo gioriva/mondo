@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0A0A0C">
+<meta name="theme-color" content="#15151C">
 <title>Giorgio Riva</title>
 
 <meta name="description" content="Freedom is a state of mind.">
@@ -51,7 +51,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --sumi:  #0C0C0D;
+  --sumi:  #17171E;
   --washi: #E9E4D8;
   --muted: #6E675D;
   --shu:   #B5433C;
@@ -61,10 +61,10 @@
   --sans:  'Montserrat', sans-serif;
 }
 
-html { background: #0A0A0C; }
+html { background: #15151C; }
 
 body {
-  background: linear-gradient(180deg, #0A0A0C 0%, #0C0C0D 45%, #0E0D0C 100%);
+  background: linear-gradient(180deg, #15151C 0%, #17171E 45%, #1B1913 100%);
   color: var(--washi);
   font-family: var(--sans);
   font-weight: 300;
@@ -153,7 +153,7 @@ body.menu-open #burger span:nth-child(3) { transform: translateY(-7px) rotate(-4
 #menu-veil {
   position: fixed; inset: 0;
   z-index: 10003;
-  background: rgba(8,8,9,0.72);
+  background: rgba(14,14,18,0.70);
   backdrop-filter: blur(3px);
   opacity: 0; visibility: hidden;
   transition: opacity .5s, visibility .5s;
@@ -165,7 +165,7 @@ body.menu-open #menu-veil { opacity: 1; visibility: visible; }
   top: 0; right: 0; bottom: 0;
   z-index: 10004;
   width: min(420px, 88vw);
-  background: rgba(13,12,13,0.985);
+  background: rgba(24,24,31,0.985);
   border-left: 1px solid rgba(233,228,216,0.09);
   box-shadow: -30px 0 80px rgba(0,0,0,0.55);
   transform: translateX(100%);
@@ -290,16 +290,16 @@ body.menu-open .menu-icons { opacity: 1; transition-delay: .45s; }
 body.hov #cur-dot  { width: 10px; height: 10px; background: var(--washi); }
 body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9); }
 
-/* ── Crane (tancho) ── */
-#crane {
+/* ── Dragon (ryu) ── */
+#dragon {
   position: fixed;
   z-index: 8;
   opacity: 0;
   transition: opacity 1.5s ease;
   pointer-events: none;
 }
-#crane.visible { opacity: 1; }
-#crane svg { display: block; overflow: visible; }
+#dragon.visible { opacity: 1; }
+#dragon svg { display: block; overflow: visible; }
 
 /* ── Cookie banner ── */
 #cookie-banner {
@@ -309,7 +309,7 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
   transform: translateX(-50%) translateY(140%);
   z-index: 10000;
   width: min(92vw, 640px);
-  background: rgba(15,14,13,0.97);
+  background: rgba(26,25,31,0.97);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(233,228,216,0.14);
   border-radius: 4px;
@@ -372,14 +372,14 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
   .identity { left: 6vw; bottom: 3dvh; right: 6vw; }
   .identity h1 {
     font-size: clamp(2.3rem, 11vw, 3.4rem);
-    text-shadow: 0 0 26px rgba(12,12,13,0.95), 0 0 10px rgba(12,12,13,0.9);
+    text-shadow: 0 0 26px rgba(21,21,28,0.95), 0 0 10px rgba(21,21,28,0.9);
   }
   .identity .rule { margin: 0.9rem 0; }
   .identity p {
     font-size: 1rem;
-    text-shadow: 0 0 18px rgba(12,12,13,0.95);
+    text-shadow: 0 0 18px rgba(21,21,28,0.95);
   }
-  #crane { transform: scale(0.75); }
+  #dragon { transform: scale(0.75); }
   #cookie-banner {
     flex-direction: column;
     align-items: stretch;
@@ -402,8 +402,8 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"  stop-color="#16130F"/>
-      <stop offset="100%" stop-color="#070707"/>
+      <stop offset="0%"  stop-color="#241F17"/>
+      <stop offset="100%" stop-color="#100F0E"/>
     </linearGradient>
     <radialGradient id="moonglow" cx="50%" cy="0%" r="100%">
       <stop offset="0%"  stop-color="rgba(200,169,126,0.09)"/>
@@ -425,16 +425,16 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
   <g id="moon-link">
     <g id="moon-group">
       <circle cx="1130" cy="230" r="64" fill="#E9E4D8" opacity="0.88"/>
-      <circle cx="1108" cy="212" r="9"  fill="#0C0C0D" opacity="0.07"/>
-      <circle cx="1148" cy="248" r="13" fill="#0C0C0D" opacity="0.06"/>
-      <circle cx="1122" cy="256" r="6"  fill="#0C0C0D" opacity="0.05"/>
+      <circle cx="1108" cy="212" r="9"  fill="#17171E" opacity="0.07"/>
+      <circle cx="1148" cy="248" r="13" fill="#17171E" opacity="0.06"/>
+      <circle cx="1122" cy="256" r="6"  fill="#17171E" opacity="0.05"/>
     </g>
   </g>
 
   <!-- ══ MOUNT FUJI (scenery) ══ -->
   <g id="fuji">
     <path d="M 60 660 C 260 610, 340 460, 396 318 L 484 318 C 540 460, 620 610, 820 660 Z"
-          fill="#131317"/>
+          fill="#212129"/>
     <path d="M 60 660 C 260 610, 340 460, 396 318 L 484 318 C 540 460, 620 610, 820 660"
           fill="none" stroke="rgba(233,228,216,0.13)" stroke-width="1"/>
     <!-- snow cap -->
@@ -444,13 +444,13 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 
   <!-- ══ HIMEJI hill (scenery) ══ -->
   <g id="himeji-hill">
-    <path d="M 980 660 Q 1180 590 1440 630 L 1440 660 Z" fill="#111115"/>
+    <path d="M 980 660 Q 1180 590 1440 630 L 1440 660 Z" fill="#1D1D25"/>
     <path d="M 980 660 Q 1180 590 1440 630" stroke="rgba(233,228,216,0.10)" stroke-width="1" fill="none"/>
   </g>
 
   <!-- ══ HIMEJI CASTLE → MONDO ══ -->
   <g id="himeji-link">
-  <g id="himeji" stroke="rgba(233,228,216,0.16)" stroke-width="1" fill="#0A0A0B">
+  <g id="himeji" stroke="rgba(233,228,216,0.16)" stroke-width="1" fill="#191920">
     <!-- base walls -->
     <path d="M 1150 620 L 1160 585 L 1290 585 L 1300 620 Z"/>
     <!-- tier 1 -->
@@ -528,38 +528,51 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 
 
 <!-- Crane (tancho) -> /drone/ -->
-<div id="crane">
-  <svg width="80" height="46" viewBox="0 0 80 46" xmlns="http://www.w3.org/2000/svg" fill="none">
-    <!-- far wing (behind body) -->
-    <g id="wing-far">
-      <path d="M 40 23 C 31 12, 20 6, 9 8 C 21 13, 29 18, 40 23 Z"
-            fill="#E9E4D8" opacity="0.5"/>
-      <path d="M 14 7 C 11 7.2, 9.5 7.6, 9 8 C 12 9.2, 15 10.4, 18 11.5 C 16.4 9.9, 15.1 8.4, 14 7 Z"
-            fill="#1A1918" opacity="0.6"/>
-    </g>
-    <!-- tail -->
-    <path d="M 26 24 L 15 26.5 L 26 29 Z" fill="#E9E4D8" opacity="0.85"/>
-    <path d="M 18 25.3 L 15 26.5 L 18 27.8 Z" fill="#1A1918" opacity="0.9"/>
-    <!-- legs trailing -->
-    <path d="M 28 28 L 13 32.5" stroke="#E9E4D8" stroke-width="1" stroke-opacity="0.55" stroke-linecap="round"/>
-    <path d="M 29 29 L 14 35.5" stroke="#E9E4D8" stroke-width="1" stroke-opacity="0.55" stroke-linecap="round"/>
-    <!-- body -->
-    <ellipse cx="38" cy="26" rx="14" ry="5.4" fill="#E9E4D8" opacity="0.92" transform="rotate(-7 38 26)"/>
-    <!-- neck + head -->
-    <path d="M 49 23.5 C 56 21.5, 60 18, 64.5 14.5" stroke="#E9E4D8" stroke-width="2.6" stroke-linecap="round" stroke-opacity="0.92"/>
-    <circle cx="65.5" cy="13.8" r="2.3" fill="#E9E4D8" opacity="0.95"/>
-    <path d="M 67.5 13.2 L 75 11.4" stroke="#E9E4D8" stroke-width="1.2" stroke-linecap="round" stroke-opacity="0.85"/>
-    <!-- red crown -->
-    <circle cx="65" cy="12" r="1.4" fill="#B5433C"/>
-    <!-- near wing (in front) -->
-    <g id="wing-near">
-      <path d="M 42 24 C 34 9, 23 1, 10 3 C 24 9, 32 17, 42 24 Z"
-            fill="#E9E4D8" opacity="0.95"/>
-      <path d="M 16 2.2 C 13 2.4, 11 2.7, 10 3 C 13.5 4.5, 17 6, 20.5 7.6 C 18.8 5.7, 17.3 3.9, 16 2.2 Z"
-            fill="#1A1918" opacity="0.75"/>
+<div id="dragon">
+  <svg width="170" height="76" viewBox="0 0 170 76" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <defs>
+      <linearGradient id="dg-skin" x1="1" y1="0" x2="0" y2="0">
+        <stop offset="0%"   stop-color="#C85A45"/>
+        <stop offset="45%"  stop-color="#B5433C"/>
+        <stop offset="100%" stop-color="#8E3A34"/>
+      </linearGradient>
+      <linearGradient id="dg-fade" x1="1" y1="0" x2="0" y2="0">
+        <stop offset="0%"   stop-color="#C8A97E" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#C8A97E" stop-opacity="0.15"/>
+      </linearGradient>
+    </defs>
+
+    <g id="dg-scene">
+      <path id="dg-body"  fill="url(#dg-skin)"/>
+      <path id="dg-belly" fill="none" stroke="url(#dg-fade)" stroke-width="0.9" stroke-linecap="round"/>
+      <path id="dg-ridge" fill="#8E3A34" opacity="0.95"/>
+      <g id="dg-limbs"></g>
+      <g id="dg-tail"></g>
+      <g id="dg-head">
+        <!-- mane -->
+        <path d="M -1 -3.4 C -5 -7.5, -10 -9.5, -15 -10 C -10 -7, -6 -4.6, -3 -2.4 Z" fill="#8E3A34"/>
+        <path d="M -2 -1 C -8 -2.6, -13 -2.4, -18 -0.6 C -12 -0.6, -7 0.6, -3 2 Z" fill="#8E3A34" opacity="0.85"/>
+        <!-- horns -->
+        <path d="M 1.5 -3.2 C 0.4 -8, -2.6 -12, -7.4 -14.4 C -3.4 -10.6, -0.8 -6.6, 0.4 -3 Z" fill="#C8A97E"/>
+        <path d="M 4.2 -3.6 C 4 -7.6, 2.4 -11, -0.6 -13.8 C 1.4 -10, 2.4 -6.6, 2.8 -3.4 Z" fill="#C8A97E" opacity="0.7"/>
+        <!-- head + snout -->
+        <path d="M -2 -4 C 5 -5.2, 12 -3.6, 16.4 -1.4 L 16.4 1.8
+                 C 12 4, 5 5.4, -2 4.2 C -4.4 2.6, -4.4 -2.4, -2 -4 Z" fill="url(#dg-skin)"/>
+        <!-- jaw line -->
+        <path d="M 2 2.6 C 7 3.6, 12 3, 15.6 1.6" stroke="#C8A97E" stroke-width="0.7" stroke-opacity="0.55" fill="none"/>
+        <!-- eye -->
+        <circle cx="8.6" cy="-1.6" r="1.5" fill="#E8C07A"/>
+        <circle cx="8.9" cy="-1.6" r="0.6" fill="#17171E"/>
+        <!-- nostril -->
+        <circle cx="15" cy="-0.4" r="0.55" fill="#17171E" opacity="0.6"/>
+        <!-- whiskers -->
+        <path d="M 15.4 0.4 C 8 4.6, -2 8.4, -13 9.4" stroke="#C8A97E" stroke-width="0.85"
+              stroke-opacity="0.8" stroke-linecap="round" fill="none"/>
+        <path d="M 14.6 1.6 C 8 6.6, 0 11, -9 14" stroke="#C8A97E" stroke-width="0.7"
+              stroke-opacity="0.55" stroke-linecap="round" fill="none"/>
+      </g>
     </g>
   </svg>
-  </a>
 </div>
 
 <!-- Menu -->
@@ -814,7 +827,7 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
       var tw = 0.18 + 0.35 * (0.5 + 0.5 * Math.sin(ts * s.speed + s.phase));
       ctx.beginPath();
       ctx.arc(s.x * cv.width, s.y * cv.height, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(233,228,216,' + tw.toFixed(3) + ')';
+      ctx.fillStyle = 'rgba(240,236,226,' + tw.toFixed(3) + ')';
       ctx.fill();
     }
     for (var m = meteors.length - 1; m >= 0; m--) {
@@ -1005,16 +1018,128 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 })();
 
 /* ════════════════════════════════════
-   CRANE flight: gliding with wing beats
+   DRAGON flight: undulating serpentine body
    ════════════════════════════════════ */
 (function () {
-  var crane = document.getElementById('crane');
-  var svg = crane.querySelector('svg');
-  var wingNear = document.getElementById('wing-near');
-  var wingFar  = document.getElementById('wing-far');
+  var dragon = document.getElementById('dragon');
+  var svg    = dragon.querySelector('svg');
+  var body   = document.getElementById('dg-body');
+  var belly  = document.getElementById('dg-belly');
+  var ridge  = document.getElementById('dg-ridge');
+  var head   = document.getElementById('dg-head');
+  var limbsG = document.getElementById('dg-limbs');
+  var tailG  = document.getElementById('dg-tail');
+  var NS2 = 'http://www.w3.org/2000/svg';
+
   var W = window.innerWidth, H = window.innerHeight;
   window.addEventListener('resize', function () { W = window.innerWidth; H = window.innerHeight; });
 
+  /* ── serpentine geometry ── */
+  var N = 46;                 // spine samples, s = 0 (head) .. 1 (tail)
+  var HEAD_X = 150, TAIL_X = 12, MID_Y = 38;
+
+  function spine(s, ph) {
+    var x = HEAD_X - (HEAD_X - TAIL_X) * s;
+    var amp = 7.5 * (0.28 + 0.72 * s);          // tail swings wider
+    var y = MID_Y + Math.sin(s * 5.4 + ph) * amp;
+    return { x: x, y: y };
+  }
+  function halfWidth(s) {
+    return 7.2 * Math.pow(1 - s, 0.5) * (0.82 + 0.18 * Math.sin(Math.PI * Math.min(1, s * 2.6)));
+  }
+
+  /* two limbs, rebuilt each frame at their spine position */
+  var limbs = [];
+  [0.28, 0.60].forEach(function () {
+    var g = document.createElementNS(NS2, 'g');
+    var p = document.createElementNS(NS2, 'path');
+    p.setAttribute('d', 'M 0 0 C -1.6 4.4, -4.4 7, -8.4 8.4 L -6.6 9.6 M -8.4 8.4 L -9.4 6.4 M -8.4 8.4 L -10.4 8.8');
+    p.setAttribute('stroke', '#8E3A34');
+    p.setAttribute('stroke-width', '1.9');
+    p.setAttribute('stroke-linecap', 'round');
+    p.setAttribute('fill', 'none');
+    g.appendChild(p);
+    limbsG.appendChild(g);
+    limbs.push(g);
+  });
+
+  /* tail flame tuft */
+  var tailPath = document.createElementNS(NS2, 'path');
+  tailPath.setAttribute('d', 'M 0 0 C -5 -3.4, -10 -4.6, -15.5 -4 C -10.5 -1.6, -6 0.6, -2 2.4 Z');
+  tailPath.setAttribute('fill', '#C8A97E');
+  tailPath.setAttribute('opacity', '0.75');
+  tailG.appendChild(tailPath);
+  var tailPath2 = document.createElementNS(NS2, 'path');
+  tailPath2.setAttribute('d', 'M 0 0 C -5 2.6, -10 4.6, -16 5.6 C -10 4.4, -5 2.6, -1 0.6 Z');
+  tailPath2.setAttribute('fill', '#C8A97E');
+  tailPath2.setAttribute('opacity', '0.45');
+  tailG.appendChild(tailPath2);
+
+  function renderBody(ph) {
+    var pts = [], i, s, p;
+    for (i = 0; i <= N; i++) {
+      s = i / N;
+      p = spine(s, ph);
+      p.s = s;
+      pts.push(p);
+    }
+    // normals
+    for (i = 0; i <= N; i++) {
+      var a = pts[Math.max(0, i - 1)], b = pts[Math.min(N, i + 1)];
+      var tx = b.x - a.x, ty = b.y - a.y;
+      var len = Math.hypot(tx, ty) || 1;
+      pts[i].nx = -ty / len;
+      pts[i].ny =  tx / len;
+      // forward = toward the head (spine runs head -> tail)
+      pts[i].ang = Math.atan2(-ty, -tx) * 180 / Math.PI;
+      pts[i].w = halfWidth(pts[i].s);
+    }
+
+    var top = '', bot = '', mid = '';
+    for (i = 0; i <= N; i++) {
+      p = pts[i];
+      top += (i === 0 ? 'M' : 'L') + (p.x + p.nx * p.w).toFixed(2) + ',' + (p.y + p.ny * p.w).toFixed(2);
+      mid += (i === 0 ? 'M' : 'L') + p.x.toFixed(2) + ',' + (p.y - p.ny * p.w * 0.45).toFixed(2);
+    }
+    for (i = N; i >= 0; i--) {
+      p = pts[i];
+      bot += 'L' + (p.x - p.nx * p.w).toFixed(2) + ',' + (p.y - p.ny * p.w).toFixed(2);
+    }
+    body.setAttribute('d', top + bot + 'Z');
+    belly.setAttribute('d', mid);
+
+    // dorsal spikes along the upper edge
+    var spikes = '';
+    for (i = 3; i < N - 4; i += 3) {
+      var q = pts[i], r = pts[i + 2];
+      var bx = q.x + q.nx * q.w, by = q.y + q.ny * q.w;
+      var ex = r.x + r.nx * r.w, ey = r.y + r.ny * r.w;
+      var mxp = (bx + ex) / 2 + q.nx * q.w * 1.15;
+      var myp = (by + ey) / 2 + q.ny * q.w * 1.15;
+      spikes += 'M' + bx.toFixed(2) + ',' + by.toFixed(2) +
+                'L' + mxp.toFixed(2) + ',' + myp.toFixed(2) +
+                'L' + ex.toFixed(2) + ',' + ey.toFixed(2) + 'Z';
+    }
+    ridge.setAttribute('d', spikes);
+
+    // head follows the first spine point
+    var h = pts[0];
+    head.setAttribute('transform', 'translate(' + h.x.toFixed(2) + ',' + h.y.toFixed(2) + ') rotate(' + h.ang.toFixed(1) + ')');
+
+    // limbs
+    [0.28, 0.60].forEach(function (ls, k) {
+      var lp = spine(ls, ph);
+      var i2 = Math.round(ls * N);
+      limbs[k].setAttribute('transform',
+        'translate(' + lp.x.toFixed(2) + ',' + lp.y.toFixed(2) + ') rotate(' + pts[i2].ang.toFixed(1) + ')');
+    });
+
+    // tail tuft
+    var tl = pts[N];
+    tailG.setAttribute('transform', 'translate(' + tl.x.toFixed(2) + ',' + tl.y.toFixed(2) + ') rotate(' + tl.ang.toFixed(1) + ')');
+  }
+
+  /* ── flight path ── */
   var waypoints = [
     [0.14, 0.14], [0.34, 0.08], [0.55, 0.16], [0.74, 0.07],
     [0.88, 0.13], [0.84, 0.30], [0.64, 0.36], [0.44, 0.28],
@@ -1022,13 +1147,13 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
   ];
 
   var idx = 0;
-  var startX = -80, startY = H * 0.18;
+  var startX = -110, startY = H * 0.18;
   var targetX = waypoints[0][0] * W, targetY = waypoints[0][1] * H;
   var startTime = null;
   var segDuration = 9000;
-  var facing = 1; // 1 = right, -1 = left
+  var facing = 1;
 
-  setTimeout(function () { crane.classList.add('visible'); }, 1400);
+  setTimeout(function () { dragon.classList.add('visible'); }, 1400);
 
   function easeInOut(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
 
@@ -1038,25 +1163,17 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
     var e = easeInOut(t);
     var x = startX + (targetX - startX) * e;
     var y = startY + (targetY - startY) * e;
-    var bob = Math.sin(ts * 0.0011) * 2.5;
+    var bob = Math.sin(ts * 0.0009) * 2.5;
 
-    crane.style.left = (x - 40) + 'px';
-    crane.style.top  = (y - 23 + bob) + 'px';
+    dragon.style.left = (x - 85) + 'px';
+    dragon.style.top  = (y - 38 + bob) + 'px';
 
-    /* face direction of travel */
     var dir = (targetX - startX) >= 0 ? 1 : -1;
-    facing += (dir - facing) * 0.08;
-    var tilt = Math.max(-8, Math.min(8, (targetY - startY) * -0.008 * dir));
+    facing += (dir - facing) * 0.06;
+    var tilt = Math.max(-7, Math.min(7, (targetY - startY) * -0.007 * dir));
     svg.style.transform = 'scaleX(' + facing.toFixed(3) + ') rotate(' + tilt.toFixed(1) + 'deg)';
 
-    /* wing beat: slow flap with glide pauses */
-    var beat = Math.sin(ts * 0.004);
-    var glide = 0.5 + 0.5 * Math.sin(ts * 0.0006);        /* 0..1, slow cycle */
-    var amp = 6 + 16 * glide;                              /* flap harder, then glide */
-    var nearA = beat * amp;
-    var farA  = Math.sin(ts * 0.004 + 0.7) * amp * 0.8;
-    wingNear.setAttribute('transform', 'rotate(' + nearA.toFixed(1) + ' 42 24)');
-    wingFar.setAttribute('transform',  'rotate(' + farA.toFixed(1)  + ' 40 23)');
+    renderBody(ts * 0.0026);
 
     if (t >= 1) {
       startX = x; startY = y + bob;
