@@ -171,26 +171,6 @@
     animation: fadeUp 1s 0.9s forwards;
   }
 
-  .hero-meta {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    margin-top: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 1s 1.2s forwards;
-  }
-
-  .hero-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    color: var(--clay);
-    text-transform: uppercase;
-    border: 1px solid rgba(200,168,130,0.4);
-    padding: 0.4rem 0.9rem;
-    border-radius: 2px;
-  }
-
   .scroll-hint {
     position: absolute;
     bottom: 2.5rem;
@@ -260,7 +240,7 @@
   }
   .nav-day {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.62rem;
     letter-spacing: 0.1em;
     color: rgba(255,255,255,0.5);
     padding: 0.3rem 0.5rem;
@@ -274,30 +254,26 @@
     color: var(--gold);
     background: rgba(212,168,67,0.15);
   }
-
-
-
-  /* ── TIMELINE STRIP ── */
-  #timeline-strip {
-    background: var(--deep-ocean);
-    padding: 2.2rem 2rem 2.4rem;
-    text-align: center;
-  }
-  .ts-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--clay);
-    margin-bottom: 1.2rem;
-  }
+  /* ── TIMELINE (integrata nell'intestazione) ── */
   .ts-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
+    gap: 0.35rem;
     justify-content: center;
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 1000px;
+    margin: 2rem auto 0;
+    padding-top: 1.6rem;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .ts-links .nav-day {
+    color: var(--text-light);
+    border: 1px solid transparent;
+  }
+  .ts-links .nav-day:hover,
+  .ts-links .nav-day.active {
+    color: var(--terracotta);
+    background: rgba(196,97,58,0.08);
+    border-color: rgba(196,97,58,0.25);
   }
 
 
@@ -382,7 +358,7 @@
 
   .days-header {
     background: var(--white);
-    padding: 4rem 2rem 3rem;
+    padding: 4.5rem 2rem 3rem;
     text-align: center;
     border-bottom: 1px solid rgba(0,0,0,0.06);
   }
@@ -632,9 +608,11 @@
   }
   .hl-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
   }
+  @media (max-width: 900px) { .hl-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .hl-grid { grid-template-columns: 1fr; } }
   .hl-item {
     background: rgba(255,255,255,0.12);
     border-radius: 4px;
@@ -661,44 +639,6 @@
     line-height: 1.5;
   }
 
-  /* ── STATS ── */
-  #stats {
-    background: var(--deep-ocean);
-    padding: 4.5rem 2rem;
-  }
-  .stats-inner {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
-    text-align: center;
-  }
-  .stat-item {}
-  .stat-number {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    color: var(--gold);
-    font-weight: 900;
-    line-height: 1;
-    display: block;
-  }
-  .stat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    margin-top: 0.4rem;
-    display: block;
-  }
-  .stat-divider {
-    width: 1px;
-    background: rgba(255,255,255,0.1);
-    margin: 0 auto;
-  }
 
   /* ── FOOTER ── */
   footer {
@@ -868,11 +808,6 @@
       A Cali<br><span>Story ☀️</span>
     </h1>
     <p class="hero-subtitle">Dalle onde del Pacifico alle luci del Nevada</p>
-    <div class="hero-meta">
-      <span class="hero-badge">Road Trip</span>
-      <span class="hero-badge">5.000+ km</span>
-      <span class="hero-badge">15 giorni di magia</span>
-    </div>
   </div>
 
   <div class="scroll-hint" onclick="document.getElementById('days').scrollIntoView({behavior:'smooth'})">
@@ -882,18 +817,13 @@
 </section>
 
 
-<!-- TIMELINE STRIP -->
-<div id="timeline-strip">
-  <p class="ts-label">La timeline del viaggio</p>
-  <div class="ts-links" id="timeline-links"></div>
-</div>
-
 <!-- DAYS SECTION -->
 <section id="days">
   <div class="days-header">
     <p class="section-label">Giorno per giorno</p>
     <h2>Il diario di viaggio</h2>
     <p>Ogni giorno una nuova avventura, ogni miglio un nuovo paesaggio</p>
+    <div class="ts-links" id="timeline-links"></div>
   </div>
 
   <div class="filter-bar" id="filter-bar">
@@ -944,37 +874,15 @@
         <h4>Cielo stellato nel deserto</h4>
         <p>Due poltroncine, vino del ranch e infinite stelle sopra la testa</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section id="stats">
-  <div class="stats-inner">
-    <div class="stats-grid">
-      <div class="stat-item reveal">
-        <span class="stat-number">15</span>
-        <span class="stat-label">Giorni di viaggio</span>
+      <div class="hl-item reveal reveal-delay-1">
+        <span class="hl-icon">🛣️</span>
+        <h4>Quasi 5.000 km</h4>
+        <p>Dalla Pacific Coast Highway al deserto del Nevada, sempre su strada</p>
       </div>
-      <div class="stat-item reveal reveal-delay-1">
-        <span class="stat-number">5k+</span>
-        <span class="stat-label">Km percorsi</span>
-      </div>
-      <div class="stat-item reveal reveal-delay-2">
-        <span class="stat-number">48°</span>
-        <span class="stat-label">Caldo nella Death Valley</span>
-      </div>
-      <div class="stat-item reveal reveal-delay-3">
-        <span class="stat-number">3</span>
-        <span class="stat-label">Apple Store visitati</span>
-      </div>
-      <div class="stat-item reveal">
-        <span class="stat-number">1</span>
-        <span class="stat-label">Orso avvistato</span>
-      </div>
-      <div class="stat-item reveal reveal-delay-1">
-        <span class="stat-number">∞</span>
-        <span class="stat-label">Ricordi nel cuore</span>
+      <div class="hl-item reveal reveal-delay-2">
+        <span class="hl-icon">📅</span>
+        <h4>15 giorni</h4>
+        <p>Un road trip indimenticabile, dal primo all'ultimo miglio</p>
       </div>
     </div>
   </div>
