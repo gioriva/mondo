@@ -549,27 +549,61 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
       <g id="dg-limbs"></g>
       <g id="dg-tail"></g>
       <g id="dg-head">
-        <!-- mane -->
-        <path d="M -1 -3.4 C -5 -7.5, -10 -9.5, -15 -10 C -10 -7, -6 -4.6, -3 -2.4 Z" fill="#8E3A34"/>
-        <path d="M -2 -1 C -8 -2.6, -13 -2.4, -18 -0.6 C -12 -0.6, -7 0.6, -3 2 Z" fill="#8E3A34" opacity="0.85"/>
-        <!-- horns -->
-        <path d="M 1.5 -3.2 C 0.4 -8, -2.6 -12, -7.4 -14.4 C -3.4 -10.6, -0.8 -6.6, 0.4 -3 Z" fill="#C8A97E"/>
-        <path d="M 4.2 -3.6 C 4 -7.6, 2.4 -11, -0.6 -13.8 C 1.4 -10, 2.4 -6.6, 2.8 -3.4 Z" fill="#C8A97E" opacity="0.7"/>
-        <!-- head + snout -->
-        <path d="M -2 -4 C 5 -5.2, 12 -3.6, 16.4 -1.4 L 16.4 1.8
-                 C 12 4, 5 5.4, -2 4.2 C -4.4 2.6, -4.4 -2.4, -2 -4 Z" fill="url(#dg-skin)"/>
-        <!-- jaw line -->
-        <path d="M 2 2.6 C 7 3.6, 12 3, 15.6 1.6" stroke="#C8A97E" stroke-width="0.7" stroke-opacity="0.55" fill="none"/>
-        <!-- eye -->
-        <circle cx="8.6" cy="-1.6" r="1.5" fill="#E8C07A"/>
-        <circle cx="8.9" cy="-1.6" r="0.6" fill="#17171E"/>
+        <!-- neck mane, flowing back -->
+        <path d="M -2 2 C -7 3.4, -12 5.6, -17 8.6 C -11 6.8, -6 5.4, -1.6 4.6 Z" fill="#8E3A34" opacity="0.9"/>
+        <path d="M -2.4 0.6 C -8 0.8, -14 1.6, -20 3.4 C -13 2.6, -7 2.4, -2 2.6 Z" fill="#8E3A34" opacity="0.7"/>
+        <path d="M -1.6 -4.4 C -6 -6.4, -11 -7.6, -16.5 -7.8 C -11 -6, -6 -4, -2.4 -2 Z" fill="#8E3A34" opacity="0.85"/>
+
+        <!-- horns, antler-like -->
+        <path d="M -0.6 -5 C -2.6 -9.4, -5.6 -12.6, -10 -14.8
+                 C -11.3 -15.4, -12.1 -14.3, -11.1 -13.4
+                 C -7.4 -10.4, -4.4 -7.4, -2.8 -4.2 Z" fill="#C8A97E"/>
+        <path d="M -5.4 -10.4 C -7.6 -12.6, -10 -13.6, -12.8 -14.2
+                 C -10.4 -12.6, -8.4 -10.8, -6.8 -9 Z" fill="#C8A97E" opacity="0.8"/>
+        <path d="M 2.6 -5.6 C 1.6 -9.2, -0.6 -12, -3.8 -14.2
+                 C -1.6 -11, -0.2 -8, 0.6 -5 Z" fill="#C8A97E" opacity="0.55"/>
+
+        <!-- ear fin -->
+        <path d="M -2 -2.6 C -6 -4.2, -9.4 -4.2, -12.4 -3.2
+                 C -9 -2.2, -5.6 -1, -3 0.2 Z" fill="#8E3A34"/>
+
+        <!-- upper head and snout -->
+        <path d="M -3 -5.4 C 2 -7.6, 8 -7.2, 12.4 -4.8
+                 C 16 -3.2, 19.6 -2.6, 21.6 -1.8
+                 C 22.8 -1.3, 22.7 0.3, 21.3 0.6
+                 L 14 1.6 C 9 2.4, 2 2.4, -3 1.4 Z" fill="url(#dg-skin)"/>
+
+        <!-- brow ridge -->
+        <path d="M 4.4 -5.4 C 6.6 -7.4, 10 -7, 12.2 -5.2
+                 C 9.8 -6, 6.8 -6.2, 4.4 -5.4 Z" fill="#8E3A34"/>
+
+        <!-- lower jaw, slightly open -->
+        <path d="M 2 1.8 C 6.4 3.8, 12.4 4.6, 18.6 4.4
+                 C 19.9 4.4, 20.1 3.1, 18.8 2.8
+                 C 12.8 2.4, 6.8 1.6, 2.8 0.8 Z" fill="#8E3A34"/>
+
+        <!-- fangs -->
+        <path d="M 17.6 1 L 18.8 3.2 L 16.6 1.3 Z" fill="#F0E2C2"/>
+        <path d="M 13.4 1.4 L 14.4 3.4 L 12.4 1.6 Z" fill="#F0E2C2" opacity="0.9"/>
+        <path d="M 16.2 2.8 L 15.2 1 L 17.2 2.6 Z" fill="#F0E2C2" opacity="0.85"/>
+
+        <!-- chin beard -->
+        <path d="M 6 3.2 C 4 6.4, 1 8.6, -3 9.8 C 0.4 7.2, 3 4.8, 4.4 2.6 Z" fill="#8E3A34" opacity="0.85"/>
+
+        <!-- eye, slit pupil -->
+        <ellipse cx="8.4" cy="-3.4" rx="2.3" ry="1.6" transform="rotate(-12 8.4 -3.4)" fill="#E8C07A"/>
+        <ellipse cx="8.7" cy="-3.4" rx="0.5" ry="1.25" transform="rotate(-12 8.7 -3.4)" fill="#17171E"/>
+
         <!-- nostril -->
-        <circle cx="15" cy="-0.4" r="0.55" fill="#17171E" opacity="0.6"/>
+        <path d="M 19.4 -1.8 C 20.6 -2.4, 21.6 -2, 21.6 -1.2" stroke="#8E3A34" stroke-width="0.7"
+              stroke-linecap="round" fill="none"/>
+        <circle cx="20.4" cy="-1.1" r="0.5" fill="#17171E" opacity="0.7"/>
+
         <!-- whiskers -->
-        <path d="M 15.4 0.4 C 8 4.6, -2 8.4, -13 9.4" stroke="#C8A97E" stroke-width="0.85"
+        <path d="M 21 -0.6 C 13 3.6, 2 8, -11 9.6" stroke="#C8A97E" stroke-width="0.85"
               stroke-opacity="0.8" stroke-linecap="round" fill="none"/>
-        <path d="M 14.6 1.6 C 8 6.6, 0 11, -9 14" stroke="#C8A97E" stroke-width="0.7"
-              stroke-opacity="0.55" stroke-linecap="round" fill="none"/>
+        <path d="M 20 0.8 C 12 6, 3 10.6, -7 14" stroke="#C8A97E" stroke-width="0.7"
+              stroke-opacity="0.5" stroke-linecap="round" fill="none"/>
       </g>
     </g>
   </svg>
