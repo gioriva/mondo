@@ -99,6 +99,7 @@
       padding: 40px 6vw;
       display: flex; justify-content: center; align-items: center;
       gap: 26px;
+      flex-wrap: wrap;
     }
     .f-item {
       display: inline-flex; align-items: center; gap: 10px;
@@ -109,6 +110,21 @@
     .f-item:hover { color: var(--azure); }
     .f-item svg { width: 17px; height: 17px; }
     .f-sep { color: var(--line); }
+
+    /* FOOTER mobile: griglia 2x2, niente separatori */
+    @media (max-width: 640px) {
+      footer {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        justify-content: center;
+        justify-items: start;
+        gap: 20px 30px;
+        padding: 34px 6vw;
+      }
+      .f-sep { display: none; }
+      .f-item { font-size: 10.5px; letter-spacing: 0.18em; }
+    }
+
 
     .rv { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(0.19,1,0.22,1), transform 1s cubic-bezier(0.19,1,0.22,1); }
     .rv.in { opacity: 1; transform: translateY(0); }
@@ -283,12 +299,31 @@
     }
     .lb-info em { font-style: normal; color: var(--azure); margin-left: 14px; }
 
+    /* ANTEPRIMA MOBILE: in vista "Tutti" mostra solo le prime foto per album */
+    .alb-more { display: none; text-align: center; margin-top: 26px; }
+    .more-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: 'Archivo', sans-serif;
+      font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink); background: transparent;
+      border: 1px solid var(--line);
+      padding: 13px 24px; cursor: pointer;
+      transition: border-color 0.25s, color 0.25s, gap 0.25s;
+    }
+    .more-btn:hover { border-color: var(--azure); color: var(--azure); gap: 18px; }
+    .more-btn svg { width: 12px; height: 12px; }
+
     @media (max-width: 1000px) { .pgrid { columns: 2; } }
     @media (max-width: 640px) {
       .pgrid { columns: 1; }
       .nav-links { display: none; }
       .burger { display: flex; }
       .filters { justify-content: flex-start; }
+      /* in vista "Tutti": massimo 4 tavole per album + pulsante */
+      .alb.preview .ph:nth-of-type(n+5) { display: none; }
+      .alb.preview .alb-more { display: block; }
+      .alb.preview .vid { max-width: 300px; }
+      .alb { padding-top: 9dvh; }
     }
   </style>
 </head>
@@ -407,7 +442,11 @@ ALBUMS.forEach((a, ai) => {
         '<div class="vid-cap">Ripresa in volo · ' + a.name + '</div>' +
       '</div>'
     : '') +
-    '<div class="pgrid" id="g-' + a.slug + '"></div>';
+    '<div class="pgrid" id="g-' + a.slug + '"></div>' +
+    '<div class="alb-more"><button class="more-btn" data-open="' + a.slug + '">' +
+      'Vedi tutte le ' + a.photos.length + ' tavole' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M12 5l7 7-7 7"/></svg>' +
+    '</button></div>';
 
   root.appendChild(sec);
   io.observe(sec);
@@ -424,17 +463,39 @@ ALBUMS.forEach((a, ai) => {
   });
 });
 
-// FILTER
+// FILTER + anteprima mobile
+const mq = window.matchMedia('(max-width: 640px)');
+let filtro = 'all';
+
+function applica() {
+  document.querySelectorAll('.alb').forEach(s => {
+    const attivo = (filtro === 'all' || s.dataset.f === filtro);
+    s.classList.toggle('hidden', !attivo);
+    // anteprima solo su mobile e solo nella vista "Tutti"
+    s.classList.toggle('preview', mq.matches && filtro === 'all');
+  });
+}
+
+function seleziona(f, scrollTop) {
+  filtro = f;
+  document.querySelectorAll('.fbtn').forEach(x => x.classList.toggle('on', x.dataset.f === f));
+  applica();
+  if (scrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 document.querySelectorAll('.fbtn').forEach(b => {
+  b.addEventListener('click', () => seleziona(b.dataset.f, false));
+});
+
+// pulsante "vedi tutte le tavole"
+document.querySelectorAll('.more-btn').forEach(b => {
   b.addEventListener('click', () => {
-    document.querySelectorAll('.fbtn').forEach(x => x.classList.remove('on'));
-    b.classList.add('on');
-    const f = b.dataset.f;
-    document.querySelectorAll('.alb').forEach(s => {
-      s.classList.toggle('hidden', f !== 'all' && s.dataset.f !== f);
-    });
+    seleziona(b.dataset.open, true);
   });
 });
+
+mq.addEventListener('change', applica);
+applica();
 
 // LIGHTBOX
 let ai = 0, pi = 0;

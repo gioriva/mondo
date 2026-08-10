@@ -99,6 +99,7 @@
       padding: 40px 6vw;
       display: flex; justify-content: center; align-items: center;
       gap: 26px;
+      flex-wrap: wrap;
     }
     .f-item {
       display: inline-flex; align-items: center; gap: 10px;
@@ -109,6 +110,21 @@
     .f-item:hover { color: var(--azure); }
     .f-item svg { width: 17px; height: 17px; }
     .f-sep { color: var(--line); }
+
+    /* FOOTER mobile: griglia 2x2, niente separatori */
+    @media (max-width: 640px) {
+      footer {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        justify-content: center;
+        justify-items: start;
+        gap: 20px 30px;
+        padding: 34px 6vw;
+      }
+      .f-sep { display: none; }
+      .f-item { font-size: 10.5px; letter-spacing: 0.18em; }
+    }
+
 
     .rv { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(0.19,1,0.22,1), transform 1s cubic-bezier(0.19,1,0.22,1); }
     .rv.in { opacity: 1; transform: translateY(0); }
