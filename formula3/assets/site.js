@@ -199,10 +199,51 @@
     });
   }
 
+  /* ---------- menu ad hamburger ---------- */
+
+  function inizializzaMenu() {
+    var bottone = document.getElementById("hamburger");
+    var menu = document.getElementById("menu");
+    if (!bottone || !menu) return;
+
+    var velo = document.createElement("div");
+    velo.className = "velo";
+    document.body.appendChild(velo);
+
+    function apri() {
+      menu.classList.add("aperto");
+      bottone.classList.add("aperto");
+      velo.classList.add("visibile");
+      bottone.setAttribute("aria-expanded", "true");
+      bottone.setAttribute("aria-label", "Chiudi il menu");
+    }
+
+    function chiudi() {
+      menu.classList.remove("aperto");
+      bottone.classList.remove("aperto");
+      velo.classList.remove("visibile");
+      bottone.setAttribute("aria-expanded", "false");
+      bottone.setAttribute("aria-label", "Apri il menu");
+    }
+
+    bottone.addEventListener("click", function () {
+      if (menu.classList.contains("aperto")) chiudi(); else apri();
+    });
+    velo.addEventListener("click", chiudi);
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && menu.classList.contains("aperto")) chiudi();
+    });
+    /* le ancore interne chiudono il menu prima di scorrere */
+    Array.prototype.forEach.call(menu.querySelectorAll("a"), function (a) {
+      a.addEventListener("click", function () { chiudi(); });
+    });
+  }
+
   /* ---------- avvio ---------- */
 
   document.addEventListener("DOMContentLoaded", function () {
     inizializzaConsenso();
+    inizializzaMenu();
     costruisciGalleria();
     inizializzaVisore();
 
