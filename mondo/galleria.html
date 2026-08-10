@@ -298,6 +298,149 @@
       background:var(--c-patagonia); flex-shrink:0;
     }
 
+
+    /* filtri */
+    .filtri {
+      display:flex; flex-wrap:wrap; gap:.6rem;
+      margin-bottom:2rem;
+    }
+    .filtro {
+      --c: var(--rosso);
+      font-family:inherit;
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-size:.74rem; font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase;
+      padding:.6rem 1rem;
+      border:1px solid var(--bordo); border-radius:100px;
+      background:#fffdf8; color:var(--grigio);
+      cursor:pointer;
+      transition:border-color .25s, color .25s, background .25s;
+    }
+    .filtro em {
+      font-style:normal; font-size:.66rem;
+      color:var(--tenue); letter-spacing:.04em;
+    }
+    .filtro i {
+      width:8px; height:8px; border-radius:50%;
+      background:var(--c); flex-shrink:0;
+    }
+    .filtro:hover { border-color:var(--c); color:var(--inchiostro); }
+    .filtro.scelto {
+      background:var(--c); border-color:var(--c); color:#fff;
+    }
+    .filtro.scelto em { color:rgba(255,255,255,.75); }
+    .filtro.scelto i { background:rgba(255,255,255,.85); }
+
+    /* blocchi per viaggio */
+    .blocco { margin-bottom:3.2rem; }
+    .blocco[hidden] { display:none; }
+    .blocco-testa {
+      display:flex; align-items:center; gap:1rem;
+      margin-bottom:1.1rem; flex-wrap:wrap;
+    }
+    .blocco-testa .pallino {
+      width:11px; height:11px; border-radius:50%;
+      background:var(--c); flex-shrink:0;
+    }
+    .blocco-testa h3 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.7rem; line-height:1.1;
+    }
+    .blocco-testa .conteggio {
+      font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--tenue);
+    }
+    .blocco-testa .diario {
+      margin-left:auto;
+      font-size:.68rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase;
+      color:var(--c); text-decoration:none;
+      display:inline-flex; align-items:center; gap:.45rem;
+      transition:gap .3s;
+    }
+    .blocco-testa .diario::after { content:'→'; }
+    .blocco-testa .diario:hover { gap:.8rem; }
+
+    .mosaico {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
+      gap:.55rem;
+    }
+    .mosaico button {
+      position:relative;
+      aspect-ratio:1/1;
+      padding:0; border:none; border-radius:3px;
+      overflow:hidden; cursor:pointer;
+      background:var(--carta-2);
+      transition:transform .3s, box-shadow .3s;
+    }
+    .mosaico img {
+      width:100%; height:100%; object-fit:cover; display:block;
+      transition:transform .5s, opacity .4s;
+      opacity:0;
+    }
+    .mosaico img.carica { opacity:1; }
+    .mosaico button:hover { transform:scale(1.03); z-index:2; box-shadow:0 10px 24px rgba(35,32,28,.18); }
+    .mosaico button:hover img { transform:scale(1.08); }
+    .mosaico button:focus-visible { outline:2px solid var(--rosso); outline-offset:3px; }
+
+    .ancora {
+      display:block; margin:1.2rem auto 0;
+      font-family:inherit;
+      font-size:.72rem; font-weight:500;
+      letter-spacing:.16em; text-transform:uppercase;
+      padding:.75rem 1.6rem;
+      border:1px solid var(--bordo); border-radius:100px;
+      background:#fffdf8; color:var(--grigio);
+      cursor:pointer;
+      transition:border-color .25s, color .25s;
+    }
+    .ancora:hover { border-color:var(--rosso); color:var(--rosso); }
+
+    /* visualizzatore */
+    .visore {
+      position:fixed; inset:0; z-index:9500;
+      background:rgba(28,25,21,.94);
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; visibility:hidden;
+      transition:opacity .3s, visibility 0s .3s;
+    }
+    .visore.aperto { opacity:1; visibility:visible; transition:opacity .3s, visibility 0s; }
+    .visore img {
+      max-width:92vw; max-height:84vh;
+      border-radius:3px;
+      box-shadow:0 24px 60px rgba(0,0,0,.5);
+    }
+    .visore-chiudi, .visore-nav {
+      position:absolute;
+      width:46px; height:46px; border-radius:50%;
+      border:1px solid rgba(253,248,238,.3);
+      background:rgba(28,25,21,.5);
+      color:#fdf8ee; cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      font-size:1.1rem;
+      transition:background .25s, border-color .25s;
+    }
+    .visore-chiudi:hover, .visore-nav:hover { background:var(--rosso); border-color:var(--rosso); }
+    .visore-chiudi { top:1.2rem; right:1.2rem; }
+    .visore-nav.prec { left:1.2rem; }
+    .visore-nav.succ { right:1.2rem; }
+    .visore-info {
+      position:absolute; bottom:1.3rem; left:50%;
+      transform:translateX(-50%);
+      font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+      color:rgba(253,248,238,.75);
+      background:rgba(28,25,21,.5);
+      padding:.5rem 1rem; border-radius:100px;
+      white-space:nowrap;
+    }
+    @media (max-width: 640px) {
+      .mosaico { grid-template-columns:repeat(auto-fill, minmax(104px, 1fr)); gap:.4rem; }
+      .visore-nav { width:40px; height:40px; }
+      .visore-nav.prec { left:.5rem; }
+      .visore-nav.succ { right:.5rem; }
+    }
+
     /* footer */
     footer {
       max-width:1280px; width:100%; margin:0 auto;
@@ -452,7 +595,7 @@
         <path d="M2.5 4.6c6.4-1.6 12.6-1.6 19 0"/><path d="M3.6 7.4h16.8"/>
         <path d="M6.2 7.4V21M17.8 7.4V21"/><path d="M5.4 11h13.2"/>
       </svg>
-      <span><b>Gio Riva</b><i>Il sito personale</i></span>
+      <span><b>Gio Riva</b></span>
     </a>
 
     <a class="menu-voce" href="index.html">
@@ -475,151 +618,23 @@
 
   <header class="apertura">
     <h1>La galleria <em>dei viaggi</em></h1>
-    <p class="intro">Gli album fotografici di ogni viaggio, raccolti qui. Scegli una destinazione e apri le sue foto.</p>
+    <p class="intro">Millequattrocentoventisette fotografie, quattro viaggi, otto anni. Filtra per destinazione, tocca una foto per aprirla.</p>
   </header>
 
   <main class="raccolta">
-    <div class="titolo-sezione"><h2>Gli album</h2></div>
-
-    <div class="griglia">
-      <a class="album rivela" style="--c:var(--c-singapore)" href="http://www.gioriva.it/mondo/singapore2012/galleria.html" target="_blank" rel="noopener">
-        <div class="cornice">
-          <span class="anno">2012</span>
-          <div class="scena">
-            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="228" cy="96" r="40" fill="currentColor" opacity=".22"/>
-              <path d="M74 400V182h34v218zM118 400V166h36v234zM164 400V186h34v214zM208 400V158h38v242z" fill="currentColor" opacity=".5"/>
-              <path d="M60 154c62-26 128-30 196-10l6-24C188 98 118 104 52 132z" fill="currentColor"/>
-              <path d="M262 144c14-2 24-8 32-18l-8-8c-6 8-14 12-24 14z" fill="currentColor"/>
-              <path d="M0 352c30 0 30 14 60 14s30-14 60-14 30 14 60 14 30-14 60-14 30 14 60 14v48H0z" fill="currentColor" opacity=".28"/>
-              <path d="M0 376c30 0 30 12 60 12s30-12 60-12 30 12 60 12 30-12 60-12 30 12 60 12v24H0z" fill="currentColor" opacity=".45"/>
-            </svg>
-          </div>
-        </div>
-        <div class="dettagli">
-          <h3>Singapore</h3>
-          <p class="nota">Dieci capitoli, da Singapore al Vietnam</p>
-          <span class="vai">Apri l'album</span>
-        </div>
-      </a>
-      <a class="album rivela" style="--c:var(--c-giappone18)" href="http://www.gioriva.it/mondo/giappone2018/" target="_blank" rel="noopener">
-        <div class="cornice">
-          <span class="anno">2018</span>
-          <div class="scena">
-            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="214" cy="104" r="46" fill="currentColor" opacity=".26"/>
-              <path d="M52 336l108-152 108 152z" fill="currentColor" opacity=".38"/>
-              <path d="M124 234l36-50 36 50-18-8-18 10-18-10z" fill="#fffdf8" opacity=".85"/>
-              <path d="M74 190h22v170H74zM196 190h22v170h-22z" fill="currentColor"/>
-              <path d="M56 176c46-14 134-14 180 0l4-22c-52-14-136-14-188 0z" fill="currentColor"/>
-              <path d="M66 214h160v18H66z" fill="currentColor"/>
-              <path d="M0 360h320v40H0z" fill="currentColor" opacity=".22"/>
-            </svg>
-          </div>
-        </div>
-        <div class="dettagli">
-          <h3>Giappone</h3>
-          <p class="nota">Tredici giornate tra Tokyo e Kyoto</p>
-          <span class="vai">Apri l'album</span>
-        </div>
-      </a>
-      <a class="album rivela" style="--c:var(--c-california)" href="http://www.gioriva.it/mondo/california2024/" target="_blank" rel="noopener">
-        <div class="cornice">
-          <span class="anno">2024</span>
-          <div class="scena">
-            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="252" cy="82" r="34" fill="currentColor" opacity=".3"/>
-              <path d="M86 330V116h16v214zM102 330V116h16v214zM206 330V116h16v214zM222 330V116h16v214z" fill="currentColor"/>
-              <path d="M80 116h44v10H80zM202 116h44v10h-44zM84 158h36v8H84zM206 158h36v8h-36z" fill="#fffdf8" opacity=".7"/>
-              <path d="M0 148c44-32 94-32 94-32s52 96 118 96 116-64 116-64l-8-14s-48 60-108 60S102 62 94 62 0 130 0 130z" fill="currentColor" opacity=".55"/>
-              <path d="M0 262h320v14H0z" fill="currentColor"/>
-              <path d="M130 262v-46h8v46zM160 262v-58h8v58zM190 262v-46h8v46z" fill="currentColor" opacity=".45"/>
-              <path d="M0 336c34 0 34 12 68 12s34-12 68-12 34 12 68 12 34-12 68-12 32 10 48 11v53H0z" fill="currentColor" opacity=".3"/>
-            </svg>
-          </div>
-        </div>
-        <div class="dettagli">
-          <h3>California &amp; Las Vegas</h3>
-          <p class="nota">Dalla costa del Pacifico al deserto</p>
-          <span class="vai">Apri l'album</span>
-        </div>
-      </a>
-      <a class="album rivela" style="--c:var(--c-hkbali)" href="http://www.gioriva.it/mondo/indonesia2025/" target="_blank" rel="noopener">
-        <div class="cornice">
-          <span class="anno">2025</span>
-          <div class="scena">
-            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M18 300V150l16-18v168zM42 300V128l18-20v192zM70 300V96l20-22v226zM100 300V132l16-18v186zM126 300V170l14-16v146z" fill="currentColor" opacity=".55"/>
-              <path d="M228 302c4-56 16-92 34-118l-14-10c-22 30-34 70-38 128z" fill="currentColor"/>
-              <path d="M248 174c-24-14-48-12-66 4 26-6 46 0 60 12zM248 174c22-18 48-20 68-6-26-4-48 4-60 16zM248 174c-6-24 2-46 22-60-12 20-16 40-10 58zM248 174c20-14 42-14 60 2-24-8-44-6-56 6z" fill="currentColor"/>
-              <circle cx="90" cy="70" r="22" fill="currentColor" opacity=".28"/>
-              <path d="M0 322c34 0 34 12 68 12s34-12 68-12 34 12 68 12 34-12 68-12 32 10 48 11v67H0z" fill="currentColor" opacity=".26"/>
-              <path d="M0 352c34 0 34 12 68 12s34-12 68-12 34 12 68 12 34-12 68-12 32 10 48 11v37H0z" fill="currentColor" opacity=".4"/>
-            </svg>
-          </div>
-        </div>
-        <div class="dettagli">
-          <h3>Hong Kong &amp; Bali</h3>
-          <p class="nota">Hong Kong, Bali e le isole Gili</p>
-          <span class="vai">Apri l'album</span>
-        </div>
-      </a>
-      <a class="album rivela" style="--c:var(--c-messico)" href="http://www.gioriva.it/mondo/messico2026/" target="_blank" rel="noopener">
-        <div class="cornice">
-          <span class="anno">2026</span>
-          <div class="scena">
-            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="240" cy="88" r="38" fill="currentColor" opacity=".3"/>
-              <path d="M240 34v-18M240 160v-18M294 88h18M168 88h18M280 48l12-12M200 128l-12 12M280 128l12 12M200 48l-12-12" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".5"/>
-              <path d="M36 344h44v-42h30v-42h30v-42h40v42h30v42h30v42h44v22H36z" fill="currentColor" opacity=".6"/>
-              <path d="M140 218h40v-30h-40z" fill="currentColor"/>
-              <path d="M152 344l8-104 8 104z" fill="#fffdf8" opacity=".65"/>
-              <path d="M50 366h220v10H50z" fill="currentColor"/>
-              <path d="M22 376c0-30 6-48 16-52 8-4 14 4 14 20v32z" fill="currentColor" opacity=".8"/>
-              <path d="M0 384h320v16H0z" fill="currentColor" opacity=".25"/>
-            </svg>
-          </div>
-        </div>
-        <div class="dettagli">
-          <h3>Messico</h3>
-          <p class="nota">Sette giorni tra cenote e caraibi</p>
-          <span class="vai">Apri l'album</span>
-        </div>
-      </a>
-      <a class="album rivela" style="--c:var(--c-giappone26)" href="http://www.gioriva.it/mondo/giappone2026/galleria.html" target="_blank" rel="noopener">
-        <div class="cornice">
-          <span class="anno">2026</span>
-          <div class="scena">
-            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="242" cy="80" r="34" fill="currentColor" opacity=".3"/>
-              <circle cx="228" cy="70" r="30" fill="#fffdf8" opacity=".9"/>
-              <path d="M156 62h8v26h-8z" fill="currentColor"/>
-              <path d="M104 108c34-14 78-14 112 0l-14-20c-28-10-56-10-84 0z" fill="currentColor"/>
-              <path d="M126 108h68v34h-68z" fill="currentColor" opacity=".55"/>
-              <path d="M88 164c42-16 102-16 144 0l-16-22c-34-12-78-12-112 0z" fill="currentColor"/>
-              <path d="M114 164h92v40h-92z" fill="currentColor" opacity=".55"/>
-              <path d="M70 226c50-18 130-18 180 0l-18-22c-42-14-102-14-144 0z" fill="currentColor"/>
-              <path d="M100 226h120v60H100z" fill="currentColor" opacity=".55"/>
-              <path d="M52 300c60-22 156-22 216 0l-20-14c-52-16-124-16-176 0z" fill="currentColor"/>
-              <path d="M86 300h148v56H86z" fill="currentColor" opacity=".55"/>
-              <circle cx="46" cy="128" r="5" fill="currentColor" opacity=".5"/>
-              <circle cx="274" cy="182" r="4" fill="currentColor" opacity=".45"/>
-              <circle cx="58" cy="216" r="4" fill="currentColor" opacity=".4"/>
-              <circle cx="266" cy="264" r="5" fill="currentColor" opacity=".4"/>
-              <path d="M0 356h320v44H0z" fill="currentColor" opacity=".22"/>
-            </svg>
-          </div>
-        </div>
-        <div class="dettagli">
-          <h3>Giappone</h3>
-          <p class="nota">527 scatti in undici giorni</p>
-          <span class="vai">Apri l'album</span>
-        </div>
-      </a>
-    </div>
+    <div class="filtri" id="filtri"></div>
+    <div id="album"></div>
 
     <p class="coda"><span></span>Patagonia e Polinesia arriva in autunno 2026: l'album si aggiunge qui appena tornati.</p>
   </main>
+
+  <div class="visore" id="visore" role="dialog" aria-label="Foto a schermo intero">
+    <button type="button" class="visore-chiudi" id="visoreChiudi" aria-label="Chiudi">✕</button>
+    <button type="button" class="visore-nav prec" id="visorePrec" aria-label="Foto precedente">‹</button>
+    <img id="visoreImg" alt="">
+    <button type="button" class="visore-nav succ" id="visoreSucc" aria-label="Foto successiva">›</button>
+    <p class="visore-info" id="visoreInfo"></p>
+  </div>
 
   <footer>
     <a href="https://www.gioriva.it/" class="voce voce--marchio">
@@ -743,6 +758,207 @@
       });
     })();
 
+
+    /* ══ galleria ══ */
+    (function(){
+      'use strict';
+  var BASE = 'https://gioriva.github.io/album/';
+  var ALBUM = [
+    {slug:'giappone2018',nome:'Giappone',anno:'2018',col:'--c-giappone18',gall:'https://www.gioriva.it/mondo/giappone2018/galleria.html',tipo:'cartelle',gruppi:[["Day01_Milano-Tokyo",["00_img_0985.jpg","01_img_0989.jpg","02_img_0992.jpg","03_img_0994.jpg","04_img_0996-1.jpg","05_img_1001.jpg","06_img_1010-1.jpg","07_img_1005.jpg","08_img_1012.jpg"]],["Day02_Tokyo-Tsukiji-Shibuya",["00_img_1040.jpg","01_img_1038.jpg","02_img_1042.jpg","03_img_1048.jpg","04_img_1054.jpg","05_img_1057.jpg","06_img_1060.jpg","07_img_1069.jpg","08_img_1070.jpg","09_img_1077.jpg","10_img_1089.jpg","11_img_1101.jpg","12_img_1105.jpg","13_img_1114-1.jpg","14_img_1117.jpg"]],["Day03_Osaka",["00_img_1119.jpg","01_img_1120.jpg","02_img_1123.jpg","03_img_1124.jpg","04_img_1131.jpg","05_img_1136.jpg","06_img_1141-2.jpg","07_img_1138.jpg","08_img_1142.jpg","09_img_1151.jpg","10_img_1154.jpg","11_img_1155.jpg","12_img_1163.jpg","13_img_1160.jpg","14_img_1175.jpg","15_img_1169.jpg","16_img_1174.jpg","17_img_1179.jpg","18_img_1181.jpg"]],["Day04_Nara",["00_img_1194.jpg","01_img_1183.jpg","02_img_1243.jpg","03_img_1188.jpg","04_img_1187.jpg","05_img_1195-1.jpg","06_img_1205-1.jpg","07_img_1207-2.jpg","08_img_1219.jpg","09_img_1223.jpg","10_img_1236.jpg","11_img_1301.jpg","12_img_1302.jpg","13_img_1265.jpg","14_img_1272.jpg"]],["Day05_Kyoto",["00_img_1314-1.jpg","01_img_1317-1.jpg","02_img_1321.jpg","03_img_1327.jpg","04_image.jpg"]],["Day06_Arashiyama-Fushimi-Kinkakuji",["00_img_1370-1.jpg","01_img_1365.jpg","02_img_1334.jpg","03_img_1337.jpg","04_img_1350.jpg","05_img_1351.jpg","06_img_1372.jpg","07_img_1385.jpg","08_img_1427-1.jpg","09_img_1412.jpg","10_img_1438.jpg","11_img_1441.jpg","12_img_1456.jpg","13_img_1458.jpg","14_img_1463.jpg","15_img_1468.jpg","16_img_1469.jpg"]],["Day07_Kyoto-Higashiyama",["00_img_1525-1.jpg","01_img_1475.jpg","02_img_1489.jpg","03_img_1503-1.jpg","04_img_1506.jpg","05_img_1511.jpg","06_img_1509-1.jpg","07_img_1524-1.jpg","08_img_1536.jpg","09_img_1550.jpg","10_img_1552.jpg","11_img_1543.jpg","12_img_1558.jpg","13_img_1554.jpg","14_img_1625.jpg"]],["Day08_Hiroshima-Miyajima",["00_img_1630-1.jpg","01_img_1641.jpg","02_img_1649.jpg","03_img_1654.jpg","04_img_1660.jpg","05_img_1665.jpg","06_img_1671.jpg","07_img_1675-1.jpg","08_img_1686-1.jpg","09_img_1679-2.jpg","10_img_1681.jpg","11_img_1700.jpg"]],["Day09_Kanazawa",["00_img_1714.jpg","01_img_1720.jpg","02_img_1729.jpg","03_img_1730.jpg","04_img_1731-2.jpg","05_img_1736.jpg","06_img_1765-1.jpg","07_img_1757-1.jpg","08_img_1769-1.jpg","09_img_1774.jpg","10_img_1781.jpg","11_img_1782-1.jpg","12_img_1785.jpg","13_img_1801-1.jpg","14_img_1802-1.jpg"]],["Day10_Yamanouchi-Nagano",["00_img_1808.jpg","01_img_1814-2.jpg","02_img_1815.jpg","03_img_1819.jpg","04_img_1832.jpg","05_img_1835.jpg","06_img_1839.jpg","07_img_1849.jpg","08_img_1852.jpg","09_img_1864.jpg","10_img_1894-1.jpg","11_img_1882.jpg","12_img_1883.jpg"]],["Day11_Tokyo-Odaiba",["00_img_1898.jpg","01_img_1901.jpg","02_img_1905.jpg","03_img_1911.jpg","04_img_1928.jpg","05_img_1933-2.jpg","06_img_1941.jpg","07_img_1944.jpg","08_img_1946.jpg","09_img_1948.jpg","10_img_1952-11.jpg","11_img_1958.jpg"]],["Day12_Fuji-Kawaguchiko-Akihabara",["00_img_1965.jpg","01_img_1967.jpg","02_img_1974.jpg","03_img_1984.jpg","04_img_1976.jpg","05_img_1981.jpg","06_img_1986.jpg","07_img_1993.jpg","08_img_1996.jpg","09_img_2007.jpg","10_img_2013.jpg","11_img_2017.jpg","12_img_2018.jpg","13_img_2022-1.jpg","14_img_2026.jpg"]],["Day13_Shibuya-Hachiko-Narita",["00_img_2032.jpg","01_img_2034.jpg","02_img_2036.jpg","03_img_2037.jpg","04_img_2041.jpg"]]]},
+    {slug:'california2024',nome:'California &amp; Las Vegas',anno:'2024',col:'--c-california',gall:'https://www.gioriva.it/mondo/california2024/galleria.html',tipo:'california',giorni:{"1":18,"2":35,"3":31,"4":33,"5":41,"6":30,"7":20,"8":17,"9":34,"10":18,"11":26,"12":15,"13":15,"14":10,"15":39,"16":6}},
+    {slug:'indonesia2025',nome:'Hong Kong &amp; Bali',anno:'2025',col:'--c-hkbali',gall:'https://www.gioriva.it/mondo/indonesia2025/galleria.html',tipo:'indonesia',gruppi:[["day01",["IMG_1346.jpg","IMG_1351.jpg"]],["day02",["IMG_1352.jpg","IMG_1353.jpg","IMG_1354.jpg","IMG_1356.jpg","IMG_1357.jpg","IMG_1358.jpg","IMG_1359.jpg","IMG_1360.jpg","IMG_1361.jpg","IMG_1362.jpg","IMG_1363.jpg"]],["day03",["IMG_1374.jpg","IMG_1375.jpg","IMG_1377.jpg","IMG_1378.jpg","IMG_1397.jpg","IMG_1409.jpg","IMG_1415.jpg","IMG_1416.jpg","IMG_1417.jpg","IMG_1419.jpg","IMG_1420.jpg","IMG_1421.jpg","IMG_1423.jpg","IMG_1424.jpg","IMG_1427.jpg","IMG_1428.jpg","IMG_1429.jpg","IMG_1432.jpg","IMG_1433.jpg","IMG_1439.jpg","IMG_1447.jpg","IMG_1448.jpg","IMG_1450.jpg","IMG_1455.jpg","IMG_1456.jpg","IMG_1457.jpg","IMG_1459.jpg","IMG_1460.jpg","IMG_1461.jpg","IMG_1465.jpg","IMG_1466.jpg","IMG_1467.jpg","IMG_1469.jpg","IMG_1470.jpg","IMG_1471.jpg","IMG_1473.jpg","IMG_1475.jpg"]],["day04",["IMG_1490.jpg","IMG_1491.jpg","IMG_1493.jpg","IMG_1494.jpg","IMG_1495.jpg","IMG_1496.jpg","IMG_1497.jpg","IMG_1498.jpg","IMG_1499.jpg","IMG_1500.jpg","IMG_1501.jpg","IMG_1502.jpg","IMG_1503.jpg","IMG_1504.jpg","IMG_1505.jpg","IMG_1506.jpg","IMG_1507.jpg","IMG_1508.jpg","IMG_1509.jpg","IMG_1510.jpg","IMG_1512.jpg","IMG_1513.jpg","IMG_1514.jpg","IMG_1527.jpg"]],["day05",["IMG_1528.jpg","IMG_1533.jpg","IMG_1535.jpg","IMG_1536.jpg","IMG_1545.jpg"]],["day06",["IMG_1549.jpg","IMG_1553.jpg","IMG_1554.jpg","IMG_1557.jpg","IMG_1559.jpg","IMG_1560.jpg","IMG_1561.jpg","IMG_1562.jpg","IMG_1563.jpg","IMG_1564.jpg","IMG_1565.jpg","IMG_1566.jpg","IMG_1569.jpg","IMG_1573.jpg","IMG_1574.jpg","IMG_1575.jpg","IMG_1576.jpg","IMG_1577.jpg","IMG_1594.jpg","IMG_1646.jpg","IMG_1647.jpg","IMG_1649.jpg","IMG_1651.jpg","IMG_1652.jpg","IMG_1659.jpg","IMG_1664.jpg","IMG_1666.jpg","IMG_1667.jpg","IMG_1669.jpg","IMG_1670.jpg","IMG_1672.jpg","IMG_1673.jpg","IMG_1674.jpg","IMG_1675.jpg","IMG_1676.jpg","IMG_1677.jpg","IMG_1684.jpg","IMG_1689.jpg","IMG_1692.jpg","IMG_1697.jpg","IMG_1698.jpg","IMG_1721.jpg","IMG_1726.jpg","IMG_1730.jpg","IMG_1748.jpg","IMG_1751.jpg","IMG_1755.jpg","IMG_1756.jpg","IMG_1760.jpg","IMG_1763.jpg","IMG_1767.jpg","IMG_1770.jpg","IMG_1771.jpg","IMG_1772.jpg","IMG_1774.jpg","IMG_1775.jpg","IMG_1776.jpg","IMG_1779.jpg","IMG_1781.jpg","IMG_1782.jpg","IMG_1783.jpg","IMG_1786.jpg","IMG_1787.jpg","IMG_1788.jpg","IMG_1789.jpg","IMG_1791.jpg","IMG_1795.jpg","IMG_1799.jpg","IMG_1800.jpg","IMG_1805.jpg","IMG_1806.jpg"]],["day07",["IMG_1808.jpg","IMG_1809.jpg","IMG_1810.jpg","IMG_1833.jpg","IMG_1835.jpg","IMG_1839.jpg","IMG_1845.jpg","IMG_1858.jpg","IMG_1859.jpg","IMG_1869.jpg","IMG_1879.jpg","IMG_1882.jpg","IMG_1884.jpg","IMG_1885.jpg","IMG_1887.jpg","IMG_1888.jpg","IMG_1889.jpg","IMG_1974.jpg","IMG_1977.jpg","IMG_1978.jpg"]],["day08",["IMG_2005.jpg","IMG_2007.jpg","IMG_2008.jpg","IMG_2011.jpg","IMG_2022.jpg","IMG_2023.jpg","IMG_2025.jpg","IMG_2026.jpg","IMG_2027.jpg","IMG_2028.jpg","IMG_2031.jpg","IMG_2032.jpg","IMG_2033.jpg","IMG_2043.jpg","IMG_2044.jpg","IMG_2045.jpg","IMG_2046.jpg","IMG_2047.jpg","IMG_2048.jpg","IMG_2049.jpg","IMG_2052.jpg","IMG_2059.jpg","IMG_2068.jpg","IMG_2072.jpg","IMG_2073.jpg"]],["day09",["IMG_2075.jpg","IMG_2077.jpg","IMG_2090.jpg","IMG_2091.jpg","IMG_2092.jpg","IMG_2093.jpg","IMG_2095.jpg","IMG_2096.jpg"]],["day10",["IMG_2110.jpg","IMG_2113.jpg","IMG_2116.jpg","IMG_2122.jpg","IMG_2125.jpg","IMG_2127.jpg","IMG_2135.jpg","IMG_2136.jpg","IMG_2138.jpg","IMG_2139.jpg","IMG_2140.jpg","IMG_2141.jpg","IMG_2142.jpg","IMG_2143.jpg","IMG_2151.jpg","IMG_2152.jpg","IMG_2162.jpg","IMG_2165.jpg","IMG_2166.jpg","IMG_2170.jpg","IMG_2172.jpg","IMG_2173.jpg","IMG_2176.jpg","IMG_2178.jpg","IMG_2179.jpg","IMG_2181.jpg","IMG_2182.jpg","IMG_2185.jpg","IMG_2187.jpg","IMG_2188.jpg","IMG_2189.jpg"]],["day11",["IMG_2195.jpg","IMG_2196.jpg","IMG_2197.jpg","IMG_2198.jpg","IMG_2201.jpg","IMG_2203.jpg","IMG_2204.jpg","IMG_2205.jpg","IMG_2210.jpg"]],["day12",["IMG_2214.jpg","IMG_2218.jpg","IMG_2220.jpg","IMG_2221.jpg","IMG_2222.jpg","IMG_2223.jpg","IMG_2224.jpg","IMG_2232.jpg","IMG_2241.jpg","IMG_2245.jpg","IMG_2246.jpg","IMG_2247.jpg","IMG_2248.jpg","IMG_2249.jpg","IMG_2251.jpg","IMG_2252.jpg"]],["day13",["72752F76-8546-4376-9798-AB3A8F0D1539.jpg","GP010660.jpg","GP010665.jpg","GP010682.jpg","GP010695.jpg","GP010696.jpg","GP010703.jpg","GP010704.jpg","GP010706.jpg","GP010709.jpg","GP010710.jpg","GP010723.jpg","GP010730.jpg","GP010731.jpg","GP010744.jpg","GP010748.jpg","GP010750.jpg","GP010751.jpg","GP010769.jpg","GP010788.jpg","GP010789.jpg","IMG_2255.jpg","IMG_2256.jpg","IMG_2257.jpg","IMG_2260.jpg","IMG_2266.jpg"]],["day14",["IMG_2269.jpg","IMG_2273.jpg","IMG_2274.jpg","IMG_2297.jpg","IMG_2299.jpg","IMG_2300.jpg","IMG_2301.jpg"]],["day15",["IMG_2305.jpg","IMG_2310.jpg","IMG_2311.jpg","IMG_2312.jpg"]],["day16",["IMG_2317.jpg","IMG_2318.jpg","IMG_2319.jpg","IMG_2320.jpg","IMG_2321.jpg","IMG_2322.jpg","IMG_2323.jpg","IMG_2324.jpg","IMG_2325.jpg","IMG_2326.jpg","IMG_2330.jpg","IMG_2336.jpg"]],["day17",["IMG_2343.jpg","IMG_2344.jpg","IMG_2346.jpg","IMG_2353.jpg","IMG_2358.jpg","IMG_2361.jpg","IMG_2363.jpg","IMG_2365.jpg","IMG_2366.jpg","IMG_2372.jpg","IMG_2374.jpg","IMG_2377.jpg","IMG_2379.jpg","IMG_2382.jpg","IMG_2385.jpg","IMG_2395.jpg","IMG_2396.jpg","IMG_2397.jpg","IMG_2398.jpg","IMG_2400.jpg","IMG_2401.jpg","IMG_2402.jpg","IMG_2404.jpg","IMG_2408.jpg","IMG_2414.jpg","IMG_2415.jpg","IMG_2417.jpg","IMG_2418.jpg","IMG_2421.jpg","IMG_2422.jpg","IMG_2425.jpg","IMG_2426.jpg","IMG_2427.jpg","IMG_2429.jpg","IMG_2430.jpg","IMG_2431.jpg","IMG_2432.jpg","IMG_2435.jpg","IMG_2448.jpg","IMG_2449.jpg","IMG_2454.jpg","IMG_2460.jpg","IMG_2465.jpg"]],["day18",["IMG_2470.jpg","IMG_2474.jpg"]]]},
+    {slug:'giappone2026',nome:'Giappone',anno:'2026',col:'--c-giappone26',gall:'https://www.gioriva.it/mondo/giappone2026/galleria.html',tipo:'giappone26',giorni:{"1":3,"2":36,"3":57,"4":46,"5":72,"6":54,"7":96,"8":26,"9":75,"10":51,"11":3}},
+  ];
+
+      function voci(a){
+        var out = [], i, j, g, n;
+        if (a.tipo === 'cartelle'){
+          for (i = 0; i < a.gruppi.length; i++){
+            g = a.gruppi[i];
+            for (j = 0; j < g[1].length; j++){
+              var u = BASE + a.slug + '/' + g[0] + '/' + g[1][j];
+              out.push({t: u, f: u});
+            }
+          }
+        } else if (a.tipo === 'piatto'){
+          for (i = 0; i < a.file.length; i++){
+            var p = BASE + a.slug + '/' + a.file[i];
+            out.push({t: p, f: p});
+          }
+        } else if (a.tipo === 'california'){
+          for (var d in a.giorni){
+            n = a.giorni[d];
+            var dd = ('0' + d).slice(-2);
+            for (j = 1; j <= n; j++){
+              var nn = ('0' + j).slice(-2);
+              out.push({
+                t: BASE + a.slug + '/t-d' + dd + '-' + nn + '.jpg',
+                f: BASE + a.slug + '/f-d' + dd + '-' + nn + '.jpg'
+              });
+            }
+          }
+        } else if (a.tipo === 'indonesia'){
+          for (i = 0; i < a.gruppi.length; i++){
+            g = a.gruppi[i];
+            for (j = 0; j < g[1].length; j++){
+              out.push({
+                t: BASE + a.slug + '/thumb/' + g[0] + '/' + g[1][j],
+                f: BASE + a.slug + '/full/'  + g[0] + '/' + g[1][j]
+              });
+            }
+          }
+        } else if (a.tipo === 'giappone26'){
+          for (var k in a.giorni){
+            n = a.giorni[k];
+            for (j = 1; j <= n; j++){
+              var mm = ('0' + j).slice(-2);
+              out.push({
+                t: BASE + a.slug + '/day' + k + '/t-' + mm + '.jpg',
+                f: BASE + a.slug + '/day' + k + '/f-' + mm + '.jpg'
+              });
+            }
+          }
+        }
+        return out;
+      }
+
+      ALBUM.forEach(function(a){ a.foto = voci(a); });
+
+      var contenitore = document.getElementById('album');
+      var barraFiltri = document.getElementById('filtri');
+      var PASSO = 60;
+      var corrente = [], indice = 0;
+
+      /* filtri */
+      function creaFiltro(testo, extra, colore, azione, scelto){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'filtro' + (scelto ? ' scelto' : '');
+        if (colore) b.style.setProperty('--c', 'var(' + colore + ')');
+        var i = document.createElement('i');
+        b.appendChild(i);
+        b.appendChild(document.createTextNode(testo));
+        if (extra){
+          var em = document.createElement('em');
+          em.textContent = extra;
+          b.appendChild(em);
+        }
+        b.addEventListener('click', function(){
+          Array.prototype.forEach.call(barraFiltri.children, function(c){ c.classList.remove('scelto'); });
+          b.classList.add('scelto');
+          azione();
+        });
+        return b;
+      }
+
+      function mostra(slug){
+        Array.prototype.forEach.call(contenitore.children, function(bl){
+          bl.hidden = !!(slug && bl.dataset.slug !== slug);
+        });
+      }
+
+      var totale = ALBUM.reduce(function(s, a){ return s + a.foto.length; }, 0);
+      barraFiltri.appendChild(creaFiltro('Tutti i viaggi', String(totale), null, function(){ mostra(null); }, true));
+      ALBUM.forEach(function(a){
+        barraFiltri.appendChild(creaFiltro(a.nome.replace('&amp;','&') + ' ' + a.anno, String(a.foto.length), a.col, function(){ mostra(a.slug); }));
+      });
+
+      /* blocchi */
+      ALBUM.forEach(function(a){
+        var bl = document.createElement('section');
+        bl.className = 'blocco';
+        bl.dataset.slug = a.slug;
+        bl.style.setProperty('--c', 'var(' + a.col + ')');
+
+        var testa = document.createElement('div');
+        testa.className = 'blocco-testa';
+        testa.innerHTML = '<span class="pallino"></span>' +
+          '<h3>' + a.nome + ' <span style="color:var(--tenue);font-size:.7em">' + a.anno + '</span></h3>' +
+          '<span class="conteggio">' + a.foto.length + ' foto</span>';
+        var link = document.createElement('a');
+        link.className = 'diario';
+        link.href = a.gall;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = 'Vai al diario';
+        testa.appendChild(link);
+        bl.appendChild(testa);
+
+        var mos = document.createElement('div');
+        mos.className = 'mosaico';
+        bl.appendChild(mos);
+
+        var mostrate = 0;
+        function aggiungi(){
+          var fino = Math.min(mostrate + PASSO, a.foto.length);
+          for (var i = mostrate; i < fino; i++){
+            (function(i){
+              var b = document.createElement('button');
+              b.type = 'button';
+              var im = document.createElement('img');
+              im.loading = 'lazy';
+              im.decoding = 'async';
+              im.src = a.foto[i].t;
+              im.alt = a.nome + ' ' + a.anno;
+              im.addEventListener('load', function(){ im.classList.add('carica'); });
+              im.addEventListener('error', function(){ b.remove(); });
+              b.appendChild(im);
+              b.addEventListener('click', function(){ apri(a, i); });
+              mos.appendChild(b);
+            })(i);
+          }
+          mostrate = fino;
+          if (mostrate >= a.foto.length && bottone) bottone.remove();
+        }
+
+        var bottone = null;
+        if (a.foto.length > PASSO){
+          bottone = document.createElement('button');
+          bottone.type = 'button';
+          bottone.className = 'ancora';
+          bottone.textContent = 'Mostra altre foto';
+          bottone.addEventListener('click', aggiungi);
+          bl.appendChild(bottone);
+        }
+        aggiungi();
+        contenitore.appendChild(bl);
+      });
+
+      /* visualizzatore */
+      var visore = document.getElementById('visore'),
+          vimg = document.getElementById('visoreImg'),
+          vinfo = document.getElementById('visoreInfo');
+
+      function apri(a, i){
+        corrente = a.foto; indice = i;
+        vimg.src = corrente[i].f;
+        vimg.alt = a.nome + ' ' + a.anno;
+        vinfo.textContent = a.nome.replace('&amp;','&') + ' ' + a.anno + '  ·  ' + (i+1) + ' di ' + corrente.length;
+        visore.classList.add('aperto');
+        document.body.style.overflow = 'hidden';
+      }
+      function scorri(passo){
+        if (!corrente.length) return;
+        indice = (indice + passo + corrente.length) % corrente.length;
+        vimg.src = corrente[indice].f;
+        vinfo.textContent = vinfo.textContent.replace(/\d+ di \d+/, (indice+1) + ' di ' + corrente.length);
+      }
+      function chiudi(){
+        visore.classList.remove('aperto');
+        vimg.src = '';
+        document.body.style.overflow = '';
+      }
+      document.getElementById('visoreChiudi').addEventListener('click', chiudi);
+      document.getElementById('visorePrec').addEventListener('click', function(e){ e.stopPropagation(); scorri(-1); });
+      document.getElementById('visoreSucc').addEventListener('click', function(e){ e.stopPropagation(); scorri(1); });
+      visore.addEventListener('click', function(e){ if (e.target === visore) chiudi(); });
+      document.addEventListener('keydown', function(e){
+        if (!visore.classList.contains('aperto')) return;
+        if (e.key === 'Escape') chiudi();
+        if (e.key === 'ArrowLeft') scorri(-1);
+        if (e.key === 'ArrowRight') scorri(1);
+      });
+    })();
   </script>
 
 </body>
