@@ -94,6 +94,8 @@ const ALBUMS = [
     name: "Cernobbio",
     loc: "Lago · Como, Italia",
     coord: "IT · 45.84N 9.07E",
+    video: "Z2LWEdLnVAc",
+    videoShort: true,
     photos: [
       "cernobbio-01.jpg",
       "cernobbio-02.jpg",
@@ -105,7 +107,13 @@ const ALBUMS = [
       "cernobbio-08.jpg",
       "cernobbio-09.jpg",
       "cernobbio-10.jpg",
-      "cernobbio-11.jpg"
+      "cernobbio-11.jpg",
+      "cernobbio-12.jpg",
+      "cernobbio-13.jpg",
+      "cernobbio-14.jpg",
+      "cernobbio-15.jpg",
+      "cernobbio-16.jpg",
+      "cernobbio-17.jpg"
     ]
   },
   {

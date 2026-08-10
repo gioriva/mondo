@@ -205,6 +205,8 @@
       box-shadow: 0 20px 55px rgba(26,26,22,0.10);
     }
     .vid-frame { position: relative; width: 100%; aspect-ratio: 16/9; background: #E9E7E1; }
+    .vid.short { max-width: 420px; }
+    .vid.short .vid-frame { aspect-ratio: 9/16; }
     .vid-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     .vid-cap {
       padding: 14px 4px 2px;
@@ -400,7 +402,7 @@ ALBUMS.forEach((a, ai) => {
       '<div class="alb-sub">' + a.loc + ' · ' + media + '</div>' +
     '</div>' +
     (a.video ?
-      '<div class="vid">' +
+      '<div class="vid' + (a.videoShort ? ' short' : '') + '">' +
         '<div class="vid-frame"><iframe src="https://www.youtube-nocookie.com/embed/' + a.video + '" title="' + a.name + ' · video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>' +
         '<div class="vid-cap">Ripresa in volo · ' + a.name + '</div>' +
       '</div>'
