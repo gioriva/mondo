@@ -82,7 +82,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background:var(--asfalto);
   color:var(--crema);
   position:relative;
-  z-index:5;
+  z-index:78;
 }
 .testata-inner{
   max-width:1200px;
