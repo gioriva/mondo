@@ -526,10 +526,21 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') next();
 });
 
-if (location.hash) setTimeout(() => {
-  const el = document.querySelector(location.hash);
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
-}, 350);
+// ARRIVO DA UN LINK: apre direttamente l'album indicato dall'ancora.
+// Filtrando invece di scorrere si evita che il caricamento progressivo
+// delle foto sposti il bersaglio durante lo scroll.
+function apriDaHash(scorri) {
+  const slug = decodeURIComponent(location.hash.replace('#', ''));
+  if (!slug) return false;
+  const esiste = ALBUMS.some(a => a.slug === slug);
+  if (!esiste) return false;
+  seleziona(slug, false);
+  window.scrollTo({ top: 0, behavior: scorri ? 'smooth' : 'auto' });
+  return true;
+}
+
+apriDaHash(false);
+window.addEventListener('hashchange', () => apriDaHash(true));
 </script>
 
 <!-- COOKIE CONSENT BANNER -->
