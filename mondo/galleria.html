@@ -4,30 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="color-scheme" content="light" />
-  <title>Contatti | Diari di viaggio</title>
+  <title>Galleria | Diari di viaggio</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fdf8ee'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23c4502f' stroke-width='2.8'/%3E%3Cellipse cx='32' cy='32' rx='8.5' ry='19' fill='none' stroke='%23c4502f' stroke-width='2.2'/%3E%3Cpath d='M13 32h38M16.5 22h31M16.5 42h31' stroke='%23c4502f' stroke-width='2.2' fill='none'/%3E%3C/svg%3E">
 
-  <meta property="og:title" content="Contatti | I viaggi di Giorgio" />
-  <meta property="og:description" content="Scrivimi: una domanda su un itinerario o solo un saluto" />
+  <meta property="og:title" content="Galleria | I viaggi di Giorgio" />
+  <meta property="og:description" content="Gli album fotografici di tutti i viaggi, raccolti in un posto solo" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.gioriva.it/mondo/contatti.html" />
+  <meta property="og:url" content="https://www.gioriva.it/mondo/galleria.html" />
   <meta property="og:image" content="https://www.gioriva.it/mondo/logo_gr_world.png" />
-  <meta name="description" content="Scrivimi: una domanda su un itinerario o solo un saluto" />
+  <meta name="description" content="Gli album fotografici di tutti i viaggi, raccolti in un posto solo" />
 
   <!-- Google Analytics (GA4) con Consent Mode v2 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', {
-      'ad_storage': 'denied',
-      'ad_user_data': 'denied',
-      'ad_personalization': 'denied',
-      'analytics_storage': 'denied'
-    });
-    gtag('js', new Date());
-    gtag('config', 'G-1ZCCJ6QBR4', { 'anonymize_ip': true });
-  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,19 +33,20 @@
       --tenue:   #a89c8b;
       --bordo:   #e3d9c6;
       --rosso:   #c4502f;
-      --ambra:   #d98b2b;
-      --teal:    #17a2a2;
+      --c-singapore: #d98b2b;
+      --c-giappone18:#c8493f;
+      --c-california:#3a7bb8;
+      --c-hkbali:    #2e9e6b;
+      --c-messico:   #e0662f;
+      --c-giappone26:#6b5fb5;
+      --c-patagonia: #17a2a2;
     }
 
     html { scroll-behavior:smooth; background:var(--carta); }
-
     body {
-      background:transparent;
-      color:var(--inchiostro);
-      font-family:'DM Sans', sans-serif;
-      line-height:1.6;
-      overflow-x:hidden;
-      min-height:100vh;
+      background:transparent; color:var(--inchiostro);
+      font-family:'DM Sans', sans-serif; line-height:1.6;
+      overflow-x:hidden; min-height:100vh;
       display:flex; flex-direction:column;
     }
     a { color:inherit; }
@@ -70,8 +59,7 @@
         url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
     }
     .portolano {
-      position:fixed; inset:0; z-index:-1;
-      pointer-events:none;
+      position:fixed; inset:0; z-index:-1; pointer-events:none;
       -webkit-mask-image:radial-gradient(ellipse 85% 75% at 50% 30%, #000 0%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.25) 100%);
       mask-image:radial-gradient(ellipse 85% 75% at 50% 30%, #000 0%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.25) 100%);
     }
@@ -81,7 +69,7 @@
       pointer-events:none; filter:blur(10px); will-change:transform;
     }
     .alone-a {
-      width:44vw; height:44vw; left:-14vw; top:40vh;
+      width:44vw; height:44vw; left:-14vw; top:42vh;
       background:radial-gradient(circle, rgba(23,162,162,.12) 0%, rgba(23,162,162,0) 68%);
       animation:deriva 36s ease-in-out infinite;
     }
@@ -93,7 +81,7 @@
     @keyframes deriva  { 0%,100% { transform:translate3d(0,0,0) } 50% { transform:translate3d(3vw,-2vh,0) } }
     @keyframes deriva2 { 0%,100% { transform:translate3d(0,0,0) } 50% { transform:translate3d(-2.5vw,2.5vh,0) } }
 
-/* ── barra e menu ── */
+    /* ── barra e menu ── */
     .barra {
       max-width:1280px; width:100%; margin:0 auto;
       padding:1.4rem 5vw;
@@ -169,103 +157,146 @@
     .menu-voce.attiva b { color:var(--rosso); }
     .menu-voce + .menu-voce { border-top:1px solid var(--bordo); border-radius:0; }
 
-    .indietro {
-      display:inline-flex; align-items:center; gap:.5rem;
+    /* apertura */
+    .apertura {
       max-width:1280px; width:100%; margin:0 auto;
-      padding:0 5vw;
-      font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
-      color:var(--grigio); text-decoration:none;
-      transition:color .25s;
+      padding:2rem 5vw 2.6rem;
     }
-    .indietro::before { content:'←'; color:var(--rosso); font-size:.95rem; }
-    .indietro:hover { color:var(--rosso); }
-
-    /* contenuto */
-    .foglio {
-      width:100%; max-width:720px; margin:0 auto;
-      padding:2.2rem 5vw 4rem;
-      flex:1;
-    }
-
     h1 {
       font-family:'Instrument Serif', serif;
       font-weight:400;
-      font-size:clamp(2.6rem, 6vw, 4.2rem);
+      font-size:clamp(2.8rem, 6.5vw, 5rem);
       line-height:1.02; letter-spacing:-.015em;
-      text-align:center;
     }
     h1 em { font-style:italic; color:var(--rosso); }
-
     .intro {
-      margin:1.1rem auto 2.6rem;
-      text-align:center;
+      margin-top:1.2rem;
+      padding-left:1.4rem; position:relative;
       font-size:1.06rem; font-weight:300;
-      color:var(--grigio);
-      max-width:44ch;
+      color:var(--grigio); max-width:52ch;
+    }
+    .intro::before {
+      content:''; position:absolute; left:0; top:.35rem; bottom:.35rem;
+      width:2px; border-radius:2px;
+      background:linear-gradient(to bottom, var(--c-singapore), var(--rosso) 50%, var(--c-patagonia));
     }
 
-    .scheda {
+    /* album */
+    .raccolta {
+      max-width:1280px; width:100%; margin:0 auto;
+      padding:1rem 5vw 4rem;
+      flex:1;
+    }
+    .titolo-sezione {
+      display:flex; align-items:baseline; gap:1.4rem;
+      margin-bottom:2rem;
+    }
+    .titolo-sezione h2 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.9rem;
+    }
+    .titolo-sezione::after {
+      content:''; flex:1; height:1px; background:var(--bordo);
+    }
+
+    .griglia {
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:2.4rem 2rem;
+    }
+
+    .album {
+      --c: var(--rosso);
+      display:block; text-decoration:none;
+      transition:transform .4s cubic-bezier(.2,.8,.2,1);
+    }
+    .album:hover, .album:focus-visible { transform:translateY(-7px); }
+    .album:focus-visible { outline:2px solid var(--c); outline-offset:8px; border-radius:4px; }
+
+    .cornice {
+      position:relative;
+      border-radius:3px; overflow:hidden;
+      background:var(--carta-2);
+      box-shadow:0 2px 4px rgba(35,32,28,.06), 0 14px 30px rgba(35,32,28,.09);
+      transition:box-shadow .4s;
+    }
+    .album:hover .cornice { box-shadow:0 4px 8px rgba(35,32,28,.08), 0 26px 50px rgba(35,32,28,.16); }
+
+    .scena {
+      position:relative;
+      aspect-ratio:1/1;
+      color:var(--c);
+      background:linear-gradient(180deg, color-mix(in srgb, var(--c) 20%, #fff) 0%, color-mix(in srgb, var(--c) 7%, #fff) 58%, #fffdf8 100%);
+      display:flex; align-items:flex-end; justify-content:center; overflow:hidden;
+    }
+    .scena svg { width:100%; height:100%; display:block; }
+
+    .anno {
+      position:absolute; top:1rem; left:1rem;
+      width:56px; height:56px; border-radius:50%;
+      background:var(--c); color:#fff;
+      font-family:'Instrument Serif', serif;
+      font-size:1.15rem;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 12px rgba(35,32,28,.2);
+      z-index:2; transition:transform .4s;
+    }
+    .anno::after {
+      content:''; position:absolute; inset:4px;
+      border:1px solid rgba(255,255,255,.55); border-radius:50%;
+    }
+    .album:hover .anno { transform:scale(1.08) rotate(-6deg); }
+
+    .dettagli {
+      padding:1rem 1.15rem 1.1rem;
       background:#fffdf8;
+      border-top:3px solid var(--c);
+      border-left:1px solid var(--bordo);
+      border-right:1px solid var(--bordo);
+      border-bottom:1px solid var(--bordo);
+      border-radius:0 0 3px 3px;
+    }
+    .dettagli h3 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.6rem; line-height:1.12;
+      margin-bottom:.15rem;
+    }
+    .nota {
+      font-size:.8rem; font-weight:300; color:var(--grigio);
+      margin-bottom:.8rem;
+    }
+    .vai {
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-size:.68rem; font-weight:500;
+      letter-spacing:.16em; text-transform:uppercase;
+      color:var(--c);
+      padding-top:.7rem;
+      border-top:1px solid var(--bordo);
+      width:100%;
+      transition:gap .3s;
+    }
+    .vai::after { content:'→'; font-size:.85rem; }
+    .album:hover .vai { gap:.9rem; }
+
+    .rivela { opacity:0; transform:translateY(22px); }
+    .rivela.dentro {
+      opacity:1; transform:none;
+      transition:opacity .65s ease, transform .65s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .coda {
+      margin-top:2.6rem;
+      padding:1.4rem 1.6rem;
+      background:var(--carta-2);
       border:1px solid var(--bordo);
       border-radius:4px;
-      border-top:4px solid var(--rosso);
-      box-shadow:0 2px 4px rgba(35,32,28,.05), 0 16px 36px rgba(35,32,28,.09);
-      padding:2.3rem 2.1rem 2.1rem;
+      font-size:.88rem; font-weight:300; color:var(--grigio);
+      display:flex; align-items:center; gap:.9rem;
     }
-
-    .riga { display:grid; grid-template-columns:1fr 1fr; gap:1.6rem; }
-    .campo { margin-bottom:1.6rem; }
-
-    label {
-      display:block;
-      font-size:.66rem; font-weight:500;
-      letter-spacing:.18em; text-transform:uppercase;
-      color:var(--tenue);
-      margin-bottom:.45rem;
+    .coda span {
+      width:9px; height:9px; border-radius:50%;
+      background:var(--c-patagonia); flex-shrink:0;
     }
-
-    input, textarea {
-      width:100%;
-      background:transparent;
-      border:0; border-bottom:1px solid var(--bordo);
-      color:var(--inchiostro);
-      font-family:'DM Sans', sans-serif;
-      font-size:1rem; font-weight:400;
-      padding:.4rem 0 .6rem;
-      outline:none; border-radius:0;
-      transition:border-color .3s;
-    }
-    textarea {
-      border:1px solid var(--bordo);
-      border-radius:3px;
-      padding:.8rem .9rem;
-      min-height:150px; resize:vertical;
-      line-height:1.55;
-    }
-    input:focus, textarea:focus { border-color:var(--rosso); }
-    input::placeholder, textarea::placeholder { color:#c2b7a4; }
-
-    .invia {
-      display:block; width:100%;
-      margin-top:.4rem;
-      font-family:'DM Sans', sans-serif;
-      font-weight:500; font-size:.74rem;
-      letter-spacing:.18em; text-transform:uppercase;
-      padding:.95rem 1.4rem;
-      border:1px solid var(--rosso); border-radius:3px;
-      background:var(--rosso); color:#fff;
-      cursor:pointer;
-      transition:background .3s, transform .3s;
-    }
-    .invia:hover { background:#a83f22; transform:translateY(-2px); }
-
-    .nota {
-      margin-top:1.2rem; text-align:center;
-      font-size:.76rem; font-weight:300;
-      color:var(--tenue);
-    }
-    .nota a { color:var(--rosso); text-decoration:none; border-bottom:1px solid rgba(196,80,47,.3); }
-    .nota a:hover { border-color:var(--rosso); }
 
     /* footer */
     footer {
@@ -286,14 +317,12 @@
     .voce:hover { color:var(--rosso); }
     .voce svg { flex-shrink:0; }
     .voce--marchio { color:var(--rosso); }
-    .voce--attiva { color:var(--rosso); cursor:default; }
 
-    /* banner cookie */
+    /* cookie */
     .cookie {
       position:fixed; left:5vw; right:5vw; bottom:1.6rem;
       max-width:820px; margin:0 auto; z-index:9999;
-      background:#fffdf8;
-      border:1px solid var(--bordo); border-radius:5px;
+      background:#fffdf8; border:1px solid var(--bordo); border-radius:5px;
       box-shadow:0 18px 46px rgba(35,32,28,.18);
       padding:1.6rem 1.8rem;
       display:grid; grid-template-columns:1fr auto;
@@ -313,18 +342,16 @@
       font-family:inherit; font-size:.72rem; font-weight:500;
       letter-spacing:.14em; text-transform:uppercase;
       padding:.75rem 1.2rem; border-radius:3px; cursor:pointer;
-      border:1px solid var(--rosso);
-      background:var(--rosso); color:#fff;
-      transition:background .25s, color .25s;
-      white-space:nowrap;
+      border:1px solid var(--rosso); background:var(--rosso); color:#fff;
+      transition:background .25s, color .25s; white-space:nowrap;
     }
     .bottone:hover { background:#a83f22; border-color:#a83f22; }
     .bottone--vuoto { background:transparent; color:var(--grigio); border-color:var(--bordo); }
     .bottone--vuoto:hover { color:var(--inchiostro); border-color:var(--grigio); }
 
-    @media (max-width: 640px) {
-      .riga { grid-template-columns:1fr; gap:0; }
-      .scheda { padding:1.8rem 1.3rem 1.6rem; }
+    @media (max-width: 1040px) { .griglia { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 660px) {
+      .griglia { grid-template-columns:1fr; gap:2rem; max-width:420px; margin:0 auto; }
       .cookie { grid-template-columns:1fr; left:0; right:0; bottom:0; border-radius:0; padding:1.4rem 1.2rem; }
       .cookie-azioni { flex-direction:row; min-width:0; }
       .bottone { flex:1; padding:.75rem .5rem; }
@@ -332,7 +359,8 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { transition-duration:.01ms !important; animation:none !important; }
+      .alone { animation:none !important; }
+      .rivela { opacity:1 !important; transform:none !important; }
       html { scroll-behavior:auto; }
     }
   </style>
@@ -435,7 +463,7 @@
       <span><b>Diari di viaggio</b><i>Tutti i viaggi, uno per uno</i></span>
     </a>
 
-    <a class="menu-voce" href="galleria.html">
+    <a class="menu-voce attiva" href="galleria.html">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
         <rect x="2.5" y="4.5" width="19" height="15" rx="2"/>
         <circle cx="8.2" cy="9.6" r="1.7"/>
@@ -445,48 +473,158 @@
     </a>
   </nav>
 
-  <a class="indietro" href="index.html">Torna ai viaggi</a>
+  <header class="apertura">
+    <h1>La galleria <em>dei viaggi</em></h1>
+    <p class="intro">Gli album fotografici di ogni viaggio, raccolti qui. Scegli una destinazione e apri le sue foto.</p>
+  </header>
 
-  <main class="foglio">
-    <h1>Scrivimi <em>una riga</em></h1>
-    <p class="intro">Una domanda su un itinerario o solo un saluto: il modulo qui sotto arriva dritto nella mia casella.</p>
+  <main class="raccolta">
+    <div class="titolo-sezione"><h2>Gli album</h2></div>
 
-    <form class="scheda" action="https://formspree.io/f/xnjegryn" method="POST">
-      <input type="hidden" name="_subject" value="Nuovo messaggio dal sito gioriva.it">
-      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-
-      <div class="riga">
-        <div class="campo">
-          <label for="nome">Nome</label>
-          <input type="text" id="nome" name="nome" required autocomplete="given-name">
+    <div class="griglia">
+      <a class="album rivela" style="--c:var(--c-singapore)" href="http://www.gioriva.it/mondo/singapore2012/galleria.html" target="_blank" rel="noopener">
+        <div class="cornice">
+          <span class="anno">2012</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="228" cy="96" r="40" fill="currentColor" opacity=".22"/>
+              <path d="M74 400V182h34v218zM118 400V166h36v234zM164 400V186h34v214zM208 400V158h38v242z" fill="currentColor" opacity=".5"/>
+              <path d="M60 154c62-26 128-30 196-10l6-24C188 98 118 104 52 132z" fill="currentColor"/>
+              <path d="M262 144c14-2 24-8 32-18l-8-8c-6 8-14 12-24 14z" fill="currentColor"/>
+              <path d="M0 352c30 0 30 14 60 14s30-14 60-14 30 14 60 14 30-14 60-14 30 14 60 14v48H0z" fill="currentColor" opacity=".28"/>
+              <path d="M0 376c30 0 30 12 60 12s30-12 60-12 30 12 60 12 30-12 60-12 30 12 60 12v24H0z" fill="currentColor" opacity=".45"/>
+            </svg>
+          </div>
         </div>
-        <div class="campo">
-          <label for="cognome">Cognome</label>
-          <input type="text" id="cognome" name="cognome" required autocomplete="family-name">
+        <div class="dettagli">
+          <h3>Singapore</h3>
+          <p class="nota">Dieci capitoli, da Singapore al Vietnam</p>
+          <span class="vai">Apri l'album</span>
         </div>
-      </div>
+      </a>
+      <a class="album rivela" style="--c:var(--c-giappone18)" href="http://www.gioriva.it/mondo/giappone2018/" target="_blank" rel="noopener">
+        <div class="cornice">
+          <span class="anno">2018</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="214" cy="104" r="46" fill="currentColor" opacity=".26"/>
+              <path d="M52 336l108-152 108 152z" fill="currentColor" opacity=".38"/>
+              <path d="M124 234l36-50 36 50-18-8-18 10-18-10z" fill="#fffdf8" opacity=".85"/>
+              <path d="M74 190h22v170H74zM196 190h22v170h-22z" fill="currentColor"/>
+              <path d="M56 176c46-14 134-14 180 0l4-22c-52-14-136-14-188 0z" fill="currentColor"/>
+              <path d="M66 214h160v18H66z" fill="currentColor"/>
+              <path d="M0 360h320v40H0z" fill="currentColor" opacity=".22"/>
+            </svg>
+          </div>
+        </div>
+        <div class="dettagli">
+          <h3>Giappone</h3>
+          <p class="nota">Tredici giornate tra Tokyo e Kyoto</p>
+          <span class="vai">Apri l'album</span>
+        </div>
+      </a>
+      <a class="album rivela" style="--c:var(--c-california)" href="http://www.gioriva.it/mondo/california2024/" target="_blank" rel="noopener">
+        <div class="cornice">
+          <span class="anno">2024</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="252" cy="82" r="34" fill="currentColor" opacity=".3"/>
+              <path d="M86 330V116h16v214zM102 330V116h16v214zM206 330V116h16v214zM222 330V116h16v214z" fill="currentColor"/>
+              <path d="M80 116h44v10H80zM202 116h44v10h-44zM84 158h36v8H84zM206 158h36v8h-36z" fill="#fffdf8" opacity=".7"/>
+              <path d="M0 148c44-32 94-32 94-32s52 96 118 96 116-64 116-64l-8-14s-48 60-108 60S102 62 94 62 0 130 0 130z" fill="currentColor" opacity=".55"/>
+              <path d="M0 262h320v14H0z" fill="currentColor"/>
+              <path d="M130 262v-46h8v46zM160 262v-58h8v58zM190 262v-46h8v46z" fill="currentColor" opacity=".45"/>
+              <path d="M0 336c34 0 34 12 68 12s34-12 68-12 34 12 68 12 34-12 68-12 32 10 48 11v53H0z" fill="currentColor" opacity=".3"/>
+            </svg>
+          </div>
+        </div>
+        <div class="dettagli">
+          <h3>California &amp; Las Vegas</h3>
+          <p class="nota">Dalla costa del Pacifico al deserto</p>
+          <span class="vai">Apri l'album</span>
+        </div>
+      </a>
+      <a class="album rivela" style="--c:var(--c-hkbali)" href="http://www.gioriva.it/mondo/indonesia2025/" target="_blank" rel="noopener">
+        <div class="cornice">
+          <span class="anno">2025</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M18 300V150l16-18v168zM42 300V128l18-20v192zM70 300V96l20-22v226zM100 300V132l16-18v186zM126 300V170l14-16v146z" fill="currentColor" opacity=".55"/>
+              <path d="M228 302c4-56 16-92 34-118l-14-10c-22 30-34 70-38 128z" fill="currentColor"/>
+              <path d="M248 174c-24-14-48-12-66 4 26-6 46 0 60 12zM248 174c22-18 48-20 68-6-26-4-48 4-60 16zM248 174c-6-24 2-46 22-60-12 20-16 40-10 58zM248 174c20-14 42-14 60 2-24-8-44-6-56 6z" fill="currentColor"/>
+              <circle cx="90" cy="70" r="22" fill="currentColor" opacity=".28"/>
+              <path d="M0 322c34 0 34 12 68 12s34-12 68-12 34 12 68 12 34-12 68-12 32 10 48 11v67H0z" fill="currentColor" opacity=".26"/>
+              <path d="M0 352c34 0 34 12 68 12s34-12 68-12 34 12 68 12 34-12 68-12 32 10 48 11v37H0z" fill="currentColor" opacity=".4"/>
+            </svg>
+          </div>
+        </div>
+        <div class="dettagli">
+          <h3>Hong Kong &amp; Bali</h3>
+          <p class="nota">Hong Kong, Bali e le isole Gili</p>
+          <span class="vai">Apri l'album</span>
+        </div>
+      </a>
+      <a class="album rivela" style="--c:var(--c-messico)" href="http://www.gioriva.it/mondo/messico2026/" target="_blank" rel="noopener">
+        <div class="cornice">
+          <span class="anno">2026</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="240" cy="88" r="38" fill="currentColor" opacity=".3"/>
+              <path d="M240 34v-18M240 160v-18M294 88h18M168 88h18M280 48l12-12M200 128l-12 12M280 128l12 12M200 48l-12-12" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".5"/>
+              <path d="M36 344h44v-42h30v-42h30v-42h40v42h30v42h30v42h44v22H36z" fill="currentColor" opacity=".6"/>
+              <path d="M140 218h40v-30h-40z" fill="currentColor"/>
+              <path d="M152 344l8-104 8 104z" fill="#fffdf8" opacity=".65"/>
+              <path d="M50 366h220v10H50z" fill="currentColor"/>
+              <path d="M22 376c0-30 6-48 16-52 8-4 14 4 14 20v32z" fill="currentColor" opacity=".8"/>
+              <path d="M0 384h320v16H0z" fill="currentColor" opacity=".25"/>
+            </svg>
+          </div>
+        </div>
+        <div class="dettagli">
+          <h3>Messico</h3>
+          <p class="nota">Sette giorni tra cenote e caraibi</p>
+          <span class="vai">Apri l'album</span>
+        </div>
+      </a>
+      <a class="album rivela" style="--c:var(--c-giappone26)" href="http://www.gioriva.it/mondo/giappone2026/galleria.html" target="_blank" rel="noopener">
+        <div class="cornice">
+          <span class="anno">2026</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="242" cy="80" r="34" fill="currentColor" opacity=".3"/>
+              <circle cx="228" cy="70" r="30" fill="#fffdf8" opacity=".9"/>
+              <path d="M156 62h8v26h-8z" fill="currentColor"/>
+              <path d="M104 108c34-14 78-14 112 0l-14-20c-28-10-56-10-84 0z" fill="currentColor"/>
+              <path d="M126 108h68v34h-68z" fill="currentColor" opacity=".55"/>
+              <path d="M88 164c42-16 102-16 144 0l-16-22c-34-12-78-12-112 0z" fill="currentColor"/>
+              <path d="M114 164h92v40h-92z" fill="currentColor" opacity=".55"/>
+              <path d="M70 226c50-18 130-18 180 0l-18-22c-42-14-102-14-144 0z" fill="currentColor"/>
+              <path d="M100 226h120v60H100z" fill="currentColor" opacity=".55"/>
+              <path d="M52 300c60-22 156-22 216 0l-20-14c-52-16-124-16-176 0z" fill="currentColor"/>
+              <path d="M86 300h148v56H86z" fill="currentColor" opacity=".55"/>
+              <circle cx="46" cy="128" r="5" fill="currentColor" opacity=".5"/>
+              <circle cx="274" cy="182" r="4" fill="currentColor" opacity=".45"/>
+              <circle cx="58" cy="216" r="4" fill="currentColor" opacity=".4"/>
+              <circle cx="266" cy="264" r="5" fill="currentColor" opacity=".4"/>
+              <path d="M0 356h320v44H0z" fill="currentColor" opacity=".22"/>
+            </svg>
+          </div>
+        </div>
+        <div class="dettagli">
+          <h3>Giappone</h3>
+          <p class="nota">527 scatti in undici giorni</p>
+          <span class="vai">Apri l'album</span>
+        </div>
+      </a>
+    </div>
 
-      <div class="campo">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required autocomplete="email" placeholder="Per poterti rispondere">
-      </div>
-
-      <div class="campo">
-        <label for="messaggio">Messaggio</label>
-        <textarea id="messaggio" name="messaggio" required placeholder="Raccontami"></textarea>
-      </div>
-
-      <button type="submit" class="invia">Invia il messaggio</button>
-    </form>
-
-    <p class="nota">I dati inviati servono solo a risponderti. Dettagli nella <a href="privacy.html">privacy e cookie policy</a>.</p>
+    <p class="coda"><span></span>Patagonia e Polinesia arriva in autunno 2026: l'album si aggiunge qui appena tornati.</p>
   </main>
 
   <footer>
     <a href="https://www.gioriva.it/" class="voce voce--marchio">
       <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3">
-        <circle cx="10" cy="10" r="7.5"/>
-        <ellipse cx="10" cy="10" rx="3.4" ry="7.5"/>
+        <circle cx="10" cy="10" r="7.5"/><ellipse cx="10" cy="10" rx="3.4" ry="7.5"/>
         <path d="M2.5 10h15M3.6 6h12.8M3.6 14h12.8"/>
       </svg>
       Gio Riva
@@ -501,19 +639,16 @@
     <button type="button" id="cookieFooter" class="voce">
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3">
         <path d="M14.4 8.6 A6.5 6.5 0 1 1 7.4 1.6 A2.6 2.6 0 0 0 10.4 5.2 A2.6 2.6 0 0 0 14.4 8.6 Z"/>
-        <circle cx="6" cy="7" r=".4"/>
-        <circle cx="8.4" cy="10.6" r=".4"/>
-        <circle cx="5.4" cy="10.4" r=".4"/>
+        <circle cx="6" cy="7" r=".4"/><circle cx="8.4" cy="10.6" r=".4"/><circle cx="5.4" cy="10.4" r=".4"/>
       </svg>
       Cookie
     </button>
-    <span class="voce voce--attiva">
+    <a href="contatti.html" class="voce">
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round">
-        <rect x="1.6" y="3.2" width="12.8" height="9.6"/>
-        <path d="M1.6 4 L8 8.8 L14.4 4"/>
+        <rect x="1.6" y="3.2" width="12.8" height="9.6"/><path d="M1.6 4 L8 8.8 L14.4 4"/>
       </svg>
       Contatti
-    </span>
+    </a>
   </footer>
 
   <div class="cookie" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Gestione cookie">
@@ -536,20 +671,17 @@
       var no = document.getElementById('cookieDecline');
       var piede = document.getElementById('cookieFooter');
       if (!banner) return;
-
       function gtagSafe(){ if (typeof gtag === 'function') gtag.apply(null, arguments); }
       function consenso(dato){
         gtagSafe('consent', 'update', { 'analytics_storage': dato ? 'granted' : 'denied' });
       }
       function mostra(){ banner.classList.add('mostra'); }
       function nascondi(){ banner.classList.remove('mostra'); }
-
       var salvato = null;
       try { salvato = localStorage.getItem(KEY); } catch(e){}
       if (salvato === 'granted'){ consenso(true); }
       else if (salvato === 'denied'){ consenso(false); }
       else { mostra(); }
-
       ok.addEventListener('click', function(){
         try { localStorage.setItem(KEY, 'granted'); } catch(e){}
         consenso(true); nascondi();
@@ -559,6 +691,25 @@
         consenso(false); nascondi();
       });
       if (piede) piede.addEventListener('click', mostra);
+    })();
+
+    (function(){
+      'use strict';
+      var pezzi = document.querySelectorAll('.rivela');
+      if (!('IntersectionObserver' in window)){
+        Array.prototype.forEach.call(pezzi, function(p){ p.classList.add('dentro'); });
+        return;
+      }
+      var oss = new IntersectionObserver(function(voci){
+        voci.forEach(function(v, i){
+          if (v.isIntersecting){
+            var el = v.target;
+            setTimeout(function(){ el.classList.add('dentro'); }, i * 70);
+            oss.unobserve(el);
+          }
+        });
+      }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+      Array.prototype.forEach.call(pezzi, function(p){ oss.observe(p); });
     })();
 
     /* menu */
@@ -591,6 +742,7 @@
         if (e.key === 'Escape') stato(false);
       });
     })();
+
   </script>
 
 </body>
