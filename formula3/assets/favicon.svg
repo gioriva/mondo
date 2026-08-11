@@ -1,14 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <clipPath id="c"><circle cx="32" cy="32" r="29"/></clipPath>
+    <clipPath id="gusciofav">
+      <path d="M8 37a24 24 0 0 1 48 0v5a4 4 0 0 1-4 4H29C17 46 8 42 8 37Z"/>
+    </clipPath>
   </defs>
-  <circle cx="32" cy="32" r="31" fill="#221a14"/>
-  <circle cx="32" cy="32" r="29" fill="#fbf5e6"/>
-  <g clip-path="url(#c)">
-    <rect x="-8" y="8" width="80" height="7" fill="#bf3a1f" transform="rotate(-8 32 32)"/>
-    <rect x="-8" y="15" width="80" height="7" fill="#e8641b" transform="rotate(-8 32 32)"/>
-    <rect x="-8" y="22" width="80" height="7" fill="#efaf34" transform="rotate(-8 32 32)"/>
+  <rect width="64" height="64" rx="14" fill="#221a14"/>
+  <g transform="translate(3.2,3.4) scale(0.9)">
+    <path d="M8 37a24 24 0 0 1 48 0v5a4 4 0 0 1-4 4H29C17 46 8 42 8 37Z" fill="#fbf5e6"/>
+    <g clip-path="url(#gusciofav)">
+      <rect x="-8" y="11" width="80" height="5" fill="#bf3a1f" transform="rotate(-8 32 32)"/>
+      <rect x="-8" y="16" width="80" height="5" fill="#e8641b" transform="rotate(-8 32 32)"/>
+      <rect x="-8" y="21" width="80" height="5" fill="#efaf34" transform="rotate(-8 32 32)"/>
+    </g>
+    <path d="M33 27h18v9H33c-4.5 0-7-1.8-7-4.5S28.5 27 33 27Z" fill="#221a14"/>
   </g>
-  <circle cx="32" cy="32" r="29" fill="none" stroke="#221a14" stroke-width="4"/>
-  <text x="32" y="46" text-anchor="middle" font-family="'Racing Sans One','Arial Black',sans-serif" font-weight="900" font-size="20" fill="#221a14">743</text>
 </svg>

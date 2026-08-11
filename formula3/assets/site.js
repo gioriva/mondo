@@ -9,7 +9,8 @@
 
   var FOTO = [];
   for (var i = 1; i <= 62; i++) FOTO.push("tarcisio" + i + ".jpg");
-  for (var j = 1; j <= 9; j++) FOTO.push("Tarcisio_" + j + ".JPEG");
+  /* Tarcisio_6 è un doppione, resta fuori dall'elenco */
+  for (var j = 1; j <= 9; j++) { if (j !== 6) FOTO.push("Tarcisio_" + j + ".JPEG"); }
 
   /* ---------- consenso cookie e Google Analytics ---------- */
 
