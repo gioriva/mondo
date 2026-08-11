@@ -880,3 +880,13 @@ footer{
   }
   .auto:nth-child(even) .auto-foto{ order:0; }
 }
+
+/* la voce Vetture della scheda pilota è un link alla pagina delle auto */
+.scheda-voce dd a{
+  color:var(--asfalto);
+  text-decoration:none;
+  border-bottom:3px solid var(--arancio);
+  padding-bottom:1px;
+  transition:color .2s ease;
+}
+.scheda-voce dd a:hover{ color:var(--rosso); }
