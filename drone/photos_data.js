@@ -121,6 +121,8 @@ const ALBUMS = [
     name: "Faro Voltiano",
     loc: "Faro · Brunate, Como",
     coord: "IT · 45.83N 9.09E",
+    video: "JxeXx6E3pKg",
+    videoShort: true,
     photos: [
       "faro-voltiano-01.jpg",
       "faro-voltiano-02.jpg",
