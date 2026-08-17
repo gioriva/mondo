@@ -239,6 +239,27 @@ const ALBUMS = [
       "cannes-25.jpg"
     ]
   },
+  {
+    slug: "paesaggi",
+    name: "Paesaggi",
+    loc: "Montagna · Alpi, Piemonte",
+    coord: "IT · Valstrona, Monte Rosa",
+    video: "CPwJDHyauvU",
+    photos: [
+      "paesaggi-01.jpg",
+      "paesaggi-02.jpg",
+      "paesaggi-03.jpg",
+      "paesaggi-04.jpg",
+      "paesaggi-05.jpg",
+      "paesaggi-06.jpg",
+      "paesaggi-07.jpg",
+      "paesaggi-08.jpg",
+      "paesaggi-09.jpg",
+      "paesaggi-10.jpg",
+      "paesaggi-11.jpg",
+      "paesaggi-12.jpg"
+    ]
+  },
 ];
 
 function photoUrl(album, file) { return BASE + "/" + album.slug + "/" + file; }
