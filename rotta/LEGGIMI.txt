@@ -1,0 +1,69 @@
+ROTTA | FLIGHT TRACKER
+Destinazione: https://www.gioriva.it/rotta/
+
+──────────────────────────────────────────────
+CONTENUTO
+──────────────────────────────────────────────
+index.html        pagina del tracker
+privacy.html      informativa privacy
+cookie.html       cookie policy, con pulsante per rivedere le preferenze
+contatti.html     modulo Formspree (nome, cognome, mail, messaggio)
+assets/
+  style.css       stile comune, temi chiaro e scuro
+  app.js          tema, banner cookie, Consent Mode v2, GA4 G-1ZCCJ6QBR4
+  rotta.js        ricerca volo, planisfero, resa dei dati
+  world.js        confini nazionali in SVG (Natural Earth 110m)
+  fonts/          IBM Plex in locale, sottoinsieme latino
+  img/            favicon 32 e 180, icona 512, og-image
+
+Carica tutto dentro la cartella /rotta della tua repo.
+Nessun file supera i 130 KB, nessuna dipendenza esterna.
+
+──────────────────────────────────────────────
+COLLEGARE I DATI REALI
+──────────────────────────────────────────────
+Le due impostazioni stanno nelle prime righe di assets/rotta.js.
+
+A. Prova veloce
+   var RAPIDAPI_KEY = "la-tua-chiave";
+   Funziona subito, ma la chiave è leggibile da chiunque apra il sorgente.
+
+B. Proxy (consigliato per il sito pubblicato)
+   var RAPIDAPI_KEY = "";
+   var PROXY_URL = "https://rotta-api.gioriva.workers.dev/volo/";
+
+   Worker Cloudflare, piano gratuito:
+
+   export default {
+     async fetch(req, env) {
+       const code = new URL(req.url).pathname.split("/").pop();
+       if (!/^[A-Z0-9]{3,8}$/i.test(code)) return new Response("[]", { status: 400 });
+       const r = await fetch(
+         `https://aerodatabox.p.rapidapi.com/flights/number/${code}?withLocation=true`,
+         { headers: {
+             "X-RapidAPI-Key": env.ADB_KEY,
+             "X-RapidAPI-Host": "aerodatabox.p.rapidapi.com" } });
+       return new Response(await r.text(), {
+         status: r.status,
+         headers: {
+           "content-type": "application/json",
+           "access-control-allow-origin": "https://www.gioriva.it",
+           "cache-control": "public, max-age=60" } });
+     }
+   };
+
+   ADB_KEY va inserita come variabile segreta nel pannello Cloudflare.
+
+Senza nessuna delle due, la pagina resta in modalità dimostrativa
+con sei voli simulati: AZ610, LH1922, NH209, FR8623, SQ355, VY6412.
+
+──────────────────────────────────────────────
+NOTE
+──────────────────────────────────────────────
+I font sono ospitati in locale, quindi niente richieste a Google Fonts
+e niente indirizzi IP che escono verso terzi senza consenso.
+
+GA4 parte solo dopo Accetta: prima della scelta lo script non viene caricato.
+La scelta si rifà dal pulsante nella pagina cookie.
+
+Il modulo contatti punta a https://formspree.io/f/xkjwkovp

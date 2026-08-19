@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rotta | Flight Tracker</title>
+<meta name="description" content="Cerca un volo di linea con il suo codice e vedi stato, orari, ritardi, aeromobile e rotta disegnata sul planisfero.">
+<link rel="canonical" href="https://www.gioriva.it/rotta/">
+<meta name="theme-color" content="#F3F5F4">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/icon-32.png">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rotta">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="Rotta | Flight Tracker">
+<meta property="og:description" content="Cerca un volo di linea con il suo codice e vedi stato, orari, ritardi, aeromobile e rotta disegnata sul planisfero.">
+<meta property="og:url" content="https://www.gioriva.it/rotta/">
+<meta property="og:image" content="https://www.gioriva.it/rotta/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.gioriva.it/rotta/assets/img/og.png">
+
+<link rel="preload" href="assets/fonts/IBMPlexSansCondensed-SemiBold-Latin1.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <div class="bg-glow"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-world" id="bgworld"></div>
+</div>
+
+<div class="wrap">
+  <header class="topbar">
+    <a class="mark" href="./">rotta<i></i><span>flight tracker</span></a>
+    <div class="topbar-r">
+      <span class="mono" id="mode" style="font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)"></span>
+      <button class="tgl" id="theme" aria-label="Cambia tema chiaro o scuro">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4 8.4 8.4 0 1 0 20 14.2z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <section class="search">
+    <p class="eyebrow">codice volo</p>
+    <div class="field" id="field">
+      <span></span>
+      <div class="fin">
+        <input id="q" class="q" placeholder="AZ610" maxlength="8" spellcheck="false"
+               autocomplete="off" autocapitalize="characters" aria-label="Codice IATA del volo">
+        <span class="uline"></span>
+      </div>
+      <button class="go" id="go" aria-label="Cerca il volo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+    <div class="examples" id="examples">
+      <span class="lab">prova con</span>
+    </div>
+  </section>
+
+  <section class="stage">
+    <div id="loading" class="loading" hidden>
+      interrogazione in corso
+      <div class="bar"><i></i></div>
+    </div>
+
+    <div id="note" class="note" hidden>
+      <h3 id="note-title"></h3>
+      <p id="note-body"></p>
+    </div>
+
+    <article class="strip" id="strip" hidden>
+      <div class="strip-head">
+        <div>
+          <h2 class="code" id="r-code">—</h2>
+          <p class="sub" id="r-sub">—</p>
+        </div>
+        <div class="status s-idle" id="r-status"><i></i><span id="r-status-t">—</span></div>
+      </div>
+
+      <div class="maprow">
+        <div class="mapbox" id="mapbox"></div>
+        <span class="maplab" id="maplab"></span>
+      </div>
+
+      <div class="ends">
+        <div class="iata" id="dep-iata">—</div>
+        <div class="iata r" id="arr-iata">—</div>
+        <div class="city" id="dep-city">—</div>
+        <div class="city r" id="arr-city">—</div>
+        <div class="times">
+          <span class="t-sched" id="dep-sched">—</span>
+          <span class="t-real" id="dep-real" hidden></span>
+        </div>
+        <div class="times r">
+          <span class="t-sched" id="arr-sched">—</span>
+          <span class="t-real" id="arr-real" hidden></span>
+        </div>
+        <div class="t-note" id="dep-note"></div>
+        <div class="t-note r" id="arr-note"></div>
+      </div>
+
+      <div class="rail">
+        <span class="rail-t" id="rail-l"></span>
+        <span class="rail-b"><i id="rail-fill"></i><b id="rail-dot"></b></span>
+        <span class="rail-t" id="rail-r"></span>
+      </div>
+
+      <div class="data">
+        <div class="cell"><span class="k">durata</span><span class="v" id="d-dur">—</span></div>
+        <div class="cell"><span class="k">distanza</span><span class="v" id="d-dist">—</span></div>
+        <div class="cell"><span class="k">velocità</span><span class="v" id="d-spd">—</span></div>
+        <div class="cell"><span class="k">quota</span><span class="v" id="d-alt">—</span></div>
+        <div class="cell"><span class="k">aeromobile</span><span class="v" id="d-craft">—</span></div>
+        <div class="cell"><span class="k">immatricolazione</span><span class="v" id="d-reg">—</span></div>
+      </div>
+
+      <div class="strip-foot">
+        <span id="r-updated">—</span>
+        <button class="refresh" id="refresh">aggiorna</button>
+      </div>
+    </article>
+  </section>
+
+  <section class="keybox">
+    <button class="keytoggle" id="keytoggle">collega i dati reali</button>
+    <div class="keypanel" id="keypanel" hidden>
+      <p>Rotta legge i dati da <strong>AeroDataBox</strong>, che risponde in https. Incolla qui la chiave RapidAPI per provarla subito: resta solo in memoria e sparisce quando chiudi la scheda.</p>
+      <div class="keyrow">
+        <input id="key" type="password" placeholder="X-RapidAPI-Key" spellcheck="false" autocomplete="off" aria-label="Chiave RapidAPI">
+        <button class="btn" id="keysave">Attiva</button>
+      </div>
+      <div class="keyhint">
+        Per l'uso quotidiano conviene il proxy: la chiave resta sul server e non finisce nel sorgente della pagina.<br>
+        Le due impostazioni si trovano nelle prime righe di <code>assets/rotta.js</code>.
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <a class="foot-l" href="https://www.gioriva.it/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2.6 5.4c4.2-1.5 14.6-1.5 18.8 0"/>
+        <path d="M4.4 8.4h15.2"/>
+        <path d="M7.2 6.1V21"/>
+        <path d="M16.8 6.1V21"/>
+      </svg>
+      Gio Riva
+    </a>
+    <nav class="foot-nav">
+      <a href="privacy.html">Privacy</a>
+      <a href="cookie.html">Cookie</a>
+      <a href="contatti.html">Contatti</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="cookie" id="cookie" role="dialog" aria-label="Preferenze cookie">
+  <h4>Cookie</h4>
+  <p>Rotta usa Google Analytics per contare le visite in forma aggregata. Niente viene installato prima della tua scelta. Dettagli nella <a href="cookie.html">cookie policy</a>.</p>
+  <div class="cookie-btns">
+    <button class="btn ghost" id="ck-no">Rifiuta</button>
+    <button class="btn" id="ck-ok">Accetta</button>
+  </div>
+</div>
+
+<script src="assets/world.js"></script>
+<script>
+  document.getElementById("bgworld").innerHTML =
+    '<svg viewBox="0 34 1000 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<path class="ln" d="' + window.WORLD + '"/></svg>';
+</script>
+<script src="assets/rotta.js"></script>
+</body>
+</html>

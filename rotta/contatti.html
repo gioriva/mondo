@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contatti | Rotta</title>
+<meta name="description" content="Scrivi al gestore di Rotta per segnalazioni, errori o idee sulla pagina.">
+<link rel="canonical" href="https://www.gioriva.it/rotta/contatti.html">
+<meta name="theme-color" content="#F3F5F4">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/icon-32.png">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rotta">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="Contatti | Rotta">
+<meta property="og:description" content="Scrivi al gestore di Rotta per segnalazioni, errori o idee sulla pagina.">
+<meta property="og:url" content="https://www.gioriva.it/rotta/contatti.html">
+<meta property="og:image" content="https://www.gioriva.it/rotta/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js"></script>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <div class="bg-glow"></div>
+  <div class="bg-grid"></div>
+</div>
+
+<div class="wrap">
+  <header class="topbar">
+    <a class="mark" href="./">rotta<i></i><span>flight tracker</span></a>
+    <div class="topbar-r">
+      <button class="tgl" id="theme" aria-label="Cambia tema chiaro o scuro">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4 8.4 8.4 0 1 0 20 14.2z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="page">
+    <h1>Contatti</h1>
+    <p class="updated">Scrivi al gestore di Rotta</p>
+
+    <p>Segnalazioni su un volo che non compare, errori negli orari, idee per la pagina: qui va bene tutto.
+    La risposta arriva alla mail che indichi.</p>
+
+    <form class="form" id="form" novalidate>
+      <div class="frow">
+        <div class="f">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" required autocomplete="given-name">
+        </div>
+        <div class="f">
+          <label for="cognome">Cognome</label>
+          <input type="text" id="cognome" name="cognome" required autocomplete="family-name">
+        </div>
+      </div>
+      <div class="f">
+        <label for="email">Mail</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+      </div>
+      <div class="f">
+        <label for="messaggio">Messaggio</label>
+        <textarea id="messaggio" name="messaggio" required></textarea>
+      </div>
+      <div class="hp" aria-hidden="true">
+        <label for="_gotcha">Lascia vuoto</label>
+        <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+      </div>
+      <label class="consent">
+        <input type="checkbox" id="ok" required>
+        <span>Ho letto l'<a href="privacy.html">informativa privacy</a> e acconsento al trattamento dei
+        miei dati per ricevere una risposta.</span>
+      </label>
+      <button class="btn" type="submit" id="send">Invia il messaggio</button>
+      <p class="fmsg" id="fmsg"></p>
+    </form>
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <a class="foot-l" href="https://www.gioriva.it/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2.6 5.4c4.2-1.5 14.6-1.5 18.8 0"/>
+        <path d="M4.4 8.4h15.2"/>
+        <path d="M7.2 6.1V21"/>
+        <path d="M16.8 6.1V21"/>
+      </svg>
+      Gio Riva
+    </a>
+    <nav class="foot-nav">
+      <a href="privacy.html">Privacy</a>
+      <a href="cookie.html">Cookie</a>
+      <a href="contatti.html">Contatti</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="cookie" id="cookie" role="dialog" aria-label="Preferenze cookie">
+  <h4>Cookie</h4>
+  <p>Rotta usa Google Analytics per contare le visite in forma aggregata. Niente viene installato prima della tua scelta. Dettagli nella <a href="cookie.html">cookie policy</a>.</p>
+  <div class="cookie-btns">
+    <button class="btn ghost" id="ck-no">Rifiuta</button>
+    <button class="btn" id="ck-ok">Accetta</button>
+  </div>
+</div>
+
+<div class="cookie" id="cookie" role="dialog" aria-label="Preferenze cookie">
+  <h4>Cookie</h4>
+  <p>Rotta usa Google Analytics per contare le visite in forma aggregata. Niente viene installato prima della tua scelta. Dettagli nella <a href="cookie.html">cookie policy</a>.</p>
+  <div class="cookie-btns">
+    <button class="btn ghost" id="ck-no">Rifiuta</button>
+    <button class="btn" id="ck-ok">Accetta</button>
+  </div>
+</div>
+<script>
+(function () {
+  var form = document.getElementById("form");
+  var msg = document.getElementById("fmsg");
+  var send = document.getElementById("send");
+
+  function stato(testo, classe) { msg.textContent = testo; msg.className = "fmsg " + classe; }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nome = document.getElementById("nome").value.trim();
+    var cognome = document.getElementById("cognome").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var testo = document.getElementById("messaggio").value.trim();
+
+    if (!nome || !cognome || !testo) { stato("Compila nome, cognome e messaggio.", "err"); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { stato("Controlla l'indirizzo mail.", "err"); return; }
+    if (!document.getElementById("ok").checked) { stato("Serve il consenso al trattamento dei dati.", "err"); return; }
+    if (document.getElementById("_gotcha").value) return;
+
+    send.disabled = true;
+    stato("Invio in corso", "ok");
+
+    fetch("https://formspree.io/f/xkjwkovp", {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: new FormData(form)
+    }).then(function (r) {
+      if (!r.ok) throw new Error();
+      form.reset();
+      stato("Messaggio inviato. Ti rispondo appena posso.", "ok");
+    }).catch(function () {
+      stato("Invio non riuscito. Riprova tra poco.", "err");
+    }).then(function () { send.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>
