@@ -1,44 +1,16 @@
 /* ============================================================
    Rotta | comportamenti comuni a tutte le pagine
-   tema chiaro/scuro, consenso cookie, Consent Mode v2
+   consenso cookie, Consent Mode v2, anno nel piede
    ============================================================ */
 (function () {
   "use strict";
 
   var GA_ID = "G-1ZCCJ6QBR4";
-  var K_THEME = "rotta:tema";
   var K_COOKIE = "rotta:cookie";
 
   /* ---------- memoria locale a prova di blocco ---------- */
   function get(k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } }
   function set(k, v) { try { window.localStorage.setItem(k, v); } catch (e) {} }
-
-  /* ---------- tema ---------- */
-  var root = document.documentElement;
-
-  function applyTheme(t) {
-    root.setAttribute("data-theme", t);
-    var m = document.querySelector('meta[name="theme-color"]');
-    if (m) m.setAttribute("content", t === "dark" ? "#0A1015" : "#F3F5F4");
-  }
-
-  // applicato subito, prima del primo disegno, per evitare il lampo bianco
-  (function () {
-    var saved = get(K_THEME);
-    var sys = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    applyTheme(saved || (sys ? "dark" : "light"));
-  })();
-
-  function initTheme() {
-    var btn = document.getElementById("theme");
-    if (!btn) return;
-    btn.addEventListener("click", function () {
-      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      applyTheme(next);
-      set(K_THEME, next);
-      document.dispatchEvent(new CustomEvent("rotta:tema", { detail: next }));
-    });
-  }
 
   /* ---------- consenso ---------- */
   window.dataLayer = window.dataLayer || [];
@@ -112,7 +84,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    initTheme();
     initConsent();
     initYear();
   });

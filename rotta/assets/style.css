@@ -11,36 +11,8 @@
 @font-face{font-family:"Plex Cond";src:url("fonts/IBMPlexSansCondensed-SemiBold-Latin1.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
 @font-face{font-family:"Plex Cond";src:url("fonts/IBMPlexSansCondensed-Bold-Latin1.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
 
-/* ---------- tema chiaro ---------- */
+/* ---------- unica tavolozza: scura ---------- */
 :root{
-  --paper:#F3F5F4;
-  --paper-2:#EAEEED;
-  --card:#FFFFFF;
-  --ink:#0D1A21;
-  --ink-2:#5C6E76;
-  --ink-3:#93A3A9;
-  --rule:#D6DEDF;
-  --rule-soft:#E7ECEC;
-  --signal:#B5116E;
-  --signal-soft:rgba(181,17,110,.10);
-  --ok:#0F7B4F;
-  --late:#B26A00;
-  --stop:#9B1C1C;
-  --land:#E2E8E8;
-  --land-line:#C9D5D7;
-  --grid:rgba(27,94,140,.06);
-  --glow:rgba(27,94,140,.07);
-  --shadow:0 1px 0 rgba(13,26,33,.04), 0 20px 44px -34px rgba(13,26,33,.55);
-
-  --mono:"Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --sans:"Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --cond:"Plex Cond", "Plex Sans", system-ui, sans-serif;
-
-  color-scheme:light;
-}
-
-/* ---------- tema scuro ---------- */
-html[data-theme="dark"]{
   --paper:#0A1015;
   --paper-2:#0E161C;
   --card:#111C23;
@@ -59,6 +31,11 @@ html[data-theme="dark"]{
   --grid:rgba(130,190,220,.05);
   --glow:rgba(120,190,230,.06);
   --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 50px -34px rgba(0,0,0,.9);
+
+  --mono:"Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans:"Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --cond:"Plex Cond", "Plex Sans", system-ui, sans-serif;
+
   color-scheme:dark;
 }
 
@@ -95,13 +72,12 @@ body{
 }
 .bg-world{
   position:absolute;left:50%;top:14vh;width:min(1900px,168vw);transform:translateX(-50%);
-  opacity:.5;
+  opacity:.75;
   mask-image:radial-gradient(115% 78% at 50% 34%, #000 22%, rgba(0,0,0,.35) 62%, transparent 100%);
   -webkit-mask-image:radial-gradient(115% 78% at 50% 34%, #000 22%, rgba(0,0,0,.35) 62%, transparent 100%);
 }
 .bg-world svg{display:block;width:100%;height:auto}
 .bg-world .ln{fill:var(--land);stroke:var(--land-line);stroke-width:.35}
-html[data-theme="dark"] .bg-world{opacity:.75}
 
 .wrap{position:relative;z-index:1;width:100%;max-width:1120px;margin:0 auto;padding:0 24px}
 
@@ -118,18 +94,9 @@ html[data-theme="dark"] .bg-world{opacity:.75}
 .mark span{color:var(--ink-3);font-family:var(--mono);font-size:.62rem;font-weight:400;
   letter-spacing:.2em;text-transform:uppercase;margin-left:4px}
 .topbar-r{display:flex;align-items:center;gap:12px}
-.tgl{
-  width:40px;height:40px;border-radius:50%;border:1px solid var(--rule);background:transparent;
-  color:var(--ink-2);display:grid;place-items:center;cursor:pointer;
-  transition:border-color .2s,color .2s,transform .3s;
+#mode{
+  font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);
 }
-.tgl:hover{border-color:var(--ink);color:var(--ink)}
-.tgl:active{transform:scale(.93)}
-.tgl svg{width:18px;height:18px}
-.tgl .moon{display:none}
-html[data-theme="dark"] .tgl .sun{display:none}
-html[data-theme="dark"] .tgl .moon{display:block}
-
 /* ---------- tipi comuni ---------- */
 .eyebrow{
   font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
@@ -349,20 +316,22 @@ code{font-family:var(--mono);font-size:.86em;background:var(--paper-2);padding:1
   background:var(--paper);
 }
 .foot-in{
-  max-width:1120px;margin:0 auto;padding:20px 24px 28px;
-  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  max-width:1120px;margin:0 auto;padding:22px 24px 30px;
+  display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;
 }
-.foot-l{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.72rem;
-  letter-spacing:.08em;color:var(--ink-2);text-decoration:none}
-.foot-l:hover{color:var(--ink)}
-.foot-l svg{width:17px;height:17px;flex:0 0 auto}
-.foot-nav{display:flex;gap:20px;flex-wrap:wrap}
-.foot-nav a,.foot-nav button{
+.foot-i{
+  display:inline-flex;align-items:center;gap:8px;text-decoration:none;
   font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink-3);text-decoration:none;background:transparent;border:0;padding:0;cursor:pointer;
+  color:var(--ink-3);transition:color .2s;
 }
-.foot-nav a:hover,.foot-nav button:hover{color:var(--ink)}
-.foot-nav a[aria-current]{color:var(--ink)}
+.foot-i svg{width:16px;height:16px;flex:0 0 auto}
+.foot-i:hover{color:var(--ink)}
+.foot-i[aria-current]{color:var(--ink-2)}
+.foot-i.brand{
+  color:var(--ink-2);font-size:.74rem;letter-spacing:.06em;text-transform:none;
+}
+.foot-i.brand svg{width:18px;height:18px}
+.foot-i.brand:hover{color:var(--ink)}
 
 /* ---------- banner cookie ---------- */
 .cookie{
@@ -405,7 +374,7 @@ code{font-family:var(--mono);font-size:.86em;background:var(--paper-2);padding:1
   .cell:nth-child(n+3){border-top:1px solid var(--rule-soft)}
   .strip-foot{padding:12px 18px}
   .frow{grid-template-columns:1fr;gap:0}
-  .foot-in{flex-direction:column;align-items:flex-start;gap:14px}
+  .foot-in{gap:18px 22px}
   .cookie-btns{grid-template-columns:1fr}
 }
 

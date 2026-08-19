@@ -17,9 +17,9 @@
         Lascia RAPIDAPI_KEY vuota e scrivi qui l'indirizzo del proxy.
         Rotta chiamerà PROXY_URL + codice volo.
   */
-  var RAPIDAPI_KEY = "225ecd1671msh02056b403b5eb40p1b3425jsnadc2bc11c19";
+  var RAPIDAPI_KEY = "";
   var RAPIDAPI_HOST = "aerodatabox.p.rapidapi.com";
-  var PROXY_URL = ""; // esempio: "https://rotta-api.gioriva.workers.dev/volo/"
+  var PROXY_URL = "https://rotta-api.giorgio-riva.workers.dev/volo/";
 
   /* ══════════ ANAGRAFICA AEROPORTI ══════════
      Serve solo come riserva: quando l'API risponde, le coordinate
@@ -538,13 +538,28 @@
 
     fetch(url, opts).then(function (res) {
       if (res.status === 204 || res.status === 404) return [];
-      if (res.status === 401 || res.status === 403) {
-        throw new Error("Chiave rifiutata. Controlla la sottoscrizione su RapidAPI.");
+      if (!res.ok) {
+        return res.text().then(function (txt) {
+          var dett = "";
+          try {
+            var j = JSON.parse(txt);
+            dett = j.message || j.error || j.detail || "";
+          } catch (e) {
+            dett = String(txt).slice(0, 180);
+          }
+          var base;
+          if (res.status === 401 || res.status === 403) {
+            base = "Chiave rifiutata, oppure non risulti iscritto ad AeroDataBox su RapidAPI.";
+          } else if (res.status === 429) {
+            base = "Quota mensile esaurita oppure troppe richieste ravvicinate.";
+          } else {
+            base = "Il servizio ha risposto con codice " + res.status + ".";
+          }
+          var e = new Error(base + (dett ? "<br><br>Risposta del server: <code>" + dett + "</code>" : ""));
+          e.dalServer = true;
+          throw e;
+        });
       }
-      if (res.status === 429) {
-        throw new Error("Quota mensile esaurita oppure troppe richieste ravvicinate.");
-      }
-      if (!res.ok) throw new Error("Il servizio ha risposto con codice " + res.status + ".");
       return res.json();
     }).then(function (data) {
       var rows = Array.isArray(data) ? data : (data && data.data) || [];
@@ -556,9 +571,11 @@
       }
       render(fromADB(pickBest(rows)), "live");
     }).catch(function (err) {
-      say("richiesta non riuscita",
-        (err && err.message ? err.message : "Il servizio non ha risposto.") +
-        (PROXY_URL ? "" : " Se l'errore riguarda CORS, il rimedio è passare da un proxy."));
+      var testo = (err && err.message) ? err.message : "Il servizio non ha risposto.";
+      if (!(err && err.dalServer) && !PROXY_URL) {
+        testo += " Se il browser segnala un problema di CORS, il rimedio è passare da un proxy.";
+      }
+      say("richiesta non riuscita", testo);
     });
   }
 
@@ -585,7 +602,11 @@
   });
 
   var kt = $("keytoggle");
-  if (kt) {
+  if (kt && (RAPIDAPI_KEY || PROXY_URL)) {
+    // sorgente dati già configurata: il pannello non serve più
+    var kb = document.querySelector(".keybox");
+    if (kb) kb.hidden = true;
+  } else if (kt) {
     kt.addEventListener("click", function () {
       var p = $("keypanel");
       p.hidden = !p.hidden;
@@ -602,7 +623,7 @@
     });
   }
 
-  // il planisfero si ridisegna al ridimensionamento e al cambio tema
+  // il planisfero si ridisegna al ridimensionamento della finestra
   var rt;
   function redraw() {
     clearTimeout(rt);
@@ -611,7 +632,6 @@
     }, 180);
   }
   window.addEventListener("resize", redraw);
-  document.addEventListener("rotta:tema", redraw);
 
   $("mode").textContent = (RAPIDAPI_KEY || PROXY_URL) ? "dati aerodatabox" : "modalità dimostrativa";
   if (window.innerWidth > 720) q.focus();

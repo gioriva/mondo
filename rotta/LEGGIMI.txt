@@ -9,7 +9,7 @@ privacy.html      informativa privacy
 cookie.html       cookie policy, con pulsante per rivedere le preferenze
 contatti.html     modulo Formspree (nome, cognome, mail, messaggio)
 assets/
-  style.css       stile comune, temi chiaro e scuro
+  style.css       stile comune, tema scuro
   app.js          tema, banner cookie, Consent Mode v2, GA4 G-1ZCCJ6QBR4
   rotta.js        ricerca volo, planisfero, resa dei dati
   world.js        confini nazionali in SVG (Natural Earth 110m)
@@ -20,42 +20,45 @@ Carica tutto dentro la cartella /rotta della tua repo.
 Nessun file supera i 130 KB, nessuna dipendenza esterna.
 
 ──────────────────────────────────────────────
-COLLEGARE I DATI REALI
+COLLEGAMENTO DATI: CONFIGURAZIONE ATTIVA
 ──────────────────────────────────────────────
-Le due impostazioni stanno nelle prime righe di assets/rotta.js.
+La pagina legge i dati tramite proxy. In assets/rotta.js, riga 20:
 
-A. Prova veloce
-   var RAPIDAPI_KEY = "la-tua-chiave";
-   Funziona subito, ma la chiave è leggibile da chiunque apra il sorgente.
+  var RAPIDAPI_KEY = "";
+  var PROXY_URL = "https://rotta-api.giorgio-riva.workers.dev/volo/";
 
-B. Proxy (consigliato per il sito pubblicato)
-   var RAPIDAPI_KEY = "";
-   var PROXY_URL = "https://rotta-api.gioriva.workers.dev/volo/";
+Nessuna chiave è presente in questi file: sta dentro Cloudflare,
+come Secret di nome ADB_KEY nel Worker "rotta-api".
 
-   Worker Cloudflare, piano gratuito:
+Se il Worker smette di rispondere, la pagina lo dice con il messaggio
+letterale del server, non con un errore generico.
 
-   export default {
-     async fetch(req, env) {
-       const code = new URL(req.url).pathname.split("/").pop();
-       if (!/^[A-Z0-9]{3,8}$/i.test(code)) return new Response("[]", { status: 400 });
-       const r = await fetch(
-         `https://aerodatabox.p.rapidapi.com/flights/number/${code}?withLocation=true`,
-         { headers: {
-             "X-RapidAPI-Key": env.ADB_KEY,
-             "X-RapidAPI-Host": "aerodatabox.p.rapidapi.com" } });
-       return new Response(await r.text(), {
-         status: r.status,
-         headers: {
-           "content-type": "application/json",
-           "access-control-allow-origin": "https://www.gioriva.it",
-           "cache-control": "public, max-age=60" } });
-     }
-   };
+Per tornare temporaneamente alla chiave diretta (sconsigliato sul sito
+pubblicato) basta invertire le due righe: chiave dentro RAPIDAPI_KEY
+e PROXY_URL vuoto.
 
-   ADB_KEY va inserita come variabile segreta nel pannello Cloudflare.
+──────────────────────────────────────────────
+DA FARE: SOSTITUIRE LA CHIAVE
+──────────────────────────────────────────────
+La chiave usata durante le prove è finita nel sorgente pubblico della
+pagina, quindi va considerata compromessa.
 
-Senza nessuna delle due, la pagina resta in modalità dimostrativa
-con sei voli simulati: AZ610, LH1922, NH209, FR8623, SQ355, VY6412.
+Su RapidAPI non si rigenera una chiave: se ne aggiunge una nuova e si
+cancella la vecchia. Le due convivono, quindi il tracker non si ferma.
+Ordine dei passaggi:
+
+  1. rapidapi.com/developer/dashboard > apri la tua app
+     (di norma "default-application")
+  2. Pagina Authorization > Add authorization > dalle un nome
+     Compare la nuova chiave: copiala
+  3. Cloudflare > Worker rotta-api > Settings > Variables and Secrets
+     modifica ADB_KEY con la nuova chiave, salva e ridistribuisci
+  4. Apri https://rotta-api.giorgio-riva.workers.dev/volo/AZ610
+     e controlla che risponda
+  5. Solo ora: torna su Authorization ed elimina la chiave vecchia
+
+Non invertire il passo 5: cancellando prima di aver aggiornato il
+Worker, il tracker smette di funzionare.
 
 ──────────────────────────────────────────────
 NOTE
@@ -65,5 +68,9 @@ e niente indirizzi IP che escono verso terzi senza consenso.
 
 GA4 parte solo dopo Accetta: prima della scelta lo script non viene caricato.
 La scelta si rifà dal pulsante nella pagina cookie.
+
+Il pannello "collega i dati reali" sotto la ricerca resta nascosto finché
+PROXY_URL o RAPIDAPI_KEY sono valorizzati. Torna visibile solo se svuoti
+entrambi, cioè in modalità dimostrativa.
 
 Il modulo contatti punta a https://formspree.io/f/xkjwkovp
