@@ -24,6 +24,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet">
   <title>Above Ground</title>
+  <meta property="og:title" content="Video | Above Ground · Fotografia Aerea">
+  <meta property="og:description" content="Riprese e short girati dall'alto con DJI Mini Pro 5.">
+  <meta property="og:image" content="https://www.gioriva.it/drone/og.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.gioriva.it/drone/og.png">
   <style>
     :root {
       --paper:  #F7F5F0;
@@ -134,41 +140,41 @@
     .rv { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(0.19,1,0.22,1), transform 1s cubic-bezier(0.19,1,0.22,1); }
     .rv.in { opacity: 1; transform: translateY(0); }
 
-    .head { padding: 170px 6vw 6dvh; text-align: center; }
-    .head .k { font-size: 10.5px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--soft); display: block; margin-bottom: 22px; }
-    .head h1 { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(38px, 6vw, 84px); letter-spacing: -0.02em; line-height: 1.05; }
+    .head { padding: 170px 6vw 4dvh; text-align: center; }
+    .head .k { font-size: 10.5px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--soft); display: block; margin-bottom: 22px; opacity: 0; animation: up 1.1s 0.15s forwards cubic-bezier(0.19,1,0.22,1); }
+    .head h1 { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(38px, 6vw, 84px); letter-spacing: -0.02em; line-height: 1.05; opacity: 0; animation: up 1.2s 0.3s forwards cubic-bezier(0.19,1,0.22,1); }
     .head h1 em { font-style: italic; color: var(--azure); }
-    .head-meta { margin-top: 22px; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--soft); }
+    .head-meta { margin-top: 24px; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--soft); opacity: 0; animation: up 1.1s 0.45s forwards cubic-bezier(0.19,1,0.22,1); }
+    @keyframes up { from { opacity:0; transform: translateY(28px); } to { opacity:1; transform: translateY(0); } }
 
-    .doc { max-width: 720px; margin: 0 auto; padding: 6dvh 6vw 14dvh; }
-    .doc section { padding-top: 6dvh; margin-top: 6dvh; border-top: 1px solid var(--line-l); }
-    .doc section:first-of-type { border-top: none; margin-top: 0; padding-top: 2dvh; }
-    .doc h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(21px, 2.8vw, 28px); letter-spacing: -0.01em; margin-bottom: 20px; }
-    .doc h2 .n { font-size: 0.55em; color: var(--azure); font-style: italic; margin-right: 12px; }
-    .doc h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 16px; margin: 26px 0 10px; }
-    .doc p { font-size: 14.5px; line-height: 1.85; color: var(--soft); margin-bottom: 16px; }
-    .doc p strong { color: var(--ink); font-weight: 400; }
-    .doc a { color: var(--azure); text-decoration: underline; text-underline-offset: 3px; }
-    .doc ul { list-style: none; margin: 0 0 16px; }
-    .doc li { font-size: 14.5px; line-height: 1.75; color: var(--soft); padding-left: 22px; position: relative; margin-bottom: 10px; }
-    .doc li::before { content: '·'; position: absolute; left: 0; color: var(--azure); }
-    .doc li strong { color: var(--ink); font-weight: 400; }
+    .vsec { padding: 0 6vw 12dvh; max-width: 1180px; margin: 0 auto; }
+    .vgroup { padding-top: 9dvh; }
+    .vgroup-head { text-align: center; margin-bottom: 5dvh; }
+    .vgroup-head .n { font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--azure); display: block; margin-bottom: 12px; }
+    .vgroup-head h2 { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(28px, 4vw, 50px); letter-spacing: -0.02em; }
+    .vgroup-head h2 em { font-style: italic; color: var(--azure); }
+    .vgroup-head p { margin-top: 12px; font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--soft); }
 
-    .ck-wrap { overflow-x: auto; background: var(--paper2); box-shadow: 0 10px 30px rgba(26,26,22,0.06); }
-    .ck-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .ck-table th, .ck-table td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--line-l); vertical-align: top; }
-    .ck-table tr:last-child td { border-bottom: none; }
-    .ck-table th { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--azure); font-weight: 500; }
-    .ck-table td { color: var(--soft); line-height: 1.6; }
-    .ck-table td strong { color: var(--ink); font-weight: 500; }
+    /* tavola video, come le foto */
+    .vcard { background: var(--paper2); padding: 14px; box-shadow: 0 20px 55px rgba(26,26,22,0.10); }
+    .vframe { position: relative; width: 100%; aspect-ratio: 16/9; background: #E9E7E1; }
+    .vframe iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .vcap { padding: 14px 4px 2px; text-align: center; }
+    .vcap .t { font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; color: var(--ink); }
+    .vcap .s { display: block; margin-top: 6px; font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--soft); }
 
-    .reset-btn { display: inline-flex; align-items: center; gap: 12px; margin-top: 6px; font-family: 'Archivo', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper); background: var(--ink); border: 1px solid var(--ink); padding: 14px 28px; cursor: pointer; transition: background 0.25s; }
-    .reset-btn:hover { background: #000; }
-    .reset-note { font-size: 13px; color: var(--soft); margin-top: 14px; }
+    /* orizzontali: impilati e centrati */
+    .vlist { display: flex; flex-direction: column; gap: 7dvh; align-items: center; }
+    .vlist .vcard { width: min(920px, 100%); }
 
-    .updated { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--soft); margin-top: 6dvh; padding-top: 4dvh; border-top: 1px solid var(--line-l); }
+    /* verticali: affiancati */
+    .vshorts { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+    .vshorts .vcard { width: min(360px, 100%); }
+    .vshorts .vframe { aspect-ratio: 9/16; }
 
     @media (max-width: 640px) {
+      .vshorts { gap: 6dvh; }
+      .vlist { gap: 6dvh; }
     }
   </style>
 </head>
@@ -179,7 +185,7 @@
   <div class="nav-links">
     <a href="https://www.gioriva.it"><svg viewBox="0 0 64 64" fill="currentColor" stroke="none"><path d="M 8 20 Q 32 13 56 20 L 56 15 Q 32 7 8 15 Z"/><rect x="13" y="22" width="38" height="5"/><polygon points="20,27 26,27 24,54 18,54"/><polygon points="38,27 44,27 46,54 40,54"/><rect x="15" y="35" width="34" height="5"/><rect x="29.5" y="27" width="5" height="8"/></svg><span>Gio Riva</span></a>
     <a href="https://www.gioriva.it/drone/works.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16.8 20.5H5.2A1.7 1.7 0 0 1 3.5 18.8V7.2"/><rect x="7.5" y="3.5" width="13" height="13" rx="1.6"/><path d="M7.7 13.4l3.5-3.2 2.6 2.2 2.8-2.6 3.7 3.4"/></svg><span>Album<small>Il mondo dall'alto</small></span></a>
-    <a href="video.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="6.5" width="13.5" height="11" rx="1.8"/><path d="M16 11l5.5-3v8L16 13z"/></svg><span>Video<small>Le riprese dall'alto</small></span></a>
+    <a href="video.html" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="6.5" width="13.5" height="11" rx="1.8"/><path d="M16 11l5.5-3v8L16 13z"/></svg><span>Video<small>Le riprese dall'alto</small></span></a>
     <a href="contatti.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span>Contatti<small>Scrivimi due righe</small></span></a>
   </div>
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
@@ -189,103 +195,18 @@
   <a href="https://www.gioriva.it"><svg viewBox="0 0 64 64" fill="currentColor" stroke="none"><path d="M 8 20 Q 32 13 56 20 L 56 15 Q 32 7 8 15 Z"/><rect x="13" y="22" width="38" height="5"/><polygon points="20,27 26,27 24,54 18,54"/><polygon points="38,27 44,27 46,54 40,54"/><rect x="15" y="35" width="34" height="5"/><rect x="29.5" y="27" width="5" height="8"/></svg><span>Gio Riva</span></a>
   <hr class="mm-rule">
   <a href="https://www.gioriva.it/drone/works.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16.8 20.5H5.2A1.7 1.7 0 0 1 3.5 18.8V7.2"/><rect x="7.5" y="3.5" width="13" height="13" rx="1.6"/><path d="M7.7 13.4l3.5-3.2 2.6 2.2 2.8-2.6 3.7 3.4"/></svg><span>Album<small>Il mondo dall'alto</small></span></a>
-  <a href="video.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="6.5" width="13.5" height="11" rx="1.8"/><path d="M16 11l5.5-3v8L16 13z"/></svg><span>Video<small>Le riprese dall'alto</small></span></a>
+  <a href="video.html" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="6.5" width="13.5" height="11" rx="1.8"/><path d="M16 11l5.5-3v8L16 13z"/></svg><span>Video<small>Le riprese dall'alto</small></span></a>
   <a href="contatti.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span>Contatti<small>Scrivimi due righe</small></span></a>
   <div class="mm-foot">Above Ground · Fotografia aerea · DJI Mini Pro 5</div>
 </div>
 
 <header class="head">
-  <span class="k">Informativa · GDPR</span>
-  <h1>Privacy <em>&amp; cookie</em></h1>
-  <div class="head-meta">Ai sensi del Reg. UE 2016/679</div>
+  <span class="k">Riprese in volo</span>
+  <h1>I <em>video</em></h1>
+  <div class="head-meta" id="headMeta">Riprese e short girati con DJI Mini Pro 5</div>
 </header>
 
-<main class="doc">
-
-  <section>
-    <h2><span class="n">I.</span>Titolare del trattamento</h2>
-    <p>Il titolare del trattamento dei dati raccolti tramite questo sito è il <strong>gestore del sito Above Ground</strong>, raggiungibile per qualsiasi richiesta relativa alla privacy tramite i recapiti indicati sul sito.</p>
-    <p>Questo sito è un portfolio personale dedicato alla fotografia aerea realizzata con drone DJI Mini Pro 5. Non vende prodotti né raccoglie dati per finalità commerciali.</p>
-  </section>
-
-  <section>
-    <h2><span class="n">II.</span>Dati raccolti</h2>
-    <p>Durante la navigazione il sito raccoglie esclusivamente <strong>dati statistici e di navigazione</strong> in forma aggregata, attraverso Google Analytics 4, e solo previo tuo consenso. Tra questi:</p>
-    <ul>
-      <li>pagine visitate e tempo di permanenza;</li>
-      <li>tipo di dispositivo, browser e sistema operativo;</li>
-      <li>area geografica approssimativa di provenienza (a livello di città/regione);</li>
-      <li>sorgente di provenienza (motore di ricerca, link diretto, social).</li>
-    </ul>
-    <p>Il sito <strong>non raccoglie dati personali identificativi</strong> (nome, email, telefono) salvo quelli che tu scelga eventualmente di comunicare contattando volontariamente il titolare.</p>
-  </section>
-
-  <section>
-    <h2><span class="n">III.</span>Finalità e base giuridica</h2>
-    <p>I dati statistici sono trattati per la sola finalità di <strong>comprendere l'andamento delle visite</strong> e migliorare i contenuti del sito. La base giuridica del trattamento è il <strong>consenso</strong> dell'utente (art. 6, par. 1, lett. a del GDPR), che puoi prestare o negare liberamente tramite il banner cookie e revocare in qualsiasi momento.</p>
-  </section>
-
-  <section id="cookie">
-    <h2><span class="n">IV.</span>Cookie utilizzati</h2>
-    <p>Un cookie è un piccolo file di testo memorizzato dal browser. Questo sito utilizza due categorie di cookie:</p>
-
-    <h3>Cookie tecnici (sempre attivi)</h3>
-    <p>Necessari al funzionamento del sito. Non richiedono consenso. Qui rientra la memorizzazione locale della tua scelta sui cookie, così da non riproporti il banner a ogni visita.</p>
-
-    <h3>Cookie analitici (previo consenso)</h3>
-    <p>Attivati solo dopo il tuo "Accetta", servono a produrre statistiche di visita tramite Google Analytics 4.</p>
-
-    <div class="ck-wrap">
-      <table class="ck-table">
-        <thead>
-          <tr><th>Cookie</th><th>Fornitore</th><th>Finalità</th><th>Durata</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>_ga</strong></td><td>Google</td><td>Distingue gli utenti unici</td><td>2 anni</td></tr>
-          <tr><td><strong>_ga_*</strong></td><td>Google</td><td>Mantiene lo stato della sessione</td><td>2 anni</td></tr>
-          <tr><td><strong>ag_consent</strong></td><td>Questo sito</td><td>Memorizza la tua scelta sui cookie</td><td>Persistente (locale)</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3>Contenuti incorporati</h3>
-    <p>Alcune pagine incorporano video tramite <strong>YouTube in modalità privacy avanzata</strong> (youtube-nocookie.com): in questa modalità YouTube non installa cookie di profilazione finché non avvii la riproduzione del video. All'avvio, si applicano le <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">condizioni privacy di Google/YouTube</a>.</p>
-  </section>
-
-  <section>
-    <h2><span class="n">V.</span>Google Analytics</h2>
-    <p>Il sito utilizza <strong>Google Analytics 4</strong>, servizio di analisi fornito da Google Ireland Ltd. Il servizio è configurato in modalità <strong>Consent Mode v2</strong>: nessun dato viene inviato a Google prima del tuo consenso esplicito. In GA4 l'indirizzo IP è anonimizzato di default e non viene mai registrato né archiviato.</p>
-    <p>Google può trasferire i dati raccolti su server situati anche al di fuori dell'Unione Europea. Per maggiori dettagli consulta la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy di Google</a> e le informazioni su <a href="https://support.google.com/analytics/answer/6004245" target="_blank" rel="noopener">come Analytics utilizza i dati</a>.</p>
-  </section>
-
-  <section>
-    <h2><span class="n">VI.</span>Conservazione dei dati</h2>
-    <p>I dati statistici aggregati raccolti tramite Google Analytics sono conservati per il periodo impostato nel servizio (di norma fino a 14 mesi) e successivamente cancellati o anonimizzati automaticamente.</p>
-  </section>
-
-  <section>
-    <h2><span class="n">VII.</span>I tuoi diritti</h2>
-    <p>In qualità di interessato hai il diritto, in qualsiasi momento, di:</p>
-    <ul>
-      <li><strong>Accedere</strong> ai tuoi dati e chiederne una copia;</li>
-      <li><strong>Rettificare</strong> o <strong>cancellare</strong> i dati che ti riguardano;</li>
-      <li><strong>Limitare</strong> od <strong>opporti</strong> al trattamento;</li>
-      <li><strong>Revocare il consenso</strong> già prestato, senza pregiudicare la liceità del trattamento precedente;</li>
-      <li>Proporre <strong>reclamo</strong> all'Autorità Garante per la protezione dei dati personali.</li>
-    </ul>
-    <p>Per esercitare questi diritti è sufficiente contattare il titolare tramite i recapiti del sito.</p>
-  </section>
-
-  <section>
-    <h2><span class="n">VIII.</span>Gestione del consenso</h2>
-    <p>Puoi modificare o revocare in qualsiasi momento la tua scelta sui cookie. Premendo il pulsante qui sotto, la preferenza salvata verrà azzerata e il banner ricomparirà per consentirti una nuova scelta.</p>
-    <button class="reset-btn" id="resetConsent">Reimposta preferenze cookie</button>
-    <p class="reset-note" id="resetNote"></p>
-  </section>
-
-  <div class="updated">Ultimo aggiornamento · Luglio 2026</div>
-
-</main>
+<main class="vsec" id="vsec"></main>
 
 <footer>
   <a class="f-item" href="https://www.gioriva.it" title="Gio Riva">
@@ -309,6 +230,7 @@
   </a>
 </footer>
 
+<script src="photos_data.js"></script>
 <script>
 const burger = document.getElementById('burger');
 const mmenu  = document.getElementById('mmenu');
@@ -321,14 +243,83 @@ mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   mmenu.classList.remove('open'); burger.classList.remove('open'); document.body.style.overflow = '';
 }));
 
-const note = document.getElementById('resetNote');
-document.getElementById('resetConsent').addEventListener('click', () => {
-  localStorage.removeItem('ag_consent');
-  if (typeof gtag === 'function') {
-    gtag('consent', 'update', { 'analytics_storage': 'denied' });
-  }
-  note.textContent = 'Preferenze azzerate. Il banner ricomparirà alla prossima pagina che aprirai.';
-});
+// COSTRUZIONE PAGINA VIDEO dai dati degli album
+const conVideo = ALBUMS.filter(a => a.video);
+const orizzontali = conVideo.filter(a => !a.videoShort);
+const verticali   = conVideo.filter(a => a.videoShort);
+
+document.getElementById('headMeta').textContent =
+  conVideo.length + ' video · Riprese con DJI Mini Pro 5';
+
+function tavola(a) {
+  return '<div class="vcard">' +
+    '<div class="vframe"><iframe src="https://www.youtube-nocookie.com/embed/' + a.video + '" ' +
+      'title="' + a.name + ' · video" ' +
+      'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ' +
+      'allowfullscreen loading="lazy"></iframe></div>' +
+    '<div class="vcap"><span class="t">' + a.name + '</span>' +
+      '<span class="s">' + a.loc + '</span></div>' +
+  '</div>';
+}
+
+const root = document.getElementById('vsec');
+let html = '';
+
+if (orizzontali.length) {
+  html += '<section class="vgroup">' +
+    '<div class="vgroup-head"><span class="n">Riprese</span><h2>In <em>volo</em></h2>' +
+    '<p>' + orizzontali.length + (orizzontali.length === 1 ? ' ripresa' : ' riprese') + '</p></div>' +
+    '<div class="vlist">' + orizzontali.map(tavola).join('') + '</div></section>';
+}
+
+if (verticali.length) {
+  html += '<section class="vgroup">' +
+    '<div class="vgroup-head"><span class="n">Short</span><h2>Verticali</h2>' +
+    '<p>' + verticali.length + ' short</p></div>' +
+    '<div class="vshorts">' + verticali.map(tavola).join('') + '</div></section>';
+}
+
+root.innerHTML = html;
+</script>
+
+<!-- COOKIE CONSENT BANNER -->
+<style>
+  #ccb{position:fixed;left:20px;right:20px;bottom:20px;z-index:9500;max-width:500px;background:#FFFFFF;border:1px solid var(--line);padding:26px 28px;transform:translateY(140%);transition:transform 0.5s cubic-bezier(0.19,1,0.22,1);box-shadow:0 18px 50px rgba(26,26,22,0.12);}
+  #ccb.show{transform:translateY(0);}
+  #ccb h3{font-family:'Fraunces',serif;font-weight:500;font-size:17px;color:var(--ink);margin-bottom:8px;}
+  #ccb p{font-size:13px;line-height:1.7;color:var(--soft);margin-bottom:18px;}
+  #ccb p a{color:var(--azure);text-decoration:underline;text-underline-offset:3px;}
+  #ccb-row{display:flex;gap:10px;flex-wrap:wrap;}
+  #ccb button{flex:1 1 0;min-width:120px;font-family:'Archivo',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:13px 16px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--ink);transition:border-color 0.25s,background 0.25s,color 0.25s;}
+  #ccb button:hover{border-color:var(--ink);}
+  #ccb button.accept{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+  #ccb button.accept:hover{background:#000;}
+  @media (max-width:600px){#ccb{left:12px;right:12px;bottom:12px;}#ccb button{flex-basis:100%;}}
+</style>
+<div id="ccb" role="dialog" aria-label="Consenso cookie">
+  <h3>Cookie &amp; Privacy</h3>
+  <p>Questo sito usa Google Analytics per capire come viene visitato. Nessun cookie di tracciamento viene attivato senza il tuo consenso. <a href="privacy.html">Maggiori informazioni</a>.</p>
+  <div id="ccb-row">
+    <button id="ccbReject">Rifiuta</button>
+    <button class="accept" id="ccbAccept">Accetta</button>
+  </div>
+</div>
+<script>
+  (function () {
+    var ccb = document.getElementById('ccb');
+    if (!localStorage.getItem('ag_consent')) {
+      setTimeout(function () { ccb.classList.add('show'); }, 900);
+    }
+    function choose(v) {
+      localStorage.setItem('ag_consent', v);
+      if (v === 'granted' && typeof gtag === 'function') {
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+      }
+      ccb.classList.remove('show');
+    }
+    document.getElementById('ccbAccept').addEventListener('click', function () { choose('granted'); });
+    document.getElementById('ccbReject').addEventListener('click', function () { choose('denied'); });
+  })();
 </script>
 </body>
 </html>
