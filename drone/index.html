@@ -125,18 +125,22 @@
     .f-item svg { width: 17px; height: 17px; }
     .f-sep { color: var(--line); }
 
-    /* FOOTER mobile: griglia 2x2, niente separatori */
+    /* FOOTER mobile: tutte le voci su una riga sola */
     @media (max-width: 640px) {
       footer {
-        display: grid;
-        grid-template-columns: repeat(2, auto);
+        flex-wrap: nowrap;
         justify-content: center;
-        justify-items: start;
-        gap: 20px 30px;
-        padding: 34px 6vw;
+        gap: clamp(10px, 3.4vw, 16px);
+        padding: 32px 4vw;
       }
       .f-sep { display: none; }
-      .f-item { font-size: 10.5px; letter-spacing: 0.18em; }
+      .f-item {
+        gap: clamp(5px, 1.6vw, 8px);
+        font-size: clamp(7.2px, 2.15vw, 9.5px);
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+      }
+      .f-item svg { width: clamp(11px, 3.4vw, 14px); height: clamp(11px, 3.4vw, 14px); }
     }
 
 
@@ -585,14 +589,9 @@
     <span>Gio Riva</span>
   </a>
   <span class="f-sep">·</span>
-  <a class="f-item" href="privacy.html#cookie" title="Cookie">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9.5"/><circle cx="9" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="14.5" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="15.5" r="1" fill="currentColor" stroke="none"/></svg>
-    <span>Cookie</span>
-  </a>
-  <span class="f-sep">·</span>
-  <a class="f-item" href="privacy.html" title="Privacy">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V6l-8-3-8 3v6c0 6 8 10 8 10z"/></svg>
-    <span>Privacy</span>
+  <a class="f-item" href="privacy.html" title="Privacy &amp; Cookie">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V6l-8-3-8 3v6c0 6 8 10 8 10z"/><circle cx="9.8" cy="9.4" r="0.9" fill="currentColor" stroke="none"/><circle cx="13.7" cy="11.2" r="0.9" fill="currentColor" stroke="none"/><circle cx="10.6" cy="13.6" r="0.9" fill="currentColor" stroke="none"/></svg>
+    <span>Privacy &amp; Cookie</span>
   </a>
   <span class="f-sep">·</span>
   <a class="f-item" href="contatti.html" title="Contatti">
