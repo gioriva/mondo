@@ -739,11 +739,6 @@ footer{
   color:var(--giallo);
   transform:translateX(4px);
 }
-.voce-menu.prima{
-  margin-bottom:.7rem;
-  padding-bottom:1.3rem;
-  border-bottom:1px solid rgba(243,233,210,.22);
-}
 .voce-icona{
   width:28px; height:28px;
   flex:none;
@@ -890,3 +885,24 @@ footer{
   transition:color .2s ease;
 }
 .scheda-voce dd a:hover{ color:var(--rosso); }
+
+/* piè di pagina: le tre voci restano su una riga sola anche sugli schermi stretti */
+@media (max-width:620px){
+  .pie-inner{
+    flex-wrap:nowrap;
+    gap:.7rem;
+    padding:2rem .6rem 1.6rem;
+  }
+  .pie-voce{
+    gap:.35rem;
+    font-size:.68rem;
+    letter-spacing:.04em;
+    white-space:nowrap;
+  }
+  .pie-voce svg{ width:18px; height:18px; }
+}
+@media (max-width:380px){
+  .pie-inner{ gap:.5rem; }
+  .pie-voce{ font-size:.62rem; letter-spacing:.02em; }
+  .pie-voce svg{ width:16px; height:16px; }
+}
