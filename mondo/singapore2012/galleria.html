@@ -287,71 +287,94 @@
   .menu-toggle.open span:nth-child(2) { opacity: 0; }
   .menu-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-  .menu-overlay {
+  /* velo di fondo */
+  .menu-scrim {
     position: fixed;
     inset: 0;
-    background: rgba(18,14,6,.97);
-    z-index: 1050;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    background: rgba(12,9,4,.55);
+    backdrop-filter: blur(2px);
+    z-index: 1040;
     opacity: 0;
     visibility: hidden;
     transition: opacity .35s ease, visibility .35s;
   }
 
-  .menu-overlay.open { opacity: 1; visibility: visible; }
+  .menu-scrim.open { opacity: 1; visibility: visible; }
+
+  /* pannello laterale */
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 340px;
+    max-width: 86vw;
+    background: rgba(18,14,6,.985);
+    border-left: 1px solid rgba(200,149,42,.28);
+    box-shadow: -18px 0 50px rgba(0,0,0,.4);
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    padding: 96px 34px 40px;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform .42s cubic-bezier(.4,0,.2,1), visibility .42s;
+    overflow-y: auto;
+  }
+
+  .menu-overlay.open { transform: translateX(0); visibility: visible; }
 
   .menu-overlay a {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 5vw, 44px);
+    font-size: 27px;
     font-weight: 400;
     color: var(--parchment);
     text-decoration: none;
-    padding: 14px 30px;
-    letter-spacing: .02em;
+    letter-spacing: .01em;
+    line-height: 1.2;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transition: color .25s, padding-left .25s;
+  }
+
+  .menu-overlay a:hover {
+    color: var(--gold-light);
+    padding-left: 8px;
+  }
+
+  .menu-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14.5px;
+    font-style: italic;
+    color: var(--warm-grey);
+    letter-spacing: .04em;
+    line-height: 1.35;
     transition: color .25s;
   }
 
-  .menu-overlay a:hover { color: var(--gold-light); font-style: italic; }
+  .menu-overlay a:hover .menu-sub { color: var(--gold); }
 
   .menu-overlay .menu-label {
     font-family: 'DM Mono', monospace;
-    font-size: 10px;
+    font-size: 9px;
     letter-spacing: .35em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 24px;
-    opacity: .7;
+    margin-bottom: 14px;
+    opacity: .65;
   }
 
-  .menu-overlay a.menu-home {
-    font-size: clamp(20px, 3.2vw, 28px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    padding-bottom: 6px;
-  }
-
-  .menu-home-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    font-style: italic;
-    color: var(--warm-grey);
-    letter-spacing: .06em;
-    transition: color .25s;
-  }
-
-  .menu-overlay a.menu-home:hover .menu-home-sub { color: var(--gold-light); }
+  .menu-overlay a.menu-home { font-size: 22px; }
 
   .menu-divider {
-    width: 56px;
+    width: 100%;
     height: 1px;
-    background: rgba(200,149,42,.4);
-    margin: 10px 0 14px;
+    background: rgba(200,149,42,.22);
+    margin: 14px 0 6px;
   }
 </style>
 </head>
@@ -361,13 +384,14 @@
 <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()" aria-label="Menu">
   <span></span><span></span><span></span>
 </div>
+<div class="menu-scrim" id="menuScrim" onclick="toggleMenu()"></div>
 <div class="menu-overlay" id="menuOverlay">
   <p class="menu-label">Menu</p>
-  <a href="https://www.gioriva.it/mondo/" class="menu-home">Home page<span class="menu-home-sub">Tutti i viaggi, su gioriva.it</span></a>
+  <a href="https://www.gioriva.it/mondo/" class="menu-home">Home page<span class="menu-sub">Tutti i viaggi, su gioriva.it</span></a>
   <div class="menu-divider"></div>
-  <a href="https://www.gioriva.it/mondo/singapore2012">Diario di viaggio</a>
-  <a href="programma.html">Programma</a>
-  <a href="galleria.html">Galleria</a>
+  <a href="https://www.gioriva.it/mondo/singapore2012">Diario di viaggio<span class="menu-sub">I racconti giorno per giorno</span></a>
+  <a href="programma.html">Programma<span class="menu-sub">Le tappe del viaggio, in sintesi</span></a>
+  <a href="galleria.html">Galleria<span class="menu-sub">Tutte le fotografie, capitolo per capitolo</span></a>
 </div>
 
 <!-- HEADER -->
@@ -620,10 +644,16 @@
 
   // Hamburger menu
   function toggleMenu() {
+    const ov = document.getElementById('menuOverlay');
     document.getElementById('menuToggle').classList.toggle('open');
-    document.getElementById('menuOverlay').classList.toggle('open');
-    document.body.style.overflow = document.getElementById('menuOverlay').classList.contains('open') ? 'hidden' : '';
+    ov.classList.toggle('open');
+    document.getElementById('menuScrim').classList.toggle('open');
+    document.body.style.overflow = ov.classList.contains('open') ? 'hidden' : '';
   }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('menuOverlay').classList.contains('open')) toggleMenu();
+  });
   document.getElementById('menuOverlay').addEventListener('click', function(e) {
     if (e.target.tagName === 'A') toggleMenu();
   });
