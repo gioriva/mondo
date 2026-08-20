@@ -1219,3 +1219,13 @@ figure img, figure video { border: 1px solid var(--bordo); border-radius: var(--
   transition: border-color .18s, color .18s;
 }
 .pp-indice a:hover { border-color: var(--ottone); color: var(--ottone); }
+
+/* In lettura scura la fascia della checklist avrebbe lo stesso tono del fondo:
+   le si dà una superficie appena più chiara perché resti un blocco distinto. */
+[data-tema="notte"] .preflight {
+  background: #0E1F2F;
+  border-top: 1px solid var(--bordo);
+}
+[data-tema="notte"] .preflight::before { opacity: .7; }
+[data-tema="notte"] .pf-voce { background: rgba(255,255,255,.028); }
+[data-tema="notte"] .pf-voce.fatta { background: rgba(217,169,79,.09); }

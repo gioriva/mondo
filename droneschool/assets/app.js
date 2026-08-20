@@ -1429,7 +1429,7 @@ document.addEventListener('DOMContentLoaded', function () {
   $('#menu').innerHTML = SH.costruisciMenu(vociAttiva(vista, app));
   $('#piede').innerHTML = SH.costruisciPiede();
 
-  applicaTema(Store.get('tema') || 'chiaro');
+  applicaTema(Store.get('tema') || 'notte');
 
   $('#apri-menu').addEventListener('click', function () { Menu.aperto() ? Menu.chiudi() : Menu.apri(); });
   $('#chiudi-menu').addEventListener('click', function () { Menu.chiudi(); });

@@ -131,7 +131,11 @@ con spiegazione. Le due simulazioni d'esame replicano il formato reale:
 75%. L'indicatore in home traduce i moduli superati in quota, da 0 a 120 metri.
 L'avanzamento è salvato nel browser locale, senza account e senza server.
 
-**Lettura scura.** Interruttore in fondo al menu, la preferenza resta memorizzata.
+**Lettura scura.** È la modalità predefinita: chi arriva sul sito la prima volta
+trova il tema scuro. L'interruttore in fondo al menu passa a quella chiara e la
+scelta resta memorizzata nel browser. Un piccolo script in testa a ogni pagina
+applica la preferenza salvata prima della prima pittura, così non si vede il
+lampo bianco al caricamento.
 
 **Ricerca.** In home il campo sta al centro dell'hero, con risultati in tempo reale e
 cinque scorciatoie sotto. Sulle altre pagine, dove quel campo non c'è, la ricerca torna
