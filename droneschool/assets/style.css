@@ -254,7 +254,7 @@ section { scroll-margin-top: calc(var(--header-h) + 16px); }
 .blocco-testa p { margin: 0; color: var(--tenue); max-width: 46ch; font-size: .95rem; flex-basis: 100%; }
 
 /* percorsi */
-.percorsi { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); align-items: stretch; }
+.percorsi { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); align-items: stretch; }
 .percorso {
   border: 1px solid var(--bordo); border-radius: var(--r); padding: 30px 28px 26px;
   background: var(--superficie); text-decoration: none; display: flex; flex-direction: column;
@@ -280,7 +280,7 @@ section { scroll-margin-top: calc(var(--header-h) + 16px); }
 
 /* aree tematiche */
 .aree { display: grid; gap: 1px; background: var(--bordo); border: 1px solid var(--bordo); border-radius: var(--r); overflow: hidden;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); }
 .area {
   background: var(--superficie); padding: 24px 22px; text-decoration: none; display: block;
   transition: background .18s;
@@ -292,7 +292,7 @@ section { scroll-margin-top: calc(var(--header-h) + 16px); }
 .area .conta { font-family: var(--dato); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--grigio-2); margin-top: 14px; display: block; }
 
 /* strumenti */
-.strumenti { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.strumenti { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); }
 .strumento {
   border: 1px solid var(--bordo); border-radius: var(--r); padding: 24px 22px; text-decoration: none;
   background: var(--superficie); transition: border-color .2s;
@@ -385,7 +385,7 @@ figcaption {
 figure img, figure video { border: 1px solid var(--bordo); border-radius: var(--r); width: 100%; }
 
 /* dati chiave (colophon style) */
-.dati { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--bordo);
+.dati { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr)); gap: 1px; background: var(--bordo);
   border: 1px solid var(--bordo); border-radius: var(--r); overflow: hidden; margin: 28px 0; }
 .dato { background: var(--superficie); padding: 18px 16px; }
 .dato b { display: block; font-family: var(--display); font-size: 1.75rem; font-weight: 400; letter-spacing: -.02em; line-height: 1.05; }
@@ -1035,7 +1035,7 @@ figure img, figure video { border: 1px solid var(--bordo); border-radius: var(--
 
 /* ---------- come si arriva all'attestato: due riquadri ---------- */
 .passi {
-  display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr));
   margin-bottom: 34px;
 }
 .passo-carta {
@@ -1070,9 +1070,14 @@ figure img, figure video { border: 1px solid var(--bordo); border-radius: var(--
   .passo-carta { padding: 22px 20px 20px; }
   .passo-lista li { padding-left: 34px; font-size: .92rem; }
   .passo-lista li::before { width: 23px; height: 23px; font-size: 10px; }
-  .piede-riga { gap: 4px 10px; }
-  .piede-riga a { letter-spacing: .12em; font-size: 10px; gap: 7px; }
-  .piede-riga .ico { width: 15px; height: 15px; }
+  /* Le tre voci restano su una riga sola: si stringono invece di andare a capo. */
+  .piede-riga { gap: 0 8px; flex-wrap: nowrap; }
+  .piede-riga a {
+    letter-spacing: .07em; font-size: 9px; gap: 6px;
+    padding: 6px 0; white-space: nowrap;
+  }
+  .piede-riga .ico { width: 13px; height: 13px; }
+  .piede-sep { font-size: 9px; }
 }
 
 /* ==========================================================================
@@ -1115,7 +1120,7 @@ figure img, figure video { border: 1px solid var(--bordo); border-radius: var(--
 .pf-conta.completa { border-color: var(--z-verde); background: color-mix(in srgb, var(--z-verde) 24%, transparent); color: #E9ECEF; }
 .pf-conta.completa b { color: #A8D69C; }
 
-.pf-griglia { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.pf-griglia { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
 
 .pf-voce {
   display: flex; align-items: flex-start; gap: 15px; text-align: left; cursor: pointer;
@@ -1229,3 +1234,12 @@ figure img, figure video { border: 1px solid var(--bordo); border-radius: var(--
 [data-tema="notte"] .preflight::before { opacity: .7; }
 [data-tema="notte"] .pf-voce { background: rgba(255,255,255,.028); }
 [data-tema="notte"] .pf-voce.fatta { background: rgba(217,169,79,.09); }
+
+
+/* Sotto i 350 px la riga di servizio si stringe ancora, senza mai spezzarsi. */
+@media (max-width: 350px) {
+  .piede-riga { gap: 0 6px; }
+  .piede-riga a { font-size: 8.2px; letter-spacing: .04em; gap: 5px; }
+  .piede-riga .ico { width: 12px; height: 12px; }
+  .piede-sep { font-size: 8px; }
+}
