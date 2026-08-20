@@ -5,8 +5,9 @@ Destinazione: https://www.gioriva.it/rotta/
 CONTENUTO
 ──────────────────────────────────────────────
 index.html        pagina del tracker
-privacy.html      informativa privacy
-cookie.html       cookie policy, con pulsante per rivedere le preferenze
+privacy.html      informativa privacy e cookie, con pulsante per rivedere
+                  le preferenze (ancora #cookie-policy)
+cookie.html       rimando alla precedente, per non lasciare link morti
 contatti.html     modulo Formspree (nome, cognome, mail, messaggio)
 assets/
   style.css       stile comune, tema scuro
@@ -67,7 +68,7 @@ I font sono ospitati in locale, quindi niente richieste a Google Fonts
 e niente indirizzi IP che escono verso terzi senza consenso.
 
 GA4 parte solo dopo Accetta: prima della scelta lo script non viene caricato.
-La scelta si rifà dal pulsante nella pagina cookie.
+La scelta si rifà dal pulsante in fondo alla pagina privacy.
 
 Il pannello "collega i dati reali" sotto la ricerca resta nascosto finché
 PROXY_URL o RAPIDAPI_KEY sono valorizzati. Torna visibile solo se svuoti

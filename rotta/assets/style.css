@@ -379,12 +379,11 @@ code{font-family:var(--mono);font-size:.86em;background:var(--paper-2);padding:1
   .cell:nth-child(n+3){border-top:1px solid var(--rule-soft)}
   .strip-foot{padding:12px 18px}
   .frow{grid-template-columns:1fr;gap:0}
-  .foot-in{
-    display:grid;grid-template-columns:1fr 1fr;justify-items:center;
-    gap:16px 18px;padding:16px 18px 20px;
-  }
-  .foot-i{font-size:.62rem;letter-spacing:.12em}
-  .foot-i.brand{font-size:.7rem}
+  .foot-in{flex-wrap:nowrap;gap:16px;padding:16px 12px 20px}
+  .foot-i{font-size:.58rem;letter-spacing:.07em;gap:6px;white-space:nowrap}
+  .foot-i svg{width:14px;height:14px}
+  .foot-i.brand{font-size:.64rem;letter-spacing:.03em}
+  .foot-i.brand svg{width:15px;height:15px}
   .search{padding:26px 0 22px}
   .eyebrow{margin-bottom:12px}
   .examples{margin-top:20px;gap:7px}
