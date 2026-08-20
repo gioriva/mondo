@@ -254,7 +254,7 @@ section { scroll-margin-top: calc(var(--header-h) + 16px); }
 .blocco-testa p { margin: 0; color: var(--tenue); max-width: 46ch; font-size: .95rem; flex-basis: 100%; }
 
 /* percorsi */
-.percorsi { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); }
+.percorsi { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); align-items: stretch; }
 .percorso {
   border: 1px solid var(--bordo); border-radius: var(--r); padding: 30px 28px 26px;
   background: var(--superficie); text-decoration: none; display: flex; flex-direction: column;
@@ -276,7 +276,7 @@ section { scroll-margin-top: calc(var(--header-h) + 16px); }
 }
 
 /* i passi da compiere, sotto il filetto */
-.percorso .passo-lista { padding-top: 24px; border-top: 1px solid var(--bordo); }
+.percorso .passo-lista { padding-top: 24px; margin-bottom: 26px; border-top: 1px solid var(--bordo); }
 
 /* aree tematiche */
 .aree { display: grid; gap: 1px; background: var(--bordo); border: 1px solid var(--bordo); border-radius: var(--r); overflow: hidden;
@@ -1065,14 +1065,6 @@ figure img, figure video { border: 1px solid var(--bordo); border-radius: var(--
   border: 1px solid var(--bordo); border-radius: 50%;
   width: 26px; height: 26px; display: grid; place-items: center;
 }
-.passo-vai {
-  margin-top: auto; padding-top: 18px; border-top: 1px solid var(--bordo);
-  font-family: var(--dato); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--ottone); text-decoration: none;
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.passo-vai::after { content: "→"; transition: transform .2s; }
-.passo-vai:hover::after { transform: translateX(4px); }
 
 @media (max-width: 620px) {
   .passo-carta { padding: 22px 20px 20px; }
@@ -1171,3 +1163,59 @@ figure img, figure video { border: 1px solid var(--bordo); border-radius: var(--
   .pf-ico svg { width: 19px; height: 19px; }
   .pf-testi b { font-size: .96rem; }
 }
+
+/* ---------- pulsante di ingresso al programma ---------- */
+.btn-percorso {
+  margin-top: auto; display: flex; align-items: center; gap: 16px;
+  text-decoration: none; border-radius: var(--r);
+  background: var(--ottone); color: #12100B;
+  padding: 15px 18px 15px 20px;
+  border: 1px solid var(--ottone);
+  transition: background .2s, border-color .2s, transform .18s, box-shadow .2s;
+}
+.btn-percorso:hover {
+  background: var(--ottone-vivo); border-color: var(--ottone-vivo);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--ottone) 34%, transparent);
+}
+.btn-percorso:active { transform: translateY(0); }
+
+.bp-testi { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.bp-testi b {
+  font-family: var(--dato); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
+  font-weight: 500;
+}
+.bp-testi small { font-size: .82rem; color: rgba(18,16,11,.66); }
+
+.bp-freccia {
+  width: 34px; height: 34px; flex: none; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(18,16,11,.12); color: #12100B;
+  transition: background .2s, transform .24s cubic-bezier(.2,.8,.3,1.3);
+}
+.bp-freccia svg { width: 18px; height: 18px; }
+.btn-percorso:hover .bp-freccia { background: rgba(18,16,11,.2); transform: translateX(4px); }
+
+[data-tema="notte"] .btn-percorso { color: #0A1622; }
+[data-tema="notte"] .bp-testi small { color: rgba(10,22,34,.7); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-percorso, .bp-freccia { transition: none; }
+}
+@media (max-width: 620px) {
+  .btn-percorso { padding: 13px 14px 13px 16px; gap: 12px; }
+  .bp-freccia { width: 30px; height: 30px; }
+}
+
+/* ---------- indice della pagina Privacy & Cookie ---------- */
+.pp-indice {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin: 0 0 34px; padding-bottom: 26px; border-bottom: 1px solid var(--bordo);
+}
+.pp-indice a {
+  font-family: var(--dato); font-size: 10.5px; letter-spacing: .13em; text-transform: uppercase;
+  text-decoration: none; color: var(--tenue);
+  border: 1px solid var(--bordo); border-radius: 30px; padding: 7px 13px;
+  transition: border-color .18s, color .18s;
+}
+.pp-indice a:hover { border-color: var(--ottone); color: var(--ottone); }

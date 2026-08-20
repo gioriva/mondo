@@ -888,6 +888,8 @@ function vistaHome() {
   h += '<div class="percorsi">';
   ['a1a3', 'a2'].forEach(function (k) {
     var p = PERCORSI[k];
+    var mods = MODULI.filter(function (m) { return m.percorsi.indexOf(k) >= 0; });
+    var domande = mods.reduce(function (n, m) { return n + m.quiz.length; }, 0);
     h += '<div class="percorso">';
     h += '<div class="sigla">' + p.sigla.replace('/', '<span>/</span>') + '</div>';
     h += '<h3>' + esc(p.nome) + '</h3><p>' + esc(p.desc) + '</p>';
@@ -895,7 +897,10 @@ function vistaHome() {
     h += '<ol class="passo-lista">';
     tappe[k].forEach(function (t) { h += '<li>' + t + '</li>'; });
     h += '</ol>';
-    h += '<a class="passo-vai" href="' + p.pagina + '">Vai al programma ' + esc(p.sigla) + '</a>';
+    h += '<a class="btn-percorso" href="' + p.pagina + '">';
+    h += '<span class="bp-testi"><b>Vai al programma ' + esc(p.sigla) + '</b>';
+    h += '<small>' + mods.length + ' moduli · ' + domande + ' domande di verifica</small></span>';
+    h += '<span class="bp-freccia" aria-hidden="true">' + SH.ICONE.freccia + '</span></a>';
     h += '</div>';
   });
   h += '</div></section>';
@@ -1226,9 +1231,16 @@ function montaContatti() {
 function vistaPrivacy() {
   var h = '<header class="hero hero-corto"><div class="hero-sfondo" aria-hidden="true"></div><div class="hero-inner">';
   h += '<div class="strip-coord"><a href="index.html">Drone School</a><span>Informativa</span><span>Reg. UE <b>2016/679</b></span></div>';
-  h += '<h1>Privacy e <em>cookie</em></h1><p class="occhiello">Cosa raccoglie questo sito, perché, per quanto tempo e come fermarlo.</p></div></header>';
+  h += '<h1>Privacy <em>&amp; Cookie</em></h1><p class="occhiello">Cosa raccoglie questo sito, perché, per quanto tempo e come fermarlo. Una pagina sola, senza rimandi.</p></div></header>';
 
   h += '<div class="wrap-stretto" style="padding-top:46px;padding-bottom:80px"><div class="prosa">';
+
+  h += '<nav class="pp-indice" aria-label="Indice della pagina">';
+  [['titolare', 'Chi tratta i dati'], ['dati', 'Quali dati'], ['basi', 'Base giuridica'],
+   ['destinatari', 'Destinatari'], ['diritti', 'I tuoi diritti'], ['cookie', 'Cookie']].forEach(function (v) {
+    h += '<a href="#' + v[0] + '">' + esc(v[1]) + '</a>';
+  });
+  h += '</nav>';
 
   h += '<h2 id="titolare">Chi tratta i dati</h2>';
   h += '<p>Il titolare del trattamento è Giorgio Riva, che gestisce questo sito a titolo personale. Per qualsiasi richiesta puoi usare il <a href="contatti.html">modulo di contatto</a>.</p>';

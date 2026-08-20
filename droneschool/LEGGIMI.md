@@ -36,7 +36,7 @@ droneschool/
 ├── area.html           area tematica, parametro ?a=
 ├── esame.html          simulazione, parametro ?p=
 ├── contatti.html       modulo Formspree
-├── privacy.html        informativa, con ancora #cookie
+├── privacy.html        informativa unica su privacy e cookie
 ├── sfondo-hero.jpg
 ├── og-droneschool.jpg
 ├── favicon.ico

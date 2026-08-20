@@ -109,15 +109,12 @@ var MENU = [
   { id: 'enac', icona: 'enac', testo: 'ENAC droni', href: 'https://www.enac.gov.it/sicurezza-aerea/droni', esterno: true, nota: "Autorità italiana dell'aviazione civile" },
   { id: 'dflight', icona: 'dflight', testo: 'D-Flight', href: 'https://www.d-flight.it', esterno: true, nota: 'Registrazione e zone geografiche' },
   { id: 'easa', icona: 'easa', testo: 'EASA', href: 'https://www.easa.europa.eu/en/domains/drones-air-mobility', esterno: true, nota: 'Agenzia europea per la sicurezza aerea' },
-  { id: 'coverdrone', icona: 'assicurazione', testo: 'Coverdrone', href: 'https://www.coverdrone.com/it/', esterno: true, nota: 'Polizze RC verso terzi per droni' },
-  { sep: '' },
-  { id: 'contatti', icona: 'contatti', testo: 'Contatti', href: 'contatti.html', nota: 'Scrivimi due righe' }
+  { id: 'coverdrone', icona: 'assicurazione', testo: 'Coverdrone', href: 'https://www.coverdrone.com/it/', esterno: true, nota: 'Polizze RC verso terzi per droni' }
 ];
 
 var PIEDE = [
   { icona: 'torii', testo: 'Gio Riva', href: 'https://www.gioriva.it/' },
-  { icona: 'privacy', testo: 'Privacy', href: 'privacy.html' },
-  { icona: 'cookie', testo: 'Cookie', href: 'privacy.html#cookie' },
+  { icona: 'privacy', testo: 'Privacy & Cookie', href: 'privacy.html' },
   { icona: 'contatti', testo: 'Contatti', href: 'contatti.html' }
 ];
 
