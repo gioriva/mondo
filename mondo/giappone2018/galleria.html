@@ -931,8 +931,8 @@
 
   .hamburger-panel {
     position: fixed;
-    top: 0; right: -280px;
-    width: 260px; height: 100vh;
+    top: 0; right: -312px;
+    width: 292px; height: 100vh;
     background: rgba(18,28,50,0.98);
     backdrop-filter: blur(16px);
     z-index: 490;
@@ -961,7 +961,7 @@
   }
   .ham-nav { display: flex; flex-direction: column; gap: 0.3rem; }
   .ham-link {
-    display: flex; align-items: center; gap: 0.8rem;
+    display: flex; align-items: center; gap: 0.75rem;
     padding: 0.85rem 1rem;
     color: rgba(245,240,232,0.75);
     text-decoration: none;
@@ -1177,7 +1177,8 @@
 
   .ham-link .ham-label { display: flex; flex-direction: column; line-height: 1.3; }
   .ham-link .ham-sub {
-    font-size: 0.65rem;
+    font-size: 0.64rem;
+    white-space: nowrap;
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 300;
     color: rgba(245,240,232,0.35);
@@ -1276,7 +1277,7 @@
 <!-- COOKIE BANNER -->
 <div class="cookie-banner" id="cookie-banner">
   <div class="cookie-title">Un attimo, prima di partire</div>
-  <div class="cookie-text">Questo sito usa cookie statistici (Google Analytics) per capire come viene esplorato e migliorarlo nel tempo. Sono attivati solo con il tuo consenso. Trovi tutti i dettagli nella <a href="https://www.gioriva.it/mondo/privacy.html">Privacy &amp; cookie policy</a>.</div>
+  <div class="cookie-text">Questo sito usa cookie statistici (Google Analytics) per capire come viene esplorato e migliorarlo nel tempo. Sono attivati solo con il tuo consenso. Trovi tutti i dettagli nella <a href="https://www.gioriva.it/mondo/privacy.html">Privacy &amp; Cookie policy</a>.</div>
   <div class="cookie-actions">
     <button class="cookie-btn accept" onclick="cookieAccept()">Accetto</button>
     <button class="cookie-btn necessary" onclick="cookieNecessary()">Solo necessari</button>
@@ -1771,9 +1772,18 @@
   <span class="jp">さようなら</span>
   <strong style="color:var(--paper); font-family:'Shippori Mincho', serif; font-size:1.1rem;">Spring in Japan</strong>
   <div class="footer-badges">
-    <a class="f-badge" href="https://www.gioriva.it/" title="gioriva.it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.2 3.6 3.2 14.4 0 18M12 3c-3.2 3.6-3.2 14.4 0 18"/></svg> Gio Riva</a>
-    <a class="f-badge" href="https://www.gioriva.it/mondo/privacy.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 8.2-7 10-4-1.8-7-5.4-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg> Privacy</a>
-    <button class="f-badge" onclick="showCookieBanner()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="9.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="8.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="1.1" fill="currentColor" stroke="none"/><circle cx="9.5" cy="14.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="12" cy="11.8" r="1.1" fill="currentColor" stroke="none"/></svg> Cookie</button>
+    <a class="f-badge" href="https://www.gioriva.it/" title="Tutti i viaggi su gioriva.it">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.1" width="14" height="14"><circle cx="8" cy="8" r="6.2"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/><path d="M1.8 8h12.4"/></svg>
+      Gio Riva
+    </a>
+    <a class="f-badge" href="https://www.gioriva.it/mondo/privacy.html" title="Privacy e cookie policy">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.1" width="14" height="14"><path d="M8 1.5l5 1.8v3.9c0 3.4-2.1 5.7-5 6.9-2.9-1.2-5-3.5-5-6.9V3.3z"/><circle cx="6.4" cy="6.2" r="0.75" fill="currentColor" stroke="none"/><circle cx="9.6" cy="7.4" r="0.75" fill="currentColor" stroke="none"/><circle cx="7.3" cy="9.6" r="0.6" fill="currentColor" stroke="none"/></svg>
+      Privacy &amp; Cookie
+    </a>
+    <a class="f-badge" href="https://www.gioriva.it/contatti.html" title="Scrivimi">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.1" width="14" height="14"><rect x="1.8" y="3.4" width="12.4" height="9.2" rx="1.3"/><path d="M2.3 4.4l5.7 4.2 5.7-4.2"/></svg>
+      Contatti
+    </a>
   </div>
 </footer>
 
@@ -1792,17 +1802,20 @@
   <nav class="ham-nav">
     <a class="ham-link" href="http://www.gioriva.it/mondo/">
       <span class="ham-icon">⛩</span>
-      <span class="ham-label">Home page<span class="ham-sub">Tutti i viaggi</span></span>
+      <span class="ham-label">Home page<span class="ham-sub">Tutti i viaggi, su gioriva.it</span></span>
     </a>
     <div class="ham-sep"></div>
     <a class="ham-link" href="index.html">
-      <span class="ham-icon">📖</span> Diario di viaggio
+      <span class="ham-icon">📖</span>
+      <span class="ham-label">Diario di viaggio<span class="ham-sub">Il racconto, giorno per giorno</span></span>
     </a>
     <a class="ham-link" href="programma.html">
-      <span class="ham-icon">📅</span> Programma
+      <span class="ham-icon">📅</span>
+      <span class="ham-label">Programma<span class="ham-sub">Mappa, tappe e itinerario</span></span>
     </a>
     <a class="ham-link" style="background:rgba(212,65,10,0.25); color:var(--paper);" href="galleria.html">
-      <span class="ham-icon">🖼</span> Galleria
+      <span class="ham-icon">🖼</span>
+      <span class="ham-label">Galleria<span class="ham-sub">167 scatti dal Giappone</span></span>
     </a>
   </nav>
   <div class="ham-footer">gioriva.it · Aprile 2018</div>
