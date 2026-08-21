@@ -400,6 +400,34 @@
       margin-top:.5em;
     }
 
+    /* indicatore del carosello (solo mobile) */
+    .sfoglia {
+      display:none;
+      align-items:center; justify-content:center;
+      gap:.55rem;
+      margin-top:.2rem;
+    }
+    .sfoglia button {
+      width:9px; height:9px; padding:0;
+      border-radius:50%;
+      border:1px solid var(--bordo);
+      background:#fffdf8;
+      cursor:pointer;
+      transition:transform .3s, background .3s, border-color .3s;
+    }
+    .sfoglia button.qui {
+      background:var(--c, var(--rosso));
+      border-color:var(--c, var(--rosso));
+      transform:scale(1.45);
+    }
+    .sfoglia-nota {
+      display:none;
+      text-align:center;
+      margin-top:.9rem;
+      font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+      color:var(--tenue);
+    }
+
     /* comparsa progressiva */
     .rivela { opacity:0; transform:translateY(22px); }
     .rivela.dentro {
@@ -488,7 +516,27 @@
       .bussola svg { width:min(66%, 260px); }
       .dati { gap:1.8rem; }
       .dato b { font-size:1.9rem; }
-      .griglia { grid-template-columns:1fr; gap:2rem; max-width:420px; margin:0 auto; }
+      /* la bacheca si sfoglia di lato invece di scorrere all'infinito */
+      .griglia {
+        display:flex;
+        gap:1rem;
+        max-width:none; margin:0 -5vw;
+        padding:.4rem 5vw 1.2rem;
+        overflow-x:auto;
+        scroll-snap-type:x mandatory;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+      }
+      .griglia::-webkit-scrollbar { display:none; }
+      .manifesto {
+        flex:0 0 78vw;
+        max-width:340px;
+        scroll-snap-align:center;
+      }
+      .rivela { opacity:1 !important; transform:none !important; }
+
+      .sfoglia, .sfoglia-nota { display:flex; }
+      .sfoglia-nota { display:block; }
       .cookie { grid-template-columns:1fr; left:0; right:0; bottom:0; border-radius:0; padding:1.4rem 1.2rem; }
       .cookie-azioni { flex-direction:row; min-width:0; }
       .bottone { flex:1; padding:.75rem .5rem; }
@@ -942,6 +990,9 @@
       </span>
 
     </div>
+
+    <div class="sfoglia" id="sfoglia" aria-hidden="true"></div>
+    <p class="sfoglia-nota">Scorri di lato per gli altri viaggi</p>
   </main>
 
   <!-- ══ footer ══ -->
@@ -1068,6 +1119,46 @@
       document.addEventListener('keydown', function(e){
         if (e.key === 'Escape') stato(false);
       });
+    })();
+
+    /* carosello dei viaggi su mobile */
+    (function(){
+      'use strict';
+      var pista = document.querySelector('.griglia'),
+          barra = document.getElementById('sfoglia');
+      if (!pista || !barra) return;
+
+      var schede = Array.prototype.slice.call(pista.querySelectorAll('.manifesto'));
+      if (!schede.length) return;
+
+      schede.forEach(function(s, i){
+        var p = document.createElement('button');
+        p.type = 'button';
+        p.setAttribute('aria-label', 'Viaggio ' + (i+1));
+        var c = s.getAttribute('style');
+        if (c) p.setAttribute('style', c);
+        p.addEventListener('click', function(){
+          pista.scrollTo({ left: s.offsetLeft - (pista.clientWidth - s.clientWidth)/2, behavior: 'smooth' });
+        });
+        barra.appendChild(p);
+      });
+
+      var pallini = Array.prototype.slice.call(barra.children);
+      function segna(){
+        var centro = pista.scrollLeft + pista.clientWidth/2, vicino = 0, minimo = Infinity;
+        schede.forEach(function(s, i){
+          var d = Math.abs(s.offsetLeft + s.clientWidth/2 - centro);
+          if (d < minimo){ minimo = d; vicino = i; }
+        });
+        pallini.forEach(function(p, i){ p.classList.toggle('qui', i === vicino); });
+      }
+      var attesa;
+      pista.addEventListener('scroll', function(){
+        clearTimeout(attesa);
+        attesa = setTimeout(segna, 60);
+      }, { passive: true });
+      segna();
+      addEventListener('resize', segna);
     })();
   </script>
 
