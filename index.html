@@ -729,6 +729,26 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 'use strict';
 
 /* ════════════════════════════════════
+   SCENE METRICS: how the slice crop lands
+   on this viewport. "narrow" means the sides
+   get cut enough to lose moon and castle,
+   which happens on phones and on tablets held
+   in portrait, so the scene is recomposed.
+   ════════════════════════════════════ */
+function sceneMetrics() {
+  var vw = window.innerWidth, vh = window.innerHeight;
+  var scale = Math.max(vw / 1440, vh / 900);
+  var visW = vw / scale;                 // visible width in viewBox units
+  var narrow = visW < 950;
+  var shiftY = narrow ? 62 : 0;
+  var offY = (900 * scale - vh) / 2;
+  return {
+    vw: vw, vh: vh, scale: scale, visW: visW, narrow: narrow,
+    waterPx: (660 + shiftY) * scale - offY
+  };
+}
+
+/* ════════════════════════════════════
    IDENTITY: desktop, whole block inside the
    water band (like mobile). The waterline position
    depends on the slice crop, so it's computed; if
@@ -747,10 +767,9 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
       h1.style.fontSize = ''; rule.style.margin = ''; pay.style.fontSize = '';
       return;
     }
-    var vw = window.innerWidth, vh = window.innerHeight;
-    var scale = Math.max(vw / 1440, vh / 900);
-    var offY = (900 * scale - vh) / 2;
-    var waterPx = 660 * scale - offY;      // waterline on screen
+    var m = sceneMetrics();
+    var vh = m.vh;
+    var waterPx = m.waterPx;               // waterline on screen
 
     var gapTop = 14, gapBottom = 22;
     var top = waterPx + gapTop;
@@ -787,8 +806,8 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 })();
 
 /* ════════════════════════════════════
-   SCENE recomposition for portrait crop
-   (slice keeps ~512..928 of viewBox visible on phones)
+   SCENE recomposition when the crop is narrow
+   (phones, and tablets in portrait)
    ════════════════════════════════════ */
 (function () {
   var moon  = document.getElementById('moon-link');
@@ -801,7 +820,7 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
   var glow   = document.getElementById('moonglow-col');
 
   function recompose() {
-    if (window.innerWidth <= 768) {
+    if (sceneMetrics().narrow) {
       moon.setAttribute('transform', 'translate(-310,-10)');    // moon -> x 820
       glow.setAttribute('transform', 'translate(-310,0)');      // glow follows moon
       torii.removeAttribute('transform');                       // torii ~500-780, in view
