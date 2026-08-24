@@ -128,7 +128,7 @@ window.MODULI_A1A3B = [
 <span class="eyebrow">Prima di ogni volo</span>
 <p>D-Flight è l'unico riferimento ufficiale per le zone geografiche UAS in Italia. Una zona può cambiare stato da un giorno all'altro: la verifica va fatta prima del volo, non una volta per tutte.</p>
 </div>
-<figure data-src="05-dflight-mappa.png" data-cap="La mappa delle zone geografiche su D-Flight, con la codifica a colori della circolare ATM-09A."></figure>`
+<figure data-src="05-zone-geografiche.png" data-cap="Il sistema a colori delle zone geografiche e le quote che ne derivano."></figure>`
     },
     {
       id: 'carta',
@@ -147,7 +147,7 @@ window.MODULI_A1A3B = [
 <tr><td>Simboli specifici</td><td>Eliporti, campi volo, siti per alianti, aree di lancio paracadutisti, campi di aeromodellismo</td></tr>
 </tbody></table></div>
 <p>Sulle carte le quote degli ostacoli sono espresse in piedi. Un aeroporto controllato si trova sempre dentro un CTR, mentre un campo non controllato può ricadere nel CTR di un aeroporto vicino: la sua presenza non implica libertà di volo.</p>
-<figure data-src="06-carta-icao.jpg" data-cap="Un estratto di carta aeronautica ICAO 1:500.000 con CTR, ostacoli e aree protette."></figure>`
+<figure data-src="06-carta-aeronautica.png" data-cap="I simboli della carta ICAO 1:500.000 che vale la pena riconoscere a colpo d'occhio."></figure>`
     }
   ],
   ricorda: [
@@ -359,7 +359,7 @@ window.MODULI_A1A3B = [
 <tr><td>Sicurezza</td><td>Borsa ignifuga, sorveglianza</td><td>Lasciare raffreddare 30 minuti dopo un volo impegnativo</td><td>Borsa ignifuga, non oltre 3-6 mesi senza uso</td></tr>
 </tbody></table></div>
 <p>Una batteria danneggiata va portata alla raccolta dei rifiuti pericolosi, non nel cestino di casa. Una Lipo trattata bene supera i 100-200 cicli. Per il trasporto aereo, mettila in borsa di sicurezza e verifica i limiti della compagnia, che di norma chiede una carica residua contenuta.</p>
-<figure data-src="07-batterie-safebag.jpg" data-cap="Batterie ai polimeri di litio riposte in borsa ignifuga, con carica di conservazione."></figure>
+<figure data-src="07-batterie.png" data-cap="I quattro numeri sull'etichetta di una batteria ai polimeri di litio e cosa significano."></figure>
 <div class="nota attenzione">
 <span class="eyebrow">Autoaccensione</span>
 <p>Le Lipo possono incendiarsi spontaneamente se caricate in modo scorretto, se cadono o se subiscono un urto. Dopo ogni atterraggio duro ispeziona il pacco e mettilo in osservazione prima di riporlo.</p>

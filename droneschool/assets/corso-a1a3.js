@@ -61,7 +61,7 @@ window.MODULI_A1A3 = [
 <li>Sorvolo di boschi o crinali, dove il drone si confonde con lo sfondo.</li>
 </ul>
 <p>La visibilità minima di riferimento per operare in VMC nello spazio aereo di classe G è di <b>1500 metri</b>. Con un UAS non è consentito volare dentro le nuvole né in nebbia.</p>
-<figure data-src="01-vlos-campo-aperto.jpg" data-cap="Volo a vista in campo aperto: nessun ostacolo fra pilota e aeromobile."></figure>
+<figure data-src="01-vlos.png" data-cap="Il contatto visivo si perde molto prima di quanto si creda: basta un edificio sulla linea di vista."></figure>
 <div class="nota">
 <span class="eyebrow">Volo FPV</span>
 <p>Il volo con visore First Person View è ammesso nella categoria Open a condizione che accanto al pilota ci sia un osservatore che mantenga il contatto visivo diretto con il drone e che sia in grado di avvertirlo. L'osservatore non può usare ausili ottici.</p>
@@ -112,7 +112,7 @@ window.MODULI_A1A3 = [
 <figcaption>Classi di marcatura e sottocategoria di impiego. La massa indicata è la massa massima al decollo, batteria e payload compresi.</figcaption>
 </figure>
 <p>Le classi <span class="mono">C5</span> e <span class="mono">C6</span> non appartengono alla categoria Open: servono per gli scenari standard europei EU-STS-01 e EU-STS-02 nella categoria Specific.</p>
-<figure data-src="02-etichetta-classe.jpg" data-cap="Etichetta di classe applicata dal costruttore sulla scocca dell'aeromobile."></figure>
+<figure data-src="02-marcatura.png" data-cap="Due contrassegni distinti: l'etichetta di classe la applica il costruttore, il numero di operatore lo applichi tu."></figure>
 <div class="nota italia">
 <span class="eyebrow">Droni senza marcatura</span>
 <p>I droni privi di etichetta di classe si chiamano <b>legacy</b>. Sono ancora utilizzabili in Open, ma solo se immessi sul mercato europeo prima del 31 dicembre 2023. Sotto i 250 g rientrano in A1 con limitazioni, oltre i 250 g finiscono in A3. Questo regime prende il nome di <b>Open limitata</b>.</p>
@@ -189,7 +189,7 @@ window.MODULI_A1A3 = [
 <li>il volume di traffico e l'ora del giorno, perché lo stesso piazzale alle 7 del mattino e alle 18 sono due luoghi diversi.</li>
 </ul>
 <p>Se una persona non coinvolta entra nell'area durante il volo devi aumentare subito la distanza o spostare l'aeromobile. Se le persone diventano più di una o si forma un gruppo, l'operazione va interrotta.</p>
-<figure data-src="03-persone-non-coinvolte.jpg" data-cap="Lungolago in una giornata feriale: persone non coinvolte in movimento, perimetro difficile da controllare."></figure>`
+<figure data-src="03-lettura-area.png" data-cap="La stessa area letta in pianta: dove finirebbe il drone e chi si trova in quel punto."></figure>`
     },
     {
       id: 'veicoli',
@@ -218,7 +218,7 @@ window.MODULI_A1A3 = [
 </div>
 <h3>Voli notturni</h3>
 <p>Nella categoria Open si vola nel <b>periodo di luce diurna uniforme</b> (Uniform Daylight Period, UDP), che inizia 15 minuti prima dell'alba e termina 15 minuti dopo il tramonto. Al di fuori di questa finestra servono condizioni particolari: il drone deve essere dotato di luce verde lampeggiante ben visibile e vanno rispettate le prescrizioni nazionali.</p>
-<figure data-src="04-tramonto-udp.jpg" data-cap="Il periodo utile si chiude 15 minuti dopo il tramonto. Oltre, servono condizioni particolari."></figure>`
+<figure data-src="04-udp.png" data-cap="La finestra utile si apre 15 minuti prima dell'alba e si chiude 15 minuti dopo il tramonto."></figure>`
     },
     {
       id: 'equipaggio',
@@ -589,7 +589,7 @@ window.MODULI_A1A3 = [
 <li><label><input type="checkbox"><span>Numero di registrazione operatore inserito nel software e QR code applicato</span></label></li>
 </ul>
 <p>Non si vola con un UAS danneggiato o che non funziona in modo perfetto. Non esiste il volo breve che giustifica un'eccezione.</p>
-<figure data-src="v01-preflight.mp4" data-cap="Controllo pre volo completo, dalla verifica delle eliche all'impostazione del failsafe."></figure>
+<figure data-src="v01-preflight.mp4" data-cap="Il controllo prima del volo, voce per voce."></figure>
 <h3>Durante il volo</h3>
 <ul>
 <li>Verifica che l'aeromobile resti in equilibrio e risponda con prontezza.</li>
@@ -625,7 +625,7 @@ window.MODULI_A1A3 = [
 <h3>Lost link</h3>
 <p>La perdita del collegamento radio fra radiocomando e aeromobile. Un UAS in condizioni di volo ha un failsafe attivo per questo scopo, di norma il <b>Return to Home</b>: il modulo satellitare ha memorizzato il punto di decollo e l'aeromobile ci rientra da solo, salendo prima alla quota impostata.</p>
 <p>Perché funzioni serve che il posizionamento satellitare fosse valido al decollo. Un RTH avviato senza home point registrato non porta il drone da nessuna parte.</p>
-<figure data-src="v02-return-to-home.mp4" data-cap="Return to Home: salita alla quota impostata, rientro sull'home point, discesa."></figure>
+<figure data-src="v02-return-to-home.mp4" data-cap="Return to Home: perdita del collegamento, salita alla quota impostata, rientro, discesa."></figure>
 <h3>Fly away</h3>
 <p>Perdita del collegamento combinata con un modulo di posizionamento non funzionante. Il Return to Home non può avviarsi e l'aeromobile resta sospeso o prosegue. Cosa fare:</p>
 <ol>

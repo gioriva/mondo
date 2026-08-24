@@ -101,7 +101,7 @@ window.MODULI_A2 = [
 <li>Ridurre la durata dell'operazione: meno tempo in aria significa meno esposizione.</li>
 <li>Impostare quota massima e distanza massima nel software prima di decollare.</li>
 </ul>
-<figure data-src="v04-regola-1-1.mp4" data-cap="La regola 1:1 applicata sul campo: quota di volo e distanza orizzontale a confronto."></figure>`
+<figure data-src="v04-regola-1-1.mp4" data-cap="La regola 1:1: la distanza orizzontale segue la quota."></figure>`
     },
     {
       id: 'meteo-a2',
@@ -222,7 +222,7 @@ window.MODULI_A2 = [
       html: `
 <p>Il payload è il carico utile che l'aeromobile può trasportare, escluse le componenti proprie. Può essere <b>fisso</b>, come una fotocamera integrata nel telaio, oppure <b>intercambiabile</b>.</p>
 <p>Con il payload fisso il costruttore ha già tenuto conto dell'effetto sull'equilibrio. Con quello intercambiabile la responsabilità passa a te: ogni sensore ha forma e massa proprie e sposta il baricentro in modo diverso.</p>
-<figure data-src="10-equilibrio-payload.jpg" data-cap="Verifica dell'equilibrio sostenendo il multirotore alle estremità dell'asse trasversale."></figure>
+<figure data-src="10-equilibrio.png" data-cap="Un carico spostato allontana il baricentro e sbilancia il lavoro dei rotori."></figure>
 <ul>
 <li>Fissa il carico in modo che non possa muoversi durante il volo.</li>
 <li>Verifica il movimento del gimbal su tutto l'arco, comandandolo dal radiocomando.</li>

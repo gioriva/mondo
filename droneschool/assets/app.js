@@ -51,7 +51,9 @@ var PERCORSI = {
   }
 };
 
-var MEDIA_BASE = 'https://gioriva.github.io/album/droneschool/';
+/* Le tavole e le animazioni viaggiano con il sito. Per spostarle su una repo
+   esterna basta cambiare questa riga, per esempio con l'indirizzo dell'album. */
+var MEDIA_BASE = 'media/';
 var FORMSPREE = 'https://formspree.io/f/xeajpyrv';
 
 /* --------------------------------------------------------- archiviazione */
@@ -651,33 +653,49 @@ function montaMedia(radice) {
   $$('figure[data-src]', radice).forEach(function (f) {
     var file = f.dataset.src;
     var cap = f.dataset.cap || '';
-    var tipo = /\.(mp4|webm)$/i.test(file) ? 'video' : 'img';
+    var video = /\.(mp4|webm)$/i.test(file);
+
     var seg = el('div', 'media-slot');
-    seg.innerHTML = '<div><span class="eyebrow">Media da caricare</span><code>' + esc(file) + '</code></div>';
+    seg.innerHTML = '<div><span class="eyebrow">Media non disponibile</span><code>' + esc(file) + '</code></div>';
     f.innerHTML = '';
-    if (tipo === 'img') {
+
+    function fallisci(nodo) {
+      if (f.querySelector('.media-slot')) return;
+      f.insertBefore(seg, f.firstChild);
+      if (nodo && nodo.parentNode) f.removeChild(nodo);
+    }
+
+    if (!video) {
       var img = new Image();
       img.alt = cap;
       img.loading = 'lazy';
-      img.onerror = function () { f.insertBefore(seg, f.firstChild); if (img.parentNode) f.removeChild(img); };
+      img.onerror = function () { fallisci(img); };
       img.src = MEDIA_BASE + file;
       f.appendChild(img);
     } else {
+      /* Due sorgenti: WebM per i browser senza codec proprietari, MP4 per tutti
+         gli altri. Il segnaposto compare solo se il file non c'è davvero, non
+         quando manca il codec: quello lo segnala già il browser. */
+      var base = file.replace(/\.(mp4|webm)$/i, '');
       var v = document.createElement('video');
-      v.controls = true; v.playsInline = true; v.preload = 'metadata';
-      var caduto = false;
-      var fallisci = function () {
-        if (caduto) return;
-        caduto = true;
-        f.insertBefore(seg, f.firstChild);
-        if (v.parentNode) f.removeChild(v);
-      };
-      v.onerror = fallisci;
-      v.addEventListener('loadedmetadata', function () { caduto = true; });
-      setTimeout(function () { if (v.readyState === 0) fallisci(); }, 4000);
-      v.src = MEDIA_BASE + file;
+      v.controls = true;
+      v.playsInline = true;
+      v.preload = 'metadata';
+      if (cap) v.setAttribute('aria-label', cap);
+
+      ['webm', 'mp4'].forEach(function (est) {
+        var so = document.createElement('source');
+        so.src = MEDIA_BASE + base + '.' + est;
+        so.type = 'video/' + est;
+        v.appendChild(so);
+      });
       f.appendChild(v);
+
+      fetch(MEDIA_BASE + base + '.mp4', { method: 'HEAD' })
+        .then(function (r) { if (!r.ok) fallisci(v); })
+        .catch(function () { fallisci(v); });
     }
+
     if (cap) f.appendChild(el('figcaption', null, esc(cap)));
   });
 }

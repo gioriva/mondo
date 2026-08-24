@@ -171,10 +171,10 @@ window.MODULI_METEO = [
 <li><b>Cumulonembi</b>: le nubi temporalesche. Durata da 30 a 90 minuti, diametro medio attorno ai 15 km, sviluppo verticale che può superare i 10 km. Producono raffiche violente, wind shear, grandine e fulmini. Non si vola nelle vicinanze, neanche quando la cellula sembra lontana.</li>
 </ul>
 <p>In inverno l'attenzione va alla formazione di ghiaccio sulle eliche: modifica il profilo, aumenta la massa e riduce la portanza.</p>
-<figure data-src="08-cumuli.jpg" data-cap="Cumuli in sviluppo: aria instabile e possibilità di rovesci nelle ore successive."></figure>
+<figure data-src="08-nubi.png" data-cap="Base delle nubi in centinaia di piedi e copertura in ottavi di cielo."></figure>
 <h3>Nebbia</h3>
 <p>Si parla di nebbia quando la visibilità orizzontale scende sotto i <b>1000 metri</b>. L'umidità relativa in nebbia è compresa fra l'80 e il 100%. Con visibilità inferiore a 1500 metri le condizioni non sono più VMC nello spazio aereo di classe G, quindi non si vola.</p>
-<figure data-src="09-nebbia.jpg" data-cap="Nebbia da irraggiamento al mattino presto. Con visibilità sotto i 1000 metri il volo è escluso."></figure>
+<figure data-src="09-spread.png" data-cap="Temperatura e punto di rugiada nell'arco di una giornata: quando le due curve si toccano, l'aria condensa."></figure>
 <div class="tab-wrap"><table>
 <thead><tr><th>Tipo di nebbia</th><th>Come si forma</th></tr></thead>
 <tbody>
@@ -426,7 +426,7 @@ window.MODULI_METEO = [
 <h3>TAF, la previsione</h3>
 <p>Il <b>TAF</b>, Terminal Aerodrome Forecast, usa la stessa codifica del METAR ma descrive una previsione per un periodo di validità, indicato con un gruppo come <span class="mono">1706/1806</span>: dal giorno 17 alle 06Z al giorno 18 alle 06Z. Al suo interno compaiono blocchi <span class="mono">BECMG</span>, <span class="mono">TEMPO</span> e <span class="mono">PROB30</span> o <span class="mono">PROB40</span>, che indicano la probabilità percentuale di un certo scenario.</p>
 <p>Per pianificare un'operazione a distanza di ore, il TAF è più utile del METAR. Per decidere se decollare adesso, il METAR è il dato che conta.</p>
-<figure data-src="v03-lettura-metar.mp4" data-cap="Lettura di un METAR reale in tempo reale, dalla stazione alla decisione operativa."></figure>`
+<figure data-src="v03-lettura-metar.mp4" data-cap="Un METAR reale letto gruppo per gruppo, fino alla decisione operativa."></figure>`
     }
   ],
   ricorda: [
