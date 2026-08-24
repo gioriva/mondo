@@ -714,6 +714,275 @@ function glifo(k) {
   return g[k] || '';
 }
 
+/* ------------------------------------------------------------------ lente
+   Le tavole sono dense di dettagli e nella colonna di lettura stanno strette.
+   Un tocco le apre a schermo intero, con zoom alla rotella o a pizzico e
+   trascinamento. Funziona anche sulle figure vettoriali, che restano nitide
+   a qualsiasi ingrandimento. */
+
+var Lente = {
+  scala: 1, tx: 0, ty: 0,
+  min: 1, max: 6,
+  trascina: null, pizzico: null,
+
+  monta: function () {
+    if ($('#lente')) return;
+    var l = el('div', 'lente');
+    l.id = 'lente';
+    l.hidden = true;
+    l.setAttribute('role', 'dialog');
+    l.setAttribute('aria-modal', 'true');
+    l.setAttribute('aria-label', 'Immagine ingrandita');
+    l.innerHTML =
+      '<div class="lente-barra">' +
+        '<span class="lente-eti" data-eti></span>' +
+        '<span class="spazio"></span>' +
+        '<button class="lente-btn" data-zoom="-" aria-label="Riduci">' + SH.ICONE.meno + '</button>' +
+        '<button class="lente-btn lente-livello" data-reset aria-label="Torna alla dimensione iniziale"><span data-liv>100%</span></button>' +
+        '<button class="lente-btn" data-zoom="+" aria-label="Ingrandisci">' + SH.ICONE.piu + '</button>' +
+        '<button class="lente-btn lente-chiudi" data-chiudi aria-label="Chiudi">' + SH.ICONE.chiudi + '</button>' +
+      '</div>' +
+      '<div class="lente-scena" data-scena><div class="lente-tela" data-tela></div></div>' +
+      '<p class="lente-cap" data-cap></p>';
+    document.body.appendChild(l);
+
+    var scena = $('[data-scena]', l);
+
+    $('[data-chiudi]', l).addEventListener('click', function () { Lente.chiudi(); });
+    $('[data-reset]', l).addEventListener('click', function () { Lente.reimposta(); });
+    $$('[data-zoom]', l).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var r = scena.getBoundingClientRect();
+        Lente.zooma(b.dataset.zoom === '+' ? 1.5 : 1 / 1.5, r.width / 2, r.height / 2);
+      });
+    });
+
+    scena.addEventListener('click', function (e) {
+      if (e.target === scena) Lente.chiudi();
+    });
+
+    scena.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      var r = scena.getBoundingClientRect();
+      Lente.zooma(Math.exp(-e.deltaY * 0.0016), e.clientX - r.left, e.clientY - r.top);
+    }, { passive: false });
+
+    scena.addEventListener('dblclick', function (e) {
+      var r = scena.getBoundingClientRect();
+      Lente.zooma(Lente.scala > 1.2 ? Lente.min / Lente.scala : 2.6, e.clientX - r.left, e.clientY - r.top);
+    });
+
+    scena.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'touch') return;
+      scena.setPointerCapture(e.pointerId);
+      Lente.trascina = { x: e.clientX, y: e.clientY, tx: Lente.tx, ty: Lente.ty };
+      scena.classList.add('afferrato');
+    });
+    scena.addEventListener('pointermove', function (e) {
+      if (!Lente.trascina) return;
+      Lente.tx = Lente.trascina.tx + (e.clientX - Lente.trascina.x);
+      Lente.ty = Lente.trascina.ty + (e.clientY - Lente.trascina.y);
+      Lente.applica();
+    });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) {
+      scena.addEventListener(ev, function () {
+        Lente.trascina = null;
+        scena.classList.remove('afferrato');
+      });
+    });
+
+    /* tocco: un dito trascina, due dita ingrandiscono */
+    scena.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 2) {
+        var d = Lente.distanza(e.touches);
+        var c = Lente.centro(e.touches, scena);
+        Lente.pizzico = { d: d, scala: Lente.scala, cx: c.x, cy: c.y, tx: Lente.tx, ty: Lente.ty };
+        Lente.trascina = null;
+      } else if (e.touches.length === 1) {
+        Lente.trascina = { x: e.touches[0].clientX, y: e.touches[0].clientY, tx: Lente.tx, ty: Lente.ty };
+      }
+    }, { passive: true });
+
+    scena.addEventListener('touchmove', function (e) {
+      if (e.touches.length === 2 && Lente.pizzico) {
+        e.preventDefault();
+        var k = Lente.distanza(e.touches) / Lente.pizzico.d;
+        var nuova = Math.max(Lente.min, Math.min(Lente.max, Lente.pizzico.scala * k));
+        var f = nuova / Lente.pizzico.scala;
+        Lente.scala = nuova;
+        Lente.tx = Lente.pizzico.cx - (Lente.pizzico.cx - Lente.pizzico.tx) * f;
+        Lente.ty = Lente.pizzico.cy - (Lente.pizzico.cy - Lente.pizzico.ty) * f;
+        Lente.applica();
+      } else if (e.touches.length === 1 && Lente.trascina) {
+        e.preventDefault();
+        Lente.tx = Lente.trascina.tx + (e.touches[0].clientX - Lente.trascina.x);
+        Lente.ty = Lente.trascina.ty + (e.touches[0].clientY - Lente.trascina.y);
+        Lente.applica();
+      }
+    }, { passive: false });
+
+    scena.addEventListener('touchend', function (e) {
+      if (e.touches.length < 2) Lente.pizzico = null;
+      if (e.touches.length === 0) Lente.trascina = null;
+    }, { passive: true });
+  },
+
+  distanza: function (t) {
+    var dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy) || 1;
+  },
+  centro: function (t, scena) {
+    var r = scena.getBoundingClientRect();
+    return { x: (t[0].clientX + t[1].clientX) / 2 - r.left, y: (t[0].clientY + t[1].clientY) / 2 - r.top };
+  },
+
+  apri: function (nodo, didascalia, etichetta) {
+    this.monta();
+    var l = $('#lente');
+    var tela = $('[data-tela]', l);
+    tela.innerHTML = '';
+    tela.appendChild(nodo);
+    $('[data-cap]', l).textContent = didascalia || '';
+    $('[data-cap]', l).hidden = !didascalia;
+    $('[data-eti]', l).textContent = etichetta || '';
+
+    l.hidden = false;
+    document.body.style.overflow = 'hidden';
+    this.reimposta();
+    requestAnimationFrame(function () {
+      l.classList.add('visibile');
+      Lente.adattaIniziale();
+      if (nodo.tagName === 'IMG' && !nodo.complete) {
+        nodo.addEventListener('load', function () { Lente.adattaIniziale(); }, { once: true });
+      }
+      Lente.suggerisci();
+    });
+    $('[data-chiudi]', l).focus();
+  },
+
+  chiudi: function () {
+    var l = $('#lente');
+    if (!l || l.hidden) return;
+    l.classList.remove('visibile');
+    document.body.style.overflow = '';
+    setTimeout(function () {
+      l.hidden = true;
+      $('[data-tela]', l).innerHTML = '';
+    }, 200);
+  },
+
+  aperta: function () {
+    var l = $('#lente');
+    return !!l && !l.hidden;
+  },
+
+  zooma: function (fattore, cx, cy) {
+    var nuova = Math.max(this.min, Math.min(this.max, this.scala * fattore));
+    var f = nuova / this.scala;
+    this.scala = nuova;
+    this.tx = cx - (cx - this.tx) * f;
+    this.ty = cy - (cy - this.ty) * f;
+    this.applica();
+  },
+
+  reimposta: function () {
+    this.scala = this.min;
+    this.tx = 0;
+    this.ty = 0;
+    this.applica();
+    this.adattaIniziale();
+  },
+
+  /* Una tavola 16:9 su un telefono in verticale sta tutta in una striscia
+     alta pochi centimetri. In quel caso conviene partire già ingranditi,
+     riempiendo l'altezza e lasciando lo scorrimento in orizzontale. */
+  adattaIniziale: function () {
+    var l = $('#lente');
+    if (!l || l.hidden) return;
+    var scena = $('[data-scena]', l);
+    var tela = $('[data-tela]', l);
+    if (!tela.offsetHeight) return;
+    var rs = scena.getBoundingClientRect();
+    var riempimento = tela.offsetHeight / rs.height;
+    if (riempimento > 0.55) return;
+    var k = Math.min(this.max, (rs.height * 0.92) / tela.offsetHeight);
+    if (k <= 1.05) return;
+    this.scala = k;
+    this.tx = 0;
+    this.ty = 0;
+    this.applica();
+  },
+
+  /* Un suggerimento che compare una volta e sparisce da solo. */
+  suggerisci: function () {
+    var l = $('#lente');
+    var vecchio = $('.lente-aiuto', l);
+    if (vecchio) vecchio.parentNode.removeChild(vecchio);
+    var tocco = window.matchMedia('(hover: none)').matches;
+    var a = el('div', 'lente-aiuto', tocco
+      ? 'Pizzica per ingrandire, trascina per spostare'
+      : 'Rotella per ingrandire, trascina per spostare, doppio clic per alternare');
+    $('[data-scena]', l).appendChild(a);
+    setTimeout(function () { a.classList.add('via'); }, 2600);
+    setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 3400);
+  },
+
+  applica: function () {
+    var l = $('#lente');
+    if (!l) return;
+    var scena = $('[data-scena]', l);
+    var tela = $('[data-tela]', l);
+
+    /* il contenuto non deve poter uscire del tutto dal campo */
+    var rs = scena.getBoundingClientRect();
+    var base = tela.offsetWidth * this.scala;
+    var baseH = tela.offsetHeight * this.scala;
+    var limX = Math.max(0, (base - rs.width) / 2);
+    var limY = Math.max(0, (baseH - rs.height) / 2);
+    this.tx = Math.max(-limX, Math.min(limX, this.tx));
+    this.ty = Math.max(-limY, Math.min(limY, this.ty));
+
+    tela.style.transform = 'translate(' + this.tx + 'px,' + this.ty + 'px) scale(' + this.scala + ')';
+    scena.classList.toggle('ingrandita', this.scala > this.min * 1.02);
+    $('[data-liv]', l).textContent = Math.round(this.scala * 100) + '%';
+  }
+};
+
+function abilitaLente(radice) {
+  $$('figure', radice).forEach(function (f) {
+    var img = f.querySelector('img');
+    var svg = f.querySelector('svg');
+    var sorgente = img || svg;
+    if (!sorgente) return;
+
+    var cap = f.querySelector('figcaption');
+    var testo = cap ? cap.textContent : (f.dataset.cap || '');
+
+    f.classList.add('ingrandibile');
+    var b = el('button', 'lente-apri');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Ingrandisci la figura');
+    b.innerHTML = SH.ICONE.lente + '<span>Ingrandisci</span>';
+    (sorgente.parentNode === f ? f : sorgente.parentNode).insertBefore(b, sorgente.nextSibling);
+
+    function apri() {
+      var nodo;
+      if (img) {
+        nodo = new Image();
+        nodo.src = img.src;
+        nodo.alt = img.alt || testo;
+      } else {
+        nodo = svg.cloneNode(true);
+        nodo.removeAttribute('style');
+      }
+      Lente.apri(nodo, testo, f.dataset.src || 'Figura');
+    }
+
+    sorgente.addEventListener('click', apri);
+    b.addEventListener('click', function (e) { e.stopPropagation(); apri(); });
+  });
+}
+
 /* -------------------------------------------------------- ricerca globale */
 
 var Ricerca = {
@@ -1476,8 +1745,15 @@ document.addEventListener('DOMContentLoaded', function () {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); Ricerca.apri(); return; }
     if (e.key === '/' && !/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) { e.preventDefault(); Ricerca.apri(); return; }
     if (e.key === 'Escape') {
-      if (!$('#ricerca').hidden) Ricerca.chiudi();
+      if (Lente.aperta()) Lente.chiudi();
+      else if (!$('#ricerca').hidden) Ricerca.chiudi();
       else if (Menu.aperto()) Menu.chiudi();
+      return;
+    }
+    if (Lente.aperta()) {
+      if (e.key === '+' || e.key === '=') { e.preventDefault(); Lente.zooma(1.5, 0, 0); }
+      if (e.key === '-' || e.key === '_') { e.preventDefault(); Lente.zooma(1 / 1.5, 0, 0); }
+      if (e.key === '0') { e.preventDefault(); Lente.reimposta(); }
       return;
     }
     if ($('#ricerca').hidden) return;
@@ -1499,6 +1775,7 @@ document.addEventListener('DOMContentLoaded', function () {
   app.innerHTML = html;
 
   montaMedia(app);
+  abilitaLente(app);
   var mt = $('#metar-tool');
   if (mt) montaMetar(mt);
 

@@ -37,6 +37,7 @@ droneschool/
 ├── esame.html          simulazione, parametro ?p=
 ├── contatti.html       modulo Formspree
 ├── privacy.html        informativa unica su privacy e cookie
+├── media/              tavole illustrate e animazioni
 ├── sfondo-hero.jpg
 ├── og-droneschool.jpg
 ├── favicon.ico
@@ -259,6 +260,34 @@ pena una rilettura dei numeri d'esame e delle tariffe su enac.gov.it.
 Il portale porta in fondo a ogni pagina una nota che chiarisce la natura non
 ufficiale del materiale e rimanda a ENAC, D-Flight ed EASA. Vale la pena
 lasciarla: è materiale di studio, non un documento normativo.
+
+---
+
+## Lente
+
+Ogni figura del portale, tavola o disegno vettoriale, si apre a schermo intero
+con un tocco sull'immagine o sul pulsante Ingrandisci. Nel visore: rotella o
+pizzico per ingrandire fino al 600%, trascinamento per spostarsi, doppio clic
+per alternare fra vista intera e dettaglio, Esc per chiudere. Da tastiera
+funzionano anche i tasti più, meno e zero.
+
+Le tavole sono esportate a 2400x1350 proprio per reggere lo zoom: alla
+dimensione di lettura ne serve un terzo, il resto sono pixel di riserva. Su un
+telefono in verticale una tavola 16:9 starebbe in una striscia di pochi
+centimetri, quindi il visore si apre già ingrandito all'altezza dello schermo e
+lascia lo scorrimento in orizzontale.
+
+---
+
+## Tavole e animazioni
+
+I moduli sono illustrati da dieci tavole tecniche e quattro animazioni, tutte
+generate dagli script in `design/` e coerenti con la tavolozza del portale.
+Vivono nella cartella `media/` e viaggiano con il sito, quindi funzionano appena
+pubblichi. Il dettaglio di cosa contengono e come rigenerarle sta in `MEDIA.md`.
+
+Le animazioni sono dichiarate in due formati, MP4 e WebM: il browser sceglie
+quello che sa decodificare. Sono mute e non partono da sole.
 
 ---
 

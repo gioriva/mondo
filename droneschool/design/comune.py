@@ -124,8 +124,14 @@ def firma(d, ss, w, h, testo="DRONE SCHOOL · GIORIVA.IT/DRONESCHOOL", m=54):
     tracked(d, (m * ss, (h - 34) * ss), testo, mono(10 * ss), (*GRIGIO_2, 190), 3.4 * ss)
 
 
+# Le tavole vengono esportate più grandi della dimensione di lettura: servono
+# pixel di riserva per lo zoom della lente, che arriva oltre il 300%.
+FATTORE_EXPORT = 1.5
+
+
 def salva(img, ss, path, w, h):
-    img.resize((w, h), Image.LANCZOS).save(path, "PNG", optimize=True)
+    W, H = int(w * FATTORE_EXPORT), int(h * FATTORE_EXPORT)
+    img.resize((W, H), Image.LANCZOS).save(path, "PNG", optimize=True)
     return path
 
 
