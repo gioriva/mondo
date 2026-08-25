@@ -64,7 +64,7 @@
 html { background: #15151C; }
 
 body {
-  background: linear-gradient(180deg, #15151C 0%, #17171E 45%, #1B1913 100%);
+  background: linear-gradient(180deg, #15151C 0%, #17171E 45%, #141A2A 100%);
   color: var(--washi);
   font-family: var(--sans);
   font-weight: 300;
@@ -269,16 +269,16 @@ body.menu-open .menu-icons { opacity: 1; transition-delay: .45s; }
 body.hov #cur-dot  { width: 10px; height: 10px; background: var(--washi); }
 body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9); }
 
-/* ── Dragon (ryu) ── */
-#dragon {
+/* ── Phoenix (ho-o) ── */
+#phoenix {
   position: fixed;
   z-index: 8;
   opacity: 0;
   transition: opacity 1.5s ease;
   pointer-events: none;
 }
-#dragon.visible { opacity: 1; }
-#dragon svg { display: block; overflow: visible; }
+#phoenix.visible { opacity: 1; }
+#phoenix svg { display: block; overflow: visible; }
 
 /* ── Cookie banner ── */
 #cookie-banner {
@@ -358,7 +358,7 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
     font-size: 1rem;
     text-shadow: 0 0 18px rgba(21,21,28,0.95);
   }
-  #dragon { transform: scale(0.75); }
+  #phoenix { transform: scale(0.75); }
   #cookie-banner {
     flex-direction: column;
     align-items: stretch;
@@ -381,8 +381,8 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"  stop-color="#241F17"/>
-      <stop offset="100%" stop-color="#100F0E"/>
+      <stop offset="0%"  stop-color="#1B2338"/>
+      <stop offset="100%" stop-color="#0E1220"/>
     </linearGradient>
     <radialGradient id="moonglow" cx="50%" cy="0%" r="100%">
       <stop offset="0%"  stop-color="rgba(200,169,126,0.09)"/>
@@ -507,84 +507,95 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 
 
 <!-- Crane (tancho) -> /drone/ -->
-<div id="dragon">
-  <svg width="170" height="76" viewBox="0 0 170 76" xmlns="http://www.w3.org/2000/svg" fill="none">
+<div id="phoenix">
+  <svg width="150" height="96" viewBox="0 0 150 96" xmlns="http://www.w3.org/2000/svg" fill="none">
     <defs>
-      <linearGradient id="dg-skin" x1="1" y1="0" x2="0" y2="0">
-        <stop offset="0%"   stop-color="#C85A45"/>
-        <stop offset="45%"  stop-color="#B5433C"/>
-        <stop offset="100%" stop-color="#8E3A34"/>
+      <linearGradient id="ph-body" x1="0.15" y1="1" x2="0.9" y2="0">
+        <stop offset="0%"   stop-color="#9E3A33"/>
+        <stop offset="45%"  stop-color="#C0503F"/>
+        <stop offset="100%" stop-color="#E2A05C"/>
       </linearGradient>
-      <linearGradient id="dg-fade" x1="1" y1="0" x2="0" y2="0">
-        <stop offset="0%"   stop-color="#C8A97E" stop-opacity="0.9"/>
-        <stop offset="100%" stop-color="#C8A97E" stop-opacity="0.15"/>
+      <linearGradient id="ph-wing" x1="1" y1="1" x2="0.1" y2="0">
+        <stop offset="0%"   stop-color="#B5433C"/>
+        <stop offset="45%"  stop-color="#D4763F"/>
+        <stop offset="100%" stop-color="#F0DDB4"/>
+      </linearGradient>
+      <linearGradient id="ph-wing2" x1="1" y1="1" x2="0.1" y2="0">
+        <stop offset="0%"   stop-color="#8E3A34"/>
+        <stop offset="50%"  stop-color="#B5433C"/>
+        <stop offset="100%" stop-color="#D8BE93"/>
+      </linearGradient>
+      <linearGradient id="ph-tail" x1="1" y1="0" x2="0" y2="0.4">
+        <stop offset="0%"   stop-color="#C0503F"/>
+        <stop offset="45%"  stop-color="#D4763F" stop-opacity="0.85"/>
+        <stop offset="100%" stop-color="#C8A97E" stop-opacity="0"/>
       </linearGradient>
     </defs>
 
-    <g id="dg-scene">
-      <path id="dg-body"  fill="url(#dg-skin)"/>
-      <path id="dg-belly" fill="none" stroke="url(#dg-fade)" stroke-width="0.9" stroke-linecap="round"/>
-      <path id="dg-ridge" fill="#8E3A34" opacity="0.95"/>
-      <g id="dg-limbs"></g>
-      <g id="dg-tail"></g>
-      <g id="dg-head">
-        <!-- neck mane, flowing back -->
-        <path d="M -2 2 C -7 3.4, -12 5.6, -17 8.6 C -11 6.8, -6 5.4, -1.6 4.6 Z" fill="#8E3A34" opacity="0.9"/>
-        <path d="M -2.4 0.6 C -8 0.8, -14 1.6, -20 3.4 C -13 2.6, -7 2.4, -2 2.6 Z" fill="#8E3A34" opacity="0.7"/>
-        <path d="M -1.6 -4.4 C -6 -6.4, -11 -7.6, -16.5 -7.8 C -11 -6, -6 -4, -2.4 -2 Z" fill="#8E3A34" opacity="0.85"/>
-
-        <!-- horns, antler-like -->
-        <path d="M -0.6 -5 C -2.6 -9.4, -5.6 -12.6, -10 -14.8
-                 C -11.3 -15.4, -12.1 -14.3, -11.1 -13.4
-                 C -7.4 -10.4, -4.4 -7.4, -2.8 -4.2 Z" fill="#C8A97E"/>
-        <path d="M -5.4 -10.4 C -7.6 -12.6, -10 -13.6, -12.8 -14.2
-                 C -10.4 -12.6, -8.4 -10.8, -6.8 -9 Z" fill="#C8A97E" opacity="0.8"/>
-        <path d="M 2.6 -5.6 C 1.6 -9.2, -0.6 -12, -3.8 -14.2
-                 C -1.6 -11, -0.2 -8, 0.6 -5 Z" fill="#C8A97E" opacity="0.55"/>
-
-        <!-- ear fin -->
-        <path d="M -2 -2.6 C -6 -4.2, -9.4 -4.2, -12.4 -3.2
-                 C -9 -2.2, -5.6 -1, -3 0.2 Z" fill="#8E3A34"/>
-
-        <!-- upper head and snout -->
-        <path d="M -3 -5.4 C 2 -7.6, 8 -7.2, 12.4 -4.8
-                 C 16 -3.2, 19.6 -2.6, 21.6 -1.8
-                 C 22.8 -1.3, 22.7 0.3, 21.3 0.6
-                 L 14 1.6 C 9 2.4, 2 2.4, -3 1.4 Z" fill="url(#dg-skin)"/>
-
-        <!-- brow ridge -->
-        <path d="M 4.4 -5.4 C 6.6 -7.4, 10 -7, 12.2 -5.2
-                 C 9.8 -6, 6.8 -6.2, 4.4 -5.4 Z" fill="#8E3A34"/>
-
-        <!-- lower jaw, slightly open -->
-        <path d="M 2 1.8 C 6.4 3.8, 12.4 4.6, 18.6 4.4
-                 C 19.9 4.4, 20.1 3.1, 18.8 2.8
-                 C 12.8 2.4, 6.8 1.6, 2.8 0.8 Z" fill="#8E3A34"/>
-
-        <!-- fangs -->
-        <path d="M 17.6 1 L 18.8 3.2 L 16.6 1.3 Z" fill="#F0E2C2"/>
-        <path d="M 13.4 1.4 L 14.4 3.4 L 12.4 1.6 Z" fill="#F0E2C2" opacity="0.9"/>
-        <path d="M 16.2 2.8 L 15.2 1 L 17.2 2.6 Z" fill="#F0E2C2" opacity="0.85"/>
-
-        <!-- chin beard -->
-        <path d="M 6 3.2 C 4 6.4, 1 8.6, -3 9.8 C 0.4 7.2, 3 4.8, 4.4 2.6 Z" fill="#8E3A34" opacity="0.85"/>
-
-        <!-- eye, slit pupil -->
-        <ellipse cx="8.4" cy="-3.4" rx="2.3" ry="1.6" transform="rotate(-12 8.4 -3.4)" fill="#E8C07A"/>
-        <ellipse cx="8.7" cy="-3.4" rx="0.5" ry="1.25" transform="rotate(-12 8.7 -3.4)" fill="#17171E"/>
-
-        <!-- nostril -->
-        <path d="M 19.4 -1.8 C 20.6 -2.4, 21.6 -2, 21.6 -1.2" stroke="#8E3A34" stroke-width="0.7"
-              stroke-linecap="round" fill="none"/>
-        <circle cx="20.4" cy="-1.1" r="0.5" fill="#17171E" opacity="0.7"/>
-
-        <!-- whiskers -->
-        <path d="M 21 -0.6 C 13 3.6, 2 8, -11 9.6" stroke="#C8A97E" stroke-width="0.85"
-              stroke-opacity="0.8" stroke-linecap="round" fill="none"/>
-        <path d="M 20 0.8 C 12 6, 3 10.6, -7 14" stroke="#C8A97E" stroke-width="0.7"
-              stroke-opacity="0.5" stroke-linecap="round" fill="none"/>
-      </g>
+    <!-- ── far wing, behind the body ── -->
+    <g id="wing-far">
+      <path d="M 84 48 C 74 36, 60 25, 40 20 C 52 30, 64 40, 74 50 Z" fill="url(#ph-wing2)" opacity="0.55"/>
+      <path d="M 80 46 C 68 36, 55 28, 42 23" stroke="#8E3A34" stroke-width="0.7" stroke-opacity="0.4" fill="none"/>
     </g>
+
+    <!-- ── tail: long streaming plumes ── -->
+    <g id="ph-tail-g">
+      <path d="M 78 54 C 60 52, 40 49, 14 42 C 38 52, 58 57, 76 59 Z" fill="url(#ph-tail)"/>
+      <path d="M 78 56 C 58 58, 38 61, 10 68 C 36 65, 58 62, 77 60 Z" fill="url(#ph-tail)" opacity="0.85"/>
+      <path d="M 77 57 C 60 62, 44 70, 22 84 C 44 74, 62 66, 76 61 Z" fill="url(#ph-tail)" opacity="0.6"/>
+      <path d="M 76 58 C 64 66, 54 76, 44 92 C 58 78, 68 68, 75 62 Z" fill="url(#ph-tail)" opacity="0.4"/>
+      <!-- eye-spots along the longest plume -->
+      <ellipse cx="34" cy="48" rx="2.6" ry="1.5" transform="rotate(-14 34 48)" fill="#E8C07A" opacity="0.55"/>
+      <ellipse cx="46" cy="51" rx="2.2" ry="1.3" transform="rotate(-12 46 51)" fill="#E8C07A" opacity="0.45"/>
+    </g>
+
+    <!-- ── body ── -->
+    <path d="M 76 58 C 78 48, 86 41, 97 39 C 106 37.5, 113 40, 115 44
+             C 117 49, 112 56, 102 60 C 92 64, 80 64, 76 58 Z" fill="url(#ph-body)"/>
+    <!-- breast highlight -->
+    <path d="M 88 60.5 C 94 62, 101 60.5, 107 56.5" stroke="#E2A05C" stroke-width="1.1"
+          stroke-opacity="0.5" stroke-linecap="round" fill="none"/>
+
+    <!-- ── neck and head ── -->
+    <path d="M 111 43 C 116 37, 121 31, 126 26" stroke="url(#ph-body)" stroke-width="6.6" stroke-linecap="round"/>
+    <path d="M 124 28.5 C 128.5 25, 133 23.5, 136 24.5
+             C 139 25.6, 139.4 29, 137 31.4
+             C 134 34.4, 128.5 34.6, 125 32 Z" fill="#E2A05C"/>
+    <!-- beak -->
+    <path d="M 136.5 26.4 L 148 23.2 L 137.6 30.4 Z" fill="#C8A97E"/>
+    <path d="M 137 28.4 L 146.5 26.8" stroke="#8E3A34" stroke-width="0.6" stroke-opacity="0.6"/>
+    <!-- eye -->
+    <circle cx="132.6" cy="28.2" r="1.5" fill="#2A1712"/>
+    <circle cx="133.1" cy="27.7" r="0.45" fill="#F0DDB4"/>
+    <!-- wattle -->
+    <path d="M 134.6 32.4 C 134 35, 132.6 36.6, 130.6 37.4 C 132.4 35.2, 133.4 33.6, 133.6 32 Z" fill="#B5433C"/>
+
+    <!-- ── crest plumes ── -->
+    <path d="M 128 24 C 128.6 17, 126.6 10.5, 122 5 C 125.4 12, 126 18, 125.6 24.4 Z" fill="#C0503F"/>
+    <path d="M 131 23.6 C 133.6 17.4, 133.6 11, 131 4.6 C 132 11.4, 131.6 17.4, 129.6 23.4 Z" fill="#D4763F" opacity="0.9"/>
+    <path d="M 124.6 25.6 C 122 20.4, 117.6 16.4, 111.6 13.6 C 117 18, 120.6 22, 123 26.6 Z" fill="#B5433C" opacity="0.75"/>
+
+    <!-- ── near wing, spread wide ── -->
+    <g id="wing-near">
+      <path d="M 88 52 C 76 34, 58 18, 32 9
+               C 44 22, 56 36, 66 48
+               C 72 55, 82 58, 88 52 Z" fill="url(#ph-wing)"/>
+      <!-- primary feather separations -->
+      <path d="M 86 51 C 74 36, 58 22, 36 12" stroke="#8E3A34" stroke-width="0.8" stroke-opacity="0.55" fill="none"/>
+      <path d="M 80 51 C 70 39, 57 27, 40 17" stroke="#8E3A34" stroke-width="0.7" stroke-opacity="0.4" fill="none"/>
+      <path d="M 74 50 C 66 41, 56 32, 44 24" stroke="#8E3A34" stroke-width="0.6" stroke-opacity="0.32" fill="none"/>
+      <!-- wing tip plumes -->
+      <path d="M 32 9 C 26 8, 21 8.6, 17 10.6 C 23 10.6, 28 11.6, 33 13 Z" fill="#F0DDB4" opacity="0.8"/>
+      <path d="M 38 15 C 32 15, 27 16.4, 23 19 C 29 18.2, 34 18.4, 39 19.2 Z" fill="#F0DDB4" opacity="0.6"/>
+      <!-- coverts -->
+      <path d="M 88 52 C 80 47, 72 44, 63 43 C 72 46, 80 50, 86 54 Z" fill="#D4763F" opacity="0.55"/>
+    </g>
+
+    <!-- ── legs tucked ── -->
+    <path d="M 92 62 C 90 66, 87 68.6, 83 70" stroke="#C8A97E" stroke-width="1.2"
+          stroke-opacity="0.6" stroke-linecap="round" fill="none"/>
+    <path d="M 98 62.6 C 96.6 66.6, 94 69.4, 90 71.4" stroke="#C8A97E" stroke-width="1.1"
+          stroke-opacity="0.45" stroke-linecap="round" fill="none"/>
   </svg>
 </div>
 
@@ -1069,128 +1080,18 @@ function sceneMetrics() {
 })();
 
 /* ════════════════════════════════════
-   DRAGON flight: undulating serpentine body
+   PHOENIX flight: wide wingbeats and glides
    ════════════════════════════════════ */
 (function () {
-  var dragon = document.getElementById('dragon');
-  var svg    = dragon.querySelector('svg');
-  var body   = document.getElementById('dg-body');
-  var belly  = document.getElementById('dg-belly');
-  var ridge  = document.getElementById('dg-ridge');
-  var head   = document.getElementById('dg-head');
-  var limbsG = document.getElementById('dg-limbs');
-  var tailG  = document.getElementById('dg-tail');
-  var NS2 = 'http://www.w3.org/2000/svg';
+  var bird     = document.getElementById('phoenix');
+  var svg      = bird.querySelector('svg');
+  var wingNear = document.getElementById('wing-near');
+  var wingFar  = document.getElementById('wing-far');
+  var tail     = document.getElementById('ph-tail-g');
 
   var W = window.innerWidth, H = window.innerHeight;
   window.addEventListener('resize', function () { W = window.innerWidth; H = window.innerHeight; });
 
-  /* ── serpentine geometry ── */
-  var N = 46;                 // spine samples, s = 0 (head) .. 1 (tail)
-  var HEAD_X = 150, TAIL_X = 12, MID_Y = 38;
-
-  function spine(s, ph) {
-    var x = HEAD_X - (HEAD_X - TAIL_X) * s;
-    var amp = 7.5 * (0.28 + 0.72 * s);          // tail swings wider
-    var y = MID_Y + Math.sin(s * 5.4 + ph) * amp;
-    return { x: x, y: y };
-  }
-  function halfWidth(s) {
-    return 7.2 * Math.pow(1 - s, 0.5) * (0.82 + 0.18 * Math.sin(Math.PI * Math.min(1, s * 2.6)));
-  }
-
-  /* two limbs, rebuilt each frame at their spine position */
-  var limbs = [];
-  [0.28, 0.60].forEach(function () {
-    var g = document.createElementNS(NS2, 'g');
-    var p = document.createElementNS(NS2, 'path');
-    p.setAttribute('d', 'M 0 0 C -1.6 4.4, -4.4 7, -8.4 8.4 L -6.6 9.6 M -8.4 8.4 L -9.4 6.4 M -8.4 8.4 L -10.4 8.8');
-    p.setAttribute('stroke', '#8E3A34');
-    p.setAttribute('stroke-width', '1.9');
-    p.setAttribute('stroke-linecap', 'round');
-    p.setAttribute('fill', 'none');
-    g.appendChild(p);
-    limbsG.appendChild(g);
-    limbs.push(g);
-  });
-
-  /* tail flame tuft */
-  var tailPath = document.createElementNS(NS2, 'path');
-  tailPath.setAttribute('d', 'M 0 0 C -5 -3.4, -10 -4.6, -15.5 -4 C -10.5 -1.6, -6 0.6, -2 2.4 Z');
-  tailPath.setAttribute('fill', '#C8A97E');
-  tailPath.setAttribute('opacity', '0.75');
-  tailG.appendChild(tailPath);
-  var tailPath2 = document.createElementNS(NS2, 'path');
-  tailPath2.setAttribute('d', 'M 0 0 C -5 2.6, -10 4.6, -16 5.6 C -10 4.4, -5 2.6, -1 0.6 Z');
-  tailPath2.setAttribute('fill', '#C8A97E');
-  tailPath2.setAttribute('opacity', '0.45');
-  tailG.appendChild(tailPath2);
-
-  function renderBody(ph) {
-    var pts = [], i, s, p;
-    for (i = 0; i <= N; i++) {
-      s = i / N;
-      p = spine(s, ph);
-      p.s = s;
-      pts.push(p);
-    }
-    // normals
-    for (i = 0; i <= N; i++) {
-      var a = pts[Math.max(0, i - 1)], b = pts[Math.min(N, i + 1)];
-      var tx = b.x - a.x, ty = b.y - a.y;
-      var len = Math.hypot(tx, ty) || 1;
-      pts[i].nx = -ty / len;
-      pts[i].ny =  tx / len;
-      // forward = toward the head (spine runs head -> tail)
-      pts[i].ang = Math.atan2(-ty, -tx) * 180 / Math.PI;
-      pts[i].w = halfWidth(pts[i].s);
-    }
-
-    var top = '', bot = '', mid = '';
-    for (i = 0; i <= N; i++) {
-      p = pts[i];
-      top += (i === 0 ? 'M' : 'L') + (p.x + p.nx * p.w).toFixed(2) + ',' + (p.y + p.ny * p.w).toFixed(2);
-      mid += (i === 0 ? 'M' : 'L') + p.x.toFixed(2) + ',' + (p.y - p.ny * p.w * 0.45).toFixed(2);
-    }
-    for (i = N; i >= 0; i--) {
-      p = pts[i];
-      bot += 'L' + (p.x - p.nx * p.w).toFixed(2) + ',' + (p.y - p.ny * p.w).toFixed(2);
-    }
-    body.setAttribute('d', top + bot + 'Z');
-    belly.setAttribute('d', mid);
-
-    // dorsal spikes along the upper edge
-    var spikes = '';
-    for (i = 3; i < N - 4; i += 3) {
-      var q = pts[i], r = pts[i + 2];
-      var bx = q.x + q.nx * q.w, by = q.y + q.ny * q.w;
-      var ex = r.x + r.nx * r.w, ey = r.y + r.ny * r.w;
-      var mxp = (bx + ex) / 2 + q.nx * q.w * 1.15;
-      var myp = (by + ey) / 2 + q.ny * q.w * 1.15;
-      spikes += 'M' + bx.toFixed(2) + ',' + by.toFixed(2) +
-                'L' + mxp.toFixed(2) + ',' + myp.toFixed(2) +
-                'L' + ex.toFixed(2) + ',' + ey.toFixed(2) + 'Z';
-    }
-    ridge.setAttribute('d', spikes);
-
-    // head follows the first spine point
-    var h = pts[0];
-    head.setAttribute('transform', 'translate(' + h.x.toFixed(2) + ',' + h.y.toFixed(2) + ') rotate(' + h.ang.toFixed(1) + ')');
-
-    // limbs
-    [0.28, 0.60].forEach(function (ls, k) {
-      var lp = spine(ls, ph);
-      var i2 = Math.round(ls * N);
-      limbs[k].setAttribute('transform',
-        'translate(' + lp.x.toFixed(2) + ',' + lp.y.toFixed(2) + ') rotate(' + pts[i2].ang.toFixed(1) + ')');
-    });
-
-    // tail tuft
-    var tl = pts[N];
-    tailG.setAttribute('transform', 'translate(' + tl.x.toFixed(2) + ',' + tl.y.toFixed(2) + ') rotate(' + tl.ang.toFixed(1) + ')');
-  }
-
-  /* ── flight path ── */
   var waypoints = [
     [0.14, 0.14], [0.34, 0.08], [0.55, 0.16], [0.74, 0.07],
     [0.88, 0.13], [0.84, 0.30], [0.64, 0.36], [0.44, 0.28],
@@ -1198,13 +1099,13 @@ function sceneMetrics() {
   ];
 
   var idx = 0;
-  var startX = -110, startY = H * 0.18;
+  var startX = -120, startY = H * 0.18;
   var targetX = waypoints[0][0] * W, targetY = waypoints[0][1] * H;
   var startTime = null;
   var segDuration = 9000;
   var facing = 1;
 
-  setTimeout(function () { dragon.classList.add('visible'); }, 1400);
+  setTimeout(function () { bird.classList.add('visible'); }, 1400);
 
   function easeInOut(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
 
@@ -1214,17 +1115,26 @@ function sceneMetrics() {
     var e = easeInOut(t);
     var x = startX + (targetX - startX) * e;
     var y = startY + (targetY - startY) * e;
-    var bob = Math.sin(ts * 0.0009) * 2.5;
 
-    dragon.style.left = (x - 85) + 'px';
-    dragon.style.top  = (y - 38 + bob) + 'px';
+    /* wingbeat drives a slight vertical lift, as in real flight */
+    var beat  = Math.sin(ts * 0.0032);
+    var glide = 0.5 + 0.5 * Math.sin(ts * 0.00055);   // long cycle: flap, then glide
+    var amp   = 5 + 17 * glide;
+    var bob   = Math.sin(ts * 0.0032 + 1.1) * (1.4 + 2.2 * glide);
+
+    bird.style.left = (x - 75) + 'px';
+    bird.style.top  = (y - 48 + bob) + 'px';
 
     var dir = (targetX - startX) >= 0 ? 1 : -1;
     facing += (dir - facing) * 0.06;
-    var tilt = Math.max(-7, Math.min(7, (targetY - startY) * -0.007 * dir));
+    var tilt = Math.max(-9, Math.min(9, (targetY - startY) * -0.008 * dir));
     svg.style.transform = 'scaleX(' + facing.toFixed(3) + ') rotate(' + tilt.toFixed(1) + 'deg)';
 
-    renderBody(ts * 0.0026);
+    /* wings pivot at the shoulder, the far one lags slightly */
+    wingNear.setAttribute('transform', 'rotate(' + (beat * amp).toFixed(1) + ' 88 52)');
+    wingFar.setAttribute('transform',  'rotate(' + (Math.sin(ts * 0.0032 + 0.65) * amp * 0.78).toFixed(1) + ' 84 48)');
+    /* tail sways gently, out of phase with the wings */
+    tail.setAttribute('transform', 'rotate(' + (Math.sin(ts * 0.0032 - 0.9) * 3.4).toFixed(1) + ' 78 57)');
 
     if (t >= 1) {
       startX = x; startY = y + bob;
