@@ -269,16 +269,16 @@ body.menu-open .menu-icons { opacity: 1; transition-delay: .45s; }
 body.hov #cur-dot  { width: 10px; height: 10px; background: var(--washi); }
 body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9); }
 
-/* ── Phoenix (ho-o) ── */
-#phoenix {
+/* ── Orizuru (paper crane) ── */
+#orizuru {
   position: fixed;
   z-index: 8;
   opacity: 0;
   transition: opacity 1.5s ease;
   pointer-events: none;
 }
-#phoenix.visible { opacity: 1; }
-#phoenix svg { display: block; overflow: visible; }
+#orizuru.visible { opacity: 1; }
+#orizuru svg { display: block; overflow: visible; }
 
 /* ── Cookie banner ── */
 #cookie-banner {
@@ -358,7 +358,7 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
     font-size: 1rem;
     text-shadow: 0 0 18px rgba(21,21,28,0.95);
   }
-  #phoenix { transform: scale(0.75); }
+  #orizuru { transform: scale(0.75); }
   #cookie-banner {
     flex-direction: column;
     align-items: stretch;
@@ -507,95 +507,42 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 
 
 <!-- Crane (tancho) -> /drone/ -->
-<div id="phoenix">
-  <svg width="150" height="96" viewBox="0 0 150 96" xmlns="http://www.w3.org/2000/svg" fill="none">
-    <defs>
-      <linearGradient id="ph-body" x1="0.15" y1="1" x2="0.9" y2="0">
-        <stop offset="0%"   stop-color="#9E3A33"/>
-        <stop offset="45%"  stop-color="#C0503F"/>
-        <stop offset="100%" stop-color="#E2A05C"/>
-      </linearGradient>
-      <linearGradient id="ph-wing" x1="1" y1="1" x2="0.1" y2="0">
-        <stop offset="0%"   stop-color="#B5433C"/>
-        <stop offset="45%"  stop-color="#D4763F"/>
-        <stop offset="100%" stop-color="#F0DDB4"/>
-      </linearGradient>
-      <linearGradient id="ph-wing2" x1="1" y1="1" x2="0.1" y2="0">
-        <stop offset="0%"   stop-color="#8E3A34"/>
-        <stop offset="50%"  stop-color="#B5433C"/>
-        <stop offset="100%" stop-color="#D8BE93"/>
-      </linearGradient>
-      <linearGradient id="ph-tail" x1="1" y1="0" x2="0" y2="0.4">
-        <stop offset="0%"   stop-color="#C0503F"/>
-        <stop offset="45%"  stop-color="#D4763F" stop-opacity="0.85"/>
-        <stop offset="100%" stop-color="#C8A97E" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-
-    <!-- ── far wing, behind the body ── -->
+<div id="orizuru">
+  <svg width="150" height="103" viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg">
+    <!-- far wing, folded behind -->
     <g id="wing-far">
-      <path d="M 84 48 C 74 36, 60 25, 40 20 C 52 30, 64 40, 74 50 Z" fill="url(#ph-wing2)" opacity="0.55"/>
-      <path d="M 80 46 C 68 36, 55 28, 42 23" stroke="#8E3A34" stroke-width="0.7" stroke-opacity="0.4" fill="none"/>
+      <polygon points="96,50 84,6 64,46"  fill="#9E9583"/>
+      <polygon points="96,50 64,46 78,54" fill="#6C6458"/>
     </g>
 
-    <!-- ── tail: long streaming plumes ── -->
-    <g id="ph-tail-g">
-      <path d="M 78 54 C 60 52, 40 49, 14 42 C 38 52, 58 57, 76 59 Z" fill="url(#ph-tail)"/>
-      <path d="M 78 56 C 58 58, 38 61, 10 68 C 36 65, 58 62, 77 60 Z" fill="url(#ph-tail)" opacity="0.85"/>
-      <path d="M 77 57 C 60 62, 44 70, 22 84 C 44 74, 62 66, 76 61 Z" fill="url(#ph-tail)" opacity="0.6"/>
-      <path d="M 76 58 C 64 66, 54 76, 44 92 C 58 78, 68 68, 75 62 Z" fill="url(#ph-tail)" opacity="0.4"/>
-      <!-- eye-spots along the longest plume -->
-      <ellipse cx="34" cy="48" rx="2.6" ry="1.5" transform="rotate(-14 34 48)" fill="#E8C07A" opacity="0.55"/>
-      <ellipse cx="46" cy="51" rx="2.2" ry="1.3" transform="rotate(-12 46 51)" fill="#E8C07A" opacity="0.45"/>
+    <!-- tail -->
+    <g id="ori-tail">
+      <polygon points="82,58 16,22 20,29 78,52" fill="#D0C9B9"/>
+      <polygon points="82,58 78,52 70,55"       fill="#9E9583"/>
+      <line x1="82" y1="58" x2="16" y2="22" stroke="#968D7C" stroke-width="0.5" stroke-opacity="0.6"/>
     </g>
 
-    <!-- ── body ── -->
-    <path d="M 76 58 C 78 48, 86 41, 97 39 C 106 37.5, 113 40, 115 44
-             C 117 49, 112 56, 102 60 C 92 64, 80 64, 76 58 Z" fill="url(#ph-body)"/>
-    <!-- breast highlight -->
-    <path d="M 88 60.5 C 94 62, 101 60.5, 107 56.5" stroke="#E2A05C" stroke-width="1.1"
-          stroke-opacity="0.5" stroke-linecap="round" fill="none"/>
+    <!-- neck and head -->
+    <g id="ori-head">
+      <polygon points="100,48 146,13 150,19" fill="#F0ECE2"/>
+      <polygon points="100,48 150,19 106,55" fill="#D0C9B9"/>
+      <polygon points="146,13 153,12 150,20" fill="#F0ECE2"/>
+      <polygon points="152,12 159,9 151,18"  fill="#B5433C"/>
+      <line x1="100" y1="48" x2="146" y2="13" stroke="#968D7C" stroke-width="0.5" stroke-opacity="0.55"/>
+    </g>
 
-    <!-- ── neck and head ── -->
-    <path d="M 111 43 C 116 37, 121 31, 126 26" stroke="url(#ph-body)" stroke-width="6.6" stroke-linecap="round"/>
-    <path d="M 124 28.5 C 128.5 25, 133 23.5, 136 24.5
-             C 139 25.6, 139.4 29, 137 31.4
-             C 134 34.4, 128.5 34.6, 125 32 Z" fill="#E2A05C"/>
-    <!-- beak -->
-    <path d="M 136.5 26.4 L 148 23.2 L 137.6 30.4 Z" fill="#C8A97E"/>
-    <path d="M 137 28.4 L 146.5 26.8" stroke="#8E3A34" stroke-width="0.6" stroke-opacity="0.6"/>
-    <!-- eye -->
-    <circle cx="132.6" cy="28.2" r="1.5" fill="#2A1712"/>
-    <circle cx="133.1" cy="27.7" r="0.45" fill="#F0DDB4"/>
-    <!-- wattle -->
-    <path d="M 134.6 32.4 C 134 35, 132.6 36.6, 130.6 37.4 C 132.4 35.2, 133.4 33.6, 133.6 32 Z" fill="#B5433C"/>
+    <!-- body -->
+    <polygon points="100,48 106,55 92,68 74,64 70,56" fill="#F0ECE2"/>
+    <polygon points="92,68 74,64 84,71"               fill="#D0C9B9"/>
+    <polygon points="86,66 74,64 80,70"               fill="#8E3A34"/>
+    <line x1="100" y1="48" x2="92" y2="68" stroke="#968D7C" stroke-width="0.5" stroke-opacity="0.6"/>
 
-    <!-- ── crest plumes ── -->
-    <path d="M 128 24 C 128.6 17, 126.6 10.5, 122 5 C 125.4 12, 126 18, 125.6 24.4 Z" fill="#C0503F"/>
-    <path d="M 131 23.6 C 133.6 17.4, 133.6 11, 131 4.6 C 132 11.4, 131.6 17.4, 129.6 23.4 Z" fill="#D4763F" opacity="0.9"/>
-    <path d="M 124.6 25.6 C 122 20.4, 117.6 16.4, 111.6 13.6 C 117 18, 120.6 22, 123 26.6 Z" fill="#B5433C" opacity="0.75"/>
-
-    <!-- ── near wing, spread wide ── -->
+    <!-- near wing -->
     <g id="wing-near">
-      <path d="M 88 52 C 76 34, 58 18, 32 9
-               C 44 22, 56 36, 66 48
-               C 72 55, 82 58, 88 52 Z" fill="url(#ph-wing)"/>
-      <!-- primary feather separations -->
-      <path d="M 86 51 C 74 36, 58 22, 36 12" stroke="#8E3A34" stroke-width="0.8" stroke-opacity="0.55" fill="none"/>
-      <path d="M 80 51 C 70 39, 57 27, 40 17" stroke="#8E3A34" stroke-width="0.7" stroke-opacity="0.4" fill="none"/>
-      <path d="M 74 50 C 66 41, 56 32, 44 24" stroke="#8E3A34" stroke-width="0.6" stroke-opacity="0.32" fill="none"/>
-      <!-- wing tip plumes -->
-      <path d="M 32 9 C 26 8, 21 8.6, 17 10.6 C 23 10.6, 28 11.6, 33 13 Z" fill="#F0DDB4" opacity="0.8"/>
-      <path d="M 38 15 C 32 15, 27 16.4, 23 19 C 29 18.2, 34 18.4, 39 19.2 Z" fill="#F0DDB4" opacity="0.6"/>
-      <!-- coverts -->
-      <path d="M 88 52 C 80 47, 72 44, 63 43 C 72 46, 80 50, 86 54 Z" fill="#D4763F" opacity="0.55"/>
+      <polygon points="102,52 70,2 58,52"  fill="#F0ECE2"/>
+      <polygon points="102,52 58,52 76,64" fill="#D0C9B9"/>
+      <line x1="102" y1="52" x2="70" y2="2" stroke="#968D7C" stroke-width="0.6" stroke-opacity="0.7"/>
     </g>
-
-    <!-- ── legs tucked ── -->
-    <path d="M 92 62 C 90 66, 87 68.6, 83 70" stroke="#C8A97E" stroke-width="1.2"
-          stroke-opacity="0.6" stroke-linecap="round" fill="none"/>
-    <path d="M 98 62.6 C 96.6 66.6, 94 69.4, 90 71.4" stroke="#C8A97E" stroke-width="1.1"
-          stroke-opacity="0.45" stroke-linecap="round" fill="none"/>
   </svg>
 </div>
 
@@ -1080,14 +1027,15 @@ function sceneMetrics() {
 })();
 
 /* ════════════════════════════════════
-   PHOENIX flight: wide wingbeats and glides
+   ORIZURU flight: paper wings and a slow drift
    ════════════════════════════════════ */
 (function () {
-  var bird     = document.getElementById('phoenix');
+  var bird     = document.getElementById('orizuru');
   var svg      = bird.querySelector('svg');
   var wingNear = document.getElementById('wing-near');
   var wingFar  = document.getElementById('wing-far');
-  var tail     = document.getElementById('ph-tail-g');
+  var tail     = document.getElementById('ori-tail');
+  var head     = document.getElementById('ori-head');
 
   var W = window.innerWidth, H = window.innerHeight;
   window.addEventListener('resize', function () { W = window.innerWidth; H = window.innerHeight; });
@@ -1102,7 +1050,7 @@ function sceneMetrics() {
   var startX = -120, startY = H * 0.18;
   var targetX = waypoints[0][0] * W, targetY = waypoints[0][1] * H;
   var startTime = null;
-  var segDuration = 9000;
+  var segDuration = 10000;
   var facing = 1;
 
   setTimeout(function () { bird.classList.add('visible'); }, 1400);
@@ -1116,25 +1064,27 @@ function sceneMetrics() {
     var x = startX + (targetX - startX) * e;
     var y = startY + (targetY - startY) * e;
 
-    /* wingbeat drives a slight vertical lift, as in real flight */
-    var beat  = Math.sin(ts * 0.0032);
-    var glide = 0.5 + 0.5 * Math.sin(ts * 0.00055);   // long cycle: flap, then glide
-    var amp   = 5 + 17 * glide;
-    var bob   = Math.sin(ts * 0.0032 + 1.1) * (1.4 + 2.2 * glide);
+    /* paper wings: a folded crane hinges, it does not beat like a bird */
+    var beat  = Math.sin(ts * 0.0021);
+    var glide = 0.5 + 0.5 * Math.sin(ts * 0.0005);
+    var amp   = 3 + 8 * glide;
+    var bob   = Math.sin(ts * 0.0021 + 1.1) * (1.2 + 1.8 * glide);
 
     bird.style.left = (x - 75) + 'px';
-    bird.style.top  = (y - 48 + bob) + 'px';
+    bird.style.top  = (y - 50 + bob) + 'px';
 
     var dir = (targetX - startX) >= 0 ? 1 : -1;
-    facing += (dir - facing) * 0.06;
-    var tilt = Math.max(-9, Math.min(9, (targetY - startY) * -0.008 * dir));
+    facing += (dir - facing) * 0.05;
+    /* a light sheet of paper rolls a little as it turns */
+    var tilt = Math.max(-10, Math.min(10, (targetY - startY) * -0.009 * dir))
+             + Math.sin(ts * 0.0007) * 2.2;
     svg.style.transform = 'scaleX(' + facing.toFixed(3) + ') rotate(' + tilt.toFixed(1) + 'deg)';
 
-    /* wings pivot at the shoulder, the far one lags slightly */
-    wingNear.setAttribute('transform', 'rotate(' + (beat * amp).toFixed(1) + ' 88 52)');
-    wingFar.setAttribute('transform',  'rotate(' + (Math.sin(ts * 0.0032 + 0.65) * amp * 0.78).toFixed(1) + ' 84 48)');
-    /* tail sways gently, out of phase with the wings */
-    tail.setAttribute('transform', 'rotate(' + (Math.sin(ts * 0.0032 - 0.9) * 3.4).toFixed(1) + ' 78 57)');
+    wingNear.setAttribute('transform', 'rotate(' + (beat * amp).toFixed(1) + ' 102 52)');
+    wingFar.setAttribute('transform',  'rotate(' + (Math.sin(ts * 0.0021 + 0.5) * amp * 0.8).toFixed(1) + ' 96 50)');
+    /* neck and tail answer the wings with a small delay */
+    tail.setAttribute('transform', 'rotate(' + (Math.sin(ts * 0.0021 - 0.8) * 2.6).toFixed(1) + ' 82 58)');
+    head.setAttribute('transform', 'rotate(' + (Math.sin(ts * 0.0021 - 0.5) * 1.8).toFixed(1) + ' 100 48)');
 
     if (t >= 1) {
       startX = x; startY = y + bob;
@@ -1142,7 +1092,7 @@ function sceneMetrics() {
       targetX = waypoints[idx][0] * W;
       targetY = waypoints[idx][1] * H;
       startTime = ts;
-      segDuration = 7500 + Math.random() * 5000;
+      segDuration = 8500 + Math.random() * 5000;
     }
     requestAnimationFrame(anim);
   }
