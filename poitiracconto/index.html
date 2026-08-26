@@ -508,6 +508,20 @@
       .dati { gap:1.8rem; }
       .dato b { font-size:1.9rem; }
       /* la bacheca si sfoglia di lato invece di scorrere all'infinito */
+      /* i tre momenti in colonna, uno per riga */
+      .payoff { max-width:none; }
+      .payoff-tre { flex-direction:column; }
+      .payoff-tre li {
+        width:100%;
+        padding:.7rem 0;
+        font-size:.9rem;
+      }
+      .payoff-tre li + li {
+        border-left:none;
+        border-top:1px solid var(--bordo);
+        padding-left:0;
+      }
+
       .griglia {
         display:flex;
         gap:1rem;
