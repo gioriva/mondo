@@ -120,8 +120,31 @@
     .barra {
       max-width:1280px; width:100%; margin:0 auto;
       padding:1.4rem 5vw;
-      display:flex; align-items:center; justify-content:flex-end;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1rem;
     }
+    .marchio {
+      display:inline-flex; align-items:center; gap:.7rem;
+      text-decoration:none; color:var(--inchiostro);
+    }
+    .marchio svg {
+      width:31px; height:31px;
+      color:var(--rosso);
+      flex-shrink:0;
+    }
+    .marchio span { display:flex; flex-direction:column; line-height:1.15; }
+    .marchio b {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.42rem;
+      letter-spacing:-.005em;
+    }
+    .marchio i {
+      font-family:'Instrument Serif', serif;
+      font-style:italic; font-size:.86rem;
+      color:var(--tenue);
+      margin-top:.1rem;
+    }
+    .marchio:hover b { color:var(--rosso); }
     .apri-menu {
       width:44px; height:38px;
       display:inline-flex; flex-direction:column; justify-content:center; gap:6px;
@@ -236,56 +259,38 @@
     }
     h1 em { font-style:italic; color:var(--rosso); }
 
-    .claim {
-      margin-top:.85rem;
-      font-family:'Instrument Serif', serif;
+    /* i tre momenti, sottolineati a pennarello */
+    .momento {
+      position:relative;
       font-style:italic;
-      font-size:clamp(1.2rem, 2.3vw, 1.7rem);
-      color:var(--grigio);
-      line-height:1.3;
+      white-space:nowrap;
+      background-repeat:no-repeat;
+      background-position:0 88%;
+      background-size:100% .28em;
     }
-
-    .payoff {
-      margin-top:2.1rem;
-      max-width:46ch;
-    }
-    .payoff-testa {
-      font-family:'Instrument Serif', serif;
-      font-size:clamp(1.45rem, 2.5vw, 2.05rem);
-      line-height:1.25;
-      color:var(--inchiostro);
-      margin-bottom:1rem;
-    }
-    .payoff-testa em { font-style:italic; color:var(--rosso); }
-
-    .payoff-tre {
-      list-style:none;
-      display:flex; flex-wrap:wrap;
-      border-top:1px solid var(--bordo);
-      border-bottom:1px solid var(--bordo);
-    }
-    .payoff-tre li {
-      display:flex; align-items:center; gap:.55rem;
-      padding:.8rem 1.2rem .8rem 0;
-      font-size:.86rem; font-weight:300;
-      color:var(--grigio);
-    }
-    .payoff-tre li + li {
-      border-left:1px solid var(--bordo);
-      padding-left:1.2rem;
-    }
-    .payoff-tre b {
-      display:inline-flex;
-      width:19px; height:19px;
-      color:var(--rosso);
-      flex-shrink:0;
-    }
-    .payoff-tre b svg { width:100%; height:100%; }
+    .m-sogni   { background-image:linear-gradient(to right, rgba(217,139,43,.42), rgba(217,139,43,.42)); }
+    .m-vivi    { background-image:linear-gradient(to right, rgba(196,80,47,.4), rgba(196,80,47,.4)); }
+    .m-ricordi { background-image:linear-gradient(to right, rgba(23,162,162,.4), rgba(23,162,162,.4)); }
 
     /* ════════ bacheca ════════ */
     .bacheca {
       max-width:1280px; margin:0 auto;
       padding:1rem 5vw 4rem;
+    }
+
+    .etichetta-sezione {
+      display:flex; align-items:center; gap:1.1rem;
+      margin-bottom:1.6rem;
+      font-size:.74rem; font-weight:500;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:var(--grigio);
+    }
+    .etichetta-sezione::before {
+      content:''; width:26px; height:2px;
+      background:var(--rosso); flex-shrink:0;
+    }
+    .etichetta-sezione::after {
+      content:''; flex:1; height:1px; background:var(--bordo);
     }
 
     .griglia {
@@ -508,19 +513,9 @@
       .dati { gap:1.8rem; }
       .dato b { font-size:1.9rem; }
       /* la bacheca si sfoglia di lato invece di scorrere all'infinito */
-      /* i tre momenti in colonna, uno per riga */
-      .payoff { max-width:none; }
-      .payoff-tre { flex-direction:column; }
-      .payoff-tre li {
-        width:100%;
-        padding:.7rem 0;
-        font-size:.9rem;
-      }
-      .payoff-tre li + li {
-        border-left:none;
-        border-top:1px solid var(--bordo);
-        padding-left:0;
-      }
+      .marchio b { font-size:1.18rem; }
+      .marchio i { display:none; }
+      .marchio svg { width:26px; height:26px; }
 
       .griglia {
         display:flex;
@@ -631,6 +626,16 @@
 
   <!-- ══ barra ══ -->
   <div class="barra">
+    <a class="marchio" href="index.html">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M4 9.2a3.2 3.2 0 0 1 3.2-3.2h17.6A3.2 3.2 0 0 1 28 9.2v10.4a3.2 3.2 0 0 1-3.2 3.2H13.6L7.4 27.4v-4.6h-.2A3.2 3.2 0 0 1 4 19.6Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+        <path d="M16 8.6l1.85 4.55L22.4 15l-4.55 1.85L16 21.4l-1.85-4.55L9.6 15l4.55-1.85Z" fill="currentColor"/>
+      </svg>
+      <span>
+        <b>Poi ti racconto...</b>
+        <i>...il mondo visto da vicino</i>
+      </span>
+    </a>
     <button type="button" class="apri-menu" id="apriMenu" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu">
       <span></span><span></span><span></span>
     </button>
@@ -679,16 +684,7 @@
   <!-- ══ apertura ══ -->
   <header class="apertura">
     <div class="apertura-testo">
-    <h1>Poi ti <em>racconto</em>...</h1>
-    <p class="claim">...il mondo visto da vicino</p>
-    <div class="payoff">
-      <p class="payoff-testa">Ogni viaggio lo vivi <em>tre volte</em></p>
-      <ol class="payoff-tre">
-        <li><b><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16.2 12.6A6.6 6.6 0 1 1 8.4 4.2a5.3 5.3 0 0 0 7.8 8.4Z"/><path d="M5.2 3.4l.6 1.6 1.6.6-1.6.6-.6 1.6-.6-1.6L3 5.6l1.6-.6Z"/></svg></b>quando lo sogni</li>
-        <li><b><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17.6 3.2 2.8 9.4l5.1 1.9 1.9 5.1 6.2-14.8Z"/><path d="M7.9 11.3 17.6 3.2"/></svg></b>quando lo vivi</li>
-        <li><b><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.6 6.4h3l1.2-2h6.4l1.2 2h3v9.2H2.6Z"/><circle cx="10" cy="10.6" r="2.9"/></svg></b>quando lo ricordi</li>
-      </ol>
-    </div>
+    <h1>Ogni viaggio lo vivi <em>tre volte</em>: quando lo <span class="momento m-sogni">sogni</span>, quando lo <span class="momento m-vivi">vivi</span> e quando lo <span class="momento m-ricordi">ricordi</span></h1>
     </div>
 
     <div class="bussola" aria-hidden="true">
@@ -819,6 +815,8 @@
 
   <!-- ══ bacheca dei manifesti ══ -->
   <main class="bacheca" id="viaggi">
+
+    <p class="etichetta-sezione">Sfoglia i diari di viaggio</p>
 
     <div class="griglia">
 
