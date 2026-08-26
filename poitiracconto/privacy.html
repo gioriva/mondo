@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="color-scheme" content="light" />
+  <title>Privacy &amp; Cookie | Poi ti racconto</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fdf8ee'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23c4502f' stroke-width='2.8'/%3E%3Cellipse cx='32' cy='32' rx='8.5' ry='19' fill='none' stroke='%23c4502f' stroke-width='2.2'/%3E%3Cpath d='M13 32h38M16.5 22h31M16.5 42h31' stroke='%23c4502f' stroke-width='2.2' fill='none'/%3E%3C/svg%3E">
+
+  <meta property="og:title" content="Privacy &amp; Cookie | Poi ti racconto" />
+  <meta property="og:description" content="Quali dati vengono raccolti su questo sito e perché" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.gioriva.it/poitiracconto/privacy.html" />
+  <meta property="og:image" content="https://www.gioriva.it/poitiracconto/og-poitiracconto.png" />
+  <meta name="description" content="Quali dati vengono raccolti su questo sito e perché" />
+
+  <!-- Google Analytics (GA4) con Consent Mode v2 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-1ZCCJ6QBR4', { 'anonymize_ip': true });
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      color-scheme: light;
+      --carta:   #fdf8ee;
+      --carta-2: #f6efe1;
+      --inchiostro: #23201c;
+      --grigio:  #6f675c;
+      --tenue:   #a89c8b;
+      --bordo:   #e3d9c6;
+      --rosso:   #c4502f;
+      --ambra:   #d98b2b;
+      --teal:    #17a2a2;
+    }
+
+    html { scroll-behavior:smooth; background:var(--carta); }
+
+    body {
+      background:transparent;
+      color:var(--inchiostro);
+      font-family:'DM Sans', sans-serif;
+      line-height:1.68;
+      overflow-x:hidden;
+      min-height:100vh;
+      display:flex; flex-direction:column;
+    }
+    a { color:inherit; }
+
+    .sfondo {
+      position:fixed; inset:0; z-index:-2;
+      background-color:var(--carta);
+      background-image:
+        radial-gradient(ellipse 120% 70% at 50% -10%, #fff6e4 0%, rgba(253,248,238,0) 62%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+    .portolano {
+      position:fixed; inset:0; z-index:-1;
+      pointer-events:none;
+      -webkit-mask-image:radial-gradient(ellipse 85% 75% at 50% 30%, #000 0%, rgba(0,0,0,.45) 62%, rgba(0,0,0,.22) 100%);
+      mask-image:radial-gradient(ellipse 85% 75% at 50% 30%, #000 0%, rgba(0,0,0,.45) 62%, rgba(0,0,0,.22) 100%);
+    }
+    .portolano svg { width:100%; height:100%; }
+    .alone {
+      position:fixed; z-index:-2; border-radius:50%;
+      pointer-events:none; filter:blur(10px); will-change:transform;
+    }
+    .alone-a {
+      width:44vw; height:44vw; left:-14vw; top:44vh;
+      background:radial-gradient(circle, rgba(23,162,162,.1) 0%, rgba(23,162,162,0) 68%);
+      animation:deriva 38s ease-in-out infinite;
+    }
+    .alone-b {
+      width:38vw; height:38vw; right:-10vw; top:-8vh;
+      background:radial-gradient(circle, rgba(224,102,47,.1) 0%, rgba(224,102,47,0) 68%);
+      animation:deriva2 46s ease-in-out infinite;
+    }
+    @keyframes deriva  { 0%,100% { transform:translate3d(0,0,0) } 50% { transform:translate3d(3vw,-2vh,0) } }
+    @keyframes deriva2 { 0%,100% { transform:translate3d(0,0,0) } 50% { transform:translate3d(-2.5vw,2.5vh,0) } }
+
+/* ── barra e menu ── */
+    .barra {
+      max-width:1280px; width:100%; margin:0 auto;
+      padding:1.4rem 5vw;
+      display:flex; align-items:center; justify-content:flex-end;
+    }
+    .apri-menu {
+      width:44px; height:38px;
+      display:inline-flex; flex-direction:column; justify-content:center; gap:6px;
+      background:none; border:none; padding:0 4px; cursor:pointer;
+    }
+    .apri-menu span {
+      display:block; height:2px; border-radius:2px;
+      background:var(--inchiostro);
+      transition:background .25s, transform .3s, width .3s;
+    }
+    .apri-menu span:nth-child(1) { width:30px; }
+    .apri-menu span:nth-child(2) { width:22px; }
+    .apri-menu span:nth-child(3) { width:26px; }
+    .apri-menu:hover span { background:var(--rosso); width:30px; }
+
+    .velo {
+      position:fixed; inset:0; z-index:9000;
+      background:rgba(35,32,28,.32);
+      opacity:0; transition:opacity .35s;
+    }
+    .velo.visibile { opacity:1; }
+
+    .menu {
+      position:fixed; top:0; right:0; bottom:0; z-index:9100;
+      width:min(360px, 86vw);
+      background:#fffdf8;
+      border-left:1px solid var(--bordo);
+      box-shadow:-16px 0 44px rgba(35,32,28,.14);
+      padding:4.4rem 1.6rem 2rem;
+      transform:translateX(102%);
+      transition:transform .42s cubic-bezier(.2,.8,.2,1);
+      display:flex; flex-direction:column; gap:.4rem;
+    }
+    .menu.aperto { transform:none; }
+    .chiudi-menu {
+      position:absolute; top:1.3rem; right:1.4rem;
+      width:38px; height:38px; border-radius:50%;
+      border:1px solid var(--bordo); background:transparent;
+      color:var(--grigio); cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      transition:color .25s, border-color .25s, transform .25s;
+    }
+    .chiudi-menu:hover { color:var(--rosso); border-color:var(--rosso); transform:rotate(90deg); }
+
+    .menu-voce {
+      display:flex; align-items:center; gap:1rem;
+      padding:1rem .9rem;
+      border-radius:4px;
+      text-decoration:none;
+      color:var(--inchiostro);
+      transition:background .25s, color .25s;
+    }
+    .menu-voce svg { color:var(--rosso); flex-shrink:0; }
+    .menu-voce span { display:flex; flex-direction:column; }
+    .menu-voce b {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.32rem; line-height:1.2;
+    }
+    .menu-voce i {
+      font-style:normal;
+      font-size:.7rem; letter-spacing:.1em;
+      color:var(--tenue);
+      margin-top:.1rem;
+    }
+    .menu-voce:hover { background:var(--carta-2); }
+    .menu-voce:hover b { color:var(--rosso); }
+    .menu-voce.attiva { background:var(--carta-2); }
+    .menu-voce.attiva b { color:var(--rosso); }
+    .menu-voce + .menu-voce { border-top:1px solid var(--bordo); border-radius:0; }
+
+    .indietro {
+      display:inline-flex; align-items:center; gap:.5rem;
+      max-width:1280px; width:100%; margin:0 auto;
+      padding:0 5vw;
+      font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--grigio); text-decoration:none;
+      transition:color .25s;
+    }
+    .indietro::before { content:'←'; color:var(--rosso); font-size:.95rem; }
+    .indietro:hover { color:var(--rosso); }
+
+    /* testata */
+    .foglio {
+      width:100%; max-width:780px; margin:0 auto;
+      padding:2.2rem 5vw 4rem;
+      flex:1;
+    }
+
+    .etichetta {
+      display:inline-block;
+      font-size:.66rem; font-weight:500;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:var(--rosso);
+      border:1px solid rgba(196,80,47,.35);
+      border-radius:2px;
+      padding:.3rem .6rem;
+      margin-bottom:1.1rem;
+    }
+
+    h1 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400;
+      font-size:clamp(2.4rem, 5.4vw, 3.8rem);
+      line-height:1.03; letter-spacing:-.015em;
+    }
+    h1 em { font-style:italic; color:var(--rosso); }
+
+    .aggiornamento {
+      margin-top:.9rem;
+      font-size:.74rem; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--tenue);
+    }
+
+    .cappello {
+      margin:1.6rem 0 2.6rem;
+      padding-left:1.3rem;
+      position:relative;
+      font-size:1.06rem; font-weight:300;
+      color:var(--grigio);
+    }
+    .cappello::before {
+      content:''; position:absolute; left:0; top:.3rem; bottom:.3rem;
+      width:2px; border-radius:2px;
+      background:linear-gradient(to bottom, var(--ambra), var(--rosso) 50%, var(--teal));
+    }
+
+    /* sezioni */
+    .sezione {
+      background:#fffdf8;
+      border:1px solid var(--bordo);
+      border-radius:4px;
+      padding:1.7rem 1.8rem;
+      margin-bottom:1.2rem;
+    }
+    .sezione h2 {
+      display:flex; align-items:baseline; gap:.8rem;
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.5rem;
+      line-height:1.2;
+      margin-bottom:.7rem;
+    }
+    .sezione h2 b {
+      font-family:'DM Sans', sans-serif;
+      font-size:.68rem; font-weight:500;
+      letter-spacing:.16em;
+      color:var(--rosso);
+      border:1px solid rgba(196,80,47,.3);
+      border-radius:50%;
+      width:30px; height:30px;
+      display:inline-flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .sezione p { font-size:.95rem; font-weight:300; color:var(--grigio); }
+    .sezione p + p { margin-top:.7rem; }
+    .sezione strong { font-weight:500; color:var(--inchiostro); }
+    .sezione a { color:var(--rosso); text-decoration:none; border-bottom:1px solid rgba(196,80,47,.3); }
+    .sezione a:hover { border-color:var(--rosso); }
+
+    .elenco { list-style:none; margin:.9rem 0 0; }
+    .elenco li {
+      position:relative;
+      padding-left:1.2rem;
+      font-size:.95rem; font-weight:300; color:var(--grigio);
+      margin-bottom:.4rem;
+    }
+    .elenco li::before {
+      content:''; position:absolute; left:0; top:.65em;
+      width:6px; height:6px; border-radius:50%;
+      background:var(--ambra);
+    }
+
+    table {
+      width:100%; border-collapse:collapse;
+      margin-top:1rem;
+      font-size:.88rem;
+    }
+    th, td {
+      text-align:left; padding:.7rem .8rem;
+      border-bottom:1px solid var(--bordo);
+      font-weight:300; color:var(--grigio);
+      vertical-align:top;
+    }
+    th {
+      font-family:'DM Sans', sans-serif;
+      font-size:.64rem; font-weight:500;
+      letter-spacing:.16em; text-transform:uppercase;
+      color:var(--tenue);
+      border-bottom:1px solid var(--bordo);
+    }
+    td strong { color:var(--inchiostro); font-weight:500; }
+
+    .gestisci {
+      display:inline-flex; align-items:center; gap:.6rem;
+      margin-top:1.1rem;
+      font-family:'DM Sans', sans-serif;
+      font-weight:500; font-size:.72rem;
+      letter-spacing:.16em; text-transform:uppercase;
+      padding:.75rem 1.2rem;
+      border:1px solid var(--rosso); border-radius:3px;
+      background:var(--rosso); color:#fff;
+      cursor:pointer;
+      transition:background .3s, transform .3s;
+    }
+    .gestisci:hover { background:#a83f22; transform:translateY(-2px); }
+
+    /* footer */
+    footer {
+      max-width:1280px; width:100%; margin:0 auto;
+      padding:2rem 5vw 2.8rem;
+      display:flex; align-items:center; justify-content:center;
+      flex-wrap:wrap; gap:2.4rem;
+      border-top:1px solid var(--bordo);
+    }
+    .voce {
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--grigio);
+      background:none; border:none; padding:0; cursor:pointer;
+      text-decoration:none; font-family:inherit;
+      transition:color .25s;
+    }
+    .voce:hover { color:var(--rosso); }
+    .voce svg { flex-shrink:0; }
+    .voce--marchio { color:var(--rosso); }
+    .voce--attiva { color:var(--rosso); cursor:default; }
+
+    @media (max-width: 640px) {
+      .sezione { padding:1.4rem 1.2rem; }
+      .sezione h2 { font-size:1.3rem; gap:.6rem; }
+      table { font-size:.82rem; }
+      th, td { padding:.6rem .5rem; }
+      footer { gap:1.6rem 2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration:.01ms !important; animation:none !important; }
+      html { scroll-behavior:auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sfondo" aria-hidden="true"></div>
+  <div class="alone alone-a" aria-hidden="true"></div>
+  <div class="alone alone-b" aria-hidden="true"></div>
+  <div class="portolano" aria-hidden="true">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M0 0 L0 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M100 0 L100 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M200 0 L200 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M300 0 L300 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M400 0 L400 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M500 0 L500 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M600 0 L600 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M700 0 L700 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M800 0 L800 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M900 0 L900 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M1000 0 L1000 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M1100 0 L1100 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M1200 0 L1200 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 0 L1200 0" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 100 L1200 100" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 200 L1200 200" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 300 L1200 300" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 400 L1200 400" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 500 L1200 500" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 600 L1200 600" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 700 L1200 700" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 800 L1200 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M232 214 L232 -1686" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L959 -1541" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L1576 -1130" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L1987 -513" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L2132 214" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L1987 941" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L1576 1558" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L959 1969" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L232 2114" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L-495 1969" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L-1112 1558" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L-1523 941" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L-1668 214" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L-1523 -513" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L-1112 -1130" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L-495 -1541" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L968 -1304" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L1695 -1159" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L2312 -748" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L2723 -131" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L2868 596" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L2723 1323" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L2312 1940" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L1695 2351" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L968 2496" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L241 2351" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L-376 1940" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L-787 1323" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L-932 596" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L-787 -131" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L-376 -748" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L241 -1159" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <circle cx="232" cy="214" r="46" stroke="#23201c" stroke-width="1" opacity=".1" fill="none"/>
+      <circle cx="968" cy="596" r="46" stroke="#23201c" stroke-width="1" opacity=".1" fill="none"/>
+      <circle cx="232" cy="214" r="30" stroke="#23201c" stroke-width="1" opacity=".08" fill="none"/>
+      <circle cx="968" cy="596" r="30" stroke="#23201c" stroke-width="1" opacity=".08" fill="none"/>
+      <path d="M232 190l4.5 12 12 4.5-12 4.5-4.5 12-4.5-12-12-4.5 12-4.5z" fill="#c4502f" opacity=".16"/>
+      <path d="M968 574l4 10.5 10.5 4-10.5 4-4 10.5-4-10.5-10.5-4 10.5-4z" fill="#17a2a2" opacity=".14"/>
+    </svg>
+  </div>
+
+  <div class="barra">
+    <button type="button" class="apri-menu" id="apriMenu" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="velo" id="velo" hidden></div>
+  <nav class="menu" id="menu" aria-label="Menu principale" aria-hidden="true">
+    <button type="button" class="chiudi-menu" id="chiudiMenu" aria-label="Chiudi il menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 3l12 12M15 3L3 15"/></svg>
+    </button>
+
+    <a class="menu-voce" href="https://www.gioriva.it/">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.5 4.6c6.4-1.6 12.6-1.6 19 0"/><path d="M3.6 7.4h16.8"/>
+        <path d="M6.2 7.4V21M17.8 7.4V21"/><path d="M5.4 11h13.2"/>
+      </svg>
+      <span><b>Gio Riva</b></span>
+    </a>
+
+    <a class="menu-voce" href="index.html">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/>
+        <path d="M3 12h18M4.6 7h14.8M4.6 17h14.8"/>
+      </svg>
+      <span><b>Poi ti racconto</b><i>Tutti i viaggi, uno per uno</i></span>
+    </a>
+
+    <a class="menu-voce" href="galleria.html">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+        <rect x="2.5" y="4.5" width="19" height="15" rx="2"/>
+        <circle cx="8.2" cy="9.6" r="1.7"/>
+        <path d="M2.5 16.2l5-4.4 4.4 3.9 3.4-2.9 6.2 5.2"/>
+      </svg>
+      <span><b>Galleria</b><i>Gli album di tutti i viaggi</i></span>
+    </a>
+
+    <a class="menu-voce" href="contatti.html">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+        <rect x="2.5" y="5" width="19" height="14" rx="2"/>
+        <path d="M2.5 6.2L12 13l9.5-6.8"/>
+      </svg>
+      <span><b>Contatti</b><i>Scrivimi due righe</i></span>
+    </a>
+  </nav>
+
+  <a class="indietro" href="index.html">Torna ai viaggi</a>
+
+  <main class="foglio">
+    <span class="etichetta">Informativa</span>
+    <h1>Privacy &amp; <em>Cookie</em></h1>
+    <p class="aggiornamento">Ultimo aggiornamento · giugno 2026</p>
+
+    <p class="cappello">Poi ti racconto è il sito personale dove raccolgo i diari dei miei viaggi. Tengo alla tua privacy tanto quanto ai miei ricordi: qui trovi spiegato, in modo semplice, quali dati vengono raccolti e perché.</p>
+
+    <section class="sezione">
+      <h2><b>01</b>Chi è il titolare</h2>
+      <p>Il titolare del trattamento dei dati è <strong>Giorgio Riva</strong>, gestore di Poi ti racconto, sito personale e non commerciale. Per qualsiasi richiesta relativa ai tuoi dati puoi scrivere tramite il modulo nella pagina <a href="contatti.html">contatti</a> o i recapiti presenti sul sito principale <a href="https://www.gioriva.it/">gioriva.it</a>.</p>
+    </section>
+
+    <section class="sezione">
+      <h2><b>02</b>Quali dati raccolgo</h2>
+      <p>Il sito <strong>non richiede registrazione</strong> e non raccoglie dati come nome, email o numero di telefono, salvo quelli che scegli di inviarmi tu compilando il modulo dei contatti. Gli unici dati trattati durante la navigazione sono quelli statistici e anonimi raccolti, previo tuo consenso, da Google Analytics:</p>
+      <ul class="elenco">
+        <li>Pagine visitate e tempo di permanenza</li>
+        <li>Tipo di dispositivo, browser e sistema operativo</li>
+        <li>Provenienza geografica approssimativa (a livello di città o regione)</li>
+        <li>Come sei arrivato al sito (link diretto, social, motore di ricerca)</li>
+      </ul>
+      <p>L'indirizzo IP viene <strong>anonimizzato</strong>: non è possibile risalire alla tua identità.</p>
+    </section>
+
+    <section class="sezione">
+      <h2><b>03</b>Il modulo dei contatti</h2>
+      <p>Se mi scrivi tramite la pagina <a href="contatti.html">contatti</a>, i dati che inserisci (nome, cognome, email e messaggio) vengono usati <strong>solo per risponderti</strong>. L'invio è gestito dal servizio Formspree, che inoltra il messaggio alla mia casella di posta. Non finiscono in nessuna lista, non vengono usati per invii promozionali e non sono ceduti a terzi.</p>
+    </section>
+
+    <section class="sezione">
+      <h2><b>04</b>Cosa sono i cookie</h2>
+      <p>I cookie sono piccoli file di testo che un sito salva sul tuo dispositivo. Servono a far funzionare le pagine o a raccogliere statistiche. Su questo sito si distinguono in due categorie.</p>
+      <table>
+        <thead>
+          <tr><th>Categoria</th><th>Finalità</th><th>Consenso</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tecnici</strong></td>
+            <td>Memorizzano la tua scelta sui cookie, così il banner non ricompare a ogni visita.</td>
+            <td>Non richiesto</td>
+          </tr>
+          <tr>
+            <td><strong>Statistici</strong><br>(Google Analytics)</td>
+            <td>Raccolgono dati anonimi e aggregati su come viene usato il sito.</td>
+            <td>Richiesto</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>I cookie statistici di Google Analytics restano attivi fino a un massimo di <strong>14 mesi</strong>. Quelli tecnici relativi alla tua scelta vengono conservati sul tuo dispositivo finché non li cancelli.</p>
+    </section>
+
+    <section class="sezione">
+      <h2><b>05</b>La tua scelta, sempre revocabile</h2>
+      <p>Alla prima visita ti viene chiesto se attivare i cookie statistici. Finché non acconsenti, Google Analytics resta disattivato e non scrive alcun cookie (Consent Mode). Puoi cambiare idea in qualsiasi momento:</p>
+      <button type="button" class="gestisci" id="manageBtn">Gestisci le mie preferenze</button>
+      <p>In alternativa, puoi sempre cancellare i cookie dalle impostazioni del tuo browser o navigare in modalità anonima.</p>
+    </section>
+
+    <section class="sezione">
+      <h2><b>06</b>A chi vengono comunicati</h2>
+      <p>I dati statistici sono trattati da <strong>Google Ireland Ltd.</strong> in qualità di responsabile, tramite il servizio Google Analytics 4. Google può trasferire dati anche fuori dall'Unione Europea, nel rispetto delle clausole contrattuali standard approvate dalla Commissione Europea. Per dettagli puoi consultare la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy di Google</a>. I messaggi inviati dal modulo sono trattati da <strong>Formspree Inc.</strong> per la sola consegna della posta. Nessun dato viene venduto o ceduto a terzi per finalità commerciali.</p>
+    </section>
+
+    <section class="sezione">
+      <h2><b>07</b>I tuoi diritti</h2>
+      <p>In base al Regolamento UE 2016/679 (GDPR) hai diritto di accedere, rettificare, cancellare o limitare il trattamento dei tuoi dati, e di opporti allo stesso. Trattandosi in gran parte di dati anonimi e aggregati, in molti casi non sarà possibile ricondurli a te; puoi comunque revocare il consenso ai cookie statistici in qualsiasi momento. Se ritieni che i tuoi diritti siano stati violati, puoi rivolgerti al <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>.</p>
+    </section>
+
+    <section class="sezione">
+      <h2><b>08</b>Modifiche</h2>
+      <p>Questa informativa può essere aggiornata nel tempo, ad esempio se cambiano gli strumenti utilizzati. La data in alto indica sempre l'ultima revisione.</p>
+    </section>
+  </main>
+
+  <footer>
+    <a href="https://www.gioriva.it/" class="voce voce--marchio">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.5 4.6c6.4-1.6 12.6-1.6 19 0"/>
+        <path d="M3.6 7.4h16.8"/>
+        <path d="M6.2 7.4V21M17.8 7.4V21"/>
+        <path d="M5.4 11h13.2"/>
+      </svg>
+      Gio Riva
+    </a>
+    <span class="voce voce--attiva">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round">
+        <path d="M8 1.6 L13.4 3.6 V8 c0 3.4-2.4 5.4-5.4 6.2 C5 13.4 2.6 11.4 2.6 8 V3.6 Z"/>
+        <circle cx="6.4" cy="6.2" r=".55" fill="currentColor" stroke="none"/>
+        <circle cx="9.6" cy="7.4" r=".55" fill="currentColor" stroke="none"/>
+        <circle cx="7.2" cy="9.6" r=".55" fill="currentColor" stroke="none"/>
+      </svg>
+      Privacy &amp; Cookie
+    </span>
+    <a href="contatti.html" class="voce">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round">
+        <rect x="1.6" y="3.2" width="12.8" height="9.6"/>
+        <path d="M1.6 4 L8 8.8 L14.4 4"/>
+      </svg>
+      Contatti
+    </a>
+  </footer>
+
+  <script>
+    (function(){
+      'use strict';
+      var KEY = 'gr_cookie_consent';
+      function riparti(){
+        try { localStorage.removeItem(KEY); } catch(e){}
+        window.location.href = 'index.html';
+      }
+      var btn = document.getElementById('manageBtn');
+      if (btn) btn.addEventListener('click', riparti);
+      var piede = document.getElementById('cookieFooter');
+      if (piede) piede.addEventListener('click', riparti);
+    })();
+
+    /* menu */
+    (function(){
+      'use strict';
+      var apri = document.getElementById('apriMenu'),
+          chiudi = document.getElementById('chiudiMenu'),
+          menu = document.getElementById('menu'),
+          velo = document.getElementById('velo');
+      if (!apri || !menu) return;
+
+      function stato(aperto){
+        menu.classList.toggle('aperto', aperto);
+        menu.setAttribute('aria-hidden', aperto ? 'false' : 'true');
+        apri.setAttribute('aria-expanded', aperto ? 'true' : 'false');
+        if (aperto){
+          velo.hidden = false;
+          requestAnimationFrame(function(){ velo.classList.add('visibile'); });
+          document.body.style.overflow = 'hidden';
+        } else {
+          velo.classList.remove('visibile');
+          setTimeout(function(){ velo.hidden = true; }, 350);
+          document.body.style.overflow = '';
+        }
+      }
+      apri.addEventListener('click', function(){ stato(true); });
+      chiudi.addEventListener('click', function(){ stato(false); });
+      velo.addEventListener('click', function(){ stato(false); });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') stato(false);
+      });
+    })();
+  </script>
+
+</body>
+</html>

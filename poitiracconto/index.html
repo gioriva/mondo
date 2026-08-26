@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="color-scheme" content="light" />
+  <title>Poi ti racconto | Diari di viaggio</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fdf8ee'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23c4502f' stroke-width='2.8'/%3E%3Cellipse cx='32' cy='32' rx='8.5' ry='19' fill='none' stroke='%23c4502f' stroke-width='2.2'/%3E%3Cpath d='M13 32h38M16.5 22h31M16.5 42h31' stroke='%23c4502f' stroke-width='2.2' fill='none'/%3E%3C/svg%3E">
+
+  <!-- Social sharing meta tags -->
+  <meta property="og:title" content="Poi ti racconto" />
+  <meta property="og:description" content="Ogni viaggio lo vivi tre volte: quando lo sogni, quando lo vivi e quando lo ricordi" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.gioriva.it/poitiracconto/" />
+  <meta property="og:image" content="https://www.gioriva.it/poitiracconto/og-poitiracconto.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Poi ti racconto" />
+  <meta name="twitter:description" content="Ogni viaggio lo vivi tre volte: quando lo sogni, quando lo vivi e quando lo ricordi" />
+  <meta name="twitter:image" content="https://www.gioriva.it/poitiracconto/og-poitiracconto.png" />
+  <meta name="description" content="Ogni viaggio lo vivi tre volte: quando lo sogni, quando lo vivi e quando lo ricordi" />
+
+  <!-- Google Analytics (GA4) con Consent Mode v2 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-1ZCCJ6QBR4', { 'anonymize_ip': true });
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      color-scheme: light;
+      --carta:   #fdf8ee;
+      --carta-2: #f6efe1;
+      --inchiostro: #23201c;
+      --grigio:  #6f675c;
+      --tenue:   #a89c8b;
+      --bordo:   #e3d9c6;
+      --rosso:   #c4502f;
+
+      --c-singapore: #d98b2b;
+      --c-giappone18:#c8493f;
+      --c-california:#3a7bb8;
+      --c-hkbali:    #2e9e6b;
+      --c-messico:   #e0662f;
+      --c-giappone26:#6b5fb5;
+      --c-patagonia: #17a2a2;
+    }
+
+    html { scroll-behavior:smooth; background:var(--carta); }
+
+    body {
+      background:transparent;
+      color:var(--inchiostro);
+      font-family:'DM Sans', sans-serif;
+      overflow-x:hidden;
+      line-height:1.6;
+    }
+    a { color:inherit; }
+
+    /* carta con grana e reticolo tenue */
+    .sfondo {
+      position:fixed; inset:0; z-index:-2;
+      overflow:hidden;
+      background-color:var(--carta);
+      background-image:
+        radial-gradient(ellipse 120% 70% at 50% -10%, #fff6e4 0%, rgba(253,248,238,0) 62%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+
+    /* carta portolana: reticolo e linee di rombo */
+    .portolano {
+      position:fixed; inset:0; z-index:-1;
+      pointer-events:none;
+      -webkit-mask-image:radial-gradient(ellipse 85% 75% at 50% 32%, #000 0%, rgba(0,0,0,.55) 62%, rgba(0,0,0,.28) 100%);
+      mask-image:radial-gradient(ellipse 85% 75% at 50% 32%, #000 0%, rgba(0,0,0,.55) 62%, rgba(0,0,0,.28) 100%);
+    }
+    .portolano svg { width:100%; height:100%; }
+
+    /* aloni di colore che derivano piano */
+    .alone {
+      position:fixed; z-index:-2;
+      border-radius:50%;
+      pointer-events:none;
+      filter:blur(10px);
+      will-change:transform;
+    }
+    .alone-a {
+      width:46vw; height:46vw; left:-12vw; top:34vh;
+      background:radial-gradient(circle, rgba(23,162,162,.13) 0%, rgba(23,162,162,0) 68%);
+      animation:deriva 34s ease-in-out infinite;
+    }
+    .alone-b {
+      width:40vw; height:40vw; right:-8vw; top:-8vh;
+      background:radial-gradient(circle, rgba(224,102,47,.12) 0%, rgba(224,102,47,0) 68%);
+      animation:deriva2 42s ease-in-out infinite;
+    }
+    .alone-c {
+      width:38vw; height:38vw; left:42vw; top:112vh;
+      background:radial-gradient(circle, rgba(107,95,181,.1) 0%, rgba(107,95,181,0) 68%);
+      animation:deriva 50s ease-in-out infinite 3s;
+    }
+
+/* ── barra e menu ── */
+    .barra {
+      max-width:1280px; width:100%; margin:0 auto;
+      padding:1.4rem 5vw;
+      display:flex; align-items:center; justify-content:flex-end;
+    }
+    .apri-menu {
+      width:44px; height:38px;
+      display:inline-flex; flex-direction:column; justify-content:center; gap:6px;
+      background:none; border:none; padding:0 4px; cursor:pointer;
+    }
+    .apri-menu span {
+      display:block; height:2px; border-radius:2px;
+      background:var(--inchiostro);
+      transition:background .25s, transform .3s, width .3s;
+    }
+    .apri-menu span:nth-child(1) { width:30px; }
+    .apri-menu span:nth-child(2) { width:22px; }
+    .apri-menu span:nth-child(3) { width:26px; }
+    .apri-menu:hover span { background:var(--rosso); width:30px; }
+
+    .velo {
+      position:fixed; inset:0; z-index:9000;
+      background:rgba(35,32,28,.32);
+      opacity:0; transition:opacity .35s;
+    }
+    .velo.visibile { opacity:1; }
+
+    .menu {
+      position:fixed; top:0; right:0; bottom:0; z-index:9100;
+      width:min(360px, 86vw);
+      background:#fffdf8;
+      border-left:1px solid var(--bordo);
+      box-shadow:-16px 0 44px rgba(35,32,28,.14);
+      padding:4.4rem 1.6rem 2rem;
+      transform:translateX(102%);
+      transition:transform .42s cubic-bezier(.2,.8,.2,1);
+      display:flex; flex-direction:column; gap:.4rem;
+    }
+    .menu.aperto { transform:none; }
+    .chiudi-menu {
+      position:absolute; top:1.3rem; right:1.4rem;
+      width:38px; height:38px; border-radius:50%;
+      border:1px solid var(--bordo); background:transparent;
+      color:var(--grigio); cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      transition:color .25s, border-color .25s, transform .25s;
+    }
+    .chiudi-menu:hover { color:var(--rosso); border-color:var(--rosso); transform:rotate(90deg); }
+
+    .menu-voce {
+      display:flex; align-items:center; gap:1rem;
+      padding:1rem .9rem;
+      border-radius:4px;
+      text-decoration:none;
+      color:var(--inchiostro);
+      transition:background .25s, color .25s;
+    }
+    .menu-voce svg { color:var(--rosso); flex-shrink:0; }
+    .menu-voce span { display:flex; flex-direction:column; }
+    .menu-voce b {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.32rem; line-height:1.2;
+    }
+    .menu-voce i {
+      font-style:normal;
+      font-size:.7rem; letter-spacing:.1em;
+      color:var(--tenue);
+      margin-top:.1rem;
+    }
+    .menu-voce:hover { background:var(--carta-2); }
+    .menu-voce:hover b { color:var(--rosso); }
+    .menu-voce.attiva { background:var(--carta-2); }
+    .menu-voce.attiva b { color:var(--rosso); }
+    .menu-voce + .menu-voce { border-top:1px solid var(--bordo); border-radius:0; }
+
+    /* ════════ apertura ════════ */
+    .apertura {
+      max-width:1280px; margin:0 auto;
+      padding:2.5rem 5vw 3rem;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(0,.82fr);
+      align-items:center;
+      gap:2rem;
+    }
+    .apertura-testo { position:relative; z-index:1; }
+
+    /* ── rosa dei venti ── */
+    .bussola { position:relative; display:flex; justify-content:center; }
+    .bussola svg { width:min(100%, 460px); height:auto; overflow:visible; }
+    .corona { animation:gira 150s linear infinite; transform-box:fill-box; transform-origin:center; }
+    .anello { animation:gira 88s linear infinite reverse; transform-box:fill-box; transform-origin:center; }
+    .rosa   { animation:respira 9s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+    .ago    { animation:oscilla 14s cubic-bezier(.45,.05,.55,.95) infinite; transform-box:fill-box; transform-origin:center; }
+    .lampo   { animation:lampo 4.5s ease-in-out infinite; }
+    .lampo-b { animation:lampo 5.8s ease-in-out infinite .9s; }
+
+    @keyframes gira    { to { transform:rotate(360deg); } }
+    @keyframes respira { 0%,100% { transform:scale(1) } 50% { transform:scale(1.03) } }
+    @keyframes lampo   { 0%,100% { opacity:.25 } 50% { opacity:.9 } }
+    @keyframes oscilla {
+      0%   { transform:rotate(-13deg) }
+      18%  { transform:rotate(9deg) }
+      34%  { transform:rotate(-5deg) }
+      50%  { transform:rotate(16deg) }
+      68%  { transform:rotate(-9deg) }
+      84%  { transform:rotate(4deg) }
+      100% { transform:rotate(-13deg) }
+    }
+
+    h1 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400;
+      font-size:clamp(3rem, 8vw, 6.6rem);
+      line-height:1.0;
+      letter-spacing:-.015em;
+      max-width:16ch;
+    }
+    h1 em { font-style:italic; color:var(--rosso); }
+
+    .claim {
+      margin-top:.85rem;
+      font-family:'Instrument Serif', serif;
+      font-style:italic;
+      font-size:clamp(1.2rem, 2.3vw, 1.7rem);
+      color:var(--grigio);
+      line-height:1.3;
+    }
+
+    .payoff {
+      margin-top:2rem;
+      padding-left:1.5rem;
+      position:relative;
+      max-width:46ch;
+    }
+    .payoff::before {
+      content:'';
+      position:absolute; left:0; top:.35rem; bottom:.35rem;
+      width:2px;
+      background:linear-gradient(to bottom, var(--c-singapore), var(--rosso) 50%, var(--c-patagonia));
+      border-radius:2px;
+    }
+    .payoff-testa {
+      font-family:'Instrument Serif', serif;
+      font-size:clamp(1.45rem, 2.5vw, 2.05rem);
+      line-height:1.25;
+      color:var(--inchiostro);
+      margin-bottom:.85rem;
+    }
+    .payoff-testa em { font-style:italic; color:var(--rosso); }
+    .payoff-tre {
+      list-style:none;
+      display:flex; flex-wrap:wrap; gap:.5rem 1.5rem;
+    }
+    .payoff-tre li {
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-size:.82rem; font-weight:400;
+      letter-spacing:.08em;
+      color:var(--grigio);
+      text-transform:lowercase;
+    }
+    .payoff-tre span {
+      width:7px; height:7px; border-radius:50%;
+      flex-shrink:0;
+    }
+    .payoff-tre li:nth-child(1) span { background:var(--c-singapore); }
+    .payoff-tre li:nth-child(2) span { background:var(--rosso); }
+    .payoff-tre li:nth-child(3) span { background:var(--c-patagonia); }
+
+    /* ════════ bacheca ════════ */
+    .bacheca {
+      max-width:1280px; margin:0 auto;
+      padding:2rem 5vw 4rem;
+    }
+
+    .titolo-sezione {
+      display:flex; align-items:baseline; justify-content:space-between;
+      gap:1.5rem; flex-wrap:wrap;
+      margin-bottom:2.2rem;
+    }
+    .titolo-sezione h2 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:2rem;
+      letter-spacing:-.01em;
+    }
+    .titolo-sezione p {
+      font-size:.82rem; color:var(--tenue);
+      letter-spacing:.04em;
+    }
+
+    .griglia {
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:2.4rem 2rem;
+    }
+
+    /* ── il manifesto ── */
+    .manifesto {
+      --c: var(--rosso);
+      display:block; text-decoration:none;
+      transition:transform .4s cubic-bezier(.2,.8,.2,1);
+    }
+    .manifesto:hover, .manifesto:focus-visible { transform:translateY(-7px); }
+    .manifesto:focus-visible { outline:2px solid var(--c); outline-offset:8px; border-radius:4px; }
+
+    .poster {
+      position:relative;
+      border-radius:3px;
+      overflow:hidden;
+      background:var(--carta-2);
+      box-shadow:0 2px 4px rgba(35,32,28,.06), 0 14px 30px rgba(35,32,28,.09);
+      transition:box-shadow .4s;
+    }
+    .manifesto:hover .poster { box-shadow:0 4px 8px rgba(35,32,28,.08), 0 26px 50px rgba(35,32,28,.16); }
+
+    .scena {
+      position:relative;
+      aspect-ratio:1/1;
+      color:var(--c);
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--c) 20%, #fff) 0%, color-mix(in srgb, var(--c) 7%, #fff) 58%, #fffdf8 100%);
+      display:flex; align-items:flex-end; justify-content:center;
+      overflow:hidden;
+    }
+    .scena svg { width:100%; height:100%; display:block; }
+
+    /* bollino con l'anno del viaggio */
+    .anno {
+      position:absolute; top:1rem; left:1rem;
+      width:56px; height:56px;
+      border-radius:50%;
+      background:var(--c);
+      color:#fff;
+      font-family:'Instrument Serif', serif;
+      font-size:1.15rem; letter-spacing:.02em;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 12px rgba(35,32,28,.2);
+      z-index:2;
+      transition:transform .4s;
+    }
+    .anno::after {
+      content:''; position:absolute; inset:4px;
+      border:1px solid rgba(255,255,255,.55);
+      border-radius:50%;
+    }
+    .manifesto:hover .anno { transform:scale(1.08) rotate(-6deg); }
+
+    .attesa {
+      position:absolute; top:1.5rem; right:1rem;
+      background:rgba(255,255,255,.9);
+      color:var(--c);
+      font-size:.62rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase;
+      padding:.35rem .6rem;
+      border:1px dashed currentColor;
+      border-radius:2px;
+    }
+
+    /* piede del manifesto */
+    .piede {
+      padding:1rem 1.15rem 1.1rem;
+      background:#fffdf8;
+      border-top:3px solid var(--c);
+    }
+    .piede h3 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.62rem;
+      line-height:1.12;
+      letter-spacing:-.01em;
+      margin-bottom:.2rem;
+    }
+    .piede .frase {
+      font-family:'Instrument Serif', serif;
+      font-style:italic; font-size:1.02rem;
+      color:var(--grigio);
+      line-height:1.35;
+      margin-bottom:.75rem;
+    }
+    .piede .tappe {
+      font-size:.78rem; font-weight:300;
+      line-height:1.5;
+      color:var(--grigio);
+      padding-top:.7rem;
+      border-top:1px solid var(--bordo);
+      display:flex; align-items:flex-start; gap:.5rem;
+    }
+    .piede .tappe::before {
+      content:''; flex-shrink:0;
+      width:7px; height:7px; border-radius:50%;
+      background:var(--c);
+      margin-top:.5em;
+    }
+
+    /* indicatore del carosello (solo mobile) */
+    .sfoglia {
+      display:none;
+      align-items:center; justify-content:center;
+      gap:.55rem;
+      margin-top:.2rem;
+    }
+    .sfoglia button {
+      width:9px; height:9px; padding:0;
+      border-radius:50%;
+      border:1px solid var(--bordo);
+      background:#fffdf8;
+      cursor:pointer;
+      transition:transform .3s, background .3s, border-color .3s;
+    }
+    .sfoglia button.qui {
+      background:var(--c, var(--rosso));
+      border-color:var(--c, var(--rosso));
+      transform:scale(1.45);
+    }
+    .sfoglia-nota {
+      display:none;
+      text-align:center;
+      margin-top:.9rem;
+      font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+      color:var(--tenue);
+    }
+
+    /* comparsa progressiva */
+    .rivela { opacity:0; transform:translateY(22px); }
+    .rivela.dentro {
+      opacity:1; transform:none;
+      transition:opacity .65s ease, transform .65s cubic-bezier(.2,.8,.2,1);
+    }
+
+    /* ════════ footer ════════ */
+    footer {
+      max-width:1280px; margin:0 auto;
+      padding:2rem 5vw 2.8rem;
+      display:flex; align-items:center; justify-content:center;
+      flex-wrap:wrap; gap:2.4rem;
+      border-top:1px solid var(--bordo);
+    }
+    .voce {
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--grigio);
+      background:none; border:none; padding:0; cursor:pointer;
+      text-decoration:none; font-family:inherit;
+      transition:color .25s;
+    }
+    .voce:hover { color:var(--rosso); }
+    .voce svg { flex-shrink:0; }
+    .voce--marchio { color:var(--rosso); }
+
+    /* ════════ banner cookie ════════ */
+    .cookie {
+      position:fixed; left:5vw; right:5vw; bottom:1.6rem;
+      max-width:820px; margin:0 auto; z-index:9999;
+      background:#fffdf8;
+      border:1px solid var(--bordo);
+      border-radius:5px;
+      box-shadow:0 18px 46px rgba(35,32,28,.18);
+      padding:1.6rem 1.8rem;
+      display:grid; grid-template-columns:1fr auto;
+      gap:1.2rem 2rem; align-items:center;
+      transform:translateY(150%); opacity:0; visibility:hidden;
+      transition:transform .55s cubic-bezier(.2,.8,.2,1), opacity .55s, visibility 0s .55s;
+    }
+    .cookie.mostra {
+      transform:none; opacity:1; visibility:visible;
+      transition:transform .55s cubic-bezier(.2,.8,.2,1), opacity .55s, visibility 0s;
+    }
+    .cookie h3 {
+      font-family:'Instrument Serif', serif;
+      font-weight:400; font-size:1.35rem;
+      margin-bottom:.3rem;
+    }
+    .cookie p {
+      font-size:.84rem; font-weight:300; color:var(--grigio);
+      max-width:58ch;
+    }
+    .cookie a { color:var(--rosso); text-decoration:none; border-bottom:1px solid rgba(196,80,47,.35); }
+    .cookie a:hover { border-color:var(--rosso); }
+    .cookie-azioni { display:flex; flex-direction:column; gap:.55rem; min-width:158px; }
+    .bottone {
+      font-family:inherit;
+      font-size:.72rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase;
+      padding:.75rem 1.2rem;
+      border-radius:3px; cursor:pointer;
+      border:1px solid var(--rosso);
+      background:var(--rosso); color:#fff;
+      transition:background .25s, color .25s;
+      white-space:nowrap;
+    }
+    .bottone:hover { background:#a83f22; border-color:#a83f22; }
+    .bottone--vuoto { background:transparent; color:var(--grigio); border-color:var(--bordo); }
+    .bottone--vuoto:hover { background:transparent; color:var(--inchiostro); border-color:var(--grigio); }
+
+    /* ════════ adattamenti ════════ */
+    @media (max-width: 1040px) {
+      .griglia { grid-template-columns:repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 900px) {
+      .apertura { grid-template-columns:1fr; gap:1rem; }
+      .bussola { order:-1; }
+      .bussola svg { width:min(74%, 320px); }
+    }
+
+    @media (max-width: 660px) {
+      .barra { padding:1.2rem 5vw; }
+      .apertura { padding:1.5rem 5vw 2.2rem; }
+      .bussola svg { width:min(66%, 260px); }
+      .dati { gap:1.8rem; }
+      .dato b { font-size:1.9rem; }
+      /* la bacheca si sfoglia di lato invece di scorrere all'infinito */
+      .griglia {
+        display:flex;
+        gap:1rem;
+        max-width:none; margin:0 -5vw;
+        padding:.4rem 5vw 1.2rem;
+        overflow-x:auto;
+        scroll-snap-type:x mandatory;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+      }
+      .griglia::-webkit-scrollbar { display:none; }
+      .manifesto {
+        flex:0 0 78vw;
+        max-width:340px;
+        scroll-snap-align:center;
+      }
+      .rivela { opacity:1 !important; transform:none !important; }
+
+      .sfoglia, .sfoglia-nota { display:flex; }
+      .sfoglia-nota { display:block; }
+      .cookie { grid-template-columns:1fr; left:0; right:0; bottom:0; border-radius:0; padding:1.4rem 1.2rem; }
+      .cookie-azioni { flex-direction:row; min-width:0; }
+      .bottone { flex:1; padding:.75rem .5rem; }
+      footer { gap:1.6rem 2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .alone, .lampo, .lampo-b { animation:none !important; }
+      .rivela { opacity:1 !important; transform:none !important; }
+      .corona { animation-duration:260s !important; }
+      .anello { animation-duration:180s !important; }
+      .rosa, .ago { animation-duration:26s !important; }
+      html { scroll-behavior:auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sfondo" aria-hidden="true"></div>
+  <div class="alone alone-a" aria-hidden="true"></div>
+  <div class="alone alone-b" aria-hidden="true"></div>
+  <div class="alone alone-c" aria-hidden="true"></div>
+  <div class="portolano" aria-hidden="true">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M0 0 L0 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M100 0 L100 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M200 0 L200 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M300 0 L300 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M400 0 L400 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M500 0 L500 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M600 0 L600 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M700 0 L700 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M800 0 L800 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M900 0 L900 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M1000 0 L1000 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M1100 0 L1100 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M1200 0 L1200 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 0 L1200 0" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 100 L1200 100" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 200 L1200 200" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 300 L1200 300" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 400 L1200 400" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 500 L1200 500" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 600 L1200 600" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 700 L1200 700" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M0 800 L1200 800" stroke="#23201c" stroke-width="1" opacity=".035"/>
+      <path d="M232 214 L232 -1686" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L959 -1541" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L1576 -1130" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L1987 -513" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L2132 214" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L1987 941" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L1576 1558" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L959 1969" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L232 2114" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L-495 1969" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L-1112 1558" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L-1523 941" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L-1668 214" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M232 214 L-1523 -513" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M232 214 L-1112 -1130" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M232 214 L-495 -1541" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L968 -1304" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L1695 -1159" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L2312 -748" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L2723 -131" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L2868 596" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L2723 1323" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L2312 1940" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L1695 2351" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L968 2496" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L241 2351" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L-376 1940" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L-787 1323" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L-932 596" stroke="#23201c" stroke-width="1" opacity=".085"/>
+      <path d="M968 596 L-787 -131" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <path d="M968 596 L-376 -748" stroke="#23201c" stroke-width="1" opacity=".06"/>
+      <path d="M968 596 L241 -1159" stroke="#23201c" stroke-width="1" opacity=".04"/>
+      <circle cx="232" cy="214" r="46" stroke="#23201c" stroke-width="1" opacity=".1" fill="none"/>
+      <circle cx="968" cy="596" r="46" stroke="#23201c" stroke-width="1" opacity=".1" fill="none"/>
+      <circle cx="232" cy="214" r="30" stroke="#23201c" stroke-width="1" opacity=".08" fill="none"/>
+      <circle cx="968" cy="596" r="30" stroke="#23201c" stroke-width="1" opacity=".08" fill="none"/>
+      <path d="M232 190l4.5 12 12 4.5-12 4.5-4.5 12-4.5-12-12-4.5 12-4.5z" fill="#c4502f" opacity=".16"/>
+      <path d="M968 574l4 10.5 10.5 4-10.5 4-4 10.5-4-10.5-10.5-4 10.5-4z" fill="#17a2a2" opacity=".14"/>
+    </svg>
+  </div>
+
+  <!-- ══ barra ══ -->
+  <div class="barra">
+    <button type="button" class="apri-menu" id="apriMenu" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="velo" id="velo" hidden></div>
+  <nav class="menu" id="menu" aria-label="Menu principale" aria-hidden="true">
+    <button type="button" class="chiudi-menu" id="chiudiMenu" aria-label="Chiudi il menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 3l12 12M15 3L3 15"/></svg>
+    </button>
+
+    <a class="menu-voce" href="https://www.gioriva.it/">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.5 4.6c6.4-1.6 12.6-1.6 19 0"/><path d="M3.6 7.4h16.8"/>
+        <path d="M6.2 7.4V21M17.8 7.4V21"/><path d="M5.4 11h13.2"/>
+      </svg>
+      <span><b>Gio Riva</b></span>
+    </a>
+
+    <a class="menu-voce attiva" href="index.html">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/>
+        <path d="M3 12h18M4.6 7h14.8M4.6 17h14.8"/>
+      </svg>
+      <span><b>Poi ti racconto</b><i>Tutti i viaggi, uno per uno</i></span>
+    </a>
+
+    <a class="menu-voce" href="galleria.html">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+        <rect x="2.5" y="4.5" width="19" height="15" rx="2"/>
+        <circle cx="8.2" cy="9.6" r="1.7"/>
+        <path d="M2.5 16.2l5-4.4 4.4 3.9 3.4-2.9 6.2 5.2"/>
+      </svg>
+      <span><b>Galleria</b><i>Gli album di tutti i viaggi</i></span>
+    </a>
+
+    <a class="menu-voce" href="contatti.html">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+        <rect x="2.5" y="5" width="19" height="14" rx="2"/>
+        <path d="M2.5 6.2L12 13l9.5-6.8"/>
+      </svg>
+      <span><b>Contatti</b><i>Scrivimi due righe</i></span>
+    </a>
+  </nav>
+
+  <!-- ══ apertura ══ -->
+  <header class="apertura">
+    <div class="apertura-testo">
+    <h1>Poi ti <em>racconto</em></h1>
+    <p class="claim">Il mondo visto da vicino</p>
+    <div class="payoff">
+      <p class="payoff-testa">Ogni viaggio lo vivi <em>tre volte</em></p>
+      <ul class="payoff-tre">
+        <li><span></span>quando lo sogni</li>
+        <li><span></span>quando lo vivi</li>
+        <li><span></span>quando lo ricordi</li>
+      </ul>
+    </div>
+    </div>
+
+    <div class="bussola" aria-hidden="true">
+      <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <defs>
+          <radialGradient id="aloneRosa" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#e0662f" stop-opacity=".16"/>
+            <stop offset="60%" stop-color="#d98b2b" stop-opacity=".07"/>
+            <stop offset="100%" stop-color="#d98b2b" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <circle cx="230" cy="230" r="216" fill="url(#aloneRosa)"/>
+
+        <!-- corona esterna che ruota lenta -->
+        <g class="corona">
+          <circle cx="230" cy="230" r="196" stroke="#23201c" stroke-width="1.2" opacity=".3"/>
+          <circle cx="230" cy="230" r="176" stroke="#23201c" stroke-width="1" opacity=".18"/>
+          <path d="M230.0 54.0 L230.0 34.0" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M249.4 45.0 L250.5 35.1" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M268.7 48.1 L270.8 38.3" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M287.5 53.1 L290.6 43.6" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M305.7 60.1 L309.7 50.9" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M318.0 77.6 L328.0 60.3" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M339.3 79.5 L345.2 71.4" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M354.5 91.8 L361.1 84.3" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M368.2 105.5 L375.7 98.9" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M380.5 120.7 L388.6 114.8" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M382.4 142.0 L399.7 132.0" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M399.9 154.3 L409.1 150.3" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M406.9 172.5 L416.4 169.4" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M411.9 191.3 L421.7 189.2" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M415.0 210.6 L424.9 209.5" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M406.0 230.0 L426.0 230.0" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M415.0 249.4 L424.9 250.5" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M411.9 268.7 L421.7 270.8" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M406.9 287.5 L416.4 290.6" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M399.9 305.7 L409.1 309.7" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M382.4 318.0 L399.7 328.0" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M380.5 339.3 L388.6 345.2" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M368.2 354.5 L375.7 361.1" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M354.5 368.2 L361.1 375.7" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M339.3 380.5 L345.2 388.6" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M318.0 382.4 L328.0 399.7" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M305.7 399.9 L309.7 409.1" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M287.5 406.9 L290.6 416.4" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M268.7 411.9 L270.8 421.7" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M249.4 415.0 L250.5 424.9" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M230.0 406.0 L230.0 426.0" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M210.6 415.0 L209.5 424.9" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M191.3 411.9 L189.2 421.7" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M172.5 406.9 L169.4 416.4" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M154.3 399.9 L150.3 409.1" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M142.0 382.4 L132.0 399.7" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M120.7 380.5 L114.8 388.6" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M105.5 368.2 L98.9 375.7" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M91.8 354.5 L84.3 361.1" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M79.5 339.3 L71.4 345.2" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M77.6 318.0 L60.3 328.0" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M60.1 305.7 L50.9 309.7" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M53.1 287.5 L43.6 290.6" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M48.1 268.7 L38.3 270.8" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M45.0 249.4 L35.1 250.5" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M54.0 230.0 L34.0 230.0" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M45.0 210.6 L35.1 209.5" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M48.1 191.3 L38.3 189.2" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M53.1 172.5 L43.6 169.4" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M60.1 154.3 L50.9 150.3" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M77.6 142.0 L60.3 132.0" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M79.5 120.7 L71.4 114.8" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M91.8 105.5 L84.3 98.9" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M105.5 91.8 L98.9 84.3" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M120.7 79.5 L114.8 71.4" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M142.0 77.6 L132.0 60.3" stroke="#23201c" stroke-width="1.6" opacity=".5"/>
+          <path d="M154.3 60.1 L150.3 50.9" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M172.5 53.1 L169.4 43.6" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M191.3 48.1 L189.2 38.3" stroke="#23201c" stroke-width="1" opacity=".26"/>
+          <path d="M210.6 45.0 L209.5 35.1" stroke="#23201c" stroke-width="1" opacity=".26"/>
+        </g>
+
+        <!-- anello tratteggiato in senso opposto -->
+        <circle class="anello" cx="230" cy="230" r="158" stroke="#3a7bb8" stroke-width="1.2" stroke-dasharray="3 10" opacity=".35"/>
+
+        <!-- lettere cardinali -->
+        <text x="230.0" y="74.0" text-anchor="middle" font-family="Instrument Serif, serif" font-size="22" fill="#c4502f" opacity="1">N</text>
+        <text x="393.0" y="237.0" text-anchor="middle" font-family="Instrument Serif, serif" font-size="22" fill="#23201c" opacity=".55">E</text>
+        <text x="230.0" y="400.0" text-anchor="middle" font-family="Instrument Serif, serif" font-size="22" fill="#23201c" opacity=".55">S</text>
+        <text x="67.0" y="237.0" text-anchor="middle" font-family="Instrument Serif, serif" font-size="22" fill="#23201c" opacity=".55">O</text>
+
+        <!-- la rosa -->
+        <g class="rosa">
+          <path d="M230.0 78.0 L213.0 230.0 L230.0 230.0 Z" fill="#e0662f" opacity=".9"/>
+          <path d="M230.0 78.0 L247.0 230.0 L230.0 230.0 Z" fill="#c4502f" opacity=".55"/>
+          <path d="M382.0 230.0 L230.0 213.0 L230.0 230.0 Z" fill="#e0662f" opacity=".9"/>
+          <path d="M382.0 230.0 L230.0 247.0 L230.0 230.0 Z" fill="#c4502f" opacity=".55"/>
+          <path d="M230.0 382.0 L247.0 230.0 L230.0 230.0 Z" fill="#e0662f" opacity=".9"/>
+          <path d="M230.0 382.0 L213.0 230.0 L230.0 230.0 Z" fill="#c4502f" opacity=".55"/>
+          <path d="M78.0 230.0 L230.0 247.0 L230.0 230.0 Z" fill="#e0662f" opacity=".9"/>
+          <path d="M78.0 230.0 L230.0 213.0 L230.0 230.0 Z" fill="#c4502f" opacity=".55"/>
+          <path d="M303.5 156.5 L220.8 220.8 L230.0 230.0 Z" fill="#d98b2b" opacity=".62"/>
+          <path d="M303.5 156.5 L239.2 239.2 L230.0 230.0 Z" fill="#b8762a" opacity=".38"/>
+          <path d="M303.5 303.5 L239.2 220.8 L230.0 230.0 Z" fill="#d98b2b" opacity=".62"/>
+          <path d="M303.5 303.5 L220.8 239.2 L230.0 230.0 Z" fill="#b8762a" opacity=".38"/>
+          <path d="M156.5 303.5 L239.2 239.2 L230.0 230.0 Z" fill="#d98b2b" opacity=".62"/>
+          <path d="M156.5 303.5 L220.8 220.8 L230.0 230.0 Z" fill="#b8762a" opacity=".38"/>
+          <path d="M156.5 156.5 L220.8 239.2 L230.0 230.0 Z" fill="#d98b2b" opacity=".62"/>
+          <path d="M156.5 156.5 L239.2 220.8 L230.0 230.0 Z" fill="#b8762a" opacity=".38"/>
+          <circle cx="230" cy="230" r="26" fill="#fdf8ee" opacity=".9"/>
+          <circle cx="230" cy="230" r="26" stroke="#c4502f" stroke-width="1.4" opacity=".6"/>
+          <circle cx="230" cy="230" r="14" stroke="#23201c" stroke-width="1" opacity=".3"/>
+        </g>
+
+        <!-- ago magnetico -->
+        <g class="ago">
+          <path d="M230 96 L240 230 L230 244 L220 230 Z" fill="#c4502f" opacity=".95"/>
+          <path d="M230 364 L240 230 L230 216 L220 230 Z" fill="#23201c" opacity=".42"/>
+          <circle cx="230" cy="230" r="7" fill="#fdf8ee" stroke="#c4502f" stroke-width="2"/>
+        </g>
+
+        <!-- stelline che respirano -->
+        <path class="lampo" d="M84 96l2.6 7 7 2.6-7 2.6-2.6 7-2.6-7-7-2.6 7-2.6z" fill="#d98b2b"/>
+        <path class="lampo-b" d="M388 128l2.2 6 6 2.2-6 2.2-2.2 6-2.2-6-6-2.2 6-2.2z" fill="#17a2a2"/>
+        <path class="lampo-b" d="M70 348l2.2 6 6 2.2-6 2.2-2.2 6-2.2-6-6-2.2 6-2.2z" fill="#c4502f"/>
+        <path class="lampo" d="M396 356l2 5.5 5.5 2-5.5 2-2 5.5-2-5.5-5.5-2 5.5-2z" fill="#6b5fb5"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ══ bacheca dei manifesti ══ -->
+  <main class="bacheca" id="viaggi">
+    <div class="titolo-sezione">
+      <h2>I viaggi che ti racconto</h2>
+    </div>
+
+    <div class="griglia">
+
+      <!-- Singapore -->
+      <a class="manifesto rivela" style="--c:var(--c-singapore)" href="https://www.gioriva.it/poitiracconto/singapore2012" target="_blank" rel="noopener">
+        <div class="poster">
+          <span class="anno">2012</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="228" cy="96" r="40" fill="currentColor" opacity=".22"/>
+              <path d="M74 400V182h34v218zM118 400V166h36v234zM164 400V186h34v214zM208 400V158h38v242z" fill="currentColor" opacity=".5"/>
+              <path d="M60 154c62-26 128-30 196-10l6-24C188 98 118 104 52 132z" fill="currentColor"/>
+              <path d="M262 144c14-2 24-8 32-18l-8-8c-6 8-14 12-24 14z" fill="currentColor"/>
+              <path d="M0 352c30 0 30 14 60 14s30-14 60-14 30 14 60 14 30-14 60-14 30 14 60 14v48H0z" fill="currentColor" opacity=".28"/>
+              <path d="M0 376c30 0 30 12 60 12s30-12 60-12 30 12 60 12 30-12 60-12 30 12 60 12v24H0z" fill="currentColor" opacity=".45"/>
+            </svg>
+          </div>
+        </div>
+        <div class="piede">
+          <h3>Singapore</h3>
+          <p class="frase">Città del futuro</p>
+          <p class="tappe">Grattacieli sull'acqua e orchidee ai bordi delle strade: diario di un'avventura in Asia</p>
+        </div>
+      </a>
+
+      <!-- Giappone 2018 -->
+      <a class="manifesto rivela" style="--c:var(--c-giappone18)" href="https://www.gioriva.it/poitiracconto/giappone2018" target="_blank" rel="noopener">
+        <div class="poster">
+          <span class="anno">2018</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="214" cy="104" r="46" fill="currentColor" opacity=".26"/>
+              <path d="M52 336l108-152 108 152z" fill="currentColor" opacity=".38"/>
+              <path d="M124 234l36-50 36 50-18-8-18 10-18-10z" fill="#fffdf8" opacity=".85"/>
+              <path d="M74 190h22v170H74zM196 190h22v170h-22z" fill="currentColor"/>
+              <path d="M56 176c46-14 134-14 180 0l4-22c-52-14-136-14-188 0z" fill="currentColor"/>
+              <path d="M66 214h160v18H66z" fill="currentColor"/>
+              <path d="M0 360h320v40H0z" fill="currentColor" opacity=".22"/>
+            </svg>
+          </div>
+        </div>
+        <div class="piede">
+          <h3>Giappone</h3>
+          <p class="frase">L'armonia del contrasto</p>
+          <p class="tappe">Templi silenziosi e metropoli futuristiche: passato, presente e futuro a spasso tra i ciliegi in fiore</p>
+        </div>
+      </a>
+
+      <!-- California & Las Vegas -->
+      <a class="manifesto rivela" style="--c:var(--c-california)" href="https://www.gioriva.it/poitiracconto/california2024" target="_blank" rel="noopener">
+        <div class="poster">
+          <span class="anno">2024</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="252" cy="82" r="34" fill="currentColor" opacity=".3"/>
+              <path d="M86 330V116h16v214zM102 330V116h16v214zM206 330V116h16v214zM222 330V116h16v214z" fill="currentColor"/>
+              <path d="M80 116h44v10H80zM202 116h44v10h-44zM84 158h36v8H84zM206 158h36v8h-36z" fill="#fffdf8" opacity=".7"/>
+              <path d="M0 148c44-32 94-32 94-32s52 96 118 96 116-64 116-64l-8-14s-48 60-108 60S102 62 94 62 0 130 0 130z" fill="currentColor" opacity=".55"/>
+              <path d="M0 262h320v14H0z" fill="currentColor"/>
+              <path d="M130 262v-46h8v46zM160 262v-58h8v58zM190 262v-46h8v46z" fill="currentColor" opacity=".45"/>
+              <path d="M0 336c34 0 34 12 68 12s34-12 68-12 34 12 68 12 34-12 68-12 32 10 48 11v53H0z" fill="currentColor" opacity=".3"/>
+            </svg>
+          </div>
+        </div>
+        <div class="piede">
+          <h3>California &amp; Las Vegas</h3>
+          <p class="frase">Il sogno americano</p>
+          <p class="tappe">Un road trip epico dalla costa californiana, attraverso la Silicon Valley fino alla follia di Las Vegas</p>
+        </div>
+      </a>
+
+      <!-- Hong Kong & Bali -->
+      <a class="manifesto rivela" style="--c:var(--c-hkbali)" href="https://www.gioriva.it/poitiracconto/indonesia2025" target="_blank" rel="noopener">
+        <div class="poster">
+          <span class="anno">2025</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M18 300V150l16-18v168zM42 300V128l18-20v192zM70 300V96l20-22v226zM100 300V132l16-18v186zM126 300V170l14-16v146z" fill="currentColor" opacity=".55"/>
+              <path d="M228 302c4-56 16-92 34-118l-14-10c-22 30-34 70-38 128z" fill="currentColor"/>
+              <path d="M248 174c-24-14-48-12-66 4 26-6 46 0 60 12zM248 174c22-18 48-20 68-6-26-4-48 4-60 16zM248 174c-6-24 2-46 22-60-12 20-16 40-10 58zM248 174c20-14 42-14 60 2-24-8-44-6-56 6z" fill="currentColor"/>
+              <circle cx="90" cy="70" r="22" fill="currentColor" opacity=".28"/>
+              <path d="M0 322c34 0 34 12 68 12s34-12 68-12 34 12 68 12 34-12 68-12 32 10 48 11v67H0z" fill="currentColor" opacity=".26"/>
+              <path d="M0 352c34 0 34 12 68 12s34-12 68-12 34 12 68 12 34-12 68-12 32 10 48 11v37H0z" fill="currentColor" opacity=".4"/>
+            </svg>
+          </div>
+        </div>
+        <div class="piede">
+          <h3>Hong Kong &amp; Bali</h3>
+          <p class="frase">Isole senza fine</p>
+          <p class="tappe">Da Victoria Peak alle acque cristalline delle Gili Islands, un viaggio dentro un sogno</p>
+        </div>
+      </a>
+
+      <!-- Messico -->
+      <a class="manifesto rivela" style="--c:var(--c-messico)" href="https://www.gioriva.it/poitiracconto/messico2026" target="_blank" rel="noopener">
+        <div class="poster">
+          <span class="anno">2026</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="240" cy="88" r="38" fill="currentColor" opacity=".3"/>
+              <path d="M240 34v-18M240 160v-18M294 88h18M168 88h18M280 48l12-12M200 128l-12 12M280 128l12 12M200 48l-12-12" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".5"/>
+              <path d="M36 344h44v-42h30v-42h30v-42h40v42h30v42h30v42h44v22H36z" fill="currentColor" opacity=".6"/>
+              <path d="M140 218h40v-30h-40z" fill="currentColor"/>
+              <path d="M152 344l8-104 8 104z" fill="#fffdf8" opacity=".65"/>
+              <path d="M50 366h220v10H50z" fill="currentColor"/>
+              <path d="M22 376c0-30 6-48 16-52 8-4 14 4 14 20v32z" fill="currentColor" opacity=".8"/>
+              <path d="M0 384h320v16H0z" fill="currentColor" opacity=".25"/>
+            </svg>
+          </div>
+        </div>
+        <div class="piede">
+          <h3>Messico</h3>
+          <p class="frase">Colori e civiltà</p>
+          <p class="tappe">Da Playa del Carmen a Isla Contoy, tra cenote, rovine Maya e tacos leggendari</p>
+        </div>
+      </a>
+
+      <!-- Giappone 2026 -->
+      <a class="manifesto rivela" style="--c:var(--c-giappone26)" href="https://www.gioriva.it/poitiracconto/giappone2026" target="_blank" rel="noopener">
+        <div class="poster">
+          <span class="anno">2026</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="242" cy="80" r="34" fill="currentColor" opacity=".3"/>
+              <circle cx="228" cy="70" r="30" fill="#fffdf8" opacity=".9"/>
+              <path d="M156 62h8v26h-8z" fill="currentColor"/>
+              <path d="M104 108c34-14 78-14 112 0l-14-20c-28-10-56-10-84 0z" fill="currentColor"/>
+              <path d="M126 108h68v34h-68z" fill="currentColor" opacity=".55"/>
+              <path d="M88 164c42-16 102-16 144 0l-16-22c-34-12-78-12-112 0z" fill="currentColor"/>
+              <path d="M114 164h92v40h-92z" fill="currentColor" opacity=".55"/>
+              <path d="M70 226c50-18 130-18 180 0l-18-22c-42-14-102-14-144 0z" fill="currentColor"/>
+              <path d="M100 226h120v60H100z" fill="currentColor" opacity=".55"/>
+              <path d="M52 300c60-22 156-22 216 0l-20-14c-52-16-124-16-176 0z" fill="currentColor"/>
+              <path d="M86 300h148v56H86z" fill="currentColor" opacity=".55"/>
+              <circle cx="46" cy="128" r="5" fill="currentColor" opacity=".5"/>
+              <circle cx="274" cy="182" r="4" fill="currentColor" opacity=".45"/>
+              <circle cx="58" cy="216" r="4" fill="currentColor" opacity=".4"/>
+              <circle cx="266" cy="264" r="5" fill="currentColor" opacity=".4"/>
+              <path d="M0 356h320v44H0z" fill="currentColor" opacity=".22"/>
+            </svg>
+          </div>
+        </div>
+        <div class="piede">
+          <h3>Giappone</h3>
+          <p class="frase">Il ritorno</p>
+          <p class="tappe">Tokyo, Kyoto, Nara, Osaka, Hakone e il saluto al Fuji: una nostalgia che non se ne va</p>
+        </div>
+      </a>
+
+      <!-- Patagonia e Polinesia -->
+      <span class="manifesto rivela" style="--c:var(--c-patagonia)" tabindex="0">
+        <div class="poster">
+          <span class="anno">2026</span>
+          <span class="attesa">In preparazione</span>
+          <div class="scena">
+            <svg viewBox="0 34 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="60" cy="74" r="26" fill="currentColor" opacity=".26"/>
+              <path d="M0 300l58-146 30 74 44-116 40 128 30-58 44 118z" fill="currentColor" opacity=".5"/>
+              <path d="M44 196l14-36 16 40-16-8-8 8zM118 172l14-42 18 56-16-10-10 8z" fill="#fffdf8" opacity=".8"/>
+              <path d="M262 306c2-42 12-70 28-90l-14-10c-18 24-28 56-30 100z" fill="currentColor"/>
+              <path d="M276 208c-18-12-38-10-52 2 20-4 36 0 46 8zM276 208c16-14 38-16 54-4-20-4-38 2-46 12zM276 208c-4-20 2-36 18-46-10 16-14 32-8 46z" fill="currentColor"/>
+              <path d="M0 322c34 0 34 12 68 12s34-12 68-12 34 12 68 12 34-12 68-12 32 10 48 11v67H0z" fill="currentColor" opacity=".26"/>
+              <path d="M0 354c34 0 34 12 68 12s34-12 68-12 34 12 68 12 34-12 68-12 32 10 48 11v35H0z" fill="currentColor" opacity=".42"/>
+            </svg>
+          </div>
+        </div>
+        <div class="piede">
+          <h3>Patagonia e Polinesia</h3>
+          <p class="frase">Agli estremi del mondo</p>
+          <p class="tappe">Il diario di bordo del nostro viaggio di nozze: Buenos Aires, El Calafate, Ushuaia, poi Bora Bora</p>
+        </div>
+      </span>
+
+    </div>
+
+    <div class="sfoglia" id="sfoglia" aria-hidden="true"></div>
+    <p class="sfoglia-nota">Scorri di lato per gli altri viaggi</p>
+  </main>
+
+  <!-- ══ footer ══ -->
+  <footer>
+    <a href="https://www.gioriva.it/" class="voce voce--marchio">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.5 4.6c6.4-1.6 12.6-1.6 19 0"/>
+        <path d="M3.6 7.4h16.8"/>
+        <path d="M6.2 7.4V21M17.8 7.4V21"/>
+        <path d="M5.4 11h13.2"/>
+      </svg>
+      Gio Riva
+    </a>
+    <a href="privacy.html" class="voce">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round">
+        <path d="M8 1.6 L13.4 3.6 V8 c0 3.4-2.4 5.4-5.4 6.2 C5 13.4 2.6 11.4 2.6 8 V3.6 Z"/>
+        <circle cx="6.4" cy="6.2" r=".55" fill="currentColor" stroke="none"/>
+        <circle cx="9.6" cy="7.4" r=".55" fill="currentColor" stroke="none"/>
+        <circle cx="7.2" cy="9.6" r=".55" fill="currentColor" stroke="none"/>
+      </svg>
+      Privacy &amp; Cookie
+    </a>
+    <a href="contatti.html" class="voce">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round">
+        <rect x="1.6" y="3.2" width="12.8" height="9.6"/>
+        <path d="M1.6 4 L8 8.8 L14.4 4"/>
+      </svg>
+      Contatti
+    </a>
+  </footer>
+
+  <!-- ══ banner cookie ══ -->
+  <div class="cookie" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Gestione cookie">
+    <div>
+      <h3>Un attimo, prima di partire</h3>
+      <p>Questo sito usa cookie statistici (Google Analytics) per capire come viene esplorato e migliorarlo nel tempo. Si attivano solo con il tuo consenso. Trovi i dettagli nella <a href="privacy.html">Privacy e cookie policy</a>.</p>
+    </div>
+    <div class="cookie-azioni">
+      <button class="bottone" id="cookieAccept">Accetto</button>
+      <button class="bottone bottone--vuoto" id="cookieDecline">Solo necessari</button>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      'use strict';
+      var KEY = 'gr_cookie_consent';
+      var banner = document.getElementById('cookieBanner');
+      var ok = document.getElementById('cookieAccept');
+      var no = document.getElementById('cookieDecline');
+      var piede = document.getElementById('cookieFooter');
+      if (!banner) return;
+
+      function gtagSafe(){ if (typeof gtag === 'function') gtag.apply(null, arguments); }
+      function consenso(dato){
+        gtagSafe('consent', 'update', { 'analytics_storage': dato ? 'granted' : 'denied' });
+      }
+      function mostra(){ banner.classList.add('mostra'); }
+      function nascondi(){ banner.classList.remove('mostra'); }
+
+      var salvato = null;
+      try { salvato = localStorage.getItem(KEY); } catch(e){}
+      if (salvato === 'granted'){ consenso(true); }
+      else if (salvato === 'denied'){ consenso(false); }
+      else { mostra(); }
+
+      ok.addEventListener('click', function(){
+        try { localStorage.setItem(KEY, 'granted'); } catch(e){}
+        consenso(true); nascondi();
+      });
+      no.addEventListener('click', function(){
+        try { localStorage.setItem(KEY, 'denied'); } catch(e){}
+        consenso(false); nascondi();
+      });
+      if (piede) piede.addEventListener('click', mostra);
+    })();
+
+    /* comparsa dei manifesti allo scorrimento */
+    (function(){
+      'use strict';
+      var pezzi = document.querySelectorAll('.rivela');
+      if (!('IntersectionObserver' in window)){
+        Array.prototype.forEach.call(pezzi, function(p){ p.classList.add('dentro'); });
+        return;
+      }
+      var osservatore = new IntersectionObserver(function(voci){
+        voci.forEach(function(v, i){
+          if (v.isIntersecting){
+            var el = v.target;
+            setTimeout(function(){ el.classList.add('dentro'); }, i * 70);
+            osservatore.unobserve(el);
+          }
+        });
+      }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+      Array.prototype.forEach.call(pezzi, function(p){ osservatore.observe(p); });
+    })();
+
+    /* menu */
+    (function(){
+      'use strict';
+      var apri = document.getElementById('apriMenu'),
+          chiudi = document.getElementById('chiudiMenu'),
+          menu = document.getElementById('menu'),
+          velo = document.getElementById('velo');
+      if (!apri || !menu) return;
+
+      function stato(aperto){
+        menu.classList.toggle('aperto', aperto);
+        menu.setAttribute('aria-hidden', aperto ? 'false' : 'true');
+        apri.setAttribute('aria-expanded', aperto ? 'true' : 'false');
+        if (aperto){
+          velo.hidden = false;
+          requestAnimationFrame(function(){ velo.classList.add('visibile'); });
+          document.body.style.overflow = 'hidden';
+        } else {
+          velo.classList.remove('visibile');
+          setTimeout(function(){ velo.hidden = true; }, 350);
+          document.body.style.overflow = '';
+        }
+      }
+      apri.addEventListener('click', function(){ stato(true); });
+      chiudi.addEventListener('click', function(){ stato(false); });
+      velo.addEventListener('click', function(){ stato(false); });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') stato(false);
+      });
+    })();
+
+    /* carosello dei viaggi su mobile */
+    (function(){
+      'use strict';
+      var pista = document.querySelector('.griglia'),
+          barra = document.getElementById('sfoglia');
+      if (!pista || !barra) return;
+
+      var schede = Array.prototype.slice.call(pista.querySelectorAll('.manifesto'));
+      if (!schede.length) return;
+
+      schede.forEach(function(s, i){
+        var p = document.createElement('button');
+        p.type = 'button';
+        p.setAttribute('aria-label', 'Viaggio ' + (i+1));
+        var c = s.getAttribute('style');
+        if (c) p.setAttribute('style', c);
+        p.addEventListener('click', function(){
+          pista.scrollTo({ left: s.offsetLeft - (pista.clientWidth - s.clientWidth)/2, behavior: 'smooth' });
+        });
+        barra.appendChild(p);
+      });
+
+      var pallini = Array.prototype.slice.call(barra.children);
+      function segna(){
+        var centro = pista.scrollLeft + pista.clientWidth/2, vicino = 0, minimo = Infinity;
+        schede.forEach(function(s, i){
+          var d = Math.abs(s.offsetLeft + s.clientWidth/2 - centro);
+          if (d < minimo){ minimo = d; vicino = i; }
+        });
+        pallini.forEach(function(p, i){ p.classList.toggle('qui', i === vicino); });
+      }
+      var attesa;
+      pista.addEventListener('scroll', function(){
+        clearTimeout(attesa);
+        attesa = setTimeout(segna, 60);
+      }, { passive: true });
+      segna();
+      addEventListener('resize', segna);
+    })();
+  </script>
+
+</body>
+</html>

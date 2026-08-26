@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Japan Summer 2026</title>
+  <meta name="description" content="Tokyo, Kyoto, Nara, Osaka, Hakone e il saluto al Fuji: racconto di una nostalgia che non se ne va" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Japan Summer 2026 🇯🇵" />
+  <meta property="og:description" content="Tokyo, Kyoto, Nara, Osaka, Hakone e il saluto al Fuji: racconto di una nostalgia che non se ne va" />
+  <meta property="og:image" content="https://www.gioriva.it/poitiracconto/giappone2026/japan-summer-og-sole.PNG" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%23d93a35'/></svg>" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1ZCCJ6QBR4');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --sumi: #0c0a0b;
+      --sumi-2: #151113;
+      --aka: #d93a35;
+      --kin: #d9a441;
+      --washi: #f0e8d8;
+      --hai: #8f867c;
+      --line: rgba(240,232,216,0.1);
+      --display: 'Shippori Mincho', serif;
+      --body: 'Newsreader', Georgia, serif;
+      --mono: 'DM Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--sumi);
+      color: var(--washi);
+      font-family: var(--body);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+    html { scrollbar-width: thin; scrollbar-color: rgba(217,58,53,0.6) var(--sumi); }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--sumi); }
+    ::-webkit-scrollbar-thumb { background: rgba(217,58,53,0.7); border-radius: 3px; }
+    ::selection { background: var(--aka); color: #fff; }
+    :focus-visible { outline: 2px solid var(--kin); outline-offset: 3px; }
+    a { color: inherit; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 clamp(1.2rem, 4.5vw, 3rem); }
+    .section-head { padding: clamp(3.5rem, 8vw, 5.5rem) 0 clamp(1.8rem, 4vw, 2.6rem); text-align: center; }
+    .section-head .jp { font-family: var(--display); font-size: 0.95rem; letter-spacing: 0.5em; color: var(--aka); display: block; margin-bottom: 0.9rem; }
+    .section-head h2 { font-family: var(--display); font-weight: 600; font-size: clamp(1.7rem, 4.6vw, 2.6rem); line-height: 1.14; color: var(--washi); }
+    .section-head p { margin: 1rem auto 0; max-width: 560px; color: var(--hai); font-size: 1rem; font-weight: 300; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.on { opacity: 1; transform: translateY(0); }
+    footer { border-top: 1px solid var(--line); padding: 3rem 1.5rem 3.4rem; text-align: center; }
+    .footer-sun { display: block; width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka)); margin: 0 auto 1.2rem; box-shadow: 0 0 18px rgba(217,58,53,0.45); }
+    footer .jp { font-family: var(--display); font-size: 0.95rem; letter-spacing: 0.4em; color: var(--washi); opacity: 0.8; display: block; margin-bottom: 0.5rem; }
+
+    /* ── L'uovo nero interattivo ── */
+    .hero {
+      text-align: center;
+      padding: clamp(6rem, 13vh, 8.5rem) 1.5rem clamp(2rem, 5vw, 3rem);
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(217,164,65,0.08) 0%, transparent 60%),
+        var(--sumi);
+    }
+    .egg-stage { display: inline-block; cursor: pointer; -webkit-tap-highlight-color: transparent; border: none; background: none; padding: 0; }
+    .egg-stage svg { width: min(62vw, 250px); height: auto; display: block; overflow: visible; }
+    .egg-stage .shell-top, .egg-stage .shell-bottom { transition: transform 0.7s cubic-bezier(0.34, 1.3, 0.5, 1); }
+    .egg-stage .shell-top { transform-origin: 150px 170px; }
+    .egg-stage.cracked .shell-top { transform: translate(-16px, -62px) rotate(-14deg); }
+    .egg-stage .lucky {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease 0.35s, transform 0.5s ease 0.35s;
+    }
+    .egg-stage.cracked .lucky { opacity: 1; transform: translateY(0); }
+    .egg-hint {
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--kin);
+      animation: hintPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes hintPulse { 0%,100% { opacity: 0.9; } 50% { opacity: 0.35; } }
+    .hero .jp-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 6.5vw, 3.2rem);
+      letter-spacing: 0.4em;
+      color: var(--washi);
+      display: block;
+      margin: 1.6rem 0 0.8rem;
+      text-shadow: 0 0 40px rgba(240,232,216,0.2);
+    }
+    .hero h1 { font-family: var(--display); font-weight: 600; font-size: clamp(1.5rem, 4.2vw, 2.3rem); color: var(--washi); line-height: 1.2; }
+    .hero .where { margin-top: 1rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--kin); }
+    .hero .intro { max-width: 580px; margin: 1.5rem auto 0; color: rgba(240,232,216,0.75); font-weight: 300; font-size: 1.02rem; }
+
+    /* ── Il processo in quattro passi ── */
+    .steps { display: grid; grid-template-columns: 1fr; gap: 1rem; padding-bottom: clamp(2rem, 5vw, 3rem); }
+    @media (min-width: 720px) { .steps { grid-template-columns: 1fr 1fr; } }
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: var(--sumi-2);
+      padding: 1.6rem 1.6rem 1.4rem;
+      transition: border-color 0.3s;
+    }
+    .step:hover { border-color: rgba(217,164,65,0.4); }
+    .step .s-eggs { display: flex; gap: 0.35rem; margin-bottom: 0.9rem; }
+    .step .s-eggs i {
+      display: block;
+      width: 15px; height: 19px;
+      background: var(--washi);
+      border-radius: 50% 50% 50% 50% / 60% 60% 42% 42%;
+    }
+    .step h3 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; color: var(--washi); margin-bottom: 0.5rem; }
+    .step p { font-size: 0.95rem; font-weight: 300; color: rgba(240,232,216,0.78); }
+    .step .s-num { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--kin); text-transform: uppercase; display: block; margin-bottom: 0.4rem; }
+
+    /* ── La leggenda ── */
+    .legend-7 {
+      border-left: 2px solid rgba(217,58,53,0.5);
+      padding: 0.4rem 0 0.4rem 1.5rem;
+      max-width: 68ch;
+      margin: 0 auto clamp(2rem, 5vw, 3rem);
+    }
+    .legend-7 h3 { font-family: var(--display); font-weight: 600; font-size: 1.3rem; color: var(--washi); margin-bottom: 0.6rem; }
+    .legend-7 p { font-weight: 300; color: rgba(240,232,216,0.8); margin-bottom: 0.6rem; }
+    .legend-7 p:last-child { margin-bottom: 0; }
+    .legend-7 em { color: var(--kin); }
+
+    /* ── Il video ── */
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(217,164,65,0.4);
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.5), 0 0 60px rgba(217,164,65,0.08);
+    }
+    .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-caption { margin-top: 0.9rem; text-align: center; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--hai); }
+    .video-block { padding-bottom: clamp(2.5rem, 6vw, 4rem); }
+
+    /* ── Numeri ── */
+    .numbers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 1rem; overflow: hidden; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+    @media (min-width: 720px) { .numbers { grid-template-columns: repeat(3, 1fr); } }
+    .num { background: var(--sumi); padding: 1.5rem 1.1rem; text-align: center; }
+    .num .n { font-family: var(--display); font-weight: 600; font-size: clamp(1.4rem, 3.8vw, 2rem); color: var(--washi); display: block; line-height: 1.1; }
+    .num .l { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--hai); display: block; margin-top: 0.5rem; line-height: 1.6; }
+
+    .note { max-width: 620px; margin: 0 auto; text-align: center; padding: 0 1.5rem clamp(3rem, 7vw, 5rem); }
+    .note .divider { width: 60px; height: 1px; margin: 0 auto 2rem; background: linear-gradient(to right, transparent, var(--kin), transparent); }
+    .note p { color: rgba(240,232,216,0.72); font-weight: 300; }
+    .note p + p { margin-top: 1rem; }
+    .note em { color: var(--kin); }
+
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem clamp(1.2rem, 4vw, 3rem);
+      background: rgba(15,12,13,0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      font-family: var(--display);
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--washi);
+    }
+    .nav-brand .dot {
+      width: 15px; height: 15px;
+      border-radius: 50%;
+      background: var(--aka);
+      box-shadow: 0 0 12px rgba(217,58,53,0.6);
+      flex-shrink: 0;
+    }
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(240,232,216,0.85);
+      background: rgba(15,12,13,0.35);
+      border: 1px solid rgba(240,232,216,0.25);
+      border-radius: 2rem;
+      padding: 0.55rem 1.3rem;
+      cursor: pointer;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .menu-btn:hover { color: var(--kin); border-color: rgba(217,164,65,0.65); }
+    .menu-btn .bars { display: inline-flex; flex-direction: column; gap: 4px; }
+    .menu-btn .bars i { display: block; width: 16px; height: 1.5px; background: currentColor; border-radius: 1px; transition: width 0.25s; }
+    .menu-btn .bars i:nth-child(2) { width: 10px; }
+    .menu-btn:hover .bars i { width: 16px; }
+    @media (max-width: 460px) { .brand-text { display: none; } }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(12,9,11,0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.45s ease;
+      overflow-y: auto;
+    }
+    .menu-overlay.open { opacity: 1; pointer-events: auto; }
+    .menu-close {
+      position: absolute;
+      top: 1.1rem;
+      right: clamp(1.2rem, 4vw, 3rem);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(240,232,216,0.3);
+      background: transparent;
+      color: var(--washi);
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: color 0.25s, border-color 0.25s, transform 0.35s;
+    }
+    .menu-close:hover { color: var(--aka); border-color: var(--aka); transform: rotate(90deg); }
+    .menu-kanji {
+      position: fixed;
+      left: clamp(0.8rem, 3vw, 3rem);
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      letter-spacing: 0.5em;
+      color: rgba(217,58,53,0.22);
+      pointer-events: none;
+      user-select: none;
+    }
+    @media (max-width: 800px), (max-height: 540px) {
+      .menu-kanji { display: none; }
+    }
+    .menu-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: clamp(5.5rem, 12vh, 7.5rem) clamp(1.5rem, 6vw, 3rem) 4rem;
+    }
+    @media (min-width: 900px) {
+      .menu-inner { margin: 0 clamp(2.5rem, 9vw, 8rem) 0 auto; }
+    }
+
+    .m-item {
+      display: block;
+      text-decoration: none;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--line);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .menu-overlay.open .m-item { opacity: 1; transform: translateY(0); }
+    .menu-overlay.open .m-item:nth-child(1) { transition-delay: 0.1s; }
+    .menu-overlay.open .m-item:nth-child(2) { transition-delay: 0.18s; }
+    .menu-overlay.open .m-item:nth-child(3) { transition-delay: 0.26s; }
+    .menu-overlay.open .m-item:nth-child(4) { transition-delay: 0.34s; }
+    .menu-overlay.open .m-item:nth-child(5) { transition-delay: 0.42s; }
+    .menu-overlay.open .m-item:nth-child(6) { transition-delay: 0.5s; }
+    .m-item .m-jp {
+      display: block;
+      font-family: var(--display);
+      font-size: 0.9rem;
+      letter-spacing: 0.45em;
+      color: var(--aka);
+      margin-bottom: 0.3rem;
+    }
+    .m-item .m-label {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.9rem, 4.5vw, 2.7rem);
+      color: var(--washi);
+      line-height: 1.15;
+      transition: color 0.3s, letter-spacing 0.3s;
+    }
+    .m-item .m-note {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--hai);
+      margin-top: 0.35rem;
+    }
+    .m-group { cursor: default; }
+    .m-subs { margin-top: 1rem; }
+    .m-sub {
+      display: block;
+      text-decoration: none;
+      padding: 0.55rem 0 0.55rem 1.25rem;
+      position: relative;
+    }
+    .m-sub::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 1.08rem;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
+    }
+    .m-sub .ms-jp {
+      font-family: var(--display);
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      color: rgba(217,58,53,0.75);
+      margin-right: 0.7rem;
+    }
+    .m-sub .ms-label {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.3rem, 3vw, 1.65rem);
+      color: var(--washi);
+      transition: color 0.3s;
+    }
+    .m-sub .ms-note {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--hai);
+      margin-top: 0.15rem;
+    }
+    @media (hover: hover) {
+      a.m-item:hover .m-label { color: var(--kin); letter-spacing: 0.02em; }
+      .m-sub:hover .ms-label { color: var(--kin); }
+    }
+    .m-head { display: block; text-decoration: none; }
+    .m-group .m-timeline { margin-top: 1.1rem; max-height: 36vh; }
+
+    .m-timeline {
+      position: relative;
+      padding-left: 1.6rem;
+      max-height: 58vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+    .m-timeline { scrollbar-color: rgba(217,164,65,0.6) transparent; }
+    .m-timeline::-webkit-scrollbar { width: 5px; }
+    .m-timeline::-webkit-scrollbar-track { background: transparent; }
+    .m-timeline::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, rgba(217,58,53,0.75), rgba(217,164,65,0.75));
+      border-radius: 3px;
+    }
+    .m-timeline::-webkit-scrollbar-thumb:hover { background: var(--kin); }
+    .m-timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px; top: 12px; bottom: 12px;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(217,58,53,0.55), var(--line));
+    }
+    .m-day {
+      display: block;
+      position: relative;
+      padding: 0.55rem 0.5rem 0.55rem 0;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .menu-overlay.open .m-day { opacity: 1; transform: translateX(0); }
+    .m-day::before {
+      content: '';
+      position: absolute;
+      left: -1.6rem; top: 0.95rem;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 34%, #e8524c, var(--aka));
+      box-shadow: 0 0 8px rgba(217,58,53,0.45);
+    }
+    .m-day.future::before {
+      background: var(--sumi);
+      border: 2px solid rgba(143,134,124,0.55);
+      box-shadow: none;
+    }
+    .m-day .d-meta {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--kin);
+    }
+    .m-day .d-title {
+      display: block;
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 0.98rem;
+      color: var(--washi);
+      line-height: 1.3;
+      margin-top: 0.12rem;
+      transition: color 0.25s;
+    }
+    .m-day:hover .d-title { color: var(--kin); }
+    .m-day.future .d-title { color: rgba(240,232,216,0.5); }
+    .m-item.m-home { padding: 0.75rem 0 0.95rem; }
+    .m-home .m-jp { display: inline; font-size: 0.78rem; margin: 0 0.7rem 0 0; }
+    .m-home .m-label { font-size: 1.15rem; }
+    .m-home .m-note { margin-top: 0.2rem; }
+    body.menu-locked { overflow: hidden; }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+      margin-top: 1.4rem;
+    }
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--hai);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .footer-links a:hover { color: var(--kin); }
+    .footer-links svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" aria-label="Navigazione principale">
+    <a class="nav-brand" href="index.html">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="brand-text">Japan Summer</span>
+    </a>
+    <div class="nav-links">
+      <button class="menu-btn" id="menuBtn" aria-haspopup="dialog" aria-expanded="false">
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        Menu
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════ MENU 目次 ═══════════ -->
+  <div class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
+    <button class="menu-close" id="menuClose" aria-label="Chiudi il menu">✕</button>
+    <span class="menu-kanji" aria-hidden="true">目次</span>
+    <div class="menu-inner">
+      <nav class="menu-sections" aria-label="Sezioni del sito">
+        <a class="m-item m-home" href="https://www.gioriva.it/poitiracconto/">
+          <span><span class="m-jp" aria-hidden="true">世界</span><span class="m-label">Home Page</span></span>
+          <span class="m-note">Tutti i viaggi, su gioriva.it</span>
+        </a>
+        <div class="m-item m-group">
+          <a class="m-head" href="index.html">
+            <span class="m-jp" aria-hidden="true">日記</span>
+            <span class="m-label">Diario di viaggio</span>
+            <span class="m-note">Il racconto, giorno per giorno</span>
+          </a>
+          <div class="m-timeline" id="menuTimeline"></div>
+        </div>
+        <a class="m-item" href="programma.html">
+          <span class="m-jp" aria-hidden="true">旅程</span>
+          <span class="m-label">Programma</span>
+          <span class="m-note">Voli, treni e tappe del viaggio</span>
+        </a>
+        <a class="m-item" href="galleria.html">
+          <span class="m-jp" aria-hidden="true">写真</span>
+          <span class="m-label">Galleria</span>
+          <span class="m-note">Le foto del viaggio, giorno per giorno</span>
+        </a>
+        <a class="m-item" href="consigli.html">
+          <span class="m-jp" aria-hidden="true">心得</span>
+          <span class="m-label">Consigli</span>
+          <span class="m-note">Cose da sapere prima di partire</span>
+        </a>
+        <div class="m-item m-group">
+          <span class="m-jp" aria-hidden="true">逸話</span>
+          <span class="m-label">Curiosità</span>
+          <div class="m-subs">
+            <a class="m-sub" href="omikuji.html">
+              <span><span class="ms-jp" aria-hidden="true">御神籤</span><span class="ms-label">Le benedizioni</span></span>
+              <span class="ms-note">Gli omikuji di Kiyomizu</span>
+            </a>
+            <a class="m-sub" href="himeji.html">
+              <span><span class="ms-jp" aria-hidden="true">姫路城</span><span class="ms-label">Il castello di Himeji</span></span>
+              <span class="ms-note">Quattro secoli dell'Airone bianco</span>
+            </a>
+            <a class="m-sub" href="kurotamago.html">
+              <span><span class="ms-jp" aria-hidden="true">黒卵</span><span class="ms-label">Le uova nere</span></span>
+              <span class="ms-note">I kuro-tamago di Ōwakudani</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ═══════════ HERO: l'uovo che si apre ═══════════ -->
+  <header class="hero">
+    <button class="egg-stage" id="eggStage" aria-label="Tocca l'uovo nero per aprirlo" aria-pressed="false">
+      <svg viewBox="0 0 300 340" role="img">
+        <!-- interno: albume e tuorlo, nascosti dal guscio -->
+        <g class="inside">
+          <path d="M 75 170 C 78 250 105 298 150 298 C 195 298 222 250 225 170 C 222 120 195 82 150 82 C 105 82 78 120 75 170 Z" fill="#f0e8d8"/>
+          <circle cx="150" cy="150" r="36" fill="#d9a441"/>
+          <path d="M 132 140 Q 140 128 156 128" fill="none" stroke="#f0e8d8" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+        </g>
+        <!-- guscio: metà inferiore -->
+        <path class="shell-bottom" d="M 55 170 L 78 158 L 100 172 L 122 156 L 148 172 L 172 156 L 196 172 L 220 158 L 245 170 C 242 248 208 306 150 306 C 92 306 58 248 55 170 Z" fill="#141114" stroke="#2a2326" stroke-width="1.5"/>
+        <!-- guscio: metà superiore con la scritta -->
+        <g class="shell-top">
+          <path d="M 55 170 C 58 96 98 52 150 52 C 202 52 242 96 245 170 L 220 158 L 196 172 L 172 156 L 148 172 L 122 156 L 100 172 L 78 158 Z" fill="#141114" stroke="#2a2326" stroke-width="1.5"/>
+          <path d="M 95 100 Q 115 74 145 66" fill="none" stroke="#f0e8d8" stroke-width="4" stroke-linecap="round" opacity="0.14"/>
+          <text x="150" y="128" font-family="'Shippori Mincho', serif" font-size="30" font-weight="600" fill="#f0e8d8" text-anchor="middle" letter-spacing="4">大涌谷</text>
+        </g>
+        <!-- il premio -->
+        <g class="lucky">
+          <text x="150" y="30" font-family="'Shippori Mincho', serif" font-size="19" font-weight="600" fill="#d9a441" text-anchor="middle">+7 anni di vita</text>
+        </g>
+      </svg>
+    </button>
+    <p class="egg-hint" id="eggHint">Tocca l'uovo</p>
+
+    <span class="jp-title" aria-hidden="true">黒たまご</span>
+    <h1>Le uova nere di Ōwakudani</h1>
+    <p class="where">大涌谷 · Hakone · 12 luglio 2026</p>
+    <p class="intro">A mille metri di quota, nella Grande Valle Bollente nata da un'eruzione del monte Hakone circa 3.000 anni fa, le uova entrano bianche nelle vasche fumanti e ne escono nere come l'ossidiana. Questa pagina racconta come, e perché conviene mangiarle.</p>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ═══════════ IL PROCESSO ═══════════ -->
+    <section aria-label="Come nasce un uovo nero">
+      <div class="section-head">
+        <span class="jp" aria-hidden="true">製法</span>
+        <h2>Come nasce un uovo nero</h2>
+        <p>Il procedimento, in quattro passi, così come lo raccontano i pannelli del Kurotamago-kan.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step reveal">
+          <span class="s-num">Passo uno</span>
+          <div class="s-eggs" aria-hidden="true"><i></i></div>
+          <h3>Un'ora nelle vasche termali</h3>
+          <p>Le uova fresche vengono calate nelle vasche naturali della valle e bollite lentamente per circa 60 minuti a circa 80 gradi, la temperatura dell'acqua che sgorga dal vulcano.</p>
+        </div>
+        <div class="step reveal">
+          <span class="s-num">Passo due</span>
+          <div class="s-eggs" aria-hidden="true"><i></i><i></i></div>
+          <h3>Il guscio assorbe la sorgente</h3>
+          <p>Il guscio dell'uovo è pieno di pori microscopici: durante la bollitura i minerali dell'acqua termale, ricca di ferro, vi aderiscono e vi penetrano.</p>
+        </div>
+        <div class="step reveal">
+          <span class="s-num">Passo tre</span>
+          <div class="s-eggs" aria-hidden="true"><i></i><i></i><i></i></div>
+          <h3>La chimica fa il resto</h3>
+          <p>Il ferro depositato reagisce con l'idrogeno solforato dei vapori vulcanici e forma solfuro di ferro: è lui a vestire il guscio di nero. Solo il guscio, però.</p>
+        </div>
+        <div class="step reveal">
+          <span class="s-num">Passo quattro</span>
+          <div class="s-eggs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <h3>Il tocco finale al vapore</h3>
+          <p>Le uova ormai annerite passano in una vaporiera e cuociono nel vapore a circa 100 gradi per un quarto d'ora. Pronte: si vendono ancora calde, in sacchetti da quattro.</p>
+        </div>
+      </div>
+
+      <div class="legend-7 reveal">
+        <h3>La leggenda dei sette anni</h3>
+        <p>La tradizione di Hakone dice che ogni kuro-tamago mangiato allunga la vita di sette anni. La leggenda nasce dal santuario di Enmei Jizō, il protettore della longevità venerato nella valle, e i giapponesi scherzano sul fatto che conviene fermarsi a due: l'immortalità porterebbe troppa confusione.</p>
+        <p>Dentro, per la cronaca, è un normalissimo e ottimo uovo sodo: <em>il nero è solo il vestito</em>. Si mangia con un pizzico di sale, guardando le fumarole.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════ IL VIDEO ═══════════ -->
+    <section class="video-block" aria-label="La preparazione delle uova nere">
+      <div class="section-head">
+        <span class="jp" aria-hidden="true">映像</span>
+        <h2>La preparazione, dal vivo</h2>
+        <p>Le vasche fumanti, le ceste che salgono e scendono, le uova che cambiano colore: il mestiere di chi le prepara ogni giorno.</p>
+      </div>
+      <div class="video-frame reveal">
+        <iframe src="https://www.youtube-nocookie.com/embed/-tXVpzwHtSQ" title="La preparazione dei kuro-tamago di Ōwakudani" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <p class="video-caption">Ōwakudani, le uova nere all'opera</p>
+    </section>
+
+    <!-- ═══════════ NUMERI ═══════════ -->
+    <div class="numbers reveal" aria-label="Le uova nere in numeri">
+      <div class="num"><span class="n">80 °C</span><span class="l">l'acqua delle vasche</span></div>
+      <div class="num"><span class="n">60 min</span><span class="l">di bollitura termale</span></div>
+      <div class="num"><span class="n">15 min</span><span class="l">di vapore a 100 °C</span></div>
+      <div class="num"><span class="n">+7 anni</span><span class="l">di vita per ogni uovo</span></div>
+      <div class="num"><span class="n">¥500</span><span class="l">il sacchetto da quattro</span></div>
+      <div class="num"><span class="n">3.000</span><span class="l">anni fa nasceva la valle</span></div>
+    </div>
+
+    <!-- ═══════════ NOTA ═══════════ -->
+    <div class="note">
+      <div class="divider" aria-hidden="true"></div>
+      <p>Le informazioni vengono dai pannelli del Kurotamago-kan di Ōwakudani, letti il 12 luglio 2026 tra una fumarola e l'altra, integrate dove serviva.</p>
+      <p><em>Quattordici anni guadagnati a testa.</em> Il Daikichi sta già facendo il suo lavoro.</p>
+    </div>
+  </main>
+  <footer>
+    <div class="footer-sun" aria-hidden="true"></div>
+    <span class="jp">良い旅を</span>
+    <div class="footer-links">
+      <a href="https://www.gioriva.it/" title="gioriva.it">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><ellipse cx="8" cy="8" rx="2.8" ry="6.2"/><path d="M 1.8 8 L 14.2 8"/></svg>
+        Gio Riva
+      </a>
+      <a href="https://www.gioriva.it/poitiracconto/privacy.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M 8 1.6 L 13.4 3.6 V 7.8 C 13.4 11.3 11 13.5 8 14.6 C 5 13.5 2.6 11.3 2.6 7.8 V 3.6 Z"/><circle cx="6.4" cy="6.4" r="0.75" fill="currentColor" stroke="none"/><circle cx="9.8" cy="7.4" r="0.75" fill="currentColor" stroke="none"/><circle cx="7.2" cy="10" r="0.75" fill="currentColor" stroke="none"/></svg>
+        Privacy &amp; Cookie
+      </a>
+      <a href="contatti.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="1.8" y="3.2" width="12.4" height="9.6" rx="1.2"/><path d="M 2.2 4.2 L 8 8.6 L 13.8 4.2"/></svg>
+        Contatti
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // ── Menu 目次 ──
+    const menuBtn = document.getElementById('menuBtn');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuClose = document.getElementById('menuClose');
+    function openMenu() {
+      menuOverlay.classList.add('open');
+      document.body.classList.add('menu-locked');
+      menuBtn.setAttribute('aria-expanded', 'true');
+    }
+    function closeMenu() {
+      menuOverlay.classList.remove('open');
+      document.body.classList.remove('menu-locked');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+    menuBtn.addEventListener('click', openMenu);
+    menuClose.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+    menuOverlay.addEventListener('click', (e) => { if (e.target === menuOverlay) closeMenu(); });
+
+    // ── Timeline dei giorni: caricata dal diario ──
+    const menuTimeline = document.getElementById('menuTimeline');
+    function addMenuDay(container, href, meta, title, future) {
+      const a = document.createElement('a');
+      a.className = 'm-day' + (future ? ' future' : '');
+      a.href = href;
+      a.innerHTML = '<span class="d-meta">' + meta + '</span><span class="d-title">' + title + '</span>';
+      container.appendChild(a);
+    }
+    fetch('index.html')
+      .then(r => r.text())
+      .then(html => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        doc.querySelectorAll('.diary .day').forEach((d, i) => {
+          const meta = (d.querySelector('.day-meta') || {}).textContent || '';
+          const title = (d.querySelector('h3') || {}).textContent || '';
+          addMenuDay(menuTimeline, 'index.html#day-' + (i + 1), meta, title, d.classList.contains('writing'));
+        });
+      })
+      .catch(() => {});
+
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('on'); revealObserver.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── L'uovo che si apre ──
+    const eggStage = document.getElementById('eggStage');
+    const eggHint = document.getElementById('eggHint');
+    eggStage.addEventListener('click', () => {
+      const cracked = eggStage.classList.toggle('cracked');
+      eggStage.setAttribute('aria-pressed', cracked);
+      eggHint.textContent = cracked ? 'Buon appetito (e lunga vita)' : "Tocca l'uovo";
+      eggHint.style.animation = cracked ? 'none' : '';
+    });
+  </script>
+</body>
+</html>
