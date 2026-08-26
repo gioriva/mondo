@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fdf8ee'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23c4502f' stroke-width='2.8'/%3E%3Cellipse cx='32' cy='32' rx='8.5' ry='19' fill='none' stroke='%23c4502f' stroke-width='2.2'/%3E%3Cpath d='M13 32h38M16.5 22h31M16.5 42h31' stroke='%23c4502f' stroke-width='2.2' fill='none'/%3E%3C/svg%3E">
 
   <!-- Social sharing meta tags -->
-  <meta property="og:title" content="Poi ti racconto" />
+  <meta property="og:title" content="Poi ti racconto | Diari di viaggio" />
   <meta property="og:description" content="Ogni viaggio lo vivi tre volte: quando lo sogni, quando lo vivi e quando lo ricordi" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.gioriva.it/poitiracconto/" />
@@ -16,7 +16,7 @@
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Poi ti racconto" />
+  <meta name="twitter:title" content="Poi ti racconto | Diari di viaggio" />
   <meta name="twitter:description" content="Ogni viaggio lo vivi tre volte: quando lo sogni, quando lo vivi e quando lo ricordi" />
   <meta name="twitter:image" content="https://www.gioriva.it/poitiracconto/og-poitiracconto.png" />
   <meta name="description" content="Ogni viaggio lo vivi tre volte: quando lo sogni, quando lo vivi e quando lo ricordi" />
@@ -246,64 +246,46 @@
     }
 
     .payoff {
-      margin-top:2rem;
-      padding-left:1.5rem;
-      position:relative;
+      margin-top:2.1rem;
       max-width:46ch;
-    }
-    .payoff::before {
-      content:'';
-      position:absolute; left:0; top:.35rem; bottom:.35rem;
-      width:2px;
-      background:linear-gradient(to bottom, var(--c-singapore), var(--rosso) 50%, var(--c-patagonia));
-      border-radius:2px;
     }
     .payoff-testa {
       font-family:'Instrument Serif', serif;
       font-size:clamp(1.45rem, 2.5vw, 2.05rem);
       line-height:1.25;
       color:var(--inchiostro);
-      margin-bottom:.85rem;
+      margin-bottom:1rem;
     }
     .payoff-testa em { font-style:italic; color:var(--rosso); }
+
     .payoff-tre {
       list-style:none;
-      display:flex; flex-wrap:wrap; gap:.5rem 1.5rem;
+      display:flex; flex-wrap:wrap;
+      border-top:1px solid var(--bordo);
+      border-bottom:1px solid var(--bordo);
     }
     .payoff-tre li {
-      display:inline-flex; align-items:center; gap:.5rem;
-      font-size:.82rem; font-weight:400;
-      letter-spacing:.08em;
+      display:flex; align-items:center; gap:.55rem;
+      padding:.8rem 1.2rem .8rem 0;
+      font-size:.86rem; font-weight:300;
       color:var(--grigio);
-      text-transform:lowercase;
     }
-    .payoff-tre span {
-      width:7px; height:7px; border-radius:50%;
+    .payoff-tre li + li {
+      border-left:1px solid var(--bordo);
+      padding-left:1.2rem;
+    }
+    .payoff-tre b {
+      display:inline-flex;
+      width:19px; height:19px;
+      color:var(--rosso);
       flex-shrink:0;
     }
-    .payoff-tre li:nth-child(1) span { background:var(--c-singapore); }
-    .payoff-tre li:nth-child(2) span { background:var(--rosso); }
-    .payoff-tre li:nth-child(3) span { background:var(--c-patagonia); }
+    .payoff-tre b svg { width:100%; height:100%; }
 
     /* ════════ bacheca ════════ */
     .bacheca {
       max-width:1280px; margin:0 auto;
-      padding:2rem 5vw 4rem;
-    }
-
-    .titolo-sezione {
-      display:flex; align-items:baseline; justify-content:space-between;
-      gap:1.5rem; flex-wrap:wrap;
-      margin-bottom:2.2rem;
-    }
-    .titolo-sezione h2 {
-      font-family:'Instrument Serif', serif;
-      font-weight:400; font-size:2rem;
-      letter-spacing:-.01em;
-    }
-    .titolo-sezione p {
-      font-size:.82rem; color:var(--tenue);
-      letter-spacing:.04em;
+      padding:1rem 5vw 4rem;
     }
 
     .griglia {
@@ -651,7 +633,7 @@
         <path d="M2.5 4.6c6.4-1.6 12.6-1.6 19 0"/><path d="M3.6 7.4h16.8"/>
         <path d="M6.2 7.4V21M17.8 7.4V21"/><path d="M5.4 11h13.2"/>
       </svg>
-      <span><b>Gio Riva</b></span>
+      <span><b>Gio Riva</b><i>Torna alla home</i></span>
     </a>
 
     <a class="menu-voce attiva" href="index.html">
@@ -683,15 +665,15 @@
   <!-- ══ apertura ══ -->
   <header class="apertura">
     <div class="apertura-testo">
-    <h1>Poi ti <em>racconto</em></h1>
-    <p class="claim">Il mondo visto da vicino</p>
+    <h1>Poi ti <em>racconto</em>...</h1>
+    <p class="claim">...il mondo visto da vicino</p>
     <div class="payoff">
       <p class="payoff-testa">Ogni viaggio lo vivi <em>tre volte</em></p>
-      <ul class="payoff-tre">
-        <li><span></span>quando lo sogni</li>
-        <li><span></span>quando lo vivi</li>
-        <li><span></span>quando lo ricordi</li>
-      </ul>
+      <ol class="payoff-tre">
+        <li><b><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16.2 12.6A6.6 6.6 0 1 1 8.4 4.2a5.3 5.3 0 0 0 7.8 8.4Z"/><path d="M5.2 3.4l.6 1.6 1.6.6-1.6.6-.6 1.6-.6-1.6L3 5.6l1.6-.6Z"/></svg></b>quando lo sogni</li>
+        <li><b><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17.6 3.2 2.8 9.4l5.1 1.9 1.9 5.1 6.2-14.8Z"/><path d="M7.9 11.3 17.6 3.2"/></svg></b>quando lo vivi</li>
+        <li><b><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.6 6.4h3l1.2-2h6.4l1.2 2h3v9.2H2.6Z"/><circle cx="10" cy="10.6" r="2.9"/></svg></b>quando lo ricordi</li>
+      </ol>
     </div>
     </div>
 
@@ -823,9 +805,6 @@
 
   <!-- ══ bacheca dei manifesti ══ -->
   <main class="bacheca" id="viaggi">
-    <div class="titolo-sezione">
-      <h2>I viaggi che ti racconto</h2>
-    </div>
 
     <div class="griglia">
 
