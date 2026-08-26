@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formula Tre | Le stagioni di Tarcisio Riva</title>
+  <meta name="description" content="Scrivi a Gio Riva: circuiti, date, persone e ricordi legati alle foto di Tarcisio in monoposto.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Racing+Sans+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+  <header class="testata">
+    <div class="testata-inner">
+      <a class="marchio" href="index.html">
+        <svg class="logo-casco" viewBox="0 0 64 64" aria-hidden="true"><defs><clipPath id="gusciologo"><path d="M11 32a21 21 0 0 1 42 0v17a5 5 0 0 1-5 5H32C20 54 11 47 11 38Z"/></clipPath></defs><path d="M11 32a21 21 0 0 1 42 0v17a5 5 0 0 1-5 5H32C20 54 11 47 11 38Z" fill="#fbf5e6"/><g clip-path="url(#gusciologo)"><rect x="-8" y="8" width="80" height="6" fill="#bf3a1f" transform="rotate(-8 32 32)"/><rect x="-8" y="14" width="80" height="6" fill="#e8641b" transform="rotate(-8 32 32)"/><rect x="-8" y="20" width="80" height="6" fill="#efaf34" transform="rotate(-8 32 32)"/></g><path d="M33 29h16v11H33c-4.5 0-7.5-2.2-7.5-5.5S28.5 29 33 29Z" fill="#221a14"/></svg>
+        <span>Formula Tre</span>
+      </a>
+      <button class="hamburger" id="hamburger" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+      <nav class="menu" id="menu" aria-label="Navigazione principale">
+    <a class="voce-menu" href="index.html"><span class="voce-icona"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 18a11 11 0 0 1 22 0v4a2 2 0 0 1-2 2H9l-4-4z"/><path d="M5 18h14a3 3 0 0 1 3 3v3"/></svg></span><span class="voce-testo"><span class="voce-titolo">Formula Tre</span><span class="voce-sotto">La home di Tarcisio</span></span></a>
+    <a class="voce-menu" href="index.html#galleria"><span class="voce-icona"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="24" height="18" rx="1"/><path d="M4 20l6-6 5 5 4-4 9 9"/><circle cx="11" cy="12.5" r="1.8"/></svg></span><span class="voce-testo"><span class="voce-titolo">Galleria</span><span class="voce-sotto">Le fotografie in pista</span></span></a>
+    <a class="voce-menu" href="auto.html"><span class="voce-icona"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l9-2 3-5h3v5h5v-6h3v9H3z"/><circle cx="9" cy="22" r="3"/><circle cx="23" cy="22" r="3.5"/></svg></span><span class="voce-testo"><span class="voce-titolo">Le auto</span><span class="voce-sotto">Le tre monoposto</span></span></a>
+    <a class="voce-menu" href="contatti.html" aria-current="page"><span class="voce-icona"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="24" height="16" rx="1"/><path d="M4 10l12 8 12-8"/></svg></span><span class="voce-testo"><span class="voce-titolo">Contatti</span><span class="voce-sotto">Scrivimi due righe</span></span></a>
+  </nav>
+  <div class="stripes" aria-hidden="true"></div>
+
+  <main class="pagina">
+    <h1>Contatti</h1>
+    <p class="sotto">Il muretto box di questo sito</p>
+
+    <p>Se in una delle foto riconosci un circuito, una data, una vettura o una persona, scrivimelo: mi aiuti a completare le didascalie di questo archivio. E se hai corso con Tarcisio, o eri lì con lui, mi farebbe piacere leggerti.</p>
+
+    <form class="modulo" action="https://formspree.io/f/mojgkgqg" method="POST">
+      <input type="hidden" name="_subject" value="Messaggio dal sito Formula Tre">
+      <div class="campi-doppi">
+        <div class="campo">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" autocomplete="given-name" required>
+        </div>
+        <div class="campo">
+          <label for="cognome">Cognome</label>
+          <input type="text" id="cognome" name="cognome" autocomplete="family-name" required>
+        </div>
+      </div>
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </div>
+      <div class="campo">
+        <label for="messaggio">Messaggio</label>
+        <textarea id="messaggio" name="messaggio" required></textarea>
+      </div>
+      <button class="bottone" type="submit">Invia il messaggio</button>
+    </form>
+
+    <p style="margin-top:1.2rem; font-size:.85rem; color:#7a5a44;">I dati del modulo vengono usati solo per risponderti. Dettagli nella pagina <a href="privacy.html">Privacy &amp; Cookie</a>.</p>
+  </main>
+
+  <div class="checker" aria-hidden="true"></div>
+  <footer>
+    <div class="pie-inner">
+      <a class="pie-voce" href="https://www.gioriva.it/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 64 64" fill="currentColor" stroke="none" aria-hidden="true"><path d="M 8 20 Q 32 13 56 20 L 56 15 Q 32 7 8 15 Z"/><rect x="13" y="22" width="38" height="5"/><polygon points="20,27 26,27 24,54 18,54"/><polygon points="38,27 44,27 46,54 40,54"/><rect x="15" y="35" width="34" height="5"/><rect x="29.5" y="27" width="5" height="8"/></svg>
+        Gio Riva
+      </a>
+      <a class="pie-voce" href="privacy.html">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 4l10 4v8c0 6-4 10-10 12C10 26 6 22 6 16V8z"/><path d="M12 16l3 3 5-6" stroke="#e8641b"/></svg>
+        Privacy &amp; Cookie
+      </a>
+      <a class="pie-voce" href="contatti.html" aria-current="page">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="8" width="24" height="16" rx="1"/><path d="M4 10l12 8 12-8" stroke="#e8641b"/></svg>
+        Contatti
+      </a>
+    </div>
+    <p class="pie-nota">Un ricordo di famiglia, dedicato a Tarcisio.</p>
+  </footer>
+
+  <aside class="cookie-avviso" id="cookie-avviso" role="region" aria-label="Informativa cookie">
+    <h3>Ai box: cookie</h3>
+    <p>Questo sito usa Google Analytics solo per contare le visite. Parte soltanto se accetti. Nessun altro tracciamento. <a href="privacy.html#cookie">Come funziona</a>.</p>
+    <div class="cookie-azioni">
+      <button class="bottone" type="button" id="cookie-accetta">Accetta</button>
+      <button class="bottone secondario" type="button" id="cookie-rifiuta">Rifiuta</button>
+    </div>
+  </aside>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>
