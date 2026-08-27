@@ -167,6 +167,15 @@
   .foot-links a:hover { color:var(--gold); }
   .foot-links svg { width:14px; height:14px; opacity:0.8; }
 
+  @media (max-width: 560px) {
+    .foot-links {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.1rem;
+    }
+    .foot-links a { justify-content: center; }
+  }
+
   @media (max-width:640px) {
     nav { padding:1rem 4.5rem 1rem 1.2rem; }
     .c-card { padding:2rem 1.5rem; }
