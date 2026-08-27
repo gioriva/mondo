@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <!-- Google tag (gtag.js) con Consent Mode v2 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-1ZCCJ6QBR4');
+    if (localStorage.getItem('ag_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjRjdGNUYwIi8+PGxpbmUgeDE9IjQiIHkxPSIyMyIgeDI9IjI4IiB5Mj0iMjMiIHN0cm9rZT0iIzFBMUExNiIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iMi4yIDQiLz48ZyBzdHJva2U9IiMyRTVDRTYiIHN0cm9rZS13aWR0aD0iMS42IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxsaW5lIHgxPSIxMS41IiB5MT0iOC41IiB4Mj0iMTUiIHkyPSIxMiIvPjxsaW5lIHgxPSIyMC41IiB5MT0iOC41IiB4Mj0iMTciIHkyPSIxMiIvPjxsaW5lIHgxPSIxMS41IiB5MT0iMTUuNSIgeDI9IjE1IiB5Mj0iMTIuNSIvPjxsaW5lIHgxPSIyMC41IiB5MT0iMTUuNSIgeDI9IjE3IiB5Mj0iMTIuNSIvPjwvZz48Y2lyY2xlIGN4PSIxMSIgY3k9IjgiIHI9IjIuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkU1Q0U2IiBzdHJva2Utd2lkdGg9IjEuNCIvPjxjaXJjbGUgY3g9IjIxIiBjeT0iOCIgcj0iMi42IiBmaWxsPSJub25lIiBzdHJva2U9IiMyRTVDRTYiIHN0cm9rZS13aWR0aD0iMS40Ii8+PGNpcmNsZSBjeD0iMTEiIGN5PSIxNiIgcj0iMi42IiBmaWxsPSJub25lIiBzdHJva2U9IiMyRTVDRTYiIHN0cm9rZS13aWR0aD0iMS40Ii8+PGNpcmNsZSBjeD0iMjEiIGN5PSIxNiIgcj0iMi42IiBmaWxsPSJub25lIiBzdHJva2U9IiMyRTVDRTYiIHN0cm9rZS13aWR0aD0iMS40Ii8+PHJlY3QgeD0iMTMuNiIgeT0iOS42IiB3aWR0aD0iNC44IiBoZWlnaHQ9IjQuOCIgcng9IjEuMiIgZmlsbD0iIzJFNUNFNiIvPjwvc3ZnPgo=">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>Linea di Volo</title>
+  <meta property="og:title" content="Privacy & Cookie | Linea di Volo">
+  <meta property="og:description" content="Informativa privacy e cookie del sito Linea di Volo.">
+  <meta property="og:image" content="https://www.gioriva.it/lineadivolo/og.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.gioriva.it/lineadivolo/og.png">
+  <style>
+    :root {
+      --paper:  #F7F5F0;
+      --paper2: #FFFFFF;
+      --ink:    #1A1A16;
+      --soft:   #6E6C64;
+      --azure:  #2E5CE6;
+      --line:   rgba(26,26,22,0.14);
+      --line-l: rgba(26,26,22,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--paper);
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='180'%20height='180'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='180'%20height='180'%20filter='url(%23g)'%20opacity='0.045'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Cpath%20d='M%200,0.0%20L%206,2.6%20L%2012,5.1%20L%2018,7.6%20L%2024,9.9%20L%2030,12.0%20L%2036,13.8%20L%2042,15.4%20L%2048,16.7%20L%2054,17.7%20L%2060,18.4%20L%2066,18.7%20L%2072,18.8%20L%2078,18.5%20L%2084,18.0%20L%2090,17.3%20L%2096,16.3%20L%20102,15.2%20L%20108,14.0%20L%20114,12.7%20L%20120,11.3%20L%20126,10.0%20L%20132,8.7%20L%20138,7.5%20L%20144,6.5%20L%20150,5.5%20L%20156,4.7%20L%20162,4.1%20L%20168,3.6%20L%20174,3.3%20L%20180,3.1%20L%20186,3.1%20L%20192,3.2%20L%20198,3.4%20L%20204,3.6%20L%20210,3.9%20L%20216,4.2%20L%20222,4.5%20L%20228,4.8%20L%20234,5.0%20L%20240,5.0%20L%20246,5.0%20L%20252,4.9%20L%20258,4.6%20L%20264,4.2%20L%20270,3.7%20L%20276,3.1%20L%20282,2.4%20L%20288,1.7%20L%20294,0.8%20L%20300,0.0%20L%20306,-0.8%20L%20312,-1.7%20L%20318,-2.4%20L%20324,-3.1%20L%20330,-3.7%20L%20336,-4.2%20L%20342,-4.6%20L%20348,-4.9%20L%20354,-5.0%20L%20360,-5.0%20L%20366,-5.0%20L%20372,-4.8%20L%20378,-4.5%20L%20384,-4.2%20L%20390,-3.9%20L%20396,-3.6%20L%20402,-3.4%20L%20408,-3.2%20L%20414,-3.1%20L%20420,-3.1%20L%20426,-3.3%20L%20432,-3.6%20L%20438,-4.1%20L%20444,-4.7%20L%20450,-5.5%20L%20456,-6.5%20L%20462,-7.5%20L%20468,-8.7%20L%20474,-10.0%20L%20480,-11.3%20L%20486,-12.7%20L%20492,-14.0%20L%20498,-15.2%20L%20504,-16.3%20L%20510,-17.3%20L%20516,-18.0%20L%20522,-18.5%20L%20528,-18.8%20L%20534,-18.7%20L%20540,-18.4%20L%20546,-17.7%20L%20552,-16.7%20L%20558,-15.4%20L%20564,-13.8%20L%20570,-12.0%20L%20576,-9.9%20L%20582,-7.6%20L%20588,-5.1%20L%20594,-2.6%20L%20600,-0.0'%20fill='none'%20stroke='%231A1A16'%20stroke-opacity='0.05'%20stroke-width='1'/%3E%3Cpath%20d='M%200,78.4%20L%206,78.8%20L%2012,78.9%20L%2018,78.7%20L%2024,78.2%20L%2030,77.5%20L%2036,76.4%20L%2042,75.2%20L%2048,73.7%20L%2054,72.1%20L%2060,70.5%20L%2066,68.7%20L%2072,67.0%20L%2078,65.4%20L%2084,63.8%20L%2090,62.4%20L%2096,61.2%20L%20102,60.2%20L%20108,59.4%20L%20114,58.9%20L%20120,58.6%20L%20126,58.5%20L%20132,58.7%20L%20138,59.1%20L%20144,59.8%20L%20150,60.5%20L%20156,61.5%20L%20162,62.5%20L%20168,63.5%20L%20174,64.6%20L%20180,65.6%20L%20186,66.5%20L%20192,67.4%20L%20198,68.1%20L%20204,68.6%20L%20210,68.9%20L%20216,69.0%20L%20222,68.9%20L%20228,68.6%20L%20234,68.1%20L%20240,67.3%20L%20246,66.4%20L%20252,65.4%20L%20258,64.2%20L%20264,62.9%20L%20270,61.6%20L%20276,60.2%20L%20282,58.8%20L%20288,57.4%20L%20294,56.2%20L%20300,55.0%20L%20306,53.9%20L%20312,52.9%20L%20318,52.0%20L%20324,51.3%20L%20330,50.8%20L%20336,50.3%20L%20342,50.0%20L%20348,49.8%20L%20354,49.6%20L%20360,49.5%20L%20366,49.5%20L%20372,49.5%20L%20378,49.5%20L%20384,49.4%20L%20390,49.3%20L%20396,49.2%20L%20402,49.0%20L%20408,48.8%20L%20414,48.5%20L%20420,48.1%20L%20426,47.7%20L%20432,47.3%20L%20438,46.9%20L%20444,46.5%20L%20450,46.1%20L%20456,45.9%20L%20462,45.7%20L%20468,45.7%20L%20474,45.9%20L%20480,46.2%20L%20486,46.7%20L%20492,47.5%20L%20498,48.5%20L%20504,49.7%20L%20510,51.1%20L%20516,52.7%20L%20522,54.6%20L%20528,56.6%20L%20534,58.7%20L%20540,60.9%20L%20546,63.1%20L%20552,65.4%20L%20558,67.6%20L%20564,69.8%20L%20570,71.8%20L%20576,73.6%20L%20582,75.2%20L%20588,76.5%20L%20594,77.6%20L%20600,78.4'%20fill='none'%20stroke='%231A1A16'%20stroke-opacity='0.05'%20stroke-width='1'/%3E%3Cpath%20d='M%200,129.6%20L%206,128.2%20L%2012,126.8%20L%2018,125.3%20L%2024,124.0%20L%2030,122.6%20L%2036,121.5%20L%2042,120.4%20L%2048,119.6%20L%2054,119.0%20L%2060,118.6%20L%2066,118.4%20L%2072,118.6%20L%2078,118.9%20L%2084,119.5%20L%2090,120.3%20L%2096,121.3%20L%20102,122.5%20L%20108,123.8%20L%20114,125.1%20L%20120,126.5%20L%20126,127.8%20L%20132,129.1%20L%20138,130.2%20L%20144,131.2%20L%20150,132.0%20L%20156,132.5%20L%20162,132.8%20L%20168,132.8%20L%20174,132.5%20L%20180,131.9%20L%20186,131.0%20L%20192,129.8%20L%20198,128.4%20L%20204,126.8%20L%20210,125.0%20L%20216,123.0%20L%20222,120.9%20L%20228,118.7%20L%20234,116.6%20L%20240,114.4%20L%20246,112.4%20L%20252,110.4%20L%20258,108.6%20L%20264,107.0%20L%20270,105.6%20L%20276,104.4%20L%20282,103.5%20L%20288,102.8%20L%20294,102.4%20L%20300,102.2%20L%20306,102.2%20L%20312,102.4%20L%20318,102.8%20L%20324,103.4%20L%20330,104.0%20L%20336,104.8%20L%20342,105.6%20L%20348,106.4%20L%20354,107.3%20L%20360,108.1%20L%20366,108.9%20L%20372,109.6%20L%20378,110.3%20L%20384,110.9%20L%20390,111.4%20L%20396,111.9%20L%20402,112.4%20L%20408,112.8%20L%20414,113.1%20L%20420,113.5%20L%20426,114.0%20L%20432,114.4%20L%20438,114.9%20L%20444,115.6%20L%20450,116.3%20L%20456,117.1%20L%20462,118.0%20L%20468,119.0%20L%20474,120.2%20L%20480,121.4%20L%20486,122.7%20L%20492,124.1%20L%20498,125.5%20L%20504,127.0%20L%20510,128.4%20L%20516,129.7%20L%20522,130.9%20L%20528,132.1%20L%20534,133.0%20L%20540,133.8%20L%20546,134.4%20L%20552,134.8%20L%20558,134.9%20L%20564,134.8%20L%20570,134.4%20L%20576,133.8%20L%20582,133.0%20L%20588,132.0%20L%20594,130.9%20L%20600,129.6'%20fill='none'%20stroke='%231A1A16'%20stroke-opacity='0.05'%20stroke-width='1'/%3E%3Cpath%20d='M%200,183.1%20L%206,182.8%20L%2012,182.7%20L%2018,182.8%20L%2024,183.0%20L%2030,183.4%20L%2036,184.0%20L%2042,184.6%20L%2048,185.5%20L%2054,186.4%20L%2060,187.3%20L%2066,188.3%20L%2072,189.3%20L%2078,190.2%20L%2084,191.1%20L%2090,191.8%20L%2096,192.3%20L%20102,192.6%20L%20108,192.6%20L%20114,192.4%20L%20120,191.9%20L%20126,191.1%20L%20132,190.0%20L%20138,188.7%20L%20144,187.0%20L%20150,185.2%20L%20156,183.1%20L%20162,180.8%20L%20168,178.5%20L%20174,176.0%20L%20180,173.5%20L%20186,171.1%20L%20192,168.7%20L%20198,166.5%20L%20204,164.4%20L%20210,162.5%20L%20216,160.9%20L%20222,159.6%20L%20228,158.6%20L%20234,158.0%20L%20240,157.7%20L%20246,157.6%20L%20252,158.0%20L%20258,158.6%20L%20264,159.5%20L%20270,160.6%20L%20276,162.0%20L%20282,163.5%20L%20288,165.2%20L%20294,166.9%20L%20300,168.7%20L%20306,170.4%20L%20312,172.1%20L%20318,173.7%20L%20324,175.2%20L%20330,176.6%20L%20336,177.8%20L%20342,178.8%20L%20348,179.7%20L%20354,180.4%20L%20360,180.9%20L%20366,181.2%20L%20372,181.5%20L%20378,181.6%20L%20384,181.6%20L%20390,181.6%20L%20396,181.5%20L%20402,181.4%20L%20408,181.4%20L%20414,181.4%20L%20420,181.4%20L%20426,181.6%20L%20432,181.8%20L%20438,182.1%20L%20444,182.6%20L%20450,183.1%20L%20456,183.7%20L%20462,184.3%20L%20468,185.0%20L%20474,185.7%20L%20480,186.5%20L%20486,187.2%20L%20492,187.8%20L%20498,188.4%20L%20504,188.9%20L%20510,189.2%20L%20516,189.5%20L%20522,189.6%20L%20528,189.5%20L%20534,189.4%20L%20540,189.0%20L%20546,188.6%20L%20552,188.1%20L%20558,187.4%20L%20564,186.8%20L%20570,186.0%20L%20576,185.3%20L%20582,184.7%20L%20588,184.0%20L%20594,183.5%20L%20600,183.1'%20fill='none'%20stroke='%231A1A16'%20stroke-opacity='0.05'%20stroke-width='1'/%3E%3Cpath%20d='M%200,247.9%20L%206,248.0%20L%2012,248.0%20L%2018,248.2%20L%2024,248.3%20L%2030,248.4%20L%2036,248.4%20L%2042,248.3%20L%2048,248.1%20L%2054,247.8%20L%2060,247.3%20L%2066,246.7%20L%2072,245.8%20L%2078,244.8%20L%2084,243.5%20L%2090,242.1%20L%2096,240.5%20L%20102,238.7%20L%20108,236.8%20L%20114,234.7%20L%20120,232.7%20L%20126,230.5%20L%20132,228.4%20L%20138,226.4%20L%20144,224.5%20L%20150,222.7%20L%20156,221.2%20L%20162,219.9%20L%20168,218.8%20L%20174,218.1%20L%20180,217.7%20L%20186,217.6%20L%20192,217.8%20L%20198,218.4%20L%20204,219.3%20L%20210,220.4%20L%20216,221.9%20L%20222,223.6%20L%20228,225.4%20L%20234,227.4%20L%20240,229.5%20L%20246,231.7%20L%20252,233.8%20L%20258,235.9%20L%20264,237.8%20L%20270,239.7%20L%20276,241.3%20L%20282,242.7%20L%20288,243.9%20L%20294,244.8%20L%20300,245.4%20L%20306,245.8%20L%20312,245.9%20L%20318,245.8%20L%20324,245.5%20L%20330,245.0%20L%20336,244.3%20L%20342,243.5%20L%20348,242.6%20L%20354,241.8%20L%20360,240.9%20L%20366,240.1%20L%20372,239.3%20L%20378,238.7%20L%20384,238.2%20L%20390,237.9%20L%20396,237.8%20L%20402,237.8%20L%20408,238.1%20L%20414,238.5%20L%20420,239.1%20L%20426,239.9%20L%20432,240.8%20L%20438,241.8%20L%20444,242.8%20L%20450,243.9%20L%20456,245.1%20L%20462,246.2%20L%20468,247.2%20L%20474,248.2%20L%20480,249.0%20L%20486,249.8%20L%20492,250.4%20L%20498,250.8%20L%20504,251.2%20L%20510,251.3%20L%20516,251.4%20L%20522,251.3%20L%20528,251.1%20L%20534,250.8%20L%20540,250.5%20L%20546,250.1%20L%20552,249.7%20L%20558,249.3%20L%20564,248.9%20L%20570,248.6%20L%20576,248.3%20L%20582,248.1%20L%20588,248.0%20L%20594,247.9%20L%20600,247.9'%20fill='none'%20stroke='%231A1A16'%20stroke-opacity='0.05'%20stroke-width='1'/%3E%3Cpath%20d='M%200,300.0%20L%206,299.5%20L%2012,298.9%20L%2018,298.3%20L%2024,297.7%20L%2030,296.9%20L%2036,296.1%20L%2042,295.3%20L%2048,294.3%20L%2054,293.2%20L%2060,292.1%20L%2066,290.9%20L%2072,289.7%20L%2078,288.5%20L%2084,287.3%20L%2090,286.1%20L%2096,285.1%20L%20102,284.1%20L%20108,283.3%20L%20114,282.6%20L%20120,282.2%20L%20126,282.0%20L%20132,282.0%20L%20138,282.2%20L%20144,282.7%20L%20150,283.5%20L%20156,284.5%20L%20162,285.7%20L%20168,287.1%20L%20174,288.7%20L%20180,290.4%20L%20186,292.2%20L%20192,294.1%20L%20198,295.9%20L%20204,297.7%20L%20210,299.5%20L%20216,301.1%20L%20222,302.5%20L%20228,303.7%20L%20234,304.7%20L%20240,305.4%20L%20246,305.9%20L%20252,306.1%20L%20258,306.0%20L%20264,305.7%20L%20270,305.2%20L%20276,304.4%20L%20282,303.5%20L%20288,302.4%20L%20294,301.2%20L%20300,300.0%20L%20306,298.8%20L%20312,297.6%20L%20318,296.5%20L%20324,295.6%20L%20330,294.8%20L%20336,294.3%20L%20342,294.0%20L%20348,293.9%20L%20354,294.1%20L%20360,294.6%20L%20366,295.3%20L%20372,296.3%20L%20378,297.5%20L%20384,298.9%20L%20390,300.5%20L%20396,302.3%20L%20402,304.1%20L%20408,305.9%20L%20414,307.8%20L%20420,309.6%20L%20426,311.3%20L%20432,312.9%20L%20438,314.3%20L%20444,315.5%20L%20450,316.5%20L%20456,317.3%20L%20462,317.8%20L%20468,318.0%20L%20474,318.0%20L%20480,317.8%20L%20486,317.4%20L%20492,316.7%20L%20498,315.9%20L%20504,314.9%20L%20510,313.9%20L%20516,312.7%20L%20522,311.5%20L%20528,310.3%20L%20534,309.1%20L%20540,307.9%20L%20546,306.8%20L%20552,305.7%20L%20558,304.7%20L%20564,303.9%20L%20570,303.1%20L%20576,302.3%20L%20582,301.7%20L%20588,301.1%20L%20594,300.5%20L%20600,300.0'%20fill='none'%20stroke='%231A1A16'%20stroke-opacity='0.05'%20stroke-width='1'/%3E%3Cpath%20d='M%200,352.1%20L%206,352.1%20L%2012,352.0%20L%2018,351.9%20L%2024,351.7%20L%2030,351.4%20L%2036,351.1%20L%2042,350.7%20L%2048,350.3%20L%2054,349.9%20L%2060,349.5%20L%2066,349.2%20L%2072,348.9%20L%2078,348.7%20L%2084,348.6%20L%2090,348.7%20L%2096,348.8%20L%20102,349.2%20L%20108,349.6%20L%20114,350.2%20L%20120,351.0%20L%20126,351.8%20L%20132,352.8%20L%20138,353.8%20L%20144,354.9%20L%20150,356.1%20L%20156,357.2%20L%20162,358.2%20L%20168,359.2%20L%20174,360.1%20L%20180,360.9%20L%20186,361.5%20L%20192,361.9%20L%20198,362.2%20L%20204,362.2%20L%20210,362.1%20L%20216,361.8%20L%20222,361.3%20L%20228,360.7%20L%20234,359.9%20L%20240,359.1%20L%20246,358.2%20L%20252,357.4%20L%20258,356.5%20L%20264,355.7%20L%20270,355.0%20L%20276,354.5%20L%20282,354.2%20L%20288,354.1%20L%20294,354.2%20L%20300,354.6%20L%20306,355.2%20L%20312,356.1%20L%20318,357.3%20L%20324,358.7%20L%20330,360.3%20L%20336,362.2%20L%20342,364.1%20L%20348,366.2%20L%20354,368.3%20L%20360,370.5%20L%20366,372.6%20L%20372,374.6%20L%20378,376.4%20L%20384,378.1%20L%20390,379.6%20L%20396,380.7%20L%20402,381.6%20L%20408,382.2%20L%20414,382.4%20L%20420,382.3%20L%20426,381.9%20L%20432,381.2%20L%20438,380.1%20L%20444,378.8%20L%20450,377.3%20L%20456,375.5%20L%20462,373.6%20L%20468,371.6%20L%20474,369.5%20L%20480,367.3%20L%20486,365.3%20L%20492,363.2%20L%20498,361.3%20L%20504,359.5%20L%20510,357.9%20L%20516,356.5%20L%20522,355.2%20L%20528,354.2%20L%20534,353.3%20L%20540,352.7%20L%20546,352.2%20L%20552,351.9%20L%20558,351.7%20L%20564,351.6%20L%20570,351.6%20L%20576,351.7%20L%20582,351.8%20L%20588,352.0%20L%20594,352.0%20L%20600,352.1'%20fill='none'%20stroke='%231A1A16'%20stroke-opacity='0.05'%20stroke-width='1'/%3E%3Cpath%20d='M%200,416.9%20L%206,416.5%20L%2012,416.0%20L%2018,415.3%20L%2024,414.7%20L%2030,414.0%20L%2036,413.2%20L%2042,412.6%20L%2048,411.9%20L%2054,411.4%20L%2060,411.0%20L%2066,410.6%20L%2072,410.5%20L%2078,410.4%20L%2084,410.5%20L%2090,410.8%20L%2096,411.1%20L%20102,411.6%20L%20108,412.2%20L%20114,412.8%20L%20120,413.5%20L%20126,414.3%20L%20132,415.0%20L%20138,415.7%20L%20144,416.3%20L%20150,416.9%20L%20156,417.4%20L%20162,417.9%20L%20168,418.2%20L%20174,418.4%20L%20180,418.6%20L%20186,418.6%20L%20192,418.6%20L%20198,418.6%20L%20204,418.5%20L%20210,418.4%20L%20216,418.4%20L%20222,418.4%20L%20228,418.5%20L%20234,418.8%20L%20240,419.1%20L%20246,419.6%20L%20252,420.3%20L%20258,421.2%20L%20264,422.2%20L%20270,423.4%20L%20276,424.8%20L%20282,426.3%20L%20288,427.9%20L%20294,429.6%20L%20300,431.3%20L%20306,433.1%20L%20312,434.8%20L%20318,436.5%20L%20324,438.0%20L%20330,439.4%20L%20336,440.5%20L%20342,441.4%20L%20348,442.0%20L%20354,442.4%20L%20360,442.3%20L%20366,442.0%20L%20372,441.4%20L%20378,440.4%20L%20384,439.1%20L%20390,437.5%20L%20396,435.6%20L%20402,433.5%20L%20408,431.3%20L%20414,428.9%20L%20420,426.5%20L%20426,424.0%20L%20432,421.5%20L%20438,419.2%20L%20444,416.9%20L%20450,414.8%20L%20456,413.0%20L%20462,411.3%20L%20468,410.0%20L%20474,408.9%20L%20480,408.1%20L%20486,407.6%20L%20492,407.4%20L%20498,407.4%20L%20504,407.7%20L%20510,408.2%20L%20516,408.9%20L%20522,409.8%20L%20528,410.7%20L%20534,411.7%20L%20540,412.7%20L%20546,413.6%20L%20552,414.5%20L%20558,415.4%20L%20564,416.0%20L%20570,416.6%20L%20576,417.0%20L%20582,417.2%20L%20588,417.3%20L%20594,417.2%20L%20600,416.9'%20fill='none'%20stroke='%231A1A16'%20stroke-opacity='0.05'%20stroke-width='1'/%3E%3Cpath%20d='M%200,470.4%20L%206,469.1%20L%2012,468.0%20L%2018,467.0%20L%2024,466.2%20L%2030,465.6%20L%2036,465.2%20L%2042,465.1%20L%2048,465.2%20L%2054,465.6%20L%2060,466.2%20L%2066,467.0%20L%2072,467.9%20L%2078,469.1%20L%2084,470.3%20L%2090,471.6%20L%2096,473.0%20L%20102,474.5%20L%20108,475.9%20L%20114,477.3%20L%20120,478.6%20L%20126,479.8%20L%20132,481.0%20L%20138,482.0%20L%20144,482.9%20L%20150,483.7%20L%20156,484.4%20L%20162,485.1%20L%20168,485.6%20L%20174,486.0%20L%20180,486.5%20L%20186,486.9%20L%20192,487.2%20L%20198,487.6%20L%20204,488.1%20L%20210,488.6%20L%20216,489.1%20L%20222,489.7%20L%20228,490.4%20L%20234,491.1%20L%20240,491.9%20L%20246,492.7%20L%20252,493.6%20L%20258,494.4%20L%20264,495.2%20L%20270,496.0%20L%20276,496.6%20L%20282,497.2%20L%20288,497.6%20L%20294,497.8%20L%20300,497.8%20L%20306,497.6%20L%20312,497.2%20L%20318,496.5%20L%20324,495.6%20L%20330,494.4%20L%20336,493.0%20L%20342,491.4%20L%20348,489.6%20L%20354,487.6%20L%20360,485.6%20L%20366,483.4%20L%20372,481.3%20L%20378,479.1%20L%20384,477.0%20L%20390,475.0%20L%20396,473.2%20L%20402,471.6%20L%20408,470.2%20L%20414,469.0%20L%20420,468.1%20L%20426,467.5%20L%20432,467.2%20L%20438,467.2%20L%20444,467.5%20L%20450,468.0%20L%20456,468.8%20L%20462,469.8%20L%20468,470.9%20L%20474,472.2%20L%20480,473.5%20L%20486,474.9%20L%20492,476.2%20L%20498,477.5%20L%20504,478.7%20L%20510,479.7%20L%20516,480.5%20L%20522,481.1%20L%20528,481.4%20L%20534,481.6%20L%20540,481.4%20L%20546,481.0%20L%20552,480.4%20L%20558,479.6%20L%20564,478.5%20L%20570,477.4%20L%20576,476.0%20L%20582,474.7%20L%20588,473.2%20L%20594,471.8%20L%20600,470.4'%20fill='none'%20stroke='%231A1A16'%20stroke-opacity='0.05'%20stroke-width='1'/%3E%3Cpath%20d='M%200,521.6%20L%206,522.4%20L%2012,523.5%20L%2018,524.8%20L%2024,526.4%20L%2030,528.2%20L%2036,530.2%20L%2042,532.4%20L%2048,534.6%20L%2054,536.9%20L%2060,539.1%20L%2066,541.3%20L%2072,543.4%20L%2078,545.4%20L%2084,547.3%20L%2090,548.9%20L%2096,550.3%20L%20102,551.5%20L%20108,552.5%20L%20114,553.3%20L%20120,553.8%20L%20126,554.1%20L%20132,554.3%20L%20138,554.3%20L%20144,554.1%20L%20150,553.9%20L%20156,553.5%20L%20162,553.1%20L%20168,552.7%20L%20174,552.3%20L%20180,551.9%20L%20186,551.5%20L%20192,551.2%20L%20198,551.0%20L%20204,550.8%20L%20210,550.7%20L%20216,550.6%20L%20222,550.5%20L%20228,550.5%20L%20234,550.5%20L%20240,550.5%20L%20246,550.4%20L%20252,550.2%20L%20258,550.0%20L%20264,549.7%20L%20270,549.2%20L%20276,548.7%20L%20282,548.0%20L%20288,547.1%20L%20294,546.1%20L%20300,545.0%20L%20306,543.8%20L%20312,542.6%20L%20318,541.2%20L%20324,539.8%20L%20330,538.4%20L%20336,537.1%20L%20342,535.8%20L%20348,534.6%20L%20354,533.6%20L%20360,532.7%20L%20366,531.9%20L%20372,531.4%20L%20378,531.1%20L%20384,531.0%20L%20390,531.1%20L%20396,531.4%20L%20402,531.9%20L%20408,532.6%20L%20414,533.5%20L%20420,534.4%20L%20426,535.4%20L%20432,536.5%20L%20438,537.5%20L%20444,538.5%20L%20450,539.5%20L%20456,540.2%20L%20462,540.9%20L%20468,541.3%20L%20474,541.5%20L%20480,541.4%20L%20486,541.1%20L%20492,540.6%20L%20498,539.8%20L%20504,538.8%20L%20510,537.6%20L%20516,536.2%20L%20522,534.6%20L%20528,533.0%20L%20534,531.3%20L%20540,529.5%20L%20546,527.9%20L%20552,526.3%20L%20558,524.8%20L%20564,523.6%20L%20570,522.5%20L%20576,521.8%20L%20582,521.3%20L%20588,521.1%20L%20594,521.2%20L%20600,521.6'%20fill='none'%20stroke='%231A1A16'%20stroke-opacity='0.05'%20stroke-width='1'/%3E%3Cpath%20d='M%200,600.0%20L%206,602.6%20L%2012,605.1%20L%2018,607.6%20L%2024,609.9%20L%2030,612.0%20L%2036,613.8%20L%2042,615.4%20L%2048,616.7%20L%2054,617.7%20L%2060,618.4%20L%2066,618.7%20L%2072,618.8%20L%2078,618.5%20L%2084,618.0%20L%2090,617.3%20L%2096,616.3%20L%20102,615.2%20L%20108,614.0%20L%20114,612.7%20L%20120,611.3%20L%20126,610.0%20L%20132,608.7%20L%20138,607.5%20L%20144,606.5%20L%20150,605.5%20L%20156,604.7%20L%20162,604.1%20L%20168,603.6%20L%20174,603.3%20L%20180,603.1%20L%20186,603.1%20L%20192,603.2%20L%20198,603.4%20L%20204,603.6%20L%20210,603.9%20L%20216,604.2%20L%20222,604.5%20L%20228,604.8%20L%20234,605.0%20L%20240,605.0%20L%20246,605.0%20L%20252,604.9%20L%20258,604.6%20L%20264,604.2%20L%20270,603.7%20L%20276,603.1%20L%20282,602.4%20L%20288,601.7%20L%20294,600.8%20L%20300,600.0%20L%20306,599.2%20L%20312,598.3%20L%20318,597.6%20L%20324,596.9%20L%20330,596.3%20L%20336,595.8%20L%20342,595.4%20L%20348,595.1%20L%20354,595.0%20L%20360,595.0%20L%20366,595.0%20L%20372,595.2%20L%20378,595.5%20L%20384,595.8%20L%20390,596.1%20L%20396,596.4%20L%20402,596.6%20L%20408,596.8%20L%20414,596.9%20L%20420,596.9%20L%20426,596.7%20L%20432,596.4%20L%20438,595.9%20L%20444,595.3%20L%20450,594.5%20L%20456,593.5%20L%20462,592.5%20L%20468,591.3%20L%20474,590.0%20L%20480,588.7%20L%20486,587.3%20L%20492,586.0%20L%20498,584.8%20L%20504,583.7%20L%20510,582.7%20L%20516,582.0%20L%20522,581.5%20L%20528,581.2%20L%20534,581.3%20L%20540,581.6%20L%20546,582.3%20L%20552,583.3%20L%20558,584.6%20L%20564,586.2%20L%20570,588.0%20L%20576,590.1%20L%20582,592.4%20L%20588,594.9%20L%20594,597.4%20L%20600,600.0'%20fill='none'%20stroke='%231A1A16'%20stroke-opacity='0.05'%20stroke-width='1'/%3E%3C/svg%3E");
+      background-size: 180px 180px, 600px 600px;
+      background-repeat: repeat, repeat;
+      color: var(--ink);
+      font-family: 'Archivo', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: var(--ink); color: var(--paper); }
+    .serif { font-family: 'Fraunces', serif; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+      height: 76px;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 6vw;
+      background: rgba(247,245,240,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line-l);
+    }
+    .logo {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: 'Fraunces', serif;
+      font-weight: 500; font-size: 19px;
+      letter-spacing: -0.01em;
+      color: var(--ink); text-decoration: none;
+      position: relative; z-index: 320;
+    }
+    .logo svg { width: 26px; height: 26px; flex: none; }
+    @media (max-width: 480px) { .logo { gap: 9px; font-size: 17px; } .logo svg { width: 22px; height: 22px; } }
+    .logo em { font-style: italic; color: var(--azure); }
+    .nav-links { display: none; }
+    .nav-links a {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--soft); text-decoration: none;
+      transition: color 0.25s;
+      padding-bottom: 3px;
+    }
+    .nav-links a svg { width: 15px; height: 15px; flex: none; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.on { color: var(--ink); border-bottom: 1px solid var(--azure); }
+
+    .burger{display:flex;background:none;border:none;cursor:pointer;width:44px;height:44px;align-items:center;justify-content:center;position:relative;z-index:320;padding:0;}
+    .burger span{position:absolute;left:11px;right:11px;height:1px;background:var(--ink);transition:transform 0.3s ease;}
+    .burger span:nth-child(1){transform:translateY(-4px);}
+    .burger span:nth-child(2){transform:translateY(4px);}
+    .burger.open span:nth-child(1){transform:rotate(45deg);}
+    .burger.open span:nth-child(2){transform:rotate(-45deg);}
+    /* menu: colonna laterale a tutta altezza */
+    .mm-veil{position:fixed;inset:0;z-index:305;background:rgba(26,26,22,0.30);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity 0.36s ease;}
+    .mm-veil.open{opacity:1;pointer-events:all;}
+    .mmenu{
+      position:fixed;z-index:310;
+      top:0;right:0;bottom:0;
+      width:min(400px,84vw);
+      background:var(--paper);
+      border-left:1px solid var(--line);
+      box-shadow:-24px 0 60px rgba(26,26,22,0.14);
+      padding:118px 46px 40px;
+      display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:6px;
+      transform:translateX(100%);
+      opacity:1;pointer-events:none;
+      transition:transform 0.46s cubic-bezier(0.19,1,0.22,1);
+      overflow-y:auto;
+    }
+    .mmenu.open{transform:none;pointer-events:all;}
+    .mmenu a{
+      display:flex;align-items:center;gap:18px;
+      font-family:'Fraunces',serif;font-weight:400;
+      font-size:clamp(26px,3.4vw,34px);line-height:1.15;
+      color:var(--ink);text-decoration:none;opacity:0.5;
+      padding:14px 0;
+      transition:opacity 0.25s,transform 0.3s;
+    }
+    .mmenu a:hover{opacity:1;transform:translateX(5px);}
+    .mmenu a.on{opacity:1;font-style:italic;}
+    .mmenu a svg{width:24px;height:24px;flex:none;stroke-width:1.3;}
+    .mmenu a span{display:flex;flex-direction:column;align-items:flex-start;}
+    .mmenu a small{font-family:'Archivo',sans-serif;font-size:9.5px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--soft);margin-top:7px;font-style:normal;}
+    .mmenu .mm-rule{width:100%;height:1px;background:var(--line-l);border:0;margin:10px 0;}
+    .mmenu .mm-foot{margin-top:auto;padding-top:26px;border-top:1px solid var(--line-l);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--soft);line-height:1.9;}
+    @media (max-width:640px){
+      .mmenu{width:min(300px,78vw);padding:100px 26px 28px;}
+      .mmenu a{font-size:25px;padding:12px 0;}
+      .mmenu a svg{width:21px;height:21px;}
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--line-l);
+      padding: 40px 6vw;
+      display: flex; justify-content: center; align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+    .f-item {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--soft); text-decoration: none;
+      font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+      transition: color 0.25s;
+    }
+    .f-item:hover { color: var(--azure); }
+    .f-item svg { width: 17px; height: 17px; }
+    .f-sep { color: var(--line); }
+
+    /* FOOTER mobile: tutte le voci su una riga sola */
+    @media (max-width: 640px) {
+      footer {
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: clamp(10px, 3.4vw, 16px);
+        padding: 32px 4vw;
+      }
+      .f-sep { display: none; }
+      .f-item {
+        gap: clamp(5px, 1.6vw, 8px);
+        font-size: clamp(7.2px, 2.15vw, 9.5px);
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+      }
+      .f-item svg { width: clamp(11px, 3.4vw, 14px); height: clamp(11px, 3.4vw, 14px); }
+    }
+
+
+    .rv { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(0.19,1,0.22,1), transform 1s cubic-bezier(0.19,1,0.22,1); }
+    .rv.in { opacity: 1; transform: translateY(0); }
+
+    .head { padding: 170px 6vw 6dvh; text-align: center; }
+    .head .k { font-size: 10.5px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--soft); display: block; margin-bottom: 22px; }
+    .head h1 { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(38px, 6vw, 84px); letter-spacing: -0.02em; line-height: 1.05; }
+    .head h1 em { font-style: italic; color: var(--azure); }
+    .head-meta { margin-top: 22px; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--soft); }
+
+    .doc { max-width: 720px; margin: 0 auto; padding: 6dvh 6vw 14dvh; }
+    .doc section { padding-top: 6dvh; margin-top: 6dvh; border-top: 1px solid var(--line-l); }
+    .doc section:first-of-type { border-top: none; margin-top: 0; padding-top: 2dvh; }
+    .doc h2 { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(21px, 2.8vw, 28px); letter-spacing: -0.01em; margin-bottom: 20px; }
+    .doc h2 .n { font-size: 0.55em; color: var(--azure); font-style: italic; margin-right: 12px; }
+    .doc h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 16px; margin: 26px 0 10px; }
+    .doc p { font-size: 14.5px; line-height: 1.85; color: var(--soft); margin-bottom: 16px; }
+    .doc p strong { color: var(--ink); font-weight: 400; }
+    .doc a { color: var(--azure); text-decoration: underline; text-underline-offset: 3px; }
+    .doc ul { list-style: none; margin: 0 0 16px; }
+    .doc li { font-size: 14.5px; line-height: 1.75; color: var(--soft); padding-left: 22px; position: relative; margin-bottom: 10px; }
+    .doc li::before { content: '·'; position: absolute; left: 0; color: var(--azure); }
+    .doc li strong { color: var(--ink); font-weight: 400; }
+
+    .ck-wrap { overflow-x: auto; background: var(--paper2); box-shadow: 0 10px 30px rgba(26,26,22,0.06); }
+    .ck-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .ck-table th, .ck-table td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--line-l); vertical-align: top; }
+    .ck-table tr:last-child td { border-bottom: none; }
+    .ck-table th { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--azure); font-weight: 500; }
+    .ck-table td { color: var(--soft); line-height: 1.6; }
+    .ck-table td strong { color: var(--ink); font-weight: 500; }
+
+    .reset-btn { display: inline-flex; align-items: center; gap: 12px; margin-top: 6px; font-family: 'Archivo', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper); background: var(--ink); border: 1px solid var(--ink); padding: 14px 28px; cursor: pointer; transition: background 0.25s; }
+    .reset-btn:hover { background: #000; }
+    .reset-note { font-size: 13px; color: var(--soft); margin-top: 14px; }
+
+    .updated { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--soft); margin-top: 6dvh; padding-top: 4dvh; border-top: 1px solid var(--line-l); }
+
+    @media (max-width: 640px) {
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="logo" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="6.4" cy="5.6" r="2.9"/><circle cx="17.6" cy="5.6" r="2.9"/><circle cx="6.4" cy="13.4" r="2.9"/><circle cx="17.6" cy="13.4" r="2.9"/><line x1="8.5" y1="7.7" x2="10.3" y2="9"/><line x1="15.5" y1="7.7" x2="13.7" y2="9"/><line x1="8.5" y1="11.3" x2="10.3" y2="10"/><line x1="15.5" y1="11.3" x2="13.7" y2="10"/><rect x="9.7" y="8" width="4.6" height="3.4" rx="1" fill="var(--azure)" stroke="none"/><line x1="3" y1="20.4" x2="21" y2="20.4" stroke-linecap="round" stroke-dasharray="1.6 3"/></svg><span>Linea di <em>Volo</em></span></a>
+  <div class="nav-links">
+    <a href="https://www.gioriva.it"><svg viewBox="0 0 64 64" fill="currentColor" stroke="none"><path d="M 8 20 Q 32 13 56 20 L 56 15 Q 32 7 8 15 Z"/><rect x="13" y="22" width="38" height="5"/><polygon points="20,27 26,27 24,54 18,54"/><polygon points="38,27 44,27 46,54 40,54"/><rect x="15" y="35" width="34" height="5"/><rect x="29.5" y="27" width="5" height="8"/></svg><span>Gio Riva</span></a>
+    <a href="https://www.gioriva.it/lineadivolo/works.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16.8 20.5H5.2A1.7 1.7 0 0 1 3.5 18.8V7.2"/><rect x="7.5" y="3.5" width="13" height="13" rx="1.6"/><path d="M7.7 13.4l3.5-3.2 2.6 2.2 2.8-2.6 3.7 3.4"/></svg><span>Album<small>Il mondo dall'alto</small></span></a>
+    <a href="video.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="6.5" width="13.5" height="11" rx="1.8"/><path d="M16 11l5.5-3v8L16 13z"/></svg><span>Video<small>Le riprese dall'alto</small></span></a>
+    <a href="contatti.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span>Contatti<small>Scrivimi due righe</small></span></a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+</nav>
+
+<div class="mm-veil" id="mveil"></div>
+<div class="mmenu" id="mmenu">
+  <a href="https://www.gioriva.it"><svg viewBox="0 0 64 64" fill="currentColor" stroke="none"><path d="M 8 20 Q 32 13 56 20 L 56 15 Q 32 7 8 15 Z"/><rect x="13" y="22" width="38" height="5"/><polygon points="20,27 26,27 24,54 18,54"/><polygon points="38,27 44,27 46,54 40,54"/><rect x="15" y="35" width="34" height="5"/><rect x="29.5" y="27" width="5" height="8"/></svg><span>Gio Riva</span></a>
+  <hr class="mm-rule">
+  <a href="https://www.gioriva.it/lineadivolo/works.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16.8 20.5H5.2A1.7 1.7 0 0 1 3.5 18.8V7.2"/><rect x="7.5" y="3.5" width="13" height="13" rx="1.6"/><path d="M7.7 13.4l3.5-3.2 2.6 2.2 2.8-2.6 3.7 3.4"/></svg><span>Album<small>Il mondo dall'alto</small></span></a>
+  <a href="video.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="6.5" width="13.5" height="11" rx="1.8"/><path d="M16 11l5.5-3v8L16 13z"/></svg><span>Video<small>Le riprese dall'alto</small></span></a>
+  <a href="contatti.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span>Contatti<small>Scrivimi due righe</small></span></a>
+  <div class="mm-foot">Linea di Volo · Fotografia aerea · DJI Mini Pro 5</div>
+</div>
+
+<header class="head">
+  <span class="k">Informativa · GDPR</span>
+  <h1>Privacy <em>&amp; cookie</em></h1>
+  <div class="head-meta">Ai sensi del Reg. UE 2016/679</div>
+</header>
+
+<main class="doc">
+
+  <section>
+    <h2><span class="n">I.</span>Titolare del trattamento</h2>
+    <p>Il titolare del trattamento dei dati raccolti tramite questo sito è il <strong>gestore del sito Linea di Volo</strong>, raggiungibile per qualsiasi richiesta relativa alla privacy tramite i recapiti indicati sul sito.</p>
+    <p>Questo sito è un portfolio personale dedicato alla fotografia aerea realizzata con drone DJI Mini Pro 5. Non vende prodotti né raccoglie dati per finalità commerciali.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">II.</span>Dati raccolti</h2>
+    <p>Durante la navigazione il sito raccoglie esclusivamente <strong>dati statistici e di navigazione</strong> in forma aggregata, attraverso Google Analytics 4, e solo previo tuo consenso. Tra questi:</p>
+    <ul>
+      <li>pagine visitate e tempo di permanenza;</li>
+      <li>tipo di dispositivo, browser e sistema operativo;</li>
+      <li>area geografica approssimativa di provenienza (a livello di città/regione);</li>
+      <li>sorgente di provenienza (motore di ricerca, link diretto, social).</li>
+    </ul>
+    <p>Il sito <strong>non raccoglie dati personali identificativi</strong> (nome, email, telefono) salvo quelli che tu scelga eventualmente di comunicare contattando volontariamente il titolare.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">III.</span>Finalità e base giuridica</h2>
+    <p>I dati statistici sono trattati per la sola finalità di <strong>comprendere l'andamento delle visite</strong> e migliorare i contenuti del sito. La base giuridica del trattamento è il <strong>consenso</strong> dell'utente (art. 6, par. 1, lett. a del GDPR), che puoi prestare o negare liberamente tramite il banner cookie e revocare in qualsiasi momento.</p>
+  </section>
+
+  <section id="cookie">
+    <h2><span class="n">IV.</span>Cookie utilizzati</h2>
+    <p>Un cookie è un piccolo file di testo memorizzato dal browser. Questo sito utilizza due categorie di cookie:</p>
+
+    <h3>Cookie tecnici (sempre attivi)</h3>
+    <p>Necessari al funzionamento del sito. Non richiedono consenso. Qui rientra la memorizzazione locale della tua scelta sui cookie, così da non riproporti il banner a ogni visita.</p>
+
+    <h3>Cookie analitici (previo consenso)</h3>
+    <p>Attivati solo dopo il tuo "Accetta", servono a produrre statistiche di visita tramite Google Analytics 4.</p>
+
+    <div class="ck-wrap">
+      <table class="ck-table">
+        <thead>
+          <tr><th>Cookie</th><th>Fornitore</th><th>Finalità</th><th>Durata</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>_ga</strong></td><td>Google</td><td>Distingue gli utenti unici</td><td>2 anni</td></tr>
+          <tr><td><strong>_ga_*</strong></td><td>Google</td><td>Mantiene lo stato della sessione</td><td>2 anni</td></tr>
+          <tr><td><strong>ag_consent</strong></td><td>Questo sito</td><td>Memorizza la tua scelta sui cookie</td><td>Persistente (locale)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Contenuti incorporati</h3>
+    <p>Alcune pagine incorporano video tramite <strong>YouTube in modalità privacy avanzata</strong> (youtube-nocookie.com): in questa modalità YouTube non installa cookie di profilazione finché non avvii la riproduzione del video. All'avvio, si applicano le <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">condizioni privacy di Google/YouTube</a>.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">V.</span>Google Analytics</h2>
+    <p>Il sito utilizza <strong>Google Analytics 4</strong>, servizio di analisi fornito da Google Ireland Ltd. Il servizio è configurato in modalità <strong>Consent Mode v2</strong>: nessun dato viene inviato a Google prima del tuo consenso esplicito. In GA4 l'indirizzo IP è anonimizzato di default e non viene mai registrato né archiviato.</p>
+    <p>Google può trasferire i dati raccolti su server situati anche al di fuori dell'Unione Europea. Per maggiori dettagli consulta la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy di Google</a> e le informazioni su <a href="https://support.google.com/analytics/answer/6004245" target="_blank" rel="noopener">come Analytics utilizza i dati</a>.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">VI.</span>Conservazione dei dati</h2>
+    <p>I dati statistici aggregati raccolti tramite Google Analytics sono conservati per il periodo impostato nel servizio (di norma fino a 14 mesi) e successivamente cancellati o anonimizzati automaticamente.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">VII.</span>I tuoi diritti</h2>
+    <p>In qualità di interessato hai il diritto, in qualsiasi momento, di:</p>
+    <ul>
+      <li><strong>Accedere</strong> ai tuoi dati e chiederne una copia;</li>
+      <li><strong>Rettificare</strong> o <strong>cancellare</strong> i dati che ti riguardano;</li>
+      <li><strong>Limitare</strong> od <strong>opporti</strong> al trattamento;</li>
+      <li><strong>Revocare il consenso</strong> già prestato, senza pregiudicare la liceità del trattamento precedente;</li>
+      <li>Proporre <strong>reclamo</strong> all'Autorità Garante per la protezione dei dati personali.</li>
+    </ul>
+    <p>Per esercitare questi diritti è sufficiente contattare il titolare tramite i recapiti del sito.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">VIII.</span>Gestione del consenso</h2>
+    <p>Puoi modificare o revocare in qualsiasi momento la tua scelta sui cookie. Premendo il pulsante qui sotto, la preferenza salvata verrà azzerata e il banner ricomparirà per consentirti una nuova scelta.</p>
+    <button class="reset-btn" id="resetConsent">Reimposta preferenze cookie</button>
+    <p class="reset-note" id="resetNote"></p>
+  </section>
+
+  <div class="updated">Ultimo aggiornamento · Luglio 2026</div>
+
+</main>
+
+<footer>
+  <a class="f-item" href="https://www.gioriva.it" title="Gio Riva">
+    <svg viewBox="0 0 64 64" fill="currentColor" stroke="none"><path d="M 8 20 Q 32 13 56 20 L 56 15 Q 32 7 8 15 Z"/><rect x="13" y="22" width="38" height="5"/><polygon points="20,27 26,27 24,54 18,54"/><polygon points="38,27 44,27 46,54 40,54"/><rect x="15" y="35" width="34" height="5"/><rect x="29.5" y="27" width="5" height="8"/></svg>
+    <span>Gio Riva</span>
+  </a>
+  <span class="f-sep">·</span>
+  <a class="f-item" href="privacy.html" title="Privacy &amp; Cookie">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V6l-8-3-8 3v6c0 6 8 10 8 10z"/><circle cx="9.8" cy="9.4" r="0.9" fill="currentColor" stroke="none"/><circle cx="13.7" cy="11.2" r="0.9" fill="currentColor" stroke="none"/><circle cx="10.6" cy="13.6" r="0.9" fill="currentColor" stroke="none"/></svg>
+    <span>Privacy &amp; Cookie</span>
+  </a>
+  <span class="f-sep">·</span>
+  <a class="f-item" href="contatti.html" title="Contatti">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+    <span>Contatti</span>
+  </a>
+</footer>
+
+<script>
+const burger = document.getElementById('burger');
+const mmenu  = document.getElementById('mmenu');
+const mveil  = document.getElementById('mveil');
+
+function chiudiMenu() {
+  mmenu.classList.remove('open');
+  mveil.classList.remove('open');
+  burger.classList.remove('open');
+}
+burger.addEventListener('click', () => {
+  const apri = !mmenu.classList.contains('open');
+  mmenu.classList.toggle('open', apri);
+  mveil.classList.toggle('open', apri);
+  burger.classList.toggle('open', apri);
+});
+mveil.addEventListener('click', chiudiMenu);
+mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', chiudiMenu));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') chiudiMenu(); });
+
+const note = document.getElementById('resetNote');
+document.getElementById('resetConsent').addEventListener('click', () => {
+  localStorage.removeItem('ag_consent');
+  if (typeof gtag === 'function') {
+    gtag('consent', 'update', { 'analytics_storage': 'denied' });
+  }
+  note.textContent = 'Preferenze azzerate. Il banner ricomparirà alla prossima pagina che aprirai.';
+});
+</script>
+</body>
+</html>
