@@ -195,6 +195,10 @@ section{padding:96px 0 0}
 }
 .tooltip .t-ora{opacity:.7;font-weight:500;margin-right:6px}
 .nota-grafico{margin-top:10px;font-size:13px;color:var(--inchiostro-2);font-weight:500}
+.legenda{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.leg{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--inchiostro-2)}
+.leg .q{width:12px;height:12px;border-radius:4px}
+.leg .q.parziale{opacity:.45;outline:1.5px dashed var(--inchiostro-2);outline-offset:1px}
 
 /* ---------- CO2 ---------- */
 .blocco-co2{
@@ -362,6 +366,23 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
         <div class="tooltip" id="tooltip"></div>
       </div>
       <p class="nota-grafico" id="notaGrafico">Un punto ogni 5 minuti, direttamente dagli inverter Huawei.</p>
+    </div>
+  </section>
+
+  <section class="contenitore" data-pronto id="sezStorico" hidden>
+    <h2 class="titolo-sez">Lo storico, mese per mese</h2>
+    <p class="sotto-sez">Tutta la produzione da quando i pannelli sono stati accesi, nel maggio 2024. Il mese in corso cresce in diretta.</p>
+    <div class="pannello-grafico">
+      <div class="legenda">
+        <span class="leg"><span class="q" style="background:var(--toyota)"></span>Toyota</span>
+        <span class="leg"><span class="q" style="background:var(--lexus)"></span>Lexus</span>
+        <span class="leg"><span class="q parziale" style="background:var(--ambra)"></span>mese in corso</span>
+      </div>
+      <div class="area-svg" id="areaStorico">
+        <svg id="svgStorico" viewBox="0 0 800 320" role="img" aria-label="Produzione mensile dall'attivazione"></svg>
+        <div class="tooltip" id="tooltipStorico"></div>
+      </div>
+      <p class="nota-grafico">Dati mensili dai report FusionSolar, in kWh.</p>
     </div>
   </section>
 
@@ -545,6 +566,107 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
     });
   });
 
+  /* ---------- Storico mensile ---------- */
+  var storico = null;
+  var MESI_IT = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
+  function nomeMese(chiave, lungo){
+    var a = chiave.split("-");
+    var n = MESI_IT[(+a[1])-1] || "";
+    return lungo ? n + " " + a[0] : n + " " + a[0].slice(2);
+  }
+
+  function caricaStorico(){
+    fetch("storico.json", {cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+      .then(function(j){
+        storico = j;
+        document.getElementById("sezStorico").hidden = false;
+        disegnaStorico();
+      })
+      .catch(function(){ /* senza storico la sezione resta nascosta */ });
+  }
+
+  function barreStorico(){
+    if (!storico) return [];
+    var barre = storico.mesi.slice();
+    if (dati){
+      var chiaveOra = (dati.aggiornato || new Date().toISOString()).slice(0,7);
+      if (chiaveOra > barre[barre.length-1].m){
+        var b = { m: chiaveOra, toyota: 0, lexus: 0, corrente: true };
+        dati.impianti.forEach(function(i){ if (!i.errore) b[i.id] = i.meseKwh || 0; });
+        barre.push(b);
+      }
+    }
+    return barre;
+  }
+
+  function disegnaStorico(){
+    var svg = document.getElementById("svgStorico");
+    var barre = barreStorico();
+    if (!barre.length){ svg.innerHTML = ""; return; }
+    var W=800, H=320, PS=14, PB=34, PL=44, PR=10;
+    var max = Math.max.apply(null, barre.map(function(b){ return (b.toyota||0)+(b.lexus||0); }).concat([1])) * 1.12;
+    var n = barre.length;
+    var passo = (W-PL-PR)/n, largh = Math.min(passo*0.66, 26);
+    var Y = function(v){ return H-PB - (H-PS-PB) * v/max; };
+
+    var griglia = "", etY = "";
+    for (var g=0; g<=4; g++){
+      var vy = max*g/4, y = Y(vy).toFixed(1);
+      griglia += '<line x1="'+PL+'" y1="'+y+'" x2="'+(W-PR)+'" y2="'+y+'" stroke="#E5EDF4" stroke-width="1"/>';
+      etY += '<text x="'+(PL-8)+'" y="'+(+y+4)+'" text-anchor="end" font-size="12" font-weight="600" fill="#8CA0B3">'+(Math.round(vy/100)/10)+'</text>';
+    }
+    etY += '<text x="'+(PL-8)+'" y="'+(PS-2)+'" text-anchor="end" font-size="11" font-weight="600" fill="#8CA0B3">MWh</text>';
+
+    var corpi = "", etX = "";
+    for (var i=0;i<n;i++){
+      var b = barre[i];
+      var cx = PL + passo*i + passo/2, x = (cx - largh/2).toFixed(1);
+      var t = b.toyota||0, l = b.lexus||0;
+      var yT = Y(t), yL = Y(t+l);
+      var op = b.corrente ? ' opacity=".45"' : '';
+      if (t > 0) corpi += '<rect x="'+x+'" y="'+yT.toFixed(1)+'" width="'+largh.toFixed(1)+'" height="'+(H-PB-yT).toFixed(1)+'" fill="#D6001C" rx="2"'+op+'/>';
+      if (l > 0) corpi += '<rect x="'+x+'" y="'+yL.toFixed(1)+'" width="'+largh.toFixed(1)+'" height="'+(yT-yL).toFixed(1)+'" fill="#2E4A66" rx="2"'+op+'/>';
+      if (i % 4 === 0 || b.corrente)
+        etX += '<text x="'+cx.toFixed(1)+'" y="'+(H-10)+'" text-anchor="middle" font-size="11" font-weight="600" fill="#8CA0B3">'+nomeMese(b.m)+'</text>';
+    }
+
+    svg.innerHTML = griglia + etY + corpi + etX +
+      '<rect id="evidStorico" y="'+PS+'" height="'+(H-PS-PB)+'" width="'+passo.toFixed(1)+'" fill="#14283C" opacity="0" rx="4"/>';
+    svg._geomS = {W:W,H:H,PL:PL,PR:PR,passo:passo,n:n,barre:barre};
+  }
+
+  function agganciaScrubStorico(){
+    var area = document.getElementById("areaStorico");
+    var svg = document.getElementById("svgStorico");
+    var tip = document.getElementById("tooltipStorico");
+    function mostra(ev){
+      var g = svg._geomS; if (!g) return;
+      var box = svg.getBoundingClientRect();
+      var px = (ev.clientX - box.left) / box.width * g.W;
+      var i = Math.floor((px - g.PL) / g.passo);
+      if (i < 0 || i >= g.n){ nascondi(); return; }
+      var b = g.barre[i], tot = (b.toyota||0)+(b.lexus||0);
+      var ev1 = svg.querySelector("#evidStorico");
+      ev1.setAttribute("x", (g.PL + g.passo*i).toFixed(1));
+      ev1.setAttribute("opacity", ".06");
+      tip.innerHTML = '<span class="t-ora">'+nomeMese(b.m, true)+(b.corrente?" (in corso)":"")+'</span>'+
+        fmt(tot,0)+' kWh<br><span class="t-ora">Toyota</span>'+fmt(b.toyota||0,0)+
+        ' <span class="t-ora">Lexus</span>'+fmt(b.lexus||0,0);
+      tip.style.left = ((g.PL + g.passo*i + g.passo/2)/g.W*100)+"%";
+      tip.style.top = "18%";
+      tip.style.opacity = 1;
+    }
+    function nascondi(){
+      tip.style.opacity = 0;
+      var ev1 = svg.querySelector("#evidStorico");
+      if (ev1) ev1.setAttribute("opacity","0");
+    }
+    area.addEventListener("pointermove", mostra);
+    area.addEventListener("pointerdown", mostra);
+    area.addEventListener("pointerleave", nascondi);
+  }
+
   /* ---------- Card impianti ---------- */
   function disegnaImpianti(){
     var box = document.getElementById("grigliaImpianti");
@@ -603,6 +725,7 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
     animaSole(potenza, piccoOggi);
     disegnaGrafico();
     disegnaImpianti();
+    disegnaStorico();
 
     var d = new Date(dati.aggiornato || Date.now());
     document.getElementById("oraAgg").textContent =
@@ -635,7 +758,9 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
 
   aggiornaCielo();
   agganciaScrub();
+  agganciaScrubStorico();
   carica(true);
+  caricaStorico();
   setInterval(function(){ carica(false); }, 5*60*1000);
   setInterval(aggiornaCielo, 60*1000);
 })();
