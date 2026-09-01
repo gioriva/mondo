@@ -159,7 +159,8 @@ header{
 @media(max-width:400px){.cont{padding:16px 14px 14px}}
 
 /* ---------- Sezioni ---------- */
-section{padding:64px 0 0}
+section{padding:96px 0 0}
+.contatori{margin-bottom:8px}
 .titolo-sez{
   font-weight:800;font-stretch:108%;
   font-size:clamp(22px,3vw,30px);letter-spacing:-.01em;
@@ -280,7 +281,6 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
 
 <header>
   <div class="contenitore testata">
-    <span class="badge-live"><span class="punto"></span>Dati in diretta</span>
     <a class="marchio" href="/fotovoltaico/" aria-label="Fusion Solar Rivauto">
       <!-- Logo: sole sopra un tetto -->
       <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
@@ -298,6 +298,7 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
       </svg>
       <span class="nome"><b>Fusion Solar</b><span>Rivauto</span></span>
     </a>
+    <span class="badge-live"><span class="punto"></span>Dati in diretta</span>
   </div>
 </header>
 
@@ -365,6 +366,12 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
   </section>
 
   <section class="contenitore" data-pronto>
+    <h2 class="titolo-sez">I due impianti</h2>
+    <p class="sotto-sez">Due tetti, due impianti indipendenti realizzati da Geneco con inverter e pannelli Huawei.</p>
+    <div class="griglia-imp" id="grigliaImpianti"></div>
+  </section>
+
+  <section class="contenitore" data-pronto>
     <h2 class="titolo-sez">Quanta CO2 abbiamo evitato</h2>
     <div class="blocco-co2">
       <div class="co2-sx">
@@ -378,12 +385,6 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
         <div class="equiv"><div class="icona">🌍</div><div><div class="val" id="eqGiri">0</div><div class="cosa">giri del mondo, sempre in elettrico</div></div></div>
       </div>
     </div>
-  </section>
-
-  <section class="contenitore" data-pronto>
-    <h2 class="titolo-sez">I due impianti</h2>
-    <p class="sotto-sez">Due tetti, due impianti indipendenti realizzati da Geneco con inverter e pannelli Huawei.</p>
-    <div class="griglia-imp" id="grigliaImpianti"></div>
   </section>
 </main>
 
