@@ -207,29 +207,45 @@ section.contenitore{padding-top:104px}
 .leg .q.parziale{opacity:.45;outline:1.5px dashed var(--inchiostro-2);outline-offset:1px}
 
 /* ---------- CO2 ---------- */
-.blocco-co2{
-  margin-top:22px;border-radius:var(--raggio);overflow:hidden;
-  background:linear-gradient(135deg,#0F3D2E 0%,#1B5C44 100%);
-  color:#fff;display:grid;grid-template-columns:1.1fr 1fr;
+.griglia-co2{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.scheda-co2{
+  position:relative;overflow:hidden;
+  border-radius:var(--raggio);padding:26px 22px 24px;
+  background:linear-gradient(150deg,var(--verde-a) 0%,var(--verde-b) 100%);
+  color:#fff;display:flex;flex-direction:column;gap:14px;
+  box-shadow:0 16px 40px -24px rgba(12,53,39,.85);
 }
-.co2-sx{padding:36px 34px}
-.co2-sx .mega{
-  font-weight:900;font-stretch:115%;
-  font-size:clamp(52px,7vw,84px);line-height:1;letter-spacing:-.03em;
+.scheda-co2.c1{--verde-a:#0A3125;--verde-b:#17503B}
+.scheda-co2.c2{--verde-a:#114935;--verde-b:#226E52}
+.scheda-co2.c3{--verde-a:#1A6449;--verde-b:#2F8F69}
+.scheda-co2.c4{--verde-a:#268163;--verde-b:#43AE84}
+.scheda-co2::after{
+  content:"";position:absolute;right:-40px;top:-40px;
+  width:150px;height:150px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 70%);
+  pointer-events:none;
+}
+.scheda-co2 .simbolo{
+  width:46px;height:46px;border-radius:14px;flex:none;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);
+}
+.scheda-co2 .simbolo svg{width:24px;height:24px;stroke:rgba(255,255,255,.92);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.scheda-co2 .cifra{
+  font-weight:900;font-stretch:112%;
+  font-size:clamp(30px,3.4vw,40px);line-height:1.05;letter-spacing:-.025em;
   font-variant-numeric:tabular-nums;
+  display:flex;align-items:baseline;flex-wrap:wrap;gap:0 6px;
 }
-.co2-sx .mega small{font-size:.32em;font-weight:700}
-.co2-sx .desc{margin-top:10px;font-size:16px;font-weight:600;opacity:.92}
-.co2-sx .fine{margin-top:16px;font-size:13px;opacity:.65;font-weight:500;max-width:40ch}
-.co2-dx{
-  padding:36px 34px;display:flex;flex-direction:column;justify-content:center;gap:20px;
-  background:rgba(255,255,255,.06);border-left:1px solid rgba(255,255,255,.12);
-}
-.equiv{display:flex;align-items:center;gap:14px}
-.equiv .icona{width:42px;height:42px;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.12);border-radius:12px;font-size:20px}
-.equiv .val{font-weight:800;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.15}
-.equiv .cosa{font-size:13.5px;opacity:.8;font-weight:500}
-@media(max-width:760px){.blocco-co2{grid-template-columns:1fr}.co2-dx{border-left:none;border-top:1px solid rgba(255,255,255,.12)}}
+.scheda-co2.compatta .cifra{font-size:clamp(25px,2.4vw,29px)}
+.scheda-co2 .cifra small{font-size:.42em;font-weight:700;letter-spacing:0;opacity:.85}
+.scheda-co2.compatta .cifra small{font-size:.5em}
+.scheda-co2 .voce{font-size:14.5px;font-weight:700;margin-top:8px}
+.scheda-co2 .glossa{font-size:13px;font-weight:500;opacity:.72;line-height:1.45;margin-top:3px}
+.scheda-co2 .corpo{margin-top:auto}
+.nota-co2{margin-top:14px;font-size:13px;color:var(--inchiostro-2);font-weight:500;max-width:70ch}
+@media(max-width:900px){.griglia-co2{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.griglia-co2{grid-template-columns:1fr}.scheda-co2{padding:22px 20px}}
 
 /* ---------- Impianti ---------- */
 .griglia-imp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
@@ -359,6 +375,12 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
   </div>
 
   <section class="contenitore" data-pronto>
+    <h2 class="titolo-sez">I due impianti</h2>
+    <p class="sotto-sez">Due tetti, due impianti indipendenti realizzati da Geneco con inverter e pannelli Huawei.</p>
+    <div class="griglia-imp" id="grigliaImpianti"></div>
+  </section>
+
+  <section class="contenitore" data-pronto>
     <h2 class="titolo-sez">La giornata, ora per ora</h2>
     <p class="sotto-sez">La curva parte dall'alba e si spegne al tramonto. Tocca il grafico per leggere la potenza in ogni momento.</p>
     <div class="pannello-grafico">
@@ -395,30 +417,61 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
         <svg id="svgStorico" viewBox="0 0 800 320" role="img" aria-label="Produzione mensile dall'attivazione"></svg>
         <div class="tooltip" id="tooltipStorico"></div>
       </div>
-      <p class="nota-grafico">Dati mensili dai report FusionSolar, in kWh.</p>
+      <p class="nota-grafico">Dati mensili dai report FusionSolar. Asse in MWh, dettaglio in kWh.</p>
     </div>
   </section>
 
   <section class="contenitore" data-pronto>
-    <h2 class="titolo-sez">I due impianti</h2>
-    <p class="sotto-sez">Due tetti, due impianti indipendenti realizzati da Geneco con inverter e pannelli Huawei.</p>
-    <div class="griglia-imp" id="grigliaImpianti"></div>
-  </section>
+    <h2 class="titolo-sez">Cosa ci guadagna l'ambiente</h2>
+    <p class="sotto-sez">Ogni kilowattora prodotto sul tetto è un kilowattora che nessuna centrale ha dovuto bruciare. Ecco cosa vuol dire, in concreto.</p>
+    <div class="griglia-co2">
 
-  <section class="contenitore" data-pronto>
-    <h2 class="titolo-sez">Quanta CO2 abbiamo evitato</h2>
-    <div class="blocco-co2">
-      <div class="co2-sx">
-        <div class="mega"><span id="co2Ton">0</span><small> tonnellate</small></div>
-        <p class="desc">di CO2 non emessa da quando i pannelli sono accesi.</p>
-        <p class="fine">Calcolo prudente: 0,26 kg di CO2 per ogni kWh, il fattore del mix elettrico italiano (fonte ISPRA), non quello a carbone usato da Huawei.</p>
-      </div>
-      <div class="co2-dx">
-        <div class="equiv"><div class="icona">🌳</div><div><div class="val" id="eqAlberi">0</div><div class="cosa">alberi che assorbono CO2 per un anno</div></div></div>
-        <div class="equiv"><div class="icona">🔋</div><div><div class="val" id="eqKm">0 km</div><div class="cosa">percorribili con un'auto elettrica</div></div></div>
-        <div class="equiv"><div class="icona">🌍</div><div><div class="val" id="eqGiri">0</div><div class="cosa">giri del mondo, sempre in elettrico</div></div></div>
-      </div>
+      <article class="scheda-co2 c1">
+        <span class="simbolo" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M6.5 18h10a4 4 0 0 0 .6-7.95 5.5 5.5 0 0 0-10.7-1.2A3.9 3.9 0 0 0 6.5 18Z"/><path d="M9.5 21.5c.6-.8 1.4-1.4 2.5-1.4s1.9.6 2.5 1.4"/></svg>
+        </span>
+        <div class="corpo">
+          <div class="cifra"><span id="co2Ton">0</span><small>tonnellate</small></div>
+          <p class="voce">CO2 non emessa</p>
+          <p class="glossa">Da quando i pannelli sono accesi, nel maggio 2024.</p>
+        </div>
+      </article>
+
+      <article class="scheda-co2 c2">
+        <span class="simbolo" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2.8 7.4 9.6h2.7L5.8 16h12.4l-4.3-6.4h2.7L12 2.8Z"/><path d="M12 16v5.2"/><path d="M9.4 21.2h5.2"/></svg>
+        </span>
+        <div class="corpo">
+          <div class="cifra" id="eqAlberi">0</div>
+          <p class="voce">Alberi equivalenti</p>
+          <p class="glossa">Quanti ne servirebbero per assorbire la stessa CO2 in un anno.</p>
+        </div>
+      </article>
+
+      <article class="scheda-co2 c3 compatta">
+        <span class="simbolo" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M19.5 17H21v-4.2l-2.3-5A2 2 0 0 0 16.9 6.6H7.1a2 2 0 0 0-1.8 1.2l-2.3 5V17h1.5"/><path d="M8.5 17h7"/><circle cx="6.5" cy="17" r="2"/><circle cx="17.5" cy="17" r="2"/><path d="M4.2 12.4h15.6"/></svg>
+        </span>
+        <div class="corpo">
+          <div class="cifra"><span id="eqKm">0</span><small>km</small></div>
+          <p class="voce">In auto elettrica</p>
+          <p class="glossa">La distanza percorribile con l'energia che abbiamo prodotto.</p>
+        </div>
+      </article>
+
+      <article class="scheda-co2 c4">
+        <span class="simbolo" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg>
+        </span>
+        <div class="corpo">
+          <div class="cifra" id="eqGiri">0</div>
+          <p class="voce">Giri del mondo</p>
+          <p class="glossa">Sempre in elettrico, lungo tutto l'equatore.</p>
+        </div>
+      </article>
+
     </div>
+    <p class="nota-co2">Calcolo prudente: 0,26 kg di CO2 per ogni kWh, il fattore del mix elettrico italiano (fonte ISPRA), non quello a carbone usato da Huawei. Un albero assorbe 25 kg di CO2 all'anno, un'auto elettrica consuma 0,15 kWh per chilometro.</p>
   </section>
 </main>
 
@@ -691,7 +744,7 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
     var svg = document.getElementById("svgStorico");
     var barre = barreStorico();
     if (!barre.length){ svg.innerHTML = ""; return; }
-    var W=800, H=320, PS=18, PB=34, PL=48, PR=10;
+    var W=800, H=320, PS=28, PB=34, PL=48, PR=10;
     var piccoKwh = Math.max.apply(null, barre.map(function(b){ return b.toyota+b.lexus; }).concat([1]));
     var max = scalaNice(piccoKwh/1000) * 1000;
     var n = barre.length;
@@ -706,7 +759,7 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
       etY += '<text x="'+(PL-8)+'" y="'+(+y+4)+'" text-anchor="end" font-size="12" font-weight="600" fill="#8CA0B3">'+
              (et % 1 === 0 ? et : et.toFixed(1).replace(".",",")) + '</text>';
     }
-    etY += '<text x="'+(PL-8)+'" y="'+(PS-4)+'" text-anchor="end" font-size="11" font-weight="600" fill="#8CA0B3">MWh</text>';
+    etY += '<text x="'+(PL-8)+'" y="12" text-anchor="end" font-size="11" font-weight="600" fill="#8CA0B3">MWh</text>';
 
     var ogniQuante = (vistaStorico === "anni" || annoStorico) ? 1 : (n > 20 ? 4 : 2);
     var corpi = "", etX = "";
@@ -822,7 +875,7 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
     contaFinoA(document.getElementById("co2Ton"), co2Kg/1000, 1, durata);
     document.getElementById("eqAlberi").textContent = fmt(Math.round(co2Kg/25), 0);
     var kmEv = Math.round(totale/0.15);
-    document.getElementById("eqKm").textContent = fmt(kmEv,0) + " km";
+    document.getElementById("eqKm").textContent = fmt(kmEv,0);
     document.getElementById("eqGiri").textContent = fmt(kmEv/40075, 1);
 
     animaSole(potenza, piccoOggi);
