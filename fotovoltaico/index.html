@@ -471,7 +471,7 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
       </article>
 
     </div>
-    <p class="nota-co2">Calcolo prudente: 0,26 kg di CO2 per ogni kWh, il fattore del mix elettrico italiano (fonte ISPRA), non quello a carbone usato da Huawei. Un albero assorbe 25 kg di CO2 all'anno, un'auto elettrica consuma 0,15 kWh per chilometro.</p>
+    <p class="nota-co2">Calcolo prudente: 0,26 kg di CO2 per ogni kWh, il fattore del mix elettrico italiano (fonte ISPRA), non quello a carbone usato da Huawei. Un albero assorbe 25 kg di CO2 all'anno, un'auto elettrica consuma 0,17 kWh per chilometro.</p>
   </section>
 </main>
 
@@ -874,7 +874,7 @@ footer{margin-top:70px;padding:26px 0 34px;border-top:1px solid var(--linea)}
     });
     contaFinoA(document.getElementById("co2Ton"), co2Kg/1000, 1, durata);
     document.getElementById("eqAlberi").textContent = fmt(Math.round(co2Kg/25), 0);
-    var kmEv = Math.round(totale/0.15);
+    var kmEv = Math.round(totale/0.17);
     document.getElementById("eqKm").textContent = fmt(kmEv,0);
     document.getElementById("eqGiri").textContent = fmt(kmEv/40075, 1);
 
