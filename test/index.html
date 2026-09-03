@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A1220">
+<title>Giorgio Riva</title>
+
+<meta name="description" content="Freedom is a state of mind.">
+<meta property="og:title" content="Giorgio Riva">
+<meta property="og:description" content="Freedom is a state of mind.">
+<meta property="og:image" content="https://www.gioriva.it/og-image.png?v=5">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.gioriva.it/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Giorgio Riva">
+<meta name="twitter:description" content="Freedom is a state of mind.">
+<meta name="twitter:image" content="https://www.gioriva.it/og-image.png?v=5">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+
+<!-- Google Analytics + Consent Mode -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied'
+  });
+  gtag('config', 'G-1ZCCJ6QBR4', { 'anonymize_ip': true });
+  try {
+    if (localStorage.getItem('gr_cookie_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* ai-iro, the indigo of Japanese dye, instead of black */
+  --ai:      #0F1B2D;
+  --ai-deep: #0A1220;
+  --silk:    #ECE6DA;
+  --sun:     #C63C3B;
+  --gold:    #C8A97E;
+  --mist:    #7C8A9C;
+  /* names the shared menu and cookie blocks expect */
+  --sumi:  var(--ai);
+  --washi: var(--silk);
+  --shu:   var(--sun);
+  --kin:   var(--gold);
+  --muted: var(--mist);
+  --line:  rgba(236,230,218,0.10);
+  --serif: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif;
+  --jp:    'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --sans:  'Zen Kaku Gothic New', 'Helvetica Neue', Arial, sans-serif;
+}
+
+html { background: var(--ai-deep); }
+
+body {
+  background: linear-gradient(180deg, var(--ai-deep) 0%, var(--ai) 42%, #0C1727 100%);
+  color: var(--silk);
+  font-family: var(--sans);
+  font-weight: 300;
+  height: 100vh;
+  overflow: hidden;
+  cursor: none;
+}
+a, button { cursor: none; }
+a:focus-visible, button:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+
+/* ── The sea ── */
+#sky { position: fixed; inset: 0; z-index: 0; }
+#sea { position: fixed; inset: 0; z-index: 1; }
+
+/* ── The sun: flat, no gradient ── */
+#sun {
+  position: fixed;
+  z-index: 2;
+  width: var(--sun-d);
+  height: var(--sun-d);
+  border-radius: 50%;
+  background: var(--sun);
+  left: 78vw;
+  top: calc(var(--horizon) - var(--sun-d));
+  transform: translateY(24px);
+  opacity: 0;
+  transition: transform 2.4s cubic-bezier(.2,.7,.2,1) .4s, opacity 1.6s ease .4s;
+}
+body.ready #sun { transform: translateY(0); opacity: 1; }
+
+/* ── Masthead: a quiet mark at the top ── */
+.mast {
+  position: fixed;
+  z-index: 10;
+  left: 6vw;
+  bottom: 6vh;
+  opacity: 0;
+  transition: opacity 1.4s ease 1.6s;
+}
+body.ready .mast { opacity: 1; }
+.mast h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.42rem;
+  letter-spacing: 0.06em;
+  line-height: 1.25;
+  color: var(--silk);
+}
+.mast p {
+  margin-top: 0.15rem;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+  color: var(--mist);
+}
+
+/* ── Vertical Japanese column ── */
+.tate {
+  position: fixed;
+  z-index: 10;
+  right: 5.2vw;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-family: var(--jp);
+  font-size: 0.95rem;
+  letter-spacing: 0.32em;
+  color: var(--mist);
+  opacity: 0;
+  transition: opacity 1.6s ease 2.2s;
+}
+body.ready .tate { opacity: 0.85; }
+.tate span { display: block; }
+.tate span + span { margin-right: 0.9em; opacity: 0.6; }
+
+/* ── Clocks ── */
+.clocks {
+  position: fixed;
+  z-index: 10;
+  right: 6vw;
+  bottom: 6vh;
+  text-align: right;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--mist);
+  opacity: 0;
+  transition: opacity 1.4s ease 2.4s;
+}
+body.ready .clocks { opacity: 1; }
+.clocks b { font-weight: 400; color: var(--silk); }
+
+/* ── Hamburger + menu, seigaiha edition ── */
+#burger {
+  position: fixed;
+  top: 1.7rem; right: 2rem;
+  z-index: 10005;
+  width: 44px; height: 44px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 7px;
+  background: none; border: none; padding: 0;
+}
+#burger span {
+  display: block;
+  width: 26px; height: 1px;
+  background: var(--silk);
+  opacity: 0.85;
+  transition: transform .45s cubic-bezier(.16,.84,.44,1), opacity .25s, background .25s, width .3s;
+}
+#burger span:nth-child(2) { width: 18px; align-self: flex-end; margin-right: 9px; }
+#burger:hover span { background: var(--gold); opacity: 1; }
+body.menu-open #burger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+body.menu-open #burger span:nth-child(2) { opacity: 0; }
+body.menu-open #burger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+#menu-veil {
+  position: fixed; inset: 0;
+  z-index: 10003;
+  background: rgba(8,14,26,0.62);
+  backdrop-filter: blur(4px);
+  opacity: 0; visibility: hidden;
+  transition: opacity .5s, visibility .5s;
+}
+body.menu-open #menu-veil { opacity: 1; visibility: visible; }
+
+#menu {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  z-index: 10004;
+  width: min(440px, 88vw);
+  background: var(--ai-deep);
+  border-left: 1px solid rgba(236,230,218,0.08);
+  transform: translateX(100%);
+  transition: transform .6s cubic-bezier(.16,.84,.44,1);
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 5.5rem 3rem 3rem;
+  overflow-y: auto;
+}
+/* seigaiha rising from the bottom of the panel */
+#menu::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 46%;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ECE6DA' stroke-width='1'%3E%3Cpath d='M0 40a40 40 0 0 1 80 0M10 40a30 30 0 0 1 60 0M20 40a20 20 0 0 1 40 0M30 40a10 10 0 0 1 20 0'/%3E%3Cpath d='M-40 80a40 40 0 0 1 80 0M-30 80a30 30 0 0 1 60 0M-20 80a20 20 0 0 1 40 0M-10 80a10 10 0 0 1 20 0'/%3E%3Cpath d='M40 80a40 40 0 0 1 80 0M50 80a30 30 0 0 1 60 0M60 80a20 20 0 0 1 40 0M70 80a10 10 0 0 1 20 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+  mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+body.menu-open #menu { transform: translateX(0); }
+#menu > * { position: relative; z-index: 1; }
+
+.menu-list { display: block; }
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  text-decoration: none;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid rgba(236,230,218,0.07);
+  opacity: 0;
+  transform: translateX(16px);
+  transition: opacity .5s, transform .5s;
+}
+body.menu-open .menu-item { opacity: 1; transform: translateX(0); }
+.menu-list .menu-item:last-child { border-bottom: none; }
+.menu-item .mi {
+  width: 22px; height: 22px;
+  flex: 0 0 auto;
+  color: var(--mist);
+  transition: color .3s, transform .35s;
+}
+.menu-item .tx { display: block; transition: transform .35s; }
+.menu-item .t {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.62rem;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: var(--silk);
+  transition: color .3s;
+}
+.menu-item .s {
+  display: block;
+  margin-top: 0.22rem;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: var(--mist);
+  transition: color .3s;
+}
+.menu-item:hover .t  { color: var(--gold); }
+.menu-item:hover .mi { color: var(--gold); transform: translateX(3px); }
+.menu-item:hover .tx { transform: translateX(5px); }
+.menu-item:hover .s  { color: rgba(236,230,218,0.7); }
+
+.menu-sep {
+  height: 1px;
+  margin: 1.6rem 0;
+  background: rgba(236,230,218,0.12);
+}
+
+.menu-icons {
+  display: flex;
+  gap: 1.8rem;
+  list-style: none;
+  opacity: 0;
+  transition: opacity .5s;
+}
+body.menu-open .menu-icons { opacity: 1; transition-delay: .5s; }
+.menu-icons a { display: block; color: var(--mist); transition: color .25s, transform .25s; }
+.menu-icons svg { width: 18px; height: 18px; display: block; }
+.menu-icons a:hover { color: var(--gold); transform: translateY(-2px); }
+
+@media (max-width: 768px) {
+  #burger { top: 1.1rem; right: 1.1rem; }
+  #menu { width: 100vw; border-left: none; padding: 5rem 2rem 2.5rem; }
+  .menu-item .t { font-size: 1.45rem; }
+}
+
+/* ── Custom cursor ── */
+#cur-dot {
+  position: fixed; top: 0; left: 0;
+  width: 6px; height: 6px;
+  background: var(--shu);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10020;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s;
+}
+body.hov #cur-dot  { width: 10px; height: 10px; background: var(--washi); }
+
+/* ── Orizuru (paper crane) ── */
+#orizuru {
+  position: fixed;
+  z-index: 8;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  pointer-events: none;
+}
+#orizuru.visible { opacity: 1; }
+#orizuru svg { display: block; overflow: visible; }
+
+/* ── Cookie banner ── */
+#cookie-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(140%);
+  z-index: 10000;
+  width: min(92vw, 640px);
+  background: rgba(26,25,31,0.97);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(233,228,216,0.14);
+  border-radius: 4px;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  transition: transform .6s cubic-bezier(.16,.84,.44,1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+#cookie-banner.show { transform: translateX(-50%) translateY(0); }
+.cookie-text { flex: 1 1 280px; font-size: 0.78rem; line-height: 1.7; color: var(--muted); }
+.cookie-text strong {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--washi);
+  margin-bottom: 0.35rem;
+}
+.cookie-text a { color: var(--shu); text-decoration: none; border-bottom: 1px solid rgba(181,67,60,0.35); }
+.cookie-text a:hover { color: var(--washi); }
+.cookie-actions { display: flex; gap: 0.75rem; flex: 0 0 auto; }
+.cookie-btn {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.2rem;
+  border-radius: 2px;
+  border: 1px solid var(--shu);
+  background: transparent;
+  color: var(--shu);
+  transition: background .2s, color .2s;
+  white-space: nowrap;
+}
+.cookie-btn.decline { border-color: rgba(233,228,216,0.15); color: var(--muted); }
+.cookie-btn.accept:hover { background: var(--shu); color: var(--washi); }
+.cookie-btn.decline:hover { border-color: var(--muted); color: var(--washi); }
+
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  body { cursor: auto; height: 100dvh; }
+  a, button { cursor: pointer; }
+  #cur-dot { display: none; }
+  .mast { left: 7vw; bottom: 5dvh; }
+  .mast h1 { font-size: 1.15rem; }
+  .mast p { font-size: 0.76rem; }
+  #sun { left: auto; right: 9vw; }
+  .tate { right: 6vw; top: 44%; font-size: 0.82rem; }
+  .clocks { right: 7vw; bottom: 5dvh; font-size: 0.7rem; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="sky"></canvas>
+<canvas id="sea"></canvas>
+<div id="sun"></div>
+
+<header class="mast">
+  <h1>Giorgio Riva</h1>
+  <p>Freedom is a state of mind.</p>
+</header>
+
+<div class="tate" aria-hidden="true">
+  <span>ジョルジョ・リーヴァ</span>
+  <span>自由は心の在り方</span>
+</div>
+
+<div class="clocks">
+  <div>Como <b id="clock-como">--:--</b></div>
+  <div>Tokyo <b id="clock-tokyo">--:--</b></div>
+</div>
+
+<!-- Menu -->
+<button id="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu">
+  <span></span><span></span><span></span>
+</button>
+
+<div id="menu-veil"></div>
+
+<nav id="menu" aria-label="Menu principale">
+<div class="menu-list">
+  <a class="menu-item" href="https://www.gioriva.it/poitiracconto">
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="8.5"/>
+      <ellipse cx="12" cy="12" rx="3.6" ry="8.5"/>
+      <path d="M3.9 9.2 H20.1 M3.9 14.8 H20.1"/>
+    </svg>
+    <span class="tx">
+      <span class="t">Poi ti racconto</span>
+      <span class="s">Storie e diari di viaggio</span>
+    </span>
+  </a>
+  <a class="menu-item" href="https://www.gioriva.it/lineadivolo">
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="9.6" y="9.6" width="4.8" height="4.8" rx="1.2"/>
+      <path d="M9.6 9.6 L6.4 6.4 M14.4 9.6 L17.6 6.4 M9.6 14.4 L6.4 17.6 M14.4 14.4 L17.6 17.6"/>
+      <path d="M3.4 6.4 H9.4 M14.6 6.4 H20.6 M3.4 17.6 H9.4 M14.6 17.6 H20.6"/>
+    </svg>
+    <span class="tx">
+      <span class="t">Linea di volo</span>
+      <span class="s">Il mondo visto dal drone</span>
+    </span>
+  </a>
+  <a class="menu-item" href="https://www.gioriva.it/quotazero">
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3.6 19 H20.4"/>
+      <path d="M7.4 19 h2.4 M12.2 19 h2.4"/>
+      <path d="M5.2 17.2 C 8 14.4, 11 11.8, 14.6 9.6" stroke-dasharray="1.6 2.2" stroke-opacity="0.75"/>
+      <path d="M13.4 11.6 L20.2 4.6 L17.9 12.6 L16.3 10.4 Z" fill="currentColor" stroke="none"/>
+    </svg>
+    <span class="tx">
+      <span class="t">Quota Zero</span>
+      <span class="s">Il volo comincia a terra</span>
+    </span>
+  </a>
+  <a class="menu-item" href="https://www.gioriva.it/formulatre">
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4.2 13.6 A7.8 7.8 0 0 1 19.8 13.2 V16.4 A1.6 1.6 0 0 1 18.2 18 H10"/>
+      <path d="M4.2 13.6 V16 A2 2 0 0 0 6.2 18 H10"/>
+      <path d="M6.6 11.4 H17.2 A2 2 0 0 1 19.2 13.4 H6.2"/>
+    </svg>
+    <span class="tx">
+      <span class="t">Formula Tre</span>
+      <span class="s">Un album di ricordi</span>
+    </span>
+  </a>
+  <a class="menu-item" href="https://www.gioriva.it/rotta/">
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="5.4" cy="17.6" r="1.5"/>
+      <circle cx="18.4" cy="6.2" r="1.5"/>
+      <path d="M6.6 16.6 C 9 11.6, 13 8.2, 17.2 6.6" stroke-dasharray="1.7 2.3" stroke-opacity="0.75"/>
+      <path d="M9.6 14.6 L15.4 11 L13.2 15.4 L12.2 13.9 Z" fill="currentColor" stroke="none"/>
+    </svg>
+    <span class="tx">
+      <span class="t">Rotta</span>
+      <span class="s">Traccia i tuoi voli</span>
+    </span>
+  </a>
+  <a class="menu-item" href="https://www.gioriva.it/issdeck">
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="2.6"/>
+      <path d="M10.1 10.1 L6.6 6.6 M13.9 13.9 L17.4 17.4"/>
+      <rect x="3.4" y="4.2" width="4.6" height="3" rx="0.6" transform="rotate(-45 5.7 5.7)"/>
+      <rect x="16" y="16.8" width="4.6" height="3" rx="0.6" transform="rotate(-45 18.3 18.3)"/>
+      <path d="M13.9 10.1 L16.4 7.6 M10.1 13.9 L7.6 16.4"/>
+    </svg>
+    <span class="tx">
+      <span class="t">ISS Deck</span>
+      <span class="s">Nello spazio con la ISS</span>
+    </span>
+  </a>
+  </div>
+
+  <div class="menu-sep"></div>
+  <ul class="menu-icons">
+    <li><a href="/privacy.html" aria-label="Privacy" title="Privacy">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3 L19 6 V11 C19 16 16 19.5 12 21 C8 19.5 5 16 5 11 V6 Z"/>
+        <circle cx="12" cy="11" r="1.6"/>
+        <path d="M12 12.6 V15"/>
+      </svg>
+    </a></li>
+    <li><a href="#" id="cookie-reopen" aria-label="Cookie" title="Cookie">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3 A9 9 0 1 0 21 12 A4 4 0 0 1 16.5 7.5 A4 4 0 0 1 12 3 Z"/>
+        <circle cx="9.5" cy="10" r="0.7" fill="currentColor" stroke="none"/>
+        <circle cx="13" cy="15" r="0.7" fill="currentColor" stroke="none"/>
+        <circle cx="8.5" cy="15.5" r="0.7" fill="currentColor" stroke="none"/>
+      </svg>
+    </a></li>
+    <li><a href="/contatti.html" aria-label="Contattami" title="Contattami">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/>
+        <path d="M4.5 7 L12 13 L19.5 7"/>
+      </svg>
+    </a></li>
+    <li><a href="https://www.linkedin.com/in/giorgioriva/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="4" width="16" height="16" rx="3"/>
+        <path d="M8.5 11 V16"/>
+        <circle cx="8.5" cy="8.3" r="0.9" fill="currentColor" stroke="none"/>
+        <path d="M12 16 V11.5 M12 13 C12 11.8 13 11 14.1 11 C15.3 11 15.8 11.9 15.8 13.1 V16"/>
+      </svg>
+    </a></li>
+    <li><a href="https://www.instagram.com/gioriva" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="4" width="16" height="16" rx="4.5"/>
+        <circle cx="12" cy="12" r="3.6"/>
+        <circle cx="16.6" cy="7.4" r="0.8" fill="currentColor" stroke="none"/>
+      </svg>
+    </a></li>
+  </ul>
+</nav>
+
+<!-- Cookie banner -->
+<div id="cookie-banner" role="dialog" aria-label="Gestione cookie">
+  <div class="cookie-text">
+    <strong>Cookie &amp; privacy</strong>
+    Questo sito usa cookie analitici (Google Analytics) per capire come viene visitato. Sono attivati solo con il tuo consenso. Maggiori dettagli nella <a href="/privacy.html">privacy policy</a>.
+  </div>
+  <div class="cookie-actions">
+    <button class="cookie-btn decline" id="cookie-decline">Rifiuta</button>
+    <button class="cookie-btn accept" id="cookie-accept">Accetta</button>
+  </div>
+</div>
+
+<div id="cur-dot"></div>
+
+<script>
+'use strict';
+
+/* ════════════════════════════════════
+   SKY: quiet dust and a handful of bright stars
+   ════════════════════════════════════ */
+(function () {
+  var cv = document.getElementById('sky');
+  var ctx = cv.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, dpr, t0 = null;
+
+  var dust = [], bright = [];
+  for (var i = 0; i < 90; i++) {
+    dust.push({ x: Math.random(), y: Math.random() * 0.42, r: 0.3 + Math.random() * 0.6,
+                ph: Math.random() * 6.28, sp: 0.25 + Math.random() * 0.5 });
+  }
+  for (var j = 0; j < 9; j++) {
+    bright.push({ x: 0.03 + Math.random() * 0.94, y: 0.04 + Math.random() * 0.32,
+                  r: 0.9 + Math.random() * 0.7, ph: Math.random() * 6.28, sp: 0.2 + Math.random() * 0.35 });
+  }
+
+  function layout() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  layout();
+  window.addEventListener('resize', layout);
+
+  function draw(ts) {
+    if (t0 === null) t0 = ts;
+    var time = reduce ? 0 : (ts - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+
+    for (var i = 0; i < dust.length; i++) {
+      var d = dust[i];
+      var a = 0.07 + 0.13 * (0.5 + 0.5 * Math.sin(time * d.sp + d.ph));
+      ctx.beginPath();
+      ctx.arc(d.x * W, d.y * H, d.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(236,230,218,' + a.toFixed(3) + ')';
+      ctx.fill();
+    }
+
+    for (var j = 0; j < bright.length; j++) {
+      var b = bright[j];
+      var k = 0.5 + 0.5 * Math.sin(time * b.sp + b.ph);
+      var x = b.x * W, y = b.y * H;
+      var rr = b.r * (0.9 + 0.25 * k);
+      var glow = ctx.createRadialGradient(x, y, 0, x, y, rr * 5);
+      glow.addColorStop(0, 'rgba(236,230,218,' + (0.09 + 0.08 * k).toFixed(3) + ')');
+      glow.addColorStop(1, 'rgba(236,230,218,0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath(); ctx.arc(x, y, rr * 5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(236,230,218,' + (0.5 + 0.25 * k).toFixed(3) + ')';
+      ctx.beginPath(); ctx.arc(x, y, rr, 0, Math.PI * 2); ctx.fill();
+    }
+
+    if (!reduce || time < 2) requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ════════════════════════════════════
+   SEIGAIHA: the wave pattern as a living
+   wireframe sea, drawn back to front so each
+   row of arcs hides the one behind it.
+   ════════════════════════════════════ */
+(function () {
+  var cv = document.getElementById('sea');
+  var ctx = cv.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, dpr, horizon, rows, maxR, sunX, t0 = null;
+
+  function isMobile() { return window.innerWidth <= 768; }
+
+  function layout() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    horizon = H * (isMobile() ? 0.52 : 0.46);
+    rows = isMobile() ? 15 : 19;
+    maxR = Math.max(34, Math.min(88, W / 22));
+    var d = Math.max(56, Math.min(132, W * 0.07));
+    document.documentElement.style.setProperty('--horizon', horizon + 'px');
+    document.documentElement.style.setProperty('--sun-d', d + 'px');
+    var sun = document.getElementById('sun');
+    sunX = isMobile() ? W - W * 0.09 - d / 2 : W * 0.78 + d / 2;
+  }
+  layout();
+  window.addEventListener('resize', layout);
+
+  function draw(ts) {
+    if (t0 === null) t0 = ts;
+    var time = (ts - t0) / 1000;
+    var shimmer = reduce ? 0 : time;
+
+    ctx.clearRect(0, 0, W, H);
+
+    /* horizon */
+    ctx.strokeStyle = 'rgba(236,230,218,0.16)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, horizon + 0.5); ctx.lineTo(W, horizon + 0.5); ctx.stroke();
+
+    for (var k = 0; k < rows; k++) {
+      var t = k / (rows - 1);                          /* 0 far .. 1 near */
+      var reveal = Math.min(1, Math.max(0, (time - 0.15 - k * 0.075) / 0.9));
+      if (reveal <= 0) continue;
+
+      var y = horizon + (H - horizon) * Math.pow(t, 1.7) + maxR * 0.35 * t;
+      var r = maxR * (0.2 + 0.8 * Math.pow(t, 1.35));
+      var step = r * 1.98;
+      var offset = (k % 2) * r;
+      var bob = Math.sin(shimmer * 0.7 + k * 0.55) * r * 0.035;
+
+      /* far rows cooler, near rows silk */
+      var mixR = Math.round(143 + (236 - 143) * t);
+      var mixG = Math.round(176 + (230 - 176) * t);
+      var mixB = Math.round(200 + (218 - 200) * t);
+      var baseA = (0.08 + 0.26 * t) * reveal;
+
+      var n = Math.ceil(W / step) + 2;
+      for (var i = -1; i < n; i++) {
+        var x = i * step + offset;
+        var cy = y + bob;
+
+        /* occlude what is behind */
+        ctx.fillStyle = k === 0 ? '#0E1929' : (t < 0.5 ? '#0D1726' : '#0C1524');
+        ctx.beginPath(); ctx.arc(x, cy, r, 0, Math.PI * 2); ctx.fill();
+
+        /* traveling light + the sun's path on the water */
+        var ph = Math.sin(shimmer * 0.9 - i * 0.42 + k * 0.7);
+        var a = baseA * (0.55 + 0.45 * ph);
+        var dx = Math.abs(x - sunX);
+        var band = r * (1.6 + 2.2 * (1 - t));
+        var onPath = dx < band;
+        var col = onPath
+          ? 'rgba(200,169,126,' + Math.min(0.9, a * 2.2 + 0.08 * reveal).toFixed(3) + ')'
+          : 'rgba(' + mixR + ',' + mixG + ',' + mixB + ',' + a.toFixed(3) + ')';
+
+        ctx.strokeStyle = col;
+        ctx.lineWidth = 1;
+        for (var q = 1; q <= 4; q++) {
+          ctx.beginPath();
+          ctx.arc(x, cy, r * (q / 4) - 0.5, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
+    }
+
+    if (!reduce || time < 3) requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  setTimeout(function () { document.body.classList.add('ready'); }, 250);
+})();
+
+/* ════════════════════════════════════
+   CLOCKS: Como and Tokyo
+   ════════════════════════════════════ */
+(function () {
+  var como  = document.getElementById('clock-como');
+  var tokyo = document.getElementById('clock-tokyo');
+  function fmt(tz) {
+    try {
+      return new Intl.DateTimeFormat('it-IT', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: tz }).format(new Date());
+    } catch (e) { return '--:--'; }
+  }
+  function tick() {
+    como.textContent  = fmt('Europe/Rome');
+    tokyo.textContent = fmt('Asia/Tokyo');
+  }
+  tick();
+  setInterval(tick, 15000);
+})();
+
+/* ════════════════════════════════════
+   CUSTOM CURSOR
+   ════════════════════════════════════ */
+(function () {
+  var dot = document.getElementById('cur-dot');
+  var mx = 0, my = 0;
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(function (el) {
+    el.addEventListener('mouseenter', function () { document.body.classList.add('hov'); });
+    el.addEventListener('mouseleave', function () { document.body.classList.remove('hov'); });
+  });
+})();
+
+/* ════════════════════════════════════
+   MENU
+   ════════════════════════════════════ */
+(function () {
+  var burger = document.getElementById('burger');
+  var veil   = document.getElementById('menu-veil');
+  var menu   = document.getElementById('menu');
+  var items  = menu.querySelectorAll('.menu-item');
+
+  // staggered reveal
+  items.forEach(function (el, i) {
+    el.style.transitionDelay = (0.12 + i * 0.07) + 's';
+  });
+
+  function open() {
+    document.body.classList.add('menu-open');
+    burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', 'Chiudi il menu');
+  }
+  function close() {
+    document.body.classList.remove('menu-open');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Apri il menu');
+  }
+  function toggle() {
+    document.body.classList.contains('menu-open') ? close() : open();
+  }
+
+  burger.addEventListener('click', toggle);
+  veil.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
+  });
+
+  // expose for the cookie link inside the menu
+  window.__closeMenu = close;
+})();
+
+/* ════════════════════════════════════
+   COOKIE CONSENT
+   ════════════════════════════════════ */
+(function () {
+  var banner  = document.getElementById('cookie-banner');
+  var accept  = document.getElementById('cookie-accept');
+  var decline = document.getElementById('cookie-decline');
+  var reopen  = document.getElementById('cookie-reopen');
+  var KEY = 'gr_cookie_consent';
+
+  function store(val) { try { localStorage.setItem(KEY, val); } catch (e) {} }
+  function getStored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function show() { banner.classList.add('show'); }
+  function hide() { banner.classList.remove('show'); }
+
+  accept.addEventListener('click', function () {
+    store('granted');
+    if (typeof gtag === 'function') gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    hide();
+  });
+  decline.addEventListener('click', function () {
+    store('denied');
+    if (typeof gtag === 'function') gtag('consent', 'update', { 'analytics_storage': 'denied' });
+    hide();
+  });
+  reopen.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (window.__closeMenu) window.__closeMenu();
+    setTimeout(show, 380);
+  });
+
+  if (!getStored()) setTimeout(show, 1800);
+})();
+
+</script>
+</body>
+</html>
