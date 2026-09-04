@@ -97,7 +97,7 @@ a:focus-visible, button:focus-visible { outline: 1px solid var(--gold); outline-
   border-radius: 50%;
   background: var(--sun);
   left: 78vw;
-  top: calc(var(--horizon) - var(--sun-d));
+  top: calc(var(--horizon) - var(--sun-d) - var(--sun-d) * 0.45);   /* a breath above the waves */
   transform: translateY(24px);
   opacity: 0;
   transition: transform 2.4s cubic-bezier(.2,.7,.2,1) .4s, opacity 1.6s ease .4s;
