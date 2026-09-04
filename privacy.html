@@ -2,145 +2,158 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A1220">
 <title>Privacy Policy | Giorgio Riva</title>
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+
+<!-- Google Analytics + Consent Mode -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied'
+  });
+  gtag('config', 'G-1ZCCJ6QBR4', { 'anonymize_ip': true });
+  try {
+    if (localStorage.getItem('gr_cookie_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  } catch (e) {}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:      #0E0E0E;
-  --surface: #151515;
-  --line:    rgba(255,255,255,0.07);
-  --text:    #E8E2D9;
-  --muted:   #6B6560;
+  --ai:      #0F1B2D;
+  --ai-deep: #0A1220;
+  --silk:    #ECE6DA;
+  --sun:     #C63C3B;
   --gold:    #C8A97E;
-  --serif:  'Cormorant Garamond', Georgia, serif;
-  --sans:   'Montserrat', sans-serif;
+  --mist:    #7C8A9C;
+  --line:    rgba(236,230,218,0.10);
+  --serif:   'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif;
+  --sans:    'Zen Kaku Gothic New', 'Helvetica Neue', Arial, sans-serif;
 }
 
-html { scroll-behavior: smooth; }
-
+html { background: var(--ai-deep); }
 body {
-  background: var(--bg);
-  color: var(--text);
+  background: linear-gradient(180deg, var(--ai-deep) 0%, var(--ai) 40%, #0C1727 100%);
+  color: var(--silk);
   font-family: var(--sans);
   font-weight: 300;
-  line-height: 1.8;
   min-height: 100vh;
+  line-height: 1.75;
+}
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 1px solid var(--gold); outline-offset: 4px;
+}
+
+/* seigaiha rising from the bottom of the page */
+body::after {
+  content: '';
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: 38vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.13;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ECE6DA' stroke-width='1'%3E%3Cpath d='M0 40a40 40 0 0 1 80 0M10 40a30 30 0 0 1 60 0M20 40a20 20 0 0 1 40 0M30 40a10 10 0 0 1 20 0'/%3E%3Cpath d='M-40 80a40 40 0 0 1 80 0M-30 80a30 30 0 0 1 60 0M-20 80a20 20 0 0 1 40 0M-10 80a10 10 0 0 1 20 0'/%3E%3Cpath d='M40 80a40 40 0 0 1 80 0M50 80a30 30 0 0 1 60 0M60 80a20 20 0 0 1 40 0M70 80a10 10 0 0 1 20 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+  mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
 }
 
 .wrap {
-  max-width: 760px;
+  position: relative;
+  z-index: 1;
+  max-width: 660px;
   margin: 0 auto;
-  padding: 6rem 2rem 5rem;
+  padding: 4.5rem 1.75rem 6rem;
 }
 
 .back {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  color: var(--mist);
   text-decoration: none;
-  margin-bottom: 3.5rem;
-  transition: gap .25s, color .2s;
+  margin-bottom: 3.2rem;
+  transition: color .2s, gap .25s;
 }
-.back:hover { gap: 1rem; color: var(--gold); }
+.back:hover { color: var(--gold); gap: 0.9rem; }
 
+.sun-mark {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--sun);
+  margin-right: 0.85rem;
+  vertical-align: 0.1em;
+}
 h1 {
   font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  line-height: 1.05;
-  margin-bottom: 0.5rem;
+  font-weight: 400;
+  font-size: clamp(2rem, 4.4vw, 2.8rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
 }
-h1 em { font-style: italic; color: var(--gold); }
-
-.updated {
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 3rem;
-}
-
-.rule { width: 40px; height: 1px; background: var(--gold); opacity: 0.6; margin-bottom: 3rem; }
+.updated { margin-top: 0.6rem; font-size: 0.8rem; color: var(--mist); }
+.rule { width: 60px; height: 1px; background: var(--gold); opacity: 0.7; margin: 1.6rem 0 2.2rem; }
 
 h2 {
   font-family: var(--serif);
   font-weight: 400;
-  font-style: italic;
-  font-size: 1.6rem;
-  color: var(--gold);
-  margin: 2.75rem 0 1rem;
+  font-size: 1.3rem;
+  margin: 2.4rem 0 0.7rem;
+  color: var(--silk);
 }
+p { font-size: 0.95rem; color: rgba(236,230,218,0.82); }
+p + p { margin-top: 0.9rem; }
+.muted { color: var(--mist); font-size: 0.88rem; }
+ul { padding-left: 1.2rem; margin: 0.6rem 0; }
+li { font-size: 0.95rem; color: rgba(236,230,218,0.82); margin: 0.3rem 0; }
+strong { font-weight: 400; color: var(--silk); }
+a.inline { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(200,169,126,0.35); }
+a.inline:hover { color: var(--silk); border-color: var(--silk); }
 
-p { font-size: 0.92rem; color: #cfc8bd; margin-bottom: 1.1rem; }
-p.muted { color: var(--muted); font-size: 0.85rem; }
-
-ul { list-style: none; margin: 0 0 1.1rem; }
-li {
-  font-size: 0.92rem;
-  color: #cfc8bd;
-  padding-left: 1.4rem;
-  position: relative;
-  margin-bottom: 0.6rem;
-}
-li::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0.7em;
-  width: 5px; height: 5px;
-  background: var(--gold);
-  border-radius: 50%;
-  opacity: 0.7;
-}
-
-a.inline { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(200,169,126,0.3); }
-a.inline:hover { color: var(--text); }
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0 1.5rem;
-  font-size: 0.85rem;
-}
-th, td {
-  text-align: left;
-  padding: 0.75rem 0.5rem;
-  border-bottom: 1px solid var(--line);
-  vertical-align: top;
-}
-th {
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 400;
-}
-td { color: #cfc8bd; }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.4rem; font-size: 0.9rem; }
+th, td { text-align: left; padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 400; color: var(--mist); font-size: 0.78rem; }
+td { color: rgba(236,230,218,0.85); }
 
 footer {
-  border-top: 1px solid var(--line);
-  padding: 2rem;
+  position: relative;
+  z-index: 1;
   text-align: center;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  color: var(--muted);
+  padding: 1.6rem;
+  font-size: 0.78rem;
+  color: var(--mist);
 }
-footer a { color: var(--muted); text-decoration: none; }
+footer a { color: var(--mist); text-decoration: none; }
 footer a:hover { color: var(--gold); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.wrap { animation: fadeUp .8s ease both; }
+@media (prefers-reduced-motion: reduce) { .wrap { animation: none; } }
+
+@media (max-width: 560px) {
+  .wrap { padding: 3.2rem 1.4rem 5rem; }
+  th, td { padding: 0.6rem 0.4rem; }
+}
 </style>
 </head>
 <body>
@@ -148,24 +161,29 @@ footer a:hover { color: var(--gold); }
 <div class="wrap">
   <a class="back" href="/">&larr; Torna alla home</a>
 
-  <h1>Privacy <em>Policy</em></h1>
-  <p class="updated">Ultimo aggiornamento &middot; Giugno 2026</p>
+  <h1><span class="sun-mark" aria-hidden="true"></span>Privacy Policy</h1>
+  <p class="updated">Ultimo aggiornamento: settembre 2026</p>
   <div class="rule"></div>
 
   <p>Questa pagina descrive come vengono trattati i dati personali di chi visita questo sito (gioriva.it), in conformità al Regolamento UE 2016/679 (GDPR) e alla normativa italiana vigente. Il sito è un progetto personale a carattere non commerciale.</p>
 
   <h2>Titolare del trattamento</h2>
-  <p>Il titolare del trattamento è Giorgio Riva. Per qualsiasi richiesta relativa ai tuoi dati puoi scrivere all'indirizzo indicato in fondo a questa pagina.</p>
+  <p>Il titolare del trattamento è Giorgio Riva. Per qualsiasi richiesta relativa ai tuoi dati puoi scrivere tramite la <a class="inline" href="/contatti.html">pagina dei contatti</a>.</p>
 
   <h2>Quali dati raccogliamo</h2>
-  <p>Il sito non richiede registrazione e non raccoglie dati identificativi forniti volontariamente (non ci sono moduli di contatto né aree riservate). Gli unici dati trattati sono quelli raccolti, previo tuo consenso, dagli strumenti di analisi statistica:</p>
+  <p>Il sito non richiede registrazione e non ha aree riservate. I dati trattati sono di due tipi.</p>
+  <p><strong>Dati che ci invii tu</strong>, attraverso il modulo di contatto: nome, cognome, indirizzo email e testo del messaggio. Vengono usati esclusivamente per risponderti e non sono ceduti a terzi per altri scopi.</p>
+  <p><strong>Dati statistici</strong>, raccolti solo previo tuo consenso dagli strumenti di analisi:</p>
   <ul>
     <li>Pagine visitate e tempo di permanenza</li>
     <li>Tipo di dispositivo, browser e sistema operativo</li>
-    <li>Provenienza geografica approssimativa (a livello di città/regione)</li>
-    <li>Sorgente di provenienza (es. link da un social network o motore di ricerca)</li>
+    <li>Provenienza geografica approssimativa, a livello di città o regione</li>
+    <li>Sorgente di provenienza, per esempio un link da un social network o da un motore di ricerca</li>
   </ul>
-  <p class="muted">Questi dati sono raccolti in forma aggregata e non permettono di identificarti personalmente.</p>
+  <p class="muted">I dati statistici sono raccolti in forma aggregata e non permettono di identificarti personalmente.</p>
+
+  <h2>Modulo di contatto</h2>
+  <p>Il modulo è gestito dal servizio Formspree, che riceve i dati inseriti e li recapita al titolare via email. Il trattamento da parte di Formspree è disciplinato dalla sua informativa, consultabile su <a class="inline" href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener">formspree.io</a>. La base giuridica è l'esecuzione della tua richiesta (art. 6, par. 1, lett. b del GDPR). I messaggi sono conservati per il tempo necessario a gestire la corrispondenza.</p>
 
   <h2>Cookie utilizzati</h2>
   <p>Un cookie è un piccolo file di testo salvato dal browser. Questo sito utilizza due categorie di cookie:</p>
@@ -188,7 +206,7 @@ footer a:hover { color: var(--gold); }
     </tbody>
   </table>
 
-  <p>I cookie analitici vengono attivati <strong>solo dopo il tuo consenso esplicito</strong> tramite il banner. Fino a quel momento Google Analytics resta disattivato (Consent Mode con impostazione "denied" di default). Puoi modificare la tua scelta in qualsiasi momento cliccando su "Cookie" nel piè di pagina.</p>
+  <p>I cookie analitici vengono attivati <strong>solo dopo il tuo consenso esplicito</strong> tramite il banner. Fino a quel momento Google Analytics resta disattivato (Consent Mode con impostazione "denied" di default). Puoi modificare la tua scelta in qualsiasi momento dalla voce "Cookie" che trovi nel menù della home.</p>
 
   <h2>Google Analytics</h2>
   <p>Il servizio è fornito da Google Ireland Ltd. I dati raccolti sono utilizzati per produrre report statistici. Google può trasferire questi dati anche al di fuori dell'Unione Europea: il trattamento da parte di Google è disciplinato dalla sua informativa privacy, consultabile su <a class="inline" href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>. Gli indirizzi IP vengono trattati in forma anonimizzata.</p>
@@ -197,7 +215,7 @@ footer a:hover { color: var(--gold); }
   <p>La base giuridica del trattamento analitico è il tuo consenso (art. 6, par. 1, lett. a del GDPR). Il consenso espresso tramite il banner viene conservato nel browser e ha validità fino a sua revoca. I dati statistici raccolti da Google Analytics sono conservati secondo i periodi di retention impostati nella piattaforma.</p>
 
   <h2>I tuoi diritti</h2>
-  <p>In qualsiasi momento puoi esercitare i diritti previsti dagli articoli 15-22 del GDPR:</p>
+  <p>In qualsiasi momento puoi esercitare i diritti previsti dagli articoli da 15 a 22 del GDPR:</p>
   <ul>
     <li>Accesso ai tuoi dati e richiesta di copia</li>
     <li>Rettifica o cancellazione</li>
@@ -207,16 +225,16 @@ footer a:hover { color: var(--gold); }
   </ul>
 
   <h2>Come revocare il consenso</h2>
-  <p>Puoi disattivare i cookie analitici in due modi: cliccando su "Cookie" nel piè di pagina della home e scegliendo "Rifiuta", oppure cancellando i dati di navigazione dal tuo browser. Puoi inoltre installare il <a class="inline" href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">componente aggiuntivo per la disattivazione di Google Analytics</a>.</p>
+  <p>Puoi disattivare i cookie analitici in due modi: dalla voce "Cookie" nel menù della home, scegliendo "Rifiuta", oppure cancellando i dati di navigazione dal tuo browser. Puoi inoltre installare il <a class="inline" href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">componente aggiuntivo per la disattivazione di Google Analytics</a>.</p>
 
   <h2>Contatti</h2>
-  <p>Per qualsiasi domanda su questa informativa o sul trattamento dei tuoi dati, puoi contattare il titolare tramite i profili social collegati in home, oppure all'indirizzo email che troverai sui canali ufficiali.</p>
+  <p>Per qualsiasi domanda su questa informativa o sul trattamento dei tuoi dati, scrivimi dalla <a class="inline" href="/contatti.html">pagina dei contatti</a>.</p>
 
   <p class="muted" style="margin-top:2.5rem">Questa informativa può essere aggiornata nel tempo. La data dell'ultima revisione è indicata in cima alla pagina.</p>
 </div>
 
 <footer>
-  &copy; 2026 Giorgio Riva &middot; <a href="/">gioriva.it</a>
+  &copy; 2026 Giorgio Riva &nbsp;<a href="/">gioriva.it</a>
 </footer>
 
 </body>

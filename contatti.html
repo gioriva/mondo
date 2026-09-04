@@ -3,191 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0A0A0C">
+<meta name="theme-color" content="#0A1220">
 <title>Contattami | Giorgio Riva</title>
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+
+<!-- Google Analytics + Consent Mode -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied'
+  });
+  gtag('config', 'G-1ZCCJ6QBR4', { 'anonymize_ip': true });
+  try {
+    if (localStorage.getItem('gr_cookie_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  } catch (e) {}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --sumi:  #0C0C0D;
-  --washi: #E9E4D8;
-  --muted: #6E675D;
-  --shu:   #B5433C;
-  --kin:   #C8A97E;
-  --line:  rgba(233,228,216,0.10);
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans:  'Montserrat', sans-serif;
+  --ai:      #0F1B2D;
+  --ai-deep: #0A1220;
+  --silk:    #ECE6DA;
+  --sun:     #C63C3B;
+  --gold:    #C8A97E;
+  --mist:    #7C8A9C;
+  --line:    rgba(236,230,218,0.10);
+  --serif:   'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif;
+  --sans:    'Zen Kaku Gothic New', 'Helvetica Neue', Arial, sans-serif;
 }
 
-html { background: #0A0A0C; }
-
+html { background: var(--ai-deep); }
 body {
-  background: linear-gradient(180deg, #0A0A0C 0%, #0C0C0D 60%, #0E0D0C 100%);
-  color: var(--washi);
+  background: linear-gradient(180deg, var(--ai-deep) 0%, var(--ai) 40%, #0C1727 100%);
+  color: var(--silk);
   font-family: var(--sans);
   font-weight: 300;
   min-height: 100vh;
+  line-height: 1.75;
+}
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 1px solid var(--gold); outline-offset: 4px;
 }
 
-/* Paper grain */
-body::before {
+/* seigaiha rising from the bottom of the page */
+body::after {
   content: '';
   position: fixed;
-  inset: 0;
-  z-index: 1;
+  left: 0; right: 0; bottom: 0;
+  height: 38vh;
+  z-index: 0;
   pointer-events: none;
-  opacity: 0.3;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.06 0 0 0 0 0.055 0 0 0 0 0.05 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.13;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ECE6DA' stroke-width='1'%3E%3Cpath d='M0 40a40 40 0 0 1 80 0M10 40a30 30 0 0 1 60 0M20 40a20 20 0 0 1 40 0M30 40a10 10 0 0 1 20 0'/%3E%3Cpath d='M-40 80a40 40 0 0 1 80 0M-30 80a30 30 0 0 1 60 0M-20 80a20 20 0 0 1 40 0M-10 80a10 10 0 0 1 20 0'/%3E%3Cpath d='M40 80a40 40 0 0 1 80 0M50 80a30 30 0 0 1 60 0M60 80a20 20 0 0 1 40 0M70 80a10 10 0 0 1 20 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+  mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
 }
 
 .wrap {
   position: relative;
-  z-index: 2;
-  max-width: 620px;
+  z-index: 1;
+  max-width: 660px;
   margin: 0 auto;
-  padding: 5rem 1.75rem 4rem;
+  padding: 4.5rem 1.75rem 6rem;
 }
 
 .back {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  color: var(--mist);
   text-decoration: none;
-  margin-bottom: 3rem;
-  transition: gap .25s, color .2s;
+  margin-bottom: 3.2rem;
+  transition: color .2s, gap .25s;
 }
-.back:hover { gap: 1rem; color: var(--shu); }
+.back:hover { color: var(--gold); gap: 0.9rem; }
 
+.sun-mark {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--sun);
+  margin-right: 0.85rem;
+  vertical-align: 0.1em;
+}
 h1 {
   font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(2.6rem, 6vw, 4rem);
-  line-height: 1.05;
+  font-weight: 400;
+  font-size: clamp(2rem, 4.4vw, 2.8rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
 }
-h1 em { font-style: italic; color: var(--kin); }
+.updated { margin-top: 0.6rem; font-size: 0.8rem; color: var(--mist); }
+.rule { width: 60px; height: 1px; background: var(--gold); opacity: 0.7; margin: 1.6rem 0 2.2rem; }
 
-.kintsugi {
-  width: 70px; height: 1px;
-  margin: 1.4rem 0 1.2rem;
-  background: linear-gradient(90deg, var(--kin), transparent);
-}
-
-.intro {
+h2 {
   font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.05rem;
-  color: var(--muted);
-  line-height: 1.7;
-  margin-bottom: 3rem;
-  max-width: 460px;
+  font-weight: 400;
+  font-size: 1.3rem;
+  margin: 2.4rem 0 0.7rem;
+  color: var(--silk);
+}
+p { font-size: 0.95rem; color: rgba(236,230,218,0.82); }
+p + p { margin-top: 0.9rem; }
+.muted { color: var(--mist); font-size: 0.88rem; }
+ul { padding-left: 1.2rem; margin: 0.6rem 0; }
+li { font-size: 0.95rem; color: rgba(236,230,218,0.82); margin: 0.3rem 0; }
+strong { font-weight: 400; color: var(--silk); }
+a.inline { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(200,169,126,0.35); }
+a.inline:hover { color: var(--silk); border-color: var(--silk); }
+
+table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.4rem; font-size: 0.9rem; }
+th, td { text-align: left; padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 400; color: var(--mist); font-size: 0.78rem; }
+td { color: rgba(236,230,218,0.85); }
+
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 1.6rem;
+  font-size: 0.78rem;
+  color: var(--mist);
+}
+footer a { color: var(--mist); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.wrap { animation: fadeUp .8s ease both; }
+@media (prefers-reduced-motion: reduce) { .wrap { animation: none; } }
+
+@media (max-width: 560px) {
+  .wrap { padding: 3.2rem 1.4rem 5rem; }
+  th, td { padding: 0.6rem 0.4rem; }
 }
 
-/* ── Form ── */
-form { display: flex; flex-direction: column; gap: 2rem; }
+.intro { font-family: var(--serif); font-size: 1.05rem; color: var(--mist); line-height: 1.7; margin-bottom: 2.8rem; max-width: 480px; }
 
+form { display: flex; flex-direction: column; gap: 1.9rem; }
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-
-.field { display: flex; flex-direction: column; gap: 0.55rem; }
-
-label {
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
+.field { display: flex; flex-direction: column; gap: 0.5rem; }
+label { font-size: 0.78rem; color: var(--mist); }
 input, textarea {
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--line);
-  color: var(--washi);
+  color: var(--silk);
   font-family: var(--serif);
-  font-size: 1.15rem;
-  font-weight: 300;
-  padding: 0.5rem 2px 0.65rem;
+  font-size: 1.1rem;
+  padding: 0.45rem 2px 0.6rem;
   outline: none;
   border-radius: 0;
   transition: border-color .3s;
 }
 textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
-input:focus, textarea:focus { border-bottom-color: var(--shu); }
-input::placeholder, textarea::placeholder { color: rgba(110,103,93,0.5); font-style: italic; }
+input:focus, textarea:focus { border-bottom-color: var(--gold); outline: none; }
 
 button[type="submit"] {
   align-self: flex-start;
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
   font-family: var(--sans);
-  font-size: 0.65rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  padding: 0.9rem 2.4rem;
+  font-weight: 400;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 2.2rem;
   border-radius: 2px;
-  border: 1px solid var(--shu);
+  border: 1px solid var(--gold);
   background: transparent;
-  color: var(--shu);
+  color: var(--gold);
   cursor: pointer;
   transition: background .25s, color .25s;
 }
-button[type="submit"]:hover { background: var(--shu); color: var(--washi); }
+button[type="submit"]:hover { background: var(--gold); color: var(--ai-deep); }
 
-/* status messages */
-#form-status {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1rem;
-  min-height: 1.4em;
-}
-#form-status.ok  { color: var(--kin); }
-#form-status.err { color: var(--shu); }
-
-/* torii mark at the bottom */
-.mark {
-  display: block;
-  margin: 4rem auto 0;
-  width: 34px;
-  opacity: 0.5;
-}
-
-footer {
-  position: relative;
-  z-index: 2;
-  border-top: 1px solid var(--line);
-  padding: 1.6rem;
-  text-align: center;
-}
-footer a {
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-}
-footer a:hover { color: var(--shu); }
-
-@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-.wrap > * { animation: fadeUp .7s ease both; }
-.wrap > *:nth-child(1) { animation-delay: .05s; }
-.wrap > *:nth-child(2) { animation-delay: .15s; }
-.wrap > *:nth-child(3) { animation-delay: .25s; }
-.wrap > *:nth-child(4) { animation-delay: .3s; }
-.wrap > *:nth-child(5) { animation-delay: .4s; }
+#form-status { font-family: var(--serif); font-size: 1rem; min-height: 1.4em; }
+#form-status.ok  { color: var(--gold); }
+#form-status.err { color: var(--sun); }
 
 @media (max-width: 560px) {
-  .wrap { padding: 3.5rem 1.4rem 3rem; }
-  .row { grid-template-columns: 1fr; gap: 2rem; }
+  .row { grid-template-columns: 1fr; gap: 1.9rem; }
   button[type="submit"] { align-self: stretch; }
 }
 </style>
@@ -197,8 +208,8 @@ footer a:hover { color: var(--shu); }
 <div class="wrap">
   <a class="back" href="/">&larr; Torna alla home</a>
 
-  <h1>Contatta<em>mi</em></h1>
-  <div class="kintsugi"></div>
+  <h1><span class="sun-mark" aria-hidden="true"></span>Contattami</h1>
+  <div class="rule"></div>
   <p class="intro">Scrivimi pure: che sia per un progetto, una domanda o solo per scambiare due parole, questo è il posto giusto.</p>
 
   <form id="contact-form" action="https://formspree.io/f/mdaqwjwz" method="POST">
@@ -224,53 +235,33 @@ footer a:hover { color: var(--shu); }
     <p id="form-status" aria-live="polite"></p>
     <button type="submit">Invia il messaggio</button>
   </form>
-
-  <!-- torii mark -->
-  <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-    <g fill="#B5433C">
-      <path d="M 8 20 Q 32 13 56 20 L 56 15 Q 32 7 8 15 Z"/>
-      <rect x="13" y="22" width="38" height="5"/>
-      <polygon points="20,27 26,27 24,54 18,54"/>
-      <polygon points="38,27 44,27 46,54 40,54"/>
-      <rect x="15" y="35" width="34" height="5"/>
-      <rect x="29.5" y="27" width="5" height="8"/>
-    </g>
-  </svg>
 </div>
 
 <footer>
-  <a href="/">gioriva.it</a>
+  &copy; 2026 Giorgio Riva &nbsp;<a href="/">gioriva.it</a>
 </footer>
 
 <script>
 'use strict';
-/* Submit via fetch so the visitor stays on the page, with themed feedback */
 (function () {
   var form = document.getElementById('contact-form');
   var status = document.getElementById('form-status');
-
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     status.textContent = 'Invio in corso\u2026';
     status.className = '';
-    var data = new FormData(form);
-
-    fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(function (resp) {
-      if (resp.ok) {
-        form.reset();
-        status.textContent = 'Messaggio inviato. Grazie, ti risponder\u00f2 presto.';
-        status.className = 'ok';
-      } else {
-        return resp.json().then(function (d) { throw d; });
-      }
-    }).catch(function () {
-      status.textContent = 'Qualcosa \u00e8 andato storto. Riprova tra poco.';
-      status.className = 'err';
-    });
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+      .then(function (resp) {
+        if (resp.ok) {
+          form.reset();
+          status.textContent = 'Messaggio inviato. Grazie, ti risponder\u00f2 presto.';
+          status.className = 'ok';
+        } else { throw new Error('bad status'); }
+      })
+      .catch(function () {
+        status.textContent = 'Qualcosa \u00e8 andato storto. Riprova tra poco.';
+        status.className = 'err';
+      });
   });
 })();
 </script>
