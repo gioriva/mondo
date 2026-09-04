@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#15151C">
+<meta name="theme-color" content="#0A1220">
 <title>Giorgio Riva</title>
 
 <meta name="description" content="Freedom is a state of mind.">
 <meta property="og:title" content="Giorgio Riva">
 <meta property="og:description" content="Freedom is a state of mind.">
-<meta property="og:image" content="https://www.gioriva.it/og-image.png?v=5">
+<meta property="og:image" content="https://www.gioriva.it/og-image.png?v=6">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:type" content="website">
@@ -17,11 +17,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Giorgio Riva">
 <meta name="twitter:description" content="Freedom is a state of mind.">
-<meta name="twitter:image" content="https://www.gioriva.it/og-image.png?v=5">
+<meta name="twitter:image" content="https://www.gioriva.it/og-image.png?v=6">
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
 
 <!-- Google Analytics + Consent Mode -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
@@ -45,27 +45,36 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --sumi:  #17171E;
-  --washi: #E9E4D8;
-  --muted: #6E675D;
-  --shu:   #B5433C;
-  --kin:   #C8A97E;
-  --line:  rgba(233,228,216,0.08);
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans:  'Montserrat', sans-serif;
+  /* ai-iro, the indigo of Japanese dye, instead of black */
+  --ai:      #0F1B2D;
+  --ai-deep: #0A1220;
+  --silk:    #ECE6DA;
+  --sun:     #C63C3B;
+  --gold:    #C8A97E;
+  --mist:    #7C8A9C;
+  /* names the shared menu and cookie blocks expect */
+  --sumi:  var(--ai);
+  --washi: var(--silk);
+  --shu:   var(--sun);
+  --kin:   var(--gold);
+  --muted: var(--mist);
+  --line:  rgba(236,230,218,0.10);
+  --serif: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif;
+  --jp:    'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --sans:  'Zen Kaku Gothic New', 'Helvetica Neue', Arial, sans-serif;
 }
 
-html { background: #15151C; }
+html { background: var(--ai-deep); }
 
 body {
-  background: linear-gradient(180deg, #15151C 0%, #17171E 45%, #141A2A 100%);
-  color: var(--washi);
+  background: linear-gradient(180deg, var(--ai-deep) 0%, var(--ai) 42%, #0C1727 100%);
+  color: var(--silk);
   font-family: var(--sans);
   font-weight: 300;
   height: 100vh;
@@ -73,88 +82,104 @@ body {
   cursor: none;
 }
 a, button { cursor: none; }
+a:focus-visible, button:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
 
-/* Paper grain */
-body::before {
-  content: '';
+/* ── The sea ── */
+#sky { position: fixed; inset: 0; z-index: 0; }
+#sea { position: fixed; inset: 0; z-index: 1; }
+
+/* ── The sun: flat, no gradient ── */
+#sun {
   position: fixed;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  opacity: 0.3;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.06 0 0 0 0 0.055 0 0 0 0 0.05 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-#stars  { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
-#petals { position: fixed; inset: 0; z-index: 6; pointer-events: none; }
-
-/* ── Scene ── */
-#scene {
-  position: fixed;
-  inset: 0;
   z-index: 2;
+  width: var(--sun-d);
+  height: var(--sun-d);
+  border-radius: 50%;
+  background: var(--sun);
+  left: 78vw;
+  top: calc(var(--horizon) - var(--sun-d) - var(--sun-d) * 0.8);    /* well clear of the waves */
+  transform: translateY(24px);
+  opacity: 0;
+  transition: transform 2.4s cubic-bezier(.2,.7,.2,1) .4s, opacity 1.6s ease .4s;
 }
-#scene svg { width: 100%; height: 100%; display: block; }
+body.ready #sun { transform: translateY(0); opacity: 1; }
 
-/* Hotspot hover labels inside SVG */
-#torii-group, #moon-group, #himeji { transition: filter .3s; }
-
-/* ── Identity ── */
-.identity {
+/* ── Masthead: a quiet mark at the top ── */
+.mast {
   position: fixed;
-  left: 5vw;
-  bottom: 13vh;
   z-index: 10;
+  left: 6vw;
+  bottom: 6vh;
+  opacity: 0;
+  transition: opacity 1.4s ease 1.6s;
 }
-.identity h1 {
+body.ready .mast { opacity: 1; }
+.mast h1 {
   font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(3rem, 6.5vw, 6rem);
-  line-height: 0.95;
-  color: var(--washi);
+  font-weight: 400;
+  font-size: 1.42rem;
+  letter-spacing: 0.06em;
+  line-height: 1.25;
+  color: var(--silk);
 }
-.identity h1 em { font-style: italic; color: var(--kin); }
-.identity .rule {
-  width: 40px; height: 1px;
-  background: linear-gradient(90deg, var(--kin), transparent);
-  opacity: 0.7;
-  margin: 1.3rem 0;
-}
-.identity p {
+.mast p {
+  margin-top: 0.15rem;
   font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
-  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+  color: var(--mist);
 }
 
+/* ── Vertical Japanese column ── */
+.tate {
+  position: fixed;
+  z-index: 10;
+  right: 5.2vw;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-family: var(--jp);
+  font-size: 0.95rem;
+  letter-spacing: 0.32em;
+  color: var(--mist);
+  opacity: 0;
+  transition: opacity 1.6s ease 2.2s;
+}
+body.ready .tate { opacity: 0.85; }
+.tate span { display: block; }
+.tate span + span { margin-right: 0.9em; opacity: 0.6; }
 
-/* ── Hamburger + menu ── */
+/* ── Hamburger + menu, seigaiha edition ── */
 #burger {
   position: fixed;
-  top: 1.6rem; right: 2rem;
+  top: 1.7rem; right: 2rem;
   z-index: 10005;
   width: 44px; height: 44px;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  gap: 6px;
+  gap: 7px;
   background: none; border: none; padding: 0;
 }
 #burger span {
   display: block;
   width: 26px; height: 1px;
-  background: var(--washi);
-  transition: transform .4s cubic-bezier(.16,.84,.44,1), opacity .25s, background .25s;
+  background: var(--silk);
+  opacity: 0.85;
+  transition: transform .45s cubic-bezier(.16,.84,.44,1), opacity .25s, background .25s, width .3s;
 }
-#burger:hover span { background: var(--shu); }
-body.menu-open #burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+#burger span:nth-child(2) { width: 18px; align-self: flex-end; margin-right: 9px; }
+#burger:hover span { background: var(--gold); opacity: 1; }
+body.menu-open #burger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 body.menu-open #burger span:nth-child(2) { opacity: 0; }
-body.menu-open #burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+body.menu-open #burger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 #menu-veil {
   position: fixed; inset: 0;
   z-index: 10003;
-  background: rgba(14,14,18,0.70);
-  backdrop-filter: blur(3px);
+  background: rgba(8,14,26,0.62);
+  backdrop-filter: blur(4px);
   opacity: 0; visibility: hidden;
   transition: opacity .5s, visibility .5s;
 }
@@ -164,85 +189,99 @@ body.menu-open #menu-veil { opacity: 1; visibility: visible; }
   position: fixed;
   top: 0; right: 0; bottom: 0;
   z-index: 10004;
-  width: min(420px, 88vw);
-  background: rgba(24,24,31,0.985);
-  border-left: 1px solid rgba(233,228,216,0.09);
-  box-shadow: -30px 0 80px rgba(0,0,0,0.55);
+  width: min(440px, 88vw);
+  background: var(--ai-deep);
+  border-left: 1px solid rgba(236,230,218,0.08);
   transform: translateX(100%);
-  transition: transform .55s cubic-bezier(.16,.84,.44,1);
+  transition: transform .6s cubic-bezier(.16,.84,.44,1);
   display: flex; flex-direction: column;
   justify-content: center;
-  padding: 5.5rem 2.8rem 3rem;
+  padding: 5.5rem 3rem 3rem;
   overflow-y: auto;
 }
+/* seigaiha rising from the bottom of the panel */
+#menu::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 46%;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ECE6DA' stroke-width='1'%3E%3Cpath d='M0 40a40 40 0 0 1 80 0M10 40a30 30 0 0 1 60 0M20 40a20 20 0 0 1 40 0M30 40a10 10 0 0 1 20 0'/%3E%3Cpath d='M-40 80a40 40 0 0 1 80 0M-30 80a30 30 0 0 1 60 0M-20 80a20 20 0 0 1 40 0M-10 80a10 10 0 0 1 20 0'/%3E%3Cpath d='M40 80a40 40 0 0 1 80 0M50 80a30 30 0 0 1 60 0M60 80a20 20 0 0 1 40 0M70 80a10 10 0 0 1 20 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+  mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+}
 body.menu-open #menu { transform: translateX(0); }
+#menu > * { position: relative; z-index: 1; }
 
+.menu-list { display: block; }
 .menu-item {
   display: flex;
   align-items: center;
-  gap: 1.05rem;
+  gap: 1.1rem;
   text-decoration: none;
-  padding: 1.05rem 0;
-  border-bottom: 1px solid rgba(233,228,216,0.05);
+  padding: 0.95rem 0;
+  border-bottom: 1px solid rgba(236,230,218,0.07);
   opacity: 0;
-  transform: translateX(18px);
+  transform: translateX(16px);
   transition: opacity .5s, transform .5s;
 }
 body.menu-open .menu-item { opacity: 1; transform: translateX(0); }
 .menu-list .menu-item:last-child { border-bottom: none; }
 .menu-item .mi {
-  width: 24px; height: 24px;
+  width: 22px; height: 22px;
   flex: 0 0 auto;
-  color: var(--muted);
-  transition: color .28s, transform .35s;
+  color: var(--mist);
+  transition: color .3s, transform .35s;
 }
-.menu-item .tx { display: block; }
-.menu-item:hover .mi { color: var(--shu); transform: translateX(4px); }
+.menu-item .tx { display: block; transition: transform .35s; }
 .menu-item .t {
   display: block;
   font-family: var(--serif);
-  font-weight: 300;
-  font-size: 1.72rem;
-  line-height: 1.15;
-  color: var(--washi);
-  transition: color .28s, transform .35s;
+  font-weight: 400;
+  font-size: 1.62rem;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: var(--silk);
+  transition: color .3s;
 }
 .menu-item .s {
   display: block;
-  margin-top: 0.28rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.19em;
-  text-transform: uppercase;
-  color: var(--muted);
-  transition: color .28s;
+  margin-top: 0.22rem;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: var(--mist);
+  transition: color .3s;
 }
-.menu-item:hover .t { color: var(--shu); }
-.menu-item:hover .tx { transform: translateX(6px); }
-.menu-item .tx { transition: transform .35s; }
-.menu-item:hover .s { color: rgba(233,228,216,0.6); }
+.menu-item:hover .t  { color: var(--gold); }
+.menu-item:hover .mi { color: var(--gold); transform: translateX(3px); }
+.menu-item:hover .tx { transform: translateX(5px); }
+.menu-item:hover .s  { color: rgba(236,230,218,0.7); }
 
 .menu-sep {
   height: 1px;
-  margin: 1.5rem 0;
-  background: linear-gradient(90deg, rgba(200,169,126,0.4), transparent);
+  margin: 1.6rem 0;
+  background: rgba(236,230,218,0.12);
 }
 
 .menu-icons {
   display: flex;
-  gap: 1.9rem;
+  gap: 1.8rem;
   list-style: none;
   opacity: 0;
   transition: opacity .5s;
 }
-body.menu-open .menu-icons { opacity: 1; transition-delay: .45s; }
-.menu-icons a { display: block; color: var(--muted); transition: color .25s, transform .25s; }
+body.menu-open .menu-icons { opacity: 1; transition-delay: .5s; }
+.menu-icons a { display: block; color: var(--mist); transition: color .25s, transform .25s; }
 .menu-icons svg { width: 18px; height: 18px; display: block; }
-.menu-icons a:hover { color: var(--shu); transform: translateY(-2px); }
+.menu-icons a:hover { color: var(--gold); transform: translateY(-2px); }
 
 @media (max-width: 768px) {
   #burger { top: 1.1rem; right: 1.1rem; }
   #menu { width: 100vw; border-left: none; padding: 5rem 2rem 2.5rem; }
-  .menu-item .t { font-size: 1.55rem; }
+  .menu-item .t { font-size: 1.45rem; }
 }
 
 /* ── Custom cursor ── */
@@ -256,18 +295,7 @@ body.menu-open .menu-icons { opacity: 1; transition-delay: .45s; }
   transform: translate(-50%,-50%);
   transition: width .2s, height .2s, background .2s;
 }
-#cur-ring {
-  position: fixed; top: 0; left: 0;
-  width: 32px; height: 32px;
-  border: 1px solid rgba(181,67,60,0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10019;
-  transform: translate(-50%,-50%);
-  transition: width .25s, height .25s, border-color .25s;
-}
 body.hov #cur-dot  { width: 10px; height: 10px; background: var(--washi); }
-body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9); }
 
 /* ── Orizuru (paper crane) ── */
 #orizuru {
@@ -331,13 +359,6 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 .cookie-btn.accept:hover { background: var(--shu); color: var(--washi); }
 .cookie-btn.decline:hover { border-color: var(--muted); color: var(--washi); }
 
-/* ── Entry ── */
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-#scene         { animation: fadeIn 2.2s ease both .2s; }
-.identity h1   { animation: fadeUp .9s ease both 1.2s; }
-.identity .rule{ animation: fadeIn 1.1s ease both 1.55s; }
-.identity p    { animation: fadeUp .9s ease both 1.65s; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -347,203 +368,31 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 @media (max-width: 768px) {
   body { cursor: auto; height: 100dvh; }
   a, button { cursor: pointer; }
-  #cur-dot, #cur-ring { display: none; }
-  .identity { left: 6vw; bottom: 4dvh; right: 6vw; }
-  .identity h1 {
-    font-size: clamp(2.3rem, 11vw, 3.4rem);
-    text-shadow: 0 0 26px rgba(21,21,28,0.95), 0 0 10px rgba(21,21,28,0.9);
-  }
-  .identity .rule { margin: 0.9rem 0; }
-  .identity p {
-    font-size: 1rem;
-    text-shadow: 0 0 18px rgba(21,21,28,0.95);
-  }
-  #orizuru { transform: scale(0.75); }
-  #cookie-banner {
-    flex-direction: column;
-    align-items: stretch;
-    bottom: 12px;
-    padding: 1.1rem 1.2rem;
-    gap: 0.9rem;
-  }
-  .cookie-text { flex: 0 0 auto; font-size: 0.74rem; line-height: 1.55; }
-  .cookie-actions { justify-content: stretch; }
-  .cookie-btn { flex: 1; }
+  #cur-dot { display: none; }
+  .mast { left: 7vw; bottom: 5dvh; }
+  .mast h1 { font-size: 1.15rem; }
+  .mast p { font-size: 0.76rem; }
+  #sun { left: auto; right: 9vw; }
+  .tate { right: 6vw; top: 13dvh; transform: none; font-size: 0.78rem; letter-spacing: 0.26em; }
 }
 </style>
 </head>
 <body>
 
-<canvas id="stars"></canvas>
+<canvas id="sky"></canvas>
+<canvas id="sea"></canvas>
+<div id="sun"></div>
 
-<!-- ── The scene ── -->
-<div id="scene">
-<svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"  stop-color="#1B2338"/>
-      <stop offset="100%" stop-color="#0E1220"/>
-    </linearGradient>
-    <radialGradient id="moonglow" cx="50%" cy="0%" r="100%">
-      <stop offset="0%"  stop-color="rgba(200,169,126,0.09)"/>
-      <stop offset="55%" stop-color="rgba(200,169,126,0.04)"/>
-      <stop offset="100%" stop-color="rgba(200,169,126,0)"/>
-    </radialGradient>
-    <linearGradient id="refl-fade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"  stop-color="white" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="white" stop-opacity="0"/>
-    </linearGradient>
-    <mask id="refl-mask">
-      <rect x="0" y="660" width="1440" height="240" fill="url(#refl-fade)"/>
-    </mask>
-  </defs>
-
-  <g id="scene-shift">
-
-  <!-- ══ MOON → ISS ══ -->
-  <g id="moon-link">
-    <g id="moon-group">
-      <circle cx="1130" cy="230" r="64" fill="#E9E4D8" opacity="0.88"/>
-      <circle cx="1108" cy="212" r="9"  fill="#17171E" opacity="0.07"/>
-      <circle cx="1148" cy="248" r="13" fill="#17171E" opacity="0.06"/>
-      <circle cx="1122" cy="256" r="6"  fill="#17171E" opacity="0.05"/>
-    </g>
-  </g>
-
-  <!-- ══ MOUNT FUJI (scenery) ══ -->
-  <g id="fuji">
-    <path d="M 60 660 C 260 610, 340 460, 396 318 L 484 318 C 540 460, 620 610, 820 660 Z"
-          fill="#212129"/>
-    <path d="M 60 660 C 260 610, 340 460, 396 318 L 484 318 C 540 460, 620 610, 820 660"
-          fill="none" stroke="rgba(233,228,216,0.13)" stroke-width="1"/>
-    <!-- snow cap -->
-    <path d="M 396 318 L 484 318 C 478 336 470 342 462 352 L 452 338 L 440 360 L 428 340 L 416 356 L 406 336 C 402 330 398 324 396 318 Z"
-          fill="#E9E4D8" opacity="0.42"/>
-  </g>
-
-  <!-- ══ HIMEJI hill (scenery) ══ -->
-  <g id="himeji-hill">
-    <path d="M 980 660 Q 1180 590 1440 630 L 1440 660 Z" fill="#1D1D25"/>
-    <path d="M 980 660 Q 1180 590 1440 630" stroke="rgba(233,228,216,0.10)" stroke-width="1" fill="none"/>
-  </g>
-
-  <!-- ══ HIMEJI CASTLE → MONDO ══ -->
-  <g id="himeji-link">
-  <g id="himeji" stroke="rgba(233,228,216,0.16)" stroke-width="1" fill="#191920">
-    <!-- base walls -->
-    <path d="M 1150 620 L 1160 585 L 1290 585 L 1300 620 Z"/>
-    <!-- tier 1 -->
-    <path d="M 1168 585 L 1168 560 L 1282 560 L 1282 585 Z"/>
-    <path d="M 1152 560 Q 1225 546 1298 560 L 1282 542 L 1168 542 Z"/>
-    <!-- tier 2 -->
-    <path d="M 1180 542 L 1180 518 L 1270 518 L 1270 542 Z"/>
-    <path d="M 1166 518 Q 1225 505 1284 518 L 1268 501 L 1182 501 Z"/>
-    <!-- tier 3 -->
-    <path d="M 1192 501 L 1192 480 L 1258 480 L 1258 501 Z"/>
-    <path d="M 1180 480 Q 1225 468 1270 480 L 1254 464 L 1196 464 Z"/>
-    <!-- top tier + shachihoko finials -->
-    <path d="M 1204 464 L 1204 446 L 1246 446 L 1246 464 Z"/>
-    <path d="M 1194 446 Q 1225 435 1256 446 L 1242 431 L 1208 431 Z"/>
-    <line x1="1212" y1="431" x2="1210" y2="422"/>
-    <line x1="1238" y1="431" x2="1240" y2="422"/>
-  </g>
-  </g>
-
-  <!-- ══ WATER ══ -->
-  <rect x="0" y="660" width="1440" height="240" fill="url(#water)"/>
-  <line x1="0" y1="660" x2="1440" y2="660" stroke="rgba(233,228,216,0.14)" stroke-width="1"/>
-  <!-- moon glow column on water -->
-  <ellipse id="moonglow-col" cx="1130" cy="662" rx="70" ry="175" fill="url(#moonglow)"/>
-  <!-- ripples -->
-  <g stroke="rgba(233,228,216,0.06)" stroke-width="1">
-    <line class="ripple" x1="180"  y1="700" x2="430"  y2="700"/>
-    <line class="ripple" x1="540"  y1="742" x2="860"  y2="742"/>
-    <line class="ripple" x1="950"  y1="710" x2="1240" y2="710"/>
-    <line class="ripple" x1="300"  y1="800" x2="620"  y2="800"/>
-    <line class="ripple" x1="820"  y1="828" x2="1140" y2="828"/>
-  </g>
-
-  <!-- ══ FLOATING TORII → MONDO ══ -->
-  <g id="torii-link">
-    <!-- reflection -->
-    <g mask="url(#refl-mask)" opacity="0.8">
-      <g transform="translate(0,1320) scale(1,-1)" fill="#7E2E29">
-        <path d="M 500 392 Q 640 366 780 392 L 780 374 Q 640 344 500 374 Z"/>
-        <rect x="524" y="398" width="232" height="15"/>
-        <polygon points="586,413 602,413 590,660 574,660"/>
-        <polygon points="678,413 694,413 706,660 690,660"/>
-        <rect x="548" y="478" width="184" height="15"/>
-        <rect x="633" y="413" width="14" height="65"/>
-      </g>
-    </g>
-    <!-- torii -->
-    <g id="torii-group" fill="#B5433C">
-      <!-- kasagi (curved top beam) -->
-      <path d="M 500 392 Q 640 366 780 392 L 780 374 Q 640 344 500 374 Z"/>
-      <!-- shimaki -->
-      <rect x="524" y="398" width="232" height="15"/>
-      <!-- pillars (slight inward lean) -->
-      <polygon points="586,413 602,413 590,660 574,660"/>
-      <polygon points="678,413 694,413 706,660 690,660"/>
-      <!-- nuki -->
-      <rect x="548" y="478" width="184" height="15"/>
-      <!-- gakuzuka -->
-      <rect x="633" y="413" width="14" height="65"/>
-    </g>
-  </g>
-  </g>
-</svg>
-</div>
-
-<canvas id="petals"></canvas>
-
-<!-- Identity -->
-<div class="identity">
-  <h1>Giorgio <em>Riva</em></h1>
-  <div class="rule"></div>
+<header class="mast">
+  <h1>Giorgio Riva</h1>
   <p>Freedom is a state of mind.</p>
+</header>
+
+<div class="tate" aria-hidden="true">
+  <span>ジョルジョ・リーヴァ</span>
+  <span>自由は心の在り方</span>
 </div>
 
-
-
-<!-- Crane (tancho) -> /drone/ -->
-<div id="orizuru">
-  <svg width="150" height="103" viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg">
-    <!-- far wing, folded behind -->
-    <g id="wing-far">
-      <polygon points="96,50 84,6 64,46"  fill="#9E9583"/>
-      <polygon points="96,50 64,46 78,54" fill="#6C6458"/>
-    </g>
-
-    <!-- tail -->
-    <g id="ori-tail">
-      <polygon points="82,58 16,22 20,29 78,52" fill="#D0C9B9"/>
-      <polygon points="82,58 78,52 70,55"       fill="#9E9583"/>
-      <line x1="82" y1="58" x2="16" y2="22" stroke="#968D7C" stroke-width="0.5" stroke-opacity="0.6"/>
-    </g>
-
-    <!-- neck and head -->
-    <g id="ori-head">
-      <polygon points="100,48 146,13 150,19" fill="#F0ECE2"/>
-      <polygon points="100,48 150,19 106,55" fill="#D0C9B9"/>
-      <polygon points="146,13 153,12 150,20" fill="#F0ECE2"/>
-      <polygon points="152,12 159,9 151,18"  fill="#B5433C"/>
-      <line x1="100" y1="48" x2="146" y2="13" stroke="#968D7C" stroke-width="0.5" stroke-opacity="0.55"/>
-    </g>
-
-    <!-- body -->
-    <polygon points="100,48 106,55 92,68 74,64 70,56" fill="#F0ECE2"/>
-    <polygon points="92,68 74,64 84,71"               fill="#D0C9B9"/>
-    <polygon points="86,66 74,64 80,70"               fill="#8E3A34"/>
-    <line x1="100" y1="48" x2="92" y2="68" stroke="#968D7C" stroke-width="0.5" stroke-opacity="0.6"/>
-
-    <!-- near wing -->
-    <g id="wing-near">
-      <polygon points="102,52 70,2 58,52"  fill="#F0ECE2"/>
-      <polygon points="102,52 58,52 76,64" fill="#D0C9B9"/>
-      <line x1="102" y1="52" x2="70" y2="2" stroke="#968D7C" stroke-width="0.6" stroke-opacity="0.7"/>
-    </g>
-  </svg>
 </div>
 
 <!-- Menu -->
@@ -681,255 +530,213 @@ body.hov #cur-ring { width: 48px; height: 48px; border-color: rgba(181,67,60,0.9
 </div>
 
 <div id="cur-dot"></div>
-<div id="cur-ring"></div>
 
 <script>
 'use strict';
 
 /* ════════════════════════════════════
-   SCENE METRICS: how the slice crop lands
-   on this viewport. "narrow" means the sides
-   get cut enough to lose moon and castle,
-   which happens on phones and on tablets held
-   in portrait, so the scene is recomposed.
-   ════════════════════════════════════ */
-function sceneMetrics() {
-  var vw = window.innerWidth, vh = window.innerHeight;
-  var scale = Math.max(vw / 1440, vh / 900);
-  var visW = vw / scale;                 // visible width in viewBox units
-  var narrow = visW < 950;
-  var shiftY = narrow ? 62 : 0;
-  var offY = (900 * scale - vh) / 2;
-  return {
-    vw: vw, vh: vh, scale: scale, visW: visW, narrow: narrow,
-    waterPx: (660 + shiftY) * scale - offY
-  };
-}
-
-/* ════════════════════════════════════
-   IDENTITY: desktop, whole block inside the
-   water band (like mobile). The waterline position
-   depends on the slice crop, so it's computed; if
-   the band is too short, the block scales to fit.
+   SKY: quiet dust and a handful of bright stars
    ════════════════════════════════════ */
 (function () {
-  var el = document.querySelector('.identity');
-
-  var h1   = el.querySelector('h1');
-  var rule = el.querySelector('.rule');
-  var pay  = el.querySelector('p');
-
-  function positionIdentity() {
-    if (window.innerWidth <= 768) {
-      el.style.top = ''; el.style.bottom = '';
-      h1.style.fontSize = ''; rule.style.margin = ''; pay.style.fontSize = '';
-      return;
-    }
-    var m = sceneMetrics();
-    var vh = m.vh;
-    var waterPx = m.waterPx;               // waterline on screen
-
-    var gapTop = 14, gapBottom = 22;
-    var top = waterPx + gapTop;
-    var available = vh - top - gapBottom;
-
-    el.style.top = top + 'px';
-    el.style.bottom = 'auto';
-
-    // Payoff and rule stay at fixed, readable sizes
-    pay.style.fontSize = '1.1rem';
-    rule.style.margin = '0.8rem 0';
-
-    // Only the name resizes to fill the remaining band height
-    h1.style.fontSize = '';                       // reset to CSS clamp
-    var otherH = el.offsetHeight - h1.offsetHeight;
-    var targetH1 = available - otherH;
-    var curFs = parseFloat(getComputedStyle(h1).fontSize);
-    var curH  = h1.offsetHeight;
-    if (targetH1 < curH) {
-      var fs = Math.max(36, curFs * targetH1 / curH * 1.05);
-      h1.style.fontSize = fs.toFixed(1) + 'px';
-      // if even the minimum overflows, let the block rise above the waterline
-      var overflow = el.offsetHeight - available;
-      if (overflow > 0) el.style.top = (top - overflow) + 'px';
-    }
-  }
-
-  positionIdentity();
-  window.addEventListener('resize', positionIdentity);
-  window.addEventListener('load', positionIdentity);
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(positionIdentity);
-  }
-})();
-
-/* ════════════════════════════════════
-   SCENE recomposition when the crop is narrow
-   (phones, and tablets in portrait)
-   ════════════════════════════════════ */
-(function () {
-  var moon  = document.getElementById('moon-link');
-  var torii = document.getElementById('torii-link');
-  var fuji  = document.getElementById('fuji');
-
-  var himeji = document.getElementById('himeji');
-  var hill   = document.getElementById('himeji-hill');
-  var shift  = document.getElementById('scene-shift');
-  var glow   = document.getElementById('moonglow-col');
-
-  function recompose() {
-    if (sceneMetrics().narrow) {
-      moon.setAttribute('transform', 'translate(-310,-10)');    // moon -> x 820
-      glow.setAttribute('transform', 'translate(-310,0)');      // glow follows moon
-      torii.removeAttribute('transform');                       // torii ~500-780, in view
-      fuji.setAttribute('transform', 'translate(200,0)');       // peak -> x ~640
-      shift.setAttribute('transform', 'translate(0,62)');      // lower the waterline
-      himeji.setAttribute('transform', 'translate(-390,-15)');  // castle -> x ~760-910
-      hill.setAttribute('transform', 'translate(-390,-15)');
-    } else {
-      moon.removeAttribute('transform');
-      glow.removeAttribute('transform');
-      torii.removeAttribute('transform');
-      fuji.removeAttribute('transform');
-      shift.removeAttribute('transform');
-      himeji.removeAttribute('transform');
-      hill.removeAttribute('transform');
-    }
-  }
-  recompose();
-  window.addEventListener('resize', recompose);
-})();
-
-/* ════════════════════════════════════
-   STARS + occasional meteor
-   ════════════════════════════════════ */
-(function () {
-  var cv = document.getElementById('stars');
+  var cv = document.getElementById('sky');
   var ctx = cv.getContext('2d');
-  var stars = [], meteors = [];
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, dpr, t0 = null;
 
-  function resize() { cv.width = window.innerWidth; cv.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
-
+  var dust = [], bright = [];
   for (var i = 0; i < 90; i++) {
-    stars.push({
-      x: Math.random(), y: Math.random() * 0.6,
-      r: 0.35 + Math.random() * 0.75,
-      phase: Math.random() * 6.28,
-      speed: 0.0003 + Math.random() * 0.0007
-    });
+    dust.push({ x: Math.random(), y: Math.random() * 0.42, r: 0.3 + Math.random() * 0.6,
+                ph: Math.random() * 6.28, sp: 0.25 + Math.random() * 0.5 });
   }
-
-  function spawnMeteor() {
-    meteors.push({
-      x: Math.random() * cv.width * 0.7,
-      y: Math.random() * cv.height * 0.25,
-      vx: 8, vy: 3.4, life: 1
-    });
-    setTimeout(spawnMeteor, 15000 + Math.random() * 25000);
+  for (var j = 0; j < 9; j++) {
+    bright.push({ x: 0.03 + Math.random() * 0.94, y: 0.04 + Math.random() * 0.32,
+                  r: 0.9 + Math.random() * 0.7, ph: Math.random() * 6.28, sp: 0.2 + Math.random() * 0.35 });
   }
-  setTimeout(spawnMeteor, 8000);
+  window.__brightStars = bright;
 
-  function tick(ts) {
-    ctx.clearRect(0, 0, cv.width, cv.height);
-    for (var i = 0; i < stars.length; i++) {
-      var s = stars[i];
-      var tw = 0.18 + 0.35 * (0.5 + 0.5 * Math.sin(ts * s.speed + s.phase));
+  function layout() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  layout();
+  window.addEventListener('resize', layout);
+
+  function draw(ts) {
+    if (t0 === null) t0 = ts;
+    var time = (ts - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+
+    for (var i = 0; i < dust.length; i++) {
+      var d = dust[i];
+      var a = 0.07 + 0.13 * (0.5 + 0.5 * Math.sin(time * d.sp + d.ph));
       ctx.beginPath();
-      ctx.arc(s.x * cv.width, s.y * cv.height, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(240,236,226,' + tw.toFixed(3) + ')';
+      ctx.arc(d.x * W, d.y * H, d.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(236,230,218,' + a.toFixed(3) + ')';
       ctx.fill();
     }
-    for (var m = meteors.length - 1; m >= 0; m--) {
-      var mt = meteors[m];
-      mt.x += mt.vx; mt.y += mt.vy; mt.life -= 0.012;
-      if (mt.life <= 0) { meteors.splice(m, 1); continue; }
-      var grad = ctx.createLinearGradient(mt.x, mt.y, mt.x - mt.vx * 8, mt.y - mt.vy * 8);
-      grad.addColorStop(0, 'rgba(233,228,216,' + (0.8 * mt.life).toFixed(3) + ')');
-      grad.addColorStop(1, 'rgba(233,228,216,0)');
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = 1.1;
-      ctx.beginPath();
-      ctx.moveTo(mt.x, mt.y);
-      ctx.lineTo(mt.x - mt.vx * 8, mt.y - mt.vy * 8);
-      ctx.stroke();
+
+    for (var j = 0; j < bright.length; j++) {
+      var b = bright[j];
+      var k = 0.5 + 0.5 * Math.sin(time * b.sp + b.ph);
+      var x = b.x * W, y = b.y * H;
+      var rr = b.r * (0.9 + 0.25 * k);
+      var glow = ctx.createRadialGradient(x, y, 0, x, y, rr * 5);
+      glow.addColorStop(0, 'rgba(236,230,218,' + (0.09 + 0.08 * k).toFixed(3) + ')');
+      glow.addColorStop(1, 'rgba(236,230,218,0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath(); ctx.arc(x, y, rr * 5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(236,230,218,' + (0.5 + 0.25 * k).toFixed(3) + ')';
+      ctx.beginPath(); ctx.arc(x, y, rr, 0, Math.PI * 2); ctx.fill();
     }
-    requestAnimationFrame(tick);
+
+    requestAnimationFrame(draw);
   }
-  requestAnimationFrame(tick);
+  requestAnimationFrame(draw);
 })();
 
 /* ════════════════════════════════════
-   RIPPLES: slow breathing
+   SEIGAIHA: the wave pattern as a living sea.
+   Rows are spaced by their own radius so the
+   arcs always overlap into scales, on any screen.
+   The sun and the bright stars mirror on the water.
    ════════════════════════════════════ */
 (function () {
-  var ripples = document.querySelectorAll('.ripple');
-  function tick(ts) {
-    ripples.forEach(function (r, i) {
-      var o = 0.03 + 0.05 * (0.5 + 0.5 * Math.sin(ts * 0.0004 + i * 1.4));
-      r.setAttribute('stroke-opacity', o.toFixed(3));
-    });
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-})();
-
-/* ════════════════════════════════════
-   PETALS: rare drifting sakura
-   ════════════════════════════════════ */
-(function () {
-  var cv = document.getElementById('petals');
+  var cv = document.getElementById('sea');
   var ctx = cv.getContext('2d');
-  var petals = [];
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, dpr, horizon, maxR, sunX, sunD, rowsGeo = [], t0 = null;
 
-  function resize() { cv.width = window.innerWidth; cv.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
+  function isMobile() { return window.innerWidth <= 768; }
 
-  function spawn() {
-    if (petals.length < 4) {
-      petals.push({
-        x: Math.random() * cv.width * 0.6,
-        y: -20,
-        vx: 0.25 + Math.random() * 0.4,
-        vy: 0.4 + Math.random() * 0.5,
-        rot: Math.random() * 6.28,
-        vr: (Math.random() - 0.5) * 0.02,
-        size: 5 + Math.random() * 4,
-        sway: Math.random() * 6.28
-      });
+  function layout() {
+    var mob = isMobile();
+    dpr = Math.min(window.devicePixelRatio || 1, mob ? 1.5 : 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    horizon = H * (mob ? 0.52 : 0.46);
+    maxR = mob ? Math.max(40, Math.min(70, W / 8.5)) : Math.max(40, Math.min(88, W / 22));
+    sunD = Math.max(56, Math.min(132, W * 0.07));
+    document.documentElement.style.setProperty('--horizon', horizon + 'px');
+    document.documentElement.style.setProperty('--sun-d', sunD + 'px');
+    sunX = mob ? W - W * 0.09 - sunD / 2 : W * 0.66 + sunD / 2;
+
+    /* rows from the bottom up: each row sits 0.56 r above the previous one */
+    rowsGeo = [];
+    var y = H + maxR * 0.25, k = 0;
+    while (y > horizon + 2) {
+      var t = Math.min(1, Math.max(0, (y - horizon) / (H - horizon)));
+      var r = maxR * (0.16 + 0.84 * Math.pow(t, 1.15));
+      if (r < 5) break;
+      rowsGeo.push({ y: y, r: r, t: t, k: k, rings: r > 34 ? 4 : (r > 16 ? 3 : 2) });
+      y -= r * 0.56;
+      k++;
     }
-    setTimeout(spawn, 8000 + Math.random() * 14000);
+    rowsGeo.reverse();          /* draw far to near */
   }
-  setTimeout(spawn, 5000);
+  layout();
+  window.addEventListener('resize', layout);
 
-  function drawPetal(p) {
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rot);
-    ctx.beginPath();
-    ctx.moveTo(0, -p.size);
-    ctx.bezierCurveTo(p.size * 0.8, -p.size * 0.4, p.size * 0.6, p.size * 0.6, 0, p.size);
-    ctx.bezierCurveTo(-p.size * 0.6, p.size * 0.6, -p.size * 0.8, -p.size * 0.4, 0, -p.size);
-    ctx.fillStyle = 'rgba(214,160,158,0.30)';
-    ctx.fill();
-    ctx.restore();
-  }
+  function draw(ts) {
+    if (t0 === null) t0 = ts;
+    var time = (ts - t0) / 1000;
+    var sh = time;                       /* the water always breathes, gently */
 
-  function tick(ts) {
-    ctx.clearRect(0, 0, cv.width, cv.height);
-    for (var i = petals.length - 1; i >= 0; i--) {
-      var p = petals[i];
-      p.x += p.vx + Math.sin(ts * 0.001 + p.sway) * 0.3;
-      p.y += p.vy;
-      p.rot += p.vr;
-      if (p.y > cv.height + 30 || p.x > cv.width + 30) { petals.splice(i, 1); continue; }
-      drawPetal(p);
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.strokeStyle = 'rgba(236,230,218,0.16)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, horizon + 0.5); ctx.lineTo(W, horizon + 0.5); ctx.stroke();
+
+    var n = rowsGeo.length;
+    for (var i = 0; i < n; i++) {
+      var row = rowsGeo[i];
+      var reveal = Math.min(1, Math.max(0, (time - 0.15 - i * (1.6 / n)) / 0.9));
+      if (reveal <= 0) continue;
+
+      var t = row.t, r = row.r;
+      var step = r * 1.98;
+      var offset = (row.k % 2) * r;
+      var cy = row.y + Math.sin(sh * 0.7 + row.k * 0.55) * r * 0.035;
+
+      var mixR = Math.round(143 + (236 - 143) * t);
+      var mixG = Math.round(176 + (230 - 176) * t);
+      var mixB = Math.round(200 + (218 - 200) * t);
+      var baseA = (0.08 + 0.26 * t) * reveal;
+      var band = r * (1.6 + 2.2 * (1 - t));
+      var fill = t < 0.5 ? '#0D1726' : '#0C1524';
+
+      var cnt = Math.ceil(W / step) + 2;
+      for (var j = -1; j < cnt; j++) {
+        var x = j * step + offset;
+        ctx.fillStyle = fill;
+        ctx.beginPath(); ctx.arc(x, cy, r, 0, Math.PI * 2); ctx.fill();
+
+        var ph = Math.sin(sh * 0.9 - j * 0.42 + row.k * 0.7);
+        var a = baseA * (0.55 + 0.45 * ph);
+        var col = Math.abs(x - sunX) < band
+          ? 'rgba(200,169,126,' + Math.min(0.9, a * 2.2 + 0.08 * reveal).toFixed(3) + ')'
+          : 'rgba(' + mixR + ',' + mixG + ',' + mixB + ',' + a.toFixed(3) + ')';
+        ctx.strokeStyle = col;
+        for (var q = 1; q <= row.rings; q++) {
+          ctx.beginPath();
+          ctx.arc(x, cy, r * (q / row.rings) - 0.5, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
     }
-    requestAnimationFrame(tick);
+
+    /* ── reflections: light laid over the water ── */
+    var seaH = H - horizon;
+    var open = Math.min(1, Math.max(0, (time - 1.2) / 1.6));
+    if (open > 0) {
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+
+      /* the sun, as a trembling column of red */
+      var slices = 26, colH = seaH * 0.42;
+      for (var s = 0; s < slices; s++) {
+        var f = s / slices;
+        var yy = horizon + f * colH;
+        var wob = Math.sin(sh * 1.6 + s * 0.9) * (2 + 6 * f);
+        var half = sunD * (0.42 + 0.35 * f);
+        var al = 0.20 * (1 - f) * (0.75 + 0.25 * Math.sin(sh * 2.2 - s * 0.7)) * open;
+        var g = ctx.createLinearGradient(sunX - half, 0, sunX + half, 0);
+        g.addColorStop(0, 'rgba(198,60,59,0)');
+        g.addColorStop(0.5, 'rgba(198,60,59,' + al.toFixed(3) + ')');
+        g.addColorStop(1, 'rgba(198,60,59,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(sunX - half + wob, yy, half * 2, colH / slices + 1);
+      }
+
+      /* the bright stars, as faint glints just below the line */
+      var stars = window.__brightStars || [];
+      for (var b = 0; b < stars.length; b++) {
+        var st = stars[b];
+        var sy = st.y * H;
+        var ry = horizon + (horizon - sy) * 0.22;
+        if (ry > H) continue;
+        var rx = st.x * W + Math.sin(sh * 1.3 + b) * 2;
+        var ka = 0.5 + 0.5 * Math.sin(sh * st.sp + st.ph);
+        var gl = ctx.createRadialGradient(rx, ry, 0, rx, ry, 9);
+        gl.addColorStop(0, 'rgba(236,230,218,' + (0.10 + 0.08 * ka) * open + ')');
+        gl.addColorStop(1, 'rgba(236,230,218,0)');
+        ctx.fillStyle = gl;
+        ctx.beginPath(); ctx.ellipse(rx, ry, 9, 3.5, 0, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    requestAnimationFrame(draw);
   }
-  requestAnimationFrame(tick);
+  requestAnimationFrame(draw);
+
+  setTimeout(function () { document.body.classList.add('ready'); }, 250);
 })();
 
 /* ════════════════════════════════════
@@ -937,17 +744,11 @@ function sceneMetrics() {
    ════════════════════════════════════ */
 (function () {
   var dot = document.getElementById('cur-dot');
-  var ring = document.getElementById('cur-ring');
-  var mx = 0, my = 0, rx = 0, ry = 0;
+  var mx = 0, my = 0;
   document.addEventListener('mousemove', function (e) {
     mx = e.clientX; my = e.clientY;
     dot.style.left = mx + 'px'; dot.style.top = my + 'px';
   });
-  (function anim() {
-    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(anim);
-  })();
   document.querySelectorAll('a, button').forEach(function (el) {
     el.addEventListener('mouseenter', function () { document.body.classList.add('hov'); });
     el.addEventListener('mouseleave', function () { document.body.classList.remove('hov'); });
@@ -1026,78 +827,6 @@ function sceneMetrics() {
   if (!getStored()) setTimeout(show, 1800);
 })();
 
-/* ════════════════════════════════════
-   ORIZURU flight: paper wings and a slow drift
-   ════════════════════════════════════ */
-(function () {
-  var bird     = document.getElementById('orizuru');
-  var svg      = bird.querySelector('svg');
-  var wingNear = document.getElementById('wing-near');
-  var wingFar  = document.getElementById('wing-far');
-  var tail     = document.getElementById('ori-tail');
-  var head     = document.getElementById('ori-head');
-
-  var W = window.innerWidth, H = window.innerHeight;
-  window.addEventListener('resize', function () { W = window.innerWidth; H = window.innerHeight; });
-
-  var waypoints = [
-    [0.14, 0.14], [0.34, 0.08], [0.55, 0.16], [0.74, 0.07],
-    [0.88, 0.13], [0.84, 0.30], [0.64, 0.36], [0.44, 0.28],
-    [0.24, 0.38], [0.10, 0.28]
-  ];
-
-  var idx = 0;
-  var startX = -120, startY = H * 0.18;
-  var targetX = waypoints[0][0] * W, targetY = waypoints[0][1] * H;
-  var startTime = null;
-  var segDuration = 10000;
-  var facing = 1;
-
-  setTimeout(function () { bird.classList.add('visible'); }, 1400);
-
-  function easeInOut(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
-
-  function anim(ts) {
-    if (!startTime) startTime = ts;
-    var t = Math.min((ts - startTime) / segDuration, 1);
-    var e = easeInOut(t);
-    var x = startX + (targetX - startX) * e;
-    var y = startY + (targetY - startY) * e;
-
-    /* paper wings: a folded crane hinges, it does not beat like a bird */
-    var beat  = Math.sin(ts * 0.0021);
-    var glide = 0.5 + 0.5 * Math.sin(ts * 0.0005);
-    var amp   = 3 + 8 * glide;
-    var bob   = Math.sin(ts * 0.0021 + 1.1) * (1.2 + 1.8 * glide);
-
-    bird.style.left = (x - 75) + 'px';
-    bird.style.top  = (y - 50 + bob) + 'px';
-
-    var dir = (targetX - startX) >= 0 ? 1 : -1;
-    facing += (dir - facing) * 0.05;
-    /* a light sheet of paper rolls a little as it turns */
-    var tilt = Math.max(-10, Math.min(10, (targetY - startY) * -0.009 * dir))
-             + Math.sin(ts * 0.0007) * 2.2;
-    svg.style.transform = 'scaleX(' + facing.toFixed(3) + ') rotate(' + tilt.toFixed(1) + 'deg)';
-
-    wingNear.setAttribute('transform', 'rotate(' + (beat * amp).toFixed(1) + ' 102 52)');
-    wingFar.setAttribute('transform',  'rotate(' + (Math.sin(ts * 0.0021 + 0.5) * amp * 0.8).toFixed(1) + ' 96 50)');
-    /* neck and tail answer the wings with a small delay */
-    tail.setAttribute('transform', 'rotate(' + (Math.sin(ts * 0.0021 - 0.8) * 2.6).toFixed(1) + ' 82 58)');
-    head.setAttribute('transform', 'rotate(' + (Math.sin(ts * 0.0021 - 0.5) * 1.8).toFixed(1) + ' 100 48)');
-
-    if (t >= 1) {
-      startX = x; startY = y + bob;
-      idx = (idx + 1) % waypoints.length;
-      targetX = waypoints[idx][0] * W;
-      targetY = waypoints[idx][1] * H;
-      startTime = ts;
-      segDuration = 8500 + Math.random() * 5000;
-    }
-    requestAnimationFrame(anim);
-  }
-  requestAnimationFrame(anim);
-})();
 </script>
 </body>
 </html>
