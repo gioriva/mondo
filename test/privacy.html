@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0B0D10">
+<title>Privacy Policy | Giorgio Riva</title>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+
+<!-- Google Analytics + Consent Mode -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied'
+  });
+  gtag('config', 'G-1ZCCJ6QBR4', { 'anonymize_ip': true });
+  try {
+    if (localStorage.getItem('gr_cookie_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #0B0D10;
+  --bg-2:   #0E1116;
+  --ink:    #E6E8EB;
+  --grey:   #6B7280;
+  --signal: #E8C98F;
+  --line:   rgba(230,232,235,0.09);
+  --font:   'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+}
+
+html { background: var(--bg); }
+body {
+  background: radial-gradient(120% 80% at 50% 30%, var(--bg-2) 0%, var(--bg) 70%);
+  color: var(--ink);
+  font-family: var(--font);
+  font-weight: 300;
+  min-height: 100vh;
+  line-height: 1.75;
+}
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 1px solid var(--signal); outline-offset: 4px;
+}
+
+/* a calm strip of sea at the bottom */
+#sea { position: fixed; left: 0; right: 0; bottom: 0; height: 30vh; z-index: 0; pointer-events: none; }
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 4.5rem 1.75rem 34vh;
+}
+
+.back {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-size: 0.86rem; color: var(--grey); text-decoration: none;
+  margin-bottom: 3rem;
+  transition: color .2s, gap .25s;
+}
+.back:hover { color: var(--signal); gap: 0.9rem; }
+
+h1 {
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+.updated { margin-top: 0.5rem; font-size: 0.82rem; color: var(--grey); }
+.rule { width: 48px; height: 1px; background: var(--signal); opacity: 0.8; margin: 1.5rem 0 2.2rem; }
+
+h2 { font-weight: 500; font-size: 1.15rem; margin: 2.4rem 0 0.6rem; color: var(--ink); }
+p { font-size: 0.95rem; color: rgba(230,232,235,0.82); }
+p + p { margin-top: 0.9rem; }
+.muted { color: var(--grey); font-size: 0.88rem; }
+ul { padding-left: 1.2rem; margin: 0.6rem 0; }
+li { font-size: 0.95rem; color: rgba(230,232,235,0.82); margin: 0.3rem 0; }
+strong { font-weight: 500; color: var(--ink); }
+a.inline { color: var(--signal); text-decoration: none; border-bottom: 1px solid rgba(232,201,143,0.35); }
+a.inline:hover { color: var(--ink); border-color: var(--ink); }
+
+table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.4rem; font-size: 0.9rem; }
+th, td { text-align: left; padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 400; color: var(--grey); font-size: 0.78rem; }
+td { color: rgba(230,232,235,0.85); }
+
+footer {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  z-index: 1; text-align: center;
+  padding: 1.3rem; font-size: 0.78rem; color: var(--grey);
+}
+footer a { color: var(--grey); text-decoration: none; }
+footer a:hover { color: var(--signal); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.wrap { animation: fadeUp .8s ease both; }
+@media (prefers-reduced-motion: reduce) { .wrap { animation: none; } }
+
+@media (max-width: 560px) {
+  .wrap { padding: 3.2rem 1.4rem 36vh; }
+  th, td { padding: 0.6rem 0.4rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a class="back" href="/">&larr; Torna alla home</a>
+
+  <h1>Privacy Policy</h1>
+  <p class="updated">Ultimo aggiornamento: settembre 2026</p>
+  <div class="rule"></div>
+
+  <p>Questa pagina descrive come vengono trattati i dati personali di chi visita questo sito (gioriva.it), in conformità al Regolamento UE 2016/679 (GDPR) e alla normativa italiana vigente. Il sito è un progetto personale a carattere non commerciale.</p>
+
+  <h2>Titolare del trattamento</h2>
+  <p>Il titolare del trattamento è Giorgio Riva. Per qualsiasi richiesta relativa ai tuoi dati puoi scrivere tramite la <a class="inline" href="/contatti.html">pagina dei contatti</a>.</p>
+
+  <h2>Quali dati raccogliamo</h2>
+  <p>Il sito non richiede registrazione e non ha aree riservate. I dati trattati sono di due tipi.</p>
+  <p><strong>Dati che ci invii tu</strong>, attraverso il modulo di contatto: nome, cognome, indirizzo email e testo del messaggio. Vengono usati esclusivamente per risponderti e non sono ceduti a terzi per altri scopi.</p>
+  <p><strong>Dati statistici</strong>, raccolti solo previo tuo consenso dagli strumenti di analisi:</p>
+  <ul>
+    <li>Pagine visitate e tempo di permanenza</li>
+    <li>Tipo di dispositivo, browser e sistema operativo</li>
+    <li>Provenienza geografica approssimativa, a livello di città o regione</li>
+    <li>Sorgente di provenienza, per esempio un link da un social network o da un motore di ricerca</li>
+  </ul>
+  <p class="muted">I dati statistici sono raccolti in forma aggregata e non permettono di identificarti personalmente.</p>
+
+  <h2>Modulo di contatto</h2>
+  <p>Il modulo è gestito dal servizio Formspree, che riceve i dati inseriti e li recapita al titolare via email. Il trattamento da parte di Formspree è disciplinato dalla sua informativa, consultabile su <a class="inline" href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener">formspree.io</a>. La base giuridica è l'esecuzione della tua richiesta (art. 6, par. 1, lett. b del GDPR). I messaggi sono conservati per il tempo necessario a gestire la corrispondenza.</p>
+
+  <h2>Cookie utilizzati</h2>
+  <p>Un cookie è un piccolo file di testo salvato dal browser. Questo sito utilizza due categorie di cookie:</p>
+
+  <table>
+    <thead>
+      <tr><th>Tipo</th><th>Finalità</th><th>Consenso</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tecnici</td>
+        <td>Memorizzano la tua scelta sul banner cookie, così da non riproporlo a ogni visita.</td>
+        <td>Non richiesto</td>
+      </tr>
+      <tr>
+        <td>Analitici<br>(Google Analytics 4)</td>
+        <td>Raccolgono statistiche anonime e aggregate sull'uso del sito per migliorarne i contenuti.</td>
+        <td>Richiesto</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>I cookie analitici vengono attivati <strong>solo dopo il tuo consenso esplicito</strong> tramite il banner. Fino a quel momento Google Analytics resta disattivato (Consent Mode con impostazione "denied" di default). Puoi modificare la tua scelta in qualsiasi momento dalla voce "Cookie" che trovi nel menù della home.</p>
+
+  <h2>Google Analytics</h2>
+  <p>Il servizio è fornito da Google Ireland Ltd. I dati raccolti sono utilizzati per produrre report statistici. Google può trasferire questi dati anche al di fuori dell'Unione Europea: il trattamento da parte di Google è disciplinato dalla sua informativa privacy, consultabile su <a class="inline" href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>. Gli indirizzi IP vengono trattati in forma anonimizzata.</p>
+
+  <h2>Base giuridica e durata</h2>
+  <p>La base giuridica del trattamento analitico è il tuo consenso (art. 6, par. 1, lett. a del GDPR). Il consenso espresso tramite il banner viene conservato nel browser e ha validità fino a sua revoca. I dati statistici raccolti da Google Analytics sono conservati secondo i periodi di retention impostati nella piattaforma.</p>
+
+  <h2>I tuoi diritti</h2>
+  <p>In qualsiasi momento puoi esercitare i diritti previsti dagli articoli da 15 a 22 del GDPR:</p>
+  <ul>
+    <li>Accesso ai tuoi dati e richiesta di copia</li>
+    <li>Rettifica o cancellazione</li>
+    <li>Limitazione o opposizione al trattamento</li>
+    <li>Revoca del consenso, senza pregiudicare la liceità del trattamento precedente</li>
+    <li>Reclamo al Garante per la protezione dei dati personali (<a class="inline" href="https://www.garanteprivacy.it" target="_blank" rel="noopener">garanteprivacy.it</a>)</li>
+  </ul>
+
+  <h2>Come revocare il consenso</h2>
+  <p>Puoi disattivare i cookie analitici in due modi: dalla voce "Cookie" nel menù della home, scegliendo "Rifiuta", oppure cancellando i dati di navigazione dal tuo browser. Puoi inoltre installare il <a class="inline" href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">componente aggiuntivo per la disattivazione di Google Analytics</a>.</p>
+
+  <h2>Contatti</h2>
+  <p>Per qualsiasi domanda su questa informativa o sul trattamento dei tuoi dati, scrivimi dalla <a class="inline" href="/contatti.html">pagina dei contatti</a>.</p>
+
+  <p class="muted" style="margin-top:2.5rem">Questa informativa può essere aggiornata nel tempo. La data dell'ultima revisione è indicata in cima alla pagina.</p>
+</div>
+
+<footer>
+  &copy; 2026 Giorgio Riva &nbsp;<a href="/">gioriva.it</a>
+</footer>
+<canvas id="sea"></canvas>
+<script>
+'use strict';
+/* a calm strip of sea, no lights: continuity with the home */
+(function () {
+  var cv = document.getElementById('sea'), ctx = cv.getContext('2d');
+  var W, H, dpr, lines = [], N = 6;
+  function layout() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = Math.round(window.innerHeight * 0.30);
+    cv.width = W * dpr; cv.height = H * dpr; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    lines = [];
+    for (var i = 0; i < N; i++) {
+      var d = i / (N - 1);
+      lines.push({ d: d, y: H * (0.15 + Math.pow(d, 1.6) * 0.75), amp: 1.5 + 10 * Math.pow(d, 1.7),
+        alpha: 0.06 + 0.16 * d, ph: i * 1.93,
+        k1: 2 * Math.PI / (W * (0.26 + 0.44 * d)), k2: 2 * Math.PI / (W * (0.11 + 0.16 * d)),
+        s1: 0.22 + 0.30 * d, s2: 0.18 + 0.20 * d });
+    }
+  }
+  layout(); window.addEventListener('resize', layout);
+  var t0 = null;
+  function frame(ts) {
+    if (t0 === null) t0 = ts;
+    var t = (ts - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineJoin = 'round';
+    for (var i = 0; i < N; i++) {
+      var L = lines[i], g = 0.78 + 0.22 * Math.sin(t * 0.11 + L.ph * 0.5);
+      ctx.beginPath();
+      for (var x = -8; x <= W + 8; x += 4) {
+        var y = L.y + L.amp * g * (Math.sin(x * L.k1 + t * L.s1 + L.ph) + 0.5 * Math.sin(x * L.k2 - t * L.s2 + L.ph * 1.7));
+        if (x === -8) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.lineWidth = 0.7 + 0.5 * L.d;
+      ctx.strokeStyle = 'rgba(230,232,235,' + L.alpha.toFixed(3) + ')';
+      ctx.stroke();
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
