@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0A1220">
+<meta name="theme-color" content="#0B0D10">
 <title>Privacy Policy | Giorgio Riva</title>
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
 
 <!-- Google Analytics + Consent Mode -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
@@ -32,126 +32,90 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --ai:      #0F1B2D;
-  --ai-deep: #0A1220;
-  --silk:    #ECE6DA;
-  --sun:     #C63C3B;
-  --gold:    #C8A97E;
-  --mist:    #7C8A9C;
-  --line:    rgba(236,230,218,0.10);
-  --serif:   'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif;
-  --sans:    'Zen Kaku Gothic New', 'Helvetica Neue', Arial, sans-serif;
+  --bg:     #0B0D10;
+  --bg-2:   #0E1116;
+  --ink:    #E6E8EB;
+  --grey:   #6B7280;
+  --signal: #E8C98F;
+  --line:   rgba(230,232,235,0.09);
+  --font:   'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
 }
 
-html { background: var(--ai-deep); }
+html { background: var(--bg); }
 body {
-  background: linear-gradient(180deg, var(--ai-deep) 0%, var(--ai) 40%, #0C1727 100%);
-  color: var(--silk);
-  font-family: var(--sans);
+  background: radial-gradient(120% 80% at 50% 30%, var(--bg-2) 0%, var(--bg) 70%);
+  color: var(--ink);
+  font-family: var(--font);
   font-weight: 300;
   min-height: 100vh;
   line-height: 1.75;
 }
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-  outline: 1px solid var(--gold); outline-offset: 4px;
+  outline: 1px solid var(--signal); outline-offset: 4px;
 }
 
-/* seigaiha rising from the bottom of the page */
-body::after {
-  content: '';
-  position: fixed;
-  left: 0; right: 0; bottom: 0;
-  height: 38vh;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.13;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ECE6DA' stroke-width='1'%3E%3Cpath d='M0 40a40 40 0 0 1 80 0M10 40a30 30 0 0 1 60 0M20 40a20 20 0 0 1 40 0M30 40a10 10 0 0 1 20 0'/%3E%3Cpath d='M-40 80a40 40 0 0 1 80 0M-30 80a30 30 0 0 1 60 0M-20 80a20 20 0 0 1 40 0M-10 80a10 10 0 0 1 20 0'/%3E%3Cpath d='M40 80a40 40 0 0 1 80 0M50 80a30 30 0 0 1 60 0M60 80a20 20 0 0 1 40 0M70 80a10 10 0 0 1 20 0'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 80px 80px;
-  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
-  mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
-}
+/* a calm strip of sea at the bottom */
+#sea { position: fixed; left: 0; right: 0; bottom: 0; height: 30vh; z-index: 0; pointer-events: none; }
 
 .wrap {
   position: relative;
   z-index: 1;
   max-width: 660px;
   margin: 0 auto;
-  padding: 4.5rem 1.75rem 6rem;
+  padding: 4.5rem 1.75rem 34vh;
 }
 
 .back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: 0.82rem;
-  color: var(--mist);
-  text-decoration: none;
-  margin-bottom: 3.2rem;
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-size: 0.86rem; color: var(--grey); text-decoration: none;
+  margin-bottom: 3rem;
   transition: color .2s, gap .25s;
 }
-.back:hover { color: var(--gold); gap: 0.9rem; }
+.back:hover { color: var(--signal); gap: 0.9rem; }
 
-.sun-mark {
-  display: inline-block;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--sun);
-  margin-right: 0.85rem;
-  vertical-align: 0.1em;
-}
 h1 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(2rem, 4.4vw, 2.8rem);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   line-height: 1.15;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
-.updated { margin-top: 0.6rem; font-size: 0.8rem; color: var(--mist); }
-.rule { width: 60px; height: 1px; background: var(--gold); opacity: 0.7; margin: 1.6rem 0 2.2rem; }
+.updated { margin-top: 0.5rem; font-size: 0.82rem; color: var(--grey); }
+.rule { width: 48px; height: 1px; background: var(--signal); opacity: 0.8; margin: 1.5rem 0 2.2rem; }
 
-h2 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: 1.3rem;
-  margin: 2.4rem 0 0.7rem;
-  color: var(--silk);
-}
-p { font-size: 0.95rem; color: rgba(236,230,218,0.82); }
+h2 { font-weight: 500; font-size: 1.15rem; margin: 2.4rem 0 0.6rem; color: var(--ink); }
+p { font-size: 0.95rem; color: rgba(230,232,235,0.82); }
 p + p { margin-top: 0.9rem; }
-.muted { color: var(--mist); font-size: 0.88rem; }
+.muted { color: var(--grey); font-size: 0.88rem; }
 ul { padding-left: 1.2rem; margin: 0.6rem 0; }
-li { font-size: 0.95rem; color: rgba(236,230,218,0.82); margin: 0.3rem 0; }
-strong { font-weight: 400; color: var(--silk); }
-a.inline { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(200,169,126,0.35); }
-a.inline:hover { color: var(--silk); border-color: var(--silk); }
+li { font-size: 0.95rem; color: rgba(230,232,235,0.82); margin: 0.3rem 0; }
+strong { font-weight: 500; color: var(--ink); }
+a.inline { color: var(--signal); text-decoration: none; border-bottom: 1px solid rgba(232,201,143,0.35); }
+a.inline:hover { color: var(--ink); border-color: var(--ink); }
 
 table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.4rem; font-size: 0.9rem; }
 th, td { text-align: left; padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-th { font-weight: 400; color: var(--mist); font-size: 0.78rem; }
-td { color: rgba(236,230,218,0.85); }
+th { font-weight: 400; color: var(--grey); font-size: 0.78rem; }
+td { color: rgba(230,232,235,0.85); }
 
 footer {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding: 1.6rem;
-  font-size: 0.78rem;
-  color: var(--mist);
+  position: fixed; left: 0; right: 0; bottom: 0;
+  z-index: 1; text-align: center;
+  padding: 1.3rem; font-size: 0.78rem; color: var(--grey);
 }
-footer a { color: var(--mist); text-decoration: none; }
-footer a:hover { color: var(--gold); }
+footer a { color: var(--grey); text-decoration: none; }
+footer a:hover { color: var(--signal); }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 .wrap { animation: fadeUp .8s ease both; }
 @media (prefers-reduced-motion: reduce) { .wrap { animation: none; } }
 
 @media (max-width: 560px) {
-  .wrap { padding: 3.2rem 1.4rem 5rem; }
+  .wrap { padding: 3.2rem 1.4rem 36vh; }
   th, td { padding: 0.6rem 0.4rem; }
 }
 </style>
@@ -161,7 +125,7 @@ footer a:hover { color: var(--gold); }
 <div class="wrap">
   <a class="back" href="/">&larr; Torna alla home</a>
 
-  <h1><span class="sun-mark" aria-hidden="true"></span>Privacy Policy</h1>
+  <h1>Privacy Policy</h1>
   <p class="updated">Ultimo aggiornamento: settembre 2026</p>
   <div class="rule"></div>
 
@@ -236,6 +200,49 @@ footer a:hover { color: var(--gold); }
 <footer>
   &copy; 2026 Giorgio Riva &nbsp;<a href="/">gioriva.it</a>
 </footer>
-
+<canvas id="sea"></canvas>
+<script>
+'use strict';
+/* a calm strip of sea, no lights: continuity with the home */
+(function () {
+  var cv = document.getElementById('sea'), ctx = cv.getContext('2d');
+  var W, H, dpr, lines = [], N = 6;
+  function layout() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = Math.round(window.innerHeight * 0.30);
+    cv.width = W * dpr; cv.height = H * dpr; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    lines = [];
+    for (var i = 0; i < N; i++) {
+      var d = i / (N - 1);
+      lines.push({ d: d, y: H * (0.15 + Math.pow(d, 1.6) * 0.75), amp: 1.5 + 10 * Math.pow(d, 1.7),
+        alpha: 0.06 + 0.16 * d, ph: i * 1.93,
+        k1: 2 * Math.PI / (W * (0.26 + 0.44 * d)), k2: 2 * Math.PI / (W * (0.11 + 0.16 * d)),
+        s1: 0.22 + 0.30 * d, s2: 0.18 + 0.20 * d });
+    }
+  }
+  layout(); window.addEventListener('resize', layout);
+  var t0 = null;
+  function frame(ts) {
+    if (t0 === null) t0 = ts;
+    var t = (ts - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineJoin = 'round';
+    for (var i = 0; i < N; i++) {
+      var L = lines[i], g = 0.78 + 0.22 * Math.sin(t * 0.11 + L.ph * 0.5);
+      ctx.beginPath();
+      for (var x = -8; x <= W + 8; x += 4) {
+        var y = L.y + L.amp * g * (Math.sin(x * L.k1 + t * L.s1 + L.ph) + 0.5 * Math.sin(x * L.k2 - t * L.s2 + L.ph * 1.7));
+        if (x === -8) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.lineWidth = 0.7 + 0.5 * L.d;
+      ctx.strokeStyle = 'rgba(230,232,235,' + L.alpha.toFixed(3) + ')';
+      ctx.stroke();
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
