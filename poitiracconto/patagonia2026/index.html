@@ -183,6 +183,7 @@
     -webkit-user-select: none;
     touch-action: pan-y;
   }
+  .knob::before { content: ''; position: absolute; inset: -18px; border-radius: 50%; }
   .world {
     position: absolute; inset: 0;
   }
@@ -203,8 +204,8 @@
     position: absolute;
     top: 76%;
     left: calc(var(--split) * 1%);
-    width: 62px; height: 62px;
-    margin: -31px 0 0 -31px;
+    width: 72px; height: 72px;
+    margin: -36px 0 0 -36px;
     border-radius: 50%;
     background: rgba(6,20,35,0.55);
     border: 1px solid rgba(243,241,234,0.6);
@@ -213,6 +214,7 @@
     display: flex; align-items: center; justify-content: center;
     cursor: ew-resize;
     touch-action: none;
+    -webkit-tap-highlight-color: transparent;
     z-index: 5;
     box-shadow: 0 6px 30px rgba(0,0,0,0.35);
   }
@@ -858,30 +860,64 @@
     knob.setAttribute('aria-valuenow', Math.round(v));
   }
   function clamp(v) { return Math.max(18, Math.min(82, v)); }
-  function fromEvent(e) {
+  function fromX(clientX) {
     var r = hero.getBoundingClientRect();
-    var px = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
-    return clamp(px / r.width * 100);
+    return clamp((clientX - r.left) / r.width * 100);
   }
-  function startDrag(e) { dragging = true; touched = true; hero.classList.add('grabbing'); if (hint) hint.style.opacity = '0'; target = fromEvent(e); e.preventDefault(); }
-  function moveDrag(e) { if (dragging) { target = fromEvent(e); e.preventDefault(); } }
-  function endDrag() { dragging = false; hero.classList.remove('grabbing'); }
 
-  knob.addEventListener('mousedown', startDrag);
-  knob.addEventListener('touchstart', startDrag, { passive: false });
-  window.addEventListener('mousemove', moveDrag);
-  window.addEventListener('touchmove', moveDrag, { passive: false });
-  window.addEventListener('mouseup', endDrag);
-  window.addEventListener('touchend', endDrag);
+  /* trascinamento con Pointer Events: dito, mouse e pennino con lo stesso codice */
+  var pointerId = null;
+  function startDrag(e) {
+    pointerId = e.pointerId;
+    dragging = true; touched = true;
+    hero.classList.add('grabbing');
+    if (hint) hint.style.opacity = '0';
+    try { knob.setPointerCapture(e.pointerId); } catch (err) {}
+    target = fromX(e.clientX);
+    if (reduce) { split = target; applySplit(split); }
+    e.preventDefault();
+  }
+  function moveDrag(e) {
+    if (!dragging || (pointerId !== null && e.pointerId !== pointerId)) return;
+    target = fromX(e.clientX);
+    if (reduce) { split = target; applySplit(split); }
+    e.preventDefault();
+  }
+  function endDrag(e) {
+    if (!dragging) return;
+    dragging = false; pointerId = null;
+    hero.classList.remove('grabbing');
+    try { knob.releasePointerCapture(e.pointerId); } catch (err) {}
+  }
+  knob.addEventListener('pointerdown', startDrag);
+  knob.addEventListener('pointermove', moveDrag);
+  knob.addEventListener('pointerup', endDrag);
+  knob.addEventListener('pointercancel', endDrag);
+  knob.addEventListener('lostpointercapture', endDrag);
+  /* ripiego per browser senza Pointer Events */
+  if (!window.PointerEvent) {
+    var tf = function (e) { return e.touches && e.touches[0] ? e.touches[0].clientX : e.clientX; };
+    knob.addEventListener('touchstart', function (e) { dragging = true; touched = true; target = fromX(tf(e)); if (reduce) { split = target; applySplit(split); } e.preventDefault(); }, { passive: false });
+    window.addEventListener('touchmove', function (e) { if (dragging) { target = fromX(tf(e)); if (reduce) { split = target; applySplit(split); } e.preventDefault(); } }, { passive: false });
+    window.addEventListener('touchend', function () { dragging = false; });
+    knob.addEventListener('mousedown', function (e) { dragging = true; touched = true; target = fromX(e.clientX); e.preventDefault(); });
+    window.addEventListener('mousemove', function (e) { if (dragging) { target = fromX(e.clientX); if (reduce) { split = target; applySplit(split); } } });
+    window.addEventListener('mouseup', function () { dragging = false; });
+  }
+
   /* su desktop basta muovere il mouse sulla scena */
   hero.addEventListener('mousemove', function (e) {
-    if (dragging || window.matchMedia('(hover: none)').matches) return;
-    touched = true; target = fromEvent(e);
+    if (dragging || reduce || window.matchMedia('(hover: none)').matches) return;
+    touched = true; target = fromX(e.clientX);
   });
   hero.addEventListener('mouseleave', function () { if (!dragging) touched = false; t0 = performance.now(); });
   knob.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft') { touched = true; target = clamp(target - 5); }
-    if (e.key === 'ArrowRight') { touched = true; target = clamp(target + 5); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      touched = true;
+      target = clamp(target + (e.key === 'ArrowLeft' ? -5 : 5));
+      if (reduce) { split = target; applySplit(split); }
+      e.preventDefault();
+    }
   });
 
   function frame(now) {
@@ -889,11 +925,12 @@
       /* alla deriva, lentamente, finché nessuno tocca */
       target = 50 + Math.sin((now - t0) / 5200) * 13;
     }
-    split += (target - split) * (dragging ? 0.28 : 0.06);
+    split += (target - split) * (dragging ? 0.35 : 0.06);
     applySplit(split);
     requestAnimationFrame(frame);
   }
-  if (reduce) { applySplit(50); knob.addEventListener('keydown', function () { applySplit(target); }); }
+  /* con "riduci movimento": niente deriva automatica, ma il trascinamento resta */
+  if (reduce) { applySplit(50); }
   else { requestAnimationFrame(frame); }
   window.addEventListener('resize', function () { applySplit(split); });
 
