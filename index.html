@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0B0D10">
+<meta name="theme-color" content="#0C0907">
 <title>Giorgio Riva</title>
 
 <meta name="description" content="Freedom is a state of mind.">
 <meta property="og:title" content="Giorgio Riva">
 <meta property="og:description" content="Freedom is a state of mind.">
-<meta property="og:image" content="https://www.gioriva.it/og-image.png?v=7">
+<meta property="og:image" content="https://www.gioriva.it/og-image.png?v=9">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:type" content="website">
@@ -17,11 +17,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Giorgio Riva">
 <meta name="twitter:description" content="Freedom is a state of mind.">
-<meta name="twitter:image" content="https://www.gioriva.it/og-image.png?v=7">
+<meta name="twitter:image" content="https://www.gioriva.it/og-image.png?v=9">
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=6">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=6">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
 
 <!-- Google Analytics + Consent Mode -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
@@ -45,258 +45,305 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300,100;1,9..144,300,100&display=swap" rel="stylesheet">
 
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg:     #0B0D10;
-  --bg-2:   #0E1116;
-  --ink:    #E6E8EB;
-  --grey:   #6B7280;
-  --dot:    #C9CFD6;
-  --signal: #E8C98F;
-  --line:   rgba(230,232,235,0.09);
-  --font:   'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
-  /* names the shared cookie block expects */
-  --sumi: var(--bg); --washi: var(--ink); --shu: var(--signal); --kin: var(--signal); --muted: var(--grey);
-  --serif: var(--font); --sans: var(--font);
+  --bg:     #0C0907;
+  --ink:    #EFE6D8;
+  --dim:    rgba(239,230,216,0.42);
+  --accent: #F2B36B;
+  --line:   rgba(239,230,216,0.10);
+  --font:   "IBM Plex Mono", ui-monospace, monospace;
+  --serif:  "Fraunces", Georgia, serif;
 }
-
-html { background: var(--bg); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
 body {
-  background: radial-gradient(120% 80% at 50% 45%, var(--bg-2) 0%, var(--bg) 70%);
-  color: var(--ink);
+  background: var(--bg);
   font-family: var(--font);
-  font-weight: 300;
-  height: 100vh;
-  overflow: hidden;
-  cursor: none;
-}
-a, button { cursor: none; }
-a:focus-visible, button:focus-visible { outline: 1px solid var(--signal); outline-offset: 4px; }
-
-/* ── The sea ── */
-#sea { position: fixed; inset: 0; z-index: 1; }
-
-/* ── Signature under the system ── */
-.sign {
-  position: fixed; z-index: 10;
-  left: 0; right: 0;
-  top: var(--sign-y, 76vh);
-  text-align: center;
-  opacity: 0; transform: translateY(6px);
-  transition: opacity 1.4s ease 1.2s, transform 1.4s ease 1.2s;
-}
-body.ready .sign { opacity: 1; transform: none; }
-.brand {
-  font-weight: 400;
-  font-size: 1.05rem;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
   color: var(--ink);
-  padding-left: 0.34em;   /* balances the trailing tracking */
+  -webkit-font-smoothing: antialiased;
 }
-.payoff {
-  margin-top: 0.7rem;
-  font-weight: 300;
-  font-size: 0.86rem;
-  letter-spacing: 0.04em;
-  color: var(--grey);
+canvas#c { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+a:focus-visible, button:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
+
+/* vignette: darkens the edges, warm */
+.vignette {
+  position: fixed; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 75% 70% at 50% 62%, transparent 45%, rgba(12,9,7,0.92) 100%);
 }
 
-/* ── Menu trigger: three small waves ── */
-#burger {
-  position: fixed; top: 1.6rem; right: 2.2rem; z-index: 10005;
-  width: 48px; height: 48px;
-  display: grid; place-items: center;
-  background: none; border: none; padding: 0;
-  color: var(--ink);
-  transition: color .25s;
-}
-#burger:hover { color: var(--signal); }
-#burger svg { width: 30px; height: 22px; display: block; overflow: visible; }
-#burger .wv { stroke: currentColor; stroke-width: 1.2; fill: none; stroke-linecap: round;
-  transition: opacity .35s, transform .45s cubic-bezier(.16,.84,.44,1); transform-origin: 15px 11px; }
-#burger .x  { stroke: currentColor; stroke-width: 1.2; stroke-linecap: round;
-  opacity: 0; transition: opacity .35s .1s; }
-body.menu-open #burger .wv { opacity: 0; transform: scaleX(0.2); }
-body.menu-open #burger .x  { opacity: 1; }
-
-/* ── The sea is the menu: one voice per wave ── */
-#menu {
-  position: fixed; inset: 0; z-index: 10004;
+/* the name, where the wordmark was */
+.center {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
   pointer-events: none;
-  visibility: hidden;
+  transform: translateY(-14vh);
 }
-body.menu-open #menu { visibility: visible; }
-.row {
-  position: absolute;
-  left: 8vw; right: 8vw;
-  top: var(--row-y, 50%);
-  transform: translateY(calc(-100% - 10px));
-  display: flex; align-items: baseline; gap: 1.1rem;
+.wm {
+  text-align: center;
+  opacity: 0; animation: fade 2s ease 0.8s forwards;
+}
+.wm .name {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(1.7rem, 3.1vw, 2.6rem);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.wm .rule {
+  width: 30px; height: 1px;
+  margin: 0.9rem auto 0.8rem;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.85;
+}
+.wm .payoff {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(0.88rem, 1.2vw, 1.02rem);
+  letter-spacing: 0.02em;
+  color: rgba(239,230,216,0.62);
+  white-space: nowrap;
+}
+@keyframes fade { to { opacity: 1; } }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ── menu ── */
+#burger {
+  position: fixed; top: 1.35rem; right: 1.7rem; z-index: 10005;
+  width: 48px; height: 48px;
+  background: none; border: none; padding: 0; cursor: pointer;
+}
+#burger .d {
+  position: absolute; left: 50%; top: 50%;
+  width: 4px; height: 4px; margin: -2px 0 0 -2px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition: transform .55s cubic-bezier(.16,.84,.44,1), background .3s, opacity .3s;
+}
+#burger .d3 { background: var(--accent); }
+/* closed: a little wave */
+#burger .d1 { transform: translate(-16px, 4px); animation: bob 3.2s ease-in-out infinite; }
+#burger .d2 { transform: translate(-8px, -2px); animation: bob 3.2s ease-in-out infinite .35s; }
+#burger .d3 { transform: translate(0, -5px); animation: bob 3.2s ease-in-out infinite .7s; }
+#burger .d4 { transform: translate(8px, -2px); animation: bob 3.2s ease-in-out infinite 1.05s; }
+#burger .d5 { transform: translate(16px, 4px); animation: bob 3.2s ease-in-out infinite 1.4s; }
+@keyframes bob { 0%, 100% { margin-top: -2px; } 50% { margin-top: -5px; } }
+#burger:hover .d { background: var(--accent); }
+/* open: an X made of the same five dots */
+body.menu-open #burger .d { animation: none; margin-top: -2px; }
+body.menu-open #burger .d1 { transform: translate(-9px, -9px); }
+body.menu-open #burger .d2 { transform: translate(9px, -9px); }
+body.menu-open #burger .d3 { transform: translate(0, 0); }
+body.menu-open #burger .d4 { transform: translate(-9px, 9px); }
+body.menu-open #burger .d5 { transform: translate(9px, 9px); }
+
+#menu-veil { position: fixed; inset: 0; z-index: 10003; background: rgba(8,6,4,0.62);
+  backdrop-filter: blur(4px); opacity: 0; visibility: hidden; transition: opacity .5s, visibility .5s; }
+body.menu-open #menu-veil { opacity: 1; visibility: visible; }
+#menu {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 10004;
+  width: min(460px, 90vw);
+  background: radial-gradient(120% 80% at 100% 50%, #171109 0%, #100C09 60%);
+  border-left: 1px solid var(--line);
+  transform: translateX(100%);
+  transition: transform .6s cubic-bezier(.16,.84,.44,1);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5.5rem 3.2rem 3rem;
+  overflow-y: auto;
+}
+body.menu-open #menu { transform: translateX(0); }
+/* a little dotted water at the foot of the panel */
+#menu::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 26%;
+  pointer-events: none; opacity: 0.35;
+  background-image: radial-gradient(rgba(239,230,216,0.55) 0.7px, transparent 0.9px);
+  background-size: 11px 11px;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+  mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+#menu > * { position: relative; z-index: 1; }
+.menu-kicker {
+  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 1.4rem;
+  opacity: 0; transition: opacity .5s .1s;
+}
+body.menu-open .menu-kicker { opacity: 1; }
+.menu-list { display: block; }
+.menu-item {
+  display: grid; grid-template-columns: 1.7rem 1fr; align-items: center; column-gap: 0.9rem;
   text-decoration: none;
-  pointer-events: auto;
-  opacity: 0;
-  transition: opacity .5s ease, transform .5s ease;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+  opacity: 0; transform: translateX(16px);
+  transition: opacity .5s, transform .5s;
 }
-body.menu-open .row { opacity: 1; }
-.row .mi { width: 18px; height: 18px; flex: 0 0 auto; align-self: center; color: var(--grey); transition: color .3s; }
-.row .t { font-weight: 500; font-size: 1.35rem; letter-spacing: 0.01em; color: var(--ink); transition: color .3s; }
-.row .s { font-weight: 300; font-size: 0.86rem; color: var(--grey); transition: color .3s; }
-.row:hover .t, .row:focus-visible .t { color: var(--signal); }
-.row:hover .mi { color: var(--signal); }
-.row:hover .s { color: rgba(230,232,235,0.75); }
+body.menu-open .menu-item { opacity: 1; transform: translateX(0); }
+.menu-list .menu-item:last-child { border-bottom: none; }
+.menu-item .mi { display: block; width: 22px; height: 22px; color: rgba(239,230,216,0.55); transition: color .3s, transform .35s; }
+.menu-item .mi .dot { fill: var(--accent); stroke: none; }
+.menu-item .tx { display: block; transition: transform .35s; }
+.menu-item .t { display: block; font-family: var(--serif); font-weight: 300; font-size: 1.55rem; line-height: 1.15; letter-spacing: 0.01em; color: var(--ink); transition: color .3s; }
+.menu-item .s { display: block; margin-top: 0.15rem; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 0.92rem; color: var(--dim); transition: color .3s; }
+.menu-item:hover .t  { color: var(--accent); }
+.menu-item:hover .mi { color: var(--accent); transform: translateX(2px); }
+.menu-item:hover .tx { transform: translateX(5px); }
+.menu-item:hover .s  { color: rgba(239,230,216,0.72); }
+.menu-sep { height: 1px; margin: 1.6rem 0; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0.5; }
+.menu-icons { display: flex; gap: 1.8rem; list-style: none; opacity: 0; transition: opacity .5s; }
+body.menu-open .menu-icons { opacity: 1; transition-delay: .5s; }
+.menu-icons a { display: block; color: var(--dim); transition: color .25s, transform .25s; }
+.menu-icons svg { width: 17px; height: 17px; display: block; }
+.menu-icons a:hover { color: var(--accent); transform: translateY(-2px); }
 
-.menu-icons {
-  position: absolute;
-  left: 0; right: 0;
-  top: var(--icons-y, 86%);
-  display: flex; justify-content: center; gap: 2rem;
-  list-style: none;
-  pointer-events: auto;
-  opacity: 0; transition: opacity .5s ease .35s;
-}
-body.menu-open .menu-icons { opacity: 1; }
-.menu-icons a { display: block; color: var(--grey); transition: color .25s, transform .25s; }
-.menu-icons svg { width: 18px; height: 18px; display: block; }
-.menu-icons a:hover { color: var(--signal); transform: translateY(-2px); }
-
-/* the signature steps aside while the menu is open */
-body.menu-open .sign { opacity: 0; transform: translateY(6px); transition-delay: 0s; }
-
-/* ── Cursor ── */
-#cur-dot { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: var(--signal);
-  border-radius: 50%; pointer-events: none; z-index: 10020; transform: translate(-50%,-50%);
-  transition: width .2s, height .2s, background .2s; }
-body.hov #cur-dot { width: 12px; height: 12px; background: var(--ink); }
-
-/* ── Cookie banner ── */
+/* ── cookie banner ── */
 #cookie-banner {
   position: fixed; left: 50%; bottom: 24px;
   transform: translateX(-50%) translateY(140%);
   z-index: 10000; width: min(92vw, 640px);
-  background: rgba(14,17,22,0.97); backdrop-filter: blur(10px);
+  background: rgba(16,12,9,0.97); backdrop-filter: blur(10px);
   border: 1px solid var(--line); border-radius: 6px;
   padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
   transition: transform .6s cubic-bezier(.16,.84,.44,1);
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 #cookie-banner.show { transform: translateX(-50%) translateY(0); }
-.cookie-text { flex: 1 1 280px; font-size: 0.82rem; line-height: 1.65; color: var(--grey); }
-.cookie-text strong { display: block; font-weight: 500; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.3rem; }
-.cookie-text a { color: var(--signal); text-decoration: none; border-bottom: 1px solid rgba(232,201,143,0.35); }
+.cookie-text { flex: 1 1 280px; font-size: 0.78rem; line-height: 1.65; color: var(--dim); }
+.cookie-text strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.05rem; color: var(--ink); margin-bottom: 0.3rem; }
+.cookie-text a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(242,179,107,0.35); }
 .cookie-actions { display: flex; gap: 0.7rem; flex: 0 0 auto; }
-.cookie-btn { font-family: var(--font); font-size: 0.8rem; font-weight: 400; padding: 0.65rem 1.2rem;
-  border-radius: 4px; border: 1px solid var(--signal); background: transparent; color: var(--signal);
+.cookie-btn { font-family: var(--font); font-size: 0.74rem; padding: 0.65rem 1.2rem; border-radius: 4px;
+  border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer;
   transition: background .2s, color .2s; white-space: nowrap; }
-.cookie-btn.decline { border-color: var(--line); color: var(--grey); }
-.cookie-btn.accept:hover { background: var(--signal); color: var(--bg); }
-.cookie-btn.decline:hover { border-color: var(--grey); color: var(--ink); }
+.cookie-btn.decline { border-color: var(--line); color: var(--dim); }
+.cookie-btn.accept:hover { background: var(--accent); color: var(--bg); }
+.cookie-btn.decline:hover { border-color: var(--dim); color: var(--ink); }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition-duration: 0.01ms !important; }
+@media (max-width: 600px) {
+  .wm .name { font-size: 1.6rem; }
+  .wm .payoff { font-size: 0.86rem; }
 }
-
-/* ── Mobile ── */
 @media (max-width: 768px) {
-  body { cursor: auto; height: 100dvh; }
-  a, button { cursor: pointer; }
-  #cur-dot { display: none; }
-  .brand { font-size: 0.86rem; letter-spacing: 0.28em; }
-  .payoff { font-size: 0.8rem; }
-  #burger { top: 0.9rem; right: 0.8rem; }
-  .row { left: 7vw; right: 7vw; gap: 0.8rem; }
-  .row .t { font-size: 1.12rem; }
-  .row .s { font-size: 0.74rem; }
-  .menu-icons { gap: 1.6rem; }
+  #burger { top: 0.7rem; right: 0.7rem; }
+  #menu { width: 100vw; border-left: none; padding: 5rem 1.8rem 2.5rem; }
+  .menu-item .t { font-size: 1.4rem; }
   #cookie-banner { flex-direction: column; align-items: stretch; bottom: 12px; padding: 1.1rem 1.2rem; gap: 0.9rem; }
-  .cookie-text { flex: 0 0 auto; font-size: 0.78rem; }
+  .cookie-text { flex: 0 0 auto; }
   .cookie-actions { justify-content: stretch; }
   .cookie-btn { flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wm { animation: none; opacity: 1; }
 }
 </style>
 </head>
 <body>
 
-<canvas id="sea"></canvas>
+<canvas id="c" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
 
-<div class="sign">
-  <div class="brand">Giorgio Riva</div>
-  <div class="payoff">Freedom is a state of mind.</div>
+<div class="center">
+  <div class="wm">
+    <h1 class="name">Giorgio Riva</h1>
+    <div class="rule" aria-hidden="true"></div>
+    <p class="payoff">Freedom is a state of mind.</p>
+  </div>
 </div>
+
+
 
 <!-- Menu -->
 <button id="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu">
-  <svg viewBox="0 0 30 22" aria-hidden="true">
-    <path class="wv" d="M2 4 C 6 1.5, 9 6.5, 15 4 S 24 1.5, 28 4"/>
-    <path class="wv" d="M2 11 C 6 8.5, 9 13.5, 15 11 S 24 8.5, 28 11"/>
-    <path class="wv" d="M2 18 C 6 15.5, 9 20.5, 15 18 S 24 15.5, 28 18"/>
-    <path class="x" d="M6 2 L24 20 M24 2 L6 20"/>
-  </svg>
+  <span class="d d1"></span><span class="d d2"></span><span class="d d3"></span><span class="d d4"></span><span class="d d5"></span>
 </button>
 
+<div id="menu-veil"></div>
+
 <nav id="menu" aria-label="Menu principale">
-  <a class="row" href="https://www.gioriva.it/poitiracconto" data-row="0" style="--row-y: var(--row-0)">
+<div class="menu-kicker">Dove andare</div>
+<div class="menu-list">
+  <a class="menu-item" href="https://www.gioriva.it/poitiracconto">
     <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="8.5"/>
-      <ellipse cx="12" cy="12" rx="3.6" ry="8.5"/>
-      <path d="M3.9 9.2 H20.1 M3.9 14.8 H20.1"/>
+      <path d="M5 4.5 C5 3.7 5.7 3 6.5 3 H18.5 C19.3 3 20 3.7 20 4.5 V19.5 C20 20.3 19.3 21 18.5 21 H6.5 C5.7 21 5 20.3 5 19.5 Z"/>
+      <path d="M8.5 3 V21"/>
+      <path d="M11.5 8 H17 M11.5 11.5 H17 M11.5 15 H15"/>
+      <circle class="dot" cx="16" cy="17.8" r="1.2"/>
     </svg>
-    <span class="t">Poi ti racconto</span>
-    <span class="s">Storie e diari di viaggio</span>
+    <span class="tx">
+      <span class="t">Poi ti racconto</span>
+      <span class="s">Storie e diari di viaggio</span>
+    </span>
   </a>
-  <a class="row" href="https://www.gioriva.it/lineadivolo" data-row="1" style="--row-y: var(--row-1)">
+  <a class="menu-item" href="https://www.gioriva.it/lineadivolo">
     <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <rect x="9.6" y="9.6" width="4.8" height="4.8" rx="1.2"/>
-      <path d="M9.6 9.6 L6.4 6.4 M14.4 9.6 L17.6 6.4 M9.6 14.4 L6.4 17.6 M14.4 14.4 L17.6 17.6"/>
-      <path d="M3.4 6.4 H9.4 M14.6 6.4 H20.6 M3.4 17.6 H9.4 M14.6 17.6 H20.6"/>
+      <path d="M9.5 9.5 L6.5 6.5 M14.5 9.5 L17.5 6.5 M9.5 14.5 L6.5 17.5 M14.5 14.5 L17.5 17.5"/>
+      <circle cx="5.5" cy="5.5" r="2.2"/><circle cx="18.5" cy="5.5" r="2.2"/><circle cx="5.5" cy="18.5" r="2.2"/><circle cx="18.5" cy="18.5" r="2.2"/>
+      <rect x="9.5" y="9.5" width="5" height="5" rx="1.4"/>
+      <circle class="dot" cx="12" cy="12" r="1"/>
     </svg>
-    <span class="t">Linea di volo</span>
-    <span class="s">Il mondo visto dal drone</span>
+    <span class="tx">
+      <span class="t">Linea di volo</span>
+      <span class="s">Il mondo visto dal drone</span>
+    </span>
   </a>
-  <a class="row" href="https://www.gioriva.it/quotazero" data-row="2" style="--row-y: var(--row-2)">
+  <a class="menu-item" href="https://www.gioriva.it/quotazero">
     <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M3.6 19 H20.4"/>
-      <path d="M7.4 19 h2.4 M12.2 19 h2.4"/>
-      <path d="M5.2 17.2 C 8 14.4, 11 11.8, 14.6 9.6" stroke-dasharray="1.6 2.2" stroke-opacity="0.75"/>
-      <path d="M13.4 11.6 L20.2 4.6 L17.9 12.6 L16.3 10.4 Z" fill="currentColor" stroke="none"/>
+      <path d="M3.5 19 H20.5"/>
+      <path d="M7 19 h2.4 M11.8 19 h2.4"/>
+      <path d="M5.2 16.4 C 8 13.8, 11.2 11.4, 15.2 9.4" stroke-dasharray="1.6 2.2"/>
+      <path d="M13.8 10.9 L20.4 4.6 L18.2 12.2 L16.7 10.2 Z"/>
+      <circle class="dot" cx="5.2" cy="16.4" r="1.1"/>
     </svg>
-    <span class="t">Quota Zero</span>
-    <span class="s">Il volo comincia a terra</span>
+    <span class="tx">
+      <span class="t">Quota Zero</span>
+      <span class="s">Il volo comincia a terra</span>
+    </span>
   </a>
-  <a class="row" href="https://www.gioriva.it/formulatre" data-row="3" style="--row-y: var(--row-3)">
+  <a class="menu-item" href="https://www.gioriva.it/formulatre">
     <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M4.2 13.6 A7.8 7.8 0 0 1 19.8 13.2 V16.4 A1.6 1.6 0 0 1 18.2 18 H10"/>
       <path d="M4.2 13.6 V16 A2 2 0 0 0 6.2 18 H10"/>
       <path d="M6.6 11.4 H17.2 A2 2 0 0 1 19.2 13.4 H6.2"/>
+      <circle class="dot" cx="16.4" cy="15.6" r="1.1"/>
     </svg>
-    <span class="t">Formula Tre</span>
-    <span class="s">Un album di ricordi</span>
+    <span class="tx">
+      <span class="t">Formula Tre</span>
+      <span class="s">Un album di ricordi</span>
+    </span>
   </a>
-  <a class="row" href="https://www.gioriva.it/rotta/" data-row="4" style="--row-y: var(--row-4)">
+  <a class="menu-item" href="https://www.gioriva.it/rotta/">
     <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="5.4" cy="17.6" r="1.5"/>
-      <circle cx="18.4" cy="6.2" r="1.5"/>
-      <path d="M6.6 16.6 C 9 11.6, 13 8.2, 17.2 6.6" stroke-dasharray="1.7 2.3" stroke-opacity="0.75"/>
-      <path d="M9.6 14.6 L15.4 11 L13.2 15.4 L12.2 13.9 Z" fill="currentColor" stroke="none"/>
+      <circle cx="5.4" cy="17.6" r="1.6"/>
+      <path d="M6.6 16.6 C 9 11.6, 13 8.2, 17.2 6.6" stroke-dasharray="1.7 2.3"/>
+      <path d="M9.6 14.6 L15.4 11 L13.2 15.4 L12.2 13.9 Z"/>
+      <circle class="dot" cx="18.4" cy="6.2" r="1.5"/>
     </svg>
-    <span class="t">Rotta</span>
-    <span class="s">Traccia i tuoi voli</span>
+    <span class="tx">
+      <span class="t">Rotta</span>
+      <span class="s">Traccia i tuoi voli</span>
+    </span>
   </a>
-  <a class="row" href="https://www.gioriva.it/issdeck" data-row="5" style="--row-y: var(--row-5)">
+  <a class="menu-item" href="https://www.gioriva.it/issdeck">
     <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="2.6"/>
       <path d="M10.1 10.1 L6.6 6.6 M13.9 13.9 L17.4 17.4"/>
       <rect x="3.4" y="4.2" width="4.6" height="3" rx="0.6" transform="rotate(-45 5.7 5.7)"/>
       <rect x="16" y="16.8" width="4.6" height="3" rx="0.6" transform="rotate(-45 18.3 18.3)"/>
       <path d="M13.9 10.1 L16.4 7.6 M10.1 13.9 L7.6 16.4"/>
+      <circle cx="12" cy="12" r="2.6"/>
+      <circle class="dot" cx="12" cy="12" r="1"/>
     </svg>
-    <span class="t">ISS Deck</span>
-    <span class="s">Nello spazio con la ISS</span>
+    <span class="tx">
+      <span class="t">ISS Deck</span>
+      <span class="s">Nello spazio con la ISS</span>
+    </span>
   </a>
+  </div>
+
+  <div class="menu-sep"></div>
   <ul class="menu-icons">
     <li><a href="/privacy.html" aria-label="Privacy" title="Privacy">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
@@ -349,332 +396,164 @@ body.hov #cur-dot { width: 12px; height: 12px; background: var(--ink); }
   </div>
 </div>
 
-<div id="cur-dot"></div>
 
 <script>
-'use strict';
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const SPEED = reduced ? 0.5 : 1;   // con "riduci movimento" l'onda rallenta ma non si ferma
 
-/* ════════════════════════════════════
-   THE SEA
-   Lines from edge to edge, laid out in depth:
-   the far ones are close together, faint, with
-   short slow swells; the near ones are far apart,
-   brighter, with longer and faster waves. Each
-   line is a sum of three swells that never repeat,
-   and wave groups come and go over the minutes.
-   Lights ride the crests and glint on the slopes.
-   A tap on the water sets a new light going.
-   ════════════════════════════════════ */
-(function () {
-  var cv = document.getElementById('sea');
-  var ctx = cv.getContext('2d');
-  var W, H, dpr, mobile, N, top, bandH, ampMax, lines = [];
-
-  function layout() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = window.innerWidth; H = window.innerHeight;
-    cv.width = W * dpr; cv.height = H * dpr;
-    cv.style.width = W + 'px'; cv.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    mobile = W <= 768;
-    N = mobile ? 8 : 11;
-    top = H * (mobile ? 0.40 : 0.37);
-    bandH = H * (mobile ? 0.24 : 0.30);
-    ampMax = mobile ? 15 : 24;
-    lines = [];
-    for (var i = 0; i < N; i++) {
-      var d = i / (N - 1);                       /* 0 far .. 1 near */
-      lines.push({
-        d: d,
-        y: top + Math.pow(d, 1.65) * bandH,
-        amp: 1.5 + (ampMax - 1.5) * Math.pow(d, 1.7),
-        alpha: 0.07 + 0.27 * Math.pow(d, 1.2),
-        width: 0.7 + 0.6 * d,
-        ph: i * 1.93,
-        /* wavelengths shrink with distance, speeds slow down */
-        k1: 2 * Math.PI / (W * (0.26 + 0.44 * d)),
-        k2: 2 * Math.PI / (W * (0.11 + 0.16 * d)),
-        k3: 2 * Math.PI / (W * (0.045 + 0.06 * d)),
-        s1: 0.22 + 0.30 * d, s2: 0.18 + 0.20 * d, s3: 0.5 + 0.5 * d
-      });
+    let W, H, DPR, COLS, ROWS, XR;
+    function resize() {
+      const mobile = innerWidth < 600;
+      DPR = Math.min(devicePixelRatio || 1, mobile ? 1.5 : 2);
+      W = canvas.width = Math.round(innerWidth * DPR);
+      H = canvas.height = Math.round(innerHeight * DPR);
+      // densità della griglia in base alla larghezza
+      COLS = mobile ? 110 : 200;
+      ROWS = mobile ? 60 : 80;
+      // larghezza del piano in scena: su schermi stretti si restringe, così i punti restano fitti
+      XR = 20 * Math.max(0.4, Math.min(1, (innerWidth / innerHeight) / 1.6));
     }
-    var bottom = top + bandH + ampMax;
-    document.documentElement.style.setProperty('--sign-y', (bottom + (mobile ? 38 : 54)) + 'px');
+    resize();
+    addEventListener('resize', resize);
 
-    /* menu: six evenly spaced rows, hosted by six of the lines */
-    var r0 = H * (mobile ? 0.25 : 0.27), r1 = H * (mobile ? 0.70 : 0.73);
-    menuRows = [];
-    for (var m = 0; m < 6; m++) {
-      var ry = r0 + (r1 - r0) * m / 5;
-      menuRows.push(ry);
-      document.documentElement.style.setProperty('--row-' + m, ry + 'px');
+    // camera fissa, leggermente dall'alto
+    const cam = { y: 0.75, f: 1.55 };
+    const TOUCH = matchMedia('(hover: none)').matches;
+    const AMP = TOUCH ? 1.35 : 1;      // su touch onda più visibile
+    let lastTouch = -1e9;              // ultimo tocco reale
+    const K = () => cam.f * H * 0.62;      // fattore di proiezione
+    const pointer = { x: 0, z: 0, s: 0 }; // punto in scena e forza del ripple
+    let ripple = 0;
+
+    function toScene(clientX, clientY) {
+      // proiezione inversa approssimata del cursore sul piano y=0
+      const off = Math.max(0.02, clientY / innerHeight - 0.5);
+      const pz = Math.min(10.4, cam.y * cam.f * 0.62 / off);
+      pointer.z = pz - 0.4;
+      pointer.x = (clientX - innerWidth / 2) * pz / (cam.f * 0.62 * innerHeight);
+      pointer.s = 1;
     }
-    document.documentElement.style.setProperty('--icons-y', (H * (mobile ? 0.84 : 0.86)) + 'px');
-    menuLines = [];
-    for (var q = 0; q < 6; q++) menuLines.push(Math.round(1 + q * (N - 2) / 5));
-  }
-  var menuRows = [], menuLines = [], menuOpen = false, menuT = 0, hoverIdx = -1;
-  layout();
-  window.addEventListener('resize', layout);
+    addEventListener('pointermove', e => { toScene(e.clientX, e.clientY); lastTouch = performance.now(); }, { passive: true });
+    addEventListener('pointerdown', e => { toScene(e.clientX, e.clientY); ripple = 1; lastTouch = performance.now(); }, { passive: true });
 
-  window.__sea = {
-    menu: function (on) {
-      menuOpen = on;
-      if (on) lights.forEach(function (l, k) { l.line = menuLines[k % 6]; l.hist = []; });
-    },
-    hover: function (i) { hoverIdx = i; }
-  };
-
-  function surface(L, x, t) {
-    var group = 0.78 + 0.22 * Math.sin(t * 0.11 + L.ph * 0.5);      /* wave groups */
-    var yb = L.yb !== undefined ? L.yb : L.y;
-    var am = L.am !== undefined ? L.am : L.amp;
-    return yb + am * group * (
-      Math.sin(x * L.k1 + t * L.s1 + L.ph) +
-      0.5  * Math.sin(x * L.k2 - t * L.s2 + L.ph * 1.7) +
-      0.22 * Math.sin(x * L.k3 + t * L.s3 + L.ph * 0.6)
-    );
-  }
-  function slope(L, x, t) { return (surface(L, x + 2, t) - surface(L, x - 2, t)) / 4; }
-
-  /* colour of the light follows the hour in Como: warm at dusk and night, cooler by day */
-  function lightColour() {
-    var h;
-    try { h = parseInt(new Intl.DateTimeFormat('it-IT', { hour: '2-digit', hour12: false, timeZone: 'Europe/Rome' }).format(new Date()), 10); }
-    catch (e) { h = new Date().getHours(); }
-    var warm = (h >= 19 || h < 7) ? 1 : (h >= 16 ? (h - 15) / 4 : (h < 9 ? (9 - h) / 3 : 0));
-    var r = Math.round(236 + 5 * warm), g = Math.round(236 - 8 * warm), b = Math.round(238 - 34 * warm);
-    return r + ',' + g + ',' + b;
-  }
-  var COL = lightColour();
-  setInterval(function () { COL = lightColour(); }, 60000);
-
-  /* ── lights ── */
-  var lights = [];
-  function spawn(lineIdx, u, speed) {
-    lights.push({ line: lineIdx, u: u, speed: speed, trail: mobile ? 44 : 64, hist: [], born: performance.now() });
-    while (lights.length > 9) lights.shift();
-  }
-  spawn(N - 1, 0.10, 0.050); spawn(N - 3, 0.55, 0.040); spawn(N - 2, 0.82, 0.045); spawn(N - 4, 0.30, 0.034);
-
-  /* a tap on the water sets a light going from there */
-  window.addEventListener('pointerdown', function (e) {
-    if (e.target.closest && e.target.closest('a, button, #cookie-banner')) return;
-    if (document.body.classList.contains('menu-open')) return;
-    var best = 0, bd = 1e9;
-    for (var i = 0; i < N; i++) { var dd = Math.abs(lines[i].y - e.clientY); if (dd < bd) { bd = dd; best = i; } }
-    if (bd > (mobile ? 60 : 80)) return;
-    spawn(best, e.clientX / W, 0.038 + Math.random() * 0.02);
-  });
-
-  /* ── glints: brief sparkles on the slopes ── */
-  var glints = [];
-
-  var t0 = null, last = null;
-  function frame(ts) {
-    if (t0 === null) { t0 = ts; last = ts; }
-    var time = (ts - t0) / 1000, dt = Math.min(0.05, (ts - last) / 1000); last = ts;
-    ctx.clearRect(0, 0, W, H);
-
-    /* menu transition: lines glide to their rows and calm down */
-    menuT = Math.max(0, Math.min(1, menuT + (menuOpen ? 1 : -1) * dt / 0.7));
-    var mE = menuT < 0.5 ? 2 * menuT * menuT : -1 + (4 - 2 * menuT) * menuT;
-    for (var li2 = 0; li2 < N; li2++) {
-      var Lm = lines[li2], mi = menuLines.indexOf(li2);
-      if (mi >= 0) {
-        Lm.yb = Lm.y + (menuRows[mi] - Lm.y) * mE;
-        Lm.am = Lm.amp * (1 - 0.55 * mE) + (mobile ? 3 : 5) * mE;
-        var hov = (hoverIdx === mi) ? 1 : 0;
-        Lm.al = Lm.alpha + (0.34 + 0.4 * hov - Lm.alpha) * mE;
-      } else {
-        Lm.yb = Lm.y; Lm.am = Lm.amp;
-        Lm.al = Lm.alpha * (1 - mE);
-      }
+    // senza mouse (o dopo 3 s senza tocchi) un punto di pressione vaga da solo sul piano
+    function autoPointer(t) {
+      if (!TOUCH || t - lastTouch < 3000) return;
+      const k = t * 0.00022 * SPEED;
+      pointer.x = Math.sin(k * 1.3) * (XR * 0.28);
+      pointer.z = 2.6 + (Math.sin(k * 0.9 + 1.7) * 0.5 + 0.5) * 3.5;
+      pointer.s += (0.9 - pointer.s) * 0.02;
+      if (Math.sin(k * 0.45) > 0.995 && ripple < 0.05) ripple = 1;
     }
 
-    /* ── the horizon: a wide soft light that breathes and drifts ── */
-    var hz = lines[0].y;
-    var hzBorn = Math.min(1, Math.max(0, (time - 0.4) / 2.4)) * (1 - 0.6 * mE);
-    var hx = W * (0.5 + 0.26 * Math.sin(time * 0.05));
-    var breathe = 0.85 + 0.15 * Math.sin(time * 0.35);
-    var rx = W * (mobile ? 0.55 : 0.36), ry = H * (mobile ? 0.10 : 0.13);
-
-    var sky = ctx.createLinearGradient(0, hz - H * 0.18, 0, hz);
-    sky.addColorStop(0, 'rgba(' + COL + ',0)');
-    sky.addColorStop(1, 'rgba(' + COL + ',' + (0.045 * hzBorn).toFixed(3) + ')');
-    ctx.fillStyle = sky; ctx.fillRect(0, hz - H * 0.18, W, H * 0.18);
-
-    ctx.save();
-    ctx.translate(hx, hz); ctx.scale(rx, ry);
-    var halo = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
-    halo.addColorStop(0,    'rgba(' + COL + ',' + (0.16 * breathe * hzBorn).toFixed(3) + ')');
-    halo.addColorStop(0.45, 'rgba(' + COL + ',' + (0.05 * breathe * hzBorn).toFixed(3) + ')');
-    halo.addColorStop(1,    'rgba(' + COL + ',0)');
-    ctx.fillStyle = halo;
-    ctx.beginPath(); ctx.arc(0, 0, 1, 0, Math.PI * 2); ctx.fill();
-    ctx.restore();
-
-    /* a thin bright seam on the horizon itself, strongest under the halo */
-    var seam = ctx.createLinearGradient(hx - rx, 0, hx + rx, 0);
-    seam.addColorStop(0,   'rgba(' + COL + ',0)');
-    seam.addColorStop(0.5, 'rgba(' + COL + ',' + (0.55 * hzBorn).toFixed(3) + ')');
-    seam.addColorStop(1,   'rgba(' + COL + ',0)');
-
-    /* ── the lines: written from left to right, horizon first ── */
-    ctx.lineJoin = 'round'; ctx.lineCap = 'round';
-    var step = mobile ? 3 : 4;
-    for (var i = 0; i < N; i++) {
-      var L = lines[i];
-      var a = Math.min(1, Math.max(0, (time - 0.2 - i * 0.16) / 1.6));
-      if (a <= 0) continue;
-      var e = 1 - Math.pow(1 - a, 3);
-      var xEnd = -8 + (W + 16) * e;
-      ctx.beginPath();
-      for (var x = -8; x <= xEnd; x += step) {
-        var y = L.yb + (surface(L, x, time) - L.yb) * e;
-        if (x === -8) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      }
-      ctx.lineWidth = L.width + 0.4 * mE;
-      ctx.strokeStyle = 'rgba(230,232,235,' + (L.al * e).toFixed(3) + ')';
-      ctx.stroke();
-      if (menuT > 0 && hoverIdx >= 0 && menuLines[hoverIdx] === i) {
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = 'rgba(' + COL + ',' + (0.14 * mE).toFixed(3) + ')';
-        ctx.stroke();
-        ctx.globalCompositeOperation = 'source-over';
-      }
-
-      /* the far lines catch the horizon light */
-      if (i < 5 && e > 0 && menuT < 0.99) {
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.strokeStyle = (i === 0) ? seam : (function () {
-          var gl = ctx.createLinearGradient(hx - rx * 1.1, 0, hx + rx * 1.1, 0);
-          var la = (0.22 * (1 - L.d * 1.6)) * e * hzBorn;
-          gl.addColorStop(0, 'rgba(' + COL + ',0)');
-          gl.addColorStop(0.5, 'rgba(' + COL + ',' + Math.max(0, la).toFixed(3) + ')');
-          gl.addColorStop(1, 'rgba(' + COL + ',0)');
-          return gl;
-        })();
-        ctx.lineWidth = (i === 0) ? 1.4 : L.width;
-        ctx.stroke();
-        ctx.globalCompositeOperation = 'source-over';
-      }
+    // colori precalcolati (16 livelli di alpha per ciascuna tinta)
+    const LEVELS = 16;
+    const PAL_INK = [], PAL_ACC = [];
+    for (let i = 0; i < LEVELS; i++) {
+      const a = (i + 1) / LEVELS;
+      PAL_INK.push(`rgba(239,230,216,${a.toFixed(3)})`);
+      PAL_ACC.push(`rgba(242,179,107,${a.toFixed(3)})`);
     }
 
-    ctx.globalCompositeOperation = 'lighter';
+    let lastT = 0;
 
-    /* ── glints ── */
-    if (time > 3 && glints.length < (mobile ? 6 : 12) && Math.random() < 0.06) {
-      var li = 2 + Math.floor(Math.random() * (N - 2));
-      glints.push({ line: li, x: Math.random() * W, t: 0, life: 0.5 + Math.random() * 0.7 });
-    }
-    for (var gi = glints.length - 1; gi >= 0; gi--) {
-      var G = glints[gi]; G.t += dt;
-      if (G.t > G.life) { glints.splice(gi, 1); continue; }
-      var Lg = lines[G.line];
-      var f = Math.sin(G.t / G.life * Math.PI);
-      var sl = Math.abs(slope(Lg, G.x, time));
-      var ga = f * (0.25 + 0.5 * Lg.d) * (0.5 + Math.min(1, sl * 6));
-      var gy = surface(Lg, G.x, time);
-      var gg = ctx.createRadialGradient(G.x, gy, 0, G.x, gy, 7);
-      gg.addColorStop(0, 'rgba(' + COL + ',' + ga.toFixed(3) + ')');
-      gg.addColorStop(1, 'rgba(' + COL + ',0)');
-      ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(G.x, gy, 7, 0, Math.PI * 2); ctx.fill();
-    }
+    function frame(t) {
+      const dt = Math.min(100, t - lastT); lastT = t;
 
-    /* ── lights riding the crests ── */
-    var appearL = Math.min(1, Math.max(0, (time - 2.4) / 1.5));
-    for (var k = lights.length - 1; k >= 0; k--) {
-      var l = lights[k];
-      var Ll = lines[Math.min(l.line, N - 1)];
-      l.u += l.speed * dt;
-      if (l.u > 1.06) {
-        if (k < 4) { l.u = -0.06; l.hist = []; l.line = 2 + (l.line + 3) % (N - 2); }
-        else { lights.splice(k, 1); continue; }
+      autoPointer(t);
+      if (!TOUCH || t - lastTouch < 3000) pointer.s *= 0.97;
+      ripple *= 0.985;
+
+      ctx.fillStyle = '#0C0907';
+      ctx.fillRect(0, 0, W, H);
+
+      const time = t * 0.00035 * SPEED;
+      const cx = W / 2, cy = H / 2;
+
+      // disegno dal fondo verso il davanti
+      for (let r = ROWS - 1; r >= 0; r--) {
+        const z = 0.6 + (r / ROWS) * 9.4;              // parte sotto il bordo inferiore, così non si stacca mai
+        for (let c = 0; c < COLS; c++) {
+          const x = ((c / (COLS - 1)) - 0.5) * XR;   // larghezza -XR/2 .. XR/2
+
+          // superficie: due onde incrociate + un'increspatura dal cursore
+          const near = Math.min(1, (r / ROWS) * 3.5);   // le prime file restano piatte: il bordo inferiore non si scopre mai
+          const amp = (0.95 - (r / ROWS) * 0.6) * AMP * near; // il fondo si calma, così non si aggroviglia
+          let y = (Math.sin(x * 0.32 + time * 1.4) * 0.16
+                + Math.sin(z * 0.55 - time * 1.1) * 0.14
+                + Math.sin((x + z) * 0.22 + time * 0.7) * 0.10) * amp;
+
+          const dx = x - pointer.x, dz = z - pointer.z;
+          const d = Math.sqrt(dx * dx + dz * dz);
+          y += Math.exp(-d * d * 1.6) * 0.35 * pointer.s;
+          y += Math.sin(d * 6 - t * 0.008) * Math.exp(-d * 0.9) * 0.12 * ripple;
+
+          // proiezione prospettica
+          const pz = z + 0.4;                    // distanza dalla camera
+          const py = y - cam.y;
+          const sx = cx + (x / pz) * K();
+          const sy = cy - (py / pz) * K();
+
+          if (sy < -10 || sy > H + 10 || sx < -10 || sx > W + 10) continue;
+
+          const depth = 1 - r / ROWS;                       // 1 vicino, 0 lontano
+          const lift = Math.max(0, y + 0.25);               // le creste brillano
+          const far = Math.min(1, (1 - r / ROWS) * 4);  // dissolvenza sull'orizzonte
+          const a = (0.12 + depth * 0.45 + lift * 0.6) * far;
+          const size = (0.6 + depth * 1.2 + lift * 1.0) * DPR;
+
+          if (a < 0.04) continue;
+          const idx = Math.min(LEVELS - 1, (a * LEVELS) | 0);
+          ctx.fillStyle = lift > 0.42 ? PAL_ACC[idx] : PAL_INK[idx];
+          ctx.fillRect(sx - size / 2, sy - size / 2, size, size);
+        }
       }
-      var px = l.u * W, py = surface(Ll, px, time);
-      var pt = { x: px, y: py };
-      l.hist.push(pt); if (l.hist.length > l.trail) l.hist.shift();
-      /* brighter when the slope faces the light */
-      var glint = 0.75 + 0.5 * Math.max(0, -slope(Ll, px, time) * 5);
-      var A = appearL * Math.min(1, (ts - l.born) / 600) * (0.55 + 0.45 * Ll.d);
-      if (menuT > 0) {
-        var onHover = hoverIdx >= 0 && menuLines[hoverIdx] === l.line;
-        A *= (1 - 0.35 * mE) + (onHover ? 0.75 * mE : 0);
-      }
-      for (var h = 1; h < l.hist.length; h++) {
-        var ff = h / l.hist.length;
-        ctx.strokeStyle = 'rgba(' + COL + ',' + (0.85 * ff * ff * ff * A).toFixed(3) + ')';
-        ctx.lineWidth = 0.4 + 1.7 * ff;
-        ctx.beginPath(); ctx.moveTo(l.hist[h - 1].x, l.hist[h - 1].y); ctx.lineTo(l.hist[h].x, l.hist[h].y); ctx.stroke();
-      }
-      var rad = 14 + 6 * glint;
-      var g = ctx.createRadialGradient(px, py, 0, px, py, rad);
-      g.addColorStop(0, 'rgba(' + COL + ',' + (0.5 * A * glint).toFixed(3) + ')');
-      g.addColorStop(1, 'rgba(' + COL + ',0)');
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(px, py, rad, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = 'rgba(255,252,246,' + A.toFixed(3) + ')';
-      ctx.beginPath(); ctx.arc(px, py, 1.6 + 0.4 * glint, 0, Math.PI * 2); ctx.fill();
+
+      requestAnimationFrame(frame);
     }
-    ctx.globalCompositeOperation = 'source-over';
 
     requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-  setTimeout(function () { document.body.classList.add('ready'); }, 300);
-})();
 
+</script>
+<script>
+'use strict';
 /* ════════════════════════════════════
-   CUSTOM CURSOR
-   ════════════════════════════════════ */
-(function () {
-  var dot = document.getElementById('cur-dot');
-  var mx = 0, my = 0;
-  document.addEventListener('mousemove', function (e) {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-  });
-  document.querySelectorAll('a, button').forEach(function (el) {
-    el.addEventListener('mouseenter', function () { document.body.classList.add('hov'); });
-    el.addEventListener('mouseleave', function () { document.body.classList.remove('hov'); });
-  });
-})();
-
-/* ════════════════════════════════════
-   MENU: the sea becomes the menu
+   MENU
    ════════════════════════════════════ */
 (function () {
   var burger = document.getElementById('burger');
+  var veil   = document.getElementById('menu-veil');
   var menu   = document.getElementById('menu');
-  var rows   = menu.querySelectorAll('.row');
+  var items  = menu.querySelectorAll('.menu-item');
 
-  rows.forEach(function (el, i) {
-    el.style.transitionDelay = (0.15 + i * 0.07) + 's';
-    el.addEventListener('mouseenter', function () { if (window.__sea) window.__sea.hover(i); });
-    el.addEventListener('mouseleave', function () { if (window.__sea) window.__sea.hover(-1); });
-    el.addEventListener('focus', function () { if (window.__sea) window.__sea.hover(i); });
-    el.addEventListener('blur',  function () { if (window.__sea) window.__sea.hover(-1); });
+  // staggered reveal
+  items.forEach(function (el, i) {
+    el.style.transitionDelay = (0.12 + i * 0.07) + 's';
   });
 
   function open() {
     document.body.classList.add('menu-open');
     burger.setAttribute('aria-expanded', 'true');
     burger.setAttribute('aria-label', 'Chiudi il menu');
-    if (window.__sea) window.__sea.menu(true);
   }
   function close() {
     document.body.classList.remove('menu-open');
     burger.setAttribute('aria-expanded', 'false');
     burger.setAttribute('aria-label', 'Apri il menu');
-    if (window.__sea) { window.__sea.menu(false); window.__sea.hover(-1); }
-    rows.forEach(function (el) { el.style.transitionDelay = '0s'; });
-    setTimeout(function () { rows.forEach(function (el, i) { el.style.transitionDelay = (0.15 + i * 0.07) + 's'; }); }, 600);
   }
-  burger.addEventListener('click', function () {
+  function toggle() {
     document.body.classList.contains('menu-open') ? close() : open();
+  }
+
+  burger.addEventListener('click', toggle);
+  veil.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
   });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+  // expose for the cookie link inside the menu
   window.__closeMenu = close;
 })();
 

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0B0D10">
+<meta name="theme-color" content="#0C0907">
 <title>Contattami | Giorgio Riva</title>
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=6">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=6">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6">
 
 <!-- Google Analytics + Consent Mode -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
@@ -32,115 +32,79 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300,100;0,9..144,400,100;1,9..144,300,100&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg:     #0B0D10;
-  --bg-2:   #0E1116;
-  --ink:    #E6E8EB;
-  --grey:   #6B7280;
-  --signal: #E8C98F;
-  --line:   rgba(230,232,235,0.09);
-  --font:   'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --bg:     #0C0907;
+  --ink:    #EFE6D8;
+  --dim:    rgba(239,230,216,0.48);
+  --accent: #F2B36B;
+  --line:   rgba(239,230,216,0.10);
+  --mono:   "IBM Plex Mono", ui-monospace, monospace;
+  --serif:  "Fraunces", Georgia, serif;
+  --sans:   "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
 }
-
 html { background: var(--bg); }
 body {
-  background: radial-gradient(120% 80% at 50% 30%, var(--bg-2) 0%, var(--bg) 70%);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font);
+  font-family: var(--sans);
   font-weight: 300;
   min-height: 100vh;
   line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
 }
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-  outline: 1px solid var(--signal); outline-offset: 4px;
-}
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
 
-/* a calm strip of sea at the bottom */
-#sea { position: fixed; left: 0; right: 0; bottom: 0; height: 30vh; z-index: 0; pointer-events: none; }
+/* the water at the bottom of the page */
+#c { position: fixed; left: 0; right: 0; bottom: 0; height: 38vh; width: 100%; z-index: 0; pointer-events: none; display: block; }
+.vignette { position: fixed; left: 0; right: 0; bottom: 0; height: 38vh; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(12,9,7,0) 45%), radial-gradient(ellipse 80% 90% at 50% 100%, transparent 50%, rgba(12,9,7,0.9) 100%); }
 
-.wrap {
-  position: relative;
-  z-index: 1;
-  max-width: 660px;
-  margin: 0 auto;
-  padding: 4.5rem 1.75rem 34vh;
-}
-
-.back {
-  display: inline-flex; align-items: center; gap: 0.55rem;
-  font-size: 0.86rem; color: var(--grey); text-decoration: none;
-  margin-bottom: 3rem;
-  transition: color .2s, gap .25s;
-}
-.back:hover { color: var(--signal); gap: 0.9rem; }
-
-h1 {
-  font-weight: 500;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  line-height: 1.15;
-  letter-spacing: 0.01em;
-}
-.updated { margin-top: 0.5rem; font-size: 0.82rem; color: var(--grey); }
-.rule { width: 48px; height: 1px; background: var(--signal); opacity: 0.8; margin: 1.5rem 0 2.2rem; }
-
-h2 { font-weight: 500; font-size: 1.15rem; margin: 2.4rem 0 0.6rem; color: var(--ink); }
-p { font-size: 0.95rem; color: rgba(230,232,235,0.82); }
+.wrap { position: relative; z-index: 1; max-width: 660px; margin: 0 auto; padding: 4.5rem 1.75rem 40vh; }
+.back { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
+  color: var(--dim); text-decoration: none; margin-bottom: 3rem; transition: color .2s, gap .25s; }
+.back:hover { color: var(--accent); gap: 0.9rem; }
+h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(2rem, 4.4vw, 2.8rem); line-height: 1.1; letter-spacing: 0.01em; }
+.updated { margin-top: 0.5rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--dim); }
+.rule { width: 34px; height: 1px; background: linear-gradient(90deg, var(--accent), transparent); margin: 1.5rem 0 2.2rem; }
+h2 { font-family: var(--serif); font-weight: 400; font-size: 1.35rem; margin: 2.4rem 0 0.6rem; color: var(--ink); }
+p { font-size: 0.96rem; color: rgba(239,230,216,0.82); }
 p + p { margin-top: 0.9rem; }
-.muted { color: var(--grey); font-size: 0.88rem; }
+.muted { color: var(--dim); font-size: 0.88rem; }
 ul { padding-left: 1.2rem; margin: 0.6rem 0; }
-li { font-size: 0.95rem; color: rgba(230,232,235,0.82); margin: 0.3rem 0; }
+li { font-size: 0.96rem; color: rgba(239,230,216,0.82); margin: 0.3rem 0; }
 strong { font-weight: 500; color: var(--ink); }
-a.inline { color: var(--signal); text-decoration: none; border-bottom: 1px solid rgba(232,201,143,0.35); }
+a.inline { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(242,179,107,0.35); }
 a.inline:hover { color: var(--ink); border-color: var(--ink); }
-
 table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.4rem; font-size: 0.9rem; }
 th, td { text-align: left; padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-th { font-weight: 400; color: var(--grey); font-size: 0.78rem; }
-td { color: rgba(230,232,235,0.85); }
-
-footer {
-  position: fixed; left: 0; right: 0; bottom: 0;
-  z-index: 1; text-align: center;
-  padding: 1.3rem; font-size: 0.78rem; color: var(--grey);
-}
-footer a { color: var(--grey); text-decoration: none; }
-footer a:hover { color: var(--signal); }
-
+th { font-family: var(--mono); font-weight: 400; color: var(--dim); font-size: 0.7rem; letter-spacing: 0.06em; }
+td { color: rgba(239,230,216,0.85); }
+footer { position: fixed; left: 0; right: 0; bottom: 0; z-index: 1; text-align: center; padding: 1.2rem;
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; color: var(--dim); }
+footer a { color: var(--dim); text-decoration: none; }
+footer a:hover { color: var(--accent); }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 .wrap { animation: fadeUp .8s ease both; }
 @media (prefers-reduced-motion: reduce) { .wrap { animation: none; } }
+@media (max-width: 560px) { .wrap { padding: 3.2rem 1.4rem 42vh; } th, td { padding: 0.6rem 0.4rem; } }
 
-@media (max-width: 560px) {
-  .wrap { padding: 3.2rem 1.4rem 36vh; }
-  th, td { padding: 0.6rem 0.4rem; }
-}
-
-.intro { font-size: 1rem; color: var(--grey); line-height: 1.7; margin-bottom: 2.6rem; max-width: 480px; }
+.intro { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 1.1rem; color: var(--dim); line-height: 1.7; margin-bottom: 2.6rem; max-width: 480px; }
 form { display: flex; flex-direction: column; gap: 1.8rem; }
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .field { display: flex; flex-direction: column; gap: 0.45rem; }
-label { font-size: 0.8rem; color: var(--grey); }
-input, textarea {
-  background: transparent; border: none; border-bottom: 1px solid var(--line);
-  color: var(--ink); font-family: var(--font); font-weight: 300; font-size: 1.02rem;
-  padding: 0.45rem 2px 0.6rem; outline: none; border-radius: 0; transition: border-color .3s;
-}
+label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; color: var(--dim); }
+input, textarea { background: transparent; border: none; border-bottom: 1px solid var(--line); color: var(--ink);
+  font-family: var(--serif); font-weight: 300; font-size: 1.15rem; padding: 0.45rem 2px 0.6rem; outline: none; border-radius: 0; transition: border-color .3s; }
 textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
-input:focus, textarea:focus { border-bottom-color: var(--signal); }
-button[type="submit"] {
-  align-self: flex-start; margin-top: 0.4rem;
-  font-family: var(--font); font-weight: 400; font-size: 0.86rem;
-  padding: 0.8rem 2rem; border-radius: 4px;
-  border: 1px solid var(--signal); background: transparent; color: var(--signal);
-  cursor: pointer; transition: background .25s, color .25s;
-}
-button[type="submit"]:hover { background: var(--signal); color: var(--bg); }
-#form-status { font-size: 0.95rem; min-height: 1.4em; }
-#form-status.ok  { color: var(--signal); }
+input:focus, textarea:focus { border-bottom-color: var(--accent); }
+button[type="submit"] { align-self: flex-start; margin-top: 0.4rem; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em;
+  padding: 0.8rem 1.8rem; border-radius: 4px; border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; transition: background .25s, color .25s; }
+button[type="submit"]:hover { background: var(--accent); color: var(--bg); }
+#form-status { font-family: var(--serif); font-style: italic; font-size: 1rem; min-height: 1.4em; }
+#form-status.ok  { color: var(--accent); }
 #form-status.err { color: #E07A6E; }
 @media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 1.8rem; } button[type="submit"] { align-self: stretch; } }
 </style>
@@ -182,50 +146,123 @@ button[type="submit"]:hover { background: var(--signal); color: var(--bg); }
 <footer>
   &copy; 2026 Giorgio Riva &nbsp;<a href="/">gioriva.it</a>
 </footer>
-<canvas id="sea"></canvas>
 
+<canvas id="c" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
 <script>
-'use strict';
-/* a calm strip of sea, no lights: continuity with the home */
-(function () {
-  var cv = document.getElementById('sea'), ctx = cv.getContext('2d');
-  var W, H, dpr, lines = [], N = 6;
-  function layout() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = window.innerWidth; H = Math.round(window.innerHeight * 0.30);
-    cv.width = W * dpr; cv.height = H * dpr; cv.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    lines = [];
-    for (var i = 0; i < N; i++) {
-      var d = i / (N - 1);
-      lines.push({ d: d, y: H * (0.15 + Math.pow(d, 1.6) * 0.75), amp: 1.5 + 10 * Math.pow(d, 1.7),
-        alpha: 0.06 + 0.16 * d, ph: i * 1.93,
-        k1: 2 * Math.PI / (W * (0.26 + 0.44 * d)), k2: 2 * Math.PI / (W * (0.11 + 0.16 * d)),
-        s1: 0.22 + 0.30 * d, s2: 0.18 + 0.20 * d });
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const SPEED = reduced ? 0.5 : 1;   // con "riduci movimento" l'onda rallenta ma non si ferma
+
+    let W, H, DPR, COLS, ROWS, XR;
+    function resize() {
+      const mobile = innerWidth < 600;
+      DPR = Math.min(devicePixelRatio || 1, mobile ? 1.5 : 2);
+      W = canvas.width = Math.round(innerWidth * DPR);
+      H = canvas.height = Math.round(canvas.clientHeight * DPR);
+      // densità della griglia in base alla larghezza
+      COLS = mobile ? 110 : 200;
+      ROWS = mobile ? 34 : 44;
+      // larghezza del piano in scena: su schermi stretti si restringe, così i punti restano fitti
+      XR = 20 * Math.max(0.4, Math.min(1, (innerWidth / (canvas.clientHeight * 2.4)) / 1.6));
     }
-  }
-  layout(); window.addEventListener('resize', layout);
-  var t0 = null;
-  function frame(ts) {
-    if (t0 === null) t0 = ts;
-    var t = (ts - t0) / 1000;
-    ctx.clearRect(0, 0, W, H);
-    ctx.lineJoin = 'round';
-    for (var i = 0; i < N; i++) {
-      var L = lines[i], g = 0.78 + 0.22 * Math.sin(t * 0.11 + L.ph * 0.5);
-      ctx.beginPath();
-      for (var x = -8; x <= W + 8; x += 4) {
-        var y = L.y + L.amp * g * (Math.sin(x * L.k1 + t * L.s1 + L.ph) + 0.5 * Math.sin(x * L.k2 - t * L.s2 + L.ph * 1.7));
-        if (x === -8) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    resize();
+    addEventListener('resize', resize);
+
+    // camera fissa, leggermente dall'alto
+    const cam = { y: 0.75, f: 1.55 };
+    const TOUCH = matchMedia('(hover: none)').matches;
+    const AMP = TOUCH ? 1.35 : 1;      // su touch onda più visibile
+    let lastTouch = -1e9;              // ultimo tocco reale
+    const K = () => cam.f * H * 0.62;      // fattore di proiezione
+    const pointer = { x: 0, z: 0, s: 0 }; // punto in scena e forza del ripple
+    let ripple = 0;
+
+    function toScene(clientX, clientY) {
+      // proiezione inversa approssimata del cursore sul piano y=0
+      const off = Math.max(0.02, clientY / innerHeight - 0.5);
+      const pz = Math.min(10.4, cam.y * cam.f * 0.62 / off);
+      pointer.z = pz - 0.4;
+      pointer.x = (clientX - innerWidth / 2) * pz / (cam.f * 0.62 * innerHeight);
+      pointer.s = 1;
+    }
+
+    // senza mouse (o dopo 3 s senza tocchi) un punto di pressione vaga da solo sul piano
+    function autoPointer(t) {
+      const k = t * 0.00022 * SPEED;
+      pointer.x = Math.sin(k * 1.3) * (XR * 0.28);
+      pointer.z = 2.6 + (Math.sin(k * 0.9 + 1.7) * 0.5 + 0.5) * 3.5;
+      pointer.s += (0.9 - pointer.s) * 0.02;
+      if (Math.sin(k * 0.45) > 0.995 && ripple < 0.05) ripple = 1;
+    }
+
+    // colori precalcolati (16 livelli di alpha per ciascuna tinta)
+    const LEVELS = 16;
+    const PAL_INK = [], PAL_ACC = [];
+    for (let i = 0; i < LEVELS; i++) {
+      const a = (i + 1) / LEVELS;
+      PAL_INK.push(`rgba(239,230,216,${a.toFixed(3)})`);
+      PAL_ACC.push(`rgba(242,179,107,${a.toFixed(3)})`);
+    }
+
+    let lastT = 0;
+
+    function frame(t) {
+      const dt = Math.min(100, t - lastT); lastT = t;
+
+      autoPointer(t);
+      ripple *= 0.985;
+
+      ctx.fillStyle = '#0C0907';
+      ctx.fillRect(0, 0, W, H);
+
+      const time = t * 0.00035 * SPEED;
+      const cx = W / 2, cy = H / 2;
+
+      // disegno dal fondo verso il davanti
+      for (let r = ROWS - 1; r >= 0; r--) {
+        const z = 0.6 + (r / ROWS) * 9.4;              // parte sotto il bordo inferiore, così non si stacca mai
+        for (let c = 0; c < COLS; c++) {
+          const x = ((c / (COLS - 1)) - 0.5) * XR;   // larghezza -XR/2 .. XR/2
+
+          // superficie: due onde incrociate + un'increspatura dal cursore
+          const near = Math.min(1, (r / ROWS) * 3.5);   // le prime file restano piatte: il bordo inferiore non si scopre mai
+          const amp = (0.95 - (r / ROWS) * 0.6) * AMP * near; // il fondo si calma, così non si aggroviglia
+          let y = (Math.sin(x * 0.32 + time * 1.4) * 0.16
+                + Math.sin(z * 0.55 - time * 1.1) * 0.14
+                + Math.sin((x + z) * 0.22 + time * 0.7) * 0.10) * amp;
+
+          const dx = x - pointer.x, dz = z - pointer.z;
+          const d = Math.sqrt(dx * dx + dz * dz);
+          y += Math.exp(-d * d * 1.6) * 0.35 * pointer.s;
+          y += Math.sin(d * 6 - t * 0.008) * Math.exp(-d * 0.9) * 0.12 * ripple;
+
+          // proiezione prospettica
+          const pz = z + 0.4;                    // distanza dalla camera
+          const py = y - cam.y;
+          const sx = cx + (x / pz) * K();
+          const sy = cy - (py / pz) * K();
+
+          if (sy < -10 || sy > H + 10 || sx < -10 || sx > W + 10) continue;
+
+          const depth = 1 - r / ROWS;                       // 1 vicino, 0 lontano
+          const lift = Math.max(0, y + 0.25);               // le creste brillano
+          const far = Math.min(1, (1 - r / ROWS) * 4);  // dissolvenza sull'orizzonte
+          const a = (0.12 + depth * 0.45 + lift * 0.6) * far;
+          const size = (0.6 + depth * 1.2 + lift * 1.0) * DPR;
+
+          if (a < 0.04) continue;
+          const idx = Math.min(LEVELS - 1, (a * LEVELS) | 0);
+          ctx.fillStyle = lift > 0.42 ? PAL_ACC[idx] : PAL_INK[idx];
+          ctx.fillRect(sx - size / 2, sy - size / 2, size, size);
+        }
       }
-      ctx.lineWidth = 0.7 + 0.5 * L.d;
-      ctx.strokeStyle = 'rgba(230,232,235,' + L.alpha.toFixed(3) + ')';
-      ctx.stroke();
+
+      requestAnimationFrame(frame);
     }
+
     requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-})();
 </script>
 </body>
 </html>
