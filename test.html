@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0E19">
+<title>Giorgio Riva</title>
+
+<meta name="description" content="Freedom is a state of mind.">
+<meta property="og:title" content="Giorgio Riva">
+<meta property="og:description" content="Freedom is a state of mind.">
+<meta property="og:image" content="https://www.gioriva.it/og-image.png?v=6">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.gioriva.it/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Giorgio Riva">
+<meta name="twitter:description" content="Freedom is a state of mind.">
+<meta name="twitter:image" content="https://www.gioriva.it/og-image.png?v=6">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+
+<!-- Google Analytics + Consent Mode -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZCCJ6QBR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied'
+  });
+  gtag('config', 'G-1ZCCJ6QBR4', { 'anonymize_ip': true });
+  try {
+    if (localStorage.getItem('gr_cookie_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  } catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #0A0E19;
+  --bg-2:   #121829;
+  --ink:    #E6E8EB;
+  --grey:   #6B7280;
+  --dot:    #C9CFD6;
+  --signal: #E8C98F;
+  --line:   rgba(230,232,235,0.09);
+  --font:   'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  /* names the shared cookie block expects */
+  --sumi: var(--bg); --washi: var(--ink); --shu: var(--signal); --kin: var(--signal); --muted: var(--grey);
+  --serif: var(--font); --sans: var(--font);
+}
+
+html { background: #080B14; }
+body {
+  background: radial-gradient(85% 70% at 50% 46%, #151B2C 0%, #0F1424 45%, #0A0E19 75%, #080B14 100%);
+  color: var(--ink);
+  font-family: var(--font);
+  font-weight: 300;
+  height: 100vh;
+  overflow: hidden;
+  cursor: none;
+}
+a, button { cursor: none; }
+a:focus-visible, button:focus-visible { outline: 1px solid var(--signal); outline-offset: 4px; }
+
+/* ── The network ── */
+#net { position: fixed; inset: 0; z-index: 1; }
+
+/* fine grain: texture, and no banding on OLED */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 2;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.6 0 0 0 0 0.72 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── The seed: the name at the centre ── */
+.sign {
+  position: fixed; z-index: 10;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 1.2rem 1.8rem;
+  opacity: 0;
+  transition: opacity 1.4s ease .3s;
+}
+body.ready .sign { opacity: 1; }
+.brand {
+  font-weight: 500;
+  font-size: 1.15rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-left: 0.34em;
+}
+.payoff {
+  margin-top: 0.75rem;
+  font-weight: 300;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  color: var(--grey);
+}
+
+/* ── Hamburger + menu ── */
+#burger {
+  position: fixed; top: 1.6rem; right: 2.2rem; z-index: 10005;
+  width: 48px; height: 48px;
+  display: grid; place-items: center;
+  background: none; border: none; padding: 0;
+  color: var(--ink);
+  transition: color .25s;
+}
+#burger:hover { color: var(--signal); }
+#burger svg { width: 32px; height: 32px; display: block; overflow: visible; }
+#burger .node-icon { transition: opacity .3s, transform .4s cubic-bezier(.16,.84,.44,1); transform-origin: 16px 16px; }
+#burger .x { opacity: 0; transition: opacity .3s .1s; }
+body.menu-open #burger .node-icon { opacity: 0; transform: scale(0.6); }
+body.menu-open #burger .x { opacity: 1; }
+
+#menu-veil { position: fixed; inset: 0; z-index: 10003; background: rgba(8,10,13,0.6);
+  backdrop-filter: blur(4px); opacity: 0; visibility: hidden; transition: opacity .5s, visibility .5s; }
+body.menu-open #menu-veil { opacity: 1; visibility: visible; }
+
+#menu {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 10004;
+  width: min(440px, 88vw);
+  background-color: #0F1424;
+  background-image: radial-gradient(rgba(200,208,220,0.16) 0.7px, transparent 0.9px);
+  background-size: 17px 17px;
+  border-left: 1px solid var(--line);
+  transform: translateX(100%);
+  transition: transform .6s cubic-bezier(.16,.84,.44,1);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5.5rem 3rem 3rem;
+  overflow-y: auto;
+}
+body.menu-open #menu { transform: translateX(0); }
+
+.menu-list { display: block; position: relative; padding-left: 0; }
+/* the bus the voices hang from */
+.menu-list::before {
+  content: ''; position: absolute; left: 3px; top: 10px; bottom: 10px;
+  width: 1px; background: rgba(230,232,235,0.16);
+}
+.menu-item {
+  display: flex; align-items: center; gap: 0.9rem;
+  text-decoration: none;
+  padding: 0.82rem 0 0.82rem 0;
+  opacity: 0; transform: translateX(16px);
+  transition: opacity .5s, transform .5s;
+}
+body.menu-open .menu-item { opacity: 1; transform: translateX(0); }
+.menu-item .trace { width: 44px; height: 44px; flex: 0 0 auto; margin-left: -18px; }
+.menu-item .trace path { fill: none; stroke: rgba(230,232,235,0.28); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; transition: stroke .3s; }
+.menu-item .trace circle { fill: var(--bg-2); stroke: rgba(230,232,235,0.55); stroke-width: 1.1; transition: fill .3s, stroke .3s, filter .3s; }
+.menu-item .mi { width: 20px; height: 20px; flex: 0 0 auto; color: var(--grey); transition: color .3s; }
+.menu-item .tx { display: block; transition: transform .35s; }
+.menu-item .t { display: block; font-weight: 500; font-size: 1.15rem; line-height: 1.2; color: var(--ink); transition: color .3s; }
+.menu-item .s { display: block; margin-top: 0.12rem; font-weight: 300; font-size: 0.8rem; color: var(--grey); transition: color .3s; }
+.menu-item:hover .trace path { stroke: var(--signal); }
+.menu-item:hover .trace circle { fill: var(--signal); stroke: var(--signal); filter: drop-shadow(0 0 5px rgba(232,201,143,0.8)); }
+.menu-item:hover .t  { color: var(--signal); }
+.menu-item:hover .mi { color: var(--signal); }
+.menu-item:hover .tx { transform: translateX(3px); }
+
+.menu-sep { height: 1px; margin: 1.6rem 0; background: var(--line); }
+.menu-icons { display: flex; gap: 1.8rem; list-style: none; opacity: 0; transition: opacity .5s; }
+body.menu-open .menu-icons { opacity: 1; transition-delay: .5s; }
+.menu-icons a { display: block; color: var(--grey); transition: color .25s, transform .25s; }
+.menu-icons svg { width: 18px; height: 18px; display: block; }
+.menu-icons a:hover { color: var(--signal); transform: translateY(-2px); }
+
+/* ── Cursor ── */
+#cur-dot { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: var(--signal);
+  border-radius: 50%; pointer-events: none; z-index: 10020; transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s; }
+body.hov #cur-dot { width: 12px; height: 12px; background: var(--ink); }
+
+/* ── Cookie banner ── */
+#cookie-banner {
+  position: fixed; left: 50%; bottom: 24px;
+  transform: translateX(-50%) translateY(140%);
+  z-index: 10000; width: min(92vw, 640px);
+  background: rgba(14,17,22,0.97); backdrop-filter: blur(10px);
+  border: 1px solid var(--line); border-radius: 6px;
+  padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  transition: transform .6s cubic-bezier(.16,.84,.44,1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+#cookie-banner.show { transform: translateX(-50%) translateY(0); }
+.cookie-text { flex: 1 1 280px; font-size: 0.82rem; line-height: 1.65; color: var(--grey); }
+.cookie-text strong { display: block; font-weight: 500; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.3rem; }
+.cookie-text a { color: var(--signal); text-decoration: none; border-bottom: 1px solid rgba(232,201,143,0.35); }
+.cookie-actions { display: flex; gap: 0.7rem; flex: 0 0 auto; }
+.cookie-btn { font-family: var(--font); font-size: 0.8rem; font-weight: 400; padding: 0.65rem 1.2rem;
+  border-radius: 4px; border: 1px solid var(--signal); background: transparent; color: var(--signal);
+  transition: background .2s, color .2s; white-space: nowrap; }
+.cookie-btn.decline { border-color: var(--line); color: var(--grey); }
+.cookie-btn.accept:hover { background: var(--signal); color: var(--bg); }
+.cookie-btn.decline:hover { border-color: var(--grey); color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  body { cursor: auto; height: 100dvh; }
+  a, button { cursor: pointer; }
+  #cur-dot { display: none; }
+  .brand { font-size: 0.86rem; letter-spacing: 0.28em; }
+  .payoff { font-size: 0.8rem; }
+  #burger { top: 1.1rem; right: 1.1rem; }
+  #menu { width: 100vw; border-left: none; padding: 5rem 2rem 2.5rem; }
+  #cookie-banner { flex-direction: column; align-items: stretch; bottom: 12px; padding: 1.1rem 1.2rem; gap: 0.9rem; }
+  .cookie-text { flex: 0 0 auto; font-size: 0.78rem; }
+  .cookie-actions { justify-content: stretch; }
+  .cookie-btn { flex: 1; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="net"></canvas>
+
+<div class="sign">
+  <div class="brand">Giorgio Riva</div>
+  <div class="payoff">Freedom is a state of mind.</div>
+</div>
+
+<!-- Menu -->
+<button id="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu">
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <g class="node-icon" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+      <path d="M4 16 H12 L17 11 H24"/>
+      <circle cx="26.5" cy="11" r="2.4"/>
+      <path d="M12 16 L17 21 H21"/>
+      <circle cx="23.5" cy="21" r="2.4"/>
+    </g>
+    <path class="x" d="M8 8 L24 24 M24 8 L8 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>
+</button>
+
+<div id="menu-veil"></div>
+
+<nav id="menu" aria-label="Menu principale">
+<div class="menu-list">
+  <a class="menu-item" href="https://www.gioriva.it/poitiracconto">
+    <svg class="trace" viewBox="0 0 44 44" aria-hidden="true"><path d="M2 22 H14 L26 10 H34"/><circle cx="38" cy="10" r="2.6"/></svg>
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="8.5"/>
+      <ellipse cx="12" cy="12" rx="3.6" ry="8.5"/>
+      <path d="M3.9 9.2 H20.1 M3.9 14.8 H20.1"/>
+    </svg>
+    <span class="tx">
+      <span class="t">Poi ti racconto</span>
+      <span class="s">Storie e diari di viaggio</span>
+    </span>
+  </a>
+  <a class="menu-item" href="https://www.gioriva.it/lineadivolo">
+    <svg class="trace" viewBox="0 0 44 44" aria-hidden="true"><path d="M2 22 H14 L26 10 H34"/><circle cx="38" cy="10" r="2.6"/></svg>
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="9.6" y="9.6" width="4.8" height="4.8" rx="1.2"/>
+      <path d="M9.6 9.6 L6.4 6.4 M14.4 9.6 L17.6 6.4 M9.6 14.4 L6.4 17.6 M14.4 14.4 L17.6 17.6"/>
+      <path d="M3.4 6.4 H9.4 M14.6 6.4 H20.6 M3.4 17.6 H9.4 M14.6 17.6 H20.6"/>
+    </svg>
+    <span class="tx">
+      <span class="t">Linea di volo</span>
+      <span class="s">Il mondo visto dal drone</span>
+    </span>
+  </a>
+  <a class="menu-item" href="https://www.gioriva.it/quotazero">
+    <svg class="trace" viewBox="0 0 44 44" aria-hidden="true"><path d="M2 22 H14 L26 10 H34"/><circle cx="38" cy="10" r="2.6"/></svg>
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3.6 19 H20.4"/>
+      <path d="M7.4 19 h2.4 M12.2 19 h2.4"/>
+      <path d="M5.2 17.2 C 8 14.4, 11 11.8, 14.6 9.6" stroke-dasharray="1.6 2.2" stroke-opacity="0.75"/>
+      <path d="M13.4 11.6 L20.2 4.6 L17.9 12.6 L16.3 10.4 Z" fill="currentColor" stroke="none"/>
+    </svg>
+    <span class="tx">
+      <span class="t">Quota Zero</span>
+      <span class="s">Il volo comincia a terra</span>
+    </span>
+  </a>
+  <a class="menu-item" href="https://www.gioriva.it/formulatre">
+    <svg class="trace" viewBox="0 0 44 44" aria-hidden="true"><path d="M2 22 H14 L26 10 H34"/><circle cx="38" cy="10" r="2.6"/></svg>
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4.2 13.6 A7.8 7.8 0 0 1 19.8 13.2 V16.4 A1.6 1.6 0 0 1 18.2 18 H10"/>
+      <path d="M4.2 13.6 V16 A2 2 0 0 0 6.2 18 H10"/>
+      <path d="M6.6 11.4 H17.2 A2 2 0 0 1 19.2 13.4 H6.2"/>
+    </svg>
+    <span class="tx">
+      <span class="t">Formula Tre</span>
+      <span class="s">Un album di ricordi</span>
+    </span>
+  </a>
+  <a class="menu-item" href="https://www.gioriva.it/rotta/">
+    <svg class="trace" viewBox="0 0 44 44" aria-hidden="true"><path d="M2 22 H14 L26 10 H34"/><circle cx="38" cy="10" r="2.6"/></svg>
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="5.4" cy="17.6" r="1.5"/>
+      <circle cx="18.4" cy="6.2" r="1.5"/>
+      <path d="M6.6 16.6 C 9 11.6, 13 8.2, 17.2 6.6" stroke-dasharray="1.7 2.3" stroke-opacity="0.75"/>
+      <path d="M9.6 14.6 L15.4 11 L13.2 15.4 L12.2 13.9 Z" fill="currentColor" stroke="none"/>
+    </svg>
+    <span class="tx">
+      <span class="t">Rotta</span>
+      <span class="s">Traccia i tuoi voli</span>
+    </span>
+  </a>
+  <a class="menu-item" href="https://www.gioriva.it/issdeck">
+    <svg class="trace" viewBox="0 0 44 44" aria-hidden="true"><path d="M2 22 H14 L26 10 H34"/><circle cx="38" cy="10" r="2.6"/></svg>
+    <svg class="mi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="2.6"/>
+      <path d="M10.1 10.1 L6.6 6.6 M13.9 13.9 L17.4 17.4"/>
+      <rect x="3.4" y="4.2" width="4.6" height="3" rx="0.6" transform="rotate(-45 5.7 5.7)"/>
+      <rect x="16" y="16.8" width="4.6" height="3" rx="0.6" transform="rotate(-45 18.3 18.3)"/>
+      <path d="M13.9 10.1 L16.4 7.6 M10.1 13.9 L7.6 16.4"/>
+    </svg>
+    <span class="tx">
+      <span class="t">ISS Deck</span>
+      <span class="s">Nello spazio con la ISS</span>
+    </span>
+  </a>
+  </div>
+
+  <div class="menu-sep"></div>
+  <ul class="menu-icons">
+    <li><a href="/privacy.html" aria-label="Privacy" title="Privacy">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3 L19 6 V11 C19 16 16 19.5 12 21 C8 19.5 5 16 5 11 V6 Z"/>
+        <circle cx="12" cy="11" r="1.6"/>
+        <path d="M12 12.6 V15"/>
+      </svg>
+    </a></li>
+    <li><a href="#" id="cookie-reopen" aria-label="Cookie" title="Cookie">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3 A9 9 0 1 0 21 12 A4 4 0 0 1 16.5 7.5 A4 4 0 0 1 12 3 Z"/>
+        <circle cx="9.5" cy="10" r="0.7" fill="currentColor" stroke="none"/>
+        <circle cx="13" cy="15" r="0.7" fill="currentColor" stroke="none"/>
+        <circle cx="8.5" cy="15.5" r="0.7" fill="currentColor" stroke="none"/>
+      </svg>
+    </a></li>
+    <li><a href="/contatti.html" aria-label="Contattami" title="Contattami">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/>
+        <path d="M4.5 7 L12 13 L19.5 7"/>
+      </svg>
+    </a></li>
+    <li><a href="https://www.linkedin.com/in/giorgioriva/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="4" width="16" height="16" rx="3"/>
+        <path d="M8.5 11 V16"/>
+        <circle cx="8.5" cy="8.3" r="0.9" fill="currentColor" stroke="none"/>
+        <path d="M12 16 V11.5 M12 13 C12 11.8 13 11 14.1 11 C15.3 11 15.8 11.9 15.8 13.1 V16"/>
+      </svg>
+    </a></li>
+    <li><a href="https://www.instagram.com/gioriva" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="4" width="16" height="16" rx="4.5"/>
+        <circle cx="12" cy="12" r="3.6"/>
+        <circle cx="16.6" cy="7.4" r="0.8" fill="currentColor" stroke="none"/>
+      </svg>
+    </a></li>
+  </ul>
+</nav>
+
+<!-- Cookie banner -->
+<div id="cookie-banner" role="dialog" aria-label="Gestione cookie">
+  <div class="cookie-text">
+    <strong>Cookie &amp; privacy</strong>
+    Questo sito usa cookie analitici (Google Analytics) per capire come viene visitato. Sono attivati solo con il tuo consenso. Maggiori dettagli nella <a href="/privacy.html">privacy policy</a>.
+  </div>
+  <div class="cookie-actions">
+    <button class="cookie-btn decline" id="cookie-decline">Rifiuta</button>
+    <button class="cookie-btn accept" id="cookie-accept">Accetta</button>
+  </div>
+</div>
+
+<div id="cur-dot"></div>
+
+<script>
+'use strict';
+
+/* ════════════════════════════════════
+   THE NETWORK
+   Luminous traces grow out of the name, step by
+   step on a grid, turning by 45 degrees like a
+   circuit, branching, stopping at nodes. Every
+   visit grows differently. When the space is
+   full it rests, fades, and starts again.
+   ════════════════════════════════════ */
+(function () {
+  var cv = document.getElementById('net');
+  var ctx = cv.getContext('2d');
+  var off = document.createElement('canvas');
+  var octx = off.getContext('2d');
+  var board = document.createElement('canvas');
+  var bctx = board.getContext('2d');
+  var W, H, dpr, mobile, G, cols, rows, occ, tips, nodes, segs, seedRect, phase, phaseT, fadeA;
+  var DIRS = [[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]];
+  var CAP, MAXTIPS;
+
+  function layout() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = off.width = board.width = W * dpr; cv.height = off.height = board.height = H * dpr;
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); octx.setTransform(dpr, 0, 0, dpr, 0, 0); bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    mobile = W <= 768;
+    G = mobile ? 13 : 17;
+    cols = Math.ceil(W / G) + 2; rows = Math.ceil(H / G) + 2;
+    CAP = mobile ? 700 : 1500; MAXTIPS = mobile ? 7 : 10;
+    drawBoard();
+    restart();
+  }
+
+  /* the board: a grid of faint dots, brighter around the name, fading to the edges */
+  function drawBoard() {
+    bctx.clearRect(0, 0, W, H);
+    var cx = W / 2, cy = H / 2, R = Math.max(W, H) * 0.70;
+    for (var y = 0; y < rows; y++) {
+      for (var x = 0; x < cols; x++) {
+        var X = x * G + G / 2, Y = y * G + G / 2;
+        var d = Math.sqrt((X - cx) * (X - cx) + (Y - cy) * (Y - cy)) / R;
+        var fall = Math.max(0, 1 - d * d);
+        var marker = (x % 6 === 0 && y % 6 === 0);
+        var a = (marker ? 0.42 : 0.20) * (0.25 + 0.75 * fall);
+        bctx.fillStyle = 'rgba(190,200,222,' + a.toFixed(3) + ')';
+        bctx.beginPath(); bctx.arc(X, Y, marker ? 1.1 : 0.75, 0, Math.PI * 2); bctx.fill();
+      }
+    }
+  }
+
+  function seedBox() {
+    var el = document.querySelector('.sign');
+    var r = el ? el.getBoundingClientRect() : { left: W/2-120, top: H/2-40, width: 240, height: 80 };
+    var pad = mobile ? 14 : 22;
+    return { x0: Math.floor((r.left - pad) / G), y0: Math.floor((r.top - pad) / G),
+             x1: Math.ceil((r.right + pad) / G), y1: Math.ceil((r.bottom + pad) / G) };
+  }
+
+  function restart() {
+    occ = new Uint8Array(cols * rows);
+    tips = []; nodes = []; segs = 0;
+    seedRect = seedBox();
+    /* the name's box is off limits */
+    for (var y = seedRect.y0; y <= seedRect.y1; y++) for (var x = seedRect.x0; x <= seedRect.x1; x++) mark(x, y);
+    octx.clearRect(0, 0, W, H);
+    phase = 'grow'; phaseT = 0; fadeA = 1;
+    /* first tips leave the box from its four sides */
+    for (var i = 0; i < 6; i++) spawnFromSeed();
+  }
+  function mark(x, y) { if (x >= 0 && y >= 0 && x < cols && y < rows) occ[y * cols + x] = 1; }
+  function busy(x, y) { return x < 1 || y < 1 || x >= cols - 1 || y >= rows - 1 || occ[y * cols + x] === 1; }
+
+  function spawnFromSeed() {
+    if (tips.length >= MAXTIPS) return false;
+    var r = seedRect;
+    for (var tries = 0; tries < 24; tries++) {
+      var side = Math.floor(Math.random() * 4), x, y, d;
+      if (side === 0) { x = r.x0 + 1 + Math.floor(Math.random() * (r.x1 - r.x0 - 1)); y = r.y0; d = 6; }
+      if (side === 1) { x = r.x0 + 1 + Math.floor(Math.random() * (r.x1 - r.x0 - 1)); y = r.y1; d = 2; }
+      if (side === 2) { x = r.x0; y = r.y0 + 1 + Math.floor(Math.random() * (r.y1 - r.y0 - 1)); d = 4; }
+      if (side === 3) { x = r.x1; y = r.y0 + 1 + Math.floor(Math.random() * (r.y1 - r.y0 - 1)); d = 0; }
+      if (!busy(x + DIRS[d][0], y + DIRS[d][1])) {
+        tips.push(newTip(x, y, d));
+        return true;
+      }
+    }
+    return false;
+  }
+  /* once the name's edge is full, new branches leave from existing nodes */
+  function spawnFromNode() {
+    if (tips.length >= MAXTIPS || nodes.length === 0) return false;
+    for (var tries = 0; tries < 30; tries++) {
+      var n = nodes[Math.floor(Math.random() * nodes.length)];
+      var d0 = Math.floor(Math.random() * 8);
+      for (var k = 0; k < 8; k++) {
+        var d = (d0 + k) % 8;
+        var nx = n.gx + DIRS[d][0], ny = n.gy + DIRS[d][1];
+        if (!busy(nx, ny) && !(d % 2 === 1 && busy(n.gx + DIRS[d][0], n.gy) && busy(n.gx, n.gy + DIRS[d][1]))) {
+          tips.push(newTip(n.gx, n.gy, d));
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  function px(x) { return x * G + G / 2; }
+  function py(y) { return y * G + G / 2; }
+
+  /* a tip holds the cell it comes from, the cell it is heading to, and how far along it is */
+  function newTip(x, y, d) {
+    var t = { x: x, y: y, d: d, life: 0, warm: Math.random() < 0.22, p: 0, tx: x, ty: y, moving: false };
+    return t;
+  }
+  function beginSegment(t) {
+    var turn = Math.random(), d = t.d;
+    if (turn < 0.16) d = (d + 1) % 8; else if (turn < 0.32) d = (d + 7) % 8;
+    var nx = t.x + DIRS[d][0], ny = t.y + DIRS[d][1];
+    var blocked = busy(nx, ny) || (d % 2 === 1 && busy(t.x + DIRS[d][0], t.y) && busy(t.x, t.y + DIRS[d][1]));
+    if (blocked || Math.random() < 0.02 || t.life > 90) return false;
+    t.d = d; t.tx = nx; t.ty = ny; t.p = 0; t.moving = true;
+    t.lx = px(t.x); t.ly = py(t.y);                  /* last point drawn */
+    mark(nx, ny);
+    return true;
+  }
+  function tipPos(t) {
+    return { x: px(t.x) + (px(t.tx) - px(t.x)) * t.p, y: py(t.y) + (py(t.ty) - py(t.y)) * t.p };
+  }
+  var CELL_TIME = 0.30;                               /* seconds to cross one cell */
+
+  function advance(dt) {
+    for (var i = tips.length - 1; i >= 0; i--) {
+      var t = tips[i];
+      if (!t.moving && !beginSegment(t)) {
+        drawNode(t.x, t.y, t.warm, Math.random() < 0.3);
+        tips.splice(i, 1);
+        continue;
+      }
+      /* move along the segment, diagonals take a little longer */
+      var len = (t.d % 2 === 1) ? 1.414 : 1;
+      t.p = Math.min(1, t.p + dt / (CELL_TIME * len));
+      var q = tipPos(t);
+      octx.beginPath(); octx.moveTo(t.lx, t.ly); octx.lineTo(q.x, q.y);
+      octx.strokeStyle = t.warm ? 'rgba(232,201,143,0.42)' : 'rgba(230,232,235,0.26)';
+      octx.lineWidth = 1; octx.lineCap = 'butt'; octx.stroke();
+      t.lx = q.x; t.ly = q.y;
+
+      if (t.p >= 1) {                                  /* arrived: settle on the cell */
+        t.x = t.tx; t.y = t.ty; t.life++; segs++; t.moving = false;
+        if (Math.random() < 0.075 && tips.length < MAXTIPS) {
+          var bd = (Math.random() < 0.5) ? (t.d + 2) % 8 : (t.d + 6) % 8;
+          tips.push(newTip(t.x, t.y, bd));
+          if (Math.random() < 0.5) drawNode(t.x, t.y, t.warm, false);
+        }
+      }
+    }
+    if (tips.length < 4 && segs < CAP) { if (!spawnFromSeed()) spawnFromNode(); }
+  }
+
+  function drawNode(x, y, warm, big) {
+    var X = px(x), Y = py(y), r = big ? 2.6 : 1.8;
+    var col = warm ? '232,201,143' : '230,232,235';
+    var g = octx.createRadialGradient(X, Y, 0, X, Y, r * 5);
+    g.addColorStop(0, 'rgba(' + col + ',' + (warm ? 0.32 : 0.16) + ')'); g.addColorStop(1, 'rgba(' + col + ',0)');
+    octx.fillStyle = g; octx.beginPath(); octx.arc(X, Y, r * 5, 0, Math.PI * 2); octx.fill();
+    octx.fillStyle = 'rgba(' + col + ',' + (warm ? 0.95 : 0.8) + ')';
+    octx.beginPath(); octx.arc(X, Y, r, 0, Math.PI * 2); octx.fill();
+    nodes.push({ x: X, y: Y, gx: x, gy: y, warm: warm, ph: Math.random() * 6.28, r: r });
+  }
+
+
+
+  layout();
+  window.addEventListener('resize', layout);
+
+  var t0 = null, last = null;
+  function frame(ts) {
+    if (t0 === null) { t0 = ts; last = ts; }
+    var time = (ts - t0) / 1000, dt = Math.min(0.05, (ts - last) / 1000); last = ts;
+
+    if (phase === 'grow') {
+      advance(dt);
+      if (segs >= CAP || (tips.length === 0 && time > 20)) { phase = 'rest'; phaseT = 0; }
+    } else if (phase === 'rest') {
+      phaseT += dt;
+      if (phaseT > 24) { phase = 'fade'; phaseT = 0; }
+    } else if (phase === 'fade') {
+      phaseT += dt;
+      fadeA = Math.max(0, 1 - phaseT / 4);
+      if (fadeA === 0) { restart(); t0 = ts; }
+    }
+
+    ctx.clearRect(0, 0, W, H);
+    var breathe = 0.5 + 0.5 * Math.sin(time * 0.35);
+    var glow = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.min(W, H) * (mobile ? 0.55 : 0.42));
+    glow.addColorStop(0, 'rgba(232,201,143,' + (0.07 + 0.04 * breathe).toFixed(3) + ')');
+    glow.addColorStop(0.5, 'rgba(120,140,190,' + (0.04 + 0.02 * breathe).toFixed(3) + ')');
+    glow.addColorStop(1, 'rgba(120,140,190,0)');
+    ctx.fillStyle = glow; ctx.fillRect(0, 0, W, H);
+    ctx.drawImage(board, 0, 0, W, H);
+    ctx.globalAlpha = fadeA;
+    ctx.drawImage(off, 0, 0, W, H);
+
+    /* nodes breathe; the warm ones a little more */
+    ctx.globalCompositeOperation = 'lighter';
+    for (var n = 0; n < nodes.length; n++) {
+      var N = nodes[n];
+      var k = 0.5 + 0.5 * Math.sin(time * (N.warm ? 1.1 : 0.7) + N.ph);
+      if (k < 0.55) continue;
+      var a = (k - 0.55) * (N.warm ? 0.7 : 0.35);
+      ctx.fillStyle = 'rgba(' + (N.warm ? '232,201,143' : '230,232,235') + ',' + a.toFixed(3) + ')';
+      ctx.beginPath(); ctx.arc(N.x, N.y, N.r * 2.2, 0, Math.PI * 2); ctx.fill();
+    }
+    /* the growing tips glow */
+    for (var i = 0; i < tips.length; i++) {
+      var T = tips[i], Q = tipPos(T), X = Q.x, Y = Q.y;
+      var g = ctx.createRadialGradient(X, Y, 0, X, Y, 12);
+      g.addColorStop(0, T.warm ? 'rgba(232,201,143,0.7)' : 'rgba(230,232,235,0.55)'); g.addColorStop(1, 'rgba(230,232,235,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(X, Y, 12, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(255,252,246,0.95)'; ctx.beginPath(); ctx.arc(X, Y, 1.6, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
+
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  setTimeout(function () { document.body.classList.add('ready'); }, 200);
+  /* the seed box depends on the rendered text: rebuild once fonts are in */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { restart(); });
+})();
+
+/* ════════════════════════════════════
+   CUSTOM CURSOR
+   ════════════════════════════════════ */
+(function () {
+  var dot = document.getElementById('cur-dot');
+  var mx = 0, my = 0;
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(function (el) {
+    el.addEventListener('mouseenter', function () { document.body.classList.add('hov'); });
+    el.addEventListener('mouseleave', function () { document.body.classList.remove('hov'); });
+  });
+})();
+
+/* ════════════════════════════════════
+   MENU
+   ════════════════════════════════════ */
+(function () {
+  var burger = document.getElementById('burger');
+  var veil   = document.getElementById('menu-veil');
+  var menu   = document.getElementById('menu');
+  var items  = menu.querySelectorAll('.menu-item');
+
+  // staggered reveal
+  items.forEach(function (el, i) {
+    el.style.transitionDelay = (0.12 + i * 0.07) + 's';
+  });
+
+  function open() {
+    document.body.classList.add('menu-open');
+    burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', 'Chiudi il menu');
+  }
+  function close() {
+    document.body.classList.remove('menu-open');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Apri il menu');
+  }
+  function toggle() {
+    document.body.classList.contains('menu-open') ? close() : open();
+  }
+
+  burger.addEventListener('click', toggle);
+  veil.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
+  });
+
+  // expose for the cookie link inside the menu
+  window.__closeMenu = close;
+})();
+
+/* ════════════════════════════════════
+   COOKIE CONSENT
+   ════════════════════════════════════ */
+(function () {
+  var banner  = document.getElementById('cookie-banner');
+  var accept  = document.getElementById('cookie-accept');
+  var decline = document.getElementById('cookie-decline');
+  var reopen  = document.getElementById('cookie-reopen');
+  var KEY = 'gr_cookie_consent';
+
+  function store(val) { try { localStorage.setItem(KEY, val); } catch (e) {} }
+  function getStored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function show() { banner.classList.add('show'); }
+  function hide() { banner.classList.remove('show'); }
+
+  accept.addEventListener('click', function () {
+    store('granted');
+    if (typeof gtag === 'function') gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    hide();
+  });
+  decline.addEventListener('click', function () {
+    store('denied');
+    if (typeof gtag === 'function') gtag('consent', 'update', { 'analytics_storage': 'denied' });
+    hide();
+  });
+  reopen.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (window.__closeMenu) window.__closeMenu();
+    setTimeout(show, 380);
+  });
+
+  if (!getStored()) setTimeout(show, 1800);
+})();
+
+</script>
+</body>
+</html>
